@@ -11,6 +11,9 @@ The purpose of [INDEX.md](https://github.com/instance01/InstanceClient/blob/mast
 Uses DarkStorm's GUI API (included) and has a Console included.
 
 
+Download [here](https://github.com/instance01/InstanceClient/releases).
+
+
 #### Currently included stuff:
 
 
