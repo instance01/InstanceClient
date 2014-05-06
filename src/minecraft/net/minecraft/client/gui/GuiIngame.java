@@ -51,13 +51,13 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.comze_instancelabs.client.Main;
+import com.comze_instancelabs.client.InstanceMain;
 
 public class GuiIngame extends Gui
 {
-	//TODO t
-	private boolean keyStates[];
-	
+    //TODO t
+    private boolean keyStates[];
+
     private static final ResourceLocation vignetteTexPath = new ResourceLocation("textures/misc/vignette.png");
     private static final ResourceLocation widgetsTexPath = new ResourceLocation("textures/gui/widgets.png");
     private static final ResourceLocation pumpkinBlurTexPath = new ResourceLocation("textures/misc/pumpkinblur.png");
@@ -88,97 +88,119 @@ public class GuiIngame extends Gui
 
     public GuiIngame(Minecraft par1Minecraft)
     {
-    	//TODO t
-    	keyStates = new boolean [256];
+        //TODO t
+        keyStates = new boolean [256];
         this.mc = par1Minecraft;
         this.persistantChatGUI = new GuiNewChat(par1Minecraft);
     }
-    
+
     //TODO t
-    public boolean checkKey(int i){
-    	if(mc.currentScreen != null){
-    		return false;
-    	}
-    	
-    	if(Keyboard.isKeyDown(i) != keyStates[i]){
-    		return keyStates[i] = !keyStates[i];
-    	}else{
-    		return false;
-    	}
+    public boolean checkKey(int i)
+    {
+        if (mc.currentScreen != null)
+        {
+            return false;
+        }
+
+        if (Keyboard.isKeyDown(i) != keyStates[i])
+        {
+            return keyStates[i] = !keyStates[i];
+        }
+        else
+        {
+            return false;
+        }
     }
 
     //TODO t
     /**
-	 * Renders Radar
-	 */
-	int tick = 0;
+     * Renders Radar
+     */
+    int tick = 0;
 
-	public void drawRadar() {
-		tick++;
-		if (tick >= 50) {
-			tick = 0;
-		}
-		GL11.glLineWidth(2.0F);
-		Main.getRender().drawFilledCircle(Minecraft.getMinecraft().displayWidth / 2 - 60, 60, 50, 0x66007700);
-		Main.getRender().drawCircle(Minecraft.getMinecraft().displayWidth / 2 - 60, 60, 50, 0x99008000);
-		Main.getRender().drawCircle(Minecraft.getMinecraft().displayWidth / 2 - 60, 60, 38, 0x99008000);
-		Main.getRender().drawCircle(Minecraft.getMinecraft().displayWidth / 2 - 60, 60, 25, 0x99008000);
-		Main.getRender().drawCircle(Minecraft.getMinecraft().displayWidth / 2 - 60, 60, 13, 0x99008000);
-		Main.getRender().drawCircle(Minecraft.getMinecraft().displayWidth / 2 - 60, 60, tick, 0x33000000);
+    public void drawRadar()
+    {
+        tick++;
 
-		Main.getRender().dr(Minecraft.getMinecraft().displayWidth / 2 - 110, 59.5, Minecraft.getMinecraft().displayWidth / 2 - 10, 60.5, 0x99000000);
-		Main.getRender().dr(Minecraft.getMinecraft().displayWidth / 2 - 59.5, 10, Minecraft.getMinecraft().displayWidth / 2 - 60.5, 110, 0x99000000);
+        if (tick >= 50)
+        {
+            tick = 0;
+        }
 
-		Main.getRender().drawCircle(Minecraft.getMinecraft().displayWidth / 2 - 60, 60, 1, 0xffffffff); // Player
+        GL11.glLineWidth(2.0F);
+        InstanceMain.getRender().drawFilledCircle(Minecraft.getMinecraft().displayWidth / 2 - 60, 60, 50, 0x66007700);
+        InstanceMain.getRender().drawCircle(Minecraft.getMinecraft().displayWidth / 2 - 60, 60, 50, 0x99008000);
+        InstanceMain.getRender().drawCircle(Minecraft.getMinecraft().displayWidth / 2 - 60, 60, 38, 0x99008000);
+        InstanceMain.getRender().drawCircle(Minecraft.getMinecraft().displayWidth / 2 - 60, 60, 25, 0x99008000);
+        InstanceMain.getRender().drawCircle(Minecraft.getMinecraft().displayWidth / 2 - 60, 60, 13, 0x99008000);
+        InstanceMain.getRender().drawCircle(Minecraft.getMinecraft().displayWidth / 2 - 60, 60, tick, 0x33000000);
+        InstanceMain.getRender().dr(Minecraft.getMinecraft().displayWidth / 2 - 110, 59.5, Minecraft.getMinecraft().displayWidth / 2 - 10, 60.5, 0x99000000);
+        InstanceMain.getRender().dr(Minecraft.getMinecraft().displayWidth / 2 - 59.5, 10, Minecraft.getMinecraft().displayWidth / 2 - 60.5, 110, 0x99000000);
+        InstanceMain.getRender().drawCircle(Minecraft.getMinecraft().displayWidth / 2 - 60, 60, 1, 0xffffffff); // Player
+        List<Entity> list1 = this.mc.theWorld.loadedEntityList;
+        GL11.glLineWidth(1.0F);
 
-		List<Entity> list1 = this.mc.theWorld.loadedEntityList;
+        for (int i = 0; i < list1.size(); i++)
+        {
+            Entity entity = list1.get(i);
+            double xdis = this.mc.thePlayer.posX - entity.posX;
+            double zdis = this.mc.thePlayer.posZ - entity.posZ;
+            double tdis = Math.sqrt((xdis * xdis) + (zdis * zdis));
+            double difInAng = MathHelper.wrapAngleTo180_double(this.mc.thePlayer.rotationYaw - ((Math.atan2(zdis, xdis) * 180.0D) / Math.PI));
+            double finalX = Math.cos(Math.toRadians(difInAng)) * tdis;
+            double finalY = -Math.sin(Math.toRadians(difInAng)) * tdis;
+            GL11.glPushMatrix();
+            GL11.glTranslatef(Minecraft.getMinecraft().displayWidth / 2 - 60, 60, 0);
 
-		GL11.glLineWidth(1.0F);
-		for (int i = 0; i < list1.size(); i++) {
-			Entity entity = list1.get(i);
-			double xdis = this.mc.thePlayer.posX - entity.posX;
-			double zdis = this.mc.thePlayer.posZ - entity.posZ;
-			double tdis = Math.sqrt((xdis * xdis) + (zdis * zdis));
+            if (tdis <= 100)
+            {
+                if (!(entity instanceof EntityClientPlayerMP))
+                {
+                    if (entity instanceof EntityPlayer)
+                    {
+                        InstanceMain.getRender().drawCircle((int) finalX / 2, (int) finalY / 2, 1, 0xff0000ff);
+                        GL11.glScalef(0.5F, 0.5F, 0.5F);
+                        EntityPlayer p = (EntityPlayer) entity;
+                        String u = p.getCommandSenderName();
+                        this.mc.fontRenderer.drawString(u, (int)(finalX) - (this.mc.fontRenderer.getStringWidth(u) / 2), (int) finalY - 10, 0xffffff);
+                        GL11.glScalef(1F, 0.5F, 1F);
+                    }
 
-			double difInAng = MathHelper.wrapAngleTo180_double(this.mc.thePlayer.rotationYaw - ((Math.atan2(zdis, xdis) * 180.0D) / Math.PI));
-			double finalX = Math.cos(Math.toRadians(difInAng)) * tdis;
-			double finalY = -Math.sin(Math.toRadians(difInAng)) * tdis;
+                    if (entity instanceof EntityAnimal)
+                    {
+                        InstanceMain.getRender().drawCircle((int) finalX / 2, (int) finalY / 2, 1, 0xff00ff00);
+                    }
 
-			GL11.glPushMatrix();
-			GL11.glTranslatef(Minecraft.getMinecraft().displayWidth / 2 - 60, 60, 0);
-			if (tdis <= 100) {
-				if (!(entity instanceof EntityClientPlayerMP)) {
-					if (entity instanceof EntityPlayer) {
-						Main.getRender().drawCircle((int) finalX / 2, (int) finalY / 2, 1, 0xff0000ff);
-						GL11.glScalef(0.5F, 0.5F, 0.5F);
-						EntityPlayer p = (EntityPlayer) entity;
-						String u = p.getCommandSenderName();
-						this.mc.fontRenderer.drawString(u, (int) (finalX) - (this.mc.fontRenderer.getStringWidth(u) / 2), (int) finalY - 10, 0xffffff);
-						GL11.glScalef(1F, 0.5F, 1F);
-					}
-					if (entity instanceof EntityAnimal) {
-						Main.getRender().drawCircle((int) finalX / 2, (int) finalY / 2, 1, 0xff00ff00);
-					}
-					if (entity instanceof EntityMob) {
-						Main.getRender().drawCircle((int) finalX / 2, (int) finalY / 2, 1, 0xffff0000);
-					}
-					if (entity instanceof EntitySlime) {
-						Main.getRender().drawCircle((int) finalX / 2, (int) finalY / 2, 1, 0xffff88cc);
-					}
-					if (entity instanceof EntityVillager) {
-						Main.getRender().drawCircle((int) finalX / 2, (int) finalY / 2, 1, 0xff8b4513);
-					}
-					if (entity instanceof EntityBat) {
-						Main.getRender().drawCircle((int) finalX / 2, (int) finalY / 2, 1, 0xfff4a460);
-					}
-					if (entity instanceof EntitySquid) {
-						Main.getRender().drawCircle((int) finalX / 2, (int) finalY / 2, 1, 0xff003399);
-					}
-				}
-			}
-			GL11.glPopMatrix();
-		}
-	}
+                    if (entity instanceof EntityMob)
+                    {
+                        InstanceMain.getRender().drawCircle((int) finalX / 2, (int) finalY / 2, 1, 0xffff0000);
+                    }
+
+                    if (entity instanceof EntitySlime)
+                    {
+                        InstanceMain.getRender().drawCircle((int) finalX / 2, (int) finalY / 2, 1, 0xffff88cc);
+                    }
+
+                    if (entity instanceof EntityVillager)
+                    {
+                        InstanceMain.getRender().drawCircle((int) finalX / 2, (int) finalY / 2, 1, 0xff8b4513);
+                    }
+
+                    if (entity instanceof EntityBat)
+                    {
+                        InstanceMain.getRender().drawCircle((int) finalX / 2, (int) finalY / 2, 1, 0xfff4a460);
+                    }
+
+                    if (entity instanceof EntitySquid)
+                    {
+                        InstanceMain.getRender().drawCircle((int) finalX / 2, (int) finalY / 2, 1, 0xff003399);
+                    }
+                }
+            }
+
+            GL11.glPopMatrix();
+        }
+    }
 
     /**
      * Render the ingame overlay with quick icon bar, ...
@@ -262,10 +284,9 @@ public class GuiIngame extends Gui
         }
 
         //TODO t
-        Main.getGuiManager().renderPinned();
+        InstanceMain.getGuiManager().renderPinned();
         //TODO t
         drawRadar();
-        
         int var32;
 
         if (this.mc.thePlayer.getSleepTimer() > 0)
@@ -458,18 +479,24 @@ public class GuiIngame extends Gui
             GL11.glPopMatrix();
             this.mc.mcProfiler.endSection();
         }
-        
+
         //TODO t
-        if(checkKey(Keyboard.KEY_U)){
-        	Minecraft.getMinecraft().m.getRender().cmdTab = !Minecraft.getMinecraft().m.getRender().cmdTab;
-        	Minecraft.getMinecraft().m.getRender().rendercmdTextbox();
-        }else if(checkKey(Keyboard.KEY_Y)){
-        	Main.getRender().ingamegui = !Main.getRender().ingamegui;
-        	Minecraft.getMinecraft().m.getRender().renderIngameGui();
-        }else if(checkKey(Keyboard.KEY_X)){
-        	if(Main.containsMod("xray")){
-        		Main.getMod("xray").execute();
-        	}
+        if (checkKey(Keyboard.KEY_U))
+        {
+            Minecraft.getMinecraft().m.getRender().cmdTab = !Minecraft.getMinecraft().m.getRender().cmdTab;
+            Minecraft.getMinecraft().m.getRender().rendercmdTextbox();
+        }
+        else if (checkKey(Keyboard.KEY_Y))
+        {
+            InstanceMain.getRender().ingamegui = !InstanceMain.getRender().ingamegui;
+            Minecraft.getMinecraft().m.getRender().renderIngameGui();
+        }
+        else if (checkKey(Keyboard.KEY_X))
+        {
+            if (InstanceMain.containsMod("xray"))
+            {
+                InstanceMain.getMod("xray").execute();
+            }
         }
 
         if (this.recordPlayingUpFor > 0)

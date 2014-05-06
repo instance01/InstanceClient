@@ -1,6 +1,6 @@
 package net.minecraft.client.entity;
 
-import com.comze_instancelabs.client.Main;
+import com.comze_instancelabs.client.InstanceMain;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
@@ -114,11 +114,13 @@ public class EntityClientPlayerMP extends EntityPlayerSP
      * Send updated motion and position information to the server
      */
     public void sendMotionUpdates()
-    {	
-    	//TODO t
-    	if(Main.freecam){
-    		return;
-    	}
+    {
+        //TODO t
+        if (InstanceMain.freecam)
+        {
+            return;
+        }
+
         boolean var1 = this.isSprinting();
 
         if (var1 != this.wasSneaking)

@@ -210,6 +210,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     /**
      * Typically "menu.convertingLevel", "menu.loadingLevel" or others.
      */
+
     protected synchronized void setUserMessage(String par1Str)
     {
         this.userMessage = par1Str;

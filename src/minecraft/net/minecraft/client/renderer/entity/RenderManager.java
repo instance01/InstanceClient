@@ -92,7 +92,7 @@ import net.minecraft.util.ReportedException;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
-import com.comze_instancelabs.client.Main;
+import com.comze_instancelabs.client.InstanceMain;
 
 public class RenderManager
 {
@@ -299,12 +299,15 @@ public class RenderManager
                 {
                     try
                     {
-                    	//TODO t
-            			if (Main.containsMod("coloredmobs")) {
-            				if (Main.getMod("coloredmobs").isEnabled()) {
-            					com.comze_instancelabs.client.Render.drawESP(p_147939_1_.posX, p_147939_1_.posY, p_147939_1_.posZ, 155, 155, 0);
-            				}
-            			}
+                        //TODO t
+                        if (InstanceMain.containsMod("coloredmobs"))
+                        {
+                            if (InstanceMain.getMod("coloredmobs").isEnabled())
+                            {
+                                com.comze_instancelabs.client.Render.drawESP(p_147939_1_.posX, p_147939_1_.posY, p_147939_1_.posZ, 155, 155, 0);
+                            }
+                        }
+
                         var11.doRender(p_147939_1_, p_147939_2_, p_147939_4_, p_147939_6_, p_147939_8_, p_147939_9_);
                     }
                     catch (Throwable var18)
@@ -320,11 +323,13 @@ public class RenderManager
                     {
                         throw new ReportedException(CrashReport.makeCrashReport(var17, "Post-rendering entity in world"));
                     }
-                    
+
                     //TODO t
-            		if (Main.containsMod("mobesp")) {
-            			if (Main.getMod("mobesp").isEnabled()) {
-            				try
+                    if (InstanceMain.containsMod("mobesp"))
+                    {
+                        if (InstanceMain.getMod("mobesp").isEnabled())
+                        {
+                            try
                             {
                                 this.func_85094_b(p_147939_1_, p_147939_2_, p_147939_4_, p_147939_6_, p_147939_8_, p_147939_9_);
                             }
@@ -332,8 +337,9 @@ public class RenderManager
                             {
                                 throw new ReportedException(CrashReport.makeCrashReport(var16, "Rendering entity hitbox in world"));
                             }
-            			}
-            		}
+                        }
+                    }
+
                     //
 
                     if (field_85095_o && !p_147939_1_.isInvisible() && !p_147939_10_)
@@ -372,18 +378,24 @@ public class RenderManager
 
     private void func_85094_b(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
-    	float var10 = par1Entity.width / 2.0F;
+        float var10 = par1Entity.width / 2.0F;
         AxisAlignedBB var11 = AxisAlignedBB.getAABBPool().getAABB(par2 - (double)var10, par4, par6 - (double)var10, par2 + (double)var10, par4 + (double)par1Entity.height, par6 + (double)var10);
-        //TODO t
-        if(par1Entity instanceof EntityMob){
-        	Main.getRender().drawESP(var11, 255, 0, 0); // red
-        }else if(par1Entity instanceof EntityPlayer){
-        	//
-        }else{
-        	Main.getRender().drawESP(var11, 0, 0, 255); // green
-        }
-    	//
 
+        //TODO t
+        if (par1Entity instanceof EntityMob)
+        {
+            InstanceMain.getRender().drawESP(var11, 255, 0, 0); // red
+        }
+        else if (par1Entity instanceof EntityPlayer)
+        {
+            //
+        }
+        else
+        {
+            InstanceMain.getRender().drawESP(var11, 0, 0, 255); // green
+        }
+
+        //
         /*GL11.glDepthMask(false);
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_LIGHTING);

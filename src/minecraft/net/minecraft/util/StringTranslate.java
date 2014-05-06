@@ -77,6 +77,7 @@ public class StringTranslate
     /**
      * Replaces all the current instance's translations with the ones that are passed in.
      */
+
     public static synchronized void replaceWith(Map par0Map)
     {
         instance.languageList.clear();
@@ -87,6 +88,7 @@ public class StringTranslate
     /**
      * Translate a key to current language.
      */
+
     public synchronized String translateKey(String par1Str)
     {
         return this.tryTranslateKey(par1Str);
@@ -95,6 +97,7 @@ public class StringTranslate
     /**
      * Translate a key to current language applying String.format()
      */
+
     public synchronized String translateKeyFormat(String par1Str, Object ... par2ArrayOfObj)
     {
         String var3 = this.tryTranslateKey(par1Str);

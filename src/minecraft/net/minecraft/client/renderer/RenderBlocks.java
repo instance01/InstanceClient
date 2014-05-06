@@ -49,7 +49,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.comze_instancelabs.client.Main;
+import com.comze_instancelabs.client.InstanceMain;
 
 public class RenderBlocks
 {

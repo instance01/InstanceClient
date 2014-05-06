@@ -1,16 +1,16 @@
 /*
  * Copyright (c) 2013, DarkStorm (darkstorm@evilminecraft.net)
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -39,216 +39,270 @@ import org.darkstorm.minecraft.gui.listener.*;
 import org.darkstorm.minecraft.gui.theme.Theme;
 import org.darkstorm.minecraft.gui.theme.simple.SimpleTheme;
 
-import com.comze_instancelabs.client.Main;
+import com.comze_instancelabs.client.InstanceMain;
 import com.comze_instancelabs.client.Module;
 
-public final class InstanceGuiManager extends AbstractGuiManager {
-	private class ModuleFrame extends BasicFrame {
-		private ModuleFrame() {
-		}
+public final class InstanceGuiManager extends AbstractGuiManager
+{
+    private class ModuleFrame extends BasicFrame
+    {
+        private ModuleFrame()
+        {
+        }
 
-		private ModuleFrame(String title) {
-			super(title);
-		}
-	}
+        private ModuleFrame(String title)
+        {
+            super(title);
+        }
+    }
 
-	private final AtomicBoolean setup;
+    private final AtomicBoolean setup;
 
-	public InstanceGuiManager() {
-		setup = new AtomicBoolean();
-	}
+    public InstanceGuiManager()
+    {
+        setup = new AtomicBoolean();
+    }
 
-	@Override
-	public void setup() {
-		if(!setup.compareAndSet(false, true))
-			return;
+    @Override
+    public void setup()
+    {
+        if (!setup.compareAndSet(false, true))
+        {
+            return;
+        }
 
-		//createTestFrame()
-		createModuleListFrame();
-		createModuleFrame();
+        //createTestFrame()
+        createModuleListFrame();
+        createModuleFrame();
+        // Optional equal sizing and auto-positioning
+        resizeComponents();
+        Minecraft minecraft = Minecraft.getMinecraft();
+        Dimension maxSize = recalculateSizes();
+        int offsetX = 5, offsetY = 5;
+        int scale = minecraft.gameSettings.guiScale;
 
-		// Optional equal sizing and auto-positioning
-		resizeComponents();
-		Minecraft minecraft = Minecraft.getMinecraft();
-		Dimension maxSize = recalculateSizes();
-		int offsetX = 5, offsetY = 5;
-		int scale = minecraft.gameSettings.guiScale;
-		if(scale == 0)
-			scale = 1000;
-		int scaleFactor = 0;
-		while(scaleFactor < scale && minecraft.displayWidth / (scaleFactor + 1) >= 320 && minecraft.displayHeight / (scaleFactor + 1) >= 240)
-			scaleFactor++;
-		for(Frame frame : getFrames()) {
-			frame.setX(offsetX);
-			frame.setY(offsetY);
-			offsetX += maxSize.width + 5;
-			if(offsetX + maxSize.width + 5 > minecraft.displayWidth / scaleFactor) {
-				offsetX = 5;
-				offsetY += maxSize.height + 5;
-			}
-		}
-	}
+        if (scale == 0)
+        {
+            scale = 1000;
+        }
 
-	public void createModuleListFrame(){
-		Theme theme = getTheme();
-		Frame frame = new BasicFrame("Enabled Modules");
-		frame.setTheme(theme);
-		frame.setClosable(false);
+        int scaleFactor = 0;
 
-		Main.getRender().modulelistframe = frame;
-		
-		for(final Module m : Main.modList){
-			if(!m.isEnabled()){
-				continue;
-			}
-			BasicButton btn = new BasicButton(m.getName());
-			btn.addButtonListener(new ButtonListener() {
-				@Override
-				public void onButtonPress(Button button) {
-					m.disable();
-				}
-			});
-			frame.add(btn);
-		}
+        while (scaleFactor < scale && minecraft.displayWidth / (scaleFactor + 1) >= 320 && minecraft.displayHeight / (scaleFactor + 1) >= 240)
+        {
+            scaleFactor++;
+        }
 
-		frame.setX(200);
-		frame.setY(200);
-		Dimension defaultDimension = theme.getUIForComponent(frame).getDefaultSize(frame);
-		frame.setWidth(110);
-		frame.setHeight(defaultDimension.height);
-		frame.layoutChildren();
-		frame.setVisible(true);
-		frame.setMinimized(true);
-		addFrame(frame);
-	}
-	
-	public void createModuleFrame(){
-		Theme theme = getTheme();
-		Frame frame = new BasicFrame("Modules");
-		frame.setTheme(theme);
-		frame.setClosable(false);
+        for (Frame frame : getFrames())
+        {
+            frame.setX(offsetX);
+            frame.setY(offsetY);
+            offsetX += maxSize.width + 5;
 
-		for(final Module m : Main.modList){
-			BasicButton btn = new BasicButton(m.getName());
-			btn.addButtonListener(new ButtonListener() {
-				@Override
-				public void onButtonPress(Button button) {
-					m.execute();
-				}
-			});
-			frame.add(btn);
-		}
+            if (offsetX + maxSize.width + 5 > minecraft.displayWidth / scaleFactor)
+            {
+                offsetX = 5;
+                offsetY += maxSize.height + 5;
+            }
+        }
+    }
 
-		frame.setX(100);
-		frame.setY(100);
-		Dimension defaultDimension = theme.getUIForComponent(frame).getDefaultSize(frame);
-		frame.setWidth(defaultDimension.width);
-		frame.setHeight(defaultDimension.height);
-		frame.layoutChildren();
-		frame.setVisible(true);
-		frame.setMinimized(true);
-		addFrame(frame);
-	}
-	
-	private void createTestFrame() {
-		Theme theme = getTheme();
-		Frame testFrame = new BasicFrame("Frame");
-		testFrame.setTheme(theme);
+    public void createModuleListFrame()
+    {
+        Theme theme = getTheme();
+        Frame frame = new BasicFrame("Enabled Modules");
+        frame.setTheme(theme);
+        frame.setClosable(false);
+        InstanceMain.getRender().modulelistframe = frame;
 
-		testFrame.add(new BasicLabel("TEST LOL"));
-		testFrame.add(new BasicLabel("TEST 23423"));
-		testFrame.add(new BasicLabel("TE123123123ST LOL"));
-		testFrame.add(new BasicLabel("31243 LO3242L432"));
-		BasicButton testButton = new BasicButton("Duplicate this frame!");
-		testButton.addButtonListener(new ButtonListener() {
+        for (final Module m : InstanceMain.modList)
+        {
+            if (!m.isEnabled())
+            {
+                continue;
+            }
 
-			@Override
-			public void onButtonPress(Button button) {
-				createTestFrame();
-			}
-		});
-		testFrame.add(new BasicCheckButton("This is a checkbox"));
-		testFrame.add(testButton);
-		ComboBox comboBox = new BasicComboBox("Simple theme", "Other theme", "Other theme 2");
-		comboBox.addComboBoxListener(new ComboBoxListener() {
+            BasicButton btn = new BasicButton(m.getName());
+            btn.addButtonListener(new ButtonListener()
+            {
+                @Override
+                public void onButtonPress(Button button)
+                {
+                    m.disable();
+                }
+            });
+            frame.add(btn);
+        }
 
-			@Override
-			public void onComboBoxSelectionChanged(ComboBox comboBox) {
-				Theme theme;
-				switch(comboBox.getSelectedIndex()) {
-				case 0:
-					theme = new SimpleTheme();
-					break;
-				case 1:
-					// Some other theme
-					// break;
-				case 2:
-					// Another theme
-					// break;
-				default:
-					return;
-				}
-				setTheme(theme);
-			}
-		});
-		testFrame.add(comboBox);
-		Slider slider = new BasicSlider("Test");
-		slider.setContentSuffix("things");
-		slider.setValueDisplay(ValueDisplay.INTEGER);
-		testFrame.add(slider);
-		testFrame.add(new BasicProgressBar(50, 0, 100, 1, ValueDisplay.PERCENTAGE));
+        frame.setX(200);
+        frame.setY(200);
+        Dimension defaultDimension = theme.getUIForComponent(frame).getDefaultSize(frame);
+        frame.setWidth(110);
+        frame.setHeight(defaultDimension.height);
+        frame.layoutChildren();
+        frame.setVisible(true);
+        frame.setMinimized(true);
+        addFrame(frame);
+    }
 
-		testFrame.setX(50);
-		testFrame.setY(50);
-		Dimension defaultDimension = theme.getUIForComponent(testFrame).getDefaultSize(testFrame);
-		testFrame.setWidth(defaultDimension.width);
-		testFrame.setHeight(defaultDimension.height);
-		testFrame.layoutChildren();
-		testFrame.setVisible(true);
-		testFrame.setMinimized(true);
-		addFrame(testFrame);
-	}
+    public void createModuleFrame()
+    {
+        Theme theme = getTheme();
+        Frame frame = new BasicFrame("Modules");
+        frame.setTheme(theme);
+        frame.setClosable(false);
 
-	@Override
-	protected void resizeComponents() {
-		Theme theme = getTheme();
-		Frame[] frames = getFrames();
-		Button enable = new BasicButton("Enable");
-		Button disable = new BasicButton("Disable");
-		Dimension enableSize = theme.getUIForComponent(enable).getDefaultSize(enable);
-		Dimension disableSize = theme.getUIForComponent(disable).getDefaultSize(disable);
-		int buttonWidth = Math.max(enableSize.width, disableSize.width);
-		int buttonHeight = Math.max(enableSize.height, disableSize.height);
-		for(Frame frame : frames) {
-			if(frame instanceof ModuleFrame) {
-				for(Component component : frame.getChildren()) {
-					if(component instanceof Button) {
-						component.setWidth(buttonWidth);
-						component.setHeight(buttonHeight);
-					}
-				}
-			}
-		}
-		recalculateSizes();
-	}
+        for (final Module m : InstanceMain.modList)
+        {
+            BasicButton btn = new BasicButton(m.getName());
+            btn.addButtonListener(new ButtonListener()
+            {
+                @Override
+                public void onButtonPress(Button button)
+                {
+                    m.execute();
+                }
+            });
+            frame.add(btn);
+        }
 
-	private Dimension recalculateSizes() {
-		Frame[] frames = getFrames();
-		int maxWidth = 0, maxHeight = 0;
-		for(Frame frame : frames) {
-			Dimension defaultDimension = frame.getTheme().getUIForComponent(frame).getDefaultSize(frame);
-			maxWidth = Math.max(maxWidth, defaultDimension.width);
-			frame.setHeight(defaultDimension.height);
-			if(frame.isMinimized()) {
-				for(Rectangle area : frame.getTheme().getUIForComponent(frame).getInteractableRegions(frame))
-					maxHeight = Math.max(maxHeight, area.height);
-			} else
-				maxHeight = Math.max(maxHeight, defaultDimension.height);
-		}
-		for(Frame frame : frames) {
-			frame.setWidth(maxWidth);
-			frame.layoutChildren();
-		}
-		return new Dimension(maxWidth, maxHeight);
-	}
+        frame.setX(100);
+        frame.setY(100);
+        Dimension defaultDimension = theme.getUIForComponent(frame).getDefaultSize(frame);
+        frame.setWidth(defaultDimension.width);
+        frame.setHeight(defaultDimension.height);
+        frame.layoutChildren();
+        frame.setVisible(true);
+        frame.setMinimized(true);
+        addFrame(frame);
+    }
+
+    private void createTestFrame()
+    {
+        Theme theme = getTheme();
+        Frame testFrame = new BasicFrame("Frame");
+        testFrame.setTheme(theme);
+        testFrame.add(new BasicLabel("TEST LOL"));
+        testFrame.add(new BasicLabel("TEST 23423"));
+        testFrame.add(new BasicLabel("TE123123123ST LOL"));
+        testFrame.add(new BasicLabel("31243 LO3242L432"));
+        BasicButton testButton = new BasicButton("Duplicate this frame!");
+        testButton.addButtonListener(new ButtonListener()
+        {
+            @Override
+            public void onButtonPress(Button button)
+            {
+                createTestFrame();
+            }
+        });
+        testFrame.add(new BasicCheckButton("This is a checkbox"));
+        testFrame.add(testButton);
+        ComboBox comboBox = new BasicComboBox("Simple theme", "Other theme", "Other theme 2");
+        comboBox.addComboBoxListener(new ComboBoxListener()
+        {
+            @Override
+            public void onComboBoxSelectionChanged(ComboBox comboBox)
+            {
+                Theme theme;
+
+                switch (comboBox.getSelectedIndex())
+                {
+                    case 0:
+                        theme = new SimpleTheme();
+                        break;
+
+                    case 1:
+
+                        // Some other theme
+                        // break;
+                    case 2:
+
+                        // Another theme
+                        // break;
+                    default:
+                        return;
+                }
+
+                setTheme(theme);
+            }
+        });
+        testFrame.add(comboBox);
+        Slider slider = new BasicSlider("Test");
+        slider.setContentSuffix("things");
+        slider.setValueDisplay(ValueDisplay.INTEGER);
+        testFrame.add(slider);
+        testFrame.add(new BasicProgressBar(50, 0, 100, 1, ValueDisplay.PERCENTAGE));
+        testFrame.setX(50);
+        testFrame.setY(50);
+        Dimension defaultDimension = theme.getUIForComponent(testFrame).getDefaultSize(testFrame);
+        testFrame.setWidth(defaultDimension.width);
+        testFrame.setHeight(defaultDimension.height);
+        testFrame.layoutChildren();
+        testFrame.setVisible(true);
+        testFrame.setMinimized(true);
+        addFrame(testFrame);
+    }
+
+    @Override
+    protected void resizeComponents()
+    {
+        Theme theme = getTheme();
+        Frame[] frames = getFrames();
+        Button enable = new BasicButton("Enable");
+        Button disable = new BasicButton("Disable");
+        Dimension enableSize = theme.getUIForComponent(enable).getDefaultSize(enable);
+        Dimension disableSize = theme.getUIForComponent(disable).getDefaultSize(disable);
+        int buttonWidth = Math.max(enableSize.width, disableSize.width);
+        int buttonHeight = Math.max(enableSize.height, disableSize.height);
+
+        for (Frame frame : frames)
+        {
+            if (frame instanceof ModuleFrame)
+            {
+                for (Component component : frame.getChildren())
+                {
+                    if (component instanceof Button)
+                    {
+                        component.setWidth(buttonWidth);
+                        component.setHeight(buttonHeight);
+                    }
+                }
+            }
+        }
+
+        recalculateSizes();
+    }
+
+    private Dimension recalculateSizes()
+    {
+        Frame[] frames = getFrames();
+        int maxWidth = 0, maxHeight = 0;
+
+        for (Frame frame : frames)
+        {
+            Dimension defaultDimension = frame.getTheme().getUIForComponent(frame).getDefaultSize(frame);
+            maxWidth = Math.max(maxWidth, defaultDimension.width);
+            frame.setHeight(defaultDimension.height);
+
+            if (frame.isMinimized())
+            {
+                for (Rectangle area : frame.getTheme().getUIForComponent(frame).getInteractableRegions(frame))
+                {
+                    maxHeight = Math.max(maxHeight, area.height);
+                }
+            }
+            else
+            {
+                maxHeight = Math.max(maxHeight, defaultDimension.height);
+            }
+        }
+
+        for (Frame frame : frames)
+        {
+            frame.setWidth(maxWidth);
+            frame.layoutChildren();
+        }
+
+        return new Dimension(maxWidth, maxHeight);
+    }
 }

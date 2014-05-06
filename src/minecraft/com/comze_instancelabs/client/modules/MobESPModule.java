@@ -7,10 +7,10 @@ import net.minecraft.util.EnumChatFormatting;
 import com.comze_instancelabs.client.Module;
 import com.comze_instancelabs.client.Render;
 
-public class MobESPModule extends Module {
-
-	public MobESPModule() {
-		super("mobesp", "Renders Mob ESP.");
-	}
-
+public class MobESPModule extends Module
+{
+    public MobESPModule()
+    {
+        super("mobesp", "Renders Mob ESP.");
+    }
 }

@@ -7,196 +7,262 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.darkstorm.minecraft.gui.listener.ComponentListener;
 import org.darkstorm.minecraft.gui.theme.*;
 
-public abstract class AbstractComponent implements Component {
-	private Container parent = null;
-	private Theme theme;
+public abstract class AbstractComponent implements Component
+{
+    private Container parent = null;
+    private Theme theme;
 
-	protected Rectangle area = new Rectangle(0, 0, 0, 0);
-	protected ComponentUI ui;
-	protected Color foreground, background;
-	protected boolean enabled = true, visible = true;
+    protected Rectangle area = new Rectangle(0, 0, 0, 0);
+    protected ComponentUI ui;
+    protected Color foreground, background;
+    protected boolean enabled = true, visible = true;
 
-	private List<ComponentListener> listeners = new CopyOnWriteArrayList<ComponentListener>();
+    private List<ComponentListener> listeners = new CopyOnWriteArrayList<ComponentListener>();
 
-	public void render() {
-		if(ui == null)
-			return;
-		ui.render(this);
-	}
+    public void render()
+    {
+        if (ui == null)
+        {
+            return;
+        }
 
-	@Override
-	public void update() {
-		if(ui == null)
-			return;
-		ui.handleUpdate(this);
-	}
+        ui.render(this);
+    }
 
-	protected ComponentUI getUI() {
-		return theme.getUIForComponent(this);
-	}
+    @Override
+    public void update()
+    {
+        if (ui == null)
+        {
+            return;
+        }
 
-	@Override
-	public void onMousePress(int x, int y, int button) {
-		if(ui != null) {
-			for(Rectangle area : ui.getInteractableRegions(this)) {
-				if(area.contains(x, y)) {
-					ui.handleInteraction(this, new Point(x, y), button);
-					break;
-				}
-			}
-		}
-	}
+        ui.handleUpdate(this);
+    }
 
-	@Override
-	public void onMouseRelease(int x, int y, int button) {
-	}
+    protected ComponentUI getUI()
+    {
+        return theme.getUIForComponent(this);
+    }
 
-	public Theme getTheme() {
-		return theme;
-	}
+    @Override
+    public void onMousePress(int x, int y, int button)
+    {
+        if (ui != null)
+        {
+            for (Rectangle area : ui.getInteractableRegions(this))
+            {
+                if (area.contains(x, y))
+                {
+                    ui.handleInteraction(this, new Point(x, y), button);
+                    break;
+                }
+            }
+        }
+    }
 
-	public void setTheme(Theme theme) {
-		Theme oldTheme = this.theme;
-		this.theme = theme;
-		if(theme == null) {
-			ui = null;
-			foreground = null;
-			background = null;
-			return;
-		}
+    @Override
+    public void onMouseRelease(int x, int y, int button)
+    {
+    }
 
-		ui = getUI();
-		boolean changeArea;
-		if(oldTheme != null) {
-			Dimension defaultSize = oldTheme.getUIForComponent(this).getDefaultSize(this);
-			changeArea = area.width == defaultSize.width && area.height == defaultSize.height;
-		} else
-			changeArea = area.equals(new Rectangle(0, 0, 0, 0));
-		if(changeArea) {
-			Dimension defaultSize = ui.getDefaultSize(this);
-			area = new Rectangle(area.x, area.y, defaultSize.width, defaultSize.height);
-		}
-		foreground = ui.getDefaultForegroundColor(this);
-		background = ui.getDefaultBackgroundColor(this);
-	}
+    public Theme getTheme()
+    {
+        return theme;
+    }
 
-	public int getX() {
-		return area.x;
-	}
+    public void setTheme(Theme theme)
+    {
+        Theme oldTheme = this.theme;
+        this.theme = theme;
 
-	public int getY() {
-		return area.y;
-	}
+        if (theme == null)
+        {
+            ui = null;
+            foreground = null;
+            background = null;
+            return;
+        }
 
-	public int getWidth() {
-		return area.width;
-	}
+        ui = getUI();
+        boolean changeArea;
 
-	public int getHeight() {
-		return area.height;
-	}
+        if (oldTheme != null)
+        {
+            Dimension defaultSize = oldTheme.getUIForComponent(this).getDefaultSize(this);
+            changeArea = area.width == defaultSize.width && area.height == defaultSize.height;
+        }
+        else
+        {
+            changeArea = area.equals(new Rectangle(0, 0, 0, 0));
+        }
 
-	public void setX(int x) {
-		area.x = x;
-	}
+        if (changeArea)
+        {
+            Dimension defaultSize = ui.getDefaultSize(this);
+            area = new Rectangle(area.x, area.y, defaultSize.width, defaultSize.height);
+        }
 
-	public void setY(int y) {
-		area.y = y;
-	}
+        foreground = ui.getDefaultForegroundColor(this);
+        background = ui.getDefaultBackgroundColor(this);
+    }
 
-	public void setWidth(int width) {
-		area.width = width;
-	}
+    public int getX()
+    {
+        return area.x;
+    }
 
-	public void setHeight(int height) {
-		area.height = height;
-	}
+    public int getY()
+    {
+        return area.y;
+    }
 
-	@Override
-	public Color getBackgroundColor() {
-		return background;
-	}
+    public int getWidth()
+    {
+        return area.width;
+    }
 
-	@Override
-	public Color getForegroundColor() {
-		return foreground;
-	}
+    public int getHeight()
+    {
+        return area.height;
+    }
 
-	@Override
-	public void setBackgroundColor(Color color) {
-		background = color;
-	}
+    public void setX(int x)
+    {
+        area.x = x;
+    }
 
-	@Override
-	public void setForegroundColor(Color color) {
-		foreground = color;
-	}
+    public void setY(int y)
+    {
+        area.y = y;
+    }
 
-	public Point getLocation() {
-		return area.getLocation();
-	}
+    public void setWidth(int width)
+    {
+        area.width = width;
+    }
 
-	public Dimension getSize() {
-		return area.getSize();
-	}
+    public void setHeight(int height)
+    {
+        area.height = height;
+    }
 
-	public Rectangle getArea() {
-		return area;
-	}
+    @Override
+    public Color getBackgroundColor()
+    {
+        return background;
+    }
 
-	public Container getParent() {
-		return parent;
-	}
+    @Override
+    public Color getForegroundColor()
+    {
+        return foreground;
+    }
 
-	public void setParent(Container parent) {
-		if(!parent.hasChild(this) || (this.parent != null && this.parent.hasChild(this)))
-			throw new IllegalArgumentException();
-		this.parent = parent;
-	}
+    @Override
+    public void setBackgroundColor(Color color)
+    {
+        background = color;
+    }
 
-	public void resize() {
-		Dimension defaultDimension = ui.getDefaultSize(this);
-		setWidth(defaultDimension.width);
-		setHeight(defaultDimension.height);
-	}
+    @Override
+    public void setForegroundColor(Color color)
+    {
+        foreground = color;
+    }
 
-	public boolean isEnabled() {
-		return enabled;
-	}
+    public Point getLocation()
+    {
+        return area.getLocation();
+    }
 
-	public void setEnabled(boolean enabled) {
-		if(parent != null && !parent.isEnabled())
-			this.enabled = false;
-		else
-			this.enabled = enabled;
-	}
+    public Dimension getSize()
+    {
+        return area.getSize();
+    }
 
-	public boolean isVisible() {
-		return visible;
-	}
+    public Rectangle getArea()
+    {
+        return area;
+    }
 
-	public void setVisible(boolean visible) {
-		if(parent != null && !parent.isVisible())
-			this.visible = false;
-		else
-			this.visible = visible;
-	}
+    public Container getParent()
+    {
+        return parent;
+    }
 
-	protected void addListener(ComponentListener listener) {
-		synchronized(listeners) {
-			listeners.add(listener);
-		}
-	}
+    public void setParent(Container parent)
+    {
+        if (!parent.hasChild(this) || (this.parent != null && this.parent.hasChild(this)))
+        {
+            throw new IllegalArgumentException();
+        }
 
-	protected void removeListener(ComponentListener listener) {
-		synchronized(listeners) {
-			listeners.remove(listener);
-		}
-	}
+        this.parent = parent;
+    }
 
-	protected ComponentListener[] getListeners() {
-		synchronized(listeners) {
-			return listeners.toArray(new ComponentListener[listeners.size()]);
-		}
-	}
+    public void resize()
+    {
+        Dimension defaultDimension = ui.getDefaultSize(this);
+        setWidth(defaultDimension.width);
+        setHeight(defaultDimension.height);
+    }
+
+    public boolean isEnabled()
+    {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled)
+    {
+        if (parent != null && !parent.isEnabled())
+        {
+            this.enabled = false;
+        }
+        else
+        {
+            this.enabled = enabled;
+        }
+    }
+
+    public boolean isVisible()
+    {
+        return visible;
+    }
+
+    public void setVisible(boolean visible)
+    {
+        if (parent != null && !parent.isVisible())
+        {
+            this.visible = false;
+        }
+        else
+        {
+            this.visible = visible;
+        }
+    }
+
+    protected void addListener(ComponentListener listener)
+    {
+        synchronized (listeners)
+        {
+            listeners.add(listener);
+        }
+    }
+
+    protected void removeListener(ComponentListener listener)
+    {
+        synchronized (listeners)
+        {
+            listeners.remove(listener);
+        }
+    }
+
+    protected ComponentListener[] getListeners()
+    {
+        synchronized (listeners)
+        {
+            return listeners.toArray(new ComponentListener[listeners.size()]);
+        }
+    }
 }

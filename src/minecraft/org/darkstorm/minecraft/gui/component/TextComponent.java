@@ -1,7 +1,8 @@
 package org.darkstorm.minecraft.gui.component;
 
-public interface TextComponent extends Component {
-	public String getText();
+public interface TextComponent extends Component
+{
+    public String getText();
 
-	public void setText(String text);
+    public void setText(String text);
 }

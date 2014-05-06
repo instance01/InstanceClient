@@ -7,10 +7,10 @@ import net.minecraft.util.EnumChatFormatting;
 import com.comze_instancelabs.client.Module;
 import com.comze_instancelabs.client.Render;
 
-public class ColoredMobsModule extends Module {
-
-	public ColoredMobsModule() {
-		super("coloredmobs", "Renders Yellow Mobs (failed ESP).");
-	}
-
+public class ColoredMobsModule extends Module
+{
+    public ColoredMobsModule()
+    {
+        super("coloredmobs", "Renders Yellow Mobs (failed ESP).");
+    }
 }

@@ -1,16 +1,16 @@
 /*
  * Copyright (c) 2013, DarkStorm (darkstorm@evilminecraft.net)
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -32,77 +32,103 @@ import org.darkstorm.minecraft.gui.theme.Theme;
 
 /**
  * Minecraft GUI API
- * 
+ *
  * @author DarkStorm (darkstorm@evilminecraft.net)
  */
-public abstract class AbstractGuiManager implements GuiManager {
-	private final List<Frame> frames;
+public abstract class AbstractGuiManager implements GuiManager
+{
+    private final List<Frame> frames;
 
-	private Theme theme;
+    private Theme theme;
 
-	public AbstractGuiManager() {
-		frames = new CopyOnWriteArrayList<Frame>();
-	}
+    public AbstractGuiManager()
+    {
+        frames = new CopyOnWriteArrayList<Frame>();
+    }
 
-	@Override
-	public abstract void setup();
+    @Override
+    public abstract void setup();
 
-	@Override
-	public void addFrame(Frame frame) {
-		frame.setTheme(theme);
-		frames.add(0, frame);
-	}
+    @Override
+    public void addFrame(Frame frame)
+    {
+        frame.setTheme(theme);
+        frames.add(0, frame);
+    }
 
-	@Override
-	public void removeFrame(Frame frame) {
-		frames.remove(frame);
-	}
+    @Override
+    public void removeFrame(Frame frame)
+    {
+        frames.remove(frame);
+    }
 
-	@Override
-	public Frame[] getFrames() {
-		return frames.toArray(new Frame[frames.size()]);
-	}
+    @Override
+    public Frame[] getFrames()
+    {
+        return frames.toArray(new Frame[frames.size()]);
+    }
 
-	@Override
-	public void bringForward(Frame frame) {
-		if(frames.remove(frame))
-			frames.add(0, frame);
-	}
+    @Override
+    public void bringForward(Frame frame)
+    {
+        if (frames.remove(frame))
+        {
+            frames.add(0, frame);
+        }
+    }
 
-	@Override
-	public Theme getTheme() {
-		return theme;
-	}
+    @Override
+    public Theme getTheme()
+    {
+        return theme;
+    }
 
-	@Override
-	public void setTheme(Theme theme) {
-		this.theme = theme;
-		for(Frame frame : frames)
-			frame.setTheme(theme);
-		resizeComponents();
-	}
+    @Override
+    public void setTheme(Theme theme)
+    {
+        this.theme = theme;
 
-	protected abstract void resizeComponents();
+        for (Frame frame : frames)
+        {
+            frame.setTheme(theme);
+        }
 
-	@Override
-	public void render() {
-		Frame[] frames = getFrames();
-		for(int i = frames.length - 1; i >= 0; i--)
-			frames[i].render();
-	}
+        resizeComponents();
+    }
 
-	@Override
-	public void renderPinned() {
-		Frame[] frames = getFrames();
-		for(int i = frames.length - 1; i >= 0; i--)
-			if(frames[i].isPinned())
-				frames[i].render();
-	}
+    protected abstract void resizeComponents();
 
-	@Override
-	public void update() {
-		Frame[] frames = getFrames();
-		for(int i = frames.length - 1; i >= 0; i--)
-			frames[i].update();
-	}
+    @Override
+    public void render()
+    {
+        Frame[] frames = getFrames();
+
+        for (int i = frames.length - 1; i >= 0; i--)
+        {
+            frames[i].render();
+        }
+    }
+
+    @Override
+    public void renderPinned()
+    {
+        Frame[] frames = getFrames();
+
+        for (int i = frames.length - 1; i >= 0; i--)
+            if (frames[i].isPinned())
+            {
+                frames[i].render();
+            }
+    }
+
+    @Override
+    public void update()
+    {
+        Frame[] frames = getFrames();
+
+        for (int i = frames.length - 1; i >= 0; i--)
+        {
+            frames[i].update();
+        }
+    }
 }

@@ -7,10 +7,10 @@ import net.minecraft.util.EnumChatFormatting;
 import com.comze_instancelabs.client.Module;
 import com.comze_instancelabs.client.Render;
 
-public class ChestESPModule extends Module {
-
-	public ChestESPModule() {
-		super("chestesp", "Renders TileEntity ESP (Chest/Enderchest/Sign/Spawner/Piston/Skull/Beacon/Endportal/EnchantmentTable).");
-	}
-
+public class ChestESPModule extends Module
+{
+    public ChestESPModule()
+    {
+        super("chestesp", "Renders TileEntity ESP (Chest/Enderchest/Sign/Spawner/Piston/Skull/Beacon/Endportal/EnchantmentTable).");
+    }
 }

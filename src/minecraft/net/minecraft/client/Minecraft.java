@@ -1,6 +1,6 @@
 package net.minecraft.client;
 
-import com.comze_instancelabs.client.Main;
+import com.comze_instancelabs.client.InstanceMain;
 import com.comze_instancelabs.client.gui.CmdTextboxGUI;
 import com.google.common.collect.Lists;
 import io.netty.util.concurrent.GenericFutureListener;
@@ -148,8 +148,8 @@ import org.lwjgl.util.glu.GLU;
 
 public class Minecraft implements IPlayerUsage
 {
-	//TODO t
-	public static Main m = new Main();
+    //TODO t
+    public static InstanceMain m = new InstanceMain();
     private static final Logger logger = LogManager.getLogger();
     private static final ResourceLocation locationMojangPng = new ResourceLocation("textures/gui/title/mojang.png");
     public static final boolean isRunningOnMac = Util.getOSType() == Util.EnumOS.MACOS;
@@ -1634,16 +1634,17 @@ public class Minecraft implements IPlayerUsage
         }
 
         this.mcProfiler.startSection("gui");
+        InstanceMain.getGuiManager().update();
 
-        Main.getGuiManager().update();
         if (!this.isGamePaused)
         {
             this.ingameGUI.updateTick();
-            
+
             //TODO t
-        	if(Main.getRender().ingamegui){
-                Main.getGuiManager().render();
-        	}
+            if (InstanceMain.getRender().ingamegui)
+            {
+                InstanceMain.getGuiManager().render();
+            }
         }
 
         this.mcProfiler.endStartSection("pick");

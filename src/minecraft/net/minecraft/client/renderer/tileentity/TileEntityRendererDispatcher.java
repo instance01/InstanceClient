@@ -24,7 +24,7 @@ import net.minecraft.util.ReportedException;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
-import com.comze_instancelabs.client.Main;
+import com.comze_instancelabs.client.InstanceMain;
 
 public class TileEntityRendererDispatcher
 {
@@ -125,19 +125,22 @@ public class TileEntityRendererDispatcher
         {
             try
             {
-            	//TODO t
-        		if (Main.containsMod("chestesp")) {
-        			if (Main.getMod("chestesp").isEnabled()) {
-        				try
+                //TODO t
+                if (InstanceMain.containsMod("chestesp"))
+                {
+                    if (InstanceMain.getMod("chestesp").isEnabled())
+                    {
+                        try
                         {
-        					Main.getRender().drawESP(p_147549_2_, p_147549_4_, p_147549_6_, 255, 0, 0); // red
+                            InstanceMain.getRender().drawESP(p_147549_2_, p_147549_4_, p_147549_6_, 255, 0, 0); // red
                         }
                         catch (Throwable var16)
                         {
                             throw new ReportedException(CrashReport.makeCrashReport(var16, "Rendering entity hitbox in world"));
                         }
-        			}
-        		}
+                    }
+                }
+
                 //
                 var9.renderTileEntityAt(p_147549_1_, p_147549_2_, p_147549_4_, p_147549_6_, p_147549_8_);
             }
