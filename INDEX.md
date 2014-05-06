@@ -6,7 +6,7 @@
 ### FreeCam ###
 
 - EntityClientPlayerMP.java:118
-- 
+
 
 ### Ingame GUI and Keys ###
 
@@ -17,7 +17,7 @@
 - GuiIngame.java:264
 - GuiIngame.java:266
 - GuiIngame.java:462
-- 
+
 
 ### ColoredMobs and MobESP ###
 
@@ -35,4 +35,3 @@
 
 - Minecraft.java:151
 - Minecraft.java:1643
-- 
