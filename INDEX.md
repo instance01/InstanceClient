@@ -1,14 +1,14 @@
-### XRay ###
+#### XRay
 
 - Block.java:580
 
 
-### FreeCam ###
+#### FreeCam
 
 - EntityClientPlayerMP.java:118
 
 
-### Ingame GUI and Keys ###
+#### Ingame GUI and Keys
 
 - GuiIngame.java:58
 - GuiIngame.java:91
@@ -19,19 +19,19 @@
 - GuiIngame.java:462
 
 
-### ColoredMobs and MobESP ###
+#### ColoredMobs and MobESP
 
 - RenderManager.java:302
 - RenderManager.java:324
 - RenderManager.java:377
 
 
-### ChestESP etc. ### 
+#### ChestESP etc.
 
 - TileEntityRendererDispatcher.java:128
 
 
-### Initialization ###
+#### Initialization
 
 - Minecraft.java:151
 - Minecraft.java:1643
