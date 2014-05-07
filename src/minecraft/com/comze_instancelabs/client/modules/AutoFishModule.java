@@ -20,20 +20,22 @@ import com.comze_instancelabs.client.util.CEntityPlayer;
 
 public class AutoFishModule extends Module
 {
-    public static CEntityPlayer c;
-
     public AutoFishModule()
     {
         super("autofish", "Automatically catches fish.");
+        this.setNeedUpdate(true);
     }
 
     //int ccc = 0;
     int cc = 0;
     int c_ = 0;
-    
+
     @Override
-    public void execute()
+    public void execute(boolean update)
     {
+    	if(update){
+    		super.execute();
+    	}
         if (this.isEnabled())
         {
         	if (Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem() != null && Item.getIdFromItem(Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().getItem()) == 346) {
@@ -55,8 +57,6 @@ public class AutoFishModule extends Module
 					}
 				}
 			}
-        }else{
-        	enable();
         }
     }
 

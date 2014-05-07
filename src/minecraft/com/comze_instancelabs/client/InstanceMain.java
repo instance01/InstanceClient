@@ -80,6 +80,8 @@ public class InstanceMain
             	if(m.getNeedArgs()){
             		m.execute(cmd.split(" "));
             		return;
+            	}else if(m.getNeedUpdate()){
+            		m.execute(true);
             	}
                 m.execute();
             }

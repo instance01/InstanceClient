@@ -109,7 +109,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
     {
     	//TODO t
     	if(InstanceMain.autofish){
-    		InstanceMain.getMod("autofish").execute();
+    		InstanceMain.getMod("autofish").execute(false);
     	}
 
         if (this.sprintingTicksLeft > 0)

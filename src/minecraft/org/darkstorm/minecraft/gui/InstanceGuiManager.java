@@ -128,6 +128,9 @@ public final class InstanceGuiManager extends AbstractGuiManager
                 @Override
                 public void onButtonPress(Button button)
                 {
+                	if(m.getNeedUpdate()){
+                		m.execute(true);
+                	}
                     m.disable();
                 }
             });
@@ -160,6 +163,10 @@ public final class InstanceGuiManager extends AbstractGuiManager
                 @Override
                 public void onButtonPress(Button button)
                 {
+                	if(m.getNeedUpdate()){
+                		m.execute(true);
+                		return;
+                	}
                     m.execute();
                 }
             });

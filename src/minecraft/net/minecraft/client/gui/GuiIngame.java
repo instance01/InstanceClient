@@ -499,7 +499,6 @@ public class GuiIngame extends Gui
                 InstanceMain.getMod("xray").execute();
             }
         }
-        
         for(String mod_ : KeyBinds.binds.keySet()){
         	if(checkKey(KeyBinds.binds.get(mod_))){
         		InstanceMain.getMod(mod_).execute();

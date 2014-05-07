@@ -6,6 +6,7 @@ public class Module
     String desc = "";
     boolean enabled = false;
     boolean needsargs = false;
+    boolean needsupdate = false;
     
     public Module(String name, String description)
     {
@@ -22,6 +23,10 @@ public class Module
         }
 
         enable();
+    }
+    
+    public void execute(boolean update){
+    	
     }
     
     public void execute(String[] args)
@@ -63,5 +68,13 @@ public class Module
     
     public void setNeedArgs(boolean b){
     	this.needsargs = b;
+    }
+    
+    public boolean getNeedUpdate(){
+    	return needsupdate;
+    }
+    
+    public void setNeedUpdate(boolean b){
+    	this.needsupdate = b;
     }
 }
