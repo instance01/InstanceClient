@@ -52,7 +52,7 @@ public class AutoFishModule extends Module
 				} else {
 					c_--;
 					if (c_ < 1) {
-						c_ = 30;
+						c_ = 20;
 						this.sendPackets();
 					}
 				}

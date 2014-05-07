@@ -501,7 +501,11 @@ public class GuiIngame extends Gui
         }
         for(String mod_ : KeyBinds.binds.keySet()){
         	if(checkKey(KeyBinds.binds.get(mod_))){
-        		InstanceMain.getMod(mod_).execute();
+        		if(InstanceMain.getMod(mod_).getNeedUpdate()){
+        			InstanceMain.getMod(mod_).execute(true);
+        		}else{
+        			InstanceMain.getMod(mod_).execute();
+        		}
         	}
         }
 
