@@ -49,12 +49,14 @@ public class Module
     {
         enabled = true;
         InstanceMain.getRender().updateModuleListFrame();
+        Settings.saveAll();
     }
 
     public void disable()
     {
         enabled = false;
         InstanceMain.getRender().updateModuleListFrame();
+        Settings.saveAll();
     }
 
     public String getName()

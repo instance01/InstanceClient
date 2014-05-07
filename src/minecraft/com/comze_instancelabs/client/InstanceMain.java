@@ -44,6 +44,7 @@ public class InstanceMain
         modList.add(new FreecamModule());
         modList.add(new AutoFishModule());
         modList.add(new KeybindModule());
+        Settings.loadAll();
     }
 
     public static void initGUI()
@@ -51,6 +52,7 @@ public class InstanceMain
         guimanager = new InstanceGuiManager();
         guimanager.setTheme(new SimpleTheme());
         guimanager.setup();
+        Settings.loadEnabledMods();
     }
 
     public static Render getRender()

@@ -41,6 +41,7 @@ import org.darkstorm.minecraft.gui.theme.simple.SimpleTheme;
 
 import com.comze_instancelabs.client.InstanceMain;
 import com.comze_instancelabs.client.Module;
+import com.comze_instancelabs.client.Settings;
 
 public final class InstanceGuiManager extends AbstractGuiManager
 {
@@ -115,6 +116,10 @@ public final class InstanceGuiManager extends AbstractGuiManager
         frame.setClosable(false);
         InstanceMain.getRender().modulelistframe = frame;
 
+        if(Settings.moduleListFramePinned){
+        	frame.setPinned(true);
+        }
+        
         for (final Module m : InstanceMain.modList)
         {
             if (!m.isEnabled())
@@ -155,6 +160,10 @@ public final class InstanceGuiManager extends AbstractGuiManager
         frame.setTheme(theme);
         frame.setClosable(false);
 
+        if(Settings.moduleFramePinned){
+        	frame.setPinned(true);
+        }
+        
         for (final Module m : InstanceMain.modList)
         {
             BasicButton btn = new BasicButton(m.getName());
@@ -311,5 +320,19 @@ public final class InstanceGuiManager extends AbstractGuiManager
         }
 
         return new Dimension(maxWidth, maxHeight);
+    }
+    
+    public static void updatePinned(){
+    	Frame[] frames = InstanceMain.getGuiManager().getFrames();
+
+        for (int i = frames.length - 1; i >= 0; i--)
+        {
+        	if(frames[i].getTitle().equalsIgnoreCase("enabled modules")){
+        		Settings.moduleListFramePinned = frames[i].isPinned();
+        	}else if(frames[i].getTitle().equalsIgnoreCase("modules")){
+        		Settings.moduleFramePinned = frames[i].isPinned();
+        	}
+        }
+        Settings.saveAll();
     }
 }

@@ -4,11 +4,14 @@ import static org.lwjgl.opengl.GL11.*;
 
 import java.awt.*;
 
+import org.darkstorm.minecraft.gui.InstanceGuiManager;
 import org.darkstorm.minecraft.gui.component.Component;
 import org.darkstorm.minecraft.gui.component.Frame;
 import org.darkstorm.minecraft.gui.layout.Constraint;
 import org.darkstorm.minecraft.gui.theme.AbstractComponentUI;
 import org.darkstorm.minecraft.gui.util.RenderUtil;
+
+import com.comze_instancelabs.client.Settings;
 
 public class SimpleFrameUI extends AbstractComponentUI<Frame>
 {
@@ -214,6 +217,7 @@ public class SimpleFrameUI extends AbstractComponentUI<Frame>
                     && location.y >= 2 && location.y <= textHeight + 2)
             {
                 component.setPinned(!component.isPinned());
+                InstanceGuiManager.updatePinned();
                 return;
             }
 
