@@ -24,12 +24,13 @@ Download [here](https://github.com/instance01/InstanceClient/releases).
 - FreeCam
 - Fullbright
 - ColoredMobs
+- AutoFish
 
 
 #### Planned stuff:
 
 
-- AutoFish
+- Projectiles
 - Youtube Player
 
 
