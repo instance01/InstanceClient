@@ -49,6 +49,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Session;
 import net.minecraft.world.World;
 
+import com.comze_instancelabs.client.InstanceMain;
+
 public class EntityPlayerSP extends AbstractClientPlayer
 {
     public MovementInput movementInput;
@@ -105,6 +107,11 @@ public class EntityPlayerSP extends AbstractClientPlayer
      */
     public void onLivingUpdate()
     {
+    	//TODO t
+    	if(InstanceMain.autofish){
+    		InstanceMain.getMod("autofish").execute();
+    	}
+
         if (this.sprintingTicksLeft > 0)
         {
             --this.sprintingTicksLeft;
@@ -137,7 +144,9 @@ public class EntityPlayerSP extends AbstractClientPlayer
             {
                 if (this.mc.currentScreen != null)
                 {
-                    this.mc.displayGuiScreen((GuiScreen)null);
+                	//TODO t
+                	//remove portal screen
+                    //this.mc.displayGuiScreen((GuiScreen)null);
                 }
 
                 if (this.timeInPortal == 0.0F)

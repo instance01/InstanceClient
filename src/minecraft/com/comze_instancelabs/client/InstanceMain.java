@@ -6,6 +6,7 @@ import java.util.List;
 import org.darkstorm.minecraft.gui.InstanceGuiManager;
 import org.darkstorm.minecraft.gui.theme.simple.SimpleTheme;
 
+import com.comze_instancelabs.client.modules.AutoFishModule;
 import com.comze_instancelabs.client.modules.ChestESPModule;
 import com.comze_instancelabs.client.modules.ColoredMobsModule;
 import com.comze_instancelabs.client.modules.FreecamModule;
@@ -21,7 +22,8 @@ public class InstanceMain
 
     public static boolean xray = false;
     public static boolean freecam = false;
-
+    public static boolean autofish = false;
+    
     public static List<Module> modList = new ArrayList<Module>();
 
     public InstanceMain()
@@ -39,6 +41,7 @@ public class InstanceMain
         modList.add(new ChestESPModule());
         modList.add(new XrayModule());
         modList.add(new FreecamModule());
+        modList.add(new AutoFishModule());
     }
 
     public static void initGUI()

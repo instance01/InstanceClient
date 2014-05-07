@@ -742,11 +742,14 @@ public class EntityRenderer implements IResourceManagerReloadListener
                 var5 = 7;
             }
 
-            float var6 = 5.0F / (var4 * var4 + 5.0F) - var4 * 0.04F;
+            //TODO t
+            // remove confusion and portal effect
+            /*float var6 = 5.0F / (var4 * var4 + 5.0F) - var4 * 0.04F;
             var6 *= var6;
             GL11.glRotatef(((float)this.rendererUpdateCount + par1) * (float)var5, 0.0F, 1.0F, 1.0F);
             GL11.glScalef(1.0F / var6, 1.0F, 1.0F);
             GL11.glRotatef(-((float)this.rendererUpdateCount + par1) * (float)var5, 0.0F, 1.0F, 1.0F);
+        	*/
         }
 
         this.orientCamera(par1);
