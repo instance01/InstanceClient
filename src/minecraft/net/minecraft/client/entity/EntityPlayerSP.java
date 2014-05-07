@@ -145,7 +145,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
                 if (this.mc.currentScreen != null)
                 {
                 	//TODO t
-                	//remove portal screen
+                	// remove portal screen
                     //this.mc.displayGuiScreen((GuiScreen)null);
                 }
 

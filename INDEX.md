@@ -35,3 +35,14 @@
 
 - Minecraft.java:151
 - Minecraft.java:1643
+
+
+#### Other Improvements
+
+- EntityPlayerSP.java:147 Remove portal screen
+- EntityRenderer.java:745 Remove portal and confusion effect
+
+
+#### AutoFish
+
+- EntityPlayerSP.java:110
