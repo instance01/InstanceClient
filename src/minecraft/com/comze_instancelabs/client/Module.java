@@ -5,7 +5,8 @@ public class Module
     String name = "";
     String desc = "";
     boolean enabled = false;
-
+    boolean needsargs = false;
+    
     public Module(String name, String description)
     {
         this.name = name;
@@ -13,6 +14,17 @@ public class Module
     }
 
     public void execute()
+    {
+        if (isEnabled())
+        {
+            disable();
+            return;
+        }
+
+        enable();
+    }
+    
+    public void execute(String[] args)
     {
         if (isEnabled())
         {
@@ -43,5 +55,13 @@ public class Module
     public String getName()
     {
         return name;
+    }
+    
+    public boolean getNeedArgs(){
+    	return needsargs;
+    }
+    
+    public void setNeedArgs(boolean b){
+    	this.needsargs = b;
     }
 }

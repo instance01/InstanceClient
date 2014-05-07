@@ -12,6 +12,7 @@ import com.comze_instancelabs.client.modules.ColoredMobsModule;
 import com.comze_instancelabs.client.modules.FreecamModule;
 import com.comze_instancelabs.client.modules.FullbrightModule;
 import com.comze_instancelabs.client.modules.HelpModule;
+import com.comze_instancelabs.client.modules.KeybindModule;
 import com.comze_instancelabs.client.modules.MobESPModule;
 import com.comze_instancelabs.client.modules.XrayModule;
 
@@ -42,6 +43,7 @@ public class InstanceMain
         modList.add(new XrayModule());
         modList.add(new FreecamModule());
         modList.add(new AutoFishModule());
+        modList.add(new KeybindModule());
     }
 
     public static void initGUI()
@@ -63,13 +65,22 @@ public class InstanceMain
 
     public void executeCMD(String cmd)
     {
+    	String cmd_ = cmd;
+    	if(cmd.contains(" ")){
+    		cmd_ = cmd.split(" ")[0];
+    	}
+    	
         // search in modules and try to enable
-        if (containsMod(cmd))
+        if (containsMod(cmd_))
         {
-            Module m = getMod(cmd);
+            Module m = getMod(cmd_);
 
             if (m != null)
             {
+            	if(m.getNeedArgs()){
+            		m.execute(cmd.split(" "));
+            		return;
+            	}
                 m.execute();
             }
         }
@@ -113,4 +124,8 @@ public class InstanceMain
 
         return null;
     }
+    
+	public static boolean isNumeric(String s) {
+		return s.matches("[-+]?\\d*\\.?\\d+");
+	}
 }

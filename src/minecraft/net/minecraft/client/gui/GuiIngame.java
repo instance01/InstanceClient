@@ -52,6 +52,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.comze_instancelabs.client.InstanceMain;
+import com.comze_instancelabs.client.KeyBinds;
 
 public class GuiIngame extends Gui
 {
@@ -497,6 +498,12 @@ public class GuiIngame extends Gui
             {
                 InstanceMain.getMod("xray").execute();
             }
+        }
+        
+        for(String mod_ : KeyBinds.binds.keySet()){
+        	if(checkKey(KeyBinds.binds.get(mod_))){
+        		InstanceMain.getMod(mod_).execute();
+        	}
         }
 
         if (this.recordPlayingUpFor > 0)

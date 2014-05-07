@@ -171,7 +171,6 @@ public class CmdTextboxGUI extends GuiScreen
 
     public void sendCommand(String cmd)
     {
-        System.out.println(cmd);
         Minecraft.getMinecraft().m.executeCMD(cmd);
         //this.mc.ingameGUI.getChatGUI().func_146239_a(cmd);
         currentcmd = "";
