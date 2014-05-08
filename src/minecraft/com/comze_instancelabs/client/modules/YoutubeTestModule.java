@@ -1,13 +1,10 @@
 package com.comze_instancelabs.client.modules;
 
-import javafx.application.Application;
-import javafx.application.Platform;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
 import com.comze_instancelabs.client.Module;
-import com.comze_instancelabs.client.YoutubePlayerTest;
 
 public class YoutubeTestModule extends Module
 {
