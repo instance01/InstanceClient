@@ -11,6 +11,7 @@ public class HelpModule extends Module
     public HelpModule()
     {
         super("help", "Displays help information.");
+        this.setHidden(true);
     }
 
     @Override

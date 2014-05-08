@@ -166,6 +166,9 @@ public final class InstanceGuiManager extends AbstractGuiManager
         
         for (final Module m : InstanceMain.modList)
         {
+        	if(m.getIsHidden()){
+        		continue;
+        	}
             BasicButton btn = new BasicButton(m.getName());
             btn.addButtonListener(new ButtonListener()
             {

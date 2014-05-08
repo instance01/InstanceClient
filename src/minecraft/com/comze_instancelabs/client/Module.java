@@ -7,6 +7,7 @@ public class Module
     boolean enabled = false;
     boolean needsargs = false;
     boolean needsupdate = false;
+    boolean hidden = false;
     
     public Module(String name, String description)
     {
@@ -78,5 +79,13 @@ public class Module
     
     public void setNeedUpdate(boolean b){
     	this.needsupdate = b;
+    }
+    
+    public boolean getIsHidden(){
+    	return hidden;
+    }
+    
+    public void setHidden(boolean b){
+    	this.hidden = b;
     }
 }

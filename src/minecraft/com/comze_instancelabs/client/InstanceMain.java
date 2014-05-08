@@ -15,6 +15,7 @@ import com.comze_instancelabs.client.modules.HelpModule;
 import com.comze_instancelabs.client.modules.KeybindModule;
 import com.comze_instancelabs.client.modules.MobESPModule;
 import com.comze_instancelabs.client.modules.XrayModule;
+import com.comze_instancelabs.client.modules.YoutubeTestModule;
 
 public class InstanceMain
 {
@@ -44,6 +45,7 @@ public class InstanceMain
         modList.add(new FreecamModule());
         modList.add(new AutoFishModule());
         modList.add(new KeybindModule());
+        modList.add(new YoutubeTestModule());
         Settings.loadAll();
     }
 
