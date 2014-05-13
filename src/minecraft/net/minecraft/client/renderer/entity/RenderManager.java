@@ -304,7 +304,7 @@ public class RenderManager
                         {
                             if (InstanceMain.getMod("coloredmobs").isEnabled())
                             {
-                                com.comze_instancelabs.client.Render.drawESP(p_147939_1_.posX, p_147939_1_.posY, p_147939_1_.posZ, 155, 155, 0);
+                                com.comze_instancelabs.client.InstanceRender.drawESP(p_147939_1_.posX, p_147939_1_.posY, p_147939_1_.posZ, 155, 155, 0);
                             }
                         }
 
@@ -388,7 +388,8 @@ public class RenderManager
         }
         else if (par1Entity instanceof EntityPlayer)
         {
-            //
+        	var11 = AxisAlignedBB.getAABBPool().getAABB(par2 - (double)var10, par4 - (double)par1Entity.height, par6 - (double)var10, par2 + (double)var10, par4, par6 + (double)var10);
+        	InstanceMain.getRender().drawESP(var11, 105, 0, 154); // yellowish
         }
         else
         {

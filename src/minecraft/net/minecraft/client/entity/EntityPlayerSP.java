@@ -50,6 +50,7 @@ import net.minecraft.util.Session;
 import net.minecraft.world.World;
 
 import com.comze_instancelabs.client.InstanceMain;
+import com.comze_instancelabs.client.modules.FreecamModule;
 
 public class EntityPlayerSP extends AbstractClientPlayer
 {
@@ -533,6 +534,15 @@ public class EntityPlayerSP extends AbstractClientPlayer
 
     protected boolean func_145771_j(double p_145771_1_, double p_145771_3_, double p_145771_5_)
     {
+    	//TODO t
+		if (InstanceMain.freecam) {
+			this.noClip = true;
+			FreecamModule.fly(this);
+			return false;
+		}else{
+			this.noClip = false;
+		}
+
         int var7 = MathHelper.floor_double(p_145771_1_);
         int var8 = MathHelper.floor_double(p_145771_3_);
         int var9 = MathHelper.floor_double(p_145771_5_);

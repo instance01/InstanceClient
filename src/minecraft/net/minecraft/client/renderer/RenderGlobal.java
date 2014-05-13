@@ -1,7 +1,7 @@
 package net.minecraft.client.renderer;
 
 import com.comze_instancelabs.client.InstanceMain;
-import com.comze_instancelabs.client.Render;
+import com.comze_instancelabs.client.InstanceRender;
 import com.google.common.collect.Maps;
 import java.nio.IntBuffer;
 import java.util.ArrayList;

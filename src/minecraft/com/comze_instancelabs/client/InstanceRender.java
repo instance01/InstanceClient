@@ -16,7 +16,7 @@ import net.minecraft.util.AxisAlignedBB;
 
 import com.comze_instancelabs.client.gui.CmdTextboxGUI;
 
-public class Render
+public class InstanceRender
 {
     public boolean ingameInfos = true;
     public boolean cmdTab = false;
@@ -24,7 +24,7 @@ public class Render
 
     public Frame modulelistframe = null;
 
-    public Render()
+    public InstanceRender()
     {
     }
 

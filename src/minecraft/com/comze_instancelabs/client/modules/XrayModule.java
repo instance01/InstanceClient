@@ -6,7 +6,7 @@ import net.minecraft.util.EnumChatFormatting;
 
 import com.comze_instancelabs.client.InstanceMain;
 import com.comze_instancelabs.client.Module;
-import com.comze_instancelabs.client.Render;
+import com.comze_instancelabs.client.InstanceRender;
 
 public class XrayModule extends Module
 {

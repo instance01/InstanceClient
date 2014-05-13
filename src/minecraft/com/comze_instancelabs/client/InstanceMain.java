@@ -19,13 +19,13 @@ import com.comze_instancelabs.client.modules.YoutubeTestModule;
 
 public class InstanceMain
 {
-    static Render r;
+    static InstanceRender r;
     static InstanceGuiManager guimanager;
 
     public static boolean xray = false;
     public static boolean freecam = false;
     public static boolean autofish = false;
-    
+
     public static List<Module> modList = new ArrayList<Module>();
 
     public InstanceMain()
@@ -35,7 +35,7 @@ public class InstanceMain
 
     public static void init()
     {
-        r  = new Render();
+        r  = new InstanceRender();
         modList.add(new HelpModule());
         modList.add(new FullbrightModule());
         modList.add(new ColoredMobsModule());
@@ -57,7 +57,7 @@ public class InstanceMain
         Settings.loadEnabledMods();
     }
 
-    public static Render getRender()
+    public static InstanceRender getRender()
     {
         return r;
     }

@@ -1,5 +1,6 @@
 package net.minecraft.entity.player;
 
+import com.comze_instancelabs.client.InstanceMain;
 import com.google.common.base.Charsets;
 import com.mojang.authlib.GameProfile;
 import java.util.Collection;
@@ -1381,6 +1382,10 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
      */
     public boolean isEntityInsideOpaqueBlock()
     {
+    	//TODO t
+    	if(InstanceMain.freecam){
+    		return false;
+    	}
         return !this.sleeping && super.isEntityInsideOpaqueBlock();
     }
 
