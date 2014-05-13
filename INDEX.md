@@ -19,7 +19,7 @@
 - GuiIngame.java:462
 
 
-#### ColoredMobs and MobESP
+#### ColoredMobs and MobESP (PlayerESP)
 
 - RenderManager.java:302
 - RenderManager.java:324
