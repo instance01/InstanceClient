@@ -26,7 +26,7 @@ Download [here](https://github.com/instance01/InstanceClient/releases).
 - Fullbright
 - ColoredMobs
 - AutoFish
-- Timer <sub>(20 is default)</sub>
+- Timer <sub>(20 is default; 0 breaks the game)</sub>
 
 
 #### Planned stuff:
@@ -45,3 +45,5 @@ Download [here](https://github.com/instance01/InstanceClient/releases).
 - U - Console
 - X - XRay
 
+
+You can bind any key to a module ingame with the "bind" command, use it in the console.
