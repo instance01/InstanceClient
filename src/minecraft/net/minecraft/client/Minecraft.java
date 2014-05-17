@@ -893,6 +893,7 @@ public class Minecraft implements IPlayerUsage
         try
         {
             this.startGame();
+            //TODO t
             m.initGUI();
         }
         catch (Throwable var11)

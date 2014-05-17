@@ -20,7 +20,8 @@ public class SimpleButtonUI extends AbstractComponentUI<Button>
         super(Button.class);
         this.theme = theme;
         foreground = Color.WHITE;
-        background = new Color(128, 128, 128, 128 + 128 / 2);
+        //background = new Color(128, 128, 128, 128 + 128 / 2);
+        background = new Color(0, 152, 235, 100); // blue
     }
 
     @Override
