@@ -6,6 +6,7 @@ import java.util.List;
 import org.darkstorm.minecraft.gui.InstanceGuiManager;
 import org.darkstorm.minecraft.gui.theme.simple.SimpleTheme;
 
+import com.comze_instancelabs.client.modules.AllChestESPModule;
 import com.comze_instancelabs.client.modules.AutoFishModule;
 import com.comze_instancelabs.client.modules.ChestESPModule;
 import com.comze_instancelabs.client.modules.ColoredMobsModule;
@@ -41,6 +42,7 @@ public class InstanceMain
         modList.add(new ColoredMobsModule());
         modList.add(new MobESPModule());
         modList.add(new ChestESPModule());
+        modList.add(new AllChestESPModule());
         modList.add(new XrayModule());
         modList.add(new FreecamModule());
         modList.add(new AutoFishModule());

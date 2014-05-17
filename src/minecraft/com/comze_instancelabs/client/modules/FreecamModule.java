@@ -46,6 +46,9 @@ public class FreecamModule extends Module
 
         if (c != null)
         {
+        	// optional: if that's enabled, we won't be able to glitch with freecam anymore, but won't be kicked for flying on vanilla servers.
+            //Minecraft.getMinecraft().thePlayer.setPosition(c.posX, c.posY, c.posZ);
+
             Minecraft.getMinecraft().theWorld.removeEntity(c);
         }
     }

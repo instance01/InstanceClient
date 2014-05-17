@@ -3,6 +3,8 @@ package net.minecraft.client.renderer.tileentity;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderEnchantmentTable;
@@ -126,9 +128,9 @@ public class TileEntityRendererDispatcher
             try
             {
                 //TODO t
-                if (InstanceMain.containsMod("chestesp"))
+                if (InstanceMain.containsMod("allchestesp"))
                 {
-                    if (InstanceMain.getMod("chestesp").isEnabled())
+                    if (InstanceMain.getMod("allchestesp").isEnabled())
                     {
                         try
                         {
@@ -139,6 +141,26 @@ public class TileEntityRendererDispatcher
                             throw new ReportedException(CrashReport.makeCrashReport(var16, "Rendering entity hitbox in world"));
                         }
                     }
+                }
+                
+                // Chest and TrappedChest
+                if(p_147549_1_.blockType != null){
+                	if(p_147549_1_.blockType == Block.getBlockById(54) || p_147549_1_.blockType == Block.getBlockById(146)){
+                		if (InstanceMain.containsMod("chestesp"))
+                        {
+                            if (InstanceMain.getMod("chestesp").isEnabled())
+                            {
+                                try
+                                {
+                                    InstanceMain.getRender().drawESP(p_147549_2_, p_147549_4_, p_147549_6_, 255, 0, 0); // red
+                                }
+                                catch (Throwable var16)
+                                {
+                                    throw new ReportedException(CrashReport.makeCrashReport(var16, "Rendering entity hitbox in world"));
+                                }
+                            }
+                        }
+                	}
                 }
 
                 //
