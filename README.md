@@ -5,6 +5,8 @@ Modded Minecraft Client with a few Utilities.
 
 ![InstanceClient](https://dl.dropboxusercontent.com/u/82137075/1805_015102_12.png)
 
+Thanks to [Sinuce](http://denmarkinminecraft.com/profile/4517920) for creating the design for the GuiButtons above.
+
 The purpose of [INDEX.md](https://github.com/instance01/InstanceClient/blob/master/INDEX.md) is to keep track of the mod locations, but it doesn't contain any mods that don't require changing vanilla Minecraft code (obviously).
 
 
