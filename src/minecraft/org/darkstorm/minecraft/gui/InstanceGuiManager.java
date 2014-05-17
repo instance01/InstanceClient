@@ -120,6 +120,10 @@ public final class InstanceGuiManager extends AbstractGuiManager
         	frame.setPinned(true);
         }
         
+        if(Settings.moduleListFrameMinimized){
+        	frame.setMinimized(true);
+        }
+        
         for (final Module m : InstanceMain.modList)
         {
             if (!m.isEnabled())
@@ -162,6 +166,9 @@ public final class InstanceGuiManager extends AbstractGuiManager
 
         if(Settings.moduleFramePinned){
         	frame.setPinned(true);
+        }
+        if(Settings.moduleFrameMinimized){
+        	frame.setMinimized(true);
         }
         
         for (final Module m : InstanceMain.modList)
@@ -334,6 +341,20 @@ public final class InstanceGuiManager extends AbstractGuiManager
         		Settings.moduleListFramePinned = frames[i].isPinned();
         	}else if(frames[i].getTitle().equalsIgnoreCase("modules")){
         		Settings.moduleFramePinned = frames[i].isPinned();
+        	}
+        }
+        Settings.saveAll();
+    }
+    
+    public static void updateOpen(){
+    	Frame[] frames = InstanceMain.getGuiManager().getFrames();
+
+        for (int i = frames.length - 1; i >= 0; i--)
+        {
+        	if(frames[i].getTitle().equalsIgnoreCase("enabled modules")){
+        		Settings.moduleListFrameMinimized = frames[i].isMinimized();
+        	}else if(frames[i].getTitle().equalsIgnoreCase("modules")){
+        		Settings.moduleFrameMinimized = frames[i].isMinimized();
         	}
         }
         Settings.saveAll();

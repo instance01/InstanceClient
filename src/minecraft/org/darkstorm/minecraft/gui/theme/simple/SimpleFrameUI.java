@@ -230,6 +230,7 @@ public class SimpleFrameUI extends AbstractComponentUI<Frame>
                     && location.y >= 2 && location.y <= textHeight + 2)
             {
                 component.setMinimized(!component.isMinimized());
+                InstanceGuiManager.updateOpen();
                 return;
             }
 

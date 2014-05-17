@@ -36,7 +36,7 @@ public class InstanceMain
 
     public static void init()
     {
-        r  = new InstanceRender();
+        r = new InstanceRender();
         modList.add(new HelpModule());
         modList.add(new FullbrightModule());
         modList.add(new ColoredMobsModule());

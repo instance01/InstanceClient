@@ -13,6 +13,8 @@ public class Settings
 {
     public static boolean moduleFramePinned;
     public static boolean moduleListFramePinned;
+    public static boolean moduleFrameMinimized;
+    public static boolean moduleListFrameMinimized;
     
     
     
@@ -25,6 +27,8 @@ public class Settings
 
     		prop.setProperty("moduleFramePinned", Boolean.toString(moduleFramePinned));
     		prop.setProperty("moduleListFramePinned", Boolean.toString(moduleListFramePinned));
+    		prop.setProperty("moduleFrameOpen", Boolean.toString(moduleFrameMinimized));
+    		prop.setProperty("moduleListFrameOpen", Boolean.toString(moduleListFrameMinimized));
 
     		prop.store(output, null);
     	} catch (IOException io) {
@@ -104,6 +108,8 @@ public class Settings
     		
     		moduleFramePinned = Boolean.parseBoolean(prop.getProperty("moduleFramePinned"));
     		moduleListFramePinned = Boolean.parseBoolean(prop.getProperty("moduleListFramePinned"));
+    		moduleFrameMinimized = Boolean.parseBoolean(prop.getProperty("moduleFrameOpen"));
+    		moduleListFrameMinimized = Boolean.parseBoolean(prop.getProperty("moduleListFrameOpen"));
     		
     	} catch (IOException io) {
     		//io.printStackTrace();
