@@ -2844,4 +2844,10 @@ public class Minecraft implements IPlayerUsage
             }
         }
     }
+    
+    //TODO t
+    public void setTimer(Timer t){
+    	this.timer = t;
+    }
+
 }

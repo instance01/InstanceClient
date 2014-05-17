@@ -15,6 +15,7 @@ import com.comze_instancelabs.client.modules.FullbrightModule;
 import com.comze_instancelabs.client.modules.HelpModule;
 import com.comze_instancelabs.client.modules.KeybindModule;
 import com.comze_instancelabs.client.modules.MobESPModule;
+import com.comze_instancelabs.client.modules.TimerModule;
 import com.comze_instancelabs.client.modules.XrayModule;
 import com.comze_instancelabs.client.modules.YoutubeTestModule;
 
@@ -47,6 +48,7 @@ public class InstanceMain
         modList.add(new FreecamModule());
         modList.add(new AutoFishModule());
         modList.add(new KeybindModule());
+        modList.add(new TimerModule());
         modList.add(new YoutubeTestModule());
         Settings.loadAll();
     }
