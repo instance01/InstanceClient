@@ -10,6 +10,7 @@ import com.comze_instancelabs.client.modules.AllChestESPModule;
 import com.comze_instancelabs.client.modules.AutoFishModule;
 import com.comze_instancelabs.client.modules.ChestESPModule;
 import com.comze_instancelabs.client.modules.ColoredMobsModule;
+import com.comze_instancelabs.client.modules.FOVModule;
 import com.comze_instancelabs.client.modules.FreecamModule;
 import com.comze_instancelabs.client.modules.FullbrightModule;
 import com.comze_instancelabs.client.modules.HelpModule;
@@ -49,6 +50,7 @@ public class InstanceMain
         modList.add(new AutoFishModule());
         modList.add(new KeybindModule());
         modList.add(new TimerModule());
+        modList.add(new FOVModule());
         modList.add(new YoutubeTestModule());
         Settings.loadAll();
     }
