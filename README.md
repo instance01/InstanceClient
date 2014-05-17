@@ -17,7 +17,7 @@ Download [here](https://github.com/instance01/InstanceClient/releases).
 #### Currently included stuff:
 
 
-- MobESP
+- MobESP (PlayerESP)
 - ChestESP
 - XRay
 - Radar
