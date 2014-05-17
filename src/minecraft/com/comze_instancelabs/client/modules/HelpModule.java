@@ -17,6 +17,6 @@ public class HelpModule extends Module
     @Override
     public void execute()
     {
-        Minecraft.getMinecraft().ingameGUI.getChatGUI().func_146234_a(new ChatComponentText(EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + "You can get more help by visiting http://instancelabs.eu5.org."), 1);
+        Minecraft.getMinecraft().ingameGUI.getChatGUI().func_146234_a(new ChatComponentText(EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + "You can get more help by visiting" + EnumChatFormatting.GOLD + "" + EnumChatFormatting.BOLD + "https://github.com/instance01/InstanceClient."), 1);
     }
 }
