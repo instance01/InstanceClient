@@ -35,6 +35,7 @@ Download [here](https://github.com/instance01/InstanceClient/releases).
 - Projectiles
 - Youtube Player
 - Legit Forcefield
+- Screen Info like FPS, Armor HUD, Target
 - Add Optifine at Minecraft 1.8 release
 
 
