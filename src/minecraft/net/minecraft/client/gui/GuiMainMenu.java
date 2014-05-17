@@ -617,7 +617,7 @@ public class GuiMainMenu extends GuiScreen
         GL11.glScalef(var8, var8, var8);
         this.drawCenteredString(this.fontRendererObj, this.splashText, 0, -8, -256);
         GL11.glPopMatrix();
-        String var9 = "Minecraft 1.7.2";
+        String var9 = "Minecraft 1.7.2 (InstanceClient)";
 
         if (this.mc.isDemo())
         {

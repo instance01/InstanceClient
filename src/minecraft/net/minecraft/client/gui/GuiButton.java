@@ -58,6 +58,12 @@ public class GuiButton extends Gui
         return var2;
     }
 
+    //TODO t
+    int width = 0;
+    int height = 0;
+    int x = 0;
+    int y = 0;
+    
     /**
      * Draws this button to the screen.
      */
@@ -70,11 +76,51 @@ public class GuiButton extends Gui
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             this.field_146123_n = p_146112_2_ >= this.field_146128_h && p_146112_3_ >= this.field_146129_i && p_146112_2_ < this.field_146128_h + this.field_146120_f && p_146112_3_ < this.field_146129_i + this.field_146121_g;
             int var5 = this.getHoverState(this.field_146123_n);
+            
+            //TODO t
+            if(field_146123_n){
+            	width += 2;
+            	height += 2;
+            	x += 1;
+            	y += 1;
+            }else{
+            	width -= 2;
+            	height -= 2;
+            	x -= 1;
+            	y -= 1;
+            }
+            if(width > 4){
+            	width = 4;
+            }else if(width < 0){
+            	width = 0;
+            }
+            if(height > 4){
+            	height = 4;
+            }else if(height < 0){
+            	height = 0;
+            }
+            if(x > 2){
+            	x = 2;
+            }else if(x < 0){
+            	x = 0;
+            }
+            if(y > 2){
+            	y = 2;
+            }else if(y < 0){
+            	y = 0;
+            }
+            
             GL11.glEnable(GL11.GL_BLEND);
             OpenGlHelper.glBlendFunc(770, 771, 1, 0);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            this.drawTexturedModalRect(this.field_146128_h, this.field_146129_i, 0, 46 + var5 * 20, this.field_146120_f / 2, this.field_146121_g);
-            this.drawTexturedModalRect(this.field_146128_h + this.field_146120_f / 2, this.field_146129_i, 200 - this.field_146120_f / 2, 46 + var5 * 20, this.field_146120_f / 2, this.field_146121_g);
+            
+            //TODO t
+            //this.drawTexturedModalRect(this.field_146128_h, this.field_146129_i, 0, 46 + var5 * 20, this.field_146120_f / 2, this.field_146121_g);
+            //this.drawTexturedModalRect(this.field_146128_h + this.field_146120_f / 2, this.field_146129_i, 200 - this.field_146120_f / 2, 46 + var5 * 20, this.field_146120_f / 2, this.field_146121_g);
+            this.drawTexturedModalRect(this.field_146128_h + x, this.field_146129_i + y, 0, 46 + var5 * 20, (this.field_146120_f - width) / 2, this.field_146121_g - height);
+            this.drawTexturedModalRect(this.field_146128_h + x + (this.field_146120_f - width) / 2, this.field_146129_i + y, 200 - (this.field_146120_f - width) / 2, 46 + var5 * 20, (this.field_146120_f - width) / 2, this.field_146121_g - height);
+            
+            
             this.mouseDragged(p_146112_1_, p_146112_2_, p_146112_3_);
             int var6 = 14737632;
 
