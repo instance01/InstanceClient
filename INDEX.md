@@ -46,3 +46,8 @@
 #### AutoFish
 
 - EntityPlayerSP.java:110
+
+
+#### Timer
+
+- Minecraft.java:2847
