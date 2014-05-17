@@ -16,6 +16,7 @@ public class KeybindModule extends Module
     {
         super("bind", "Binds a key to a module.");
         this.setNeedArgs(true);
+        this.setHidden(true);
     }
 
     @Override
