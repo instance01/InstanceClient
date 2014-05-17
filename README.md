@@ -17,14 +17,16 @@ Download [here](https://github.com/instance01/InstanceClient/releases).
 #### Currently included stuff:
 
 
-- MobESP (PlayerESP)
+- MobESP <sub>(includes PlayerESP)</sub>
 - ChestESP
+- AllChestESP <sub>(Renders Chest/Enderchest/Sign/Spawner/Piston/Skull/Beacon/Endportal/EnchantmentTable)</sub>
 - XRay
 - Radar
 - FreeCam
 - Fullbright
 - ColoredMobs
 - AutoFish
+- Timer <sub>(20 is default)</sub>
 
 
 #### Planned stuff:
@@ -32,7 +34,8 @@ Download [here](https://github.com/instance01/InstanceClient/releases).
 
 - Projectiles
 - Youtube Player
-
+- Legit Forcefield
+- Add Optifine at Minecraft 1.8 release
 
 
 #### Keys
