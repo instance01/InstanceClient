@@ -720,16 +720,28 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         return true;
     }
 
+    public Thread t;
     public void startServerThread()
     {
-        (new Thread("Server thread")
+    	//TODO t
+    	//this.t = new MinecraftServerFIX(this, "Server thread");
+    	t = new Thread("Server thread"){
+    		private static final String __OBFID = "CL_00001418";
+    		public void run()
+            {
+    			MinecraftServer.getServer().run();
+                //MinecraftServer.this.run();
+            }
+    	};
+    	t.start();
+        /*(new Thread("Server thread")
         {
             private static final String __OBFID = "CL_00001418";
             public void run()
             {
                 MinecraftServer.this.run();
             }
-        }).start();
+        }).start();*/
     }
 
     /**

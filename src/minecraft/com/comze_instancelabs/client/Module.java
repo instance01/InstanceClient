@@ -88,4 +88,8 @@ public class Module
     public void setHidden(boolean b){
     	this.hidden = b;
     }
+    
+    public void update(){
+    	return;
+    }
 }

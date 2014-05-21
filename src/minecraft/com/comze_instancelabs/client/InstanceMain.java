@@ -8,6 +8,7 @@ import org.darkstorm.minecraft.gui.theme.simple.SimpleTheme;
 
 import com.comze_instancelabs.client.modules.AllChestESPModule;
 import com.comze_instancelabs.client.modules.AutoFishModule;
+import com.comze_instancelabs.client.modules.AutoPrisonMine;
 import com.comze_instancelabs.client.modules.ChestESPModule;
 import com.comze_instancelabs.client.modules.ColoredMobsModule;
 import com.comze_instancelabs.client.modules.FOVModule;
@@ -50,6 +51,7 @@ public class InstanceMain
         modList.add(new AutoFishModule());
         modList.add(new KeybindModule());
         modList.add(new TimerModule());
+        modList.add(new AutoPrisonMine());
         modList.add(new FOVModule());
         modList.add(new YoutubeTestModule());
         Settings.loadAll();
@@ -139,5 +141,13 @@ public class InstanceMain
     
 	public static boolean isNumeric(String s) {
 		return s.matches("[-+]?\\d*\\.?\\d+");
+	}
+	
+	public static void update(){
+		for(Module m : modList){
+			//if(m.isEnabled()){
+				m.update();
+			//}
+		}
 	}
 }

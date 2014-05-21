@@ -79,18 +79,18 @@ public class GuiButton extends Gui
             
             //TODO t
             if(field_146123_n){
-            	width += 2;
+            	width += 4;
             	height += 2;
-            	x += 1;
+            	x += 2;
             	y += 1;
             }else{
-            	width -= 2;
+            	width -= 4;
             	height -= 2;
-            	x -= 1;
+            	x -= 2;
             	y -= 1;
             }
-            if(width > 4){
-            	width = 4;
+            if(width > 8){
+            	width = 8;
             }else if(width < 0){
             	width = 0;
             }
@@ -99,8 +99,8 @@ public class GuiButton extends Gui
             }else if(height < 0){
             	height = 0;
             }
-            if(x > 2){
-            	x = 2;
+            if(x > 4){
+            	x = 4;
             }else if(x < 0){
             	x = 0;
             }
@@ -119,8 +119,8 @@ public class GuiButton extends Gui
             //this.drawTexturedModalRect(this.field_146128_h + this.field_146120_f / 2, this.field_146129_i, 200 - this.field_146120_f / 2, 46 + var5 * 20, this.field_146120_f / 2, this.field_146121_g);
             this.drawTexturedModalRect(this.field_146128_h + x, this.field_146129_i + y, 0, 46 + var5 * 20 + y, (this.field_146120_f - width) / 2, this.field_146121_g - height);
             this.drawTexturedModalRect(this.field_146128_h + x + (this.field_146120_f - width) / 2, this.field_146129_i + y, 200 - (this.field_146120_f - width) / 2, 46 + var5 * 20 + y, (this.field_146120_f - width) / 2, this.field_146121_g - height);
-            
-            
+
+
             this.mouseDragged(p_146112_1_, p_146112_2_, p_146112_3_);
             int var6 = 14737632;
 

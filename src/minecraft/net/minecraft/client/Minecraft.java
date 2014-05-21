@@ -1636,6 +1636,8 @@ public class Minecraft implements IPlayerUsage
 
         this.mcProfiler.startSection("gui");
         InstanceMain.getGuiManager().update();
+        //TODO t
+        InstanceMain.update();
 
         if (!this.isGamePaused)
         {
