@@ -69,6 +69,9 @@ public class CmdTextboxGUI extends GuiScreen
     {
         Keyboard.enableRepeatEvents(false);
         this.mc.ingameGUI.getChatGUI().resetScroll();
+        if(Minecraft.getMinecraft().m.getRender().cmdTab){
+    		Minecraft.getMinecraft().m.getRender().cmdTab = false;
+    	}
     }
 
     /**
@@ -107,6 +110,10 @@ public class CmdTextboxGUI extends GuiScreen
             // U key
             typed_u = true;
             return;
+        }
+        
+        if(!typed_u){
+        	typed_u = true;
         }
 
         if (par2 == 1)
