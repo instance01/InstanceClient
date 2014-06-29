@@ -3,7 +3,7 @@ InstanceClient
 
 Modded Minecraft Client with a few Utilities.
 
-![InstanceClient](https://dl.dropboxusercontent.com/u/82137075/1805_015102_12.png)
+![InstanceClient](https://dl.dropboxusercontent.com/u/82137075/2906_145732_76.png)
 
 Thanks to [Sinuce](http://denmarkinminecraft.com/profile/4517920) for creating the design for the GuiButtons above.
 
