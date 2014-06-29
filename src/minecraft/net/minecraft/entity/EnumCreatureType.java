@@ -28,13 +28,13 @@ public enum EnumCreatureType
     private final boolean isAnimal;
     private static final String __OBFID = "CL_00001551";
 
-    private EnumCreatureType(Class par3Class, int par4, Material par5Material, boolean par6, boolean par7)
+    private EnumCreatureType(Class p_i1596_3_, int p_i1596_4_, Material p_i1596_5_, boolean p_i1596_6_, boolean p_i1596_7_)
     {
-        this.creatureClass = par3Class;
-        this.maxNumberOfCreature = par4;
-        this.creatureMaterial = par5Material;
-        this.isPeacefulCreature = par6;
-        this.isAnimal = par7;
+        this.creatureClass = p_i1596_3_;
+        this.maxNumberOfCreature = p_i1596_4_;
+        this.creatureMaterial = p_i1596_5_;
+        this.isPeacefulCreature = p_i1596_6_;
+        this.isAnimal = p_i1596_7_;
     }
 
     public Class getCreatureClass()

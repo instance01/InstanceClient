@@ -11,12 +11,12 @@ public class EntityHugeExplodeFX extends EntityFX
     private int maximumTime = 8;
     private static final String __OBFID = "CL_00000911";
 
-    public EntityHugeExplodeFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12)
+    public EntityHugeExplodeFX(World p_i1214_1_, double p_i1214_2_, double p_i1214_4_, double p_i1214_6_, double p_i1214_8_, double p_i1214_10_, double p_i1214_12_)
     {
-        super(par1World, par2, par4, par6, 0.0D, 0.0D, 0.0D);
+        super(p_i1214_1_, p_i1214_2_, p_i1214_4_, p_i1214_6_, 0.0D, 0.0D, 0.0D);
     }
 
-    public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7) {}
+    public void renderParticle(Tessellator p_70539_1_, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_) {}
 
     /**
      * Called to update the entity's position/logic.

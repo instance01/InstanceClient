@@ -7,8 +7,8 @@ public class ResourcePackFileNotFoundException extends FileNotFoundException
 {
     private static final String __OBFID = "CL_00001086";
 
-    public ResourcePackFileNotFoundException(File par1File, String par2Str)
+    public ResourcePackFileNotFoundException(File p_i1294_1_, String p_i1294_2_)
     {
-        super(String.format("\'%s\' in ResourcePack \'%s\'", new Object[] {par2Str, par1File}));
+        super(String.format("\'%s\' in ResourcePack \'%s\'", new Object[] {p_i1294_2_, p_i1294_1_}));
     }
 }

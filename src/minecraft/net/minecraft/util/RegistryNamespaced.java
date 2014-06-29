@@ -34,9 +34,9 @@ public class RegistryNamespaced extends RegistrySimple implements IObjectIntIter
         return HashBiMap.create();
     }
 
-    public Object getObject(String p_148751_1_)
+    public Object getObject(String p_82594_1_)
     {
-        return super.getObject(ensureNamespaced(p_148751_1_));
+        return super.getObject(ensureNamespaced(p_82594_1_));
     }
 
     /**
@@ -50,9 +50,9 @@ public class RegistryNamespaced extends RegistrySimple implements IObjectIntIter
     /**
      * Does this registry contain an entry for the given key?
      */
-    public boolean containsKey(String p_148752_1_)
+    public boolean containsKey(String p_148741_1_)
     {
-        return super.containsKey(ensureNamespaced(p_148752_1_));
+        return super.containsKey(ensureNamespaced(p_148741_1_));
     }
 
     /**
@@ -102,8 +102,8 @@ public class RegistryNamespaced extends RegistrySimple implements IObjectIntIter
         return this.containsKey((String)p_148741_1_);
     }
 
-    public Object getObject(Object par1Obj)
+    public Object getObject(Object p_82594_1_)
     {
-        return this.getObject((String)par1Obj);
+        return this.getObject((String)p_82594_1_);
     }
 }

@@ -34,9 +34,9 @@ public class ItemDye extends Item
     /**
      * Gets an icon index based on an item's damage value
      */
-    public IIcon getIconFromDamage(int par1)
+    public IIcon getIconFromDamage(int p_77617_1_)
     {
-        int var2 = MathHelper.clamp_int(par1, 0, 15);
+        int var2 = MathHelper.clamp_int(p_77617_1_, 0, 15);
         return this.field_150920_d[var2];
     }
 
@@ -44,9 +44,9 @@ public class ItemDye extends Item
      * Returns the unlocalized name of this item. This version accepts an ItemStack so different stacks can have
      * different names based on their damage or NBT.
      */
-    public String getUnlocalizedName(ItemStack par1ItemStack)
+    public String getUnlocalizedName(ItemStack p_77667_1_)
     {
-        int var2 = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 15);
+        int var2 = MathHelper.clamp_int(p_77667_1_.getItemDamage(), 0, 15);
         return super.getUnlocalizedName() + "." + field_150923_a[var2];
     }
 
@@ -54,71 +54,71 @@ public class ItemDye extends Item
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
      * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
      */
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+    public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World p_77648_3_, int p_77648_4_, int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
     {
-        if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7, par1ItemStack))
+        if (!p_77648_2_.canPlayerEdit(p_77648_4_, p_77648_5_, p_77648_6_, p_77648_7_, p_77648_1_))
         {
             return false;
         }
         else
         {
-            if (par1ItemStack.getItemDamage() == 15)
+            if (p_77648_1_.getItemDamage() == 15)
             {
-                if (func_150919_a(par1ItemStack, par3World, par4, par5, par6))
+                if (func_150919_a(p_77648_1_, p_77648_3_, p_77648_4_, p_77648_5_, p_77648_6_))
                 {
-                    if (!par3World.isClient)
+                    if (!p_77648_3_.isClient)
                     {
-                        par3World.playAuxSFX(2005, par4, par5, par6, 0);
+                        p_77648_3_.playAuxSFX(2005, p_77648_4_, p_77648_5_, p_77648_6_, 0);
                     }
 
                     return true;
                 }
             }
-            else if (par1ItemStack.getItemDamage() == 3)
+            else if (p_77648_1_.getItemDamage() == 3)
             {
-                Block var11 = par3World.getBlock(par4, par5, par6);
-                int var12 = par3World.getBlockMetadata(par4, par5, par6);
+                Block var11 = p_77648_3_.getBlock(p_77648_4_, p_77648_5_, p_77648_6_);
+                int var12 = p_77648_3_.getBlockMetadata(p_77648_4_, p_77648_5_, p_77648_6_);
 
                 if (var11 == Blocks.log && BlockLog.func_150165_c(var12) == 3)
                 {
-                    if (par7 == 0)
+                    if (p_77648_7_ == 0)
                     {
                         return false;
                     }
 
-                    if (par7 == 1)
+                    if (p_77648_7_ == 1)
                     {
                         return false;
                     }
 
-                    if (par7 == 2)
+                    if (p_77648_7_ == 2)
                     {
-                        --par6;
+                        --p_77648_6_;
                     }
 
-                    if (par7 == 3)
+                    if (p_77648_7_ == 3)
                     {
-                        ++par6;
+                        ++p_77648_6_;
                     }
 
-                    if (par7 == 4)
+                    if (p_77648_7_ == 4)
                     {
-                        --par4;
+                        --p_77648_4_;
                     }
 
-                    if (par7 == 5)
+                    if (p_77648_7_ == 5)
                     {
-                        ++par4;
+                        ++p_77648_4_;
                     }
 
-                    if (par3World.isAirBlock(par4, par5, par6))
+                    if (p_77648_3_.isAirBlock(p_77648_4_, p_77648_5_, p_77648_6_))
                     {
-                        int var13 = Blocks.cocoa.onBlockPlaced(par3World, par4, par5, par6, par7, par8, par9, par10, 0);
-                        par3World.setBlock(par4, par5, par6, Blocks.cocoa, var13, 2);
+                        int var13 = Blocks.cocoa.onBlockPlaced(p_77648_3_, p_77648_4_, p_77648_5_, p_77648_6_, p_77648_7_, p_77648_8_, p_77648_9_, p_77648_10_, 0);
+                        p_77648_3_.setBlock(p_77648_4_, p_77648_5_, p_77648_6_, Blocks.cocoa, var13, 2);
 
-                        if (!par2EntityPlayer.capabilities.isCreativeMode)
+                        if (!p_77648_2_.capabilities.isCreativeMode)
                         {
-                            --par1ItemStack.stackSize;
+                            --p_77648_1_.stackSize;
                         }
                     }
 
@@ -183,17 +183,17 @@ public class ItemDye extends Item
     /**
      * Returns true if the item can be used on the given entity, e.g. shears on sheep.
      */
-    public boolean itemInteractionForEntity(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase)
+    public boolean itemInteractionForEntity(ItemStack p_111207_1_, EntityPlayer p_111207_2_, EntityLivingBase p_111207_3_)
     {
-        if (par3EntityLivingBase instanceof EntitySheep)
+        if (p_111207_3_ instanceof EntitySheep)
         {
-            EntitySheep var4 = (EntitySheep)par3EntityLivingBase;
-            int var5 = BlockColored.func_150032_b(par1ItemStack.getItemDamage());
+            EntitySheep var4 = (EntitySheep)p_111207_3_;
+            int var5 = BlockColored.func_150032_b(p_111207_1_.getItemDamage());
 
             if (!var4.getSheared() && var4.getFleeceColor() != var5)
             {
                 var4.setFleeceColor(var5);
-                --par1ItemStack.stackSize;
+                --p_111207_1_.stackSize;
             }
 
             return true;
@@ -215,13 +215,13 @@ public class ItemDye extends Item
         }
     }
 
-    public void registerIcons(IIconRegister par1IconRegister)
+    public void registerIcons(IIconRegister p_94581_1_)
     {
         this.field_150920_d = new IIcon[field_150921_b.length];
 
         for (int var2 = 0; var2 < field_150921_b.length; ++var2)
         {
-            this.field_150920_d[var2] = par1IconRegister.registerIcon(this.getIconString() + "_" + field_150921_b[var2]);
+            this.field_150920_d[var2] = p_94581_1_.registerIcon(this.getIconString() + "_" + field_150921_b[var2]);
         }
     }
 }

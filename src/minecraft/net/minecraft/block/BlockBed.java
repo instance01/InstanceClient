@@ -62,7 +62,7 @@ public class BlockBed extends BlockDirectional
             {
                 if (func_149976_c(var10))
                 {
-                    EntityPlayer var20 = null;
+                    EntityPlayer var19 = null;
                     Iterator var12 = p_149727_1_.playerEntities.iterator();
 
                     while (var12.hasNext())
@@ -75,12 +75,12 @@ public class BlockBed extends BlockDirectional
 
                             if (var14.posX == p_149727_2_ && var14.posY == p_149727_3_ && var14.posZ == p_149727_4_)
                             {
-                                var20 = var21;
+                                var19 = var21;
                             }
                         }
                     }
 
-                    if (var20 != null)
+                    if (var19 != null)
                     {
                         p_149727_5_.addChatComponentMessage(new ChatComponentTranslation("tile.bed.occupied", new Object[0]));
                         return true;
@@ -89,20 +89,20 @@ public class BlockBed extends BlockDirectional
                     func_149979_a(p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_, false);
                 }
 
-                EntityPlayer.EnumStatus var19 = p_149727_5_.sleepInBedAt(p_149727_2_, p_149727_3_, p_149727_4_);
+                EntityPlayer.EnumStatus var20 = p_149727_5_.sleepInBedAt(p_149727_2_, p_149727_3_, p_149727_4_);
 
-                if (var19 == EntityPlayer.EnumStatus.OK)
+                if (var20 == EntityPlayer.EnumStatus.OK)
                 {
                     func_149979_a(p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_, true);
                     return true;
                 }
                 else
                 {
-                    if (var19 == EntityPlayer.EnumStatus.NOT_POSSIBLE_NOW)
+                    if (var20 == EntityPlayer.EnumStatus.NOT_POSSIBLE_NOW)
                     {
                         p_149727_5_.addChatComponentMessage(new ChatComponentTranslation("tile.bed.noSleep", new Object[0]));
                     }
-                    else if (var19 == EntityPlayer.EnumStatus.NOT_SAFE)
+                    else if (var20 == EntityPlayer.EnumStatus.NOT_SAFE)
                     {
                         p_149727_5_.addChatComponentMessage(new ChatComponentTranslation("tile.bed.notSafe", new Object[0]));
                     }

@@ -42,9 +42,9 @@ public class S14PacketEntity extends Packet
         p_148840_1_.writeInt(this.field_149074_a);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149067_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149067_1_.handleEntityMovement(this);
+        p_148833_1_.handleEntityMovement(this);
     }
 
     /**
@@ -100,6 +100,47 @@ public class S14PacketEntity extends Packet
         this.processPacket((INetHandlerPlayClient)p_148833_1_);
     }
 
+    public static class S15PacketEntityRelMove extends S14PacketEntity
+    {
+        private static final String __OBFID = "CL_00001313";
+
+        public S15PacketEntityRelMove() {}
+
+        public S15PacketEntityRelMove(int p_i45203_1_, byte p_i45203_2_, byte p_i45203_3_, byte p_i45203_4_)
+        {
+            super(p_i45203_1_);
+            this.field_149072_b = p_i45203_2_;
+            this.field_149073_c = p_i45203_3_;
+            this.field_149070_d = p_i45203_4_;
+        }
+
+        public void readPacketData(PacketBuffer p_148837_1_) throws IOException
+        {
+            super.readPacketData(p_148837_1_);
+            this.field_149072_b = p_148837_1_.readByte();
+            this.field_149073_c = p_148837_1_.readByte();
+            this.field_149070_d = p_148837_1_.readByte();
+        }
+
+        public void writePacketData(PacketBuffer p_148840_1_) throws IOException
+        {
+            super.writePacketData(p_148840_1_);
+            p_148840_1_.writeByte(this.field_149072_b);
+            p_148840_1_.writeByte(this.field_149073_c);
+            p_148840_1_.writeByte(this.field_149070_d);
+        }
+
+        public String serialize()
+        {
+            return super.serialize() + String.format(", xa=%d, ya=%d, za=%d", new Object[] {Byte.valueOf(this.field_149072_b), Byte.valueOf(this.field_149073_c), Byte.valueOf(this.field_149070_d)});
+        }
+
+        public void processPacket(INetHandler p_148833_1_)
+        {
+            super.processPacket((INetHandlerPlayClient)p_148833_1_);
+        }
+    }
+
     public static class S16PacketEntityLook extends S14PacketEntity
     {
         private static final String __OBFID = "CL_00001315";
@@ -134,47 +175,6 @@ public class S14PacketEntity extends Packet
         public String serialize()
         {
             return super.serialize() + String.format(", yRot=%d, xRot=%d", new Object[] {Byte.valueOf(this.field_149071_e), Byte.valueOf(this.field_149068_f)});
-        }
-
-        public void processPacket(INetHandler p_148833_1_)
-        {
-            super.processPacket((INetHandlerPlayClient)p_148833_1_);
-        }
-    }
-
-    public static class S15PacketEntityRelMove extends S14PacketEntity
-    {
-        private static final String __OBFID = "CL_00001313";
-
-        public S15PacketEntityRelMove() {}
-
-        public S15PacketEntityRelMove(int p_i45203_1_, byte p_i45203_2_, byte p_i45203_3_, byte p_i45203_4_)
-        {
-            super(p_i45203_1_);
-            this.field_149072_b = p_i45203_2_;
-            this.field_149073_c = p_i45203_3_;
-            this.field_149070_d = p_i45203_4_;
-        }
-
-        public void readPacketData(PacketBuffer p_148837_1_) throws IOException
-        {
-            super.readPacketData(p_148837_1_);
-            this.field_149072_b = p_148837_1_.readByte();
-            this.field_149073_c = p_148837_1_.readByte();
-            this.field_149070_d = p_148837_1_.readByte();
-        }
-
-        public void writePacketData(PacketBuffer p_148840_1_) throws IOException
-        {
-            super.writePacketData(p_148840_1_);
-            p_148840_1_.writeByte(this.field_149072_b);
-            p_148840_1_.writeByte(this.field_149073_c);
-            p_148840_1_.writeByte(this.field_149070_d);
-        }
-
-        public String serialize()
-        {
-            return super.serialize() + String.format(", xa=%d, ya=%d, za=%d", new Object[] {Byte.valueOf(this.field_149072_b), Byte.valueOf(this.field_149073_c), Byte.valueOf(this.field_149070_d)});
         }
 
         public void processPacket(INetHandler p_148833_1_)

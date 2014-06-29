@@ -32,9 +32,9 @@ public class MapStorage
     private Map idCounts = new HashMap();
     private static final String __OBFID = "CL_00000604";
 
-    public MapStorage(ISaveHandler par1ISaveHandler)
+    public MapStorage(ISaveHandler p_i2162_1_)
     {
-        this.saveHandler = par1ISaveHandler;
+        this.saveHandler = p_i2162_1_;
         this.loadIdCounts();
     }
 
@@ -42,9 +42,9 @@ public class MapStorage
      * Loads an existing MapDataBase corresponding to the given String id from disk, instantiating the given Class, or
      * returns null if none such file exists. args: Class to instantiate, String dataid
      */
-    public WorldSavedData loadData(Class par1Class, String par2Str)
+    public WorldSavedData loadData(Class p_75742_1_, String p_75742_2_)
     {
-        WorldSavedData var3 = (WorldSavedData)this.loadedDataMap.get(par2Str);
+        WorldSavedData var3 = (WorldSavedData)this.loadedDataMap.get(p_75742_2_);
 
         if (var3 != null)
         {
@@ -56,17 +56,17 @@ public class MapStorage
             {
                 try
                 {
-                    File var4 = this.saveHandler.getMapFileFromName(par2Str);
+                    File var4 = this.saveHandler.getMapFileFromName(p_75742_2_);
 
                     if (var4 != null && var4.exists())
                     {
                         try
                         {
-                            var3 = (WorldSavedData)par1Class.getConstructor(new Class[] {String.class}).newInstance(new Object[] {par2Str});
+                            var3 = (WorldSavedData)p_75742_1_.getConstructor(new Class[] {String.class}).newInstance(new Object[] {p_75742_2_});
                         }
                         catch (Exception var7)
                         {
-                            throw new RuntimeException("Failed to instantiate " + par1Class.toString(), var7);
+                            throw new RuntimeException("Failed to instantiate " + p_75742_1_.toString(), var7);
                         }
 
                         FileInputStream var5 = new FileInputStream(var4);
@@ -83,7 +83,7 @@ public class MapStorage
 
             if (var3 != null)
             {
-                this.loadedDataMap.put(par2Str, var3);
+                this.loadedDataMap.put(p_75742_2_, var3);
                 this.loadedDataList.add(var3);
             }
 
@@ -94,21 +94,21 @@ public class MapStorage
     /**
      * Assigns the given String id to the given MapDataBase, removing any existing ones of the same id.
      */
-    public void setData(String par1Str, WorldSavedData par2WorldSavedData)
+    public void setData(String p_75745_1_, WorldSavedData p_75745_2_)
     {
-        if (par2WorldSavedData == null)
+        if (p_75745_2_ == null)
         {
             throw new RuntimeException("Can\'t set null data");
         }
         else
         {
-            if (this.loadedDataMap.containsKey(par1Str))
+            if (this.loadedDataMap.containsKey(p_75745_1_))
             {
-                this.loadedDataList.remove(this.loadedDataMap.remove(par1Str));
+                this.loadedDataList.remove(this.loadedDataMap.remove(p_75745_1_));
             }
 
-            this.loadedDataMap.put(par1Str, par2WorldSavedData);
-            this.loadedDataList.add(par2WorldSavedData);
+            this.loadedDataMap.put(p_75745_1_, p_75745_2_);
+            this.loadedDataList.add(p_75745_2_);
         }
     }
 
@@ -132,18 +132,18 @@ public class MapStorage
     /**
      * Saves the given MapDataBase to disk.
      */
-    private void saveData(WorldSavedData par1WorldSavedData)
+    private void saveData(WorldSavedData p_75747_1_)
     {
         if (this.saveHandler != null)
         {
             try
             {
-                File var2 = this.saveHandler.getMapFileFromName(par1WorldSavedData.mapName);
+                File var2 = this.saveHandler.getMapFileFromName(p_75747_1_.mapName);
 
                 if (var2 != null)
                 {
                     NBTTagCompound var3 = new NBTTagCompound();
-                    par1WorldSavedData.writeToNBT(var3);
+                    p_75747_1_.writeToNBT(var3);
                     NBTTagCompound var4 = new NBTTagCompound();
                     var4.setTag("data", var3);
                     FileOutputStream var5 = new FileOutputStream(var2);
@@ -204,9 +204,9 @@ public class MapStorage
     /**
      * Returns an unique new data id for the given prefix and saves the idCounts map to the 'idcounts' file.
      */
-    public int getUniqueDataId(String par1Str)
+    public int getUniqueDataId(String p_75743_1_)
     {
-        Short var2 = (Short)this.idCounts.get(par1Str);
+        Short var2 = (Short)this.idCounts.get(p_75743_1_);
 
         if (var2 == null)
         {
@@ -217,7 +217,7 @@ public class MapStorage
             var2 = Short.valueOf((short)(var2.shortValue() + 1));
         }
 
-        this.idCounts.put(par1Str, var2);
+        this.idCounts.put(p_75743_1_, var2);
 
         if (this.saveHandler == null)
         {

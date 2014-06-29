@@ -54,9 +54,9 @@ public class S28PacketEffect extends Packet
         p_148840_1_.writeBoolean(this.field_149246_f);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149245_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149245_1_.handleEffect(this);
+        p_148833_1_.handleEffect(this);
     }
 
     public boolean func_149244_c()

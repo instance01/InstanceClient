@@ -15,11 +15,11 @@ public class GuiHopper extends GuiContainer
     private IInventory field_147083_w;
     private static final String __OBFID = "CL_00000759";
 
-    public GuiHopper(InventoryPlayer par1InventoryPlayer, IInventory par2IInventory)
+    public GuiHopper(InventoryPlayer p_i1092_1_, IInventory p_i1092_2_)
     {
-        super(new ContainerHopper(par1InventoryPlayer, par2IInventory));
-        this.field_147084_v = par1InventoryPlayer;
-        this.field_147083_w = par2IInventory;
+        super(new ContainerHopper(p_i1092_1_, p_i1092_2_));
+        this.field_147084_v = p_i1092_1_;
+        this.field_147083_w = p_i1092_2_;
         this.field_146291_p = false;
         this.field_147000_g = 133;
     }

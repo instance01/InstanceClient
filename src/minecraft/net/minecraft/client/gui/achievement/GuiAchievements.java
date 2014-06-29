@@ -81,23 +81,23 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2)
+    protected void keyTyped(char p_73869_1_, int p_73869_2_)
     {
-        if (par2 == this.mc.gameSettings.keyBindInventory.getKeyCode())
+        if (p_73869_2_ == this.mc.gameSettings.keyBindInventory.getKeyCode())
         {
             this.mc.displayGuiScreen((GuiScreen)null);
             this.mc.setIngameFocus();
         }
         else
         {
-            super.keyTyped(par1, par2);
+            super.keyTyped(p_73869_1_, p_73869_2_);
         }
     }
 
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         if (this.field_146558_F)
         {
@@ -116,7 +116,7 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
                 int var6 = var4 + 8;
                 int var7 = var5 + 17;
 
-                if ((this.field_146554_D == 0 || this.field_146554_D == 1) && par1 >= var6 && par1 < var6 + 224 && par2 >= var7 && par2 < var7 + 155)
+                if ((this.field_146554_D == 0 || this.field_146554_D == 1) && p_73863_1_ >= var6 && p_73863_1_ < var6 + 224 && p_73863_2_ >= var7 && p_73863_2_ < var7 + 155)
                 {
                     if (this.field_146554_D == 0)
                     {
@@ -124,14 +124,14 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
                     }
                     else
                     {
-                        this.field_146567_u -= (double)((float)(par1 - this.field_146563_h) * this.field_146570_r);
-                        this.field_146566_v -= (double)((float)(par2 - this.field_146564_i) * this.field_146570_r);
+                        this.field_146567_u -= (double)((float)(p_73863_1_ - this.field_146563_h) * this.field_146570_r);
+                        this.field_146566_v -= (double)((float)(p_73863_2_ - this.field_146564_i) * this.field_146570_r);
                         this.field_146565_w = this.field_146569_s = this.field_146567_u;
                         this.field_146573_x = this.field_146568_t = this.field_146566_v;
                     }
 
-                    this.field_146563_h = par1;
-                    this.field_146564_i = par2;
+                    this.field_146563_h = p_73863_1_;
+                    this.field_146564_i = p_73863_2_;
                 }
             }
             else
@@ -187,7 +187,7 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
             }
 
             this.drawDefaultBackground();
-            this.func_146552_b(par1, par2, par3);
+            this.func_146552_b(p_73863_1_, p_73863_2_, p_73863_3_);
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glDisable(GL11.GL_DEPTH_TEST);
             this.func_146553_h();
@@ -233,7 +233,7 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
     {
         int var1 = (this.width - this.field_146555_f) / 2;
         int var2 = (this.height - this.field_146557_g) / 2;
-        this.fontRendererObj.drawString("Achievements", var1 + 15, var2 + 5, 4210752);
+        this.fontRendererObj.drawString(I18n.format("gui.achievements", new Object[0]), var1 + 15, var2 + 5, 4210752);
     }
 
     protected void func_146552_b(int p_146552_1_, int p_146552_2_, float p_146552_3_)
@@ -287,8 +287,8 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
         float var20 = 16.0F / this.field_146570_r;
         float var21 = 16.0F / this.field_146570_r;
         int var22;
-        int var25;
         int var24;
+        int var25;
 
         for (var22 = 0; (float)var22 * var20 - (float)var13 < 155.0F; ++var22)
         {
@@ -344,9 +344,9 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glDepthFunc(GL11.GL_LEQUAL);
         this.mc.getTextureManager().bindTexture(field_146561_C);
-        int var31;
         int var30;
-        int var43;
+        int var31;
+        int var39;
 
         for (var22 = 0; var22 < AchievementList.achievementList.size(); ++var22)
         {
@@ -356,7 +356,7 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
             {
                 var24 = var35.displayColumn * 24 - var4 + 11;
                 var25 = var35.displayRow * 24 - var5 + 11;
-                var43 = var35.parentAchievement.displayColumn * 24 - var4 + 11;
+                var39 = var35.parentAchievement.displayColumn * 24 - var4 + 11;
                 int var27 = var35.parentAchievement.displayRow * 24 - var5 + 11;
                 boolean var28 = this.field_146556_E.hasAchievementUnlocked(var35);
                 boolean var29 = this.field_146556_E.canUnlockAchievement(var35);
@@ -375,14 +375,14 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
                         var31 = -16711936;
                     }
 
-                    this.drawHorizontalLine(var24, var43, var25, var31);
-                    this.drawVerticalLine(var43, var25, var27, var31);
+                    this.drawHorizontalLine(var24, var39, var25, var31);
+                    this.drawVerticalLine(var39, var25, var27, var31);
 
-                    if (var24 > var43)
+                    if (var24 > var39)
                     {
                         this.drawTexturedModalRect(var24 - 11 - 7, var25 - 5, 114, 234, 7, 11);
                     }
-                    else if (var24 < var43)
+                    else if (var24 < var39)
                     {
                         this.drawTexturedModalRect(var24 + 11, var25 - 5, 107, 234, 7, 11);
                     }
@@ -399,23 +399,23 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
         }
 
         Achievement var34 = null;
-        RenderItem var38 = new RenderItem();
-        float var36 = (float)(p_146552_1_ - var8) * this.field_146570_r;
-        float var37 = (float)(p_146552_2_ - var9) * this.field_146570_r;
+        RenderItem var36 = new RenderItem();
+        float var37 = (float)(p_146552_1_ - var8) * this.field_146570_r;
+        float var38 = (float)(p_146552_2_ - var9) * this.field_146570_r;
         RenderHelper.enableGUIStandardItemLighting();
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glEnable(GL11.GL_COLOR_MATERIAL);
-        int var42;
-        int var40;
+        int var43;
+        int var44;
 
-        for (var43 = 0; var43 < AchievementList.achievementList.size(); ++var43)
+        for (var39 = 0; var39 < AchievementList.achievementList.size(); ++var39)
         {
-            Achievement var41 = (Achievement)AchievementList.achievementList.get(var43);
-            var40 = var41.displayColumn * 24 - var4;
-            var42 = var41.displayRow * 24 - var5;
+            Achievement var41 = (Achievement)AchievementList.achievementList.get(var39);
+            var43 = var41.displayColumn * 24 - var4;
+            var44 = var41.displayRow * 24 - var5;
 
-            if (var40 >= -24 && var42 >= -24 && (float)var40 <= 224.0F * this.field_146570_r && (float)var42 <= 155.0F * this.field_146570_r)
+            if (var43 >= -24 && var44 >= -24 && (float)var43 <= 224.0F * this.field_146570_r && (float)var44 <= 155.0F * this.field_146570_r)
             {
                 var30 = this.field_146556_E.func_150874_c(var41);
                 float var45;
@@ -455,34 +455,34 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
 
                 if (var41.getSpecial())
                 {
-                    this.drawTexturedModalRect(var40 - 2, var42 - 2, 26, 202, 26, 26);
+                    this.drawTexturedModalRect(var43 - 2, var44 - 2, 26, 202, 26, 26);
                 }
                 else
                 {
-                    this.drawTexturedModalRect(var40 - 2, var42 - 2, 0, 202, 26, 26);
+                    this.drawTexturedModalRect(var43 - 2, var44 - 2, 0, 202, 26, 26);
                 }
 
                 if (!this.field_146556_E.canUnlockAchievement(var41))
                 {
                     var45 = 0.1F;
                     GL11.glColor4f(var45, var45, var45, 1.0F);
-                    var38.renderWithColor = false;
+                    var36.renderWithColor = false;
                 }
 
                 GL11.glEnable(GL11.GL_LIGHTING);
                 GL11.glEnable(GL11.GL_CULL_FACE);
-                var38.renderItemAndEffectIntoGUI(this.mc.fontRenderer, this.mc.getTextureManager(), var41.theItemStack, var40 + 3, var42 + 3);
+                var36.renderItemAndEffectIntoGUI(this.mc.fontRenderer, this.mc.getTextureManager(), var41.theItemStack, var43 + 3, var44 + 3);
                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
                 GL11.glDisable(GL11.GL_LIGHTING);
 
                 if (!this.field_146556_E.canUnlockAchievement(var41))
                 {
-                    var38.renderWithColor = true;
+                    var36.renderWithColor = true;
                 }
 
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-                if (var36 >= (float)var40 && var36 <= (float)(var40 + 22) && var37 >= (float)var42 && var37 <= (float)(var42 + 22))
+                if (var37 >= (float)var43 && var37 <= (float)(var43 + 22) && var38 >= (float)var44 && var38 <= (float)(var44 + 22))
                 {
                     var34 = var41;
                 }
@@ -503,10 +503,10 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
 
         if (var34 != null)
         {
-            String var44 = var34.func_150951_e().getUnformattedText();
-            String var39 = var34.getDescription();
-            var40 = p_146552_1_ + 12;
-            var42 = p_146552_2_ - 4;
+            String var40 = var34.func_150951_e().getUnformattedText();
+            String var42 = var34.getDescription();
+            var43 = p_146552_1_ + 12;
+            var44 = p_146552_2_ - 4;
             var30 = this.field_146556_E.func_150874_c(var34);
 
             if (!this.field_146556_E.canUnlockAchievement(var34))
@@ -516,48 +516,48 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
 
                 if (var30 == 3)
                 {
-                    var44 = I18n.format("achievement.unknown", new Object[0]);
-                    var31 = Math.max(this.fontRendererObj.getStringWidth(var44), 120);
+                    var40 = I18n.format("achievement.unknown", new Object[0]);
+                    var31 = Math.max(this.fontRendererObj.getStringWidth(var40), 120);
                     var32 = (new ChatComponentTranslation("achievement.requires", new Object[] {var34.parentAchievement.func_150951_e()})).getUnformattedText();
                     var33 = this.fontRendererObj.splitStringWidth(var32, var31);
-                    this.drawGradientRect(var40 - 3, var42 - 3, var40 + var31 + 3, var42 + var33 + 12 + 3, -1073741824, -1073741824);
-                    this.fontRendererObj.drawSplitString(var32, var40, var42 + 12, var31, -9416624);
+                    this.drawGradientRect(var43 - 3, var44 - 3, var43 + var31 + 3, var44 + var33 + 12 + 3, -1073741824, -1073741824);
+                    this.fontRendererObj.drawSplitString(var32, var43, var44 + 12, var31, -9416624);
                 }
                 else if (var30 < 3)
                 {
-                    var31 = Math.max(this.fontRendererObj.getStringWidth(var44), 120);
+                    var31 = Math.max(this.fontRendererObj.getStringWidth(var40), 120);
                     var32 = (new ChatComponentTranslation("achievement.requires", new Object[] {var34.parentAchievement.func_150951_e()})).getUnformattedText();
                     var33 = this.fontRendererObj.splitStringWidth(var32, var31);
-                    this.drawGradientRect(var40 - 3, var42 - 3, var40 + var31 + 3, var42 + var33 + 12 + 3, -1073741824, -1073741824);
-                    this.fontRendererObj.drawSplitString(var32, var40, var42 + 12, var31, -9416624);
+                    this.drawGradientRect(var43 - 3, var44 - 3, var43 + var31 + 3, var44 + var33 + 12 + 3, -1073741824, -1073741824);
+                    this.fontRendererObj.drawSplitString(var32, var43, var44 + 12, var31, -9416624);
                 }
                 else
                 {
-                    var44 = null;
+                    var40 = null;
                 }
             }
             else
             {
-                var31 = Math.max(this.fontRendererObj.getStringWidth(var44), 120);
-                int var46 = this.fontRendererObj.splitStringWidth(var39, var31);
+                var31 = Math.max(this.fontRendererObj.getStringWidth(var40), 120);
+                int var46 = this.fontRendererObj.splitStringWidth(var42, var31);
 
                 if (this.field_146556_E.hasAchievementUnlocked(var34))
                 {
                     var46 += 12;
                 }
 
-                this.drawGradientRect(var40 - 3, var42 - 3, var40 + var31 + 3, var42 + var46 + 3 + 12, -1073741824, -1073741824);
-                this.fontRendererObj.drawSplitString(var39, var40, var42 + 12, var31, -6250336);
+                this.drawGradientRect(var43 - 3, var44 - 3, var43 + var31 + 3, var44 + var46 + 3 + 12, -1073741824, -1073741824);
+                this.fontRendererObj.drawSplitString(var42, var43, var44 + 12, var31, -6250336);
 
                 if (this.field_146556_E.hasAchievementUnlocked(var34))
                 {
-                    this.fontRendererObj.drawStringWithShadow(I18n.format("achievement.taken", new Object[0]), var40, var42 + var46 + 4, -7302913);
+                    this.fontRendererObj.drawStringWithShadow(I18n.format("achievement.taken", new Object[0]), var43, var44 + var46 + 4, -7302913);
                 }
             }
 
-            if (var44 != null)
+            if (var40 != null)
             {
-                this.fontRendererObj.drawStringWithShadow(var44, var40, var42, this.field_146556_E.canUnlockAchievement(var34) ? (var34.getSpecial() ? -128 : -1) : (var34.getSpecial() ? -8355776 : -8355712));
+                this.fontRendererObj.drawStringWithShadow(var40, var43, var44, this.field_146556_E.canUnlockAchievement(var34) ? (var34.getSpecial() ? -128 : -1) : (var34.getSpecial() ? -8355776 : -8355712));
             }
         }
 

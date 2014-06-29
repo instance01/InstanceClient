@@ -10,36 +10,36 @@ public class EntitySnowball extends EntityThrowable
 {
     private static final String __OBFID = "CL_00001722";
 
-    public EntitySnowball(World par1World)
+    public EntitySnowball(World p_i1773_1_)
     {
-        super(par1World);
+        super(p_i1773_1_);
     }
 
-    public EntitySnowball(World par1World, EntityLivingBase par2EntityLivingBase)
+    public EntitySnowball(World p_i1774_1_, EntityLivingBase p_i1774_2_)
     {
-        super(par1World, par2EntityLivingBase);
+        super(p_i1774_1_, p_i1774_2_);
     }
 
-    public EntitySnowball(World par1World, double par2, double par4, double par6)
+    public EntitySnowball(World p_i1775_1_, double p_i1775_2_, double p_i1775_4_, double p_i1775_6_)
     {
-        super(par1World, par2, par4, par6);
+        super(p_i1775_1_, p_i1775_2_, p_i1775_4_, p_i1775_6_);
     }
 
     /**
      * Called when this EntityThrowable hits a block or entity.
      */
-    protected void onImpact(MovingObjectPosition par1MovingObjectPosition)
+    protected void onImpact(MovingObjectPosition p_70184_1_)
     {
-        if (par1MovingObjectPosition.entityHit != null)
+        if (p_70184_1_.entityHit != null)
         {
             byte var2 = 0;
 
-            if (par1MovingObjectPosition.entityHit instanceof EntityBlaze)
+            if (p_70184_1_.entityHit instanceof EntityBlaze)
             {
                 var2 = 3;
             }
 
-            par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)var2);
+            p_70184_1_.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)var2);
         }
 
         for (int var3 = 0; var3 < 8; ++var3)

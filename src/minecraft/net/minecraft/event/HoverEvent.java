@@ -33,15 +33,15 @@ public class HoverEvent
         return this.value;
     }
 
-    public boolean equals(Object par1Obj)
+    public boolean equals(Object p_equals_1_)
     {
-        if (this == par1Obj)
+        if (this == p_equals_1_)
         {
             return true;
         }
-        else if (par1Obj != null && this.getClass() == par1Obj.getClass())
+        else if (p_equals_1_ != null && this.getClass() == p_equals_1_.getClass())
         {
-            HoverEvent var2 = (HoverEvent)par1Obj;
+            HoverEvent var2 = (HoverEvent)p_equals_1_;
 
             if (this.action != var2.action)
             {

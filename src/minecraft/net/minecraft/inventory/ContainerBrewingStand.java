@@ -16,33 +16,33 @@ public class ContainerBrewingStand extends Container
     private int brewTime;
     private static final String __OBFID = "CL_00001737";
 
-    public ContainerBrewingStand(InventoryPlayer par1InventoryPlayer, TileEntityBrewingStand par2TileEntityBrewingStand)
+    public ContainerBrewingStand(InventoryPlayer p_i1805_1_, TileEntityBrewingStand p_i1805_2_)
     {
-        this.tileBrewingStand = par2TileEntityBrewingStand;
-        this.addSlotToContainer(new ContainerBrewingStand.Potion(par1InventoryPlayer.player, par2TileEntityBrewingStand, 0, 56, 46));
-        this.addSlotToContainer(new ContainerBrewingStand.Potion(par1InventoryPlayer.player, par2TileEntityBrewingStand, 1, 79, 53));
-        this.addSlotToContainer(new ContainerBrewingStand.Potion(par1InventoryPlayer.player, par2TileEntityBrewingStand, 2, 102, 46));
-        this.theSlot = this.addSlotToContainer(new ContainerBrewingStand.Ingredient(par2TileEntityBrewingStand, 3, 79, 17));
+        this.tileBrewingStand = p_i1805_2_;
+        this.addSlotToContainer(new ContainerBrewingStand.Potion(p_i1805_1_.player, p_i1805_2_, 0, 56, 46));
+        this.addSlotToContainer(new ContainerBrewingStand.Potion(p_i1805_1_.player, p_i1805_2_, 1, 79, 53));
+        this.addSlotToContainer(new ContainerBrewingStand.Potion(p_i1805_1_.player, p_i1805_2_, 2, 102, 46));
+        this.theSlot = this.addSlotToContainer(new ContainerBrewingStand.Ingredient(p_i1805_2_, 3, 79, 17));
         int var3;
 
         for (var3 = 0; var3 < 3; ++var3)
         {
             for (int var4 = 0; var4 < 9; ++var4)
             {
-                this.addSlotToContainer(new Slot(par1InventoryPlayer, var4 + var3 * 9 + 9, 8 + var4 * 18, 84 + var3 * 18));
+                this.addSlotToContainer(new Slot(p_i1805_1_, var4 + var3 * 9 + 9, 8 + var4 * 18, 84 + var3 * 18));
             }
         }
 
         for (var3 = 0; var3 < 9; ++var3)
         {
-            this.addSlotToContainer(new Slot(par1InventoryPlayer, var3, 8 + var3 * 18, 142));
+            this.addSlotToContainer(new Slot(p_i1805_1_, var3, 8 + var3 * 18, 142));
         }
     }
 
-    public void addCraftingToCrafters(ICrafting par1ICrafting)
+    public void addCraftingToCrafters(ICrafting p_75132_1_)
     {
-        super.addCraftingToCrafters(par1ICrafting);
-        par1ICrafting.sendProgressBarUpdate(this, 0, this.tileBrewingStand.func_145935_i());
+        super.addCraftingToCrafters(p_75132_1_);
+        p_75132_1_.sendProgressBarUpdate(this, 0, this.tileBrewingStand.func_145935_i());
     }
 
     /**
@@ -65,33 +65,33 @@ public class ContainerBrewingStand extends Container
         this.brewTime = this.tileBrewingStand.func_145935_i();
     }
 
-    public void updateProgressBar(int par1, int par2)
+    public void updateProgressBar(int p_75137_1_, int p_75137_2_)
     {
-        if (par1 == 0)
+        if (p_75137_1_ == 0)
         {
-            this.tileBrewingStand.func_145938_d(par2);
+            this.tileBrewingStand.func_145938_d(p_75137_2_);
         }
     }
 
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer)
+    public boolean canInteractWith(EntityPlayer p_75145_1_)
     {
-        return this.tileBrewingStand.isUseableByPlayer(par1EntityPlayer);
+        return this.tileBrewingStand.isUseableByPlayer(p_75145_1_);
     }
 
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+    public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int p_82846_2_)
     {
         ItemStack var3 = null;
-        Slot var4 = (Slot)this.inventorySlots.get(par2);
+        Slot var4 = (Slot)this.inventorySlots.get(p_82846_2_);
 
         if (var4 != null && var4.getHasStack())
         {
             ItemStack var5 = var4.getStack();
             var3 = var5.copy();
 
-            if ((par2 < 0 || par2 > 2) && par2 != 3)
+            if ((p_82846_2_ < 0 || p_82846_2_ > 2) && p_82846_2_ != 3)
             {
                 if (!this.theSlot.getHasStack() && this.theSlot.isItemValid(var5))
                 {
@@ -107,14 +107,14 @@ public class ContainerBrewingStand extends Container
                         return null;
                     }
                 }
-                else if (par2 >= 4 && par2 < 31)
+                else if (p_82846_2_ >= 4 && p_82846_2_ < 31)
                 {
                     if (!this.mergeItemStack(var5, 31, 40, false))
                     {
                         return null;
                     }
                 }
-                else if (par2 >= 31 && par2 < 40)
+                else if (p_82846_2_ >= 31 && p_82846_2_ < 40)
                 {
                     if (!this.mergeItemStack(var5, 4, 31, false))
                     {
@@ -150,7 +150,7 @@ public class ContainerBrewingStand extends Container
                 return null;
             }
 
-            var4.onPickupFromSlot(par1EntityPlayer, var5);
+            var4.onPickupFromSlot(p_82846_1_, var5);
         }
 
         return var3;
@@ -160,14 +160,14 @@ public class ContainerBrewingStand extends Container
     {
         private static final String __OBFID = "CL_00001738";
 
-        public Ingredient(IInventory par2IInventory, int par3, int par4, int par5)
+        public Ingredient(IInventory p_i1803_2_, int p_i1803_3_, int p_i1803_4_, int p_i1803_5_)
         {
-            super(par2IInventory, par3, par4, par5);
+            super(p_i1803_2_, p_i1803_3_, p_i1803_4_, p_i1803_5_);
         }
 
-        public boolean isItemValid(ItemStack par1ItemStack)
+        public boolean isItemValid(ItemStack p_75214_1_)
         {
-            return par1ItemStack != null ? par1ItemStack.getItem().isPotionIngredient(par1ItemStack) : false;
+            return p_75214_1_ != null ? p_75214_1_.getItem().isPotionIngredient(p_75214_1_) : false;
         }
 
         public int getSlotStackLimit()
@@ -181,15 +181,15 @@ public class ContainerBrewingStand extends Container
         private EntityPlayer player;
         private static final String __OBFID = "CL_00001740";
 
-        public Potion(EntityPlayer par1EntityPlayer, IInventory par2IInventory, int par3, int par4, int par5)
+        public Potion(EntityPlayer p_i1804_1_, IInventory p_i1804_2_, int p_i1804_3_, int p_i1804_4_, int p_i1804_5_)
         {
-            super(par2IInventory, par3, par4, par5);
-            this.player = par1EntityPlayer;
+            super(p_i1804_2_, p_i1804_3_, p_i1804_4_, p_i1804_5_);
+            this.player = p_i1804_1_;
         }
 
-        public boolean isItemValid(ItemStack par1ItemStack)
+        public boolean isItemValid(ItemStack p_75214_1_)
         {
-            return canHoldPotion(par1ItemStack);
+            return canHoldPotion(p_75214_1_);
         }
 
         public int getSlotStackLimit()
@@ -197,19 +197,19 @@ public class ContainerBrewingStand extends Container
             return 1;
         }
 
-        public void onPickupFromSlot(EntityPlayer par1EntityPlayer, ItemStack par2ItemStack)
+        public void onPickupFromSlot(EntityPlayer p_82870_1_, ItemStack p_82870_2_)
         {
-            if (par2ItemStack.getItem() == Items.potionitem && par2ItemStack.getItemDamage() > 0)
+            if (p_82870_2_.getItem() == Items.potionitem && p_82870_2_.getItemDamage() > 0)
             {
                 this.player.addStat(AchievementList.potion, 1);
             }
 
-            super.onPickupFromSlot(par1EntityPlayer, par2ItemStack);
+            super.onPickupFromSlot(p_82870_1_, p_82870_2_);
         }
 
-        public static boolean canHoldPotion(ItemStack par0ItemStack)
+        public static boolean canHoldPotion(ItemStack p_75243_0_)
         {
-            return par0ItemStack != null && (par0ItemStack.getItem() == Items.potionitem || par0ItemStack.getItem() == Items.glass_bottle);
+            return p_75243_0_ != null && (p_75243_0_.getItem() == Items.potionitem || p_75243_0_.getItem() == Items.glass_bottle);
         }
     }
 }

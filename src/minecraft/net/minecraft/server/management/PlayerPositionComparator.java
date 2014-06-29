@@ -9,20 +9,20 @@ public class PlayerPositionComparator implements Comparator
     private final ChunkCoordinates theChunkCoordinates;
     private static final String __OBFID = "CL_00001422";
 
-    public PlayerPositionComparator(ChunkCoordinates par1ChunkCoordinates)
+    public PlayerPositionComparator(ChunkCoordinates p_i1499_1_)
     {
-        this.theChunkCoordinates = par1ChunkCoordinates;
+        this.theChunkCoordinates = p_i1499_1_;
     }
 
-    public int compare(EntityPlayerMP par1EntityPlayerMP, EntityPlayerMP par2EntityPlayerMP)
+    public int compare(EntityPlayerMP p_compare_1_, EntityPlayerMP p_compare_2_)
     {
-        double var3 = par1EntityPlayerMP.getDistanceSq((double)this.theChunkCoordinates.posX, (double)this.theChunkCoordinates.posY, (double)this.theChunkCoordinates.posZ);
-        double var5 = par2EntityPlayerMP.getDistanceSq((double)this.theChunkCoordinates.posX, (double)this.theChunkCoordinates.posY, (double)this.theChunkCoordinates.posZ);
+        double var3 = p_compare_1_.getDistanceSq((double)this.theChunkCoordinates.posX, (double)this.theChunkCoordinates.posY, (double)this.theChunkCoordinates.posZ);
+        double var5 = p_compare_2_.getDistanceSq((double)this.theChunkCoordinates.posX, (double)this.theChunkCoordinates.posY, (double)this.theChunkCoordinates.posZ);
         return var3 < var5 ? -1 : (var3 > var5 ? 1 : 0);
     }
 
-    public int compare(Object par1Obj, Object par2Obj)
+    public int compare(Object p_compare_1_, Object p_compare_2_)
     {
-        return this.compare((EntityPlayerMP)par1Obj, (EntityPlayerMP)par2Obj);
+        return this.compare((EntityPlayerMP)p_compare_1_, (EntityPlayerMP)p_compare_2_);
     }
 }

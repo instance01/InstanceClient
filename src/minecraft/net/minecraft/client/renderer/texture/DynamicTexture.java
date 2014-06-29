@@ -15,22 +15,22 @@ public class DynamicTexture extends AbstractTexture
     private final int height;
     private static final String __OBFID = "CL_00001048";
 
-    public DynamicTexture(BufferedImage par1BufferedImage)
+    public DynamicTexture(BufferedImage p_i1270_1_)
     {
-        this(par1BufferedImage.getWidth(), par1BufferedImage.getHeight());
-        par1BufferedImage.getRGB(0, 0, par1BufferedImage.getWidth(), par1BufferedImage.getHeight(), this.dynamicTextureData, 0, par1BufferedImage.getWidth());
+        this(p_i1270_1_.getWidth(), p_i1270_1_.getHeight());
+        p_i1270_1_.getRGB(0, 0, p_i1270_1_.getWidth(), p_i1270_1_.getHeight(), this.dynamicTextureData, 0, p_i1270_1_.getWidth());
         this.updateDynamicTexture();
     }
 
-    public DynamicTexture(int par1, int par2)
+    public DynamicTexture(int p_i1271_1_, int p_i1271_2_)
     {
-        this.width = par1;
-        this.height = par2;
-        this.dynamicTextureData = new int[par1 * par2];
-        TextureUtil.allocateTexture(this.getGlTextureId(), par1, par2);
+        this.width = p_i1271_1_;
+        this.height = p_i1271_2_;
+        this.dynamicTextureData = new int[p_i1271_1_ * p_i1271_2_];
+        TextureUtil.allocateTexture(this.getGlTextureId(), p_i1271_1_, p_i1271_2_);
     }
 
-    public void loadTexture(IResourceManager par1ResourceManager) throws IOException {}
+    public void loadTexture(IResourceManager p_110551_1_) throws IOException {}
 
     public void updateDynamicTexture()
     {

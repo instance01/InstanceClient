@@ -131,7 +131,7 @@ public abstract class BlockSlab extends Block
         return p_150003_0_ == Blocks.stone_slab || p_150003_0_ == Blocks.wooden_slab;
     }
 
-    public abstract String func_150002_b(int var1);
+    public abstract String func_150002_b(int p_150002_1_);
 
     /**
      * Get the block's damage value (for use with pick block).

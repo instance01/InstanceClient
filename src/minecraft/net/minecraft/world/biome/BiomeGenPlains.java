@@ -10,9 +10,9 @@ public class BiomeGenPlains extends BiomeGenBase
     protected boolean field_150628_aC;
     private static final String __OBFID = "CL_00000180";
 
-    protected BiomeGenPlains(int par1)
+    protected BiomeGenPlains(int p_i1986_1_)
     {
-        super(par1);
+        super(p_i1986_1_);
         this.setTemperatureRainfall(0.8F, 0.4F);
         this.func_150570_a(field_150593_e);
         this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityHorse.class, 5, 2, 6));
@@ -42,9 +42,9 @@ public class BiomeGenPlains extends BiomeGenBase
         }
     }
 
-    public void decorate(World par1World, Random par2Random, int par3, int par4)
+    public void decorate(World p_76728_1_, Random p_76728_2_, int p_76728_3_, int p_76728_4_)
     {
-        double var5 = field_150606_ad.func_151601_a((double)(par3 + 8) / 200.0D, (double)(par4 + 8) / 200.0D);
+        double var5 = field_150606_ad.func_151601_a((double)(p_76728_3_ + 8) / 200.0D, (double)(p_76728_4_ + 8) / 200.0D);
         int var7;
         int var8;
         int var9;
@@ -63,10 +63,10 @@ public class BiomeGenPlains extends BiomeGenBase
 
             for (var7 = 0; var7 < 7; ++var7)
             {
-                var8 = par3 + par2Random.nextInt(16) + 8;
-                var9 = par4 + par2Random.nextInt(16) + 8;
-                var10 = par2Random.nextInt(par1World.getHeightValue(var8, var9) + 32);
-                field_150610_ae.generate(par1World, par2Random, var8, var10, var9);
+                var8 = p_76728_3_ + p_76728_2_.nextInt(16) + 8;
+                var9 = p_76728_4_ + p_76728_2_.nextInt(16) + 8;
+                var10 = p_76728_2_.nextInt(p_76728_1_.getHeightValue(var8, var9) + 32);
+                field_150610_ae.generate(p_76728_1_, p_76728_2_, var8, var10, var9);
             }
         }
 
@@ -76,14 +76,14 @@ public class BiomeGenPlains extends BiomeGenBase
 
             for (var7 = 0; var7 < 10; ++var7)
             {
-                var8 = par3 + par2Random.nextInt(16) + 8;
-                var9 = par4 + par2Random.nextInt(16) + 8;
-                var10 = par2Random.nextInt(par1World.getHeightValue(var8, var9) + 32);
-                field_150610_ae.generate(par1World, par2Random, var8, var10, var9);
+                var8 = p_76728_3_ + p_76728_2_.nextInt(16) + 8;
+                var9 = p_76728_4_ + p_76728_2_.nextInt(16) + 8;
+                var10 = p_76728_2_.nextInt(p_76728_1_.getHeightValue(var8, var9) + 32);
+                field_150610_ae.generate(p_76728_1_, p_76728_2_, var8, var10, var9);
             }
         }
 
-        super.decorate(par1World, par2Random, par3, par4);
+        super.decorate(p_76728_1_, p_76728_2_, p_76728_3_, p_76728_4_);
     }
 
     protected BiomeGenBase func_150566_k()

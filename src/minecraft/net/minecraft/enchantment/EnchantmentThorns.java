@@ -11,26 +11,26 @@ public class EnchantmentThorns extends Enchantment
 {
     private static final String __OBFID = "CL_00000122";
 
-    public EnchantmentThorns(int par1, int par2)
+    public EnchantmentThorns(int p_i1937_1_, int p_i1937_2_)
     {
-        super(par1, par2, EnumEnchantmentType.armor_torso);
+        super(p_i1937_1_, p_i1937_2_, EnumEnchantmentType.armor_torso);
         this.setName("thorns");
     }
 
     /**
      * Returns the minimal value of enchantability needed on the enchantment level passed.
      */
-    public int getMinEnchantability(int par1)
+    public int getMinEnchantability(int p_77321_1_)
     {
-        return 10 + 20 * (par1 - 1);
+        return 10 + 20 * (p_77321_1_ - 1);
     }
 
     /**
      * Returns the maximum value of enchantability nedded on the enchantment level passed.
      */
-    public int getMaxEnchantability(int par1)
+    public int getMaxEnchantability(int p_77317_1_)
     {
-        return super.getMinEnchantability(par1) + 50;
+        return super.getMinEnchantability(p_77317_1_) + 50;
     }
 
     /**
@@ -41,9 +41,9 @@ public class EnchantmentThorns extends Enchantment
         return 3;
     }
 
-    public boolean canApply(ItemStack par1ItemStack)
+    public boolean canApply(ItemStack p_92089_1_)
     {
-        return par1ItemStack.getItem() instanceof ItemArmor ? true : super.canApply(par1ItemStack);
+        return p_92089_1_.getItem() instanceof ItemArmor ? true : super.canApply(p_92089_1_);
     }
 
     public void func_151367_b(EntityLivingBase p_151367_1_, Entity p_151367_2_, int p_151367_3_)
@@ -67,13 +67,13 @@ public class EnchantmentThorns extends Enchantment
         }
     }
 
-    public static boolean func_92094_a(int par0, Random par1Random)
+    public static boolean func_92094_a(int p_92094_0_, Random p_92094_1_)
     {
-        return par0 <= 0 ? false : par1Random.nextFloat() < 0.15F * (float)par0;
+        return p_92094_0_ <= 0 ? false : p_92094_1_.nextFloat() < 0.15F * (float)p_92094_0_;
     }
 
-    public static int func_92095_b(int par0, Random par1Random)
+    public static int func_92095_b(int p_92095_0_, Random p_92095_1_)
     {
-        return par0 > 10 ? par0 - 10 : 1 + par1Random.nextInt(4);
+        return p_92095_0_ > 10 ? p_92095_0_ - 10 : 1 + p_92095_1_.nextInt(4);
     }
 }

@@ -11,9 +11,9 @@ public class EntityAIRestrictOpenDoor extends EntityAIBase
     private VillageDoorInfo frontDoor;
     private static final String __OBFID = "CL_00001610";
 
-    public EntityAIRestrictOpenDoor(EntityCreature par1EntityCreature)
+    public EntityAIRestrictOpenDoor(EntityCreature p_i1651_1_)
     {
-        this.entityObj = par1EntityCreature;
+        this.entityObj = p_i1651_1_;
     }
 
     /**

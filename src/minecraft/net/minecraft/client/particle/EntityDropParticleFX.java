@@ -14,12 +14,12 @@ public class EntityDropParticleFX extends EntityFX
     private int bobTimer;
     private static final String __OBFID = "CL_00000901";
 
-    public EntityDropParticleFX(World par1World, double par2, double par4, double par6, Material par8Material)
+    public EntityDropParticleFX(World p_i1203_1_, double p_i1203_2_, double p_i1203_4_, double p_i1203_6_, Material p_i1203_8_)
     {
-        super(par1World, par2, par4, par6, 0.0D, 0.0D, 0.0D);
+        super(p_i1203_1_, p_i1203_2_, p_i1203_4_, p_i1203_6_, 0.0D, 0.0D, 0.0D);
         this.motionX = this.motionY = this.motionZ = 0.0D;
 
-        if (par8Material == Material.water)
+        if (p_i1203_8_ == Material.water)
         {
             this.particleRed = 0.0F;
             this.particleGreen = 0.0F;
@@ -35,23 +35,23 @@ public class EntityDropParticleFX extends EntityFX
         this.setParticleTextureIndex(113);
         this.setSize(0.01F, 0.01F);
         this.particleGravity = 0.06F;
-        this.materialType = par8Material;
+        this.materialType = p_i1203_8_;
         this.bobTimer = 40;
         this.particleMaxAge = (int)(64.0D / (Math.random() * 0.8D + 0.2D));
         this.motionX = this.motionY = this.motionZ = 0.0D;
     }
 
-    public int getBrightnessForRender(float par1)
+    public int getBrightnessForRender(float p_70070_1_)
     {
-        return this.materialType == Material.water ? super.getBrightnessForRender(par1) : 257;
+        return this.materialType == Material.water ? super.getBrightnessForRender(p_70070_1_) : 257;
     }
 
     /**
      * Gets how bright this entity is.
      */
-    public float getBrightness(float par1)
+    public float getBrightness(float p_70013_1_)
     {
-        return this.materialType == Material.water ? super.getBrightness(par1) : 1.0F;
+        return this.materialType == Material.water ? super.getBrightness(p_70013_1_) : 1.0F;
     }
 
     /**

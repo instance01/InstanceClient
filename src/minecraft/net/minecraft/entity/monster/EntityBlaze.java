@@ -20,9 +20,9 @@ public class EntityBlaze extends EntityMob
     private int field_70846_g;
     private static final String __OBFID = "CL_00001682";
 
-    public EntityBlaze(World par1World)
+    public EntityBlaze(World p_i1731_1_)
     {
-        super(par1World);
+        super(p_i1731_1_);
         this.isImmuneToFire = true;
         this.experienceValue = 10;
     }
@@ -63,7 +63,7 @@ public class EntityBlaze extends EntityMob
         return "mob.blaze.death";
     }
 
-    public int getBrightnessForRender(float par1)
+    public int getBrightnessForRender(float p_70070_1_)
     {
         return 15728880;
     }
@@ -71,7 +71,7 @@ public class EntityBlaze extends EntityMob
     /**
      * Gets how bright this entity is.
      */
-    public float getBrightness(float par1)
+    public float getBrightness(float p_70013_1_)
     {
         return 1.0F;
     }
@@ -124,18 +124,18 @@ public class EntityBlaze extends EntityMob
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */
-    protected void attackEntity(Entity par1Entity, float par2)
+    protected void attackEntity(Entity p_70785_1_, float p_70785_2_)
     {
-        if (this.attackTime <= 0 && par2 < 2.0F && par1Entity.boundingBox.maxY > this.boundingBox.minY && par1Entity.boundingBox.minY < this.boundingBox.maxY)
+        if (this.attackTime <= 0 && p_70785_2_ < 2.0F && p_70785_1_.boundingBox.maxY > this.boundingBox.minY && p_70785_1_.boundingBox.minY < this.boundingBox.maxY)
         {
             this.attackTime = 20;
-            this.attackEntityAsMob(par1Entity);
+            this.attackEntityAsMob(p_70785_1_);
         }
-        else if (par2 < 30.0F)
+        else if (p_70785_2_ < 30.0F)
         {
-            double var3 = par1Entity.posX - this.posX;
-            double var5 = par1Entity.boundingBox.minY + (double)(par1Entity.height / 2.0F) - (this.posY + (double)(this.height / 2.0F));
-            double var7 = par1Entity.posZ - this.posZ;
+            double var3 = p_70785_1_.posX - this.posX;
+            double var5 = p_70785_1_.boundingBox.minY + (double)(p_70785_1_.height / 2.0F) - (this.posY + (double)(this.height / 2.0F));
+            double var7 = p_70785_1_.posZ - this.posZ;
 
             if (this.attackTime == 0)
             {
@@ -159,7 +159,7 @@ public class EntityBlaze extends EntityMob
 
                 if (this.field_70846_g > 1)
                 {
-                    float var9 = MathHelper.sqrt_float(par2) * 0.5F;
+                    float var9 = MathHelper.sqrt_float(p_70785_2_) * 0.5F;
                     this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1009, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
 
                     for (int var10 = 0; var10 < 1; ++var10)
@@ -179,7 +179,7 @@ public class EntityBlaze extends EntityMob
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
-    protected void fall(float par1) {}
+    protected void fall(float p_70069_1_) {}
 
     protected Item func_146068_u()
     {
@@ -197,11 +197,11 @@ public class EntityBlaze extends EntityMob
     /**
      * Drop 0-2 items of this living's type
      */
-    protected void dropFewItems(boolean par1, int par2)
+    protected void dropFewItems(boolean p_70628_1_, int p_70628_2_)
     {
-        if (par1)
+        if (p_70628_1_)
         {
-            int var3 = this.rand.nextInt(2 + par2);
+            int var3 = this.rand.nextInt(2 + p_70628_2_);
 
             for (int var4 = 0; var4 < var3; ++var4)
             {
@@ -215,11 +215,11 @@ public class EntityBlaze extends EntityMob
         return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
     }
 
-    public void func_70844_e(boolean par1)
+    public void func_70844_e(boolean p_70844_1_)
     {
         byte var2 = this.dataWatcher.getWatchableObjectByte(16);
 
-        if (par1)
+        if (p_70844_1_)
         {
             var2 = (byte)(var2 | 1);
         }

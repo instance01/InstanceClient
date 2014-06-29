@@ -48,9 +48,9 @@ public class S3APacketTabComplete extends Packet
         }
     }
 
-    public void processPacket(INetHandlerPlayClient p_149631_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149631_1_.handleTabComplete(this);
+        p_148833_1_.handleTabComplete(this);
     }
 
     public String[] func_149630_c()

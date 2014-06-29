@@ -39,9 +39,9 @@ public class EntityEnderman extends EntityMob
     private boolean isAggressive;
     private static final String __OBFID = "CL_00001685";
 
-    public EntityEnderman(World par1World)
+    public EntityEnderman(World p_i1734_1_)
     {
-        super(par1World);
+        super(p_i1734_1_);
         this.setSize(0.6F, 2.9F);
         this.stepHeight = 1.0F;
     }
@@ -65,21 +65,21 @@ public class EntityEnderman extends EntityMob
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    public void writeEntityToNBT(NBTTagCompound p_70014_1_)
     {
-        super.writeEntityToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setShort("carried", (short)Block.getIdFromBlock(this.func_146080_bZ()));
-        par1NBTTagCompound.setShort("carriedData", (short)this.getCarryingData());
+        super.writeEntityToNBT(p_70014_1_);
+        p_70014_1_.setShort("carried", (short)Block.getIdFromBlock(this.func_146080_bZ()));
+        p_70014_1_.setShort("carriedData", (short)this.getCarryingData());
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    public void readEntityFromNBT(NBTTagCompound p_70037_1_)
     {
-        super.readEntityFromNBT(par1NBTTagCompound);
-        this.func_146081_a(Block.getBlockById(par1NBTTagCompound.getShort("carried")));
-        this.setCarryingData(par1NBTTagCompound.getShort("carriedData"));
+        super.readEntityFromNBT(p_70037_1_);
+        this.func_146081_a(Block.getBlockById(p_70037_1_.getShort("carried")));
+        this.setCarryingData(p_70037_1_.getShort("carriedData"));
     }
 
     /**
@@ -120,9 +120,9 @@ public class EntityEnderman extends EntityMob
     /**
      * Checks to see if this enderman should be attacking this player
      */
-    private boolean shouldAttackPlayer(EntityPlayer par1EntityPlayer)
+    private boolean shouldAttackPlayer(EntityPlayer p_70821_1_)
     {
-        ItemStack var2 = par1EntityPlayer.inventory.armorInventory[3];
+        ItemStack var2 = p_70821_1_.inventory.armorInventory[3];
 
         if (var2 != null && var2.getItem() == Item.getItemFromBlock(Blocks.pumpkin))
         {
@@ -130,12 +130,12 @@ public class EntityEnderman extends EntityMob
         }
         else
         {
-            Vec3 var3 = par1EntityPlayer.getLook(1.0F).normalize();
-            Vec3 var4 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX - par1EntityPlayer.posX, this.boundingBox.minY + (double)(this.height / 2.0F) - (par1EntityPlayer.posY + (double)par1EntityPlayer.getEyeHeight()), this.posZ - par1EntityPlayer.posZ);
+            Vec3 var3 = p_70821_1_.getLook(1.0F).normalize();
+            Vec3 var4 = Vec3.createVectorHelper(this.posX - p_70821_1_.posX, this.boundingBox.minY + (double)(this.height / 2.0F) - (p_70821_1_.posY + (double)p_70821_1_.getEyeHeight()), this.posZ - p_70821_1_.posZ);
             double var5 = var4.lengthVector();
             var4 = var4.normalize();
             double var7 = var3.dotProduct(var4);
-            return var7 > 1.0D - 0.025D / var5 ? par1EntityPlayer.canEntityBeSeen(this) : false;
+            return var7 > 1.0D - 0.025D / var5 && p_70821_1_.canEntityBeSeen(this);
         }
     }
 
@@ -283,9 +283,9 @@ public class EntityEnderman extends EntityMob
     /**
      * Teleport the enderman to another entity
      */
-    protected boolean teleportToEntity(Entity par1Entity)
+    protected boolean teleportToEntity(Entity p_70816_1_)
     {
-        Vec3 var2 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX - par1Entity.posX, this.boundingBox.minY + (double)(this.height / 2.0F) - par1Entity.posY + (double)par1Entity.getEyeHeight(), this.posZ - par1Entity.posZ);
+        Vec3 var2 = Vec3.createVectorHelper(this.posX - p_70816_1_.posX, this.boundingBox.minY + (double)(this.height / 2.0F) - p_70816_1_.posY + (double)p_70816_1_.getEyeHeight(), this.posZ - p_70816_1_.posZ);
         var2 = var2.normalize();
         double var3 = 16.0D;
         double var5 = this.posX + (this.rand.nextDouble() - 0.5D) * 8.0D - var2.xCoord * var3;
@@ -297,14 +297,14 @@ public class EntityEnderman extends EntityMob
     /**
      * Teleport the enderman
      */
-    protected boolean teleportTo(double par1, double par3, double par5)
+    protected boolean teleportTo(double p_70825_1_, double p_70825_3_, double p_70825_5_)
     {
         double var7 = this.posX;
         double var9 = this.posY;
         double var11 = this.posZ;
-        this.posX = par1;
-        this.posY = par3;
-        this.posZ = par5;
+        this.posX = p_70825_1_;
+        this.posY = p_70825_3_;
+        this.posZ = p_70825_5_;
         boolean var13 = false;
         int var14 = MathHelper.floor_double(this.posX);
         int var15 = MathHelper.floor_double(this.posY);
@@ -399,13 +399,13 @@ public class EntityEnderman extends EntityMob
     /**
      * Drop 0-2 items of this living's type
      */
-    protected void dropFewItems(boolean par1, int par2)
+    protected void dropFewItems(boolean p_70628_1_, int p_70628_2_)
     {
         Item var3 = this.func_146068_u();
 
         if (var3 != null)
         {
-            int var4 = this.rand.nextInt(2 + par2);
+            int var4 = this.rand.nextInt(2 + p_70628_2_);
 
             for (int var5 = 0; var5 < var4; ++var5)
             {
@@ -427,9 +427,9 @@ public class EntityEnderman extends EntityMob
     /**
      * Set the metadata of the block an enderman carries
      */
-    public void setCarryingData(int par1)
+    public void setCarryingData(int p_70817_1_)
     {
-        this.dataWatcher.updateObject(17, Byte.valueOf((byte)(par1 & 255)));
+        this.dataWatcher.updateObject(17, Byte.valueOf((byte)(p_70817_1_ & 255)));
     }
 
     /**
@@ -443,7 +443,7 @@ public class EntityEnderman extends EntityMob
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_)
     {
         if (this.isEntityInvulnerable())
         {
@@ -453,12 +453,12 @@ public class EntityEnderman extends EntityMob
         {
             this.setScreaming(true);
 
-            if (par1DamageSource instanceof EntityDamageSource && par1DamageSource.getEntity() instanceof EntityPlayer)
+            if (p_70097_1_ instanceof EntityDamageSource && p_70097_1_.getEntity() instanceof EntityPlayer)
             {
                 this.isAggressive = true;
             }
 
-            if (par1DamageSource instanceof EntityDamageSourceIndirect)
+            if (p_70097_1_ instanceof EntityDamageSourceIndirect)
             {
                 this.isAggressive = false;
 
@@ -474,7 +474,7 @@ public class EntityEnderman extends EntityMob
             }
             else
             {
-                return super.attackEntityFrom(par1DamageSource, par2);
+                return super.attackEntityFrom(p_70097_1_, p_70097_2_);
             }
         }
     }
@@ -484,9 +484,9 @@ public class EntityEnderman extends EntityMob
         return this.dataWatcher.getWatchableObjectByte(18) > 0;
     }
 
-    public void setScreaming(boolean par1)
+    public void setScreaming(boolean p_70819_1_)
     {
-        this.dataWatcher.updateObject(18, Byte.valueOf((byte)(par1 ? 1 : 0)));
+        this.dataWatcher.updateObject(18, Byte.valueOf((byte)(p_70819_1_ ? 1 : 0)));
     }
 
     static

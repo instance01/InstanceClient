@@ -18,9 +18,9 @@ public class S2EPacketCloseWindow extends Packet
         this.field_148896_a = p_i45183_1_;
     }
 
-    public void processPacket(INetHandlerPlayClient p_148895_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_148895_1_.handleCloseWindow(this);
+        p_148833_1_.handleCloseWindow(this);
     }
 
     /**

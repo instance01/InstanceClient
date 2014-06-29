@@ -88,9 +88,9 @@ public class MapGenCavesHell extends MapGenBase
                 {
                     int var54 = MathHelper.floor_double(p_151543_6_ - var29) - p_151543_3_ * 16 - 1;
                     int var36 = MathHelper.floor_double(p_151543_6_ + var29) - p_151543_3_ * 16 + 1;
-                    int var56 = MathHelper.floor_double(p_151543_8_ - var31) - 1;
+                    int var55 = MathHelper.floor_double(p_151543_8_ - var31) - 1;
                     int var38 = MathHelper.floor_double(p_151543_8_ + var31) + 1;
-                    int var55 = MathHelper.floor_double(p_151543_10_ - var29) - p_151543_4_ * 16 - 1;
+                    int var56 = MathHelper.floor_double(p_151543_10_ - var29) - p_151543_4_ * 16 - 1;
                     int var40 = MathHelper.floor_double(p_151543_10_ + var29) - p_151543_4_ * 16 + 1;
 
                     if (var54 < 0)
@@ -103,9 +103,9 @@ public class MapGenCavesHell extends MapGenBase
                         var36 = 16;
                     }
 
-                    if (var56 < 1)
+                    if (var55 < 1)
                     {
-                        var56 = 1;
+                        var55 = 1;
                     }
 
                     if (var38 > 120)
@@ -113,9 +113,9 @@ public class MapGenCavesHell extends MapGenBase
                         var38 = 120;
                     }
 
-                    if (var55 < 0)
+                    if (var56 < 0)
                     {
-                        var55 = 0;
+                        var56 = 0;
                     }
 
                     if (var40 > 16)
@@ -129,9 +129,9 @@ public class MapGenCavesHell extends MapGenBase
 
                     for (var42 = var54; !var57 && var42 < var36; ++var42)
                     {
-                        for (int var43 = var55; !var57 && var43 < var40; ++var43)
+                        for (int var43 = var56; !var57 && var43 < var40; ++var43)
                         {
-                            for (int var44 = var38 + 1; !var57 && var44 >= var56 - 1; --var44)
+                            for (int var44 = var38 + 1; !var57 && var44 >= var55 - 1; --var44)
                             {
                                 var45 = (var42 * 16 + var43) * 128 + var44;
 
@@ -144,9 +144,9 @@ public class MapGenCavesHell extends MapGenBase
                                         var57 = true;
                                     }
 
-                                    if (var44 != var56 - 1 && var42 != var54 && var42 != var36 - 1 && var43 != var55 && var43 != var40 - 1)
+                                    if (var44 != var55 - 1 && var42 != var54 && var42 != var36 - 1 && var43 != var56 && var43 != var40 - 1)
                                     {
-                                        var44 = var56;
+                                        var44 = var55;
                                     }
                                 }
                             }
@@ -157,18 +157,18 @@ public class MapGenCavesHell extends MapGenBase
                     {
                         for (var42 = var54; var42 < var36; ++var42)
                         {
-                            double var59 = ((double)(var42 + p_151543_3_ * 16) + 0.5D - p_151543_6_) / var29;
+                            double var58 = ((double)(var42 + p_151543_3_ * 16) + 0.5D - p_151543_6_) / var29;
 
-                            for (var45 = var55; var45 < var40; ++var45)
+                            for (var45 = var56; var45 < var40; ++var45)
                             {
-                                double var58 = ((double)(var45 + p_151543_4_ * 16) + 0.5D - p_151543_10_) / var29;
+                                double var59 = ((double)(var45 + p_151543_4_ * 16) + 0.5D - p_151543_10_) / var29;
                                 int var48 = (var42 * 16 + var45) * 128 + var38;
 
-                                for (int var49 = var38 - 1; var49 >= var56; --var49)
+                                for (int var49 = var38 - 1; var49 >= var55; --var49)
                                 {
                                     double var50 = ((double)var49 + 0.5D - p_151543_8_) / var31;
 
-                                    if (var50 > -0.7D && var59 * var59 + var50 * var50 + var58 * var58 < 1.0D)
+                                    if (var50 > -0.7D && var58 * var58 + var50 * var50 + var59 * var59 < 1.0D)
                                     {
                                         Block var52 = p_151543_5_[var48];
 

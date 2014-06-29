@@ -49,56 +49,56 @@ public class DamageSource
     public String damageType;
     private static final String __OBFID = "CL_00001521";
 
-    public static DamageSource causeMobDamage(EntityLivingBase par0EntityLivingBase)
+    public static DamageSource causeMobDamage(EntityLivingBase p_76358_0_)
     {
-        return new EntityDamageSource("mob", par0EntityLivingBase);
+        return new EntityDamageSource("mob", p_76358_0_);
     }
 
     /**
      * returns an EntityDamageSource of type player
      */
-    public static DamageSource causePlayerDamage(EntityPlayer par0EntityPlayer)
+    public static DamageSource causePlayerDamage(EntityPlayer p_76365_0_)
     {
-        return new EntityDamageSource("player", par0EntityPlayer);
+        return new EntityDamageSource("player", p_76365_0_);
     }
 
     /**
      * returns EntityDamageSourceIndirect of an arrow
      */
-    public static DamageSource causeArrowDamage(EntityArrow par0EntityArrow, Entity par1Entity)
+    public static DamageSource causeArrowDamage(EntityArrow p_76353_0_, Entity p_76353_1_)
     {
-        return (new EntityDamageSourceIndirect("arrow", par0EntityArrow, par1Entity)).setProjectile();
+        return (new EntityDamageSourceIndirect("arrow", p_76353_0_, p_76353_1_)).setProjectile();
     }
 
     /**
      * returns EntityDamageSourceIndirect of a fireball
      */
-    public static DamageSource causeFireballDamage(EntityFireball par0EntityFireball, Entity par1Entity)
+    public static DamageSource causeFireballDamage(EntityFireball p_76362_0_, Entity p_76362_1_)
     {
-        return par1Entity == null ? (new EntityDamageSourceIndirect("onFire", par0EntityFireball, par0EntityFireball)).setFireDamage().setProjectile() : (new EntityDamageSourceIndirect("fireball", par0EntityFireball, par1Entity)).setFireDamage().setProjectile();
+        return p_76362_1_ == null ? (new EntityDamageSourceIndirect("onFire", p_76362_0_, p_76362_0_)).setFireDamage().setProjectile() : (new EntityDamageSourceIndirect("fireball", p_76362_0_, p_76362_1_)).setFireDamage().setProjectile();
     }
 
-    public static DamageSource causeThrownDamage(Entity par0Entity, Entity par1Entity)
+    public static DamageSource causeThrownDamage(Entity p_76356_0_, Entity p_76356_1_)
     {
-        return (new EntityDamageSourceIndirect("thrown", par0Entity, par1Entity)).setProjectile();
+        return (new EntityDamageSourceIndirect("thrown", p_76356_0_, p_76356_1_)).setProjectile();
     }
 
-    public static DamageSource causeIndirectMagicDamage(Entity par0Entity, Entity par1Entity)
+    public static DamageSource causeIndirectMagicDamage(Entity p_76354_0_, Entity p_76354_1_)
     {
-        return (new EntityDamageSourceIndirect("indirectMagic", par0Entity, par1Entity)).setDamageBypassesArmor().setMagicDamage();
+        return (new EntityDamageSourceIndirect("indirectMagic", p_76354_0_, p_76354_1_)).setDamageBypassesArmor().setMagicDamage();
     }
 
     /**
      * Returns the EntityDamageSource of the Thorns enchantment
      */
-    public static DamageSource causeThornsDamage(Entity par0Entity)
+    public static DamageSource causeThornsDamage(Entity p_92087_0_)
     {
-        return (new EntityDamageSource("thorns", par0Entity)).setMagicDamage();
+        return (new EntityDamageSource("thorns", p_92087_0_)).setMagicDamage();
     }
 
-    public static DamageSource setExplosionSource(Explosion par0Explosion)
+    public static DamageSource setExplosionSource(Explosion p_94539_0_)
     {
-        return par0Explosion != null && par0Explosion.getExplosivePlacedBy() != null ? (new EntityDamageSource("explosion.player", par0Explosion.getExplosivePlacedBy())).setDifficultyScaled().setExplosion() : (new DamageSource("explosion")).setDifficultyScaled().setExplosion();
+        return p_94539_0_ != null && p_94539_0_.getExplosivePlacedBy() != null ? (new EntityDamageSource("explosion.player", p_94539_0_.getExplosivePlacedBy())).setDifficultyScaled().setExplosion() : (new DamageSource("explosion")).setDifficultyScaled().setExplosion();
     }
 
     /**
@@ -155,9 +155,9 @@ public class DamageSource
         return this.damageIsAbsolute;
     }
 
-    protected DamageSource(String par1Str)
+    protected DamageSource(String p_i1566_1_)
     {
-        this.damageType = par1Str;
+        this.damageType = p_i1566_1_;
     }
 
     public Entity getSourceOfDamage()

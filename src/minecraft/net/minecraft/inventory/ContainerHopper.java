@@ -9,51 +9,51 @@ public class ContainerHopper extends Container
     private final IInventory field_94538_a;
     private static final String __OBFID = "CL_00001750";
 
-    public ContainerHopper(InventoryPlayer par1InventoryPlayer, IInventory par2IInventory)
+    public ContainerHopper(InventoryPlayer p_i1814_1_, IInventory p_i1814_2_)
     {
-        this.field_94538_a = par2IInventory;
-        par2IInventory.openInventory();
+        this.field_94538_a = p_i1814_2_;
+        p_i1814_2_.openInventory();
         byte var3 = 51;
         int var4;
 
-        for (var4 = 0; var4 < par2IInventory.getSizeInventory(); ++var4)
+        for (var4 = 0; var4 < p_i1814_2_.getSizeInventory(); ++var4)
         {
-            this.addSlotToContainer(new Slot(par2IInventory, var4, 44 + var4 * 18, 20));
+            this.addSlotToContainer(new Slot(p_i1814_2_, var4, 44 + var4 * 18, 20));
         }
 
         for (var4 = 0; var4 < 3; ++var4)
         {
             for (int var5 = 0; var5 < 9; ++var5)
             {
-                this.addSlotToContainer(new Slot(par1InventoryPlayer, var5 + var4 * 9 + 9, 8 + var5 * 18, var4 * 18 + var3));
+                this.addSlotToContainer(new Slot(p_i1814_1_, var5 + var4 * 9 + 9, 8 + var5 * 18, var4 * 18 + var3));
             }
         }
 
         for (var4 = 0; var4 < 9; ++var4)
         {
-            this.addSlotToContainer(new Slot(par1InventoryPlayer, var4, 8 + var4 * 18, 58 + var3));
+            this.addSlotToContainer(new Slot(p_i1814_1_, var4, 8 + var4 * 18, 58 + var3));
         }
     }
 
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer)
+    public boolean canInteractWith(EntityPlayer p_75145_1_)
     {
-        return this.field_94538_a.isUseableByPlayer(par1EntityPlayer);
+        return this.field_94538_a.isUseableByPlayer(p_75145_1_);
     }
 
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+    public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int p_82846_2_)
     {
         ItemStack var3 = null;
-        Slot var4 = (Slot)this.inventorySlots.get(par2);
+        Slot var4 = (Slot)this.inventorySlots.get(p_82846_2_);
 
         if (var4 != null && var4.getHasStack())
         {
             ItemStack var5 = var4.getStack();
             var3 = var5.copy();
 
-            if (par2 < this.field_94538_a.getSizeInventory())
+            if (p_82846_2_ < this.field_94538_a.getSizeInventory())
             {
                 if (!this.mergeItemStack(var5, this.field_94538_a.getSizeInventory(), this.inventorySlots.size(), true))
                 {
@@ -81,9 +81,9 @@ public class ContainerHopper extends Container
     /**
      * Called when the container is closed.
      */
-    public void onContainerClosed(EntityPlayer par1EntityPlayer)
+    public void onContainerClosed(EntityPlayer p_75134_1_)
     {
-        super.onContainerClosed(par1EntityPlayer);
+        super.onContainerClosed(p_75134_1_);
         this.field_94538_a.closeInventory();
     }
 }

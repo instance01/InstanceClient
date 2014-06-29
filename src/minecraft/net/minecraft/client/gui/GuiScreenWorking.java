@@ -13,36 +13,36 @@ public class GuiScreenWorking extends GuiScreen implements IProgressUpdate
     /**
      * "Saving level", or the loading,or downloading equivelent
      */
-    public void displayProgressMessage(String par1Str)
+    public void displayProgressMessage(String p_73720_1_)
     {
-        this.resetProgressAndMessage(par1Str);
+        this.resetProgressAndMessage(p_73720_1_);
     }
 
     /**
      * this string, followed by "working..." and then the "% complete" are the 3 lines shown. This resets progress to 0,
      * and the WorkingString to "working...".
      */
-    public void resetProgressAndMessage(String par1Str)
+    public void resetProgressAndMessage(String p_73721_1_)
     {
-        this.field_146591_a = par1Str;
+        this.field_146591_a = p_73721_1_;
         this.resetProgresAndWorkingMessage("Working...");
     }
 
     /**
      * This is called with "Working..." by resetProgressAndMessage
      */
-    public void resetProgresAndWorkingMessage(String par1Str)
+    public void resetProgresAndWorkingMessage(String p_73719_1_)
     {
-        this.field_146589_f = par1Str;
+        this.field_146589_f = p_73719_1_;
         this.setLoadingProgress(0);
     }
 
     /**
      * Updates the progress bar on the loading screen to the specified amount. Args: loadProgress
      */
-    public void setLoadingProgress(int par1)
+    public void setLoadingProgress(int p_73718_1_)
     {
-        this.field_146590_g = par1;
+        this.field_146590_g = p_73718_1_;
     }
 
     public void func_146586_a()
@@ -53,7 +53,7 @@ public class GuiScreenWorking extends GuiScreen implements IProgressUpdate
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         if (this.field_146592_h)
         {
@@ -64,7 +64,7 @@ public class GuiScreenWorking extends GuiScreen implements IProgressUpdate
             this.drawDefaultBackground();
             this.drawCenteredString(this.fontRendererObj, this.field_146591_a, this.width / 2, 70, 16777215);
             this.drawCenteredString(this.fontRendererObj, this.field_146589_f + " " + this.field_146590_g + "%", this.width / 2, 90, 16777215);
-            super.drawScreen(par1, par2, par3);
+            super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
         }
     }
 }

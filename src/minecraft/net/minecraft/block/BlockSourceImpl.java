@@ -12,12 +12,12 @@ public class BlockSourceImpl implements IBlockSource
     private final int zPos;
     private static final String __OBFID = "CL_00001194";
 
-    public BlockSourceImpl(World par1World, int par2, int par3, int par4)
+    public BlockSourceImpl(World p_i1365_1_, int p_i1365_2_, int p_i1365_3_, int p_i1365_4_)
     {
-        this.worldObj = par1World;
-        this.xPos = par2;
-        this.yPos = par3;
-        this.zPos = par4;
+        this.worldObj = p_i1365_1_;
+        this.xPos = p_i1365_2_;
+        this.yPos = p_i1365_3_;
+        this.zPos = p_i1365_4_;
     }
 
     public World getWorld()

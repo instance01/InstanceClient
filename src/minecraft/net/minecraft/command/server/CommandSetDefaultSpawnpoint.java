@@ -22,38 +22,38 @@ public class CommandSetDefaultSpawnpoint extends CommandBase
         return 2;
     }
 
-    public String getCommandUsage(ICommandSender par1ICommandSender)
+    public String getCommandUsage(ICommandSender p_71518_1_)
     {
         return "commands.setworldspawn.usage";
     }
 
-    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_)
     {
-        if (par2ArrayOfStr.length == 3)
+        if (p_71515_2_.length == 3)
         {
-            if (par1ICommandSender.getEntityWorld() == null)
+            if (p_71515_1_.getEntityWorld() == null)
             {
                 throw new WrongUsageException("commands.setworldspawn.usage", new Object[0]);
             }
 
             byte var3 = 0;
-            int var8 = var3 + 1;
-            int var4 = parseIntBounded(par1ICommandSender, par2ArrayOfStr[var3], -30000000, 30000000);
-            int var5 = parseIntBounded(par1ICommandSender, par2ArrayOfStr[var8++], 0, 256);
-            int var6 = parseIntBounded(par1ICommandSender, par2ArrayOfStr[var8++], -30000000, 30000000);
-            par1ICommandSender.getEntityWorld().setSpawnLocation(var4, var5, var6);
-            notifyAdmins(par1ICommandSender, "commands.setworldspawn.success", new Object[] {Integer.valueOf(var4), Integer.valueOf(var5), Integer.valueOf(var6)});
+            int var7 = var3 + 1;
+            int var4 = parseIntBounded(p_71515_1_, p_71515_2_[var3], -30000000, 30000000);
+            int var5 = parseIntBounded(p_71515_1_, p_71515_2_[var7++], 0, 256);
+            int var6 = parseIntBounded(p_71515_1_, p_71515_2_[var7++], -30000000, 30000000);
+            p_71515_1_.getEntityWorld().setSpawnLocation(var4, var5, var6);
+            func_152373_a(p_71515_1_, this, "commands.setworldspawn.success", new Object[] {Integer.valueOf(var4), Integer.valueOf(var5), Integer.valueOf(var6)});
         }
         else
         {
-            if (par2ArrayOfStr.length != 0)
+            if (p_71515_2_.length != 0)
             {
                 throw new WrongUsageException("commands.setworldspawn.usage", new Object[0]);
             }
 
-            ChunkCoordinates var9 = getCommandSenderAsPlayer(par1ICommandSender).getPlayerCoordinates();
-            par1ICommandSender.getEntityWorld().setSpawnLocation(var9.posX, var9.posY, var9.posZ);
-            notifyAdmins(par1ICommandSender, "commands.setworldspawn.success", new Object[] {Integer.valueOf(var9.posX), Integer.valueOf(var9.posY), Integer.valueOf(var9.posZ)});
+            ChunkCoordinates var8 = getCommandSenderAsPlayer(p_71515_1_).getPlayerCoordinates();
+            p_71515_1_.getEntityWorld().setSpawnLocation(var8.posX, var8.posY, var8.posZ);
+            func_152373_a(p_71515_1_, this, "commands.setworldspawn.success", new Object[] {Integer.valueOf(var8.posX), Integer.valueOf(var8.posY), Integer.valueOf(var8.posZ)});
         }
     }
 }

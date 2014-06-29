@@ -40,9 +40,9 @@ public class S34PacketMaps extends Packet
         p_148840_1_.writeBytes(this.field_149190_b);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149189_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149189_1_.handleMaps(this);
+        p_148833_1_.handleMaps(this);
     }
 
     /**

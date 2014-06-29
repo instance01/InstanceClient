@@ -15,23 +15,23 @@ public class TileEntitySignRenderer extends TileEntitySpecialRenderer
     private final ModelSign field_147514_c = new ModelSign();
     private static final String __OBFID = "CL_00000970";
 
-    public void renderTileEntityAt(TileEntitySign p_147512_1_, double p_147512_2_, double p_147512_4_, double p_147512_6_, float p_147512_8_)
+    public void renderTileEntityAt(TileEntitySign p_147500_1_, double p_147500_2_, double p_147500_4_, double p_147500_6_, float p_147500_8_)
     {
-        Block var9 = p_147512_1_.getBlockType();
+        Block var9 = p_147500_1_.getBlockType();
         GL11.glPushMatrix();
         float var10 = 0.6666667F;
         float var12;
 
         if (var9 == Blocks.standing_sign)
         {
-            GL11.glTranslatef((float)p_147512_2_ + 0.5F, (float)p_147512_4_ + 0.75F * var10, (float)p_147512_6_ + 0.5F);
-            float var11 = (float)(p_147512_1_.getBlockMetadata() * 360) / 16.0F;
+            GL11.glTranslatef((float)p_147500_2_ + 0.5F, (float)p_147500_4_ + 0.75F * var10, (float)p_147500_6_ + 0.5F);
+            float var11 = (float)(p_147500_1_.getBlockMetadata() * 360) / 16.0F;
             GL11.glRotatef(-var11, 0.0F, 1.0F, 0.0F);
             this.field_147514_c.signStick.showModel = true;
         }
         else
         {
-            int var16 = p_147512_1_.getBlockMetadata();
+            int var16 = p_147500_1_.getBlockMetadata();
             var12 = 0.0F;
 
             if (var16 == 2)
@@ -49,7 +49,7 @@ public class TileEntitySignRenderer extends TileEntitySpecialRenderer
                 var12 = -90.0F;
             }
 
-            GL11.glTranslatef((float)p_147512_2_ + 0.5F, (float)p_147512_4_ + 0.75F * var10, (float)p_147512_6_ + 0.5F);
+            GL11.glTranslatef((float)p_147500_2_ + 0.5F, (float)p_147500_4_ + 0.75F * var10, (float)p_147500_6_ + 0.5F);
             GL11.glRotatef(-var12, 0.0F, 1.0F, 0.0F);
             GL11.glTranslatef(0.0F, -0.3125F, -0.4375F);
             this.field_147514_c.signStick.showModel = false;
@@ -68,18 +68,18 @@ public class TileEntitySignRenderer extends TileEntitySpecialRenderer
         GL11.glDepthMask(false);
         byte var13 = 0;
 
-        for (int var14 = 0; var14 < p_147512_1_.field_145915_a.length; ++var14)
+        for (int var14 = 0; var14 < p_147500_1_.field_145915_a.length; ++var14)
         {
-            String var15 = p_147512_1_.field_145915_a[var14];
+            String var15 = p_147500_1_.field_145915_a[var14];
 
-            if (var14 == p_147512_1_.field_145918_i)
+            if (var14 == p_147500_1_.field_145918_i)
             {
                 var15 = "> " + var15 + " <";
-                var17.drawString(var15, -var17.getStringWidth(var15) / 2, var14 * 10 - p_147512_1_.field_145915_a.length * 5, var13);
+                var17.drawString(var15, -var17.getStringWidth(var15) / 2, var14 * 10 - p_147500_1_.field_145915_a.length * 5, var13);
             }
             else
             {
-                var17.drawString(var15, -var17.getStringWidth(var15) / 2, var14 * 10 - p_147512_1_.field_145915_a.length * 5, var13);
+                var17.drawString(var15, -var17.getStringWidth(var15) / 2, var14 * 10 - p_147500_1_.field_145915_a.length * 5, var13);
             }
         }
 

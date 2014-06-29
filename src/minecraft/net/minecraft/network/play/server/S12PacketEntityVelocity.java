@@ -84,9 +84,9 @@ public class S12PacketEntityVelocity extends Packet
         p_148840_1_.writeShort(this.field_149414_d);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149413_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149413_1_.handleEntityVelocity(this);
+        p_148833_1_.handleEntityVelocity(this);
     }
 
     /**

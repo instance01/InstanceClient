@@ -26,17 +26,16 @@ public class Locale
     /**
      * par2 is a list of languages. For each language $L and domain $D, attempts to load the resource $D:lang/$L.lang
      */
-
-    public synchronized void loadLocaleDataFiles(IResourceManager par1ResourceManager, List par2List)
+    public synchronized void loadLocaleDataFiles(IResourceManager p_135022_1_, List p_135022_2_)
     {
         this.field_135032_a.clear();
-        Iterator var3 = par2List.iterator();
+        Iterator var3 = p_135022_2_.iterator();
 
         while (var3.hasNext())
         {
             String var4 = (String)var3.next();
             String var5 = String.format("lang/%s.lang", new Object[] {var4});
-            Iterator var6 = par1ResourceManager.getResourceDomains().iterator();
+            Iterator var6 = p_135022_1_.getResourceDomains().iterator();
 
             while (var6.hasNext())
             {
@@ -44,7 +43,7 @@ public class Locale
 
                 try
                 {
-                    this.loadLocaleData(par1ResourceManager.getAllResources(new ResourceLocation(var7, var5)));
+                    this.loadLocaleData(p_135022_1_.getAllResources(new ResourceLocation(var7, var5)));
                 }
                 catch (IOException var9)
                 {
@@ -90,9 +89,9 @@ public class Locale
     /**
      * par1 is a list of Resources
      */
-    private void loadLocaleData(List par1List) throws IOException
+    private void loadLocaleData(List p_135028_1_) throws IOException
     {
-        Iterator var2 = par1List.iterator();
+        Iterator var2 = p_135028_1_.iterator();
 
         while (var2.hasNext())
         {
@@ -101,9 +100,9 @@ public class Locale
         }
     }
 
-    private void loadLocaleData(InputStream par1InputStream) throws IOException
+    private void loadLocaleData(InputStream p_135021_1_) throws IOException
     {
-        Iterator var2 = IOUtils.readLines(par1InputStream, Charsets.UTF_8).iterator();
+        Iterator var2 = IOUtils.readLines(p_135021_1_, Charsets.UTF_8).iterator();
 
         while (var2.hasNext())
         {
@@ -126,22 +125,22 @@ public class Locale
     /**
      * Returns the translation, or the key itself if the key could not be translated.
      */
-    private String translateKeyPrivate(String par1Str)
+    private String translateKeyPrivate(String p_135026_1_)
     {
-        String var2 = (String)this.field_135032_a.get(par1Str);
-        return var2 == null ? par1Str : var2;
+        String var2 = (String)this.field_135032_a.get(p_135026_1_);
+        return var2 == null ? p_135026_1_ : var2;
     }
 
     /**
      * Calls String.format(translateKey(key), params)
      */
-    public String formatMessage(String par1Str, Object[] par2ArrayOfObj)
+    public String formatMessage(String p_135023_1_, Object[] p_135023_2_)
     {
-        String var3 = this.translateKeyPrivate(par1Str);
+        String var3 = this.translateKeyPrivate(p_135023_1_);
 
         try
         {
-            return String.format(var3, par2ArrayOfObj);
+            return String.format(var3, p_135023_2_);
         }
         catch (IllegalFormatException var5)
         {

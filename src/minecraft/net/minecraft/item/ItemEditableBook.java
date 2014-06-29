@@ -17,28 +17,28 @@ public class ItemEditableBook extends Item
         this.setMaxStackSize(1);
     }
 
-    public static boolean validBookTagContents(NBTTagCompound par0NBTTagCompound)
+    public static boolean validBookTagContents(NBTTagCompound p_77828_0_)
     {
-        if (!ItemWritableBook.func_150930_a(par0NBTTagCompound))
+        if (!ItemWritableBook.func_150930_a(p_77828_0_))
         {
             return false;
         }
-        else if (!par0NBTTagCompound.func_150297_b("title", 8))
+        else if (!p_77828_0_.func_150297_b("title", 8))
         {
             return false;
         }
         else
         {
-            String var1 = par0NBTTagCompound.getString("title");
-            return var1 != null && var1.length() <= 16 ? par0NBTTagCompound.func_150297_b("author", 8) : false;
+            String var1 = p_77828_0_.getString("title");
+            return var1 != null && var1.length() <= 16 ? p_77828_0_.func_150297_b("author", 8) : false;
         }
     }
 
-    public String getItemStackDisplayName(ItemStack par1ItemStack)
+    public String getItemStackDisplayName(ItemStack p_77653_1_)
     {
-        if (par1ItemStack.hasTagCompound())
+        if (p_77653_1_.hasTagCompound())
         {
-            NBTTagCompound var2 = par1ItemStack.getTagCompound();
+            NBTTagCompound var2 = p_77653_1_.getTagCompound();
             String var3 = var2.getString("title");
 
             if (!StringUtils.isNullOrEmpty(var3))
@@ -47,22 +47,22 @@ public class ItemEditableBook extends Item
             }
         }
 
-        return super.getItemStackDisplayName(par1ItemStack);
+        return super.getItemStackDisplayName(p_77653_1_);
     }
 
     /**
      * allows items to add custom lines of information to the mouseover description
      */
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+    public void addInformation(ItemStack p_77624_1_, EntityPlayer p_77624_2_, List p_77624_3_, boolean p_77624_4_)
     {
-        if (par1ItemStack.hasTagCompound())
+        if (p_77624_1_.hasTagCompound())
         {
-            NBTTagCompound var5 = par1ItemStack.getTagCompound();
+            NBTTagCompound var5 = p_77624_1_.getTagCompound();
             String var6 = var5.getString("author");
 
             if (!StringUtils.isNullOrEmpty(var6))
             {
-                par3List.add(EnumChatFormatting.GRAY + StatCollector.translateToLocalFormatted("book.byAuthor", new Object[] {var6}));
+                p_77624_3_.add(EnumChatFormatting.GRAY + StatCollector.translateToLocalFormatted("book.byAuthor", new Object[] {var6}));
             }
         }
     }
@@ -70,10 +70,10 @@ public class ItemEditableBook extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    public ItemStack onItemRightClick(ItemStack p_77659_1_, World p_77659_2_, EntityPlayer p_77659_3_)
     {
-        par3EntityPlayer.displayGUIBook(par1ItemStack);
-        return par1ItemStack;
+        p_77659_3_.displayGUIBook(p_77659_1_);
+        return p_77659_1_;
     }
 
     /**
@@ -84,7 +84,7 @@ public class ItemEditableBook extends Item
         return true;
     }
 
-    public boolean hasEffect(ItemStack par1ItemStack)
+    public boolean hasEffect(ItemStack p_77636_1_)
     {
         return true;
     }

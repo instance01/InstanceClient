@@ -13,10 +13,10 @@ public class GuiDispenser extends GuiContainer
     public TileEntityDispenser field_147089_u;
     private static final String __OBFID = "CL_00000765";
 
-    public GuiDispenser(InventoryPlayer par1InventoryPlayer, TileEntityDispenser par2TileEntityDispenser)
+    public GuiDispenser(InventoryPlayer p_i1098_1_, TileEntityDispenser p_i1098_2_)
     {
-        super(new ContainerDispenser(par1InventoryPlayer, par2TileEntityDispenser));
-        this.field_147089_u = par2TileEntityDispenser;
+        super(new ContainerDispenser(p_i1098_1_, p_i1098_2_));
+        this.field_147089_u = p_i1098_2_;
     }
 
     protected void func_146979_b(int p_146979_1_, int p_146979_2_)

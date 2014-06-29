@@ -29,19 +29,19 @@ public class RenderFallingBlock extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityFallingBlock p_147918_1_, double p_147918_2_, double p_147918_4_, double p_147918_6_, float p_147918_8_, float p_147918_9_)
+    public void doRender(EntityFallingBlock p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        World var10 = p_147918_1_.func_145807_e();
-        Block var11 = p_147918_1_.func_145805_f();
-        int var12 = MathHelper.floor_double(p_147918_1_.posX);
-        int var13 = MathHelper.floor_double(p_147918_1_.posY);
-        int var14 = MathHelper.floor_double(p_147918_1_.posZ);
+        World var10 = p_76986_1_.func_145807_e();
+        Block var11 = p_76986_1_.func_145805_f();
+        int var12 = MathHelper.floor_double(p_76986_1_.posX);
+        int var13 = MathHelper.floor_double(p_76986_1_.posY);
+        int var14 = MathHelper.floor_double(p_76986_1_.posZ);
 
         if (var11 != null && var11 != var10.getBlock(var12, var13, var14))
         {
             GL11.glPushMatrix();
-            GL11.glTranslatef((float)p_147918_2_, (float)p_147918_4_, (float)p_147918_6_);
-            this.bindEntityTexture(p_147918_1_);
+            GL11.glTranslatef((float)p_76986_2_, (float)p_76986_4_, (float)p_76986_6_);
+            this.bindEntityTexture(p_76986_1_);
             GL11.glDisable(GL11.GL_LIGHTING);
             Tessellator var15;
 
@@ -51,7 +51,7 @@ public class RenderFallingBlock extends Render
                 var15 = Tessellator.instance;
                 var15.startDrawingQuads();
                 var15.setTranslation((double)((float)(-var12) - 0.5F), (double)((float)(-var13) - 0.5F), (double)((float)(-var14) - 0.5F));
-                this.field_147920_a.renderBlockAnvilMetadata((BlockAnvil)var11, var12, var13, var14, p_147918_1_.field_145814_a);
+                this.field_147920_a.renderBlockAnvilMetadata((BlockAnvil)var11, var12, var13, var14, p_76986_1_.field_145814_a);
                 var15.setTranslation(0.0D, 0.0D, 0.0D);
                 var15.draw();
             }
@@ -68,7 +68,7 @@ public class RenderFallingBlock extends Render
             else
             {
                 this.field_147920_a.setRenderBoundsFromBlock(var11);
-                this.field_147920_a.renderBlockSandFalling(var11, var10, var12, var13, var14, p_147918_1_.field_145814_a);
+                this.field_147920_a.renderBlockSandFalling(var11, var10, var12, var13, var14, p_76986_1_.field_145814_a);
             }
 
             GL11.glEnable(GL11.GL_LIGHTING);
@@ -79,7 +79,7 @@ public class RenderFallingBlock extends Render
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntityFallingBlock p_147919_1_)
+    protected ResourceLocation getEntityTexture(EntityFallingBlock p_110775_1_)
     {
         return TextureMap.locationBlocksTexture;
     }
@@ -87,9 +87,9 @@ public class RenderFallingBlock extends Render
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntityFallingBlock)par1Entity);
+        return this.getEntityTexture((EntityFallingBlock)p_110775_1_);
     }
 
     /**
@@ -98,8 +98,8 @@ public class RenderFallingBlock extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityFallingBlock)par1Entity, par2, par4, par6, par8, par9);
+        this.doRender((EntityFallingBlock)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 }

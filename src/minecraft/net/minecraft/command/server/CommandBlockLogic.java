@@ -69,9 +69,9 @@ public abstract class CommandBlockLogic implements ICommandSender
     /**
      * Returns true if the command sender is allowed to use the given command.
      */
-    public boolean canCommandSenderUseCommand(int par1, String par2Str)
+    public boolean canCommandSenderUseCommand(int p_70003_1_, String p_70003_2_)
     {
-        return par1 <= 2;
+        return p_70003_1_ <= 2;
     }
 
     public void func_145752_a(String p_145752_1_)
@@ -141,7 +141,7 @@ public abstract class CommandBlockLogic implements ICommandSender
 
     public abstract int func_145751_f();
 
-    public abstract void func_145757_a(ByteBuf var1);
+    public abstract void func_145757_a(ByteBuf p_145757_1_);
 
     public void func_145750_b(IChatComponent p_145750_1_)
     {

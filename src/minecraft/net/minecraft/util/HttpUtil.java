@@ -32,10 +32,10 @@ public class HttpUtil
     /**
      * Builds an encoded HTTP POST content string from a string map
      */
-    public static String buildPostString(Map par0Map)
+    public static String buildPostString(Map p_76179_0_)
     {
         StringBuilder var1 = new StringBuilder();
-        Iterator var2 = par0Map.entrySet().iterator();
+        Iterator var2 = p_76179_0_.entrySet().iterator();
 
         while (var2.hasNext())
         {
@@ -144,104 +144,108 @@ public class HttpUtil
 
                 try
                 {
-                    byte[] var4 = new byte[4096];
-                    URL var5 = new URL(p_151223_1_);
-                    var1 = var5.openConnection(p_151223_6_);
-                    float var6 = 0.0F;
-                    float var7 = (float)p_151223_3_.entrySet().size();
-                    Iterator var8 = p_151223_3_.entrySet().iterator();
-
-                    while (var8.hasNext())
+                    try
                     {
-                        Entry var9 = (Entry)var8.next();
-                        var1.setRequestProperty((String)var9.getKey(), (String)var9.getValue());
+                        byte[] var4 = new byte[4096];
+                        URL var5 = new URL(p_151223_1_);
+                        var1 = var5.openConnection(p_151223_6_);
+                        float var6 = 0.0F;
+                        float var7 = (float)p_151223_3_.entrySet().size();
+                        Iterator var8 = p_151223_3_.entrySet().iterator();
+
+                        while (var8.hasNext())
+                        {
+                            Entry var9 = (Entry)var8.next();
+                            var1.setRequestProperty((String)var9.getKey(), (String)var9.getValue());
+
+                            if (p_151223_5_ != null)
+                            {
+                                p_151223_5_.setLoadingProgress((int)(++var6 / var7 * 100.0F));
+                            }
+                        }
+
+                        var2 = var1.getInputStream();
+                        var7 = (float)var1.getContentLength();
+                        int var28 = var1.getContentLength();
 
                         if (p_151223_5_ != null)
                         {
-                            p_151223_5_.setLoadingProgress((int)(++var6 / var7 * 100.0F));
+                            p_151223_5_.resetProgresAndWorkingMessage(String.format("Downloading file (%.2f MB)...", new Object[] {Float.valueOf(var7 / 1000.0F / 1000.0F)}));
                         }
-                    }
 
-                    var2 = var1.getInputStream();
-                    var7 = (float)var1.getContentLength();
-                    int var28 = var1.getContentLength();
-
-                    if (p_151223_5_ != null)
-                    {
-                        p_151223_5_.resetProgresAndWorkingMessage(String.format("Downloading file (%.2f MB)...", new Object[] {Float.valueOf(var7 / 1000.0F / 1000.0F)}));
-                    }
-
-                    if (p_151223_0_.exists())
-                    {
-                        long var29 = p_151223_0_.length();
-
-                        if (var29 == (long)var28)
+                        if (p_151223_0_.exists())
                         {
-                            p_151223_2_.func_148522_a(p_151223_0_);
+                            long var29 = p_151223_0_.length();
 
+                            if (var29 == (long)var28)
+                            {
+                                p_151223_2_.func_148522_a(p_151223_0_);
+
+                                if (p_151223_5_ != null)
+                                {
+                                    p_151223_5_.func_146586_a();
+                                }
+
+                                return;
+                            }
+
+                            HttpUtil.logger.warn("Deleting " + p_151223_0_ + " as it does not match what we currently have (" + var28 + " vs our " + var29 + ").");
+                            p_151223_0_.delete();
+                        }
+                        else if (p_151223_0_.getParentFile() != null)
+                        {
+                            p_151223_0_.getParentFile().mkdirs();
+                        }
+
+                        var3 = new DataOutputStream(new FileOutputStream(p_151223_0_));
+
+                        if (p_151223_4_ > 0 && var7 > (float)p_151223_4_)
+                        {
                             if (p_151223_5_ != null)
                             {
                                 p_151223_5_.func_146586_a();
                             }
 
-                            return;
+                            throw new IOException("Filesize is bigger than maximum allowed (file is " + var6 + ", limit is " + p_151223_4_ + ")");
                         }
 
-                        HttpUtil.logger.warn("Deleting " + p_151223_0_ + " as it does not match what we currently have (" + var28 + " vs our " + var29 + ").");
-                        p_151223_0_.delete();
-                    }
-                    else if (p_151223_0_.getParentFile() != null)
-                    {
-                        p_151223_0_.getParentFile().mkdirs();
-                    }
+                        boolean var30 = false;
+                        int var31;
 
-                    var3 = new DataOutputStream(new FileOutputStream(p_151223_0_));
+                        while ((var31 = var2.read(var4)) >= 0)
+                        {
+                            var6 += (float)var31;
 
-                    if (p_151223_4_ > 0 && var7 > (float)p_151223_4_)
-                    {
+                            if (p_151223_5_ != null)
+                            {
+                                p_151223_5_.setLoadingProgress((int)(var6 / var7 * 100.0F));
+                            }
+
+                            if (p_151223_4_ > 0 && var6 > (float)p_151223_4_)
+                            {
+                                if (p_151223_5_ != null)
+                                {
+                                    p_151223_5_.func_146586_a();
+                                }
+
+                                throw new IOException("Filesize was bigger than maximum allowed (got >= " + var6 + ", limit was " + p_151223_4_ + ")");
+                            }
+
+                            var3.write(var4, 0, var31);
+                        }
+
+                        p_151223_2_.func_148522_a(p_151223_0_);
+
                         if (p_151223_5_ != null)
                         {
                             p_151223_5_.func_146586_a();
+                            return;
                         }
-
-                        throw new IOException("Filesize is bigger than maximum allowed (file is " + var6 + ", limit is " + p_151223_4_ + ")");
                     }
-
-                    boolean var31 = false;
-                    int var30;
-
-                    while ((var30 = var2.read(var4)) >= 0)
+                    catch (Throwable var26)
                     {
-                        var6 += (float)var30;
-
-                        if (p_151223_5_ != null)
-                        {
-                            p_151223_5_.setLoadingProgress((int)(var6 / var7 * 100.0F));
-                        }
-
-                        if (p_151223_4_ > 0 && var6 > (float)p_151223_4_)
-                        {
-                            if (p_151223_5_ != null)
-                            {
-                                p_151223_5_.func_146586_a();
-                            }
-
-                            throw new IOException("Filesize was bigger than maximum allowed (got >= " + var6 + ", limit was " + p_151223_4_ + ")");
-                        }
-
-                        var3.write(var4, 0, var30);
+                        var26.printStackTrace();
                     }
-
-                    p_151223_2_.func_148522_a(p_151223_0_);
-
-                    if (p_151223_5_ != null)
-                    {
-                        p_151223_5_.func_146586_a();
-                    }
-                }
-                catch (Throwable var26)
-                {
-                    var26.printStackTrace();
                 }
                 finally
                 {
@@ -304,8 +308,26 @@ public class HttpUtil
         return var10;
     }
 
+    public static String func_152755_a(URL p_152755_0_) throws IOException
+    {
+        HttpURLConnection var1 = (HttpURLConnection)p_152755_0_.openConnection();
+        var1.setRequestMethod("GET");
+        BufferedReader var2 = new BufferedReader(new InputStreamReader(var1.getInputStream()));
+        StringBuilder var4 = new StringBuilder();
+        String var3;
+
+        while ((var3 = var2.readLine()) != null)
+        {
+            var4.append(var3);
+            var4.append('\r');
+        }
+
+        var2.close();
+        return var4.toString();
+    }
+
     public interface DownloadListener
     {
-        void func_148522_a(File var1);
+        void func_148522_a(File p_148522_1_);
     }
 }

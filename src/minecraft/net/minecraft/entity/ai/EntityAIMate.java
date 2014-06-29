@@ -27,11 +27,11 @@ public class EntityAIMate extends EntityAIBase
     double moveSpeed;
     private static final String __OBFID = "CL_00001578";
 
-    public EntityAIMate(EntityAnimal par1EntityAnimal, double par2)
+    public EntityAIMate(EntityAnimal p_i1619_1_, double p_i1619_2_)
     {
-        this.theAnimal = par1EntityAnimal;
-        this.theWorld = par1EntityAnimal.worldObj;
-        this.moveSpeed = par2;
+        this.theAnimal = p_i1619_1_;
+        this.theWorld = p_i1619_1_.worldObj;
+        this.moveSpeed = p_i1619_2_;
         this.setMutexBits(3);
     }
 

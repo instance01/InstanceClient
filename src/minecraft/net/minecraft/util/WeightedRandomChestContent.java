@@ -26,29 +26,29 @@ public class WeightedRandomChestContent extends WeightedRandom.Item
         this.theMaximumChanceToGenerateItem = p_i45311_4_;
     }
 
-    public WeightedRandomChestContent(ItemStack par1ItemStack, int par2, int par3, int par4)
+    public WeightedRandomChestContent(ItemStack p_i1558_1_, int p_i1558_2_, int p_i1558_3_, int p_i1558_4_)
     {
-        super(par4);
-        this.theItemId = par1ItemStack;
-        this.theMinimumChanceToGenerateItem = par2;
-        this.theMaximumChanceToGenerateItem = par3;
+        super(p_i1558_4_);
+        this.theItemId = p_i1558_1_;
+        this.theMinimumChanceToGenerateItem = p_i1558_2_;
+        this.theMaximumChanceToGenerateItem = p_i1558_3_;
     }
 
     /**
      * Generates the Chest contents.
      */
-    public static void generateChestContents(Random par0Random, WeightedRandomChestContent[] par1ArrayOfWeightedRandomChestContent, IInventory par2IInventory, int par3)
+    public static void generateChestContents(Random p_76293_0_, WeightedRandomChestContent[] p_76293_1_, IInventory p_76293_2_, int p_76293_3_)
     {
-        for (int var4 = 0; var4 < par3; ++var4)
+        for (int var4 = 0; var4 < p_76293_3_; ++var4)
         {
-            WeightedRandomChestContent var5 = (WeightedRandomChestContent)WeightedRandom.getRandomItem(par0Random, par1ArrayOfWeightedRandomChestContent);
-            int var6 = var5.theMinimumChanceToGenerateItem + par0Random.nextInt(var5.theMaximumChanceToGenerateItem - var5.theMinimumChanceToGenerateItem + 1);
+            WeightedRandomChestContent var5 = (WeightedRandomChestContent)WeightedRandom.getRandomItem(p_76293_0_, p_76293_1_);
+            int var6 = var5.theMinimumChanceToGenerateItem + p_76293_0_.nextInt(var5.theMaximumChanceToGenerateItem - var5.theMinimumChanceToGenerateItem + 1);
 
             if (var5.theItemId.getMaxStackSize() >= var6)
             {
                 ItemStack var7 = var5.theItemId.copy();
                 var7.stackSize = var6;
-                par2IInventory.setInventorySlotContents(par0Random.nextInt(par2IInventory.getSizeInventory()), var7);
+                p_76293_2_.setInventorySlotContents(p_76293_0_.nextInt(p_76293_2_.getSizeInventory()), var7);
             }
             else
             {
@@ -56,7 +56,7 @@ public class WeightedRandomChestContent extends WeightedRandom.Item
                 {
                     ItemStack var8 = var5.theItemId.copy();
                     var8.stackSize = 1;
-                    par2IInventory.setInventorySlotContents(par0Random.nextInt(par2IInventory.getSizeInventory()), var8);
+                    p_76293_2_.setInventorySlotContents(p_76293_0_.nextInt(p_76293_2_.getSizeInventory()), var8);
                 }
             }
         }
@@ -87,18 +87,18 @@ public class WeightedRandomChestContent extends WeightedRandom.Item
         }
     }
 
-    public static WeightedRandomChestContent[] func_92080_a(WeightedRandomChestContent[] par0ArrayOfWeightedRandomChestContent, WeightedRandomChestContent ... par1ArrayOfWeightedRandomChestContent)
+    public static WeightedRandomChestContent[] func_92080_a(WeightedRandomChestContent[] p_92080_0_, WeightedRandomChestContent ... p_92080_1_)
     {
-        WeightedRandomChestContent[] var2 = new WeightedRandomChestContent[par0ArrayOfWeightedRandomChestContent.length + par1ArrayOfWeightedRandomChestContent.length];
+        WeightedRandomChestContent[] var2 = new WeightedRandomChestContent[p_92080_0_.length + p_92080_1_.length];
         int var3 = 0;
 
-        for (int var4 = 0; var4 < par0ArrayOfWeightedRandomChestContent.length; ++var4)
+        for (int var4 = 0; var4 < p_92080_0_.length; ++var4)
         {
-            var2[var3++] = par0ArrayOfWeightedRandomChestContent[var4];
+            var2[var3++] = p_92080_0_[var4];
         }
 
-        WeightedRandomChestContent[] var8 = par1ArrayOfWeightedRandomChestContent;
-        int var5 = par1ArrayOfWeightedRandomChestContent.length;
+        WeightedRandomChestContent[] var8 = p_92080_1_;
+        int var5 = p_92080_1_.length;
 
         for (int var6 = 0; var6 < var5; ++var6)
         {

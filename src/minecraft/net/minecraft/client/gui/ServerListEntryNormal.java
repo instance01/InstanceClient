@@ -76,8 +76,8 @@ public class ServerListEntryNormal implements GuiListExtended.IGuiListEntry
             });
         }
 
-        boolean var10 = this.field_148301_e.field_82821_f > 4;
-        boolean var11 = this.field_148301_e.field_82821_f < 4;
+        boolean var10 = this.field_148301_e.field_82821_f > 5;
+        boolean var11 = this.field_148301_e.field_82821_f < 5;
         boolean var12 = var10 || var11;
         this.field_148300_d.fontRenderer.drawString(this.field_148301_e.serverName, p_148279_2_ + 32 + 3, p_148279_3_ + 1, 16777215);
         List var13 = this.field_148300_d.fontRenderer.listFormattedStringToWidth(this.field_148301_e.serverMOTD, p_148279_4_ - 32 - 2);

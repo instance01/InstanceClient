@@ -16,6 +16,7 @@ import java.nio.charset.Charset;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTSizeTracker;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class PacketBuffer extends ByteBuf
@@ -111,7 +112,7 @@ public class PacketBuffer extends ByteBuf
         {
             byte[] var2 = new byte[var1];
             this.readBytes(var2);
-            return CompressedStreamTools.decompress(var2);
+            return CompressedStreamTools.func_152457_a(var2, new NBTSizeTracker(2097152L));
         }
     }
 
@@ -893,14 +894,14 @@ public class PacketBuffer extends ByteBuf
         return this.field_150794_a.hashCode();
     }
 
-    public boolean equals(Object par1Obj)
+    public boolean equals(Object p_equals_1_)
     {
-        return this.field_150794_a.equals(par1Obj);
+        return this.field_150794_a.equals(p_equals_1_);
     }
 
-    public int compareTo(ByteBuf par1Obj)
+    public int compareTo(ByteBuf p_compareTo_1_)
     {
-        return this.field_150794_a.compareTo(par1Obj);
+        return this.field_150794_a.compareTo(p_compareTo_1_);
     }
 
     public String toString()

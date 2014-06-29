@@ -18,21 +18,21 @@ public class EntityAIWatchClosest extends EntityAIBase
     private Class watchedClass;
     private static final String __OBFID = "CL_00001592";
 
-    public EntityAIWatchClosest(EntityLiving par1EntityLiving, Class par2Class, float par3)
+    public EntityAIWatchClosest(EntityLiving p_i1631_1_, Class p_i1631_2_, float p_i1631_3_)
     {
-        this.theWatcher = par1EntityLiving;
-        this.watchedClass = par2Class;
-        this.maxDistanceForPlayer = par3;
+        this.theWatcher = p_i1631_1_;
+        this.watchedClass = p_i1631_2_;
+        this.maxDistanceForPlayer = p_i1631_3_;
         this.field_75331_e = 0.02F;
         this.setMutexBits(2);
     }
 
-    public EntityAIWatchClosest(EntityLiving par1EntityLiving, Class par2Class, float par3, float par4)
+    public EntityAIWatchClosest(EntityLiving p_i1632_1_, Class p_i1632_2_, float p_i1632_3_, float p_i1632_4_)
     {
-        this.theWatcher = par1EntityLiving;
-        this.watchedClass = par2Class;
-        this.maxDistanceForPlayer = par3;
-        this.field_75331_e = par4;
+        this.theWatcher = p_i1632_1_;
+        this.watchedClass = p_i1632_2_;
+        this.maxDistanceForPlayer = p_i1632_3_;
+        this.field_75331_e = p_i1632_4_;
         this.setMutexBits(2);
     }
 

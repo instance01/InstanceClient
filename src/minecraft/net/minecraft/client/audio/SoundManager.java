@@ -415,9 +415,9 @@ public class SoundManager
         URLStreamHandler var2 = new URLStreamHandler()
         {
             private static final String __OBFID = "CL_00001143";
-            protected URLConnection openConnection(final URL par1URL)
+            protected URLConnection openConnection(final URL p_openConnection_1_)
             {
-                return new URLConnection(par1URL)
+                return new URLConnection(p_openConnection_1_)
                 {
                     private static final String __OBFID = "CL_00001144";
                     public void connect() {}
@@ -482,7 +482,7 @@ public class SoundManager
                 else
                 {
                     Source var3 = (Source)this.soundLibrary.getSources().get(p_playing_1_);
-                    return var3 == null ? false : var3.playing() || var3.paused();
+                    return var3 == null ? false : var3.playing() || var3.paused() || var3.preLoad;
                 }
             }
         }

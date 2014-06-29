@@ -19,12 +19,12 @@ public interface ICommandSender
      * (like "I fetched this block for you by ID, but I'd like you to know that every time you do this, I die a little
      * inside"), and errors (like "it's not called iron_pixacke, silly").
      */
-    void addChatMessage(IChatComponent var1);
+    void addChatMessage(IChatComponent p_145747_1_);
 
     /**
      * Returns true if the command sender is allowed to use the given command.
      */
-    boolean canCommandSenderUseCommand(int var1, String var2);
+    boolean canCommandSenderUseCommand(int p_70003_1_, String p_70003_2_);
 
     /**
      * Return the position for this command sender.

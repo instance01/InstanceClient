@@ -62,10 +62,10 @@ public class EntityMinecartCommandBlock extends EntityMinecart
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    protected void readEntityFromNBT(NBTTagCompound p_70037_1_)
     {
-        super.readEntityFromNBT(par1NBTTagCompound);
-        this.field_145824_a.func_145759_b(par1NBTTagCompound);
+        super.readEntityFromNBT(p_70037_1_);
+        this.field_145824_a.func_145759_b(p_70037_1_);
         this.getDataWatcher().updateObject(23, this.func_145822_e().func_145753_i());
         this.getDataWatcher().updateObject(24, IChatComponent.Serializer.func_150696_a(this.func_145822_e().func_145749_h()));
     }
@@ -73,10 +73,10 @@ public class EntityMinecartCommandBlock extends EntityMinecart
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    protected void writeEntityToNBT(NBTTagCompound p_70014_1_)
     {
-        super.writeEntityToNBT(par1NBTTagCompound);
-        this.field_145824_a.func_145758_a(par1NBTTagCompound);
+        super.writeEntityToNBT(p_70014_1_);
+        this.field_145824_a.func_145758_a(p_70014_1_);
     }
 
     public int getMinecartType()
@@ -97,9 +97,9 @@ public class EntityMinecartCommandBlock extends EntityMinecart
     /**
      * Called every tick the minecart is on an activator rail. Args: x, y, z, is the rail receiving power
      */
-    public void onActivatorRailPass(int par1, int par2, int par3, boolean par4)
+    public void onActivatorRailPass(int p_96095_1_, int p_96095_2_, int p_96095_3_, boolean p_96095_4_)
     {
-        if (par4 && this.ticksExisted - this.field_145823_b >= 4)
+        if (p_96095_4_ && this.ticksExisted - this.field_145823_b >= 4)
         {
             this.func_145822_e().func_145755_a(this.worldObj);
             this.field_145823_b = this.ticksExisted;
@@ -109,14 +109,14 @@ public class EntityMinecartCommandBlock extends EntityMinecart
     /**
      * First layer of player interaction
      */
-    public boolean interactFirst(EntityPlayer par1EntityPlayer)
+    public boolean interactFirst(EntityPlayer p_130002_1_)
     {
         if (this.worldObj.isClient)
         {
-            par1EntityPlayer.func_146095_a(this.func_145822_e());
+            p_130002_1_.func_146095_a(this.func_145822_e());
         }
 
-        return super.interactFirst(par1EntityPlayer);
+        return super.interactFirst(p_130002_1_);
     }
 
     public void func_145781_i(int p_145781_1_)

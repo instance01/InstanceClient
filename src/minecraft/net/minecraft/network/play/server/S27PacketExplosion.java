@@ -100,9 +100,9 @@ public class S27PacketExplosion extends Packet
         p_148840_1_.writeFloat(this.field_149159_h);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149151_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149151_1_.handleExplosion(this);
+        p_148833_1_.handleExplosion(this);
     }
 
     public float func_149149_c()

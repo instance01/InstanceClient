@@ -18,10 +18,10 @@ public class AnimationMetadataSectionSerializer extends BaseMetadataSectionSeria
 {
     private static final String __OBFID = "CL_00001107";
 
-    public AnimationMetadataSection deserialize(JsonElement par1JsonElement, Type par2Type, JsonDeserializationContext par3JsonDeserializationContext)
+    public AnimationMetadataSection deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
     {
         ArrayList var4 = Lists.newArrayList();
-        JsonObject var5 = JsonUtils.getJsonElementAsJsonObject(par1JsonElement, "metadata section");
+        JsonObject var5 = JsonUtils.getJsonElementAsJsonObject(p_deserialize_1_, "metadata section");
         int var6 = JsonUtils.getJsonObjectIntegerFieldValueOrDefault(var5, "frametime", 1);
 
         if (var6 != 1)
@@ -70,15 +70,15 @@ public class AnimationMetadataSectionSerializer extends BaseMetadataSectionSeria
         return new AnimationMetadataSection(var4, var12, var8, var6);
     }
 
-    private AnimationFrame parseAnimationFrame(int par1, JsonElement par2JsonElement)
+    private AnimationFrame parseAnimationFrame(int p_110492_1_, JsonElement p_110492_2_)
     {
-        if (par2JsonElement.isJsonPrimitive())
+        if (p_110492_2_.isJsonPrimitive())
         {
-            return new AnimationFrame(JsonUtils.getJsonElementIntegerValue(par2JsonElement, "frames[" + par1 + "]"));
+            return new AnimationFrame(JsonUtils.getJsonElementIntegerValue(p_110492_2_, "frames[" + p_110492_1_ + "]"));
         }
-        else if (par2JsonElement.isJsonObject())
+        else if (p_110492_2_.isJsonObject())
         {
-            JsonObject var3 = JsonUtils.getJsonElementAsJsonObject(par2JsonElement, "frames[" + par1 + "]");
+            JsonObject var3 = JsonUtils.getJsonElementAsJsonObject(p_110492_2_, "frames[" + p_110492_1_ + "]");
             int var4 = JsonUtils.getJsonObjectIntegerFieldValueOrDefault(var3, "time", -1);
 
             if (var3.has("time"))
@@ -96,37 +96,37 @@ public class AnimationMetadataSectionSerializer extends BaseMetadataSectionSeria
         }
     }
 
-    public JsonElement serialize(AnimationMetadataSection par1AnimationMetadataSection, Type par2Type, JsonSerializationContext par3JsonSerializationContext)
+    public JsonElement serialize(AnimationMetadataSection p_serialize_1_, Type p_serialize_2_, JsonSerializationContext p_serialize_3_)
     {
         JsonObject var4 = new JsonObject();
-        var4.addProperty("frametime", Integer.valueOf(par1AnimationMetadataSection.getFrameTime()));
+        var4.addProperty("frametime", Integer.valueOf(p_serialize_1_.getFrameTime()));
 
-        if (par1AnimationMetadataSection.getFrameWidth() != -1)
+        if (p_serialize_1_.getFrameWidth() != -1)
         {
-            var4.addProperty("width", Integer.valueOf(par1AnimationMetadataSection.getFrameWidth()));
+            var4.addProperty("width", Integer.valueOf(p_serialize_1_.getFrameWidth()));
         }
 
-        if (par1AnimationMetadataSection.getFrameHeight() != -1)
+        if (p_serialize_1_.getFrameHeight() != -1)
         {
-            var4.addProperty("height", Integer.valueOf(par1AnimationMetadataSection.getFrameHeight()));
+            var4.addProperty("height", Integer.valueOf(p_serialize_1_.getFrameHeight()));
         }
 
-        if (par1AnimationMetadataSection.getFrameCount() > 0)
+        if (p_serialize_1_.getFrameCount() > 0)
         {
             JsonArray var5 = new JsonArray();
 
-            for (int var6 = 0; var6 < par1AnimationMetadataSection.getFrameCount(); ++var6)
+            for (int var6 = 0; var6 < p_serialize_1_.getFrameCount(); ++var6)
             {
-                if (par1AnimationMetadataSection.frameHasTime(var6))
+                if (p_serialize_1_.frameHasTime(var6))
                 {
                     JsonObject var7 = new JsonObject();
-                    var7.addProperty("index", Integer.valueOf(par1AnimationMetadataSection.getFrameIndex(var6)));
-                    var7.addProperty("time", Integer.valueOf(par1AnimationMetadataSection.getFrameTimeSingle(var6)));
+                    var7.addProperty("index", Integer.valueOf(p_serialize_1_.getFrameIndex(var6)));
+                    var7.addProperty("time", Integer.valueOf(p_serialize_1_.getFrameTimeSingle(var6)));
                     var5.add(var7);
                 }
                 else
                 {
-                    var5.add(new JsonPrimitive(Integer.valueOf(par1AnimationMetadataSection.getFrameIndex(var6))));
+                    var5.add(new JsonPrimitive(Integer.valueOf(p_serialize_1_.getFrameIndex(var6))));
                 }
             }
 
@@ -144,8 +144,8 @@ public class AnimationMetadataSectionSerializer extends BaseMetadataSectionSeria
         return "animation";
     }
 
-    public JsonElement serialize(Object par1Obj, Type par2Type, JsonSerializationContext par3JsonSerializationContext)
+    public JsonElement serialize(Object p_serialize_1_, Type p_serialize_2_, JsonSerializationContext p_serialize_3_)
     {
-        return this.serialize((AnimationMetadataSection)par1Obj, par2Type, par3JsonSerializationContext);
+        return this.serialize((AnimationMetadataSection)p_serialize_1_, p_serialize_2_, p_serialize_3_);
     }
 }

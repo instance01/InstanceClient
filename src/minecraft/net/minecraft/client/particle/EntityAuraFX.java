@@ -6,9 +6,9 @@ public class EntityAuraFX extends EntityFX
 {
     private static final String __OBFID = "CL_00000929";
 
-    public EntityAuraFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12)
+    public EntityAuraFX(World p_i1232_1_, double p_i1232_2_, double p_i1232_4_, double p_i1232_6_, double p_i1232_8_, double p_i1232_10_, double p_i1232_12_)
     {
-        super(par1World, par2, par4, par6, par8, par10, par12);
+        super(p_i1232_1_, p_i1232_2_, p_i1232_4_, p_i1232_6_, p_i1232_8_, p_i1232_10_, p_i1232_12_);
         float var14 = this.rand.nextFloat() * 0.1F + 0.2F;
         this.particleRed = var14;
         this.particleGreen = var14;

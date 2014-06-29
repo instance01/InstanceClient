@@ -7,9 +7,9 @@ public class LanguageMetadataSection implements IMetadataSection
     private final Collection languages;
     private static final String __OBFID = "CL_00001110";
 
-    public LanguageMetadataSection(Collection par1Collection)
+    public LanguageMetadataSection(Collection p_i1311_1_)
     {
-        this.languages = par1Collection;
+        this.languages = p_i1311_1_;
     }
 
     public Collection getLanguages()

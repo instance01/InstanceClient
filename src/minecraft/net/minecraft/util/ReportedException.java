@@ -8,9 +8,9 @@ public class ReportedException extends RuntimeException
     private final CrashReport theReportedExceptionCrashReport;
     private static final String __OBFID = "CL_00001579";
 
-    public ReportedException(CrashReport par1CrashReport)
+    public ReportedException(CrashReport p_i1356_1_)
     {
-        this.theReportedExceptionCrashReport = par1CrashReport;
+        this.theReportedExceptionCrashReport = p_i1356_1_;
     }
 
     /**

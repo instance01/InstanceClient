@@ -25,13 +25,13 @@ public class ClippingHelperImpl extends ClippingHelper
     /**
      * Normalize the frustum.
      */
-    private void normalize(float[][] par1ArrayOfFloat, int par2)
+    private void normalize(float[][] p_78559_1_, int p_78559_2_)
     {
-        float var3 = MathHelper.sqrt_float(par1ArrayOfFloat[par2][0] * par1ArrayOfFloat[par2][0] + par1ArrayOfFloat[par2][1] * par1ArrayOfFloat[par2][1] + par1ArrayOfFloat[par2][2] * par1ArrayOfFloat[par2][2]);
-        par1ArrayOfFloat[par2][0] /= var3;
-        par1ArrayOfFloat[par2][1] /= var3;
-        par1ArrayOfFloat[par2][2] /= var3;
-        par1ArrayOfFloat[par2][3] /= var3;
+        float var3 = MathHelper.sqrt_float(p_78559_1_[p_78559_2_][0] * p_78559_1_[p_78559_2_][0] + p_78559_1_[p_78559_2_][1] * p_78559_1_[p_78559_2_][1] + p_78559_1_[p_78559_2_][2] * p_78559_1_[p_78559_2_][2]);
+        p_78559_1_[p_78559_2_][0] /= var3;
+        p_78559_1_[p_78559_2_][1] /= var3;
+        p_78559_1_[p_78559_2_][2] /= var3;
+        p_78559_1_[p_78559_2_][3] /= var3;
     }
 
     private void init()

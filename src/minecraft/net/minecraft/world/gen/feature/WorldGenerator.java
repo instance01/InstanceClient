@@ -18,17 +18,17 @@ public abstract class WorldGenerator
         this.doBlockNotify = false;
     }
 
-    public WorldGenerator(boolean par1)
+    public WorldGenerator(boolean p_i2013_1_)
     {
-        this.doBlockNotify = par1;
+        this.doBlockNotify = p_i2013_1_;
     }
 
-    public abstract boolean generate(World var1, Random var2, int var3, int var4, int var5);
+    public abstract boolean generate(World p_76484_1_, Random p_76484_2_, int p_76484_3_, int p_76484_4_, int p_76484_5_);
 
     /**
      * Rescales the generator settings, only used in WorldGenBigTree
      */
-    public void setScale(double par1, double par3, double par5) {}
+    public void setScale(double p_76487_1_, double p_76487_3_, double p_76487_5_) {}
 
     protected void func_150515_a(World p_150515_1_, int p_150515_2_, int p_150515_3_, int p_150515_4_, Block p_150515_5_)
     {

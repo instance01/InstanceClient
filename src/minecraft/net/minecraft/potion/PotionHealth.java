@@ -4,9 +4,9 @@ public class PotionHealth extends Potion
 {
     private static final String __OBFID = "CL_00001527";
 
-    public PotionHealth(int par1, boolean par2, int par3)
+    public PotionHealth(int p_i1572_1_, boolean p_i1572_2_, int p_i1572_3_)
     {
-        super(par1, par2, par3);
+        super(p_i1572_1_, p_i1572_2_, p_i1572_3_);
     }
 
     /**
@@ -20,8 +20,8 @@ public class PotionHealth extends Potion
     /**
      * checks if Potion effect is ready to be applied this tick.
      */
-    public boolean isReady(int par1, int par2)
+    public boolean isReady(int p_76397_1_, int p_76397_2_)
     {
-        return par1 >= 1;
+        return p_76397_1_ >= 1;
     }
 }

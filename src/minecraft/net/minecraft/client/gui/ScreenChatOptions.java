@@ -14,10 +14,10 @@ public class ScreenChatOptions extends GuiScreen
     private int field_146397_s;
     private static final String __OBFID = "CL_00000681";
 
-    public ScreenChatOptions(GuiScreen par1GuiScreen, GameSettings par2GameSettings)
+    public ScreenChatOptions(GuiScreen p_i1023_1_, GameSettings p_i1023_2_)
     {
-        this.field_146396_g = par1GuiScreen;
-        this.field_146400_h = par2GameSettings;
+        this.field_146396_g = p_i1023_1_;
+        this.field_146400_h = p_i1023_2_;
     }
 
     /**
@@ -99,11 +99,11 @@ public class ScreenChatOptions extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRendererObj, this.field_146401_i, this.width / 2, 20, 16777215);
         this.drawCenteredString(this.fontRendererObj, this.field_146398_r, this.width / 2, this.field_146397_s + 7, 16777215);
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 }

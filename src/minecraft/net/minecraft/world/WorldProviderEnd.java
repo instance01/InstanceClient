@@ -33,7 +33,7 @@ public class WorldProviderEnd extends WorldProvider
     /**
      * Calculates the angle of sun and moon in the sky relative to a specified time (usually worldTime)
      */
-    public float calculateCelestialAngle(long par1, float par3)
+    public float calculateCelestialAngle(long p_76563_1_, float p_76563_3_)
     {
         return 0.0F;
     }
@@ -41,7 +41,7 @@ public class WorldProviderEnd extends WorldProvider
     /**
      * Returns array with sunrise/sunset colors
      */
-    public float[] calcSunriseSunsetColors(float par1, float par2)
+    public float[] calcSunriseSunsetColors(float p_76560_1_, float p_76560_2_)
     {
         return null;
     }
@@ -49,10 +49,10 @@ public class WorldProviderEnd extends WorldProvider
     /**
      * Return Vec3D with biome specific fog color
      */
-    public Vec3 getFogColor(float par1, float par2)
+    public Vec3 getFogColor(float p_76562_1_, float p_76562_2_)
     {
         int var3 = 10518688;
-        float var4 = MathHelper.cos(par1 * (float)Math.PI * 2.0F) * 2.0F + 0.5F;
+        float var4 = MathHelper.cos(p_76562_1_ * (float)Math.PI * 2.0F) * 2.0F + 0.5F;
 
         if (var4 < 0.0F)
         {
@@ -70,7 +70,7 @@ public class WorldProviderEnd extends WorldProvider
         var5 *= var4 * 0.0F + 0.15F;
         var6 *= var4 * 0.0F + 0.15F;
         var7 *= var4 * 0.0F + 0.15F;
-        return this.worldObj.getWorldVec3Pool().getVecFromPool((double)var5, (double)var6, (double)var7);
+        return Vec3.createVectorHelper((double)var5, (double)var6, (double)var7);
     }
 
     public boolean isSkyColored()
@@ -105,9 +105,9 @@ public class WorldProviderEnd extends WorldProvider
     /**
      * Will check if the x, z position specified is alright to be set as the map spawn point
      */
-    public boolean canCoordinateBeSpawn(int par1, int par2)
+    public boolean canCoordinateBeSpawn(int p_76566_1_, int p_76566_2_)
     {
-        return this.worldObj.getTopBlock(par1, par2).getMaterial().blocksMovement();
+        return this.worldObj.getTopBlock(p_76566_1_, p_76566_2_).getMaterial().blocksMovement();
     }
 
     /**
@@ -126,7 +126,7 @@ public class WorldProviderEnd extends WorldProvider
     /**
      * Returns true if the given X,Z coordinate should show environmental fog.
      */
-    public boolean doesXZShowFog(int par1, int par2)
+    public boolean doesXZShowFog(int p_76568_1_, int p_76568_2_)
     {
         return true;
     }

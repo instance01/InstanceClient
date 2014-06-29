@@ -35,11 +35,11 @@ public class GuiEnchantment extends GuiContainer
     private String field_147079_H;
     private static final String __OBFID = "CL_00000757";
 
-    public GuiEnchantment(InventoryPlayer par1InventoryPlayer, World par2World, int par3, int par4, int par5, String par6Str)
+    public GuiEnchantment(InventoryPlayer p_i1090_1_, World p_i1090_2_, int p_i1090_3_, int p_i1090_4_, int p_i1090_5_, String p_i1090_6_)
     {
-        super(new ContainerEnchantment(par1InventoryPlayer, par2World, par3, par4, par5));
+        super(new ContainerEnchantment(p_i1090_1_, p_i1090_2_, p_i1090_3_, p_i1090_4_, p_i1090_5_));
         this.field_147075_G = (ContainerEnchantment)this.field_147002_h;
-        this.field_147079_H = par6Str;
+        this.field_147079_H = p_i1090_6_;
     }
 
     protected void func_146979_b(int p_146979_1_, int p_146979_2_)
@@ -60,16 +60,16 @@ public class GuiEnchantment extends GuiContainer
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int par1, int par2, int par3)
+    protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_)
     {
-        super.mouseClicked(par1, par2, par3);
+        super.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
         int var4 = (this.width - this.field_146999_f) / 2;
         int var5 = (this.height - this.field_147000_g) / 2;
 
         for (int var6 = 0; var6 < 3; ++var6)
         {
-            int var7 = par1 - (var4 + 60);
-            int var8 = par2 - (var5 + 14 + 19 * var6);
+            int var7 = p_73864_1_ - (var4 + 60);
+            int var8 = p_73864_2_ - (var5 + 14 + 19 * var6);
 
             if (var7 >= 0 && var8 >= 0 && var7 < 108 && var8 < 19 && this.field_147075_G.enchantItem(this.mc.thePlayer, var6))
             {
@@ -89,7 +89,7 @@ public class GuiEnchantment extends GuiContainer
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glPushMatrix();
         GL11.glLoadIdentity();
-        ScaledResolution var6 = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
+        ScaledResolution var6 = new ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
         GL11.glViewport((var6.getScaledWidth() - 320) / 2 * var6.getScaleFactor(), (var6.getScaledHeight() - 240) / 2 * var6.getScaleFactor(), 320 * var6.getScaleFactor(), 240 * var6.getScaleFactor());
         GL11.glTranslatef(-0.34F, 0.23F, 0.0F);
         Project.gluPerspective(90.0F, 1.3333334F, 9.0F, 80.0F);

@@ -31,9 +31,9 @@ public class EntityBoat extends Entity
     private double velocityZ;
     private static final String __OBFID = "CL_00001667";
 
-    public EntityBoat(World par1World)
+    public EntityBoat(World p_i1704_1_)
     {
-        super(par1World);
+        super(p_i1704_1_);
         this.isBoatEmpty = true;
         this.speedMultiplier = 0.07D;
         this.preventEntitySpawning = true;
@@ -61,9 +61,9 @@ public class EntityBoat extends Entity
      * Returns a boundingBox used to collide the entity with other entities and blocks. This enables the entity to be
      * pushable on contact, like boats or minecarts.
      */
-    public AxisAlignedBB getCollisionBox(Entity par1Entity)
+    public AxisAlignedBB getCollisionBox(Entity p_70114_1_)
     {
-        return par1Entity.boundingBox;
+        return p_70114_1_.boundingBox;
     }
 
     /**
@@ -82,16 +82,16 @@ public class EntityBoat extends Entity
         return true;
     }
 
-    public EntityBoat(World par1World, double par2, double par4, double par6)
+    public EntityBoat(World p_i1705_1_, double p_i1705_2_, double p_i1705_4_, double p_i1705_6_)
     {
-        this(par1World);
-        this.setPosition(par2, par4 + (double)this.yOffset, par6);
+        this(p_i1705_1_);
+        this.setPosition(p_i1705_2_, p_i1705_4_ + (double)this.yOffset, p_i1705_6_);
         this.motionX = 0.0D;
         this.motionY = 0.0D;
         this.motionZ = 0.0D;
-        this.prevPosX = par2;
-        this.prevPosY = par4;
-        this.prevPosZ = par6;
+        this.prevPosX = p_i1705_2_;
+        this.prevPosY = p_i1705_4_;
+        this.prevPosZ = p_i1705_6_;
     }
 
     /**
@@ -105,7 +105,7 @@ public class EntityBoat extends Entity
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_)
     {
         if (this.isEntityInvulnerable())
         {
@@ -115,9 +115,9 @@ public class EntityBoat extends Entity
         {
             this.setForwardDirection(-this.getForwardDirection());
             this.setTimeSinceHit(10);
-            this.setDamageTaken(this.getDamageTaken() + par2 * 10.0F);
+            this.setDamageTaken(this.getDamageTaken() + p_70097_2_ * 10.0F);
             this.setBeenAttacked();
-            boolean var3 = par1DamageSource.getEntity() instanceof EntityPlayer && ((EntityPlayer)par1DamageSource.getEntity()).capabilities.isCreativeMode;
+            boolean var3 = p_70097_1_.getEntity() instanceof EntityPlayer && ((EntityPlayer)p_70097_1_.getEntity()).capabilities.isCreativeMode;
 
             if (var3 || this.getDamageTaken() > 40.0F)
             {
@@ -164,17 +164,17 @@ public class EntityBoat extends Entity
      * Sets the position and rotation. Only difference from the other one is no bounding on the rotation. Args: posX,
      * posY, posZ, yaw, pitch
      */
-    public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9)
+    public void setPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_)
     {
         if (this.isBoatEmpty)
         {
-            this.boatPosRotationIncrements = par9 + 5;
+            this.boatPosRotationIncrements = p_70056_9_ + 5;
         }
         else
         {
-            double var10 = par1 - this.posX;
-            double var12 = par3 - this.posY;
-            double var14 = par5 - this.posZ;
+            double var10 = p_70056_1_ - this.posX;
+            double var12 = p_70056_3_ - this.posY;
+            double var14 = p_70056_5_ - this.posZ;
             double var16 = var10 * var10 + var12 * var12 + var14 * var14;
 
             if (var16 <= 1.0D)
@@ -185,11 +185,11 @@ public class EntityBoat extends Entity
             this.boatPosRotationIncrements = 3;
         }
 
-        this.boatX = par1;
-        this.boatY = par3;
-        this.boatZ = par5;
-        this.boatYaw = (double)par7;
-        this.boatPitch = (double)par8;
+        this.boatX = p_70056_1_;
+        this.boatY = p_70056_3_;
+        this.boatZ = p_70056_5_;
+        this.boatYaw = (double)p_70056_7_;
+        this.boatPitch = (double)p_70056_8_;
         this.motionX = this.velocityX;
         this.motionY = this.velocityY;
         this.motionZ = this.velocityZ;
@@ -198,11 +198,11 @@ public class EntityBoat extends Entity
     /**
      * Sets the velocity to the args. Args: x, y, z
      */
-    public void setVelocity(double par1, double par3, double par5)
+    public void setVelocity(double p_70016_1_, double p_70016_3_, double p_70016_5_)
     {
-        this.velocityX = this.motionX = par1;
-        this.velocityY = this.motionY = par3;
-        this.velocityZ = this.motionZ = par5;
+        this.velocityX = this.motionX = p_70016_1_;
+        this.velocityY = this.motionY = p_70016_3_;
+        this.velocityZ = this.motionZ = p_70016_5_;
     }
 
     /**
@@ -232,7 +232,7 @@ public class EntityBoat extends Entity
         {
             double var5 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(var4 + 0) / (double)var1 - 0.125D;
             double var7 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(var4 + 1) / (double)var1 - 0.125D;
-            AxisAlignedBB var9 = AxisAlignedBB.getAABBPool().getAABB(this.boundingBox.minX, var5, this.boundingBox.minZ, this.boundingBox.maxX, var7, this.boundingBox.maxZ);
+            AxisAlignedBB var9 = AxisAlignedBB.getBoundingBox(this.boundingBox.minX, var5, this.boundingBox.minZ, this.boundingBox.maxX, var7, this.boundingBox.maxZ);
 
             if (this.worldObj.isAABBInMaterial(var9, Material.water))
             {
@@ -483,12 +483,12 @@ public class EntityBoat extends Entity
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {}
+    protected void writeEntityToNBT(NBTTagCompound p_70014_1_) {}
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {}
+    protected void readEntityFromNBT(NBTTagCompound p_70037_1_) {}
 
     public float getShadowSize()
     {
@@ -498,9 +498,9 @@ public class EntityBoat extends Entity
     /**
      * First layer of player interaction
      */
-    public boolean interactFirst(EntityPlayer par1EntityPlayer)
+    public boolean interactFirst(EntityPlayer p_130002_1_)
     {
-        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != par1EntityPlayer)
+        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != p_130002_1_)
         {
             return true;
         }
@@ -508,7 +508,7 @@ public class EntityBoat extends Entity
         {
             if (!this.worldObj.isClient)
             {
-                par1EntityPlayer.mountEntity(this);
+                p_130002_1_.mountEntity(this);
             }
 
             return true;
@@ -519,13 +519,13 @@ public class EntityBoat extends Entity
      * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
      * and deal fall damage if landing on the ground.  Args: distanceFallenThisTick, onGround
      */
-    protected void updateFallState(double par1, boolean par3)
+    protected void updateFallState(double p_70064_1_, boolean p_70064_3_)
     {
         int var4 = MathHelper.floor_double(this.posX);
         int var5 = MathHelper.floor_double(this.posY);
         int var6 = MathHelper.floor_double(this.posZ);
 
-        if (par3)
+        if (p_70064_3_)
         {
             if (this.fallDistance > 3.0F)
             {
@@ -550,18 +550,18 @@ public class EntityBoat extends Entity
                 this.fallDistance = 0.0F;
             }
         }
-        else if (this.worldObj.getBlock(var4, var5 - 1, var6).getMaterial() != Material.water && par1 < 0.0D)
+        else if (this.worldObj.getBlock(var4, var5 - 1, var6).getMaterial() != Material.water && p_70064_1_ < 0.0D)
         {
-            this.fallDistance = (float)((double)this.fallDistance - par1);
+            this.fallDistance = (float)((double)this.fallDistance - p_70064_1_);
         }
     }
 
     /**
      * Sets the damage taken from the last hit.
      */
-    public void setDamageTaken(float par1)
+    public void setDamageTaken(float p_70266_1_)
     {
-        this.dataWatcher.updateObject(19, Float.valueOf(par1));
+        this.dataWatcher.updateObject(19, Float.valueOf(p_70266_1_));
     }
 
     /**
@@ -575,9 +575,9 @@ public class EntityBoat extends Entity
     /**
      * Sets the time to count down from since the last time entity was hit.
      */
-    public void setTimeSinceHit(int par1)
+    public void setTimeSinceHit(int p_70265_1_)
     {
-        this.dataWatcher.updateObject(17, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(17, Integer.valueOf(p_70265_1_));
     }
 
     /**
@@ -591,9 +591,9 @@ public class EntityBoat extends Entity
     /**
      * Sets the forward direction of the entity.
      */
-    public void setForwardDirection(int par1)
+    public void setForwardDirection(int p_70269_1_)
     {
-        this.dataWatcher.updateObject(18, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(18, Integer.valueOf(p_70269_1_));
     }
 
     /**
@@ -607,8 +607,8 @@ public class EntityBoat extends Entity
     /**
      * true if no player in boat
      */
-    public void setIsBoatEmpty(boolean par1)
+    public void setIsBoatEmpty(boolean p_70270_1_)
     {
-        this.isBoatEmpty = par1;
+        this.isBoatEmpty = p_70270_1_;
     }
 }

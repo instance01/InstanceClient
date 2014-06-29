@@ -9,32 +9,32 @@ public class EntityNoteFX extends EntityFX
     float noteParticleScale;
     private static final String __OBFID = "CL_00000913";
 
-    public EntityNoteFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12)
+    public EntityNoteFX(World p_i1216_1_, double p_i1216_2_, double p_i1216_4_, double p_i1216_6_, double p_i1216_8_, double p_i1216_10_, double p_i1216_12_)
     {
-        this(par1World, par2, par4, par6, par8, par10, par12, 2.0F);
+        this(p_i1216_1_, p_i1216_2_, p_i1216_4_, p_i1216_6_, p_i1216_8_, p_i1216_10_, p_i1216_12_, 2.0F);
     }
 
-    public EntityNoteFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12, float par14)
+    public EntityNoteFX(World p_i1217_1_, double p_i1217_2_, double p_i1217_4_, double p_i1217_6_, double p_i1217_8_, double p_i1217_10_, double p_i1217_12_, float p_i1217_14_)
     {
-        super(par1World, par2, par4, par6, 0.0D, 0.0D, 0.0D);
+        super(p_i1217_1_, p_i1217_2_, p_i1217_4_, p_i1217_6_, 0.0D, 0.0D, 0.0D);
         this.motionX *= 0.009999999776482582D;
         this.motionY *= 0.009999999776482582D;
         this.motionZ *= 0.009999999776482582D;
         this.motionY += 0.2D;
-        this.particleRed = MathHelper.sin(((float)par8 + 0.0F) * (float)Math.PI * 2.0F) * 0.65F + 0.35F;
-        this.particleGreen = MathHelper.sin(((float)par8 + 0.33333334F) * (float)Math.PI * 2.0F) * 0.65F + 0.35F;
-        this.particleBlue = MathHelper.sin(((float)par8 + 0.6666667F) * (float)Math.PI * 2.0F) * 0.65F + 0.35F;
+        this.particleRed = MathHelper.sin(((float)p_i1217_8_ + 0.0F) * (float)Math.PI * 2.0F) * 0.65F + 0.35F;
+        this.particleGreen = MathHelper.sin(((float)p_i1217_8_ + 0.33333334F) * (float)Math.PI * 2.0F) * 0.65F + 0.35F;
+        this.particleBlue = MathHelper.sin(((float)p_i1217_8_ + 0.6666667F) * (float)Math.PI * 2.0F) * 0.65F + 0.35F;
         this.particleScale *= 0.75F;
-        this.particleScale *= par14;
+        this.particleScale *= p_i1217_14_;
         this.noteParticleScale = this.particleScale;
         this.particleMaxAge = 6;
         this.noClip = false;
         this.setParticleTextureIndex(64);
     }
 
-    public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7)
+    public void renderParticle(Tessellator p_70539_1_, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_)
     {
-        float var8 = ((float)this.particleAge + par2) / (float)this.particleMaxAge * 32.0F;
+        float var8 = ((float)this.particleAge + p_70539_2_) / (float)this.particleMaxAge * 32.0F;
 
         if (var8 < 0.0F)
         {
@@ -47,7 +47,7 @@ public class EntityNoteFX extends EntityFX
         }
 
         this.particleScale = this.noteParticleScale * var8;
-        super.renderParticle(par1Tessellator, par2, par3, par4, par5, par6, par7);
+        super.renderParticle(p_70539_1_, p_70539_2_, p_70539_3_, p_70539_4_, p_70539_5_, p_70539_6_, p_70539_7_);
     }
 
     /**

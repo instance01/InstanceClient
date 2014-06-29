@@ -8,15 +8,12 @@ public class NBTTagEnd extends NBTBase
 {
     private static final String __OBFID = "CL_00001219";
 
-    /**
-     * Read the actual data contents of the tag, implemented in NBT extension classes
-     */
-    void load(DataInput par1DataInput, int par2) throws IOException {}
+    void func_152446_a(DataInput p_152446_1_, int p_152446_2_, NBTSizeTracker p_152446_3_) throws IOException {}
 
     /**
      * Write the actual data contents of the tag, implemented in NBT extension classes
      */
-    void write(DataOutput par1DataOutput) throws IOException {}
+    void write(DataOutput p_74734_1_) throws IOException {}
 
     /**
      * Gets the type byte for the tag.

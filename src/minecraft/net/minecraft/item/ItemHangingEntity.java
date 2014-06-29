@@ -23,22 +23,22 @@ public class ItemHangingEntity extends Item
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
      * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
      */
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+    public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World p_77648_3_, int p_77648_4_, int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
     {
-        if (par7 == 0)
+        if (p_77648_7_ == 0)
         {
             return false;
         }
-        else if (par7 == 1)
+        else if (p_77648_7_ == 1)
         {
             return false;
         }
         else
         {
-            int var11 = Direction.facingToDirection[par7];
-            EntityHanging var12 = this.createHangingEntity(par3World, par4, par5, par6, var11);
+            int var11 = Direction.facingToDirection[p_77648_7_];
+            EntityHanging var12 = this.createHangingEntity(p_77648_3_, p_77648_4_, p_77648_5_, p_77648_6_, var11);
 
-            if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7, par1ItemStack))
+            if (!p_77648_2_.canPlayerEdit(p_77648_4_, p_77648_5_, p_77648_6_, p_77648_7_, p_77648_1_))
             {
                 return false;
             }
@@ -46,12 +46,12 @@ public class ItemHangingEntity extends Item
             {
                 if (var12 != null && var12.onValidSurface())
                 {
-                    if (!par3World.isClient)
+                    if (!p_77648_3_.isClient)
                     {
-                        par3World.spawnEntityInWorld(var12);
+                        p_77648_3_.spawnEntityInWorld(var12);
                     }
 
-                    --par1ItemStack.stackSize;
+                    --p_77648_1_.stackSize;
                 }
 
                 return true;
@@ -62,8 +62,8 @@ public class ItemHangingEntity extends Item
     /**
      * Create the hanging entity associated to this item.
      */
-    private EntityHanging createHangingEntity(World par1World, int par2, int par3, int par4, int par5)
+    private EntityHanging createHangingEntity(World p_82810_1_, int p_82810_2_, int p_82810_3_, int p_82810_4_, int p_82810_5_)
     {
-        return (EntityHanging)(this.hangingEntityClass == EntityPainting.class ? new EntityPainting(par1World, par2, par3, par4, par5) : (this.hangingEntityClass == EntityItemFrame.class ? new EntityItemFrame(par1World, par2, par3, par4, par5) : null));
+        return (EntityHanging)(this.hangingEntityClass == EntityPainting.class ? new EntityPainting(p_82810_1_, p_82810_2_, p_82810_3_, p_82810_4_, p_82810_5_) : (this.hangingEntityClass == EntityItemFrame.class ? new EntityItemFrame(p_82810_1_, p_82810_2_, p_82810_3_, p_82810_4_, p_82810_5_) : null));
     }
 }

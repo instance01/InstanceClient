@@ -11,11 +11,11 @@ public class TileEntityMobSpawnerRenderer extends TileEntitySpecialRenderer
 {
     private static final String __OBFID = "CL_00000968";
 
-    public void renderTileEntityAt(TileEntityMobSpawner p_147518_1_, double p_147518_2_, double p_147518_4_, double p_147518_6_, float p_147518_8_)
+    public void renderTileEntityAt(TileEntityMobSpawner p_147500_1_, double p_147500_2_, double p_147500_4_, double p_147500_6_, float p_147500_8_)
     {
         GL11.glPushMatrix();
-        GL11.glTranslatef((float)p_147518_2_ + 0.5F, (float)p_147518_4_, (float)p_147518_6_ + 0.5F);
-        func_147517_a(p_147518_1_.func_145881_a(), p_147518_2_, p_147518_4_, p_147518_6_, p_147518_8_);
+        GL11.glTranslatef((float)p_147500_2_ + 0.5F, (float)p_147500_4_, (float)p_147500_6_ + 0.5F);
+        func_147517_a(p_147500_1_.func_145881_a(), p_147500_2_, p_147500_4_, p_147500_6_, p_147500_8_);
         GL11.glPopMatrix();
     }
 

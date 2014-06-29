@@ -1,5 +1,6 @@
 package net.minecraft.world;
 
+import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -93,7 +94,7 @@ public class WorldServer extends World
         super(p_i45284_2_, p_i45284_3_, p_i45284_5_, WorldProvider.getProviderForDimension(p_i45284_4_), p_i45284_6_);
         this.mcServer = p_i45284_1_;
         this.theEntityTracker = new EntityTracker(this);
-        this.thePlayerManager = new PlayerManager(this, p_i45284_1_.getConfigurationManager().getViewDistance());
+        this.thePlayerManager = new PlayerManager(this);
 
         if (this.entityIdMap == null)
         {
@@ -190,9 +191,9 @@ public class WorldServer extends World
     /**
      * only spawns creatures allowed by the chunkProvider
      */
-    public BiomeGenBase.SpawnListEntry spawnRandomCreature(EnumCreatureType par1EnumCreatureType, int par2, int par3, int par4)
+    public BiomeGenBase.SpawnListEntry spawnRandomCreature(EnumCreatureType p_73057_1_, int p_73057_2_, int p_73057_3_, int p_73057_4_)
     {
-        List var5 = this.getChunkProvider().getPossibleCreatures(par1EnumCreatureType, par2, par3, par4);
+        List var5 = this.getChunkProvider().getPossibleCreatures(p_73057_1_, p_73057_2_, p_73057_3_, p_73057_4_);
         return var5 != null && !var5.isEmpty() ? (BiomeGenBase.SpawnListEntry)WeightedRandom.getRandomItem(this.rand, var5) : null;
     }
 
@@ -372,11 +373,11 @@ public class WorldServer extends World
 
             for (var10 = 0; var10 < var9; ++var10)
             {
-                ExtendedBlockStorage var20 = var18[var10];
+                ExtendedBlockStorage var19 = var18[var10];
 
-                if (var20 != null && var20.getNeedsRandomTick())
+                if (var19 != null && var19.getNeedsRandomTick())
                 {
-                    for (int var19 = 0; var19 < 3; ++var19)
+                    for (int var20 = 0; var20 < 3; ++var20)
                     {
                         this.updateLCG = this.updateLCG * 3 + 1013904223;
                         int var13 = this.updateLCG >> 2;
@@ -384,12 +385,12 @@ public class WorldServer extends World
                         int var15 = var13 >> 8 & 15;
                         int var16 = var13 >> 16 & 15;
                         ++var2;
-                        Block var17 = var20.func_150819_a(var14, var16, var15);
+                        Block var17 = var19.func_150819_a(var14, var16, var15);
 
                         if (var17.getTickRandomly())
                         {
                             ++var1;
-                            var17.updateTick(this, var14 + var5, var16 + var20.getYLocation(), var15 + var6, this.rand);
+                            var17.updateTick(this, var14 + var5, var16 + var19.getYLocation(), var15 + var6, this.rand);
                         }
                     }
                 }
@@ -504,7 +505,7 @@ public class WorldServer extends World
     /**
      * Runs through the list of updates to run and ticks them
      */
-    public boolean tickUpdates(boolean par1)
+    public boolean tickUpdates(boolean p_72955_1_)
     {
         int var2 = this.pendingTickListEntriesTreeSet.size();
 
@@ -526,7 +527,7 @@ public class WorldServer extends World
             {
                 var4 = (NextTickListEntry)this.pendingTickListEntriesTreeSet.first();
 
-                if (!par1 && var4.scheduledTime > this.worldInfo.getWorldTotalTime())
+                if (!p_72955_1_ && var4.scheduledTime > this.worldInfo.getWorldTotalTime())
                 {
                     break;
                 }
@@ -588,10 +589,10 @@ public class WorldServer extends World
         }
     }
 
-    public List getPendingBlockUpdates(Chunk par1Chunk, boolean par2)
+    public List getPendingBlockUpdates(Chunk p_72920_1_, boolean p_72920_2_)
     {
         ArrayList var3 = null;
-        ChunkCoordIntPair var4 = par1Chunk.getChunkCoordIntPair();
+        ChunkCoordIntPair var4 = p_72920_1_.getChunkCoordIntPair();
         int var5 = (var4.chunkXPos << 4) - 2;
         int var6 = var5 + 16 + 2;
         int var7 = (var4.chunkZPos << 4) - 2;
@@ -621,7 +622,7 @@ public class WorldServer extends World
 
                 if (var11.xCoord >= var5 && var11.xCoord < var6 && var11.zCoord >= var7 && var11.zCoord < var8)
                 {
-                    if (par2)
+                    if (p_72920_2_)
                     {
                         this.pendingTickListEntriesHashSet.remove(var11);
                         var10.remove();
@@ -644,19 +645,19 @@ public class WorldServer extends World
      * Will update the entity in the world if the chunk the entity is in is currently loaded or its forced to update.
      * Args: entity, forceUpdate
      */
-    public void updateEntityWithOptionalForce(Entity par1Entity, boolean par2)
+    public void updateEntityWithOptionalForce(Entity p_72866_1_, boolean p_72866_2_)
     {
-        if (!this.mcServer.getCanSpawnAnimals() && (par1Entity instanceof EntityAnimal || par1Entity instanceof EntityWaterMob))
+        if (!this.mcServer.getCanSpawnAnimals() && (p_72866_1_ instanceof EntityAnimal || p_72866_1_ instanceof EntityWaterMob))
         {
-            par1Entity.setDead();
+            p_72866_1_.setDead();
         }
 
-        if (!this.mcServer.getCanSpawnNPCs() && par1Entity instanceof INpc)
+        if (!this.mcServer.getCanSpawnNPCs() && p_72866_1_ instanceof INpc)
         {
-            par1Entity.setDead();
+            p_72866_1_.setDead();
         }
 
-        super.updateEntityWithOptionalForce(par1Entity, par2);
+        super.updateEntityWithOptionalForce(p_72866_1_, p_72866_2_);
     }
 
     /**
@@ -689,12 +690,12 @@ public class WorldServer extends World
     /**
      * Called when checking if a certain block can be mined or not. The 'spawn safe zone' check is located here.
      */
-    public boolean canMineBlock(EntityPlayer par1EntityPlayer, int par2, int par3, int par4)
+    public boolean canMineBlock(EntityPlayer p_72962_1_, int p_72962_2_, int p_72962_3_, int p_72962_4_)
     {
-        return !this.mcServer.isBlockProtected(this, par2, par3, par4, par1EntityPlayer);
+        return !this.mcServer.isBlockProtected(this, p_72962_2_, p_72962_3_, p_72962_4_, p_72962_1_);
     }
 
-    protected void initialize(WorldSettings par1WorldSettings)
+    protected void initialize(WorldSettings p_72963_1_)
     {
         if (this.entityIdMap == null)
         {
@@ -711,14 +712,14 @@ public class WorldServer extends World
             this.pendingTickListEntriesTreeSet = new TreeSet();
         }
 
-        this.createSpawnPosition(par1WorldSettings);
-        super.initialize(par1WorldSettings);
+        this.createSpawnPosition(p_72963_1_);
+        super.initialize(p_72963_1_);
     }
 
     /**
      * creates a spawn position at random within 256 blocks of 0,0
      */
-    protected void createSpawnPosition(WorldSettings par1WorldSettings)
+    protected void createSpawnPosition(WorldSettings p_73052_1_)
     {
         if (!this.provider.canRespawnHere())
         {
@@ -762,7 +763,7 @@ public class WorldServer extends World
             this.worldInfo.setSpawnPosition(var6, var7, var8);
             this.findingSpawnPoint = false;
 
-            if (par1WorldSettings.isBonusChestEnabled())
+            if (p_73052_1_.isBonusChestEnabled())
             {
                 this.createBonusChest();
             }
@@ -800,23 +801,35 @@ public class WorldServer extends World
     /**
      * Saves all chunks to disk while updating progress bar.
      */
-    public void saveAllChunks(boolean par1, IProgressUpdate par2IProgressUpdate) throws MinecraftException
+    public void saveAllChunks(boolean p_73044_1_, IProgressUpdate p_73044_2_) throws MinecraftException
     {
         if (this.chunkProvider.canSave())
         {
-            if (par2IProgressUpdate != null)
+            if (p_73044_2_ != null)
             {
-                par2IProgressUpdate.displayProgressMessage("Saving level");
+                p_73044_2_.displayProgressMessage("Saving level");
             }
 
             this.saveLevel();
 
-            if (par2IProgressUpdate != null)
+            if (p_73044_2_ != null)
             {
-                par2IProgressUpdate.resetProgresAndWorkingMessage("Saving chunks");
+                p_73044_2_.resetProgresAndWorkingMessage("Saving chunks");
             }
 
-            this.chunkProvider.saveChunks(par1, par2IProgressUpdate);
+            this.chunkProvider.saveChunks(p_73044_1_, p_73044_2_);
+            ArrayList var3 = Lists.newArrayList(this.theChunkProviderServer.func_152380_a());
+            Iterator var4 = var3.iterator();
+
+            while (var4.hasNext())
+            {
+                Chunk var5 = (Chunk)var4.next();
+
+                if (var5 != null && !this.thePlayerManager.func_152621_a(var5.xPosition, var5.zPosition))
+                {
+                    this.theChunkProviderServer.unloadChunksIfNotNearSpawn(var5.xPosition, var5.zPosition);
+                }
+            }
         }
     }
 
@@ -841,11 +854,11 @@ public class WorldServer extends World
         this.mapStorage.saveAllData();
     }
 
-    protected void onEntityAdded(Entity par1Entity)
+    protected void onEntityAdded(Entity p_72923_1_)
     {
-        super.onEntityAdded(par1Entity);
-        this.entityIdMap.addKey(par1Entity.getEntityId(), par1Entity);
-        Entity[] var2 = par1Entity.getParts();
+        super.onEntityAdded(p_72923_1_);
+        this.entityIdMap.addKey(p_72923_1_.getEntityId(), p_72923_1_);
+        Entity[] var2 = p_72923_1_.getParts();
 
         if (var2 != null)
         {
@@ -856,11 +869,11 @@ public class WorldServer extends World
         }
     }
 
-    protected void onEntityRemoved(Entity par1Entity)
+    protected void onEntityRemoved(Entity p_72847_1_)
     {
-        super.onEntityRemoved(par1Entity);
-        this.entityIdMap.removeObject(par1Entity.getEntityId());
-        Entity[] var2 = par1Entity.getParts();
+        super.onEntityRemoved(p_72847_1_);
+        this.entityIdMap.removeObject(p_72847_1_.getEntityId());
+        Entity[] var2 = p_72847_1_.getParts();
 
         if (var2 != null)
         {
@@ -874,19 +887,19 @@ public class WorldServer extends World
     /**
      * Returns the Entity with the given ID, or null if it doesn't exist in this World.
      */
-    public Entity getEntityByID(int par1)
+    public Entity getEntityByID(int p_73045_1_)
     {
-        return (Entity)this.entityIdMap.lookup(par1);
+        return (Entity)this.entityIdMap.lookup(p_73045_1_);
     }
 
     /**
      * adds a lightning bolt to the list of lightning bolts in this world.
      */
-    public boolean addWeatherEffect(Entity par1Entity)
+    public boolean addWeatherEffect(Entity p_72942_1_)
     {
-        if (super.addWeatherEffect(par1Entity))
+        if (super.addWeatherEffect(p_72942_1_))
         {
-            this.mcServer.getConfigurationManager().func_148541_a(par1Entity.posX, par1Entity.posY, par1Entity.posZ, 512.0D, this.provider.dimensionId, new S2CPacketSpawnGlobalEntity(par1Entity));
+            this.mcServer.getConfigurationManager().func_148541_a(p_72942_1_.posX, p_72942_1_.posY, p_72942_1_.posZ, 512.0D, this.provider.dimensionId, new S2CPacketSpawnGlobalEntity(p_72942_1_));
             return true;
         }
         else
@@ -898,23 +911,23 @@ public class WorldServer extends World
     /**
      * sends a Packet 38 (Entity Status) to all tracked players of that entity
      */
-    public void setEntityState(Entity par1Entity, byte par2)
+    public void setEntityState(Entity p_72960_1_, byte p_72960_2_)
     {
-        this.getEntityTracker().func_151248_b(par1Entity, new S19PacketEntityStatus(par1Entity, par2));
+        this.getEntityTracker().func_151248_b(p_72960_1_, new S19PacketEntityStatus(p_72960_1_, p_72960_2_));
     }
 
     /**
      * returns a new explosion. Does initiation (at time of writing Explosion is not finished)
      */
-    public Explosion newExplosion(Entity par1Entity, double par2, double par4, double par6, float par8, boolean par9, boolean par10)
+    public Explosion newExplosion(Entity p_72885_1_, double p_72885_2_, double p_72885_4_, double p_72885_6_, float p_72885_8_, boolean p_72885_9_, boolean p_72885_10_)
     {
-        Explosion var11 = new Explosion(this, par1Entity, par2, par4, par6, par8);
-        var11.isFlaming = par9;
-        var11.isSmoking = par10;
+        Explosion var11 = new Explosion(this, p_72885_1_, p_72885_2_, p_72885_4_, p_72885_6_, p_72885_8_);
+        var11.isFlaming = p_72885_9_;
+        var11.isSmoking = p_72885_10_;
         var11.doExplosionA();
         var11.doExplosionB(false);
 
-        if (!par10)
+        if (!p_72885_10_)
         {
             var11.affectedBlockPositions.clear();
         }
@@ -925,9 +938,9 @@ public class WorldServer extends World
         {
             EntityPlayer var13 = (EntityPlayer)var12.next();
 
-            if (var13.getDistanceSq(par2, par4, par6) < 4096.0D)
+            if (var13.getDistanceSq(p_72885_2_, p_72885_4_, p_72885_6_) < 4096.0D)
             {
-                ((EntityPlayerMP)var13).playerNetServerHandler.sendPacket(new S27PacketExplosion(par2, par4, par6, par8, var11.affectedBlockPositions, (Vec3)var11.func_77277_b().get(var13)));
+                ((EntityPlayerMP)var13).playerNetServerHandler.sendPacket(new S27PacketExplosion(p_72885_2_, p_72885_4_, p_72885_6_, p_72885_8_, var11.affectedBlockPositions, (Vec3)var11.func_77277_b().get(var13)));
             }
         }
 
@@ -1023,6 +1036,11 @@ public class WorldServer extends World
         }
     }
 
+    protected int func_152379_p()
+    {
+        return this.mcServer.getConfigurationManager().getViewDistance();
+    }
+
     public MinecraftServer func_73046_m()
     {
         return this.mcServer;
@@ -1072,7 +1090,7 @@ public class WorldServer extends World
 
         private ServerBlockEventList() {}
 
-        ServerBlockEventList(Object par1ServerBlockEvent)
+        ServerBlockEventList(Object p_i1521_1_)
         {
             this();
         }

@@ -20,7 +20,7 @@ public class InventoryCraftResult implements IInventory
     /**
      * Returns the stack in slot i
      */
-    public ItemStack getStackInSlot(int par1)
+    public ItemStack getStackInSlot(int p_70301_1_)
     {
         return this.stackResult[0];
     }
@@ -45,7 +45,7 @@ public class InventoryCraftResult implements IInventory
      * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
      * new stack.
      */
-    public ItemStack decrStackSize(int par1, int par2)
+    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_)
     {
         if (this.stackResult[0] != null)
         {
@@ -63,7 +63,7 @@ public class InventoryCraftResult implements IInventory
      * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
      * like when you close a workbench GUI.
      */
-    public ItemStack getStackInSlotOnClosing(int par1)
+    public ItemStack getStackInSlotOnClosing(int p_70304_1_)
     {
         if (this.stackResult[0] != null)
         {
@@ -80,9 +80,9 @@ public class InventoryCraftResult implements IInventory
     /**
      * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      */
-    public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
+    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_)
     {
-        this.stackResult[0] = par2ItemStack;
+        this.stackResult[0] = p_70299_2_;
     }
 
     /**
@@ -101,7 +101,7 @@ public class InventoryCraftResult implements IInventory
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
      */
-    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+    public boolean isUseableByPlayer(EntityPlayer p_70300_1_)
     {
         return true;
     }
@@ -113,7 +113,7 @@ public class InventoryCraftResult implements IInventory
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      */
-    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
+    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_)
     {
         return true;
     }

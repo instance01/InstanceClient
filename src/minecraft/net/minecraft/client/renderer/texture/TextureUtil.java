@@ -23,6 +23,7 @@ public class TextureUtil
     public static final int[] missingTextureData = missingTexture.getTextureData();
     private static int field_147958_e = -1;
     private static int field_147956_f = -1;
+    private static float field_152779_g = -1.0F;
     private static final int[] field_147957_g;
     private static final String __OBFID = "CL_00001067";
 
@@ -36,15 +37,15 @@ public class TextureUtil
         GL11.glDeleteTextures(p_147942_0_);
     }
 
-    public static int uploadTextureImage(int par0, BufferedImage par1BufferedImage)
+    public static int uploadTextureImage(int p_110987_0_, BufferedImage p_110987_1_)
     {
-        return uploadTextureImageAllocate(par0, par1BufferedImage, false, false);
+        return uploadTextureImageAllocate(p_110987_0_, p_110987_1_, false, false);
     }
 
-    public static void uploadTexture(int par0, int[] par1ArrayOfInteger, int par2, int par3)
+    public static void uploadTexture(int p_110988_0_, int[] p_110988_1_, int p_110988_2_, int p_110988_3_)
     {
-        bindTexture(par0);
-        func_147947_a(0, par1ArrayOfInteger, par2, par3, 0, 0, false, false, false);
+        bindTexture(p_110988_0_);
+        func_147947_a(0, p_110988_1_, p_110988_2_, p_110988_3_, 0, 0, false, false, false);
     }
 
     public static int[][] func_147949_a(int p_147949_0_, int p_147949_1_, int[][] p_147949_2_)
@@ -184,15 +185,15 @@ public class TextureUtil
         }
     }
 
-    public static int uploadTextureImageAllocate(int par0, BufferedImage par1BufferedImage, boolean par2, boolean par3)
+    public static int uploadTextureImageAllocate(int p_110989_0_, BufferedImage p_110989_1_, boolean p_110989_2_, boolean p_110989_3_)
     {
-        allocateTexture(par0, par1BufferedImage.getWidth(), par1BufferedImage.getHeight());
-        return uploadTextureImageSub(par0, par1BufferedImage, 0, 0, par2, par3);
+        allocateTexture(p_110989_0_, p_110989_1_.getWidth(), p_110989_1_.getHeight());
+        return uploadTextureImageSub(p_110989_0_, p_110989_1_, 0, 0, p_110989_2_, p_110989_3_);
     }
 
-    public static void allocateTexture(int par0, int par1, int par2)
+    public static void allocateTexture(int p_110991_0_, int p_110991_1_, int p_110991_2_)
     {
-        func_147946_a(par0, 0, par1, par2, 1.0F);
+        func_147946_a(p_110991_0_, 0, p_110991_1_, p_110991_2_, 1.0F);
     }
 
     public static void func_147946_a(int p_147946_0_, int p_147946_1_, int p_147946_2_, int p_147946_3_, float p_147946_4_)
@@ -219,36 +220,36 @@ public class TextureUtil
         }
     }
 
-    public static int uploadTextureImageSub(int par0, BufferedImage par1BufferedImage, int par2, int par3, boolean par4, boolean par5)
+    public static int uploadTextureImageSub(int p_110995_0_, BufferedImage p_110995_1_, int p_110995_2_, int p_110995_3_, boolean p_110995_4_, boolean p_110995_5_)
     {
-        bindTexture(par0);
-        uploadTextureImageSubImpl(par1BufferedImage, par2, par3, par4, par5);
-        return par0;
+        bindTexture(p_110995_0_);
+        uploadTextureImageSubImpl(p_110995_1_, p_110995_2_, p_110995_3_, p_110995_4_, p_110995_5_);
+        return p_110995_0_;
     }
 
-    private static void uploadTextureImageSubImpl(BufferedImage par0BufferedImage, int par1, int par2, boolean par3, boolean par4)
+    private static void uploadTextureImageSubImpl(BufferedImage p_110993_0_, int p_110993_1_, int p_110993_2_, boolean p_110993_3_, boolean p_110993_4_)
     {
-        int var5 = par0BufferedImage.getWidth();
-        int var6 = par0BufferedImage.getHeight();
+        int var5 = p_110993_0_.getWidth();
+        int var6 = p_110993_0_.getHeight();
         int var7 = 4194304 / var5;
         int[] var8 = new int[var7 * var5];
-        func_147951_b(par3);
-        setTextureClamped(par4);
+        func_147951_b(p_110993_3_);
+        setTextureClamped(p_110993_4_);
 
         for (int var9 = 0; var9 < var5 * var6; var9 += var5 * var7)
         {
             int var10 = var9 / var5;
             int var11 = Math.min(var7, var6 - var10);
             int var12 = var5 * var11;
-            par0BufferedImage.getRGB(0, var10, var5, var11, var8, 0, var5);
+            p_110993_0_.getRGB(0, var10, var5, var11, var8, 0, var5);
             copyToBuffer(var8, var12);
-            GL11.glTexSubImage2D(GL11.GL_TEXTURE_2D, 0, par1, par2 + var10, var5, var11, GL12.GL_BGRA, GL12.GL_UNSIGNED_INT_8_8_8_8_REV, dataBuffer);
+            GL11.glTexSubImage2D(GL11.GL_TEXTURE_2D, 0, p_110993_1_, p_110993_2_ + var10, var5, var11, GL12.GL_BGRA, GL12.GL_UNSIGNED_INT_8_8_8_8_REV, dataBuffer);
         }
     }
 
-    private static void setTextureClamped(boolean par0)
+    private static void setTextureClamped(boolean p_110997_0_)
     {
-        if (par0)
+        if (p_110997_0_)
         {
             GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL11.GL_CLAMP);
             GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_CLAMP);
@@ -265,18 +266,22 @@ public class TextureUtil
         func_147954_b(p_147951_0_, false);
     }
 
-    public static void func_147950_a(boolean p_147950_0_, boolean p_147950_1_)
+    public static void func_152777_a(boolean p_152777_0_, boolean p_152777_1_, float p_152777_2_)
     {
         field_147958_e = GL11.glGetTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER);
         field_147956_f = GL11.glGetTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER);
-        func_147954_b(p_147950_0_, p_147950_1_);
+        field_152779_g = GL11.glGetTexParameterf(GL11.GL_TEXTURE_2D, 34046);
+        func_147954_b(p_152777_0_, p_152777_1_);
+        func_152778_a(p_152777_2_);
     }
 
     public static void func_147945_b()
     {
-        if (field_147958_e >= 0 && field_147956_f >= 0)
+        if (field_147958_e >= 0 && field_147956_f >= 0 && field_152779_g >= 0.0F)
         {
             func_147952_b(field_147958_e, field_147956_f);
+            func_152778_a(field_152779_g);
+            field_152779_g = -1.0F;
             field_147958_e = -1;
             field_147956_f = -1;
         }
@@ -286,6 +291,11 @@ public class TextureUtil
     {
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, p_147952_0_);
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, p_147952_1_);
+    }
+
+    private static void func_152778_a(float p_152778_0_)
+    {
+        GL11.glTexParameterf(GL11.GL_TEXTURE_2D, 34046, p_152778_0_);
     }
 
     private static void func_147954_b(boolean p_147954_0_, boolean p_147954_1_)
@@ -302,33 +312,33 @@ public class TextureUtil
         }
     }
 
-    private static void copyToBuffer(int[] par0ArrayOfInteger, int par1)
+    private static void copyToBuffer(int[] p_110990_0_, int p_110990_1_)
     {
-        copyToBufferPos(par0ArrayOfInteger, 0, par1);
+        copyToBufferPos(p_110990_0_, 0, p_110990_1_);
     }
 
-    private static void copyToBufferPos(int[] par0ArrayOfInteger, int par1, int par2)
+    private static void copyToBufferPos(int[] p_110994_0_, int p_110994_1_, int p_110994_2_)
     {
-        int[] var3 = par0ArrayOfInteger;
+        int[] var3 = p_110994_0_;
 
         if (Minecraft.getMinecraft().gameSettings.anaglyph)
         {
-            var3 = updateAnaglyph(par0ArrayOfInteger);
+            var3 = updateAnaglyph(p_110994_0_);
         }
 
         dataBuffer.clear();
-        dataBuffer.put(var3, par1, par2);
-        dataBuffer.position(0).limit(par2);
+        dataBuffer.put(var3, p_110994_1_, p_110994_2_);
+        dataBuffer.position(0).limit(p_110994_2_);
     }
 
-    static void bindTexture(int par0)
+    static void bindTexture(int p_94277_0_)
     {
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, par0);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, p_94277_0_);
     }
 
-    public static int[] readImageData(IResourceManager par0ResourceManager, ResourceLocation par1ResourceLocation) throws IOException
+    public static int[] readImageData(IResourceManager p_110986_0_, ResourceLocation p_110986_1_) throws IOException
     {
-        BufferedImage var2 = ImageIO.read(par0ResourceManager.getResource(par1ResourceLocation).getInputStream());
+        BufferedImage var2 = ImageIO.read(p_110986_0_.getResource(p_110986_1_).getInputStream());
         int var3 = var2.getWidth();
         int var4 = var2.getHeight();
         int[] var5 = new int[var3 * var4];
@@ -336,16 +346,16 @@ public class TextureUtil
         return var5;
     }
 
-    public static int[] updateAnaglyph(int[] par0ArrayOfInteger)
+    public static int[] updateAnaglyph(int[] p_110985_0_)
     {
-        int[] var1 = new int[par0ArrayOfInteger.length];
+        int[] var1 = new int[p_110985_0_.length];
 
-        for (int var2 = 0; var2 < par0ArrayOfInteger.length; ++var2)
+        for (int var2 = 0; var2 < p_110985_0_.length; ++var2)
         {
-            int var3 = par0ArrayOfInteger[var2] >> 24 & 255;
-            int var4 = par0ArrayOfInteger[var2] >> 16 & 255;
-            int var5 = par0ArrayOfInteger[var2] >> 8 & 255;
-            int var6 = par0ArrayOfInteger[var2] & 255;
+            int var3 = p_110985_0_[var2] >> 24 & 255;
+            int var4 = p_110985_0_[var2] >> 16 & 255;
+            int var5 = p_110985_0_[var2] >> 8 & 255;
+            int var6 = p_110985_0_[var2] & 255;
             int var7 = (var4 * 30 + var5 * 59 + var6 * 11) / 100;
             int var8 = (var4 * 30 + var5 * 70) / 100;
             int var9 = (var4 * 30 + var6 * 70) / 100;

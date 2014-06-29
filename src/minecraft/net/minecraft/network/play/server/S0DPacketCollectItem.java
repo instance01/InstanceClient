@@ -38,9 +38,9 @@ public class S0DPacketCollectItem extends Packet
         p_148840_1_.writeInt(this.field_149356_b);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149355_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149355_1_.handleCollectItem(this);
+        p_148833_1_.handleCollectItem(this);
     }
 
     public int func_149354_c()

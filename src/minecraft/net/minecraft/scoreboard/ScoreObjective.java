@@ -10,12 +10,12 @@ public class ScoreObjective
     private String displayName;
     private static final String __OBFID = "CL_00000614";
 
-    public ScoreObjective(Scoreboard par1Scoreboard, String par2Str, IScoreObjectiveCriteria par3ScoreObjectiveCriteria)
+    public ScoreObjective(Scoreboard p_i2307_1_, String p_i2307_2_, IScoreObjectiveCriteria p_i2307_3_)
     {
-        this.theScoreboard = par1Scoreboard;
-        this.name = par2Str;
-        this.objectiveCriteria = par3ScoreObjectiveCriteria;
-        this.displayName = par2Str;
+        this.theScoreboard = p_i2307_1_;
+        this.name = p_i2307_2_;
+        this.objectiveCriteria = p_i2307_3_;
+        this.displayName = p_i2307_2_;
     }
 
     public Scoreboard getScoreboard()
@@ -38,9 +38,9 @@ public class ScoreObjective
         return this.displayName;
     }
 
-    public void setDisplayName(String par1Str)
+    public void setDisplayName(String p_96681_1_)
     {
-        this.displayName = par1Str;
+        this.displayName = p_96681_1_;
         this.theScoreboard.func_96532_b(this);
     }
 }

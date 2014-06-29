@@ -7,9 +7,9 @@ public class BiomeGenMushroomIsland extends BiomeGenBase
 {
     private static final String __OBFID = "CL_00000177";
 
-    public BiomeGenMushroomIsland(int par1)
+    public BiomeGenMushroomIsland(int p_i1984_1_)
     {
-        super(par1);
+        super(p_i1984_1_);
         this.theBiomeDecorator.treesPerChunk = -100;
         this.theBiomeDecorator.flowersPerChunk = -100;
         this.theBiomeDecorator.grassPerChunk = -100;

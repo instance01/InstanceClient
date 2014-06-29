@@ -12,10 +12,10 @@ public class EntityAIPanic extends EntityAIBase
     private double randPosZ;
     private static final String __OBFID = "CL_00001604";
 
-    public EntityAIPanic(EntityCreature par1EntityCreature, double par2)
+    public EntityAIPanic(EntityCreature p_i1645_1_, double p_i1645_2_)
     {
-        this.theEntityCreature = par1EntityCreature;
-        this.speed = par2;
+        this.theEntityCreature = p_i1645_1_;
+        this.speed = p_i1645_2_;
         this.setMutexBits(1);
     }
 

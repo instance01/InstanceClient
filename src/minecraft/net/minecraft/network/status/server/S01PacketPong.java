@@ -34,9 +34,9 @@ public class S01PacketPong extends Packet
         p_148840_1_.writeLong(this.field_149293_a);
     }
 
-    public void processPacket(INetHandlerStatusClient p_149291_1_)
+    public void processPacket(INetHandlerStatusClient p_148833_1_)
     {
-        p_149291_1_.handlePong(this);
+        p_148833_1_.handlePong(this);
     }
 
     /**

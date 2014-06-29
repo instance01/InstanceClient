@@ -396,6 +396,14 @@ public class JsonToNBT
         return -1;
     }
 
+    abstract static class Any
+    {
+        protected String field_150490_a;
+        private static final String __OBFID = "CL_00001233";
+
+        public abstract NBTBase func_150489_a();
+    }
+
     static class Compound extends JsonToNBT.Any
     {
         protected ArrayList field_150491_b = new ArrayList();
@@ -444,14 +452,6 @@ public class JsonToNBT
 
             return var1;
         }
-    }
-
-    abstract static class Any
-    {
-        protected String field_150490_a;
-        private static final String __OBFID = "CL_00001233";
-
-        public abstract NBTBase func_150489_a();
     }
 
     static class Primitive extends JsonToNBT.Any

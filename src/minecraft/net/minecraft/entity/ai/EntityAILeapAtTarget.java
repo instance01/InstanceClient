@@ -16,10 +16,10 @@ public class EntityAILeapAtTarget extends EntityAIBase
     float leapMotionY;
     private static final String __OBFID = "CL_00001591";
 
-    public EntityAILeapAtTarget(EntityLiving par1EntityLiving, float par2)
+    public EntityAILeapAtTarget(EntityLiving p_i1630_1_, float p_i1630_2_)
     {
-        this.leaper = par1EntityLiving;
-        this.leapMotionY = par2;
+        this.leaper = p_i1630_1_;
+        this.leapMotionY = p_i1630_2_;
         this.setMutexBits(5);
     }
 

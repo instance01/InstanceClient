@@ -184,7 +184,7 @@ public abstract class BiomeGenBase
     protected WorldGenSwamp worldGeneratorSwamp;
     private static final String __OBFID = "CL_00000158";
 
-    protected BiomeGenBase(int par1)
+    protected BiomeGenBase(int p_i1971_1_)
     {
         this.topBlock = Blocks.grass;
         this.field_150604_aj = 0;
@@ -203,8 +203,8 @@ public abstract class BiomeGenBase
         this.worldGeneratorTrees = new WorldGenTrees(false);
         this.worldGeneratorBigTree = new WorldGenBigTree(false);
         this.worldGeneratorSwamp = new WorldGenSwamp();
-        this.biomeID = par1;
-        biomeList[par1] = this;
+        this.biomeID = p_i1971_1_;
+        biomeList[p_i1971_1_] = this;
         this.theBiomeDecorator = this.createBiomeDecorator();
         this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntitySheep.class, 12, 4, 4));
         this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityPig.class, 10, 4, 4));
@@ -232,16 +232,16 @@ public abstract class BiomeGenBase
     /**
      * Sets the temperature and rainfall of this biome.
      */
-    protected BiomeGenBase setTemperatureRainfall(float par1, float par2)
+    protected BiomeGenBase setTemperatureRainfall(float p_76732_1_, float p_76732_2_)
     {
-        if (par1 > 0.1F && par1 < 0.2F)
+        if (p_76732_1_ > 0.1F && p_76732_1_ < 0.2F)
         {
             throw new IllegalArgumentException("Please avoid temperatures in the range 0.1 - 0.2 because of snow");
         }
         else
         {
-            this.temperature = par1;
-            this.rainfall = par2;
+            this.temperature = p_76732_1_;
+            this.rainfall = p_76732_2_;
             return this;
         }
     }
@@ -270,7 +270,7 @@ public abstract class BiomeGenBase
     /**
      * Gets a WorldGen appropriate for this biome.
      */
-    public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
+    public WorldGenerator getRandomWorldGenForGrass(Random p_76730_1_)
     {
         return new WorldGenTallGrass(Blocks.tallgrass, 1);
     }
@@ -289,21 +289,21 @@ public abstract class BiomeGenBase
         return this;
     }
 
-    protected BiomeGenBase setBiomeName(String par1Str)
+    protected BiomeGenBase setBiomeName(String p_76735_1_)
     {
-        this.biomeName = par1Str;
+        this.biomeName = p_76735_1_;
         return this;
     }
 
-    protected BiomeGenBase func_76733_a(int par1)
+    protected BiomeGenBase func_76733_a(int p_76733_1_)
     {
-        this.field_76754_C = par1;
+        this.field_76754_C = p_76733_1_;
         return this;
     }
 
-    protected BiomeGenBase setColor(int par1)
+    protected BiomeGenBase setColor(int p_76739_1_)
     {
-        this.func_150557_a(par1, false);
+        this.func_150557_a(p_76739_1_, false);
         return this;
     }
 
@@ -332,29 +332,29 @@ public abstract class BiomeGenBase
     /**
      * takes temperature, returns color
      */
-    public int getSkyColorByTemp(float par1)
+    public int getSkyColorByTemp(float p_76731_1_)
     {
-        par1 /= 3.0F;
+        p_76731_1_ /= 3.0F;
 
-        if (par1 < -1.0F)
+        if (p_76731_1_ < -1.0F)
         {
-            par1 = -1.0F;
+            p_76731_1_ = -1.0F;
         }
 
-        if (par1 > 1.0F)
+        if (p_76731_1_ > 1.0F)
         {
-            par1 = 1.0F;
+            p_76731_1_ = 1.0F;
         }
 
-        return Color.getHSBColor(0.62222224F - par1 * 0.05F, 0.5F + par1 * 0.1F, 1.0F).getRGB();
+        return Color.getHSBColor(0.62222224F - p_76731_1_ * 0.05F, 0.5F + p_76731_1_ * 0.1F, 1.0F).getRGB();
     }
 
     /**
      * Returns the correspondent list of the EnumCreatureType informed.
      */
-    public List getSpawnableList(EnumCreatureType par1EnumCreatureType)
+    public List getSpawnableList(EnumCreatureType p_76747_1_)
     {
-        return par1EnumCreatureType == EnumCreatureType.monster ? this.spawnableMonsterList : (par1EnumCreatureType == EnumCreatureType.creature ? this.spawnableCreatureList : (par1EnumCreatureType == EnumCreatureType.waterCreature ? this.spawnableWaterCreatureList : (par1EnumCreatureType == EnumCreatureType.ambient ? this.spawnableCaveCreatureList : null)));
+        return p_76747_1_ == EnumCreatureType.monster ? this.spawnableMonsterList : (p_76747_1_ == EnumCreatureType.creature ? this.spawnableCreatureList : (p_76747_1_ == EnumCreatureType.waterCreature ? this.spawnableWaterCreatureList : (p_76747_1_ == EnumCreatureType.ambient ? this.spawnableCaveCreatureList : null)));
     }
 
     /**
@@ -421,9 +421,9 @@ public abstract class BiomeGenBase
         }
     }
 
-    public void decorate(World par1World, Random par2Random, int par3, int par4)
+    public void decorate(World p_76728_1_, Random p_76728_2_, int p_76728_3_, int p_76728_4_)
     {
-        this.theBiomeDecorator.func_150512_a(par1World, par2Random, this, par3, par4);
+        this.theBiomeDecorator.func_150512_a(p_76728_1_, p_76728_2_, this, p_76728_3_, p_76728_4_);
     }
 
     /**
@@ -628,30 +628,11 @@ public abstract class BiomeGenBase
 
         field_150597_n.remove(hell);
         field_150597_n.remove(sky);
+        field_150597_n.remove(frozenOcean);
+        field_150597_n.remove(extremeHillsEdge);
         field_150605_ac = new NoiseGeneratorPerlin(new Random(1234L), 1);
         field_150606_ad = new NoiseGeneratorPerlin(new Random(2345L), 1);
         field_150610_ae = new WorldGenDoublePlant();
-    }
-
-    public static class SpawnListEntry extends WeightedRandom.Item
-    {
-        public Class entityClass;
-        public int minGroupCount;
-        public int maxGroupCount;
-        private static final String __OBFID = "CL_00000161";
-
-        public SpawnListEntry(Class par1Class, int par2, int par3, int par4)
-        {
-            super(par2);
-            this.entityClass = par1Class;
-            this.minGroupCount = par3;
-            this.maxGroupCount = par4;
-        }
-
-        public String toString()
-        {
-            return this.entityClass.getSimpleName() + "*(" + this.minGroupCount + "-" + this.maxGroupCount + "):" + this.itemWeight;
-        }
     }
 
     public static class Height
@@ -669,6 +650,27 @@ public abstract class BiomeGenBase
         public BiomeGenBase.Height func_150775_a()
         {
             return new BiomeGenBase.Height(this.field_150777_a * 0.8F, this.field_150776_b * 0.6F);
+        }
+    }
+
+    public static class SpawnListEntry extends WeightedRandom.Item
+    {
+        public Class entityClass;
+        public int minGroupCount;
+        public int maxGroupCount;
+        private static final String __OBFID = "CL_00000161";
+
+        public SpawnListEntry(Class p_i1970_1_, int p_i1970_2_, int p_i1970_3_, int p_i1970_4_)
+        {
+            super(p_i1970_2_);
+            this.entityClass = p_i1970_1_;
+            this.minGroupCount = p_i1970_3_;
+            this.maxGroupCount = p_i1970_4_;
+        }
+
+        public String toString()
+        {
+            return this.entityClass.getSimpleName() + "*(" + this.minGroupCount + "-" + this.maxGroupCount + "):" + this.itemWeight;
         }
     }
 

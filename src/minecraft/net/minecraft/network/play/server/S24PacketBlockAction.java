@@ -55,9 +55,9 @@ public class S24PacketBlockAction extends Packet
         p_148840_1_.writeVarIntToBuffer(Block.getIdFromBlock(this.field_148871_f) & 4095);
     }
 
-    public void processPacket(INetHandlerPlayClient p_148870_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_148870_1_.handleBlockAction(this);
+        p_148833_1_.handleBlockAction(this);
     }
 
     public Block func_148868_c()

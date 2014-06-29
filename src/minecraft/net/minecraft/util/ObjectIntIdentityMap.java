@@ -2,20 +2,20 @@ package net.minecraft.util;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterators;
-import gnu.trove.map.hash.TIntIntHashMap;
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 
 public class ObjectIntIdentityMap implements IObjectIntIterable
 {
-    private TIntIntHashMap field_148749_a = new TIntIntHashMap(256, 0.5F, -1, -1);
-    private List field_148748_b = new ArrayList();
+    private IdentityHashMap field_148749_a = new IdentityHashMap(512);
+    private List field_148748_b = Lists.newArrayList();
     private static final String __OBFID = "CL_00001203";
 
     public void func_148746_a(Object p_148746_1_, int p_148746_2_)
     {
-        this.field_148749_a.put(System.identityHashCode(p_148746_1_), p_148746_2_);
+        this.field_148749_a.put(p_148746_1_, Integer.valueOf(p_148746_2_));
 
         while (this.field_148748_b.size() <= p_148746_2_)
         {
@@ -27,7 +27,8 @@ public class ObjectIntIdentityMap implements IObjectIntIterable
 
     public int func_148747_b(Object p_148747_1_)
     {
-        return this.field_148749_a.get(System.identityHashCode(p_148747_1_));
+        Integer var2 = (Integer)this.field_148749_a.get(p_148747_1_);
+        return var2 == null ? -1 : var2.intValue();
     }
 
     public Object func_148745_a(int p_148745_1_)

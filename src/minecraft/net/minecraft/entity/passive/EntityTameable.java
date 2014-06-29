@@ -1,11 +1,13 @@
 package net.minecraft.entity.passive;
 
+import java.util.UUID;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityOwnable;
 import net.minecraft.entity.ai.EntityAISit;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.scoreboard.Team;
+import net.minecraft.server.management.PreYggdrasilConverter;
 import net.minecraft.world.World;
 
 public abstract class EntityTameable extends EntityAnimal implements IEntityOwnable
@@ -13,9 +15,9 @@ public abstract class EntityTameable extends EntityAnimal implements IEntityOwna
     protected EntityAISit aiSit = new EntityAISit(this);
     private static final String __OBFID = "CL_00001561";
 
-    public EntityTameable(World par1World)
+    public EntityTameable(World p_i1604_1_)
     {
-        super(par1World);
+        super(p_i1604_1_);
     }
 
     protected void entityInit()
@@ -28,48 +30,58 @@ public abstract class EntityTameable extends EntityAnimal implements IEntityOwna
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    public void writeEntityToNBT(NBTTagCompound p_70014_1_)
     {
-        super.writeEntityToNBT(par1NBTTagCompound);
+        super.writeEntityToNBT(p_70014_1_);
 
-        if (this.getOwnerName() == null)
+        if (this.func_152113_b() == null)
         {
-            par1NBTTagCompound.setString("Owner", "");
+            p_70014_1_.setString("OwnerUUID", "");
         }
         else
         {
-            par1NBTTagCompound.setString("Owner", this.getOwnerName());
+            p_70014_1_.setString("OwnerUUID", this.func_152113_b());
         }
 
-        par1NBTTagCompound.setBoolean("Sitting", this.isSitting());
+        p_70014_1_.setBoolean("Sitting", this.isSitting());
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    public void readEntityFromNBT(NBTTagCompound p_70037_1_)
     {
-        super.readEntityFromNBT(par1NBTTagCompound);
-        String var2 = par1NBTTagCompound.getString("Owner");
+        super.readEntityFromNBT(p_70037_1_);
+        String var2 = "";
+
+        if (p_70037_1_.func_150297_b("OwnerUUID", 8))
+        {
+            var2 = p_70037_1_.getString("OwnerUUID");
+        }
+        else
+        {
+            String var3 = p_70037_1_.getString("Owner");
+            var2 = PreYggdrasilConverter.func_152719_a(var3);
+        }
 
         if (var2.length() > 0)
         {
-            this.setOwner(var2);
+            this.func_152115_b(var2);
             this.setTamed(true);
         }
 
-        this.aiSit.setSitting(par1NBTTagCompound.getBoolean("Sitting"));
-        this.setSitting(par1NBTTagCompound.getBoolean("Sitting"));
+        this.aiSit.setSitting(p_70037_1_.getBoolean("Sitting"));
+        this.setSitting(p_70037_1_.getBoolean("Sitting"));
     }
 
     /**
      * Play the taming effect, will either be hearts or smoke depending on status
      */
-    protected void playTameEffect(boolean par1)
+    protected void playTameEffect(boolean p_70908_1_)
     {
         String var2 = "heart";
 
-        if (!par1)
+        if (!p_70908_1_)
         {
             var2 = "smoke";
         }
@@ -83,19 +95,19 @@ public abstract class EntityTameable extends EntityAnimal implements IEntityOwna
         }
     }
 
-    public void handleHealthUpdate(byte par1)
+    public void handleHealthUpdate(byte p_70103_1_)
     {
-        if (par1 == 7)
+        if (p_70103_1_ == 7)
         {
             this.playTameEffect(true);
         }
-        else if (par1 == 6)
+        else if (p_70103_1_ == 6)
         {
             this.playTameEffect(false);
         }
         else
         {
-            super.handleHealthUpdate(par1);
+            super.handleHealthUpdate(p_70103_1_);
         }
     }
 
@@ -104,11 +116,11 @@ public abstract class EntityTameable extends EntityAnimal implements IEntityOwna
         return (this.dataWatcher.getWatchableObjectByte(16) & 4) != 0;
     }
 
-    public void setTamed(boolean par1)
+    public void setTamed(boolean p_70903_1_)
     {
         byte var2 = this.dataWatcher.getWatchableObjectByte(16);
 
-        if (par1)
+        if (p_70903_1_)
         {
             this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 4)));
         }
@@ -123,11 +135,11 @@ public abstract class EntityTameable extends EntityAnimal implements IEntityOwna
         return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
     }
 
-    public void setSitting(boolean par1)
+    public void setSitting(boolean p_70904_1_)
     {
         byte var2 = this.dataWatcher.getWatchableObjectByte(16);
 
-        if (par1)
+        if (p_70904_1_)
         {
             this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 1)));
         }
@@ -137,19 +149,32 @@ public abstract class EntityTameable extends EntityAnimal implements IEntityOwna
         }
     }
 
-    public String getOwnerName()
+    public String func_152113_b()
     {
         return this.dataWatcher.getWatchableObjectString(17);
     }
 
-    public void setOwner(String par1Str)
+    public void func_152115_b(String p_152115_1_)
     {
-        this.dataWatcher.updateObject(17, par1Str);
+        this.dataWatcher.updateObject(17, p_152115_1_);
     }
 
     public EntityLivingBase getOwner()
     {
-        return this.worldObj.getPlayerEntityByName(this.getOwnerName());
+        try
+        {
+            UUID var1 = UUID.fromString(this.func_152113_b());
+            return var1 == null ? null : this.worldObj.func_152378_a(var1);
+        }
+        catch (IllegalArgumentException var2)
+        {
+            return null;
+        }
+    }
+
+    public boolean func_152114_e(EntityLivingBase p_152114_1_)
+    {
+        return p_152114_1_ == this.getOwner();
     }
 
     public EntityAISit func_70907_r()
@@ -157,7 +182,7 @@ public abstract class EntityTameable extends EntityAnimal implements IEntityOwna
         return this.aiSit;
     }
 
-    public boolean func_142018_a(EntityLivingBase par1EntityLivingBase, EntityLivingBase par2EntityLivingBase)
+    public boolean func_142018_a(EntityLivingBase p_142018_1_, EntityLivingBase p_142018_2_)
     {
         return true;
     }
@@ -177,23 +202,23 @@ public abstract class EntityTameable extends EntityAnimal implements IEntityOwna
         return super.getTeam();
     }
 
-    public boolean isOnSameTeam(EntityLivingBase par1EntityLivingBase)
+    public boolean isOnSameTeam(EntityLivingBase p_142014_1_)
     {
         if (this.isTamed())
         {
             EntityLivingBase var2 = this.getOwner();
 
-            if (par1EntityLivingBase == var2)
+            if (p_142014_1_ == var2)
             {
                 return true;
             }
 
             if (var2 != null)
             {
-                return var2.isOnSameTeam(par1EntityLivingBase);
+                return var2.isOnSameTeam(p_142014_1_);
             }
         }
 
-        return super.isOnSameTeam(par1EntityLivingBase);
+        return super.isOnSameTeam(p_142014_1_);
     }
 }

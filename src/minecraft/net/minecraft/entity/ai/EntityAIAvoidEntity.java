@@ -15,9 +15,9 @@ public class EntityAIAvoidEntity extends EntityAIBase
     public final IEntitySelector field_98218_a = new IEntitySelector()
     {
         private static final String __OBFID = "CL_00001575";
-        public boolean isEntityApplicable(Entity par1Entity)
+        public boolean isEntityApplicable(Entity p_82704_1_)
         {
-            return par1Entity.isEntityAlive() && EntityAIAvoidEntity.this.theEntity.getEntitySenses().canSee(par1Entity);
+            return p_82704_1_.isEntityAlive() && EntityAIAvoidEntity.this.theEntity.getEntitySenses().canSee(p_82704_1_);
         }
     };
 
@@ -38,14 +38,14 @@ public class EntityAIAvoidEntity extends EntityAIBase
     private Class targetEntityClass;
     private static final String __OBFID = "CL_00001574";
 
-    public EntityAIAvoidEntity(EntityCreature par1EntityCreature, Class par2Class, float par3, double par4, double par6)
+    public EntityAIAvoidEntity(EntityCreature p_i1616_1_, Class p_i1616_2_, float p_i1616_3_, double p_i1616_4_, double p_i1616_6_)
     {
-        this.theEntity = par1EntityCreature;
-        this.targetEntityClass = par2Class;
-        this.distanceFromEntity = par3;
-        this.farSpeed = par4;
-        this.nearSpeed = par6;
-        this.entityPathNavigate = par1EntityCreature.getNavigator();
+        this.theEntity = p_i1616_1_;
+        this.targetEntityClass = p_i1616_2_;
+        this.distanceFromEntity = p_i1616_3_;
+        this.farSpeed = p_i1616_4_;
+        this.nearSpeed = p_i1616_6_;
+        this.entityPathNavigate = p_i1616_1_.getNavigator();
         this.setMutexBits(1);
     }
 
@@ -80,7 +80,7 @@ public class EntityAIAvoidEntity extends EntityAIBase
             this.closestLivingEntity = (Entity)var1.get(0);
         }
 
-        Vec3 var2 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(this.theEntity, 16, 7, this.theEntity.worldObj.getWorldVec3Pool().getVecFromPool(this.closestLivingEntity.posX, this.closestLivingEntity.posY, this.closestLivingEntity.posZ));
+        Vec3 var2 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(this.theEntity, 16, 7, Vec3.createVectorHelper(this.closestLivingEntity.posX, this.closestLivingEntity.posY, this.closestLivingEntity.posZ));
 
         if (var2 == null)
         {

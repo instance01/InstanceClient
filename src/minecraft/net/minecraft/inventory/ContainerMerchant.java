@@ -16,27 +16,27 @@ public class ContainerMerchant extends Container
     private final World theWorld;
     private static final String __OBFID = "CL_00001757";
 
-    public ContainerMerchant(InventoryPlayer par1InventoryPlayer, IMerchant par2IMerchant, World par3World)
+    public ContainerMerchant(InventoryPlayer p_i1821_1_, IMerchant p_i1821_2_, World p_i1821_3_)
     {
-        this.theMerchant = par2IMerchant;
-        this.theWorld = par3World;
-        this.merchantInventory = new InventoryMerchant(par1InventoryPlayer.player, par2IMerchant);
+        this.theMerchant = p_i1821_2_;
+        this.theWorld = p_i1821_3_;
+        this.merchantInventory = new InventoryMerchant(p_i1821_1_.player, p_i1821_2_);
         this.addSlotToContainer(new Slot(this.merchantInventory, 0, 36, 53));
         this.addSlotToContainer(new Slot(this.merchantInventory, 1, 62, 53));
-        this.addSlotToContainer(new SlotMerchantResult(par1InventoryPlayer.player, par2IMerchant, this.merchantInventory, 2, 120, 53));
+        this.addSlotToContainer(new SlotMerchantResult(p_i1821_1_.player, p_i1821_2_, this.merchantInventory, 2, 120, 53));
         int var4;
 
         for (var4 = 0; var4 < 3; ++var4)
         {
             for (int var5 = 0; var5 < 9; ++var5)
             {
-                this.addSlotToContainer(new Slot(par1InventoryPlayer, var5 + var4 * 9 + 9, 8 + var5 * 18, 84 + var4 * 18));
+                this.addSlotToContainer(new Slot(p_i1821_1_, var5 + var4 * 9 + 9, 8 + var5 * 18, 84 + var4 * 18));
             }
         }
 
         for (var4 = 0; var4 < 9; ++var4)
         {
-            this.addSlotToContainer(new Slot(par1InventoryPlayer, var4, 8 + var4 * 18, 142));
+            this.addSlotToContainer(new Slot(p_i1821_1_, var4, 8 + var4 * 18, 142));
         }
     }
 
@@ -45,9 +45,9 @@ public class ContainerMerchant extends Container
         return this.merchantInventory;
     }
 
-    public void addCraftingToCrafters(ICrafting par1ICrafting)
+    public void addCraftingToCrafters(ICrafting p_75132_1_)
     {
-        super.addCraftingToCrafters(par1ICrafting);
+        super.addCraftingToCrafters(p_75132_1_);
     }
 
     /**
@@ -61,38 +61,38 @@ public class ContainerMerchant extends Container
     /**
      * Callback for when the crafting matrix is changed.
      */
-    public void onCraftMatrixChanged(IInventory par1IInventory)
+    public void onCraftMatrixChanged(IInventory p_75130_1_)
     {
         this.merchantInventory.resetRecipeAndSlots();
-        super.onCraftMatrixChanged(par1IInventory);
+        super.onCraftMatrixChanged(p_75130_1_);
     }
 
-    public void setCurrentRecipeIndex(int par1)
+    public void setCurrentRecipeIndex(int p_75175_1_)
     {
-        this.merchantInventory.setCurrentRecipeIndex(par1);
+        this.merchantInventory.setCurrentRecipeIndex(p_75175_1_);
     }
 
-    public void updateProgressBar(int par1, int par2) {}
+    public void updateProgressBar(int p_75137_1_, int p_75137_2_) {}
 
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer)
+    public boolean canInteractWith(EntityPlayer p_75145_1_)
     {
-        return this.theMerchant.getCustomer() == par1EntityPlayer;
+        return this.theMerchant.getCustomer() == p_75145_1_;
     }
 
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+    public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int p_82846_2_)
     {
         ItemStack var3 = null;
-        Slot var4 = (Slot)this.inventorySlots.get(par2);
+        Slot var4 = (Slot)this.inventorySlots.get(p_82846_2_);
 
         if (var4 != null && var4.getHasStack())
         {
             ItemStack var5 = var4.getStack();
             var3 = var5.copy();
 
-            if (par2 == 2)
+            if (p_82846_2_ == 2)
             {
                 if (!this.mergeItemStack(var5, 3, 39, true))
                 {
@@ -101,16 +101,16 @@ public class ContainerMerchant extends Container
 
                 var4.onSlotChange(var5, var3);
             }
-            else if (par2 != 0 && par2 != 1)
+            else if (p_82846_2_ != 0 && p_82846_2_ != 1)
             {
-                if (par2 >= 3 && par2 < 30)
+                if (p_82846_2_ >= 3 && p_82846_2_ < 30)
                 {
                     if (!this.mergeItemStack(var5, 30, 39, false))
                     {
                         return null;
                     }
                 }
-                else if (par2 >= 30 && par2 < 39 && !this.mergeItemStack(var5, 3, 30, false))
+                else if (p_82846_2_ >= 30 && p_82846_2_ < 39 && !this.mergeItemStack(var5, 3, 30, false))
                 {
                     return null;
                 }
@@ -134,7 +134,7 @@ public class ContainerMerchant extends Container
                 return null;
             }
 
-            var4.onPickupFromSlot(par1EntityPlayer, var5);
+            var4.onPickupFromSlot(p_82846_1_, var5);
         }
 
         return var3;
@@ -143,11 +143,11 @@ public class ContainerMerchant extends Container
     /**
      * Called when the container is closed.
      */
-    public void onContainerClosed(EntityPlayer par1EntityPlayer)
+    public void onContainerClosed(EntityPlayer p_75134_1_)
     {
-        super.onContainerClosed(par1EntityPlayer);
+        super.onContainerClosed(p_75134_1_);
         this.theMerchant.setCustomer((EntityPlayer)null);
-        super.onContainerClosed(par1EntityPlayer);
+        super.onContainerClosed(p_75134_1_);
 
         if (!this.theWorld.isClient)
         {
@@ -155,14 +155,14 @@ public class ContainerMerchant extends Container
 
             if (var2 != null)
             {
-                par1EntityPlayer.dropPlayerItemWithRandomChoice(var2, false);
+                p_75134_1_.dropPlayerItemWithRandomChoice(var2, false);
             }
 
             var2 = this.merchantInventory.getStackInSlotOnClosing(1);
 
             if (var2 != null)
             {
-                par1EntityPlayer.dropPlayerItemWithRandomChoice(var2, false);
+                p_75134_1_.dropPlayerItemWithRandomChoice(var2, false);
             }
         }
     }

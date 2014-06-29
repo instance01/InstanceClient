@@ -55,9 +55,9 @@ public class EntityFishHook extends Entity
     private double field_146053_aJ;
     private static final String __OBFID = "CL_00001663";
 
-    public EntityFishHook(World par1World)
+    public EntityFishHook(World p_i1764_1_)
     {
-        super(par1World);
+        super(p_i1764_1_);
         this.field_146037_g = -1;
         this.field_146048_h = -1;
         this.field_146050_i = -1;
@@ -65,26 +65,26 @@ public class EntityFishHook extends Entity
         this.ignoreFrustumCheck = true;
     }
 
-    public EntityFishHook(World par1World, double par2, double par4, double par6, EntityPlayer par8EntityPlayer)
+    public EntityFishHook(World p_i1765_1_, double p_i1765_2_, double p_i1765_4_, double p_i1765_6_, EntityPlayer p_i1765_8_)
     {
-        this(par1World);
-        this.setPosition(par2, par4, par6);
+        this(p_i1765_1_);
+        this.setPosition(p_i1765_2_, p_i1765_4_, p_i1765_6_);
         this.ignoreFrustumCheck = true;
-        this.field_146042_b = par8EntityPlayer;
-        par8EntityPlayer.fishEntity = this;
+        this.field_146042_b = p_i1765_8_;
+        p_i1765_8_.fishEntity = this;
     }
 
-    public EntityFishHook(World par1World, EntityPlayer par2EntityPlayer)
+    public EntityFishHook(World p_i1766_1_, EntityPlayer p_i1766_2_)
     {
-        super(par1World);
+        super(p_i1766_1_);
         this.field_146037_g = -1;
         this.field_146048_h = -1;
         this.field_146050_i = -1;
         this.ignoreFrustumCheck = true;
-        this.field_146042_b = par2EntityPlayer;
+        this.field_146042_b = p_i1766_2_;
         this.field_146042_b.fishEntity = this;
         this.setSize(0.25F, 0.25F);
-        this.setLocationAndAngles(par2EntityPlayer.posX, par2EntityPlayer.posY + 1.62D - (double)par2EntityPlayer.yOffset, par2EntityPlayer.posZ, par2EntityPlayer.rotationYaw, par2EntityPlayer.rotationPitch);
+        this.setLocationAndAngles(p_i1766_2_.posX, p_i1766_2_.posY + 1.62D - (double)p_i1766_2_.yOffset, p_i1766_2_.posZ, p_i1766_2_.rotationYaw, p_i1766_2_.rotationPitch);
         this.posX -= (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
         this.posY -= 0.10000000149011612D;
         this.posZ -= (double)(MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
@@ -103,11 +103,11 @@ public class EntityFishHook extends Entity
      * Checks if the entity is in range to render by using the past in distance and comparing it to its average edge
      * length * 64 * renderDistanceWeight Args: distance
      */
-    public boolean isInRangeToRenderDist(double par1)
+    public boolean isInRangeToRenderDist(double p_70112_1_)
     {
         double var3 = this.boundingBox.getAverageEdgeLength() * 4.0D;
         var3 *= 64.0D;
-        return par1 < var3 * var3;
+        return p_70112_1_ < var3 * var3;
     }
 
     public void func_146035_c(double p_146035_1_, double p_146035_3_, double p_146035_5_, float p_146035_7_, float p_146035_8_)
@@ -135,14 +135,14 @@ public class EntityFishHook extends Entity
      * Sets the position and rotation. Only difference from the other one is no bounding on the rotation. Args: posX,
      * posY, posZ, yaw, pitch
      */
-    public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9)
+    public void setPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_)
     {
-        this.field_146056_aC = par1;
-        this.field_146057_aD = par3;
-        this.field_146058_aE = par5;
-        this.field_146059_aF = (double)par7;
-        this.field_146060_aG = (double)par8;
-        this.field_146055_aB = par9;
+        this.field_146056_aC = p_70056_1_;
+        this.field_146057_aD = p_70056_3_;
+        this.field_146058_aE = p_70056_5_;
+        this.field_146059_aF = (double)p_70056_7_;
+        this.field_146060_aG = (double)p_70056_8_;
+        this.field_146055_aB = p_70056_9_;
         this.motionX = this.field_146061_aH;
         this.motionY = this.field_146052_aI;
         this.motionZ = this.field_146053_aJ;
@@ -151,11 +151,11 @@ public class EntityFishHook extends Entity
     /**
      * Sets the velocity to the args. Args: x, y, z
      */
-    public void setVelocity(double par1, double par3, double par5)
+    public void setVelocity(double p_70016_1_, double p_70016_3_, double p_70016_5_)
     {
-        this.field_146061_aH = this.motionX = par1;
-        this.field_146052_aI = this.motionY = par3;
-        this.field_146053_aJ = this.motionZ = par5;
+        this.field_146061_aH = this.motionX = p_70016_1_;
+        this.field_146052_aI = this.motionY = p_70016_3_;
+        this.field_146053_aJ = this.motionZ = p_70016_5_;
     }
 
     /**
@@ -235,15 +235,15 @@ public class EntityFishHook extends Entity
                 ++this.field_146047_aw;
             }
 
-            Vec3 var26 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
-            Vec3 var2 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            Vec3 var26 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
+            Vec3 var2 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
             MovingObjectPosition var3 = this.worldObj.rayTraceBlocks(var26, var2);
-            var26 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
-            var2 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            var26 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
+            var2 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
             if (var3 != null)
             {
-                var2 = this.worldObj.getWorldVec3Pool().getVecFromPool(var3.hitVec.xCoord, var3.hitVec.yCoord, var3.hitVec.zCoord);
+                var2 = Vec3.createVectorHelper(var3.hitVec.xCoord, var3.hitVec.yCoord, var3.hitVec.zCoord);
             }
 
             Entity var4 = null;
@@ -329,24 +329,24 @@ public class EntityFishHook extends Entity
                     var31 = 0.5F;
                 }
 
-                byte var33 = 5;
-                double var32 = 0.0D;
+                byte var32 = 5;
+                double var33 = 0.0D;
 
-                for (int var35 = 0; var35 < var33; ++var35)
+                for (int var34 = 0; var34 < var32; ++var34)
                 {
-                    double var14 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(var35 + 0) / (double)var33 - 0.125D + 0.125D;
-                    double var16 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(var35 + 1) / (double)var33 - 0.125D + 0.125D;
-                    AxisAlignedBB var18 = AxisAlignedBB.getAABBPool().getAABB(this.boundingBox.minX, var14, this.boundingBox.minZ, this.boundingBox.maxX, var16, this.boundingBox.maxZ);
+                    double var14 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(var34 + 0) / (double)var32 - 0.125D + 0.125D;
+                    double var16 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(var34 + 1) / (double)var32 - 0.125D + 0.125D;
+                    AxisAlignedBB var18 = AxisAlignedBB.getBoundingBox(this.boundingBox.minX, var14, this.boundingBox.minZ, this.boundingBox.maxX, var16, this.boundingBox.maxZ);
 
                     if (this.worldObj.isAABBInMaterial(var18, Material.water))
                     {
-                        var32 += 1.0D / (double)var33;
+                        var33 += 1.0D / (double)var32;
                     }
                 }
 
-                if (!this.worldObj.isClient && var32 > 0.0D)
+                if (!this.worldObj.isClient && var33 > 0.0D)
                 {
-                    WorldServer var34 = (WorldServer)this.worldObj;
+                    WorldServer var35 = (WorldServer)this.worldObj;
                     int var36 = 1;
 
                     if (this.rand.nextFloat() < 0.25F && this.worldObj.canLightningStrikeAt(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY) + 1, MathHelper.floor_double(this.posZ)))
@@ -375,8 +375,8 @@ public class EntityFishHook extends Entity
                         float var17;
                         double var20;
                         double var22;
-                        double var38;
                         float var37;
+                        double var38;
 
                         if (this.field_146038_az > 0)
                         {
@@ -387,8 +387,8 @@ public class EntityFishHook extends Entity
                                 this.motionY -= 0.20000000298023224D;
                                 this.playSound("random.splash", 0.25F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.4F);
                                 var15 = (float)MathHelper.floor_double(this.boundingBox.minY);
-                                var34.func_147487_a("bubble", this.posX, (double)(var15 + 1.0F), this.posZ, (int)(1.0F + this.width * 20.0F), (double)this.width, 0.0D, (double)this.width, 0.20000000298023224D);
-                                var34.func_147487_a("wake", this.posX, (double)(var15 + 1.0F), this.posZ, (int)(1.0F + this.width * 20.0F), (double)this.width, 0.0D, (double)this.width, 0.20000000298023224D);
+                                var35.func_147487_a("bubble", this.posX, (double)(var15 + 1.0F), this.posZ, (int)(1.0F + this.width * 20.0F), (double)this.width, 0.0D, (double)this.width, 0.20000000298023224D);
+                                var35.func_147487_a("wake", this.posX, (double)(var15 + 1.0F), this.posZ, (int)(1.0F + this.width * 20.0F), (double)this.width, 0.0D, (double)this.width, 0.20000000298023224D);
                                 this.field_146045_ax = MathHelper.getRandomIntegerInRange(this.rand, 10, 30);
                             }
                             else
@@ -403,13 +403,13 @@ public class EntityFishHook extends Entity
 
                                 if (this.rand.nextFloat() < 0.15F)
                                 {
-                                    var34.func_147487_a("bubble", var38, var20 - 0.10000000149011612D, var22, 1, (double)var37, 0.1D, (double)var17, 0.0D);
+                                    var35.func_147487_a("bubble", var38, var20 - 0.10000000149011612D, var22, 1, (double)var37, 0.1D, (double)var17, 0.0D);
                                 }
 
                                 float var24 = var37 * 0.04F;
                                 float var25 = var17 * 0.04F;
-                                var34.func_147487_a("wake", var38, var20, var22, 0, (double)var25, 0.01D, (double)(-var24), 1.0D);
-                                var34.func_147487_a("wake", var38, var20, var22, 0, (double)(-var25), 0.01D, (double)var24, 1.0D);
+                                var35.func_147487_a("wake", var38, var20, var22, 0, (double)var25, 0.01D, (double)(-var24), 1.0D);
+                                var35.func_147487_a("wake", var38, var20, var22, 0, (double)(-var25), 0.01D, (double)var24, 1.0D);
                             }
                         }
                         else if (this.field_146040_ay > 0)
@@ -437,7 +437,7 @@ public class EntityFishHook extends Entity
                                 var38 = this.posX + (double)(MathHelper.sin(var37) * var17 * 0.1F);
                                 var20 = (double)((float)MathHelper.floor_double(this.boundingBox.minY) + 1.0F);
                                 var22 = this.posZ + (double)(MathHelper.cos(var37) * var17 * 0.1F);
-                                var34.func_147487_a("splash", var38, var20, var22, 2 + this.rand.nextInt(2), 0.10000000149011612D, 0.0D, 0.10000000149011612D, 0.0D);
+                                var35.func_147487_a("splash", var38, var20, var22, 2 + this.rand.nextInt(2), 0.10000000149011612D, 0.0D, 0.10000000149011612D, 0.0D);
                             }
 
                             if (this.field_146040_ay <= 0)
@@ -459,10 +459,10 @@ public class EntityFishHook extends Entity
                     }
                 }
 
-                var13 = var32 * 2.0D - 1.0D;
+                var13 = var33 * 2.0D - 1.0D;
                 this.motionY += 0.03999999910593033D * var13;
 
-                if (var32 > 0.0D)
+                if (var33 > 0.0D)
                 {
                     var31 = (float)((double)var31 * 0.9D);
                     this.motionY *= 0.8D;
@@ -479,27 +479,27 @@ public class EntityFishHook extends Entity
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    public void writeEntityToNBT(NBTTagCompound p_70014_1_)
     {
-        par1NBTTagCompound.setShort("xTile", (short)this.field_146037_g);
-        par1NBTTagCompound.setShort("yTile", (short)this.field_146048_h);
-        par1NBTTagCompound.setShort("zTile", (short)this.field_146050_i);
-        par1NBTTagCompound.setByte("inTile", (byte)Block.getIdFromBlock(this.field_146046_j));
-        par1NBTTagCompound.setByte("shake", (byte)this.field_146044_a);
-        par1NBTTagCompound.setByte("inGround", (byte)(this.field_146051_au ? 1 : 0));
+        p_70014_1_.setShort("xTile", (short)this.field_146037_g);
+        p_70014_1_.setShort("yTile", (short)this.field_146048_h);
+        p_70014_1_.setShort("zTile", (short)this.field_146050_i);
+        p_70014_1_.setByte("inTile", (byte)Block.getIdFromBlock(this.field_146046_j));
+        p_70014_1_.setByte("shake", (byte)this.field_146044_a);
+        p_70014_1_.setByte("inGround", (byte)(this.field_146051_au ? 1 : 0));
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    public void readEntityFromNBT(NBTTagCompound p_70037_1_)
     {
-        this.field_146037_g = par1NBTTagCompound.getShort("xTile");
-        this.field_146048_h = par1NBTTagCompound.getShort("yTile");
-        this.field_146050_i = par1NBTTagCompound.getShort("zTile");
-        this.field_146046_j = Block.getBlockById(par1NBTTagCompound.getByte("inTile") & 255);
-        this.field_146044_a = par1NBTTagCompound.getByte("shake") & 255;
-        this.field_146051_au = par1NBTTagCompound.getByte("inGround") == 1;
+        this.field_146037_g = p_70037_1_.getShort("xTile");
+        this.field_146048_h = p_70037_1_.getShort("yTile");
+        this.field_146050_i = p_70037_1_.getShort("zTile");
+        this.field_146046_j = Block.getBlockById(p_70037_1_.getByte("inTile") & 255);
+        this.field_146044_a = p_70037_1_.getByte("shake") & 255;
+        this.field_146051_au = p_70037_1_.getByte("inGround") == 1;
     }
 
     public float getShadowSize()

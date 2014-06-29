@@ -40,16 +40,16 @@ public class ChunkProviderClient implements IChunkProvider
     private World worldObj;
     private static final String __OBFID = "CL_00000880";
 
-    public ChunkProviderClient(World par1World)
+    public ChunkProviderClient(World p_i1184_1_)
     {
-        this.blankChunk = new EmptyChunk(par1World, 0, 0);
-        this.worldObj = par1World;
+        this.blankChunk = new EmptyChunk(p_i1184_1_, 0, 0);
+        this.worldObj = p_i1184_1_;
     }
 
     /**
      * Checks to see if a chunk exists at x, y
      */
-    public boolean chunkExists(int par1, int par2)
+    public boolean chunkExists(int p_73149_1_, int p_73149_2_)
     {
         return true;
     }
@@ -58,26 +58,26 @@ public class ChunkProviderClient implements IChunkProvider
      * Unload chunk from ChunkProviderClient's hashmap. Called in response to a Packet50PreChunk with its mode field set
      * to false
      */
-    public void unloadChunk(int par1, int par2)
+    public void unloadChunk(int p_73234_1_, int p_73234_2_)
     {
-        Chunk var3 = this.provideChunk(par1, par2);
+        Chunk var3 = this.provideChunk(p_73234_1_, p_73234_2_);
 
         if (!var3.isEmpty())
         {
             var3.onChunkUnload();
         }
 
-        this.chunkMapping.remove(ChunkCoordIntPair.chunkXZ2Int(par1, par2));
+        this.chunkMapping.remove(ChunkCoordIntPair.chunkXZ2Int(p_73234_1_, p_73234_2_));
         this.chunkListing.remove(var3);
     }
 
     /**
      * loads or generates the chunk at the chunk location specified
      */
-    public Chunk loadChunk(int par1, int par2)
+    public Chunk loadChunk(int p_73158_1_, int p_73158_2_)
     {
-        Chunk var3 = new Chunk(this.worldObj, par1, par2);
-        this.chunkMapping.add(ChunkCoordIntPair.chunkXZ2Int(par1, par2), var3);
+        Chunk var3 = new Chunk(this.worldObj, p_73158_1_, p_73158_2_);
+        this.chunkMapping.add(ChunkCoordIntPair.chunkXZ2Int(p_73158_1_, p_73158_2_), var3);
         this.chunkListing.add(var3);
         var3.isChunkLoaded = true;
         return var3;
@@ -87,9 +87,9 @@ public class ChunkProviderClient implements IChunkProvider
      * Will return back a chunk, if it doesn't exist and its not a MP client it will generates all the blocks for the
      * specified chunk from the map seed and chunk seed
      */
-    public Chunk provideChunk(int par1, int par2)
+    public Chunk provideChunk(int p_73154_1_, int p_73154_2_)
     {
-        Chunk var3 = (Chunk)this.chunkMapping.getValueByKey(ChunkCoordIntPair.chunkXZ2Int(par1, par2));
+        Chunk var3 = (Chunk)this.chunkMapping.getValueByKey(ChunkCoordIntPair.chunkXZ2Int(p_73154_1_, p_73154_2_));
         return var3 == null ? this.blankChunk : var3;
     }
 
@@ -97,7 +97,7 @@ public class ChunkProviderClient implements IChunkProvider
      * Two modes of operation: if passed true, save all Chunks in one go.  If passed false, save up to two chunks.
      * Return true if all chunks have been saved.
      */
-    public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate)
+    public boolean saveChunks(boolean p_73151_1_, IProgressUpdate p_73151_2_)
     {
         return true;
     }
@@ -141,7 +141,7 @@ public class ChunkProviderClient implements IChunkProvider
     /**
      * Populates chunk with ores etc etc
      */
-    public void populate(IChunkProvider par1IChunkProvider, int par2, int par3) {}
+    public void populate(IChunkProvider p_73153_1_, int p_73153_2_, int p_73153_3_) {}
 
     /**
      * Converts the instance data to a readable string.
@@ -154,7 +154,7 @@ public class ChunkProviderClient implements IChunkProvider
     /**
      * Returns a list of creatures of the specified type that can spawn at the given location.
      */
-    public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int par2, int par3, int par4)
+    public List getPossibleCreatures(EnumCreatureType p_73155_1_, int p_73155_2_, int p_73155_3_, int p_73155_4_)
     {
         return null;
     }
@@ -169,5 +169,5 @@ public class ChunkProviderClient implements IChunkProvider
         return this.chunkListing.size();
     }
 
-    public void recreateStructures(int par1, int par2) {}
+    public void recreateStructures(int p_82695_1_, int p_82695_2_) {}
 }

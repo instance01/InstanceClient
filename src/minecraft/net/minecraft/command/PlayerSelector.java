@@ -36,9 +36,9 @@ public class PlayerSelector
     /**
      * Returns the one player that matches the given at-token.  Returns null if more than one player matches.
      */
-    public static EntityPlayerMP matchOnePlayer(ICommandSender par0ICommandSender, String par1Str)
+    public static EntityPlayerMP matchOnePlayer(ICommandSender p_82386_0_, String p_82386_1_)
     {
-        EntityPlayerMP[] var2 = matchPlayers(par0ICommandSender, par1Str);
+        EntityPlayerMP[] var2 = matchPlayers(p_82386_0_, p_82386_1_);
         return var2 != null && var2.length == 1 ? var2[0] : null;
     }
 
@@ -66,15 +66,11 @@ public class PlayerSelector
     /**
      * Returns an array of all players matched by the given at-token.
      */
-    public static EntityPlayerMP[] matchPlayers(ICommandSender par0ICommandSender, String par1Str)
+    public static EntityPlayerMP[] matchPlayers(ICommandSender p_82380_0_, String p_82380_1_)
     {
-        Matcher var2 = tokenPattern.matcher(par1Str);
+        Matcher var2 = tokenPattern.matcher(p_82380_1_);
 
-        if (!var2.matches())
-        {
-            return null;
-        }
-        else
+        if (var2.matches())
         {
             Map var3 = getArgumentMap(var2.group(2));
             String var4 = var2.group(1);
@@ -84,7 +80,7 @@ public class PlayerSelector
             int var8 = getDefaultMaximumLevel(var4);
             int var9 = getDefaultCount(var4);
             int var10 = WorldSettings.GameType.NOT_SET.getID();
-            ChunkCoordinates var11 = par0ICommandSender.getPlayerCoordinates();
+            ChunkCoordinates var11 = p_82380_0_.getPlayerCoordinates();
             Map var12 = func_96560_a(var3);
             String var13 = null;
             String var14 = null;
@@ -150,35 +146,39 @@ public class PlayerSelector
                 var13 = (String)var3.get("name");
             }
 
-            World var16 = var15 ? par0ICommandSender.getEntityWorld() : null;
+            World var16 = var15 ? p_82380_0_.getEntityWorld() : null;
             List var17;
 
             if (!var4.equals("p") && !var4.equals("a"))
             {
-                if (!var4.equals("r"))
-                {
-                    return null;
-                }
-                else
+                if (var4.equals("r"))
                 {
                     var17 = MinecraftServer.getServer().getConfigurationManager().findPlayers(var11, var5, var6, 0, var10, var7, var8, var12, var13, var14, var16);
                     Collections.shuffle(var17);
                     var17 = var17.subList(0, Math.min(var9, var17.size()));
-                    return var17 != null && !var17.isEmpty() ? (EntityPlayerMP[])var17.toArray(new EntityPlayerMP[0]) : new EntityPlayerMP[0];
+                    return var17.isEmpty() ? new EntityPlayerMP[0] : (EntityPlayerMP[])var17.toArray(new EntityPlayerMP[var17.size()]);
+                }
+                else
+                {
+                    return null;
                 }
             }
             else
             {
                 var17 = MinecraftServer.getServer().getConfigurationManager().findPlayers(var11, var5, var6, var9, var10, var7, var8, var12, var13, var14, var16);
-                return var17 != null && !var17.isEmpty() ? (EntityPlayerMP[])var17.toArray(new EntityPlayerMP[0]) : new EntityPlayerMP[0];
+                return var17.isEmpty() ? new EntityPlayerMP[0] : (EntityPlayerMP[])var17.toArray(new EntityPlayerMP[var17.size()]);
             }
+        }
+        else
+        {
+            return null;
         }
     }
 
-    public static Map func_96560_a(Map par0Map)
+    public static Map func_96560_a(Map p_96560_0_)
     {
         HashMap var1 = new HashMap();
-        Iterator var2 = par0Map.keySet().iterator();
+        Iterator var2 = p_96560_0_.keySet().iterator();
 
         while (var2.hasNext())
         {
@@ -187,7 +187,7 @@ public class PlayerSelector
             if (var3.startsWith("score_") && var3.length() > "score_".length())
             {
                 String var4 = var3.substring("score_".length());
-                var1.put(var4, Integer.valueOf(MathHelper.parseIntWithDefault((String)par0Map.get(var3), 1)));
+                var1.put(var4, Integer.valueOf(MathHelper.parseIntWithDefault((String)p_96560_0_.get(var3), 1)));
             }
         }
 
@@ -197,9 +197,9 @@ public class PlayerSelector
     /**
      * Returns whether the given pattern can match more than one player.
      */
-    public static boolean matchesMultiplePlayers(String par0Str)
+    public static boolean matchesMultiplePlayers(String p_82377_0_)
     {
-        Matcher var1 = tokenPattern.matcher(par0Str);
+        Matcher var1 = tokenPattern.matcher(p_82377_0_);
 
         if (var1.matches())
         {
@@ -223,14 +223,14 @@ public class PlayerSelector
     /**
      * Returns whether the given token (parameter 1) has exactly the given arguments (parameter 2).
      */
-    public static boolean hasTheseArguments(String par0Str, String par1Str)
+    public static boolean hasTheseArguments(String p_82383_0_, String p_82383_1_)
     {
-        Matcher var2 = tokenPattern.matcher(par0Str);
+        Matcher var2 = tokenPattern.matcher(p_82383_0_);
 
         if (var2.matches())
         {
             String var3 = var2.group(1);
-            return par1Str == null || par1Str.equals(var3);
+            return p_82383_1_ == null || p_82383_1_.equals(var3);
         }
         else
         {
@@ -241,15 +241,15 @@ public class PlayerSelector
     /**
      * Returns whether the given token has any arguments set.
      */
-    public static boolean hasArguments(String par0Str)
+    public static boolean hasArguments(String p_82378_0_)
     {
-        return hasTheseArguments(par0Str, (String)null);
+        return hasTheseArguments(p_82378_0_, (String)null);
     }
 
     /**
      * Gets the default minimum range (argument rm).
      */
-    private static final int getDefaultMinimumRange(String par0Str)
+    private static final int getDefaultMinimumRange(String p_82384_0_)
     {
         return 0;
     }
@@ -257,7 +257,7 @@ public class PlayerSelector
     /**
      * Gets the default maximum range (argument r).
      */
-    private static final int getDefaultMaximumRange(String par0Str)
+    private static final int getDefaultMaximumRange(String p_82379_0_)
     {
         return 0;
     }
@@ -265,7 +265,7 @@ public class PlayerSelector
     /**
      * Gets the default maximum experience level (argument l)
      */
-    private static final int getDefaultMaximumLevel(String par0Str)
+    private static final int getDefaultMaximumLevel(String p_82376_0_)
     {
         return Integer.MAX_VALUE;
     }
@@ -273,7 +273,7 @@ public class PlayerSelector
     /**
      * Gets the default minimum experience level (argument lm)
      */
-    private static final int getDefaultMinimumLevel(String par0Str)
+    private static final int getDefaultMinimumLevel(String p_82375_0_)
     {
         return 0;
     }
@@ -281,25 +281,25 @@ public class PlayerSelector
     /**
      * Gets the default number of players to return (argument c, 0 for infinite)
      */
-    private static final int getDefaultCount(String par0Str)
+    private static final int getDefaultCount(String p_82382_0_)
     {
-        return par0Str.equals("a") ? 0 : 1;
+        return p_82382_0_.equals("a") ? 0 : 1;
     }
 
     /**
      * Parses the given argument string, turning it into a HashMap&lt;String, String&gt; of name-&gt;value.
      */
-    private static Map getArgumentMap(String par0Str)
+    private static Map getArgumentMap(String p_82381_0_)
     {
         HashMap var1 = new HashMap();
 
-        if (par0Str == null)
+        if (p_82381_0_ == null)
         {
             return var1;
         }
         else
         {
-            Matcher var2 = intListPattern.matcher(par0Str);
+            Matcher var2 = intListPattern.matcher(p_82381_0_);
             int var3 = 0;
             int var4;
 
@@ -331,9 +331,9 @@ public class PlayerSelector
                 }
             }
 
-            if (var4 < par0Str.length())
+            if (var4 < p_82381_0_.length())
             {
-                var2 = keyValueListPattern.matcher(var4 == -1 ? par0Str : par0Str.substring(var4));
+                var2 = keyValueListPattern.matcher(var4 == -1 ? p_82381_0_ : p_82381_0_.substring(var4));
 
                 while (var2.find())
                 {

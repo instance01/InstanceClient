@@ -75,9 +75,9 @@ public class C13PacketPlayerAbilities extends Packet
         p_148840_1_.writeFloat(this.field_149495_f);
     }
 
-    public void processPacket(INetHandlerPlayServer p_149487_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149487_1_.processPlayerAbilities(this);
+        p_148833_1_.processPlayerAbilities(this);
     }
 
     /**

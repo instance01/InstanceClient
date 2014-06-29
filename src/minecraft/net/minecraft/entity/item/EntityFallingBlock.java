@@ -30,9 +30,9 @@ public class EntityFallingBlock extends Entity
     public NBTTagCompound field_145810_d;
     private static final String __OBFID = "CL_00001668";
 
-    public EntityFallingBlock(World par1World)
+    public EntityFallingBlock(World p_i1706_1_)
     {
-        super(par1World);
+        super(p_i1706_1_);
         this.field_145813_c = true;
         this.field_145815_h = 40;
         this.field_145816_i = 2.0F;
@@ -185,11 +185,11 @@ public class EntityFallingBlock extends Entity
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
-    protected void fall(float par1)
+    protected void fall(float p_70069_1_)
     {
         if (this.field_145809_g)
         {
-            int var2 = MathHelper.ceiling_float_int(par1 - 1.0F);
+            int var2 = MathHelper.ceiling_float_int(p_70069_1_ - 1.0F);
 
             if (var2 > 0)
             {
@@ -226,59 +226,59 @@ public class EntityFallingBlock extends Entity
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    protected void writeEntityToNBT(NBTTagCompound p_70014_1_)
     {
-        par1NBTTagCompound.setByte("Tile", (byte)Block.getIdFromBlock(this.field_145811_e));
-        par1NBTTagCompound.setInteger("TileID", Block.getIdFromBlock(this.field_145811_e));
-        par1NBTTagCompound.setByte("Data", (byte)this.field_145814_a);
-        par1NBTTagCompound.setByte("Time", (byte)this.field_145812_b);
-        par1NBTTagCompound.setBoolean("DropItem", this.field_145813_c);
-        par1NBTTagCompound.setBoolean("HurtEntities", this.field_145809_g);
-        par1NBTTagCompound.setFloat("FallHurtAmount", this.field_145816_i);
-        par1NBTTagCompound.setInteger("FallHurtMax", this.field_145815_h);
+        p_70014_1_.setByte("Tile", (byte)Block.getIdFromBlock(this.field_145811_e));
+        p_70014_1_.setInteger("TileID", Block.getIdFromBlock(this.field_145811_e));
+        p_70014_1_.setByte("Data", (byte)this.field_145814_a);
+        p_70014_1_.setByte("Time", (byte)this.field_145812_b);
+        p_70014_1_.setBoolean("DropItem", this.field_145813_c);
+        p_70014_1_.setBoolean("HurtEntities", this.field_145809_g);
+        p_70014_1_.setFloat("FallHurtAmount", this.field_145816_i);
+        p_70014_1_.setInteger("FallHurtMax", this.field_145815_h);
 
         if (this.field_145810_d != null)
         {
-            par1NBTTagCompound.setTag("TileEntityData", this.field_145810_d);
+            p_70014_1_.setTag("TileEntityData", this.field_145810_d);
         }
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    protected void readEntityFromNBT(NBTTagCompound p_70037_1_)
     {
-        if (par1NBTTagCompound.func_150297_b("TileID", 99))
+        if (p_70037_1_.func_150297_b("TileID", 99))
         {
-            this.field_145811_e = Block.getBlockById(par1NBTTagCompound.getInteger("TileID"));
+            this.field_145811_e = Block.getBlockById(p_70037_1_.getInteger("TileID"));
         }
         else
         {
-            this.field_145811_e = Block.getBlockById(par1NBTTagCompound.getByte("Tile") & 255);
+            this.field_145811_e = Block.getBlockById(p_70037_1_.getByte("Tile") & 255);
         }
 
-        this.field_145814_a = par1NBTTagCompound.getByte("Data") & 255;
-        this.field_145812_b = par1NBTTagCompound.getByte("Time") & 255;
+        this.field_145814_a = p_70037_1_.getByte("Data") & 255;
+        this.field_145812_b = p_70037_1_.getByte("Time") & 255;
 
-        if (par1NBTTagCompound.func_150297_b("HurtEntities", 99))
+        if (p_70037_1_.func_150297_b("HurtEntities", 99))
         {
-            this.field_145809_g = par1NBTTagCompound.getBoolean("HurtEntities");
-            this.field_145816_i = par1NBTTagCompound.getFloat("FallHurtAmount");
-            this.field_145815_h = par1NBTTagCompound.getInteger("FallHurtMax");
+            this.field_145809_g = p_70037_1_.getBoolean("HurtEntities");
+            this.field_145816_i = p_70037_1_.getFloat("FallHurtAmount");
+            this.field_145815_h = p_70037_1_.getInteger("FallHurtMax");
         }
         else if (this.field_145811_e == Blocks.anvil)
         {
             this.field_145809_g = true;
         }
 
-        if (par1NBTTagCompound.func_150297_b("DropItem", 99))
+        if (p_70037_1_.func_150297_b("DropItem", 99))
         {
-            this.field_145813_c = par1NBTTagCompound.getBoolean("DropItem");
+            this.field_145813_c = p_70037_1_.getBoolean("DropItem");
         }
 
-        if (par1NBTTagCompound.func_150297_b("TileEntityData", 10))
+        if (p_70037_1_.func_150297_b("TileEntityData", 10))
         {
-            this.field_145810_d = par1NBTTagCompound.getCompoundTag("TileEntityData");
+            this.field_145810_d = p_70037_1_.getCompoundTag("TileEntityData");
         }
 
         if (this.field_145811_e.getMaterial() == Material.air)
@@ -310,11 +310,11 @@ public class EntityFallingBlock extends Entity
         return false;
     }
 
-    public void addEntityCrashInfo(CrashReportCategory par1CrashReportCategory)
+    public void addEntityCrashInfo(CrashReportCategory p_85029_1_)
     {
-        super.addEntityCrashInfo(par1CrashReportCategory);
-        par1CrashReportCategory.addCrashSection("Immitating block ID", Integer.valueOf(Block.getIdFromBlock(this.field_145811_e)));
-        par1CrashReportCategory.addCrashSection("Immitating block data", Integer.valueOf(this.field_145814_a));
+        super.addEntityCrashInfo(p_85029_1_);
+        p_85029_1_.addCrashSection("Immitating block ID", Integer.valueOf(Block.getIdFromBlock(this.field_145811_e)));
+        p_85029_1_.addCrashSection("Immitating block data", Integer.valueOf(this.field_145814_a));
     }
 
     public Block func_145805_f()

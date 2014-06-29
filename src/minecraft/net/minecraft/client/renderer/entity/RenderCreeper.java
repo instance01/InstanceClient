@@ -27,9 +27,9 @@ public class RenderCreeper extends RenderLiving
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityCreeper par1EntityCreeper, float par2)
+    protected void preRenderCallback(EntityCreeper p_77041_1_, float p_77041_2_)
     {
-        float var3 = par1EntityCreeper.getCreeperFlashIntensity(par2);
+        float var3 = p_77041_1_.getCreeperFlashIntensity(p_77041_2_);
         float var4 = 1.0F + MathHelper.sin(var3 * 100.0F) * var3 * 0.01F;
 
         if (var3 < 0.0F)
@@ -52,9 +52,9 @@ public class RenderCreeper extends RenderLiving
     /**
      * Returns an ARGB int color back. Args: entityLiving, lightBrightness, partialTickTime
      */
-    protected int getColorMultiplier(EntityCreeper par1EntityCreeper, float par2, float par3)
+    protected int getColorMultiplier(EntityCreeper p_77030_1_, float p_77030_2_, float p_77030_3_)
     {
-        float var4 = par1EntityCreeper.getCreeperFlashIntensity(par3);
+        float var4 = p_77030_1_.getCreeperFlashIntensity(p_77030_3_);
 
         if ((int)(var4 * 10.0F) % 2 == 0)
         {
@@ -84,11 +84,11 @@ public class RenderCreeper extends RenderLiving
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntityCreeper par1EntityCreeper, int par2, float par3)
+    protected int shouldRenderPass(EntityCreeper p_77032_1_, int p_77032_2_, float p_77032_3_)
     {
-        if (par1EntityCreeper.getPowered())
+        if (p_77032_1_.getPowered())
         {
-            if (par1EntityCreeper.isInvisible())
+            if (p_77032_1_.isInvisible())
             {
                 GL11.glDepthMask(false);
             }
@@ -97,9 +97,9 @@ public class RenderCreeper extends RenderLiving
                 GL11.glDepthMask(true);
             }
 
-            if (par2 == 1)
+            if (p_77032_2_ == 1)
             {
-                float var4 = (float)par1EntityCreeper.ticksExisted + par3;
+                float var4 = (float)p_77032_1_.ticksExisted + p_77032_3_;
                 this.bindTexture(armoredCreeperTextures);
                 GL11.glMatrixMode(GL11.GL_TEXTURE);
                 GL11.glLoadIdentity();
@@ -116,7 +116,7 @@ public class RenderCreeper extends RenderLiving
                 return 1;
             }
 
-            if (par2 == 2)
+            if (p_77032_2_ == 2)
             {
                 GL11.glMatrixMode(GL11.GL_TEXTURE);
                 GL11.glLoadIdentity();
@@ -129,7 +129,7 @@ public class RenderCreeper extends RenderLiving
         return -1;
     }
 
-    protected int inheritRenderPass(EntityCreeper par1EntityCreeper, int par2, float par3)
+    protected int inheritRenderPass(EntityCreeper p_77035_1_, int p_77035_2_, float p_77035_3_)
     {
         return -1;
     }
@@ -137,7 +137,7 @@ public class RenderCreeper extends RenderLiving
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntityCreeper par1EntityCreeper)
+    protected ResourceLocation getEntityTexture(EntityCreeper p_110775_1_)
     {
         return creeperTextures;
     }
@@ -146,37 +146,37 @@ public class RenderCreeper extends RenderLiving
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+    protected void preRenderCallback(EntityLivingBase p_77041_1_, float p_77041_2_)
     {
-        this.preRenderCallback((EntityCreeper)par1EntityLivingBase, par2);
+        this.preRenderCallback((EntityCreeper)p_77041_1_, p_77041_2_);
     }
 
     /**
      * Returns an ARGB int color back. Args: entityLiving, lightBrightness, partialTickTime
      */
-    protected int getColorMultiplier(EntityLivingBase par1EntityLivingBase, float par2, float par3)
+    protected int getColorMultiplier(EntityLivingBase p_77030_1_, float p_77030_2_, float p_77030_3_)
     {
-        return this.getColorMultiplier((EntityCreeper)par1EntityLivingBase, par2, par3);
+        return this.getColorMultiplier((EntityCreeper)p_77030_1_, p_77030_2_, p_77030_3_);
     }
 
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3)
+    protected int shouldRenderPass(EntityLivingBase p_77032_1_, int p_77032_2_, float p_77032_3_)
     {
-        return this.shouldRenderPass((EntityCreeper)par1EntityLivingBase, par2, par3);
+        return this.shouldRenderPass((EntityCreeper)p_77032_1_, p_77032_2_, p_77032_3_);
     }
 
-    protected int inheritRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3)
+    protected int inheritRenderPass(EntityLivingBase p_77035_1_, int p_77035_2_, float p_77035_3_)
     {
-        return this.inheritRenderPass((EntityCreeper)par1EntityLivingBase, par2, par3);
+        return this.inheritRenderPass((EntityCreeper)p_77035_1_, p_77035_2_, p_77035_3_);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntityCreeper)par1Entity);
+        return this.getEntityTexture((EntityCreeper)p_110775_1_);
     }
 }

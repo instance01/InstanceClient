@@ -22,9 +22,9 @@ public class S31PacketWindowProperty extends Packet
         this.field_149185_c = p_i45187_3_;
     }
 
-    public void processPacket(INetHandlerPlayClient p_149183_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149183_1_.handleWindowProperty(this);
+        p_148833_1_.handleWindowProperty(this);
     }
 
     /**

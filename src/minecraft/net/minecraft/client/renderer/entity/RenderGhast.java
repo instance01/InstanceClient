@@ -21,18 +21,18 @@ public class RenderGhast extends RenderLiving
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntityGhast par1EntityGhast)
+    protected ResourceLocation getEntityTexture(EntityGhast p_110775_1_)
     {
-        return par1EntityGhast.func_110182_bF() ? ghastShootingTextures : ghastTextures;
+        return p_110775_1_.func_110182_bF() ? ghastShootingTextures : ghastTextures;
     }
 
     /**
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityGhast par1EntityGhast, float par2)
+    protected void preRenderCallback(EntityGhast p_77041_1_, float p_77041_2_)
     {
-        float var4 = ((float)par1EntityGhast.prevAttackCounter + (float)(par1EntityGhast.attackCounter - par1EntityGhast.prevAttackCounter) * par2) / 20.0F;
+        float var4 = ((float)p_77041_1_.prevAttackCounter + (float)(p_77041_1_.attackCounter - p_77041_1_.prevAttackCounter) * p_77041_2_) / 20.0F;
 
         if (var4 < 0.0F)
         {
@@ -50,16 +50,16 @@ public class RenderGhast extends RenderLiving
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+    protected void preRenderCallback(EntityLivingBase p_77041_1_, float p_77041_2_)
     {
-        this.preRenderCallback((EntityGhast)par1EntityLivingBase, par2);
+        this.preRenderCallback((EntityGhast)p_77041_1_, p_77041_2_);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntityGhast)par1Entity);
+        return this.getEntityTexture((EntityGhast)p_110775_1_);
     }
 }

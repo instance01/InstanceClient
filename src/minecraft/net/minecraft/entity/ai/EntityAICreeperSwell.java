@@ -14,9 +14,9 @@ public class EntityAICreeperSwell extends EntityAIBase
     EntityLivingBase creeperAttackTarget;
     private static final String __OBFID = "CL_00001614";
 
-    public EntityAICreeperSwell(EntityCreeper par1EntityCreeper)
+    public EntityAICreeperSwell(EntityCreeper p_i1655_1_)
     {
-        this.swellingCreeper = par1EntityCreeper;
+        this.swellingCreeper = p_i1655_1_;
         this.setMutexBits(1);
     }
 

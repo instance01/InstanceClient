@@ -1,7 +1,9 @@
 package net.minecraft.command.server;
 
+import com.mojang.authlib.GameProfile;
 import java.util.List;
 import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.server.MinecraftServer;
@@ -23,17 +25,27 @@ public class CommandDeOp extends CommandBase
         return 3;
     }
 
-    public String getCommandUsage(ICommandSender par1ICommandSender)
+    public String getCommandUsage(ICommandSender p_71518_1_)
     {
         return "commands.deop.usage";
     }
 
-    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_)
     {
-        if (par2ArrayOfStr.length == 1 && par2ArrayOfStr[0].length() > 0)
+        if (p_71515_2_.length == 1 && p_71515_2_[0].length() > 0)
         {
-            MinecraftServer.getServer().getConfigurationManager().removeOp(par2ArrayOfStr[0]);
-            notifyAdmins(par1ICommandSender, "commands.deop.success", new Object[] {par2ArrayOfStr[0]});
+            MinecraftServer var3 = MinecraftServer.getServer();
+            GameProfile var4 = var3.getConfigurationManager().func_152603_m().func_152700_a(p_71515_2_[0]);
+
+            if (var4 == null)
+            {
+                throw new CommandException("commands.deop.failed", new Object[] {p_71515_2_[0]});
+            }
+            else
+            {
+                var3.getConfigurationManager().func_152610_b(var4);
+                func_152373_a(p_71515_1_, this, "commands.deop.success", new Object[] {p_71515_2_[0]});
+            }
         }
         else
         {
@@ -44,8 +56,8 @@ public class CommandDeOp extends CommandBase
     /**
      * Adds the strings available in this command to the given list of tab completion options.
      */
-    public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public List addTabCompletionOptions(ICommandSender p_71516_1_, String[] p_71516_2_)
     {
-        return par2ArrayOfStr.length == 1 ? getListOfStringsFromIterableMatchingLastWord(par2ArrayOfStr, MinecraftServer.getServer().getConfigurationManager().getOps()) : null;
+        return p_71516_2_.length == 1 ? getListOfStringsMatchingLastWord(p_71516_2_, MinecraftServer.getServer().getConfigurationManager().func_152606_n()) : null;
     }
 }

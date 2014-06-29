@@ -14,9 +14,9 @@ public class EntityAIMoveIndoors extends EntityAIBase
     private int insidePosZ = -1;
     private static final String __OBFID = "CL_00001596";
 
-    public EntityAIMoveIndoors(EntityCreature par1EntityCreature)
+    public EntityAIMoveIndoors(EntityCreature p_i1637_1_)
     {
-        this.entityObj = par1EntityCreature;
+        this.entityObj = p_i1637_1_;
         this.setMutexBits(1);
     }
 
@@ -77,7 +77,7 @@ public class EntityAIMoveIndoors extends EntityAIBase
 
         if (this.entityObj.getDistanceSq((double)this.doorInfo.getInsidePosX(), (double)this.doorInfo.posY, (double)this.doorInfo.getInsidePosZ()) > 256.0D)
         {
-            Vec3 var1 = RandomPositionGenerator.findRandomTargetBlockTowards(this.entityObj, 14, 3, this.entityObj.worldObj.getWorldVec3Pool().getVecFromPool((double)this.doorInfo.getInsidePosX() + 0.5D, (double)this.doorInfo.getInsidePosY(), (double)this.doorInfo.getInsidePosZ() + 0.5D));
+            Vec3 var1 = RandomPositionGenerator.findRandomTargetBlockTowards(this.entityObj, 14, 3, Vec3.createVectorHelper((double)this.doorInfo.getInsidePosX() + 0.5D, (double)this.doorInfo.getInsidePosY(), (double)this.doorInfo.getInsidePosZ() + 0.5D));
 
             if (var1 != null)
             {

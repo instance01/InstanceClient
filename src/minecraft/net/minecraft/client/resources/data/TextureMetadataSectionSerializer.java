@@ -14,9 +14,9 @@ public class TextureMetadataSectionSerializer extends BaseMetadataSectionSeriali
 {
     private static final String __OBFID = "CL_00001115";
 
-    public TextureMetadataSection deserialize(JsonElement par1JsonElement, Type par2Type, JsonDeserializationContext par3JsonDeserializationContext)
+    public TextureMetadataSection deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
     {
-        JsonObject var4 = par1JsonElement.getAsJsonObject();
+        JsonObject var4 = p_deserialize_1_.getAsJsonObject();
         boolean var5 = JsonUtils.getJsonObjectBooleanFieldValueOrDefault(var4, "blur", false);
         boolean var6 = JsonUtils.getJsonObjectBooleanFieldValueOrDefault(var4, "clamp", false);
         ArrayList var7 = Lists.newArrayList();

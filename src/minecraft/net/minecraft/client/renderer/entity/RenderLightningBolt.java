@@ -17,7 +17,7 @@ public class RenderLightningBolt extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityLightningBolt par1EntityLightningBolt, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntityLightningBolt p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
         Tessellator var10 = Tessellator.instance;
         GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -28,7 +28,7 @@ public class RenderLightningBolt extends Render
         double[] var12 = new double[8];
         double var13 = 0.0D;
         double var15 = 0.0D;
-        Random var17 = new Random(par1EntityLightningBolt.boltVertex);
+        Random var17 = new Random(p_76986_1_.boltVertex);
 
         for (int var18 = 7; var18 >= 0; --var18)
         {
@@ -40,7 +40,7 @@ public class RenderLightningBolt extends Render
 
         for (int var45 = 0; var45 < 4; ++var45)
         {
-            Random var46 = new Random(par1EntityLightningBolt.boltVertex);
+            Random var46 = new Random(p_76986_1_.boltVertex);
 
             for (int var19 = 0; var19 < 3; ++var19)
             {
@@ -95,8 +95,8 @@ public class RenderLightningBolt extends Render
 
                     for (int var36 = 0; var36 < 5; ++var36)
                     {
-                        double var37 = par2 + 0.5D - var32;
-                        double var39 = par6 + 0.5D - var32;
+                        double var37 = p_76986_2_ + 0.5D - var32;
+                        double var39 = p_76986_6_ + 0.5D - var32;
 
                         if (var36 == 1 || var36 == 2)
                         {
@@ -108,8 +108,8 @@ public class RenderLightningBolt extends Render
                             var39 += var32 * 2.0D;
                         }
 
-                        double var41 = par2 + 0.5D - var34;
-                        double var43 = par6 + 0.5D - var34;
+                        double var41 = p_76986_2_ + 0.5D - var34;
+                        double var43 = p_76986_6_ + 0.5D - var34;
 
                         if (var36 == 1 || var36 == 2)
                         {
@@ -121,8 +121,8 @@ public class RenderLightningBolt extends Render
                             var43 += var34 * 2.0D;
                         }
 
-                        var10.addVertex(var41 + var22, par4 + (double)(var26 * 16), var43 + var24);
-                        var10.addVertex(var37 + var27, par4 + (double)((var26 + 1) * 16), var39 + var29);
+                        var10.addVertex(var41 + var22, p_76986_4_ + (double)(var26 * 16), var43 + var24);
+                        var10.addVertex(var37 + var27, p_76986_4_ + (double)((var26 + 1) * 16), var39 + var29);
                     }
 
                     var10.draw();
@@ -138,7 +138,7 @@ public class RenderLightningBolt extends Render
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntityLightningBolt par1EntityLightningBolt)
+    protected ResourceLocation getEntityTexture(EntityLightningBolt p_110775_1_)
     {
         return null;
     }
@@ -146,9 +146,9 @@ public class RenderLightningBolt extends Render
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntityLightningBolt)par1Entity);
+        return this.getEntityTexture((EntityLightningBolt)p_110775_1_);
     }
 
     /**
@@ -157,8 +157,8 @@ public class RenderLightningBolt extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityLightningBolt)par1Entity, par2, par4, par6, par8, par9);
+        this.doRender((EntityLightningBolt)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 }

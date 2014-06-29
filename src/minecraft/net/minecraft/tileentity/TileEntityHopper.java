@@ -94,34 +94,34 @@ public class TileEntityHopper extends TileEntity implements IHopper
     /**
      * Returns the stack in slot i
      */
-    public ItemStack getStackInSlot(int par1)
+    public ItemStack getStackInSlot(int p_70301_1_)
     {
-        return this.field_145900_a[par1];
+        return this.field_145900_a[p_70301_1_];
     }
 
     /**
      * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
      * new stack.
      */
-    public ItemStack decrStackSize(int par1, int par2)
+    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_)
     {
-        if (this.field_145900_a[par1] != null)
+        if (this.field_145900_a[p_70298_1_] != null)
         {
             ItemStack var3;
 
-            if (this.field_145900_a[par1].stackSize <= par2)
+            if (this.field_145900_a[p_70298_1_].stackSize <= p_70298_2_)
             {
-                var3 = this.field_145900_a[par1];
-                this.field_145900_a[par1] = null;
+                var3 = this.field_145900_a[p_70298_1_];
+                this.field_145900_a[p_70298_1_] = null;
                 return var3;
             }
             else
             {
-                var3 = this.field_145900_a[par1].splitStack(par2);
+                var3 = this.field_145900_a[p_70298_1_].splitStack(p_70298_2_);
 
-                if (this.field_145900_a[par1].stackSize == 0)
+                if (this.field_145900_a[p_70298_1_].stackSize == 0)
                 {
-                    this.field_145900_a[par1] = null;
+                    this.field_145900_a[p_70298_1_] = null;
                 }
 
                 return var3;
@@ -137,12 +137,12 @@ public class TileEntityHopper extends TileEntity implements IHopper
      * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
      * like when you close a workbench GUI.
      */
-    public ItemStack getStackInSlotOnClosing(int par1)
+    public ItemStack getStackInSlotOnClosing(int p_70304_1_)
     {
-        if (this.field_145900_a[par1] != null)
+        if (this.field_145900_a[p_70304_1_] != null)
         {
-            ItemStack var2 = this.field_145900_a[par1];
-            this.field_145900_a[par1] = null;
+            ItemStack var2 = this.field_145900_a[p_70304_1_];
+            this.field_145900_a[p_70304_1_] = null;
             return var2;
         }
         else
@@ -154,13 +154,13 @@ public class TileEntityHopper extends TileEntity implements IHopper
     /**
      * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      */
-    public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
+    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_)
     {
-        this.field_145900_a[par1] = par2ItemStack;
+        this.field_145900_a[p_70299_1_] = p_70299_2_;
 
-        if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
+        if (p_70299_2_ != null && p_70299_2_.stackSize > this.getInventoryStackLimit())
         {
-            par2ItemStack.stackSize = this.getInventoryStackLimit();
+            p_70299_2_.stackSize = this.getInventoryStackLimit();
         }
     }
 
@@ -196,9 +196,9 @@ public class TileEntityHopper extends TileEntity implements IHopper
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
      */
-    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+    public boolean isUseableByPlayer(EntityPlayer p_70300_1_)
     {
-        return this.worldObj.getTileEntity(this.field_145851_c, this.field_145848_d, this.field_145849_e) != this ? false : par1EntityPlayer.getDistanceSq((double)this.field_145851_c + 0.5D, (double)this.field_145848_d + 0.5D, (double)this.field_145849_e + 0.5D) <= 64.0D;
+        return this.worldObj.getTileEntity(this.field_145851_c, this.field_145848_d, this.field_145849_e) != this ? false : p_70300_1_.getDistanceSq((double)this.field_145851_c + 0.5D, (double)this.field_145848_d + 0.5D, (double)this.field_145849_e + 0.5D) <= 64.0D;
     }
 
     public void openInventory() {}
@@ -208,7 +208,7 @@ public class TileEntityHopper extends TileEntity implements IHopper
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      */
-    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
+    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_)
     {
         return true;
     }
@@ -233,8 +233,17 @@ public class TileEntityHopper extends TileEntity implements IHopper
         {
             if (!this.func_145888_j() && BlockHopper.func_149917_c(this.getBlockMetadata()))
             {
-                boolean var1 = this.func_145883_k();
-                var1 = func_145891_a(this) || var1;
+                boolean var1 = false;
+
+                if (!this.func_152104_k())
+                {
+                    var1 = this.func_145883_k();
+                }
+
+                if (!this.func_152105_l())
+                {
+                    var1 = func_145891_a(this) || var1;
+                }
 
                 if (var1)
                 {
@@ -252,6 +261,42 @@ public class TileEntityHopper extends TileEntity implements IHopper
         }
     }
 
+    private boolean func_152104_k()
+    {
+        ItemStack[] var1 = this.field_145900_a;
+        int var2 = var1.length;
+
+        for (int var3 = 0; var3 < var2; ++var3)
+        {
+            ItemStack var4 = var1[var3];
+
+            if (var4 != null)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean func_152105_l()
+    {
+        ItemStack[] var1 = this.field_145900_a;
+        int var2 = var1.length;
+
+        for (int var3 = 0; var3 < var2; ++var3)
+        {
+            ItemStack var4 = var1[var3];
+
+            if (var4 == null || var4.stackSize != var4.getMaxStackSize())
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     private boolean func_145883_k()
     {
         IInventory var1 = this.func_145895_l();
@@ -262,25 +307,100 @@ public class TileEntityHopper extends TileEntity implements IHopper
         }
         else
         {
-            for (int var2 = 0; var2 < this.getSizeInventory(); ++var2)
+            int var2 = Facing.oppositeSide[BlockHopper.func_149918_b(this.getBlockMetadata())];
+
+            if (this.func_152102_a(var1, var2))
             {
-                if (this.getStackInSlot(var2) != null)
+                return false;
+            }
+            else
+            {
+                for (int var3 = 0; var3 < this.getSizeInventory(); ++var3)
                 {
-                    ItemStack var3 = this.getStackInSlot(var2).copy();
-                    ItemStack var4 = func_145889_a(var1, this.decrStackSize(var2, 1), Facing.oppositeSide[BlockHopper.func_149918_b(this.getBlockMetadata())]);
-
-                    if (var4 == null || var4.stackSize == 0)
+                    if (this.getStackInSlot(var3) != null)
                     {
-                        var1.onInventoryChanged();
-                        return true;
-                    }
+                        ItemStack var4 = this.getStackInSlot(var3).copy();
+                        ItemStack var5 = func_145889_a(var1, this.decrStackSize(var3, 1), var2);
 
-                    this.setInventorySlotContents(var2, var3);
+                        if (var5 == null || var5.stackSize == 0)
+                        {
+                            var1.onInventoryChanged();
+                            return true;
+                        }
+
+                        this.setInventorySlotContents(var3, var4);
+                    }
+                }
+
+                return false;
+            }
+        }
+    }
+
+    private boolean func_152102_a(IInventory p_152102_1_, int p_152102_2_)
+    {
+        if (p_152102_1_ instanceof ISidedInventory && p_152102_2_ > -1)
+        {
+            ISidedInventory var7 = (ISidedInventory)p_152102_1_;
+            int[] var8 = var7.getAccessibleSlotsFromSide(p_152102_2_);
+
+            for (int var9 = 0; var9 < var8.length; ++var9)
+            {
+                ItemStack var6 = var7.getStackInSlot(var8[var9]);
+
+                if (var6 == null || var6.stackSize != var6.getMaxStackSize())
+                {
+                    return false;
                 }
             }
-
-            return false;
         }
+        else
+        {
+            int var3 = p_152102_1_.getSizeInventory();
+
+            for (int var4 = 0; var4 < var3; ++var4)
+            {
+                ItemStack var5 = p_152102_1_.getStackInSlot(var4);
+
+                if (var5 == null || var5.stackSize != var5.getMaxStackSize())
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private static boolean func_152103_b(IInventory p_152103_0_, int p_152103_1_)
+    {
+        if (p_152103_0_ instanceof ISidedInventory && p_152103_1_ > -1)
+        {
+            ISidedInventory var5 = (ISidedInventory)p_152103_0_;
+            int[] var6 = var5.getAccessibleSlotsFromSide(p_152103_1_);
+
+            for (int var4 = 0; var4 < var6.length; ++var4)
+            {
+                if (var5.getStackInSlot(var6[var4]) != null)
+                {
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            int var2 = p_152103_0_.getSizeInventory();
+
+            for (int var3 = 0; var3 < var2; ++var3)
+            {
+                if (p_152103_0_.getStackInSlot(var3) != null)
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     public static boolean func_145891_a(IHopper p_145891_0_)
@@ -290,6 +410,11 @@ public class TileEntityHopper extends TileEntity implements IHopper
         if (var1 != null)
         {
             byte var2 = 0;
+
+            if (func_152103_b(var1, var2))
+            {
+                return false;
+            }
 
             if (var1 instanceof ISidedInventory && var2 > -1)
             {
@@ -469,7 +594,7 @@ public class TileEntityHopper extends TileEntity implements IHopper
 
     public static EntityItem func_145897_a(World p_145897_0_, double p_145897_1_, double p_145897_3_, double p_145897_5_)
     {
-        List var7 = p_145897_0_.selectEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getAABBPool().getAABB(p_145897_1_, p_145897_3_, p_145897_5_, p_145897_1_ + 1.0D, p_145897_3_ + 1.0D, p_145897_5_ + 1.0D), IEntitySelector.selectAnything);
+        List var7 = p_145897_0_.selectEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(p_145897_1_, p_145897_3_, p_145897_5_, p_145897_1_ + 1.0D, p_145897_3_ + 1.0D, p_145897_5_ + 1.0D), IEntitySelector.selectAnything);
         return var7.size() > 0 ? (EntityItem)var7.get(0) : null;
     }
 
@@ -498,7 +623,7 @@ public class TileEntityHopper extends TileEntity implements IHopper
 
         if (var7 == null)
         {
-            List var13 = p_145893_0_.getEntitiesWithinAABBExcludingEntity((Entity)null, AxisAlignedBB.getAABBPool().getAABB(p_145893_1_, p_145893_3_, p_145893_5_, p_145893_1_ + 1.0D, p_145893_3_ + 1.0D, p_145893_5_ + 1.0D), IEntitySelector.selectInventories);
+            List var13 = p_145893_0_.getEntitiesWithinAABBExcludingEntity((Entity)null, AxisAlignedBB.getBoundingBox(p_145893_1_, p_145893_3_, p_145893_5_, p_145893_1_ + 1.0D, p_145893_3_ + 1.0D, p_145893_5_ + 1.0D), IEntitySelector.selectInventories);
 
             if (var13 != null && var13.size() > 0)
             {

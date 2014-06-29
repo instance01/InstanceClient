@@ -17,19 +17,19 @@ public class SimpleTexture extends AbstractTexture
     protected final ResourceLocation textureLocation;
     private static final String __OBFID = "CL_00001052";
 
-    public SimpleTexture(ResourceLocation par1ResourceLocation)
+    public SimpleTexture(ResourceLocation p_i1275_1_)
     {
-        this.textureLocation = par1ResourceLocation;
+        this.textureLocation = p_i1275_1_;
     }
 
-    public void loadTexture(IResourceManager par1ResourceManager) throws IOException
+    public void loadTexture(IResourceManager p_110551_1_) throws IOException
     {
         this.func_147631_c();
         InputStream var2 = null;
 
         try
         {
-            IResource var3 = par1ResourceManager.getResource(this.textureLocation);
+            IResource var3 = p_110551_1_.getResource(this.textureLocation);
             var2 = var3.getInputStream();
             BufferedImage var4 = ImageIO.read(var2);
             boolean var5 = false;

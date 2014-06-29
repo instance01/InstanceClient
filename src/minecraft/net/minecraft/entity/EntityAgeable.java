@@ -12,19 +12,19 @@ public abstract class EntityAgeable extends EntityCreature
     private float field_98057_e;
     private static final String __OBFID = "CL_00001530";
 
-    public EntityAgeable(World par1World)
+    public EntityAgeable(World p_i1578_1_)
     {
-        super(par1World);
+        super(p_i1578_1_);
     }
 
-    public abstract EntityAgeable createChild(EntityAgeable var1);
+    public abstract EntityAgeable createChild(EntityAgeable p_90011_1_);
 
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
-    public boolean interact(EntityPlayer par1EntityPlayer)
+    public boolean interact(EntityPlayer p_70085_1_)
     {
-        ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
+        ItemStack var2 = p_70085_1_.inventory.getCurrentItem();
 
         if (var2 != null && var2.getItem() == Items.spawn_egg)
         {
@@ -47,13 +47,13 @@ public abstract class EntityAgeable extends EntityCreature
                             var4.setCustomNameTag(var2.getDisplayName());
                         }
 
-                        if (!par1EntityPlayer.capabilities.isCreativeMode)
+                        if (!p_70085_1_.capabilities.isCreativeMode)
                         {
                             --var2.stackSize;
 
                             if (var2.stackSize <= 0)
                             {
-                                par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack)null);
+                                p_70085_1_.inventory.setInventorySlotContents(p_70085_1_.inventory.currentItem, (ItemStack)null);
                             }
                         }
                     }
@@ -88,10 +88,10 @@ public abstract class EntityAgeable extends EntityCreature
      * "Adds the value of the parameter times 20 to the age of this entity. If the entity is an adult (if the entity's
      * age is greater than 0), it will have no effect."
      */
-    public void addGrowth(int par1)
+    public void addGrowth(int p_110195_1_)
     {
         int var2 = this.getGrowingAge();
-        var2 += par1 * 20;
+        var2 += p_110195_1_ * 20;
 
         if (var2 > 0)
         {
@@ -105,28 +105,28 @@ public abstract class EntityAgeable extends EntityCreature
      * The age value may be negative or positive or zero. If it's negative, it get's incremented on each tick, if it's
      * positive, it get's decremented each tick. With a negative value the Entity is considered a child.
      */
-    public void setGrowingAge(int par1)
+    public void setGrowingAge(int p_70873_1_)
     {
-        this.dataWatcher.updateObject(12, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(12, Integer.valueOf(p_70873_1_));
         this.setScaleForAge(this.isChild());
     }
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    public void writeEntityToNBT(NBTTagCompound p_70014_1_)
     {
-        super.writeEntityToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setInteger("Age", this.getGrowingAge());
+        super.writeEntityToNBT(p_70014_1_);
+        p_70014_1_.setInteger("Age", this.getGrowingAge());
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    public void readEntityFromNBT(NBTTagCompound p_70037_1_)
     {
-        super.readEntityFromNBT(par1NBTTagCompound);
-        this.setGrowingAge(par1NBTTagCompound.getInteger("Age"));
+        super.readEntityFromNBT(p_70037_1_);
+        this.setGrowingAge(p_70037_1_.getInteger("Age"));
     }
 
     /**
@@ -169,19 +169,19 @@ public abstract class EntityAgeable extends EntityCreature
     /**
      * "Sets the scale for an ageable entity according to the boolean parameter, which says if it's a child."
      */
-    public void setScaleForAge(boolean par1)
+    public void setScaleForAge(boolean p_98054_1_)
     {
-        this.setScale(par1 ? 0.5F : 1.0F);
+        this.setScale(p_98054_1_ ? 0.5F : 1.0F);
     }
 
     /**
      * Sets the width and height of the entity. Args: width, height
      */
-    protected final void setSize(float par1, float par2)
+    protected final void setSize(float p_70105_1_, float p_70105_2_)
     {
         boolean var3 = this.field_98056_d > 0.0F;
-        this.field_98056_d = par1;
-        this.field_98057_e = par2;
+        this.field_98056_d = p_70105_1_;
+        this.field_98057_e = p_70105_2_;
 
         if (!var3)
         {
@@ -189,8 +189,8 @@ public abstract class EntityAgeable extends EntityCreature
         }
     }
 
-    protected final void setScale(float par1)
+    protected final void setScale(float p_98055_1_)
     {
-        super.setSize(this.field_98056_d * par1, this.field_98057_e * par1);
+        super.setSize(this.field_98056_d * p_98055_1_, this.field_98057_e * p_98055_1_);
     }
 }

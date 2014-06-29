@@ -93,9 +93,9 @@ public class S22PacketMultiBlockChange extends Packet
         }
     }
 
-    public void processPacket(INetHandlerPlayClient p_148923_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_148923_1_.handleMultiBlockChange(this);
+        p_148833_1_.handleMultiBlockChange(this);
     }
 
     /**

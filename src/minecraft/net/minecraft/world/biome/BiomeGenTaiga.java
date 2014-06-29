@@ -51,12 +51,12 @@ public class BiomeGenTaiga extends BiomeGenBase
     /**
      * Gets a WorldGen appropriate for this biome.
      */
-    public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
+    public WorldGenerator getRandomWorldGenForGrass(Random p_76730_1_)
     {
-        return par1Random.nextInt(5) > 0 ? new WorldGenTallGrass(Blocks.tallgrass, 2) : new WorldGenTallGrass(Blocks.tallgrass, 1);
+        return p_76730_1_.nextInt(5) > 0 ? new WorldGenTallGrass(Blocks.tallgrass, 2) : new WorldGenTallGrass(Blocks.tallgrass, 1);
     }
 
-    public void decorate(World par1World, Random par2Random, int par3, int par4)
+    public void decorate(World p_76728_1_, Random p_76728_2_, int p_76728_3_, int p_76728_4_)
     {
         int var5;
         int var6;
@@ -65,14 +65,14 @@ public class BiomeGenTaiga extends BiomeGenBase
 
         if (this.field_150644_aH == 1 || this.field_150644_aH == 2)
         {
-            var5 = par2Random.nextInt(3);
+            var5 = p_76728_2_.nextInt(3);
 
             for (var6 = 0; var6 < var5; ++var6)
             {
-                var7 = par3 + par2Random.nextInt(16) + 8;
-                var8 = par4 + par2Random.nextInt(16) + 8;
-                int var9 = par1World.getHeightValue(var7, var8);
-                field_150643_aG.generate(par1World, par2Random, var7, var9, var8);
+                var7 = p_76728_3_ + p_76728_2_.nextInt(16) + 8;
+                var8 = p_76728_4_ + p_76728_2_.nextInt(16) + 8;
+                int var9 = p_76728_1_.getHeightValue(var7, var8);
+                field_150643_aG.generate(p_76728_1_, p_76728_2_, var7, var9, var8);
             }
         }
 
@@ -80,13 +80,13 @@ public class BiomeGenTaiga extends BiomeGenBase
 
         for (var5 = 0; var5 < 7; ++var5)
         {
-            var6 = par3 + par2Random.nextInt(16) + 8;
-            var7 = par4 + par2Random.nextInt(16) + 8;
-            var8 = par2Random.nextInt(par1World.getHeightValue(var6, var7) + 32);
-            field_150610_ae.generate(par1World, par2Random, var6, var8, var7);
+            var6 = p_76728_3_ + p_76728_2_.nextInt(16) + 8;
+            var7 = p_76728_4_ + p_76728_2_.nextInt(16) + 8;
+            var8 = p_76728_2_.nextInt(p_76728_1_.getHeightValue(var6, var7) + 32);
+            field_150610_ae.generate(p_76728_1_, p_76728_2_, var6, var8, var7);
         }
 
-        super.decorate(par1World, par2Random, par3, par4);
+        super.decorate(p_76728_1_, p_76728_2_, p_76728_3_, p_76728_4_);
     }
 
     public void func_150573_a(World p_150573_1_, Random p_150573_2_, Block[] p_150573_3_, byte[] p_150573_4_, int p_150573_5_, int p_150573_6_, double p_150573_7_)

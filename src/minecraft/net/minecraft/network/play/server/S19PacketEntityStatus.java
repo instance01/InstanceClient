@@ -40,9 +40,9 @@ public class S19PacketEntityStatus extends Packet
         p_148840_1_.writeByte(this.field_149163_b);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149162_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149162_1_.handleEntityStatus(this);
+        p_148833_1_.handleEntityStatus(this);
     }
 
     public Entity func_149161_a(World p_149161_1_)

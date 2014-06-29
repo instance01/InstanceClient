@@ -13,9 +13,9 @@ public class TextureCompass extends TextureAtlasSprite
     public double angleDelta;
     private static final String __OBFID = "CL_00001071";
 
-    public TextureCompass(String par1Str)
+    public TextureCompass(String p_i1286_1_)
     {
-        super(par1Str);
+        super(p_i1286_1_);
     }
 
     public void updateAnimation()
@@ -35,27 +35,27 @@ public class TextureCompass extends TextureAtlasSprite
     /**
      * Updates the compass based on the given x,z coords and camera direction
      */
-    public void updateCompass(World par1World, double par2, double par4, double par6, boolean par8, boolean par9)
+    public void updateCompass(World p_94241_1_, double p_94241_2_, double p_94241_4_, double p_94241_6_, boolean p_94241_8_, boolean p_94241_9_)
     {
         if (!this.framesTextureData.isEmpty())
         {
             double var10 = 0.0D;
 
-            if (par1World != null && !par8)
+            if (p_94241_1_ != null && !p_94241_8_)
             {
-                ChunkCoordinates var12 = par1World.getSpawnPoint();
-                double var13 = (double)var12.posX - par2;
-                double var15 = (double)var12.posZ - par4;
-                par6 %= 360.0D;
-                var10 = -((par6 - 90.0D) * Math.PI / 180.0D - Math.atan2(var15, var13));
+                ChunkCoordinates var12 = p_94241_1_.getSpawnPoint();
+                double var13 = (double)var12.posX - p_94241_2_;
+                double var15 = (double)var12.posZ - p_94241_4_;
+                p_94241_6_ %= 360.0D;
+                var10 = -((p_94241_6_ - 90.0D) * Math.PI / 180.0D - Math.atan2(var15, var13));
 
-                if (!par1World.provider.isSurfaceWorld())
+                if (!p_94241_1_.provider.isSurfaceWorld())
                 {
                     var10 = Math.random() * Math.PI * 2.0D;
                 }
             }
 
-            if (par9)
+            if (p_94241_9_)
             {
                 this.currentAngle = var10;
             }

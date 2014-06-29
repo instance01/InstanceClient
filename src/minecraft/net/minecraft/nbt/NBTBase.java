@@ -12,12 +12,9 @@ public abstract class NBTBase
     /**
      * Write the actual data contents of the tag, implemented in NBT extension classes
      */
-    abstract void write(DataOutput var1) throws IOException;
+    abstract void write(DataOutput p_74734_1_) throws IOException;
 
-    /**
-     * Read the actual data contents of the tag, implemented in NBT extension classes
-     */
-    abstract void load(DataInput var1, int var2) throws IOException;
+    abstract void func_152446_a(DataInput p_152446_1_, int p_152446_2_, NBTSizeTracker p_152446_3_) throws IOException;
 
     public abstract String toString();
 
@@ -71,68 +68,20 @@ public abstract class NBTBase
         }
     }
 
-    public static String func_150283_g(int p_150283_0_)
-    {
-        switch (p_150283_0_)
-        {
-            case 0:
-                return "TAG_End";
-
-            case 1:
-                return "TAG_Byte";
-
-            case 2:
-                return "TAG_Short";
-
-            case 3:
-                return "TAG_Int";
-
-            case 4:
-                return "TAG_Long";
-
-            case 5:
-                return "TAG_Float";
-
-            case 6:
-                return "TAG_Double";
-
-            case 7:
-                return "TAG_Byte_Array";
-
-            case 8:
-                return "TAG_String";
-
-            case 9:
-                return "TAG_List";
-
-            case 10:
-                return "TAG_Compound";
-
-            case 11:
-                return "TAG_Int_Array";
-
-            case 99:
-                return "Any Numeric Tag";
-
-            default:
-                return "UNKNOWN";
-        }
-    }
-
     /**
      * Creates a clone of the tag.
      */
     public abstract NBTBase copy();
 
-    public boolean equals(Object par1Obj)
+    public boolean equals(Object p_equals_1_)
     {
-        if (!(par1Obj instanceof NBTBase))
+        if (!(p_equals_1_ instanceof NBTBase))
         {
             return false;
         }
         else
         {
-            NBTBase var2 = (NBTBase)par1Obj;
+            NBTBase var2 = (NBTBase)p_equals_1_;
             return this.getId() == var2.getId();
         }
     }

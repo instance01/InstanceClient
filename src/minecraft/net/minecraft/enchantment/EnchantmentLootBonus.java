@@ -4,15 +4,15 @@ public class EnchantmentLootBonus extends Enchantment
 {
     private static final String __OBFID = "CL_00000119";
 
-    protected EnchantmentLootBonus(int par1, int par2, EnumEnchantmentType par3EnumEnchantmentType)
+    protected EnchantmentLootBonus(int p_i1934_1_, int p_i1934_2_, EnumEnchantmentType p_i1934_3_)
     {
-        super(par1, par2, par3EnumEnchantmentType);
+        super(p_i1934_1_, p_i1934_2_, p_i1934_3_);
 
-        if (par3EnumEnchantmentType == EnumEnchantmentType.digger)
+        if (p_i1934_3_ == EnumEnchantmentType.digger)
         {
             this.setName("lootBonusDigger");
         }
-        else if (par3EnumEnchantmentType == EnumEnchantmentType.fishing_rod)
+        else if (p_i1934_3_ == EnumEnchantmentType.fishing_rod)
         {
             this.setName("lootBonusFishing");
         }
@@ -25,17 +25,17 @@ public class EnchantmentLootBonus extends Enchantment
     /**
      * Returns the minimal value of enchantability needed on the enchantment level passed.
      */
-    public int getMinEnchantability(int par1)
+    public int getMinEnchantability(int p_77321_1_)
     {
-        return 15 + (par1 - 1) * 9;
+        return 15 + (p_77321_1_ - 1) * 9;
     }
 
     /**
      * Returns the maximum value of enchantability nedded on the enchantment level passed.
      */
-    public int getMaxEnchantability(int par1)
+    public int getMaxEnchantability(int p_77317_1_)
     {
-        return super.getMinEnchantability(par1) + 50;
+        return super.getMinEnchantability(p_77317_1_) + 50;
     }
 
     /**
@@ -49,8 +49,8 @@ public class EnchantmentLootBonus extends Enchantment
     /**
      * Determines if the enchantment passed can be applyied together with this enchantment.
      */
-    public boolean canApplyTogether(Enchantment par1Enchantment)
+    public boolean canApplyTogether(Enchantment p_77326_1_)
     {
-        return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != silkTouch.effectId;
+        return super.canApplyTogether(p_77326_1_) && p_77326_1_.effectId != silkTouch.effectId;
     }
 }

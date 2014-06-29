@@ -25,12 +25,12 @@ public class MapGenRavine extends MapGenBase
             p_151540_16_ = var26 - var19.nextInt(var26 / 4);
         }
 
-        boolean var54 = false;
+        boolean var53 = false;
 
         if (p_151540_15_ == -1)
         {
             p_151540_15_ = p_151540_16_ / 2;
-            var54 = true;
+            var53 = true;
         }
 
         float var27 = 1.0F;
@@ -47,9 +47,9 @@ public class MapGenRavine extends MapGenBase
 
         for (; p_151540_15_ < p_151540_16_; ++p_151540_15_)
         {
-            double var53 = 1.5D + (double)(MathHelper.sin((float)p_151540_15_ * (float)Math.PI / (float)p_151540_16_) * p_151540_12_ * 1.0F);
-            double var30 = var53 * p_151540_17_;
-            var53 *= (double)var19.nextFloat() * 0.25D + 0.75D;
+            double var54 = 1.5D + (double)(MathHelper.sin((float)p_151540_15_ * (float)Math.PI / (float)p_151540_16_) * p_151540_12_ * 1.0F);
+            double var30 = var54 * p_151540_17_;
+            var54 *= (double)var19.nextFloat() * 0.25D + 0.75D;
             var30 *= (double)var19.nextFloat() * 0.25D + 0.75D;
             float var32 = MathHelper.cos(p_151540_14_);
             float var33 = MathHelper.sin(p_151540_14_);
@@ -64,7 +64,7 @@ public class MapGenRavine extends MapGenBase
             var25 += (var19.nextFloat() - var19.nextFloat()) * var19.nextFloat() * 2.0F;
             var24 += (var19.nextFloat() - var19.nextFloat()) * var19.nextFloat() * 4.0F;
 
-            if (var54 || var19.nextInt(4) != 0)
+            if (var53 || var19.nextInt(4) != 0)
             {
                 double var34 = p_151540_6_ - var20;
                 double var36 = p_151540_10_ - var22;
@@ -76,18 +76,18 @@ public class MapGenRavine extends MapGenBase
                     return;
                 }
 
-                if (p_151540_6_ >= var20 - 16.0D - var53 * 2.0D && p_151540_10_ >= var22 - 16.0D - var53 * 2.0D && p_151540_6_ <= var20 + 16.0D + var53 * 2.0D && p_151540_10_ <= var22 + 16.0D + var53 * 2.0D)
+                if (p_151540_6_ >= var20 - 16.0D - var54 * 2.0D && p_151540_10_ >= var22 - 16.0D - var54 * 2.0D && p_151540_6_ <= var20 + 16.0D + var54 * 2.0D && p_151540_10_ <= var22 + 16.0D + var54 * 2.0D)
                 {
-                    int var56 = MathHelper.floor_double(p_151540_6_ - var53) - p_151540_3_ * 16 - 1;
-                    int var35 = MathHelper.floor_double(p_151540_6_ + var53) - p_151540_3_ * 16 + 1;
-                    int var55 = MathHelper.floor_double(p_151540_8_ - var30) - 1;
+                    int var55 = MathHelper.floor_double(p_151540_6_ - var54) - p_151540_3_ * 16 - 1;
+                    int var35 = MathHelper.floor_double(p_151540_6_ + var54) - p_151540_3_ * 16 + 1;
+                    int var56 = MathHelper.floor_double(p_151540_8_ - var30) - 1;
                     int var37 = MathHelper.floor_double(p_151540_8_ + var30) + 1;
-                    int var57 = MathHelper.floor_double(p_151540_10_ - var53) - p_151540_4_ * 16 - 1;
-                    int var39 = MathHelper.floor_double(p_151540_10_ + var53) - p_151540_4_ * 16 + 1;
+                    int var57 = MathHelper.floor_double(p_151540_10_ - var54) - p_151540_4_ * 16 - 1;
+                    int var39 = MathHelper.floor_double(p_151540_10_ + var54) - p_151540_4_ * 16 + 1;
 
-                    if (var56 < 0)
+                    if (var55 < 0)
                     {
-                        var56 = 0;
+                        var55 = 0;
                     }
 
                     if (var35 > 16)
@@ -95,9 +95,9 @@ public class MapGenRavine extends MapGenBase
                         var35 = 16;
                     }
 
-                    if (var55 < 1)
+                    if (var56 < 1)
                     {
-                        var55 = 1;
+                        var56 = 1;
                     }
 
                     if (var37 > 248)
@@ -119,11 +119,11 @@ public class MapGenRavine extends MapGenBase
                     int var41;
                     int var44;
 
-                    for (var41 = var56; !var58 && var41 < var35; ++var41)
+                    for (var41 = var55; !var58 && var41 < var35; ++var41)
                     {
                         for (int var42 = var57; !var58 && var42 < var39; ++var42)
                         {
-                            for (int var43 = var37 + 1; !var58 && var43 >= var55 - 1; --var43)
+                            for (int var43 = var37 + 1; !var58 && var43 >= var56 - 1; --var43)
                             {
                                 var44 = (var41 * 16 + var42) * 256 + var43;
 
@@ -136,9 +136,9 @@ public class MapGenRavine extends MapGenBase
                                         var58 = true;
                                     }
 
-                                    if (var43 != var55 - 1 && var41 != var56 && var41 != var35 - 1 && var42 != var57 && var42 != var39 - 1)
+                                    if (var43 != var56 - 1 && var41 != var55 && var41 != var35 - 1 && var42 != var57 && var42 != var39 - 1)
                                     {
-                                        var43 = var55;
+                                        var43 = var56;
                                     }
                                 }
                             }
@@ -147,23 +147,23 @@ public class MapGenRavine extends MapGenBase
 
                     if (!var58)
                     {
-                        for (var41 = var56; var41 < var35; ++var41)
+                        for (var41 = var55; var41 < var35; ++var41)
                         {
-                            double var60 = ((double)(var41 + p_151540_3_ * 16) + 0.5D - p_151540_6_) / var53;
+                            double var59 = ((double)(var41 + p_151540_3_ * 16) + 0.5D - p_151540_6_) / var54;
 
                             for (var44 = var57; var44 < var39; ++var44)
                             {
-                                double var59 = ((double)(var44 + p_151540_4_ * 16) + 0.5D - p_151540_10_) / var53;
+                                double var60 = ((double)(var44 + p_151540_4_ * 16) + 0.5D - p_151540_10_) / var54;
                                 int var47 = (var41 * 16 + var44) * 256 + var37;
                                 boolean var48 = false;
 
-                                if (var60 * var60 + var59 * var59 < 1.0D)
+                                if (var59 * var59 + var60 * var60 < 1.0D)
                                 {
-                                    for (int var49 = var37 - 1; var49 >= var55; --var49)
+                                    for (int var49 = var37 - 1; var49 >= var56; --var49)
                                     {
                                         double var50 = ((double)var49 + 0.5D - p_151540_8_) / var30;
 
-                                        if ((var60 * var60 + var59 * var59) * (double)this.field_75046_d[var49] + var50 * var50 / 6.0D < 1.0D)
+                                        if ((var59 * var59 + var60 * var60) * (double)this.field_75046_d[var49] + var50 * var50 / 6.0D < 1.0D)
                                         {
                                             Block var52 = p_151540_5_[var47];
 
@@ -196,7 +196,7 @@ public class MapGenRavine extends MapGenBase
                             }
                         }
 
-                        if (var54)
+                        if (var53)
                         {
                             break;
                         }

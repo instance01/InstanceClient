@@ -59,7 +59,7 @@ public class ActiveRenderInfo
     /**
      * Updates the current render info and camera location based on entity look angles and 1st/3rd person view mode
      */
-    public static void updateRenderInfo(EntityPlayer par0EntityPlayer, boolean par1)
+    public static void updateRenderInfo(EntityPlayer p_74583_0_, boolean p_74583_1_)
     {
         GL11.glGetFloat(GL11.GL_MODELVIEW_MATRIX, modelview);
         GL11.glGetFloat(GL11.GL_PROJECTION_MATRIX, projection);
@@ -70,9 +70,9 @@ public class ActiveRenderInfo
         objectX = objectCoords.get(0);
         objectY = objectCoords.get(1);
         objectZ = objectCoords.get(2);
-        int var4 = par1 ? 1 : 0;
-        float var5 = par0EntityPlayer.rotationPitch;
-        float var6 = par0EntityPlayer.rotationYaw;
+        int var4 = p_74583_1_ ? 1 : 0;
+        float var5 = p_74583_0_.rotationPitch;
+        float var6 = p_74583_0_.rotationYaw;
         rotationX = MathHelper.cos(var6 * (float)Math.PI / 180.0F) * (float)(1 - var4 * 2);
         rotationZ = MathHelper.sin(var6 * (float)Math.PI / 180.0F) * (float)(1 - var4 * 2);
         rotationYZ = -rotationZ * MathHelper.sin(var5 * (float)Math.PI / 180.0F) * (float)(1 - var4 * 2);
@@ -83,15 +83,15 @@ public class ActiveRenderInfo
     /**
      * Returns a vector representing the projection along the given entity's view for the given distance
      */
-    public static Vec3 projectViewFromEntity(EntityLivingBase par0EntityLivingBase, double par1)
+    public static Vec3 projectViewFromEntity(EntityLivingBase p_74585_0_, double p_74585_1_)
     {
-        double var3 = par0EntityLivingBase.prevPosX + (par0EntityLivingBase.posX - par0EntityLivingBase.prevPosX) * par1;
-        double var5 = par0EntityLivingBase.prevPosY + (par0EntityLivingBase.posY - par0EntityLivingBase.prevPosY) * par1 + (double)par0EntityLivingBase.getEyeHeight();
-        double var7 = par0EntityLivingBase.prevPosZ + (par0EntityLivingBase.posZ - par0EntityLivingBase.prevPosZ) * par1;
+        double var3 = p_74585_0_.prevPosX + (p_74585_0_.posX - p_74585_0_.prevPosX) * p_74585_1_;
+        double var5 = p_74585_0_.prevPosY + (p_74585_0_.posY - p_74585_0_.prevPosY) * p_74585_1_ + (double)p_74585_0_.getEyeHeight();
+        double var7 = p_74585_0_.prevPosZ + (p_74585_0_.posZ - p_74585_0_.prevPosZ) * p_74585_1_;
         double var9 = var3 + (double)(objectX * 1.0F);
         double var11 = var5 + (double)(objectY * 1.0F);
         double var13 = var7 + (double)(objectZ * 1.0F);
-        return par0EntityLivingBase.worldObj.getWorldVec3Pool().getVecFromPool(var9, var11, var13);
+        return Vec3.createVectorHelper(var9, var11, var13);
     }
 
     public static Block getBlockAtEntityViewpoint(World p_151460_0_, EntityLivingBase p_151460_1_, float p_151460_2_)

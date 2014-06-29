@@ -14,31 +14,31 @@ public abstract class BaseAttributeMap
     protected final Map attributesByName = new LowerStringMap();
     private static final String __OBFID = "CL_00001566";
 
-    public IAttributeInstance getAttributeInstance(IAttribute par1Attribute)
+    public IAttributeInstance getAttributeInstance(IAttribute p_111151_1_)
     {
-        return (IAttributeInstance)this.attributes.get(par1Attribute);
+        return (IAttributeInstance)this.attributes.get(p_111151_1_);
     }
 
-    public IAttributeInstance getAttributeInstanceByName(String par1Str)
+    public IAttributeInstance getAttributeInstanceByName(String p_111152_1_)
     {
-        return (IAttributeInstance)this.attributesByName.get(par1Str);
+        return (IAttributeInstance)this.attributesByName.get(p_111152_1_);
     }
 
     /**
      * Registers an attribute with this AttributeMap, returns a modifiable AttributeInstance associated with this map
      */
-    public abstract IAttributeInstance registerAttribute(IAttribute var1);
+    public abstract IAttributeInstance registerAttribute(IAttribute p_111150_1_);
 
     public Collection getAllAttributes()
     {
         return this.attributesByName.values();
     }
 
-    public void addAttributeInstance(ModifiableAttributeInstance par1ModifiableAttributeInstance) {}
+    public void addAttributeInstance(ModifiableAttributeInstance p_111149_1_) {}
 
-    public void removeAttributeModifiers(Multimap par1Multimap)
+    public void removeAttributeModifiers(Multimap p_111148_1_)
     {
-        Iterator var2 = par1Multimap.entries().iterator();
+        Iterator var2 = p_111148_1_.entries().iterator();
 
         while (var2.hasNext())
         {
@@ -52,9 +52,9 @@ public abstract class BaseAttributeMap
         }
     }
 
-    public void applyAttributeModifiers(Multimap par1Multimap)
+    public void applyAttributeModifiers(Multimap p_111147_1_)
     {
-        Iterator var2 = par1Multimap.entries().iterator();
+        Iterator var2 = p_111147_1_.entries().iterator();
 
         while (var2.hasNext())
         {

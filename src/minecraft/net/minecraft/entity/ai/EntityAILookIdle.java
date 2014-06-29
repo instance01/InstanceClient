@@ -19,9 +19,9 @@ public class EntityAILookIdle extends EntityAIBase
     private int idleTime;
     private static final String __OBFID = "CL_00001607";
 
-    public EntityAILookIdle(EntityLiving par1EntityLiving)
+    public EntityAILookIdle(EntityLiving p_i1647_1_)
     {
-        this.idleEntity = par1EntityLiving;
+        this.idleEntity = p_i1647_1_;
         this.setMutexBits(3);
     }
 

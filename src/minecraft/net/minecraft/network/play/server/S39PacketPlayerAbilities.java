@@ -75,9 +75,9 @@ public class S39PacketPlayerAbilities extends Packet
         p_148840_1_.writeFloat(this.field_149114_f);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149113_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149113_1_.handlePlayerAbilities(this);
+        p_148833_1_.handlePlayerAbilities(this);
     }
 
     /**

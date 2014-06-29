@@ -63,9 +63,9 @@ public class C08PacketPlayerBlockPlacement extends Packet
         p_148840_1_.writeByte((int)(this.field_149584_h * 16.0F));
     }
 
-    public void processPacket(INetHandlerPlayServer p_149572_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149572_1_.processPlayerBlockPlacement(this);
+        p_148833_1_.processPlayerBlockPlacement(this);
     }
 
     public int func_149576_c()

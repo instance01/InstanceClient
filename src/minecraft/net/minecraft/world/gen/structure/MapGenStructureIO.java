@@ -16,35 +16,35 @@ public class MapGenStructureIO
     private static Map field_143037_d = new HashMap();
     private static final String __OBFID = "CL_00000509";
 
-    private static void func_143034_b(Class par0Class, String par1Str)
+    private static void func_143034_b(Class p_143034_0_, String p_143034_1_)
     {
-        field_143040_a.put(par1Str, par0Class);
-        field_143038_b.put(par0Class, par1Str);
+        field_143040_a.put(p_143034_1_, p_143034_0_);
+        field_143038_b.put(p_143034_0_, p_143034_1_);
     }
 
-    static void func_143031_a(Class par0Class, String par1Str)
+    static void func_143031_a(Class p_143031_0_, String p_143031_1_)
     {
-        field_143039_c.put(par1Str, par0Class);
-        field_143037_d.put(par0Class, par1Str);
+        field_143039_c.put(p_143031_1_, p_143031_0_);
+        field_143037_d.put(p_143031_0_, p_143031_1_);
     }
 
-    public static String func_143033_a(StructureStart par0StructureStart)
+    public static String func_143033_a(StructureStart p_143033_0_)
     {
-        return (String)field_143038_b.get(par0StructureStart.getClass());
+        return (String)field_143038_b.get(p_143033_0_.getClass());
     }
 
-    public static String func_143036_a(StructureComponent par0StructureComponent)
+    public static String func_143036_a(StructureComponent p_143036_0_)
     {
-        return (String)field_143037_d.get(par0StructureComponent.getClass());
+        return (String)field_143037_d.get(p_143036_0_.getClass());
     }
 
-    public static StructureStart func_143035_a(NBTTagCompound par0NBTTagCompound, World par1World)
+    public static StructureStart func_143035_a(NBTTagCompound p_143035_0_, World p_143035_1_)
     {
         StructureStart var2 = null;
 
         try
         {
-            Class var3 = (Class)field_143040_a.get(par0NBTTagCompound.getString("id"));
+            Class var3 = (Class)field_143040_a.get(p_143035_0_.getString("id"));
 
             if (var3 != null)
             {
@@ -53,29 +53,29 @@ public class MapGenStructureIO
         }
         catch (Exception var4)
         {
-            logger.warn("Failed Start with id " + par0NBTTagCompound.getString("id"));
+            logger.warn("Failed Start with id " + p_143035_0_.getString("id"));
             var4.printStackTrace();
         }
 
         if (var2 != null)
         {
-            var2.func_143020_a(par1World, par0NBTTagCompound);
+            var2.func_143020_a(p_143035_1_, p_143035_0_);
         }
         else
         {
-            logger.warn("Skipping Structure with id " + par0NBTTagCompound.getString("id"));
+            logger.warn("Skipping Structure with id " + p_143035_0_.getString("id"));
         }
 
         return var2;
     }
 
-    public static StructureComponent func_143032_b(NBTTagCompound par0NBTTagCompound, World par1World)
+    public static StructureComponent func_143032_b(NBTTagCompound p_143032_0_, World p_143032_1_)
     {
         StructureComponent var2 = null;
 
         try
         {
-            Class var3 = (Class)field_143039_c.get(par0NBTTagCompound.getString("id"));
+            Class var3 = (Class)field_143039_c.get(p_143032_0_.getString("id"));
 
             if (var3 != null)
             {
@@ -84,17 +84,17 @@ public class MapGenStructureIO
         }
         catch (Exception var4)
         {
-            logger.warn("Failed Piece with id " + par0NBTTagCompound.getString("id"));
+            logger.warn("Failed Piece with id " + p_143032_0_.getString("id"));
             var4.printStackTrace();
         }
 
         if (var2 != null)
         {
-            var2.func_143009_a(par1World, par0NBTTagCompound);
+            var2.func_143009_a(p_143032_1_, p_143032_0_);
         }
         else
         {
-            logger.warn("Skipping Piece with id " + par0NBTTagCompound.getString("id"));
+            logger.warn("Skipping Piece with id " + p_143032_0_.getString("id"));
         }
 
         return var2;

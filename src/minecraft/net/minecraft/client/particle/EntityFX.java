@@ -41,16 +41,16 @@ public class EntityFX extends Entity
     public static double interpPosZ;
     private static final String __OBFID = "CL_00000914";
 
-    protected EntityFX(World par1World, double par2, double par4, double par6)
+    protected EntityFX(World p_i1218_1_, double p_i1218_2_, double p_i1218_4_, double p_i1218_6_)
     {
-        super(par1World);
+        super(p_i1218_1_);
         this.particleAlpha = 1.0F;
         this.setSize(0.2F, 0.2F);
         this.yOffset = this.height / 2.0F;
-        this.setPosition(par2, par4, par6);
-        this.lastTickPosX = par2;
-        this.lastTickPosY = par4;
-        this.lastTickPosZ = par6;
+        this.setPosition(p_i1218_2_, p_i1218_4_, p_i1218_6_);
+        this.lastTickPosX = p_i1218_2_;
+        this.lastTickPosY = p_i1218_4_;
+        this.lastTickPosZ = p_i1218_6_;
         this.particleRed = this.particleGreen = this.particleBlue = 1.0F;
         this.particleTextureJitterX = this.rand.nextFloat() * 3.0F;
         this.particleTextureJitterY = this.rand.nextFloat() * 3.0F;
@@ -59,12 +59,12 @@ public class EntityFX extends Entity
         this.particleAge = 0;
     }
 
-    public EntityFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12)
+    public EntityFX(World p_i1219_1_, double p_i1219_2_, double p_i1219_4_, double p_i1219_6_, double p_i1219_8_, double p_i1219_10_, double p_i1219_12_)
     {
-        this(par1World, par2, par4, par6);
-        this.motionX = par8 + (double)((float)(Math.random() * 2.0D - 1.0D) * 0.4F);
-        this.motionY = par10 + (double)((float)(Math.random() * 2.0D - 1.0D) * 0.4F);
-        this.motionZ = par12 + (double)((float)(Math.random() * 2.0D - 1.0D) * 0.4F);
+        this(p_i1219_1_, p_i1219_2_, p_i1219_4_, p_i1219_6_);
+        this.motionX = p_i1219_8_ + (double)((float)(Math.random() * 2.0D - 1.0D) * 0.4F);
+        this.motionY = p_i1219_10_ + (double)((float)(Math.random() * 2.0D - 1.0D) * 0.4F);
+        this.motionZ = p_i1219_12_ + (double)((float)(Math.random() * 2.0D - 1.0D) * 0.4F);
         float var14 = (float)(Math.random() + Math.random() + 1.0D) * 0.15F;
         float var15 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
         this.motionX = this.motionX / (double)var15 * (double)var14 * 0.4000000059604645D;
@@ -72,34 +72,34 @@ public class EntityFX extends Entity
         this.motionZ = this.motionZ / (double)var15 * (double)var14 * 0.4000000059604645D;
     }
 
-    public EntityFX multiplyVelocity(float par1)
+    public EntityFX multiplyVelocity(float p_70543_1_)
     {
-        this.motionX *= (double)par1;
-        this.motionY = (this.motionY - 0.10000000149011612D) * (double)par1 + 0.10000000149011612D;
-        this.motionZ *= (double)par1;
+        this.motionX *= (double)p_70543_1_;
+        this.motionY = (this.motionY - 0.10000000149011612D) * (double)p_70543_1_ + 0.10000000149011612D;
+        this.motionZ *= (double)p_70543_1_;
         return this;
     }
 
-    public EntityFX multipleParticleScaleBy(float par1)
+    public EntityFX multipleParticleScaleBy(float p_70541_1_)
     {
-        this.setSize(0.2F * par1, 0.2F * par1);
-        this.particleScale *= par1;
+        this.setSize(0.2F * p_70541_1_, 0.2F * p_70541_1_);
+        this.particleScale *= p_70541_1_;
         return this;
     }
 
-    public void setRBGColorF(float par1, float par2, float par3)
+    public void setRBGColorF(float p_70538_1_, float p_70538_2_, float p_70538_3_)
     {
-        this.particleRed = par1;
-        this.particleGreen = par2;
-        this.particleBlue = par3;
+        this.particleRed = p_70538_1_;
+        this.particleGreen = p_70538_2_;
+        this.particleBlue = p_70538_3_;
     }
 
     /**
      * Sets the particle alpha (float)
      */
-    public void setAlphaF(float par1)
+    public void setAlphaF(float p_82338_1_)
     {
-        this.particleAlpha = par1;
+        this.particleAlpha = p_82338_1_;
     }
 
     public float getRedColorF()
@@ -155,7 +155,7 @@ public class EntityFX extends Entity
         }
     }
 
-    public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7)
+    public void renderParticle(Tessellator p_70539_1_, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_)
     {
         float var8 = (float)this.particleTextureIndexX / 16.0F;
         float var9 = var8 + 0.0624375F;
@@ -171,14 +171,14 @@ public class EntityFX extends Entity
             var11 = this.particleIcon.getMaxV();
         }
 
-        float var13 = (float)(this.prevPosX + (this.posX - this.prevPosX) * (double)par2 - interpPosX);
-        float var14 = (float)(this.prevPosY + (this.posY - this.prevPosY) * (double)par2 - interpPosY);
-        float var15 = (float)(this.prevPosZ + (this.posZ - this.prevPosZ) * (double)par2 - interpPosZ);
-        par1Tessellator.setColorRGBA_F(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha);
-        par1Tessellator.addVertexWithUV((double)(var13 - par3 * var12 - par6 * var12), (double)(var14 - par4 * var12), (double)(var15 - par5 * var12 - par7 * var12), (double)var9, (double)var11);
-        par1Tessellator.addVertexWithUV((double)(var13 - par3 * var12 + par6 * var12), (double)(var14 + par4 * var12), (double)(var15 - par5 * var12 + par7 * var12), (double)var9, (double)var10);
-        par1Tessellator.addVertexWithUV((double)(var13 + par3 * var12 + par6 * var12), (double)(var14 + par4 * var12), (double)(var15 + par5 * var12 + par7 * var12), (double)var8, (double)var10);
-        par1Tessellator.addVertexWithUV((double)(var13 + par3 * var12 - par6 * var12), (double)(var14 - par4 * var12), (double)(var15 + par5 * var12 - par7 * var12), (double)var8, (double)var11);
+        float var13 = (float)(this.prevPosX + (this.posX - this.prevPosX) * (double)p_70539_2_ - interpPosX);
+        float var14 = (float)(this.prevPosY + (this.posY - this.prevPosY) * (double)p_70539_2_ - interpPosY);
+        float var15 = (float)(this.prevPosZ + (this.posZ - this.prevPosZ) * (double)p_70539_2_ - interpPosZ);
+        p_70539_1_.setColorRGBA_F(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha);
+        p_70539_1_.addVertexWithUV((double)(var13 - p_70539_3_ * var12 - p_70539_6_ * var12), (double)(var14 - p_70539_4_ * var12), (double)(var15 - p_70539_5_ * var12 - p_70539_7_ * var12), (double)var9, (double)var11);
+        p_70539_1_.addVertexWithUV((double)(var13 - p_70539_3_ * var12 + p_70539_6_ * var12), (double)(var14 + p_70539_4_ * var12), (double)(var15 - p_70539_5_ * var12 + p_70539_7_ * var12), (double)var9, (double)var10);
+        p_70539_1_.addVertexWithUV((double)(var13 + p_70539_3_ * var12 + p_70539_6_ * var12), (double)(var14 + p_70539_4_ * var12), (double)(var15 + p_70539_5_ * var12 + p_70539_7_ * var12), (double)var8, (double)var10);
+        p_70539_1_.addVertexWithUV((double)(var13 + p_70539_3_ * var12 - p_70539_6_ * var12), (double)(var14 - p_70539_4_ * var12), (double)(var15 + p_70539_5_ * var12 - p_70539_7_ * var12), (double)var8, (double)var11);
     }
 
     public int getFXLayer()
@@ -189,18 +189,18 @@ public class EntityFX extends Entity
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {}
+    public void writeEntityToNBT(NBTTagCompound p_70014_1_) {}
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {}
+    public void readEntityFromNBT(NBTTagCompound p_70037_1_) {}
 
-    public void setParticleIcon(IIcon par1Icon)
+    public void setParticleIcon(IIcon p_110125_1_)
     {
         if (this.getFXLayer() == 1)
         {
-            this.particleIcon = par1Icon;
+            this.particleIcon = p_110125_1_;
         }
         else
         {
@@ -209,14 +209,14 @@ public class EntityFX extends Entity
                 throw new RuntimeException("Invalid call to Particle.setTex, use coordinate methods");
             }
 
-            this.particleIcon = par1Icon;
+            this.particleIcon = p_110125_1_;
         }
     }
 
     /**
      * Public method to set private field particleTextureIndex.
      */
-    public void setParticleTextureIndex(int par1)
+    public void setParticleTextureIndex(int p_70536_1_)
     {
         if (this.getFXLayer() != 0)
         {
@@ -224,8 +224,8 @@ public class EntityFX extends Entity
         }
         else
         {
-            this.particleTextureIndexX = par1 % 16;
-            this.particleTextureIndexY = par1 / 16;
+            this.particleTextureIndexX = p_70536_1_ % 16;
+            this.particleTextureIndexY = p_70536_1_ / 16;
         }
     }
 

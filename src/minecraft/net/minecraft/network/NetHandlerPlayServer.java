@@ -9,6 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.concurrent.Callable;
@@ -66,7 +67,7 @@ import net.minecraft.network.play.server.S32PacketConfirmTransaction;
 import net.minecraft.network.play.server.S3APacketTabComplete;
 import net.minecraft.network.play.server.S40PacketDisconnect;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.management.BanEntry;
+import net.minecraft.server.management.UserListBansEntry;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityBeacon;
@@ -117,13 +118,13 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer
     private boolean hasMoved = true;
     private static final String __OBFID = "CL_00001452";
 
-    public NetHandlerPlayServer(MinecraftServer par1MinecraftServer, NetworkManager par2INetworkManager, EntityPlayerMP par3EntityPlayerMP)
+    public NetHandlerPlayServer(MinecraftServer p_i1530_1_, NetworkManager p_i1530_2_, EntityPlayerMP p_i1530_3_)
     {
-        this.serverController = par1MinecraftServer;
-        this.netManager = par2INetworkManager;
-        par2INetworkManager.setNetHandler(this);
-        this.playerEntity = par3EntityPlayerMP;
-        par3EntityPlayerMP.playerNetServerHandler = this;
+        this.serverController = p_i1530_1_;
+        this.netManager = p_i1530_2_;
+        p_i1530_2_.setNetHandler(this);
+        this.playerEntity = p_i1530_3_;
+        p_i1530_3_.playerNetServerHandler = this;
     }
 
     /**
@@ -154,8 +155,10 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer
             --this.field_147375_m;
         }
 
-        this.serverController.theProfiler.endStartSection("playerTick");
-        this.serverController.theProfiler.endSection();
+        if (this.playerEntity.func_154331_x() > 0L && this.serverController.func_143007_ar() > 0 && MinecraftServer.getSystemTimeMillis() - this.playerEntity.func_154331_x() > (long)(this.serverController.func_143007_ar() * 1000 * 60))
+        {
+            this.kickPlayerFromServer("You have been idle for too long!");
+        }
     }
 
     public NetworkManager func_147362_b()
@@ -720,7 +723,7 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer
 
             this.chatSpamThresholdCount += 20;
 
-            if (this.chatSpamThresholdCount > 200 && !this.serverController.getConfigurationManager().isPlayerOpped(this.playerEntity.getCommandSenderName()))
+            if (this.chatSpamThresholdCount > 200 && !this.serverController.getConfigurationManager().func_152596_g(this.playerEntity.getGameProfile()))
             {
                 this.kickPlayerFromServer("disconnect.spam");
             }
@@ -856,9 +859,8 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer
                     }
                     else
                     {
-                        BanEntry var3 = new BanEntry(this.playerEntity.getCommandSenderName());
-                        var3.setBanReason("Death in Hardcore");
-                        this.serverController.getConfigurationManager().getBannedPlayers().put(var3);
+                        UserListBansEntry var3 = new UserListBansEntry(this.playerEntity.getGameProfile(), (Date)null, "(You just lost the game)", (Date)null, "Death in Hardcore");
+                        this.serverController.getConfigurationManager().func_152608_h().func_152687_a(var3);
                         this.playerEntity.playerNetServerHandler.kickPlayerFromServer("You have died. Game over, man, it\'s game over!");
                     }
                 }
@@ -1115,79 +1117,118 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer
      */
     public void processVanilla250Packet(C17PacketCustomPayload p_147349_1_)
     {
-        ItemStack var2;
+        PacketBuffer var2;
         ItemStack var3;
+        ItemStack var4;
 
         if ("MC|BEdit".equals(p_147349_1_.func_149559_c()))
         {
+            var2 = new PacketBuffer(Unpooled.wrappedBuffer(p_147349_1_.func_149558_e()));
+
             try
             {
-                var2 = (new PacketBuffer(Unpooled.wrappedBuffer(p_147349_1_.func_149558_e()))).readItemStackFromBuffer();
+                var3 = var2.readItemStackFromBuffer();
 
-                if (!ItemWritableBook.func_150930_a(var2.getTagCompound()))
+                if (var3 != null)
                 {
-                    throw new IOException("Invalid book tag!");
-                }
+                    if (!ItemWritableBook.func_150930_a(var3.getTagCompound()))
+                    {
+                        throw new IOException("Invalid book tag!");
+                    }
 
-                var3 = this.playerEntity.inventory.getCurrentItem();
+                    var4 = this.playerEntity.inventory.getCurrentItem();
 
-                if (var2.getItem() == Items.writable_book && var2.getItem() == var3.getItem())
-                {
-                    var3.setTagInfo("pages", var2.getTagCompound().getTagList("pages", 8));
+                    if (var4 == null)
+                    {
+                        return;
+                    }
+
+                    if (var3.getItem() == Items.writable_book && var3.getItem() == var4.getItem())
+                    {
+                        var4.setTagInfo("pages", var3.getTagCompound().getTagList("pages", 8));
+                    }
+
+                    return;
                 }
             }
-            catch (Exception var12)
+            catch (Exception var38)
             {
-                logger.error("Couldn\'t handle book info", var12);
+                logger.error("Couldn\'t handle book info", var38);
+                return;
             }
+            finally
+            {
+                var2.release();
+            }
+
+            return;
         }
         else if ("MC|BSign".equals(p_147349_1_.func_149559_c()))
         {
+            var2 = new PacketBuffer(Unpooled.wrappedBuffer(p_147349_1_.func_149558_e()));
+
             try
             {
-                var2 = (new PacketBuffer(Unpooled.wrappedBuffer(p_147349_1_.func_149558_e()))).readItemStackFromBuffer();
+                var3 = var2.readItemStackFromBuffer();
 
-                if (!ItemEditableBook.validBookTagContents(var2.getTagCompound()))
+                if (var3 != null)
                 {
-                    throw new IOException("Invalid book tag!");
-                }
+                    if (!ItemEditableBook.validBookTagContents(var3.getTagCompound()))
+                    {
+                        throw new IOException("Invalid book tag!");
+                    }
 
-                var3 = this.playerEntity.inventory.getCurrentItem();
+                    var4 = this.playerEntity.inventory.getCurrentItem();
 
-                if (var2.getItem() == Items.written_book && var3.getItem() == Items.writable_book)
-                {
-                    var3.setTagInfo("author", new NBTTagString(this.playerEntity.getCommandSenderName()));
-                    var3.setTagInfo("title", new NBTTagString(var2.getTagCompound().getString("title")));
-                    var3.setTagInfo("pages", var2.getTagCompound().getTagList("pages", 8));
-                    var3.func_150996_a(Items.written_book);
+                    if (var4 == null)
+                    {
+                        return;
+                    }
+
+                    if (var3.getItem() == Items.written_book && var4.getItem() == Items.writable_book)
+                    {
+                        var4.setTagInfo("author", new NBTTagString(this.playerEntity.getCommandSenderName()));
+                        var4.setTagInfo("title", new NBTTagString(var3.getTagCompound().getString("title")));
+                        var4.setTagInfo("pages", var3.getTagCompound().getTagList("pages", 8));
+                        var4.func_150996_a(Items.written_book);
+                    }
+
+                    return;
                 }
             }
-            catch (Exception var11)
+            catch (Exception var36)
             {
-                logger.error("Couldn\'t sign book", var11);
+                logger.error("Couldn\'t sign book", var36);
+                return;
             }
+            finally
+            {
+                var2.release();
+            }
+
+            return;
         }
         else
         {
-            DataInputStream var13;
-            int var16;
+            DataInputStream var40;
+            int var42;
 
             if ("MC|TrSel".equals(p_147349_1_.func_149559_c()))
             {
                 try
                 {
-                    var13 = new DataInputStream(new ByteArrayInputStream(p_147349_1_.func_149558_e()));
-                    var16 = var13.readInt();
-                    Container var4 = this.playerEntity.openContainer;
+                    var40 = new DataInputStream(new ByteArrayInputStream(p_147349_1_.func_149558_e()));
+                    var42 = var40.readInt();
+                    Container var45 = this.playerEntity.openContainer;
 
-                    if (var4 instanceof ContainerMerchant)
+                    if (var45 instanceof ContainerMerchant)
                     {
-                        ((ContainerMerchant)var4).setCurrentRecipeIndex(var16);
+                        ((ContainerMerchant)var45).setCurrentRecipeIndex(var42);
                     }
                 }
-                catch (Exception var10)
+                catch (Exception var35)
                 {
-                    logger.error("Couldn\'t select trade", var10);
+                    logger.error("Couldn\'t select trade", var35);
                 }
             }
             else if ("MC|AdvCdm".equals(p_147349_1_.func_149559_c()))
@@ -1198,43 +1239,48 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer
                 }
                 else if (this.playerEntity.canCommandSenderUseCommand(2, "") && this.playerEntity.capabilities.isCreativeMode)
                 {
+                    var2 = new PacketBuffer(Unpooled.wrappedBuffer(p_147349_1_.func_149558_e()));
+
                     try
                     {
-                        PacketBuffer var14 = new PacketBuffer(Unpooled.wrappedBuffer(p_147349_1_.func_149558_e()));
-                        byte var17 = var14.readByte();
-                        CommandBlockLogic var18 = null;
+                        byte var43 = var2.readByte();
+                        CommandBlockLogic var46 = null;
 
-                        if (var17 == 0)
+                        if (var43 == 0)
                         {
-                            TileEntity var5 = this.playerEntity.worldObj.getTileEntity(var14.readInt(), var14.readInt(), var14.readInt());
+                            TileEntity var5 = this.playerEntity.worldObj.getTileEntity(var2.readInt(), var2.readInt(), var2.readInt());
 
                             if (var5 instanceof TileEntityCommandBlock)
                             {
-                                var18 = ((TileEntityCommandBlock)var5).func_145993_a();
+                                var46 = ((TileEntityCommandBlock)var5).func_145993_a();
                             }
                         }
-                        else if (var17 == 1)
+                        else if (var43 == 1)
                         {
-                            Entity var20 = this.playerEntity.worldObj.getEntityByID(var14.readInt());
+                            Entity var48 = this.playerEntity.worldObj.getEntityByID(var2.readInt());
 
-                            if (var20 instanceof EntityMinecartCommandBlock)
+                            if (var48 instanceof EntityMinecartCommandBlock)
                             {
-                                var18 = ((EntityMinecartCommandBlock)var20).func_145822_e();
+                                var46 = ((EntityMinecartCommandBlock)var48).func_145822_e();
                             }
                         }
 
-                        String var23 = var14.readStringFromBuffer(var14.readableBytes());
+                        String var49 = var2.readStringFromBuffer(var2.readableBytes());
 
-                        if (var18 != null)
+                        if (var46 != null)
                         {
-                            var18.func_145752_a(var23);
-                            var18.func_145756_e();
-                            this.playerEntity.addChatMessage(new ChatComponentTranslation("advMode.setCommand.success", new Object[] {var23}));
+                            var46.func_145752_a(var49);
+                            var46.func_145756_e();
+                            this.playerEntity.addChatMessage(new ChatComponentTranslation("advMode.setCommand.success", new Object[] {var49}));
                         }
                     }
-                    catch (Exception var9)
+                    catch (Exception var33)
                     {
-                        logger.error("Couldn\'t set command block", var9);
+                        logger.error("Couldn\'t set command block", var33);
+                    }
+                    finally
+                    {
+                        var2.release();
                     }
                 }
                 else
@@ -1248,43 +1294,43 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer
                 {
                     try
                     {
-                        var13 = new DataInputStream(new ByteArrayInputStream(p_147349_1_.func_149558_e()));
-                        var16 = var13.readInt();
-                        int var22 = var13.readInt();
-                        ContainerBeacon var21 = (ContainerBeacon)this.playerEntity.openContainer;
-                        Slot var6 = var21.getSlot(0);
+                        var40 = new DataInputStream(new ByteArrayInputStream(p_147349_1_.func_149558_e()));
+                        var42 = var40.readInt();
+                        int var47 = var40.readInt();
+                        ContainerBeacon var50 = (ContainerBeacon)this.playerEntity.openContainer;
+                        Slot var6 = var50.getSlot(0);
 
                         if (var6.getHasStack())
                         {
                             var6.decrStackSize(1);
-                            TileEntityBeacon var7 = var21.func_148327_e();
-                            var7.func_146001_d(var16);
-                            var7.func_146004_e(var22);
+                            TileEntityBeacon var7 = var50.func_148327_e();
+                            var7.func_146001_d(var42);
+                            var7.func_146004_e(var47);
                             var7.onInventoryChanged();
                         }
                     }
-                    catch (Exception var8)
+                    catch (Exception var32)
                     {
-                        logger.error("Couldn\'t set beacon", var8);
+                        logger.error("Couldn\'t set beacon", var32);
                     }
                 }
             }
             else if ("MC|ItemName".equals(p_147349_1_.func_149559_c()) && this.playerEntity.openContainer instanceof ContainerRepair)
             {
-                ContainerRepair var15 = (ContainerRepair)this.playerEntity.openContainer;
+                ContainerRepair var41 = (ContainerRepair)this.playerEntity.openContainer;
 
                 if (p_147349_1_.func_149558_e() != null && p_147349_1_.func_149558_e().length >= 1)
                 {
-                    String var19 = ChatAllowedCharacters.filerAllowedCharacters(new String(p_147349_1_.func_149558_e(), Charsets.UTF_8));
+                    String var44 = ChatAllowedCharacters.filerAllowedCharacters(new String(p_147349_1_.func_149558_e(), Charsets.UTF_8));
 
-                    if (var19.length() <= 30)
+                    if (var44.length() <= 30)
                     {
-                        var15.updateItemName(var19);
+                        var41.updateItemName(var44);
                     }
                 }
                 else
                 {
-                    var15.updateItemName("");
+                    var41.updateItemName("");
                 }
             }
         }

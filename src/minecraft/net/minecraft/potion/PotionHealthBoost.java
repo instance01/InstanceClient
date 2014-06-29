@@ -7,18 +7,18 @@ public class PotionHealthBoost extends Potion
 {
     private static final String __OBFID = "CL_00001526";
 
-    public PotionHealthBoost(int par1, boolean par2, int par3)
+    public PotionHealthBoost(int p_i1571_1_, boolean p_i1571_2_, int p_i1571_3_)
     {
-        super(par1, par2, par3);
+        super(p_i1571_1_, p_i1571_2_, p_i1571_3_);
     }
 
-    public void removeAttributesModifiersFromEntity(EntityLivingBase par1EntityLivingBase, BaseAttributeMap par2BaseAttributeMap, int par3)
+    public void removeAttributesModifiersFromEntity(EntityLivingBase p_111187_1_, BaseAttributeMap p_111187_2_, int p_111187_3_)
     {
-        super.removeAttributesModifiersFromEntity(par1EntityLivingBase, par2BaseAttributeMap, par3);
+        super.removeAttributesModifiersFromEntity(p_111187_1_, p_111187_2_, p_111187_3_);
 
-        if (par1EntityLivingBase.getHealth() > par1EntityLivingBase.getMaxHealth())
+        if (p_111187_1_.getHealth() > p_111187_1_.getMaxHealth())
         {
-            par1EntityLivingBase.setHealth(par1EntityLivingBase.getMaxHealth());
+            p_111187_1_.setHealth(p_111187_1_.getMaxHealth());
         }
     }
 }

@@ -40,9 +40,9 @@ public class C02PacketUseEntity extends Packet
         p_148840_1_.writeByte(this.field_149566_b.field_151418_d);
     }
 
-    public void processPacket(INetHandlerPlayServer p_149563_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149563_1_.processUseEntity(this);
+        p_148833_1_.processUseEntity(this);
     }
 
     public Entity func_149564_a(World p_149564_1_)

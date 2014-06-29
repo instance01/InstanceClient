@@ -8,9 +8,9 @@ public abstract class EntityAmbientCreature extends EntityLiving implements IAni
 {
     private static final String __OBFID = "CL_00001636";
 
-    public EntityAmbientCreature(World par1World)
+    public EntityAmbientCreature(World p_i1679_1_)
     {
-        super(par1World);
+        super(p_i1679_1_);
     }
 
     public boolean allowLeashing()
@@ -21,7 +21,7 @@ public abstract class EntityAmbientCreature extends EntityLiving implements IAni
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
-    protected boolean interact(EntityPlayer par1EntityPlayer)
+    protected boolean interact(EntityPlayer p_70085_1_)
     {
         return false;
     }

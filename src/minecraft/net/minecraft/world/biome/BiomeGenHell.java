@@ -8,9 +8,9 @@ public class BiomeGenHell extends BiomeGenBase
 {
     private static final String __OBFID = "CL_00000173";
 
-    public BiomeGenHell(int par1)
+    public BiomeGenHell(int p_i1981_1_)
     {
-        super(par1);
+        super(p_i1981_1_);
         this.spawnableMonsterList.clear();
         this.spawnableCreatureList.clear();
         this.spawnableWaterCreatureList.clear();

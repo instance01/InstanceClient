@@ -7,14 +7,14 @@ public interface IBehaviorDispenseItem
     IBehaviorDispenseItem itemDispenseBehaviorProvider = new IBehaviorDispenseItem()
     {
         private static final String __OBFID = "CL_00001200";
-        public ItemStack dispense(IBlockSource par1IBlockSource, ItemStack par2ItemStack)
+        public ItemStack dispense(IBlockSource p_82482_1_, ItemStack p_82482_2_)
         {
-            return par2ItemStack;
+            return p_82482_2_;
         }
     };
 
     /**
      * Dispenses the specified ItemStack from a dispenser.
      */
-    ItemStack dispense(IBlockSource var1, ItemStack var2);
+    ItemStack dispense(IBlockSource p_82482_1_, ItemStack p_82482_2_);
 }

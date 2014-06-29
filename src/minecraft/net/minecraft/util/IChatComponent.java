@@ -18,19 +18,19 @@ import java.util.Map.Entry;
 
 public interface IChatComponent extends Iterable
 {
-    IChatComponent setChatStyle(ChatStyle var1);
+    IChatComponent setChatStyle(ChatStyle p_150255_1_);
 
     ChatStyle getChatStyle();
 
     /**
      * Appends the given text to the end of this component.
      */
-    IChatComponent appendText(String var1);
+    IChatComponent appendText(String p_150258_1_);
 
     /**
      * Appends the given component to the end of this one.
      */
-    IChatComponent appendSibling(IChatComponent var1);
+    IChatComponent appendSibling(IChatComponent p_150257_1_);
 
     /**
      * Gets the text of this component, without any special formatting codes added, for chat.  TODO: why is this two
@@ -64,24 +64,24 @@ public interface IChatComponent extends Iterable
         private static final Gson field_150700_a;
         private static final String __OBFID = "CL_00001263";
 
-        public IChatComponent deserialize(JsonElement p_150698_1_, Type p_150698_2_, JsonDeserializationContext p_150698_3_)
+        public IChatComponent deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
         {
-            if (p_150698_1_.isJsonPrimitive())
+            if (p_deserialize_1_.isJsonPrimitive())
             {
-                return new ChatComponentText(p_150698_1_.getAsString());
+                return new ChatComponentText(p_deserialize_1_.getAsString());
             }
-            else if (!p_150698_1_.isJsonObject())
+            else if (!p_deserialize_1_.isJsonObject())
             {
-                if (p_150698_1_.isJsonArray())
+                if (p_deserialize_1_.isJsonArray())
                 {
-                    JsonArray var11 = p_150698_1_.getAsJsonArray();
+                    JsonArray var11 = p_deserialize_1_.getAsJsonArray();
                     IChatComponent var12 = null;
-                    Iterator var13 = var11.iterator();
+                    Iterator var14 = var11.iterator();
 
-                    while (var13.hasNext())
+                    while (var14.hasNext())
                     {
-                        JsonElement var16 = (JsonElement)var13.next();
-                        IChatComponent var17 = this.deserialize(var16, var16.getClass(), p_150698_3_);
+                        JsonElement var16 = (JsonElement)var14.next();
+                        IChatComponent var17 = this.deserialize(var16, var16.getClass(), p_deserialize_3_);
 
                         if (var12 == null)
                         {
@@ -97,12 +97,12 @@ public interface IChatComponent extends Iterable
                 }
                 else
                 {
-                    throw new JsonParseException("Don\'t know how to turn " + p_150698_1_.toString() + " into a Component");
+                    throw new JsonParseException("Don\'t know how to turn " + p_deserialize_1_.toString() + " into a Component");
                 }
             }
             else
             {
-                JsonObject var4 = p_150698_1_.getAsJsonObject();
+                JsonObject var4 = p_deserialize_1_.getAsJsonObject();
                 Object var5;
 
                 if (var4.has("text"))
@@ -113,7 +113,7 @@ public interface IChatComponent extends Iterable
                 {
                     if (!var4.has("translate"))
                     {
-                        throw new JsonParseException("Don\'t know how to turn " + p_150698_1_.toString() + " into a Component");
+                        throw new JsonParseException("Don\'t know how to turn " + p_deserialize_1_.toString() + " into a Component");
                     }
 
                     String var6 = var4.get("translate").getAsString();
@@ -125,7 +125,7 @@ public interface IChatComponent extends Iterable
 
                         for (int var9 = 0; var9 < var8.length; ++var9)
                         {
-                            var8[var9] = this.deserialize(var7.get(var9), p_150698_2_, p_150698_3_);
+                            var8[var9] = this.deserialize(var7.get(var9), p_deserialize_2_, p_deserialize_3_);
 
                             if (var8[var9] instanceof ChatComponentText)
                             {
@@ -148,20 +148,20 @@ public interface IChatComponent extends Iterable
 
                 if (var4.has("extra"))
                 {
-                    JsonArray var14 = var4.getAsJsonArray("extra");
+                    JsonArray var13 = var4.getAsJsonArray("extra");
 
-                    if (var14.size() <= 0)
+                    if (var13.size() <= 0)
                     {
                         throw new JsonParseException("Unexpected empty array of components");
                     }
 
-                    for (int var15 = 0; var15 < var14.size(); ++var15)
+                    for (int var15 = 0; var15 < var13.size(); ++var15)
                     {
-                        ((IChatComponent)var5).appendSibling(this.deserialize(var14.get(var15), p_150698_2_, p_150698_3_));
+                        ((IChatComponent)var5).appendSibling(this.deserialize(var13.get(var15), p_deserialize_2_, p_deserialize_3_));
                     }
                 }
 
-                ((IChatComponent)var5).setChatStyle((ChatStyle)p_150698_3_.deserialize(p_150698_1_, ChatStyle.class));
+                ((IChatComponent)var5).setChatStyle((ChatStyle)p_deserialize_3_.deserialize(p_deserialize_1_, ChatStyle.class));
                 return (IChatComponent)var5;
             }
         }
@@ -183,47 +183,47 @@ public interface IChatComponent extends Iterable
             }
         }
 
-        public JsonElement serialize(IChatComponent p_150697_1_, Type p_150697_2_, JsonSerializationContext p_150697_3_)
+        public JsonElement serialize(IChatComponent p_serialize_1_, Type p_serialize_2_, JsonSerializationContext p_serialize_3_)
         {
-            if (p_150697_1_ instanceof ChatComponentText && p_150697_1_.getChatStyle().isEmpty() && p_150697_1_.getSiblings().isEmpty())
+            if (p_serialize_1_ instanceof ChatComponentText && p_serialize_1_.getChatStyle().isEmpty() && p_serialize_1_.getSiblings().isEmpty())
             {
-                return new JsonPrimitive(((ChatComponentText)p_150697_1_).getChatComponentText_TextValue());
+                return new JsonPrimitive(((ChatComponentText)p_serialize_1_).getChatComponentText_TextValue());
             }
             else
             {
                 JsonObject var4 = new JsonObject();
 
-                if (!p_150697_1_.getChatStyle().isEmpty())
+                if (!p_serialize_1_.getChatStyle().isEmpty())
                 {
-                    this.func_150695_a(p_150697_1_.getChatStyle(), var4, p_150697_3_);
+                    this.func_150695_a(p_serialize_1_.getChatStyle(), var4, p_serialize_3_);
                 }
 
-                if (!p_150697_1_.getSiblings().isEmpty())
+                if (!p_serialize_1_.getSiblings().isEmpty())
                 {
                     JsonArray var5 = new JsonArray();
-                    Iterator var6 = p_150697_1_.getSiblings().iterator();
+                    Iterator var6 = p_serialize_1_.getSiblings().iterator();
 
                     while (var6.hasNext())
                     {
                         IChatComponent var7 = (IChatComponent)var6.next();
-                        var5.add(this.serialize(var7, var7.getClass(), p_150697_3_));
+                        var5.add(this.serialize(var7, var7.getClass(), p_serialize_3_));
                     }
 
                     var4.add("extra", var5);
                 }
 
-                if (p_150697_1_ instanceof ChatComponentText)
+                if (p_serialize_1_ instanceof ChatComponentText)
                 {
-                    var4.addProperty("text", ((ChatComponentText)p_150697_1_).getChatComponentText_TextValue());
+                    var4.addProperty("text", ((ChatComponentText)p_serialize_1_).getChatComponentText_TextValue());
                 }
                 else
                 {
-                    if (!(p_150697_1_ instanceof ChatComponentTranslation))
+                    if (!(p_serialize_1_ instanceof ChatComponentTranslation))
                     {
-                        throw new IllegalArgumentException("Don\'t know how to serialize " + p_150697_1_ + " as a Component");
+                        throw new IllegalArgumentException("Don\'t know how to serialize " + p_serialize_1_ + " as a Component");
                     }
 
-                    ChatComponentTranslation var11 = (ChatComponentTranslation)p_150697_1_;
+                    ChatComponentTranslation var11 = (ChatComponentTranslation)p_serialize_1_;
                     var4.addProperty("translate", var11.getKey());
 
                     if (var11.getFormatArgs() != null && var11.getFormatArgs().length > 0)
@@ -238,7 +238,7 @@ public interface IChatComponent extends Iterable
 
                             if (var10 instanceof IChatComponent)
                             {
-                                var12.add(this.serialize((IChatComponent)var10, var10.getClass(), p_150697_3_));
+                                var12.add(this.serialize((IChatComponent)var10, var10.getClass(), p_serialize_3_));
                             }
                             else
                             {
@@ -264,9 +264,9 @@ public interface IChatComponent extends Iterable
             return (IChatComponent)field_150700_a.fromJson(p_150699_0_, IChatComponent.class);
         }
 
-        public JsonElement serialize(Object par1Obj, Type par2Type, JsonSerializationContext par3JsonSerializationContext)
+        public JsonElement serialize(Object p_serialize_1_, Type p_serialize_2_, JsonSerializationContext p_serialize_3_)
         {
-            return this.serialize((IChatComponent)par1Obj, par2Type, par3JsonSerializationContext);
+            return this.serialize((IChatComponent)p_serialize_1_, p_serialize_2_, p_serialize_3_);
         }
 
         static

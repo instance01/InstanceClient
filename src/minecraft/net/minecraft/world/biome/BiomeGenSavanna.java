@@ -36,19 +36,19 @@ public class BiomeGenSavanna extends BiomeGenBase
         return var1;
     }
 
-    public void decorate(World par1World, Random par2Random, int par3, int par4)
+    public void decorate(World p_76728_1_, Random p_76728_2_, int p_76728_3_, int p_76728_4_)
     {
         field_150610_ae.func_150548_a(2);
 
         for (int var5 = 0; var5 < 7; ++var5)
         {
-            int var6 = par3 + par2Random.nextInt(16) + 8;
-            int var7 = par4 + par2Random.nextInt(16) + 8;
-            int var8 = par2Random.nextInt(par1World.getHeightValue(var6, var7) + 32);
-            field_150610_ae.generate(par1World, par2Random, var6, var8, var7);
+            int var6 = p_76728_3_ + p_76728_2_.nextInt(16) + 8;
+            int var7 = p_76728_4_ + p_76728_2_.nextInt(16) + 8;
+            int var8 = p_76728_2_.nextInt(p_76728_1_.getHeightValue(var6, var7) + 32);
+            field_150610_ae.generate(p_76728_1_, p_76728_2_, var6, var8, var7);
         }
 
-        super.decorate(par1World, par2Random, par3, par4);
+        super.decorate(p_76728_1_, p_76728_2_, p_76728_3_, p_76728_4_);
     }
 
     public static class Mutated extends BiomeGenMutated
@@ -83,9 +83,9 @@ public class BiomeGenSavanna extends BiomeGenBase
             this.func_150560_b(p_150573_1_, p_150573_2_, p_150573_3_, p_150573_4_, p_150573_5_, p_150573_6_, p_150573_7_);
         }
 
-        public void decorate(World par1World, Random par2Random, int par3, int par4)
+        public void decorate(World p_76728_1_, Random p_76728_2_, int p_76728_3_, int p_76728_4_)
         {
-            this.theBiomeDecorator.func_150512_a(par1World, par2Random, this, par3, par4);
+            this.theBiomeDecorator.func_150512_a(p_76728_1_, p_76728_2_, this, p_76728_3_, p_76728_4_);
         }
     }
 }

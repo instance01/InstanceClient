@@ -24,29 +24,29 @@ public class EntityAINearestAttackableTarget extends EntityAITarget
     private EntityLivingBase targetEntity;
     private static final String __OBFID = "CL_00001620";
 
-    public EntityAINearestAttackableTarget(EntityCreature par1EntityCreature, Class par2Class, int par3, boolean par4)
+    public EntityAINearestAttackableTarget(EntityCreature p_i1663_1_, Class p_i1663_2_, int p_i1663_3_, boolean p_i1663_4_)
     {
-        this(par1EntityCreature, par2Class, par3, par4, false);
+        this(p_i1663_1_, p_i1663_2_, p_i1663_3_, p_i1663_4_, false);
     }
 
-    public EntityAINearestAttackableTarget(EntityCreature par1EntityCreature, Class par2Class, int par3, boolean par4, boolean par5)
+    public EntityAINearestAttackableTarget(EntityCreature p_i1664_1_, Class p_i1664_2_, int p_i1664_3_, boolean p_i1664_4_, boolean p_i1664_5_)
     {
-        this(par1EntityCreature, par2Class, par3, par4, par5, (IEntitySelector)null);
+        this(p_i1664_1_, p_i1664_2_, p_i1664_3_, p_i1664_4_, p_i1664_5_, (IEntitySelector)null);
     }
 
-    public EntityAINearestAttackableTarget(EntityCreature par1EntityCreature, Class par2Class, int par3, boolean par4, boolean par5, final IEntitySelector par6IEntitySelector)
+    public EntityAINearestAttackableTarget(EntityCreature p_i1665_1_, Class p_i1665_2_, int p_i1665_3_, boolean p_i1665_4_, boolean p_i1665_5_, final IEntitySelector p_i1665_6_)
     {
-        super(par1EntityCreature, par4, par5);
-        this.targetClass = par2Class;
-        this.targetChance = par3;
-        this.theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(par1EntityCreature);
+        super(p_i1665_1_, p_i1665_4_, p_i1665_5_);
+        this.targetClass = p_i1665_2_;
+        this.targetChance = p_i1665_3_;
+        this.theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(p_i1665_1_);
         this.setMutexBits(1);
         this.targetEntitySelector = new IEntitySelector()
         {
             private static final String __OBFID = "CL_00001621";
-            public boolean isEntityApplicable(Entity par1Entity)
+            public boolean isEntityApplicable(Entity p_82704_1_)
             {
-                return !(par1Entity instanceof EntityLivingBase) ? false : (par6IEntitySelector != null && !par6IEntitySelector.isEntityApplicable(par1Entity) ? false : EntityAINearestAttackableTarget.this.isSuitableTarget((EntityLivingBase)par1Entity, false));
+                return !(p_82704_1_ instanceof EntityLivingBase) ? false : (p_i1665_6_ != null && !p_i1665_6_.isEntityApplicable(p_82704_1_) ? false : EntityAINearestAttackableTarget.this.isSuitableTarget((EntityLivingBase)p_82704_1_, false));
             }
         };
     }
@@ -92,21 +92,21 @@ public class EntityAINearestAttackableTarget extends EntityAITarget
         private final Entity theEntity;
         private static final String __OBFID = "CL_00001622";
 
-        public Sorter(Entity par1Entity)
+        public Sorter(Entity p_i1662_1_)
         {
-            this.theEntity = par1Entity;
+            this.theEntity = p_i1662_1_;
         }
 
-        public int compare(Entity par1Entity, Entity par2Entity)
+        public int compare(Entity p_compare_1_, Entity p_compare_2_)
         {
-            double var3 = this.theEntity.getDistanceSqToEntity(par1Entity);
-            double var5 = this.theEntity.getDistanceSqToEntity(par2Entity);
+            double var3 = this.theEntity.getDistanceSqToEntity(p_compare_1_);
+            double var5 = this.theEntity.getDistanceSqToEntity(p_compare_2_);
             return var3 < var5 ? -1 : (var3 > var5 ? 1 : 0);
         }
 
-        public int compare(Object par1Obj, Object par2Obj)
+        public int compare(Object p_compare_1_, Object p_compare_2_)
         {
-            return this.compare((Entity)par1Obj, (Entity)par2Obj);
+            return this.compare((Entity)p_compare_1_, (Entity)p_compare_2_);
         }
     }
 }

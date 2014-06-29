@@ -73,19 +73,19 @@ public class JsonBlendingMode
         }
     }
 
-    public boolean equals(Object par1Obj)
+    public boolean equals(Object p_equals_1_)
     {
-        if (this == par1Obj)
+        if (this == p_equals_1_)
         {
             return true;
         }
-        else if (!(par1Obj instanceof JsonBlendingMode))
+        else if (!(p_equals_1_ instanceof JsonBlendingMode))
         {
             return false;
         }
         else
         {
-            JsonBlendingMode var2 = (JsonBlendingMode)par1Obj;
+            JsonBlendingMode var2 = (JsonBlendingMode)p_equals_1_;
             return this.field_148112_f != var2.field_148112_f ? false : (this.field_148115_e != var2.field_148115_e ? false : (this.field_148114_d != var2.field_148114_d ? false : (this.field_148119_h != var2.field_148119_h ? false : (this.field_148113_g != var2.field_148113_g ? false : (this.field_148117_c != var2.field_148117_c ? false : this.field_148116_b == var2.field_148116_b)))));
         }
     }

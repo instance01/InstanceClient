@@ -48,9 +48,9 @@ public class S0APacketUseBed extends Packet
         p_148840_1_.writeInt(this.field_149094_d);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149093_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149093_1_.handleUseBed(this);
+        p_148833_1_.handleUseBed(this);
     }
 
     public EntityPlayer func_149091_a(World p_149091_1_)

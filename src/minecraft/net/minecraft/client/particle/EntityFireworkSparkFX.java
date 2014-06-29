@@ -16,42 +16,42 @@ public class EntityFireworkSparkFX extends EntityFX
     private boolean hasFadeColour;
     private static final String __OBFID = "CL_00000905";
 
-    public EntityFireworkSparkFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12, EffectRenderer par14EffectRenderer)
+    public EntityFireworkSparkFX(World p_i1207_1_, double p_i1207_2_, double p_i1207_4_, double p_i1207_6_, double p_i1207_8_, double p_i1207_10_, double p_i1207_12_, EffectRenderer p_i1207_14_)
     {
-        super(par1World, par2, par4, par6);
-        this.motionX = par8;
-        this.motionY = par10;
-        this.motionZ = par12;
-        this.field_92047_az = par14EffectRenderer;
+        super(p_i1207_1_, p_i1207_2_, p_i1207_4_, p_i1207_6_);
+        this.motionX = p_i1207_8_;
+        this.motionY = p_i1207_10_;
+        this.motionZ = p_i1207_12_;
+        this.field_92047_az = p_i1207_14_;
         this.particleScale *= 0.75F;
         this.particleMaxAge = 48 + this.rand.nextInt(12);
         this.noClip = false;
     }
 
-    public void setTrail(boolean par1)
+    public void setTrail(boolean p_92045_1_)
     {
-        this.field_92054_ax = par1;
+        this.field_92054_ax = p_92045_1_;
     }
 
-    public void setTwinkle(boolean par1)
+    public void setTwinkle(boolean p_92043_1_)
     {
-        this.field_92048_ay = par1;
+        this.field_92048_ay = p_92043_1_;
     }
 
-    public void setColour(int par1)
+    public void setColour(int p_92044_1_)
     {
-        float var2 = (float)((par1 & 16711680) >> 16) / 255.0F;
-        float var3 = (float)((par1 & 65280) >> 8) / 255.0F;
-        float var4 = (float)((par1 & 255) >> 0) / 255.0F;
+        float var2 = (float)((p_92044_1_ & 16711680) >> 16) / 255.0F;
+        float var3 = (float)((p_92044_1_ & 65280) >> 8) / 255.0F;
+        float var4 = (float)((p_92044_1_ & 255) >> 0) / 255.0F;
         float var5 = 1.0F;
         this.setRBGColorF(var2 * var5, var3 * var5, var4 * var5);
     }
 
-    public void setFadeColour(int par1)
+    public void setFadeColour(int p_92046_1_)
     {
-        this.fadeColourRed = (float)((par1 & 16711680) >> 16) / 255.0F;
-        this.fadeColourGreen = (float)((par1 & 65280) >> 8) / 255.0F;
-        this.fadeColourBlue = (float)((par1 & 255) >> 0) / 255.0F;
+        this.fadeColourRed = (float)((p_92046_1_ & 16711680) >> 16) / 255.0F;
+        this.fadeColourGreen = (float)((p_92046_1_ & 65280) >> 8) / 255.0F;
+        this.fadeColourBlue = (float)((p_92046_1_ & 255) >> 0) / 255.0F;
         this.hasFadeColour = true;
     }
 
@@ -71,11 +71,11 @@ public class EntityFireworkSparkFX extends EntityFX
         return false;
     }
 
-    public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7)
+    public void renderParticle(Tessellator p_70539_1_, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_)
     {
         if (!this.field_92048_ay || this.particleAge < this.particleMaxAge / 3 || (this.particleAge + this.particleMaxAge) / 3 % 2 == 0)
         {
-            super.renderParticle(par1Tessellator, par2, par3, par4, par5, par6, par7);
+            super.renderParticle(p_70539_1_, p_70539_2_, p_70539_3_, p_70539_4_, p_70539_5_, p_70539_6_, p_70539_7_);
         }
     }
 
@@ -137,7 +137,7 @@ public class EntityFireworkSparkFX extends EntityFX
         }
     }
 
-    public int getBrightnessForRender(float par1)
+    public int getBrightnessForRender(float p_70070_1_)
     {
         return 15728880;
     }
@@ -145,7 +145,7 @@ public class EntityFireworkSparkFX extends EntityFX
     /**
      * Gets how bright this entity is.
      */
-    public float getBrightness(float par1)
+    public float getBrightness(float p_70013_1_)
     {
         return 1.0F;
     }

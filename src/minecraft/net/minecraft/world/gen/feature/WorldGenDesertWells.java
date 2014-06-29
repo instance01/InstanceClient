@@ -8,14 +8,14 @@ public class WorldGenDesertWells extends WorldGenerator
 {
     private static final String __OBFID = "CL_00000407";
 
-    public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
+    public boolean generate(World p_76484_1_, Random p_76484_2_, int p_76484_3_, int p_76484_4_, int p_76484_5_)
     {
-        while (par1World.isAirBlock(par3, par4, par5) && par4 > 2)
+        while (p_76484_1_.isAirBlock(p_76484_3_, p_76484_4_, p_76484_5_) && p_76484_4_ > 2)
         {
-            --par4;
+            --p_76484_4_;
         }
 
-        if (par1World.getBlock(par3, par4, par5) != Blocks.sand)
+        if (p_76484_1_.getBlock(p_76484_3_, p_76484_4_, p_76484_5_) != Blocks.sand)
         {
             return false;
         }
@@ -28,7 +28,7 @@ public class WorldGenDesertWells extends WorldGenerator
             {
                 for (var7 = -2; var7 <= 2; ++var7)
                 {
-                    if (par1World.isAirBlock(par3 + var6, par4 - 1, par5 + var7) && par1World.isAirBlock(par3 + var6, par4 - 2, par5 + var7))
+                    if (p_76484_1_.isAirBlock(p_76484_3_ + var6, p_76484_4_ - 1, p_76484_5_ + var7) && p_76484_1_.isAirBlock(p_76484_3_ + var6, p_76484_4_ - 2, p_76484_5_ + var7))
                     {
                         return false;
                     }
@@ -41,16 +41,16 @@ public class WorldGenDesertWells extends WorldGenerator
                 {
                     for (int var8 = -2; var8 <= 2; ++var8)
                     {
-                        par1World.setBlock(par3 + var7, par4 + var6, par5 + var8, Blocks.sandstone, 0, 2);
+                        p_76484_1_.setBlock(p_76484_3_ + var7, p_76484_4_ + var6, p_76484_5_ + var8, Blocks.sandstone, 0, 2);
                     }
                 }
             }
 
-            par1World.setBlock(par3, par4, par5, Blocks.flowing_water, 0, 2);
-            par1World.setBlock(par3 - 1, par4, par5, Blocks.flowing_water, 0, 2);
-            par1World.setBlock(par3 + 1, par4, par5, Blocks.flowing_water, 0, 2);
-            par1World.setBlock(par3, par4, par5 - 1, Blocks.flowing_water, 0, 2);
-            par1World.setBlock(par3, par4, par5 + 1, Blocks.flowing_water, 0, 2);
+            p_76484_1_.setBlock(p_76484_3_, p_76484_4_, p_76484_5_, Blocks.flowing_water, 0, 2);
+            p_76484_1_.setBlock(p_76484_3_ - 1, p_76484_4_, p_76484_5_, Blocks.flowing_water, 0, 2);
+            p_76484_1_.setBlock(p_76484_3_ + 1, p_76484_4_, p_76484_5_, Blocks.flowing_water, 0, 2);
+            p_76484_1_.setBlock(p_76484_3_, p_76484_4_, p_76484_5_ - 1, Blocks.flowing_water, 0, 2);
+            p_76484_1_.setBlock(p_76484_3_, p_76484_4_, p_76484_5_ + 1, Blocks.flowing_water, 0, 2);
 
             for (var6 = -2; var6 <= 2; ++var6)
             {
@@ -58,15 +58,15 @@ public class WorldGenDesertWells extends WorldGenerator
                 {
                     if (var6 == -2 || var6 == 2 || var7 == -2 || var7 == 2)
                     {
-                        par1World.setBlock(par3 + var6, par4 + 1, par5 + var7, Blocks.sandstone, 0, 2);
+                        p_76484_1_.setBlock(p_76484_3_ + var6, p_76484_4_ + 1, p_76484_5_ + var7, Blocks.sandstone, 0, 2);
                     }
                 }
             }
 
-            par1World.setBlock(par3 + 2, par4 + 1, par5, Blocks.stone_slab, 1, 2);
-            par1World.setBlock(par3 - 2, par4 + 1, par5, Blocks.stone_slab, 1, 2);
-            par1World.setBlock(par3, par4 + 1, par5 + 2, Blocks.stone_slab, 1, 2);
-            par1World.setBlock(par3, par4 + 1, par5 - 2, Blocks.stone_slab, 1, 2);
+            p_76484_1_.setBlock(p_76484_3_ + 2, p_76484_4_ + 1, p_76484_5_, Blocks.stone_slab, 1, 2);
+            p_76484_1_.setBlock(p_76484_3_ - 2, p_76484_4_ + 1, p_76484_5_, Blocks.stone_slab, 1, 2);
+            p_76484_1_.setBlock(p_76484_3_, p_76484_4_ + 1, p_76484_5_ + 2, Blocks.stone_slab, 1, 2);
+            p_76484_1_.setBlock(p_76484_3_, p_76484_4_ + 1, p_76484_5_ - 2, Blocks.stone_slab, 1, 2);
 
             for (var6 = -1; var6 <= 1; ++var6)
             {
@@ -74,21 +74,21 @@ public class WorldGenDesertWells extends WorldGenerator
                 {
                     if (var6 == 0 && var7 == 0)
                     {
-                        par1World.setBlock(par3 + var6, par4 + 4, par5 + var7, Blocks.sandstone, 0, 2);
+                        p_76484_1_.setBlock(p_76484_3_ + var6, p_76484_4_ + 4, p_76484_5_ + var7, Blocks.sandstone, 0, 2);
                     }
                     else
                     {
-                        par1World.setBlock(par3 + var6, par4 + 4, par5 + var7, Blocks.stone_slab, 1, 2);
+                        p_76484_1_.setBlock(p_76484_3_ + var6, p_76484_4_ + 4, p_76484_5_ + var7, Blocks.stone_slab, 1, 2);
                     }
                 }
             }
 
             for (var6 = 1; var6 <= 3; ++var6)
             {
-                par1World.setBlock(par3 - 1, par4 + var6, par5 - 1, Blocks.sandstone, 0, 2);
-                par1World.setBlock(par3 - 1, par4 + var6, par5 + 1, Blocks.sandstone, 0, 2);
-                par1World.setBlock(par3 + 1, par4 + var6, par5 - 1, Blocks.sandstone, 0, 2);
-                par1World.setBlock(par3 + 1, par4 + var6, par5 + 1, Blocks.sandstone, 0, 2);
+                p_76484_1_.setBlock(p_76484_3_ - 1, p_76484_4_ + var6, p_76484_5_ - 1, Blocks.sandstone, 0, 2);
+                p_76484_1_.setBlock(p_76484_3_ - 1, p_76484_4_ + var6, p_76484_5_ + 1, Blocks.sandstone, 0, 2);
+                p_76484_1_.setBlock(p_76484_3_ + 1, p_76484_4_ + var6, p_76484_5_ - 1, Blocks.sandstone, 0, 2);
+                p_76484_1_.setBlock(p_76484_3_ + 1, p_76484_4_ + var6, p_76484_5_ + 1, Blocks.sandstone, 0, 2);
             }
 
             return true;

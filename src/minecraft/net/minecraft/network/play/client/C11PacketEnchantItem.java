@@ -20,9 +20,9 @@ public class C11PacketEnchantItem extends Packet
         this.field_149540_b = p_i45245_2_;
     }
 
-    public void processPacket(INetHandlerPlayServer p_149538_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149538_1_.processEnchantItem(this);
+        p_148833_1_.processEnchantItem(this);
     }
 
     /**

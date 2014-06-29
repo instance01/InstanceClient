@@ -31,26 +31,26 @@ public class RenderList
     private boolean bufferFlipped;
     private static final String __OBFID = "CL_00000957";
 
-    public void setupRenderList(int par1, int par2, int par3, double par4, double par6, double par8)
+    public void setupRenderList(int p_78422_1_, int p_78422_2_, int p_78422_3_, double p_78422_4_, double p_78422_6_, double p_78422_8_)
     {
         this.valid = true;
         this.glLists.clear();
-        this.renderChunkX = par1;
-        this.renderChunkY = par2;
-        this.renderChunkZ = par3;
-        this.cameraX = par4;
-        this.cameraY = par6;
-        this.cameraZ = par8;
+        this.renderChunkX = p_78422_1_;
+        this.renderChunkY = p_78422_2_;
+        this.renderChunkZ = p_78422_3_;
+        this.cameraX = p_78422_4_;
+        this.cameraY = p_78422_6_;
+        this.cameraZ = p_78422_8_;
     }
 
-    public boolean rendersChunk(int par1, int par2, int par3)
+    public boolean rendersChunk(int p_78418_1_, int p_78418_2_, int p_78418_3_)
     {
-        return !this.valid ? false : par1 == this.renderChunkX && par2 == this.renderChunkY && par3 == this.renderChunkZ;
+        return !this.valid ? false : p_78418_1_ == this.renderChunkX && p_78418_2_ == this.renderChunkY && p_78418_3_ == this.renderChunkZ;
     }
 
-    public void addGLRenderList(int par1)
+    public void addGLRenderList(int p_78420_1_)
     {
-        this.glLists.put(par1);
+        this.glLists.put(p_78420_1_);
 
         if (this.glLists.remaining() == 0)
         {

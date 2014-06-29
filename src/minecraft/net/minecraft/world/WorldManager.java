@@ -18,49 +18,49 @@ public class WorldManager implements IWorldAccess
     private WorldServer theWorldServer;
     private static final String __OBFID = "CL_00001433";
 
-    public WorldManager(MinecraftServer par1MinecraftServer, WorldServer par2WorldServer)
+    public WorldManager(MinecraftServer p_i1517_1_, WorldServer p_i1517_2_)
     {
-        this.mcServer = par1MinecraftServer;
-        this.theWorldServer = par2WorldServer;
+        this.mcServer = p_i1517_1_;
+        this.theWorldServer = p_i1517_2_;
     }
 
     /**
      * Spawns a particle. Arg: particleType, x, y, z, velX, velY, velZ
      */
-    public void spawnParticle(String par1Str, double par2, double par4, double par6, double par8, double par10, double par12) {}
+    public void spawnParticle(String p_72708_1_, double p_72708_2_, double p_72708_4_, double p_72708_6_, double p_72708_8_, double p_72708_10_, double p_72708_12_) {}
 
     /**
      * Called on all IWorldAccesses when an entity is created or loaded. On client worlds, starts downloading any
      * necessary textures. On server worlds, adds the entity to the entity tracker.
      */
-    public void onEntityCreate(Entity par1Entity)
+    public void onEntityCreate(Entity p_72703_1_)
     {
-        this.theWorldServer.getEntityTracker().addEntityToTracker(par1Entity);
+        this.theWorldServer.getEntityTracker().addEntityToTracker(p_72703_1_);
     }
 
     /**
      * Called on all IWorldAccesses when an entity is unloaded or destroyed. On client worlds, releases any downloaded
      * textures. On server worlds, removes the entity from the entity tracker.
      */
-    public void onEntityDestroy(Entity par1Entity)
+    public void onEntityDestroy(Entity p_72709_1_)
     {
-        this.theWorldServer.getEntityTracker().removeEntityFromAllTrackingPlayers(par1Entity);
+        this.theWorldServer.getEntityTracker().removeEntityFromAllTrackingPlayers(p_72709_1_);
     }
 
     /**
      * Plays the specified sound. Arg: soundName, x, y, z, volume, pitch
      */
-    public void playSound(String par1Str, double par2, double par4, double par6, float par8, float par9)
+    public void playSound(String p_72704_1_, double p_72704_2_, double p_72704_4_, double p_72704_6_, float p_72704_8_, float p_72704_9_)
     {
-        this.mcServer.getConfigurationManager().func_148541_a(par2, par4, par6, par8 > 1.0F ? (double)(16.0F * par8) : 16.0D, this.theWorldServer.provider.dimensionId, new S29PacketSoundEffect(par1Str, par2, par4, par6, par8, par9));
+        this.mcServer.getConfigurationManager().func_148541_a(p_72704_2_, p_72704_4_, p_72704_6_, p_72704_8_ > 1.0F ? (double)(16.0F * p_72704_8_) : 16.0D, this.theWorldServer.provider.dimensionId, new S29PacketSoundEffect(p_72704_1_, p_72704_2_, p_72704_4_, p_72704_6_, p_72704_8_, p_72704_9_));
     }
 
     /**
      * Plays sound to all near players except the player reference given
      */
-    public void playSoundToNearExcept(EntityPlayer par1EntityPlayer, String par2Str, double par3, double par5, double par7, float par9, float par10)
+    public void playSoundToNearExcept(EntityPlayer p_85102_1_, String p_85102_2_, double p_85102_3_, double p_85102_5_, double p_85102_7_, float p_85102_9_, float p_85102_10_)
     {
-        this.mcServer.getConfigurationManager().func_148543_a(par1EntityPlayer, par3, par5, par7, par9 > 1.0F ? (double)(16.0F * par9) : 16.0D, this.theWorldServer.provider.dimensionId, new S29PacketSoundEffect(par2Str, par3, par5, par7, par9, par10));
+        this.mcServer.getConfigurationManager().func_148543_a(p_85102_1_, p_85102_3_, p_85102_5_, p_85102_7_, p_85102_9_ > 1.0F ? (double)(16.0F * p_85102_9_) : 16.0D, this.theWorldServer.provider.dimensionId, new S29PacketSoundEffect(p_85102_2_, p_85102_3_, p_85102_5_, p_85102_7_, p_85102_9_, p_85102_10_));
     }
 
     /**
@@ -86,19 +86,19 @@ public class WorldManager implements IWorldAccess
     /**
      * Plays the specified record. Arg: recordName, x, y, z
      */
-    public void playRecord(String par1Str, int par2, int par3, int par4) {}
+    public void playRecord(String p_72702_1_, int p_72702_2_, int p_72702_3_, int p_72702_4_) {}
 
     /**
      * Plays a pre-canned sound effect along with potentially auxiliary data-driven one-shot behaviour (particles, etc).
      */
-    public void playAuxSFX(EntityPlayer par1EntityPlayer, int par2, int par3, int par4, int par5, int par6)
+    public void playAuxSFX(EntityPlayer p_72706_1_, int p_72706_2_, int p_72706_3_, int p_72706_4_, int p_72706_5_, int p_72706_6_)
     {
-        this.mcServer.getConfigurationManager().func_148543_a(par1EntityPlayer, (double)par3, (double)par4, (double)par5, 64.0D, this.theWorldServer.provider.dimensionId, new S28PacketEffect(par2, par3, par4, par5, par6, false));
+        this.mcServer.getConfigurationManager().func_148543_a(p_72706_1_, (double)p_72706_3_, (double)p_72706_4_, (double)p_72706_5_, 64.0D, this.theWorldServer.provider.dimensionId, new S28PacketEffect(p_72706_2_, p_72706_3_, p_72706_4_, p_72706_5_, p_72706_6_, false));
     }
 
-    public void broadcastSound(int par1, int par2, int par3, int par4, int par5)
+    public void broadcastSound(int p_82746_1_, int p_82746_2_, int p_82746_3_, int p_82746_4_, int p_82746_5_)
     {
-        this.mcServer.getConfigurationManager().func_148540_a(new S28PacketEffect(par1, par2, par3, par4, par5, true));
+        this.mcServer.getConfigurationManager().func_148540_a(new S28PacketEffect(p_82746_1_, p_82746_2_, p_82746_3_, p_82746_4_, p_82746_5_, true));
     }
 
     /**

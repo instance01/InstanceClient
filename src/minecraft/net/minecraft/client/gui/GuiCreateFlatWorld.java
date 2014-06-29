@@ -26,10 +26,10 @@ public class GuiCreateFlatWorld extends GuiScreen
     private GuiButton field_146386_v;
     private static final String __OBFID = "CL_00000687";
 
-    public GuiCreateFlatWorld(GuiCreateWorld par1GuiCreateWorld, String par2Str)
+    public GuiCreateFlatWorld(GuiCreateWorld p_i1029_1_, String p_i1029_2_)
     {
-        this.field_146385_f = par1GuiCreateWorld;
-        this.func_146383_a(par2Str);
+        this.field_146385_f = p_i1029_1_;
+        this.func_146383_a(p_i1029_2_);
     }
 
     public String func_146384_e()
@@ -107,15 +107,15 @@ public class GuiCreateFlatWorld extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         this.drawDefaultBackground();
-        this.field_146390_s.func_148128_a(par1, par2, par3);
+        this.field_146390_s.func_148128_a(p_73863_1_, p_73863_2_, p_73863_3_);
         this.drawCenteredString(this.fontRendererObj, this.field_146393_h, this.width / 2, 8, 16777215);
         int var4 = this.width / 2 - 92 - 16;
         this.drawString(this.fontRendererObj, this.field_146394_i, var4, 32, 16777215);
         this.drawString(this.fontRendererObj, this.field_146391_r, var4 + 2 + 213 - this.fontRendererObj.getStringWidth(this.field_146391_r), 32, 16777215);
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 
     class Details extends GuiSlot

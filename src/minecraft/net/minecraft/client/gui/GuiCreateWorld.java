@@ -40,9 +40,9 @@ public class GuiCreateWorld extends GuiScreen
     private static final String[] field_146327_L = new String[] {"CON", "COM", "PRN", "AUX", "CLOCK$", "NUL", "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", "LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9"};
     private static final String __OBFID = "CL_00000689";
 
-    public GuiCreateWorld(GuiScreen par1GuiScreen)
+    public GuiCreateWorld(GuiScreen p_i1030_1_)
     {
-        this.field_146332_f = par1GuiScreen;
+        this.field_146332_f = p_i1030_1_;
         this.field_146329_I = "";
         this.field_146330_J = I18n.format("selectWorld.newWorld", new Object[0]);
     }
@@ -357,20 +357,20 @@ public class GuiCreateWorld extends GuiScreen
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2)
+    protected void keyTyped(char p_73869_1_, int p_73869_2_)
     {
         if (this.field_146333_g.isFocused() && !this.field_146344_y)
         {
-            this.field_146333_g.textboxKeyTyped(par1, par2);
+            this.field_146333_g.textboxKeyTyped(p_73869_1_, p_73869_2_);
             this.field_146330_J = this.field_146333_g.getText();
         }
         else if (this.field_146335_h.isFocused() && this.field_146344_y)
         {
-            this.field_146335_h.textboxKeyTyped(par1, par2);
+            this.field_146335_h.textboxKeyTyped(p_73869_1_, p_73869_2_);
             this.field_146329_I = this.field_146335_h.getText();
         }
 
-        if (par2 == 28 || par2 == 156)
+        if (p_73869_2_ == 28 || p_73869_2_ == 156)
         {
             this.actionPerformed((GuiButton)this.buttonList.get(0));
         }
@@ -382,24 +382,24 @@ public class GuiCreateWorld extends GuiScreen
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int par1, int par2, int par3)
+    protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_)
     {
-        super.mouseClicked(par1, par2, par3);
+        super.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
 
         if (this.field_146344_y)
         {
-            this.field_146335_h.mouseClicked(par1, par2, par3);
+            this.field_146335_h.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
         }
         else
         {
-            this.field_146333_g.mouseClicked(par1, par2, par3);
+            this.field_146333_g.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
         }
     }
 
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRendererObj, I18n.format("selectWorld.create", new Object[0]), this.width / 2, 20, -1);
@@ -426,7 +426,7 @@ public class GuiCreateWorld extends GuiScreen
             this.drawString(this.fontRendererObj, this.field_146328_H, this.width / 2 - 100, 149, -6250336);
         }
 
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 
     public void func_146318_a(WorldInfo p_146318_1_)

@@ -15,9 +15,9 @@ public class EntityEnderCrystal extends Entity
     public int health;
     private static final String __OBFID = "CL_00001658";
 
-    public EntityEnderCrystal(World par1World)
+    public EntityEnderCrystal(World p_i1698_1_)
     {
-        super(par1World);
+        super(p_i1698_1_);
         this.preventEntitySpawning = true;
         this.setSize(2.0F, 2.0F);
         this.yOffset = this.height / 2.0F;
@@ -25,10 +25,10 @@ public class EntityEnderCrystal extends Entity
         this.innerRotation = this.rand.nextInt(100000);
     }
 
-    public EntityEnderCrystal(World par1World, double par2, double par4, double par6)
+    public EntityEnderCrystal(World p_i1699_1_, double p_i1699_2_, double p_i1699_4_, double p_i1699_6_)
     {
-        this(par1World);
-        this.setPosition(par2, par4, par6);
+        this(p_i1699_1_);
+        this.setPosition(p_i1699_2_, p_i1699_4_, p_i1699_6_);
     }
 
     /**
@@ -68,12 +68,12 @@ public class EntityEnderCrystal extends Entity
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {}
+    protected void writeEntityToNBT(NBTTagCompound p_70014_1_) {}
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {}
+    protected void readEntityFromNBT(NBTTagCompound p_70037_1_) {}
 
     public float getShadowSize()
     {
@@ -91,7 +91,7 @@ public class EntityEnderCrystal extends Entity
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_)
     {
         if (this.isEntityInvulnerable())
         {

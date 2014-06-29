@@ -17,11 +17,11 @@ public class RenderWitherSkull extends Render
     private final ModelSkeletonHead skeletonHeadModel = new ModelSkeletonHead();
     private static final String __OBFID = "CL_00001035";
 
-    private float func_82400_a(float par1, float par2, float par3)
+    private float func_82400_a(float p_82400_1_, float p_82400_2_, float p_82400_3_)
     {
         float var4;
 
-        for (var4 = par2 - par1; var4 < -180.0F; var4 += 360.0F)
+        for (var4 = p_82400_2_ - p_82400_1_; var4 < -180.0F; var4 += 360.0F)
         {
             ;
         }
@@ -31,7 +31,7 @@ public class RenderWitherSkull extends Render
             var4 -= 360.0F;
         }
 
-        return par1 + par3 * var4;
+        return p_82400_1_ + p_82400_3_ * var4;
     }
 
     /**
@@ -40,36 +40,36 @@ public class RenderWitherSkull extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityWitherSkull par1EntityWitherSkull, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntityWitherSkull p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_CULL_FACE);
-        float var10 = this.func_82400_a(par1EntityWitherSkull.prevRotationYaw, par1EntityWitherSkull.rotationYaw, par9);
-        float var11 = par1EntityWitherSkull.prevRotationPitch + (par1EntityWitherSkull.rotationPitch - par1EntityWitherSkull.prevRotationPitch) * par9;
-        GL11.glTranslatef((float)par2, (float)par4, (float)par6);
+        float var10 = this.func_82400_a(p_76986_1_.prevRotationYaw, p_76986_1_.rotationYaw, p_76986_9_);
+        float var11 = p_76986_1_.prevRotationPitch + (p_76986_1_.rotationPitch - p_76986_1_.prevRotationPitch) * p_76986_9_;
+        GL11.glTranslatef((float)p_76986_2_, (float)p_76986_4_, (float)p_76986_6_);
         float var12 = 0.0625F;
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glScalef(-1.0F, -1.0F, 1.0F);
         GL11.glEnable(GL11.GL_ALPHA_TEST);
-        this.bindEntityTexture(par1EntityWitherSkull);
-        this.skeletonHeadModel.render(par1EntityWitherSkull, 0.0F, 0.0F, 0.0F, var10, var11, var12);
+        this.bindEntityTexture(p_76986_1_);
+        this.skeletonHeadModel.render(p_76986_1_, 0.0F, 0.0F, 0.0F, var10, var11, var12);
         GL11.glPopMatrix();
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntityWitherSkull par1EntityWitherSkull)
+    protected ResourceLocation getEntityTexture(EntityWitherSkull p_110775_1_)
     {
-        return par1EntityWitherSkull.isInvulnerable() ? invulnerableWitherTextures : witherTextures;
+        return p_110775_1_.isInvulnerable() ? invulnerableWitherTextures : witherTextures;
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntityWitherSkull)par1Entity);
+        return this.getEntityTexture((EntityWitherSkull)p_110775_1_);
     }
 
     /**
@@ -78,8 +78,8 @@ public class RenderWitherSkull extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityWitherSkull)par1Entity, par2, par4, par6, par8, par9);
+        this.doRender((EntityWitherSkull)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 }

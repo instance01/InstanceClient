@@ -8,29 +8,29 @@ public class EntityHeartFX extends EntityFX
     float particleScaleOverTime;
     private static final String __OBFID = "CL_00000909";
 
-    public EntityHeartFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12)
+    public EntityHeartFX(World p_i1211_1_, double p_i1211_2_, double p_i1211_4_, double p_i1211_6_, double p_i1211_8_, double p_i1211_10_, double p_i1211_12_)
     {
-        this(par1World, par2, par4, par6, par8, par10, par12, 2.0F);
+        this(p_i1211_1_, p_i1211_2_, p_i1211_4_, p_i1211_6_, p_i1211_8_, p_i1211_10_, p_i1211_12_, 2.0F);
     }
 
-    public EntityHeartFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12, float par14)
+    public EntityHeartFX(World p_i1212_1_, double p_i1212_2_, double p_i1212_4_, double p_i1212_6_, double p_i1212_8_, double p_i1212_10_, double p_i1212_12_, float p_i1212_14_)
     {
-        super(par1World, par2, par4, par6, 0.0D, 0.0D, 0.0D);
+        super(p_i1212_1_, p_i1212_2_, p_i1212_4_, p_i1212_6_, 0.0D, 0.0D, 0.0D);
         this.motionX *= 0.009999999776482582D;
         this.motionY *= 0.009999999776482582D;
         this.motionZ *= 0.009999999776482582D;
         this.motionY += 0.1D;
         this.particleScale *= 0.75F;
-        this.particleScale *= par14;
+        this.particleScale *= p_i1212_14_;
         this.particleScaleOverTime = this.particleScale;
         this.particleMaxAge = 16;
         this.noClip = false;
         this.setParticleTextureIndex(80);
     }
 
-    public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7)
+    public void renderParticle(Tessellator p_70539_1_, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_)
     {
-        float var8 = ((float)this.particleAge + par2) / (float)this.particleMaxAge * 32.0F;
+        float var8 = ((float)this.particleAge + p_70539_2_) / (float)this.particleMaxAge * 32.0F;
 
         if (var8 < 0.0F)
         {
@@ -43,7 +43,7 @@ public class EntityHeartFX extends EntityFX
         }
 
         this.particleScale = this.particleScaleOverTime * var8;
-        super.renderParticle(par1Tessellator, par2, par3, par4, par5, par6, par7);
+        super.renderParticle(p_70539_1_, p_70539_2_, p_70539_3_, p_70539_4_, p_70539_5_, p_70539_6_, p_70539_7_);
     }
 
     /**

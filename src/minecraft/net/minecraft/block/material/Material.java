@@ -76,9 +76,9 @@ public class Material
     private boolean isAdventureModeExempt;
     private static final String __OBFID = "CL_00000542";
 
-    public Material(MapColor par1MapColor)
+    public Material(MapColor p_i2116_1_)
     {
-        this.materialMapColor = par1MapColor;
+        this.materialMapColor = p_i2116_1_;
     }
 
     /**

@@ -24,17 +24,17 @@ public class LanguageManager implements IResourceManagerReloadListener
     private Map languageMap = Maps.newHashMap();
     private static final String __OBFID = "CL_00001096";
 
-    public LanguageManager(IMetadataSerializer par1MetadataSerializer, String par2Str)
+    public LanguageManager(IMetadataSerializer p_i1304_1_, String p_i1304_2_)
     {
-        this.theMetadataSerializer = par1MetadataSerializer;
-        this.currentLanguage = par2Str;
+        this.theMetadataSerializer = p_i1304_1_;
+        this.currentLanguage = p_i1304_2_;
         I18n.setLocale(currentLocale);
     }
 
-    public void parseLanguageMetadata(List par1List)
+    public void parseLanguageMetadata(List p_135043_1_)
     {
         this.languageMap.clear();
-        Iterator var2 = par1List.iterator();
+        Iterator var2 = p_135043_1_.iterator();
 
         while (var2.hasNext())
         {
@@ -70,7 +70,7 @@ public class LanguageManager implements IResourceManagerReloadListener
         }
     }
 
-    public void onResourceManagerReload(IResourceManager par1ResourceManager)
+    public void onResourceManagerReload(IResourceManager p_110549_1_)
     {
         ArrayList var2 = Lists.newArrayList(new String[] {"en_US"});
 
@@ -79,7 +79,7 @@ public class LanguageManager implements IResourceManagerReloadListener
             var2.add(this.currentLanguage);
         }
 
-        currentLocale.loadLocaleDataFiles(par1ResourceManager, var2);
+        currentLocale.loadLocaleDataFiles(p_110549_1_, var2);
         StringTranslate.replaceWith(currentLocale.field_135032_a);
     }
 
@@ -93,9 +93,9 @@ public class LanguageManager implements IResourceManagerReloadListener
         return this.getCurrentLanguage() != null && this.getCurrentLanguage().isBidirectional();
     }
 
-    public void setCurrentLanguage(Language par1Language)
+    public void setCurrentLanguage(Language p_135045_1_)
     {
-        this.currentLanguage = par1Language.getLanguageCode();
+        this.currentLanguage = p_135045_1_.getLanguageCode();
     }
 
     public Language getCurrentLanguage()

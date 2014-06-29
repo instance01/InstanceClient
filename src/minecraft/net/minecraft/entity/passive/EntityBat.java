@@ -16,9 +16,9 @@ public class EntityBat extends EntityAmbientCreature
     private ChunkCoordinates spawnPosition;
     private static final String __OBFID = "CL_00001637";
 
-    public EntityBat(World par1World)
+    public EntityBat(World p_i1680_1_)
     {
-        super(par1World);
+        super(p_i1680_1_);
         this.setSize(0.5F, 0.9F);
         this.setIsBatHanging(true);
     }
@@ -77,7 +77,7 @@ public class EntityBat extends EntityAmbientCreature
         return false;
     }
 
-    protected void collideWithEntity(Entity par1Entity) {}
+    protected void collideWithEntity(Entity p_82167_1_) {}
 
     protected void collideWithNearbyEntities() {}
 
@@ -92,11 +92,11 @@ public class EntityBat extends EntityAmbientCreature
         return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
     }
 
-    public void setIsBatHanging(boolean par1)
+    public void setIsBatHanging(boolean p_82236_1_)
     {
         byte var2 = this.dataWatcher.getWatchableObjectByte(16);
 
-        if (par1)
+        if (p_82236_1_)
         {
             this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 1)));
         }
@@ -199,13 +199,13 @@ public class EntityBat extends EntityAmbientCreature
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
-    protected void fall(float par1) {}
+    protected void fall(float p_70069_1_) {}
 
     /**
      * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
      * and deal fall damage if landing on the ground.  Args: distanceFallenThisTick, onGround
      */
-    protected void updateFallState(double par1, boolean par3) {}
+    protected void updateFallState(double p_70064_1_, boolean p_70064_3_) {}
 
     public boolean doesEntityNotTriggerPressurePlate()
     {
@@ -215,7 +215,7 @@ public class EntityBat extends EntityAmbientCreature
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_)
     {
         if (this.isEntityInvulnerable())
         {
@@ -228,26 +228,26 @@ public class EntityBat extends EntityAmbientCreature
                 this.setIsBatHanging(false);
             }
 
-            return super.attackEntityFrom(par1DamageSource, par2);
+            return super.attackEntityFrom(p_70097_1_, p_70097_2_);
         }
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    public void readEntityFromNBT(NBTTagCompound p_70037_1_)
     {
-        super.readEntityFromNBT(par1NBTTagCompound);
-        this.dataWatcher.updateObject(16, Byte.valueOf(par1NBTTagCompound.getByte("BatFlags")));
+        super.readEntityFromNBT(p_70037_1_);
+        this.dataWatcher.updateObject(16, Byte.valueOf(p_70037_1_.getByte("BatFlags")));
     }
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    public void writeEntityToNBT(NBTTagCompound p_70014_1_)
     {
-        super.writeEntityToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setByte("BatFlags", this.dataWatcher.getWatchableObjectByte(16));
+        super.writeEntityToNBT(p_70014_1_);
+        p_70014_1_.setByte("BatFlags", this.dataWatcher.getWatchableObjectByte(16));
     }
 
     /**

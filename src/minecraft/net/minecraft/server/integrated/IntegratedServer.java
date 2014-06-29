@@ -35,26 +35,26 @@ public class IntegratedServer extends MinecraftServer
     private ThreadLanServerPing lanServerPing;
     private static final String __OBFID = "CL_00001129";
 
-    public IntegratedServer(Minecraft par1Minecraft, String par2Str, String par3Str, WorldSettings par4WorldSettings)
+    public IntegratedServer(Minecraft p_i1317_1_, String p_i1317_2_, String p_i1317_3_, WorldSettings p_i1317_4_)
     {
-        super(new File(par1Minecraft.mcDataDir, "saves"), par1Minecraft.getProxy());
-        this.setServerOwner(par1Minecraft.getSession().getUsername());
-        this.setFolderName(par2Str);
-        this.setWorldName(par3Str);
-        this.setDemo(par1Minecraft.isDemo());
-        this.canCreateBonusChest(par4WorldSettings.isBonusChestEnabled());
+        super(new File(p_i1317_1_.mcDataDir, "saves"), p_i1317_1_.getProxy());
+        this.setServerOwner(p_i1317_1_.getSession().getUsername());
+        this.setFolderName(p_i1317_2_);
+        this.setWorldName(p_i1317_3_);
+        this.setDemo(p_i1317_1_.isDemo());
+        this.canCreateBonusChest(p_i1317_4_.isBonusChestEnabled());
         this.setBuildLimit(256);
-        this.setConfigurationManager(new IntegratedPlayerList(this));
-        this.mc = par1Minecraft;
-        this.theWorldSettings = par4WorldSettings;
+        this.func_152361_a(new IntegratedPlayerList(this));
+        this.mc = p_i1317_1_;
+        this.theWorldSettings = p_i1317_4_;
     }
 
-    protected void loadAllWorlds(String par1Str, String par2Str, long par3, WorldType par5WorldType, String par6Str)
+    protected void loadAllWorlds(String p_71247_1_, String p_71247_2_, long p_71247_3_, WorldType p_71247_5_, String p_71247_6_)
     {
-        this.convertMapIfNeeded(par1Str);
+        this.convertMapIfNeeded(p_71247_1_);
         this.worldServers = new WorldServer[3];
         this.timeOfLastDimensionTick = new long[this.worldServers.length][100];
-        ISaveHandler var7 = this.getActiveAnvilConverter().getSaveLoader(par1Str, true);
+        ISaveHandler var7 = this.getActiveAnvilConverter().getSaveLoader(p_71247_1_, true);
 
         for (int var8 = 0; var8 < this.worldServers.length; ++var8)
         {
@@ -74,16 +74,16 @@ public class IntegratedServer extends MinecraftServer
             {
                 if (this.isDemo())
                 {
-                    this.worldServers[var8] = new DemoWorldServer(this, var7, par2Str, var9, this.theProfiler);
+                    this.worldServers[var8] = new DemoWorldServer(this, var7, p_71247_2_, var9, this.theProfiler);
                 }
                 else
                 {
-                    this.worldServers[var8] = new WorldServer(this, var7, par2Str, var9, this.theWorldSettings, this.theProfiler);
+                    this.worldServers[var8] = new WorldServer(this, var7, p_71247_2_, var9, this.theWorldSettings, this.theProfiler);
                 }
             }
             else
             {
-                this.worldServers[var8] = new WorldServerMulti(this, var7, par2Str, var9, this.theWorldSettings, this.worldServers[0], this.theProfiler);
+                this.worldServers[var8] = new WorldServerMulti(this, var7, p_71247_2_, var9, this.theWorldSettings, this.worldServers[0], this.theProfiler);
             }
 
             this.worldServers[var8].addWorldAccess(new WorldManager(this, this.worldServers[var8]));
@@ -99,8 +99,8 @@ public class IntegratedServer extends MinecraftServer
      */
     protected boolean startServer() throws IOException
     {
-        logger.info("Starting integrated minecraft server version 1.7.2");
-        this.setOnlineMode(false);
+        logger.info("Starting integrated minecraft server version 1.7.10");
+        this.setOnlineMode(true);
         this.setCanSpawnAnimals(true);
         this.setCanSpawnNPCs(true);
         this.setAllowPvp(true);
@@ -130,6 +130,12 @@ public class IntegratedServer extends MinecraftServer
         if (!this.isGamePaused)
         {
             super.tick();
+
+            if (this.mc.gameSettings.renderDistanceChunks != this.getConfigurationManager().getViewDistance())
+            {
+                logger.info("Changing view distance to {}, from {}", new Object[] {Integer.valueOf(this.mc.gameSettings.renderDistanceChunks), Integer.valueOf(this.getConfigurationManager().getViewDistance())});
+                this.getConfigurationManager().func_152611_a(this.mc.gameSettings.renderDistanceChunks);
+            }
         }
     }
 
@@ -156,6 +162,11 @@ public class IntegratedServer extends MinecraftServer
         return this.theWorldSettings.getHardcoreEnabled();
     }
 
+    public boolean func_152363_m()
+    {
+        return false;
+    }
+
     protected File getDataDirectory()
     {
         return this.mc.mcDataDir;
@@ -169,18 +180,18 @@ public class IntegratedServer extends MinecraftServer
     /**
      * Called on exit from the main run() loop.
      */
-    protected void finalTick(CrashReport par1CrashReport)
+    protected void finalTick(CrashReport p_71228_1_)
     {
-        this.mc.crashed(par1CrashReport);
+        this.mc.crashed(p_71228_1_);
     }
 
     /**
      * Adds the server info, including from theWorldServer, to the crash report.
      */
-    public CrashReport addServerInfoToCrashReport(CrashReport par1CrashReport)
+    public CrashReport addServerInfoToCrashReport(CrashReport p_71230_1_)
     {
-        par1CrashReport = super.addServerInfoToCrashReport(par1CrashReport);
-        par1CrashReport.getCategory().addCrashSectionCallable("Type", new Callable()
+        p_71230_1_ = super.addServerInfoToCrashReport(p_71230_1_);
+        p_71230_1_.getCategory().addCrashSectionCallable("Type", new Callable()
         {
             private static final String __OBFID = "CL_00001130";
             public String call()
@@ -188,7 +199,7 @@ public class IntegratedServer extends MinecraftServer
                 return "Integrated Server (map_client.txt)";
             }
         });
-        par1CrashReport.getCategory().addCrashSectionCallable("Is Modded", new Callable()
+        p_71230_1_.getCategory().addCrashSectionCallable("Is Modded", new Callable()
         {
             private static final String __OBFID = "CL_00001131";
             public String call()
@@ -206,13 +217,13 @@ public class IntegratedServer extends MinecraftServer
                 }
             }
         });
-        return par1CrashReport;
+        return p_71230_1_;
     }
 
-    public void addServerStatsToSnooper(PlayerUsageSnooper par1PlayerUsageSnooper)
+    public void addServerStatsToSnooper(PlayerUsageSnooper p_70000_1_)
     {
-        super.addServerStatsToSnooper(par1PlayerUsageSnooper);
-        par1PlayerUsageSnooper.addData("snooper_partner", this.mc.getPlayerUsageSnooper().getUniqueID());
+        super.addServerStatsToSnooper(p_70000_1_);
+        p_70000_1_.func_152768_a("snooper_partner", this.mc.getPlayerUsageSnooper().getUniqueID());
     }
 
     /**
@@ -226,7 +237,7 @@ public class IntegratedServer extends MinecraftServer
     /**
      * On dedicated does nothing. On integrated, sets commandsAllowedForAll, gameType and allows external connections.
      */
-    public String shareToLAN(WorldSettings.GameType par1EnumGameType, boolean par2)
+    public String shareToLAN(WorldSettings.GameType p_71206_1_, boolean p_71206_2_)
     {
         try
         {
@@ -251,8 +262,8 @@ public class IntegratedServer extends MinecraftServer
             this.isPublic = true;
             this.lanServerPing = new ThreadLanServerPing(this.getMOTD(), var3 + "");
             this.lanServerPing.start();
-            this.getConfigurationManager().setGameType(par1EnumGameType);
-            this.getConfigurationManager().setCommandsAllowedForAll(par2);
+            this.getConfigurationManager().func_152604_a(p_71206_1_);
+            this.getConfigurationManager().setCommandsAllowedForAll(p_71206_2_);
             return var3 + "";
         }
         catch (IOException var6)
@@ -300,9 +311,9 @@ public class IntegratedServer extends MinecraftServer
     /**
      * Sets the game type for all worlds.
      */
-    public void setGameType(WorldSettings.GameType par1EnumGameType)
+    public void setGameType(WorldSettings.GameType p_71235_1_)
     {
-        this.getConfigurationManager().setGameType(par1EnumGameType);
+        this.getConfigurationManager().func_152604_a(p_71235_1_);
     }
 
     /**

@@ -10,10 +10,10 @@ public class EntityDamageSource extends DamageSource
     protected Entity damageSourceEntity;
     private static final String __OBFID = "CL_00001522";
 
-    public EntityDamageSource(String par1Str, Entity par2Entity)
+    public EntityDamageSource(String p_i1567_1_, Entity p_i1567_2_)
     {
-        super(par1Str);
-        this.damageSourceEntity = par2Entity;
+        super(p_i1567_1_);
+        this.damageSourceEntity = p_i1567_2_;
     }
 
     public Entity getEntity()

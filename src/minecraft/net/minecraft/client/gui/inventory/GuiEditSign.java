@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.play.client.C12PacketUpdateSign;
 import net.minecraft.tileentity.TileEntitySign;
@@ -14,16 +15,15 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiEditSign extends GuiScreen
 {
-    protected String field_146850_a = "Edit sign message:";
     private TileEntitySign field_146848_f;
     private int field_146849_g;
     private int field_146851_h;
     private GuiButton field_146852_i;
     private static final String __OBFID = "CL_00000764";
 
-    public GuiEditSign(TileEntitySign par1TileEntitySign)
+    public GuiEditSign(TileEntitySign p_i1097_1_)
     {
-        this.field_146848_f = par1TileEntitySign;
+        this.field_146848_f = p_i1097_1_;
     }
 
     /**
@@ -33,7 +33,7 @@ public class GuiEditSign extends GuiScreen
     {
         this.buttonList.clear();
         Keyboard.enableRepeatEvents(true);
-        this.buttonList.add(this.field_146852_i = new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120, "Done"));
+        this.buttonList.add(this.field_146852_i = new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120, I18n.format("gui.done", new Object[0])));
         this.field_146848_f.func_145913_a(false);
     }
 
@@ -76,29 +76,29 @@ public class GuiEditSign extends GuiScreen
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2)
+    protected void keyTyped(char p_73869_1_, int p_73869_2_)
     {
-        if (par2 == 200)
+        if (p_73869_2_ == 200)
         {
             this.field_146851_h = this.field_146851_h - 1 & 3;
         }
 
-        if (par2 == 208 || par2 == 28 || par2 == 156)
+        if (p_73869_2_ == 208 || p_73869_2_ == 28 || p_73869_2_ == 156)
         {
             this.field_146851_h = this.field_146851_h + 1 & 3;
         }
 
-        if (par2 == 14 && this.field_146848_f.field_145915_a[this.field_146851_h].length() > 0)
+        if (p_73869_2_ == 14 && this.field_146848_f.field_145915_a[this.field_146851_h].length() > 0)
         {
             this.field_146848_f.field_145915_a[this.field_146851_h] = this.field_146848_f.field_145915_a[this.field_146851_h].substring(0, this.field_146848_f.field_145915_a[this.field_146851_h].length() - 1);
         }
 
-        if (ChatAllowedCharacters.isAllowedCharacter(par1) && this.field_146848_f.field_145915_a[this.field_146851_h].length() < 15)
+        if (ChatAllowedCharacters.isAllowedCharacter(p_73869_1_) && this.field_146848_f.field_145915_a[this.field_146851_h].length() < 15)
         {
-            this.field_146848_f.field_145915_a[this.field_146851_h] = this.field_146848_f.field_145915_a[this.field_146851_h] + par1;
+            this.field_146848_f.field_145915_a[this.field_146851_h] = this.field_146848_f.field_145915_a[this.field_146851_h] + p_73869_1_;
         }
 
-        if (par2 == 1)
+        if (p_73869_2_ == 1)
         {
             this.actionPerformed(this.field_146852_i);
         }
@@ -107,10 +107,10 @@ public class GuiEditSign extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, this.field_146850_a, this.width / 2, 40, 16777215);
+        this.drawCenteredString(this.fontRendererObj, I18n.format("sign.edit", new Object[0]), this.width / 2, 40, 16777215);
         GL11.glPushMatrix();
         GL11.glTranslatef((float)(this.width / 2), 0.0F, 50.0F);
         float var4 = 93.75F;
@@ -156,6 +156,6 @@ public class GuiEditSign extends GuiScreen
         TileEntityRendererDispatcher.instance.func_147549_a(this.field_146848_f, -0.5D, -0.75D, -0.5D, 0.0F);
         this.field_146848_f.field_145918_i = -1;
         GL11.glPopMatrix();
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 }

@@ -13,29 +13,29 @@ public class ChunkCoordinates implements Comparable
 
     public ChunkCoordinates() {}
 
-    public ChunkCoordinates(int par1, int par2, int par3)
+    public ChunkCoordinates(int p_i1354_1_, int p_i1354_2_, int p_i1354_3_)
     {
-        this.posX = par1;
-        this.posY = par2;
-        this.posZ = par3;
+        this.posX = p_i1354_1_;
+        this.posY = p_i1354_2_;
+        this.posZ = p_i1354_3_;
     }
 
-    public ChunkCoordinates(ChunkCoordinates par1ChunkCoordinates)
+    public ChunkCoordinates(ChunkCoordinates p_i1355_1_)
     {
-        this.posX = par1ChunkCoordinates.posX;
-        this.posY = par1ChunkCoordinates.posY;
-        this.posZ = par1ChunkCoordinates.posZ;
+        this.posX = p_i1355_1_.posX;
+        this.posY = p_i1355_1_.posY;
+        this.posZ = p_i1355_1_.posZ;
     }
 
-    public boolean equals(Object par1Obj)
+    public boolean equals(Object p_equals_1_)
     {
-        if (!(par1Obj instanceof ChunkCoordinates))
+        if (!(p_equals_1_ instanceof ChunkCoordinates))
         {
             return false;
         }
         else
         {
-            ChunkCoordinates var2 = (ChunkCoordinates)par1Obj;
+            ChunkCoordinates var2 = (ChunkCoordinates)p_equals_1_;
             return this.posX == var2.posX && this.posY == var2.posY && this.posZ == var2.posZ;
         }
     }
@@ -45,35 +45,35 @@ public class ChunkCoordinates implements Comparable
         return this.posX + this.posZ << 8 + this.posY << 16;
     }
 
-    public int compareTo(ChunkCoordinates par1ChunkCoordinates)
+    public int compareTo(ChunkCoordinates p_compareTo_1_)
     {
-        return this.posY == par1ChunkCoordinates.posY ? (this.posZ == par1ChunkCoordinates.posZ ? this.posX - par1ChunkCoordinates.posX : this.posZ - par1ChunkCoordinates.posZ) : this.posY - par1ChunkCoordinates.posY;
+        return this.posY == p_compareTo_1_.posY ? (this.posZ == p_compareTo_1_.posZ ? this.posX - p_compareTo_1_.posX : this.posZ - p_compareTo_1_.posZ) : this.posY - p_compareTo_1_.posY;
     }
 
-    public void set(int par1, int par2, int par3)
+    public void set(int p_71571_1_, int p_71571_2_, int p_71571_3_)
     {
-        this.posX = par1;
-        this.posY = par2;
-        this.posZ = par3;
+        this.posX = p_71571_1_;
+        this.posY = p_71571_2_;
+        this.posZ = p_71571_3_;
     }
 
     /**
      * Returns the squared distance between this coordinates and the coordinates given as argument.
      */
-    public float getDistanceSquared(int par1, int par2, int par3)
+    public float getDistanceSquared(int p_71569_1_, int p_71569_2_, int p_71569_3_)
     {
-        float var4 = (float)(this.posX - par1);
-        float var5 = (float)(this.posY - par2);
-        float var6 = (float)(this.posZ - par3);
+        float var4 = (float)(this.posX - p_71569_1_);
+        float var5 = (float)(this.posY - p_71569_2_);
+        float var6 = (float)(this.posZ - p_71569_3_);
         return var4 * var4 + var5 * var5 + var6 * var6;
     }
 
     /**
      * Return the squared distance between this coordinates and the ChunkCoordinates given as argument.
      */
-    public float getDistanceSquaredToChunkCoordinates(ChunkCoordinates par1ChunkCoordinates)
+    public float getDistanceSquaredToChunkCoordinates(ChunkCoordinates p_82371_1_)
     {
-        return this.getDistanceSquared(par1ChunkCoordinates.posX, par1ChunkCoordinates.posY, par1ChunkCoordinates.posZ);
+        return this.getDistanceSquared(p_82371_1_.posX, p_82371_1_.posY, p_82371_1_.posZ);
     }
 
     public String toString()
@@ -81,8 +81,8 @@ public class ChunkCoordinates implements Comparable
         return "Pos{x=" + this.posX + ", y=" + this.posY + ", z=" + this.posZ + '}';
     }
 
-    public int compareTo(Object par1Obj)
+    public int compareTo(Object p_compareTo_1_)
     {
-        return this.compareTo((ChunkCoordinates)par1Obj);
+        return this.compareTo((ChunkCoordinates)p_compareTo_1_);
     }
 }

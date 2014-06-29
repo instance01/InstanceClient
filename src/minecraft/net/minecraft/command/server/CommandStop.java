@@ -13,14 +13,18 @@ public class CommandStop extends CommandBase
         return "stop";
     }
 
-    public String getCommandUsage(ICommandSender par1ICommandSender)
+    public String getCommandUsage(ICommandSender p_71518_1_)
     {
         return "commands.stop.usage";
     }
 
-    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_)
     {
-        notifyAdmins(par1ICommandSender, "commands.stop.start", new Object[0]);
+        if (MinecraftServer.getServer().worldServers != null)
+        {
+            func_152373_a(p_71515_1_, this, "commands.stop.start", new Object[0]);
+        }
+
         MinecraftServer.getServer().initiateShutdown();
     }
 }

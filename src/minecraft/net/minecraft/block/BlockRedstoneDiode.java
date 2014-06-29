@@ -321,7 +321,7 @@ public abstract class BlockRedstoneDiode extends BlockDirectional
         return this.func_149901_b(p_149899_1_);
     }
 
-    protected abstract int func_149901_b(int var1);
+    protected abstract int func_149901_b(int p_149901_1_);
 
     protected abstract BlockRedstoneDiode func_149906_e();
 

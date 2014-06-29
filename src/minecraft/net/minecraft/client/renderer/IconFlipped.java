@@ -9,11 +9,11 @@ public class IconFlipped implements IIcon
     private final boolean flipV;
     private static final String __OBFID = "CL_00001511";
 
-    public IconFlipped(IIcon par1Icon, boolean par2, boolean par3)
+    public IconFlipped(IIcon p_i1560_1_, boolean p_i1560_2_, boolean p_i1560_3_)
     {
-        this.baseIcon = par1Icon;
-        this.flipU = par2;
-        this.flipV = par3;
+        this.baseIcon = p_i1560_1_;
+        this.flipU = p_i1560_2_;
+        this.flipV = p_i1560_3_;
     }
 
     /**
@@ -51,10 +51,10 @@ public class IconFlipped implements IIcon
     /**
      * Gets a U coordinate on the icon. 0 returns uMin and 16 returns uMax. Other arguments return in-between values.
      */
-    public float getInterpolatedU(double par1)
+    public float getInterpolatedU(double p_94214_1_)
     {
         float var3 = this.getMaxU() - this.getMinU();
-        return this.getMinU() + var3 * ((float)par1 / 16.0F);
+        return this.getMinU() + var3 * ((float)p_94214_1_ / 16.0F);
     }
 
     /**
@@ -76,10 +76,10 @@ public class IconFlipped implements IIcon
     /**
      * Gets a V coordinate on the icon. 0 returns vMin and 16 returns vMax. Other arguments return in-between values.
      */
-    public float getInterpolatedV(double par1)
+    public float getInterpolatedV(double p_94207_1_)
     {
         float var3 = this.getMaxV() - this.getMinV();
-        return this.getMinV() + var3 * ((float)par1 / 16.0F);
+        return this.getMinV() + var3 * ((float)p_94207_1_ / 16.0F);
     }
 
     public String getIconName()

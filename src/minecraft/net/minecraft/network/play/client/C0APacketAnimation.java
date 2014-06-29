@@ -39,9 +39,9 @@ public class C0APacketAnimation extends Packet
         p_148840_1_.writeByte(this.field_149423_b);
     }
 
-    public void processPacket(INetHandlerPlayServer p_149422_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149422_1_.processAnimation(this);
+        p_148833_1_.processAnimation(this);
     }
 
     /**

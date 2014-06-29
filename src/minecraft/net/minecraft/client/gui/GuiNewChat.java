@@ -25,9 +25,9 @@ public class GuiNewChat extends Gui
     private boolean field_146251_k;
     private static final String __OBFID = "CL_00000669";
 
-    public GuiNewChat(Minecraft par1Minecraft)
+    public GuiNewChat(Minecraft p_i1022_1_)
     {
-        this.field_146247_f = par1Minecraft;
+        this.field_146247_f = p_i1022_1_;
     }
 
     public void func_146230_a(int p_146230_1_)
@@ -110,15 +110,15 @@ public class GuiNewChat extends Gui
                     GL11.glTranslatef(-3.0F, 0.0F, 0.0F);
                     int var18 = var5 * var9 + var5;
                     var11 = var4 * var9 + var4;
-                    int var20 = this.field_146250_j * var11 / var5;
+                    int var19 = this.field_146250_j * var11 / var5;
                     int var13 = var11 * var11 / var18;
 
                     if (var18 != var11)
                     {
-                        var14 = var20 > 0 ? 170 : 96;
-                        int var19 = this.field_146251_k ? 13382451 : 3355562;
-                        drawRect(0, -var20, 2, -var20 - var13, var19 + (var14 << 24));
-                        drawRect(2, -var20, 1, -var20 - var13, 13421772 + (var14 << 24));
+                        var14 = var19 > 0 ? 170 : 96;
+                        int var20 = this.field_146251_k ? 13382451 : 3355562;
+                        drawRect(0, -var19, 2, -var19 - var13, var20 + (var14 << 24));
+                        drawRect(2, -var19, 1, -var19 - var13, 13421772 + (var14 << 24));
                     }
                 }
 
@@ -217,14 +217,14 @@ public class GuiNewChat extends Gui
         }
 
         var8.add(var7);
-        boolean var21 = this.func_146241_e();
+        boolean var20 = this.func_146241_e();
         IChatComponent var22;
 
-        for (Iterator var20 = var8.iterator(); var20.hasNext(); this.field_146253_i.add(0, new ChatLine(p_146237_3_, var22, p_146237_2_)))
+        for (Iterator var21 = var8.iterator(); var21.hasNext(); this.field_146253_i.add(0, new ChatLine(p_146237_3_, var22, p_146237_2_)))
         {
-            var22 = (IChatComponent)var20.next();
+            var22 = (IChatComponent)var21.next();
 
-            if (var21 && this.field_146250_j > 0)
+            if (var20 && this.field_146250_j > 0)
             {
                 this.field_146251_k = true;
                 this.func_146229_b(1);
@@ -303,7 +303,7 @@ public class GuiNewChat extends Gui
         }
         else
         {
-            ScaledResolution var3 = new ScaledResolution(this.field_146247_f.gameSettings, this.field_146247_f.displayWidth, this.field_146247_f.displayHeight);
+            ScaledResolution var3 = new ScaledResolution(this.field_146247_f, this.field_146247_f.displayWidth, this.field_146247_f.displayHeight);
             int var4 = var3.getScaleFactor();
             float var5 = this.func_146244_h();
             int var6 = p_146236_1_ / var4 - 3;
@@ -365,32 +365,28 @@ public class GuiNewChat extends Gui
         Iterator var2 = this.field_146253_i.iterator();
         ChatLine var3;
 
-        do
+        while (var2.hasNext())
         {
-            if (!var2.hasNext())
-            {
-                var2 = this.field_146252_h.iterator();
-
-                do
-                {
-                    if (!var2.hasNext())
-                    {
-                        return;
-                    }
-
-                    var3 = (ChatLine)var2.next();
-                }
-                while (var3.getChatLineID() != p_146242_1_);
-
-                var2.remove();
-                return;
-            }
-
             var3 = (ChatLine)var2.next();
-        }
-        while (var3.getChatLineID() != p_146242_1_);
 
-        var2.remove();
+            if (var3.getChatLineID() == p_146242_1_)
+            {
+                var2.remove();
+            }
+        }
+
+        var2 = this.field_146252_h.iterator();
+
+        while (var2.hasNext())
+        {
+            var3 = (ChatLine)var2.next();
+
+            if (var3.getChatLineID() == p_146242_1_)
+            {
+                var2.remove();
+                break;
+            }
+        }
     }
 
     public int func_146228_f()

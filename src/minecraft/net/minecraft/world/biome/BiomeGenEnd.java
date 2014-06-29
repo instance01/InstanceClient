@@ -7,9 +7,9 @@ public class BiomeGenEnd extends BiomeGenBase
 {
     private static final String __OBFID = "CL_00000187";
 
-    public BiomeGenEnd(int par1)
+    public BiomeGenEnd(int p_i1990_1_)
     {
-        super(par1);
+        super(p_i1990_1_);
         this.spawnableMonsterList.clear();
         this.spawnableCreatureList.clear();
         this.spawnableWaterCreatureList.clear();
@@ -23,7 +23,7 @@ public class BiomeGenEnd extends BiomeGenBase
     /**
      * takes temperature, returns color
      */
-    public int getSkyColorByTemp(float par1)
+    public int getSkyColorByTemp(float p_76731_1_)
     {
         return 0;
     }

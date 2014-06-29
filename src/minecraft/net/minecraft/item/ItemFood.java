@@ -51,27 +51,27 @@ public class ItemFood extends Item
         this(p_i45340_1_, 0.6F, p_i45340_2_);
     }
 
-    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    public ItemStack onEaten(ItemStack p_77654_1_, World p_77654_2_, EntityPlayer p_77654_3_)
     {
-        --par1ItemStack.stackSize;
-        par3EntityPlayer.getFoodStats().func_151686_a(this, par1ItemStack);
-        par2World.playSoundAtEntity(par3EntityPlayer, "random.burp", 0.5F, par2World.rand.nextFloat() * 0.1F + 0.9F);
-        this.onFoodEaten(par1ItemStack, par2World, par3EntityPlayer);
-        return par1ItemStack;
+        --p_77654_1_.stackSize;
+        p_77654_3_.getFoodStats().func_151686_a(this, p_77654_1_);
+        p_77654_2_.playSoundAtEntity(p_77654_3_, "random.burp", 0.5F, p_77654_2_.rand.nextFloat() * 0.1F + 0.9F);
+        this.onFoodEaten(p_77654_1_, p_77654_2_, p_77654_3_);
+        return p_77654_1_;
     }
 
-    protected void onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    protected void onFoodEaten(ItemStack p_77849_1_, World p_77849_2_, EntityPlayer p_77849_3_)
     {
-        if (!par2World.isClient && this.potionId > 0 && par2World.rand.nextFloat() < this.potionEffectProbability)
+        if (!p_77849_2_.isClient && this.potionId > 0 && p_77849_2_.rand.nextFloat() < this.potionEffectProbability)
         {
-            par3EntityPlayer.addPotionEffect(new PotionEffect(this.potionId, this.potionDuration * 20, this.potionAmplifier));
+            p_77849_3_.addPotionEffect(new PotionEffect(this.potionId, this.potionDuration * 20, this.potionAmplifier));
         }
     }
 
     /**
      * How long it takes to use or consume an item
      */
-    public int getMaxItemUseDuration(ItemStack par1ItemStack)
+    public int getMaxItemUseDuration(ItemStack p_77626_1_)
     {
         return 32;
     }
@@ -79,7 +79,7 @@ public class ItemFood extends Item
     /**
      * returns the action that specifies what animation to play when the items is being used
      */
-    public EnumAction getItemUseAction(ItemStack par1ItemStack)
+    public EnumAction getItemUseAction(ItemStack p_77661_1_)
     {
         return EnumAction.eat;
     }
@@ -87,14 +87,14 @@ public class ItemFood extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    public ItemStack onItemRightClick(ItemStack p_77659_1_, World p_77659_2_, EntityPlayer p_77659_3_)
     {
-        if (par3EntityPlayer.canEat(this.alwaysEdible))
+        if (p_77659_3_.canEat(this.alwaysEdible))
         {
-            par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
+            p_77659_3_.setItemInUse(p_77659_1_, this.getMaxItemUseDuration(p_77659_1_));
         }
 
-        return par1ItemStack;
+        return p_77659_1_;
     }
 
     public int func_150905_g(ItemStack p_150905_1_)
@@ -119,12 +119,12 @@ public class ItemFood extends Item
      * sets a potion effect on the item. Args: int potionId, int duration (will be multiplied by 20), int amplifier,
      * float probability of effect happening
      */
-    public ItemFood setPotionEffect(int par1, int par2, int par3, float par4)
+    public ItemFood setPotionEffect(int p_77844_1_, int p_77844_2_, int p_77844_3_, float p_77844_4_)
     {
-        this.potionId = par1;
-        this.potionDuration = par2;
-        this.potionAmplifier = par3;
-        this.potionEffectProbability = par4;
+        this.potionId = p_77844_1_;
+        this.potionDuration = p_77844_2_;
+        this.potionAmplifier = p_77844_3_;
+        this.potionEffectProbability = p_77844_4_;
         return this;
     }
 

@@ -1,5 +1,6 @@
 package net.minecraft.client.gui;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
@@ -11,14 +12,15 @@ public class GuiControls extends GuiScreen
     protected String field_146495_a = "Controls";
     private GameSettings field_146497_i;
     public KeyBinding field_146491_f = null;
+    public long field_152177_g;
     private GuiKeyBindingList field_146494_r;
     private GuiButton field_146493_s;
     private static final String __OBFID = "CL_00000736";
 
-    public GuiControls(GuiScreen par1GuiScreen, GameSettings par2GameSettings)
+    public GuiControls(GuiScreen p_i1027_1_, GameSettings p_i1027_2_)
     {
-        this.field_146496_h = par1GuiScreen;
-        this.field_146497_i = par2GameSettings;
+        this.field_146496_h = p_i1027_1_;
+        this.field_146497_i = p_i1027_2_;
     }
 
     /**
@@ -80,17 +82,17 @@ public class GuiControls extends GuiScreen
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int par1, int par2, int par3)
+    protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_)
     {
         if (this.field_146491_f != null)
         {
-            this.field_146497_i.setKeyCodeSave(this.field_146491_f, -100 + par3);
+            this.field_146497_i.setKeyCodeSave(this.field_146491_f, -100 + p_73864_3_);
             this.field_146491_f = null;
             KeyBinding.resetKeyBindingArrayAndHash();
         }
-        else if (par3 != 0 || !this.field_146494_r.func_148179_a(par1, par2, par3))
+        else if (p_73864_3_ != 0 || !this.field_146494_r.func_148179_a(p_73864_1_, p_73864_2_, p_73864_3_))
         {
-            super.mouseClicked(par1, par2, par3);
+            super.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
         }
     }
 
@@ -105,35 +107,36 @@ public class GuiControls extends GuiScreen
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2)
+    protected void keyTyped(char p_73869_1_, int p_73869_2_)
     {
         if (this.field_146491_f != null)
         {
-            if (par2 == 1)
+            if (p_73869_2_ == 1)
             {
                 this.field_146497_i.setKeyCodeSave(this.field_146491_f, 0);
             }
             else
             {
-                this.field_146497_i.setKeyCodeSave(this.field_146491_f, par2);
+                this.field_146497_i.setKeyCodeSave(this.field_146491_f, p_73869_2_);
             }
 
             this.field_146491_f = null;
+            this.field_152177_g = Minecraft.getSystemTime();
             KeyBinding.resetKeyBindingArrayAndHash();
         }
         else
         {
-            super.keyTyped(par1, par2);
+            super.keyTyped(p_73869_1_, p_73869_2_);
         }
     }
 
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         this.drawDefaultBackground();
-        this.field_146494_r.func_148128_a(par1, par2, par3);
+        this.field_146494_r.func_148128_a(p_73863_1_, p_73863_2_, p_73863_3_);
         this.drawCenteredString(this.fontRendererObj, this.field_146495_a, this.width / 2, 8, 16777215);
         boolean var4 = true;
         KeyBinding[] var5 = this.field_146497_i.keyBindings;
@@ -151,6 +154,6 @@ public class GuiControls extends GuiScreen
         }
 
         this.field_146493_s.enabled = !var4;
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 }

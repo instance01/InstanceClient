@@ -7,30 +7,30 @@ public abstract class EntityFlying extends EntityLiving
 {
     private static final String __OBFID = "CL_00001545";
 
-    public EntityFlying(World par1World)
+    public EntityFlying(World p_i1587_1_)
     {
-        super(par1World);
+        super(p_i1587_1_);
     }
 
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
-    protected void fall(float par1) {}
+    protected void fall(float p_70069_1_) {}
 
     /**
      * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
      * and deal fall damage if landing on the ground.  Args: distanceFallenThisTick, onGround
      */
-    protected void updateFallState(double par1, boolean par3) {}
+    protected void updateFallState(double p_70064_1_, boolean p_70064_3_) {}
 
     /**
      * Moves the entity based on the specified heading.  Args: strafe, forward
      */
-    public void moveEntityWithHeading(float par1, float par2)
+    public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_)
     {
         if (this.isInWater())
         {
-            this.moveFlying(par1, par2, 0.02F);
+            this.moveFlying(p_70612_1_, p_70612_2_, 0.02F);
             this.moveEntity(this.motionX, this.motionY, this.motionZ);
             this.motionX *= 0.800000011920929D;
             this.motionY *= 0.800000011920929D;
@@ -38,7 +38,7 @@ public abstract class EntityFlying extends EntityLiving
         }
         else if (this.handleLavaMovement())
         {
-            this.moveFlying(par1, par2, 0.02F);
+            this.moveFlying(p_70612_1_, p_70612_2_, 0.02F);
             this.moveEntity(this.motionX, this.motionY, this.motionZ);
             this.motionX *= 0.5D;
             this.motionY *= 0.5D;
@@ -54,7 +54,7 @@ public abstract class EntityFlying extends EntityLiving
             }
 
             float var4 = 0.16277136F / (var3 * var3 * var3);
-            this.moveFlying(par1, par2, this.onGround ? 0.1F * var4 : 0.02F);
+            this.moveFlying(p_70612_1_, p_70612_2_, this.onGround ? 0.1F * var4 : 0.02F);
             var3 = 0.91F;
 
             if (this.onGround)

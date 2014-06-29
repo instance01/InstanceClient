@@ -11,15 +11,15 @@ public class EnchantmentData extends WeightedRandom.Item
     public final int enchantmentLevel;
     private static final String __OBFID = "CL_00000115";
 
-    public EnchantmentData(Enchantment par1Enchantment, int par2)
+    public EnchantmentData(Enchantment p_i1930_1_, int p_i1930_2_)
     {
-        super(par1Enchantment.getWeight());
-        this.enchantmentobj = par1Enchantment;
-        this.enchantmentLevel = par2;
+        super(p_i1930_1_.getWeight());
+        this.enchantmentobj = p_i1930_1_;
+        this.enchantmentLevel = p_i1930_2_;
     }
 
-    public EnchantmentData(int par1, int par2)
+    public EnchantmentData(int p_i1931_1_, int p_i1931_2_)
     {
-        this(Enchantment.enchantmentsList[par1], par2);
+        this(Enchantment.enchantmentsList[p_i1931_1_], p_i1931_2_);
     }
 }

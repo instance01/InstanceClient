@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHopper;
@@ -39,7 +40,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.Vec3;
-import net.minecraft.util.Vec3Pool;
 import net.minecraft.village.VillageCollection;
 import net.minecraft.village.VillageSiege;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -121,9 +121,6 @@ public abstract class World implements IBlockAccess
     public final VillageCollection villageCollectionObj;
     protected final VillageSiege villageSiegeObj = new VillageSiege(this);
     public final Profiler theProfiler;
-
-    /** The world-local pool of vectors */
-    private final Vec3Pool vecPool = new Vec3Pool(300, 2000);
     private final Calendar theCalendar = Calendar.getInstance();
     protected Scoreboard worldScoreboard = new Scoreboard();
 
@@ -156,15 +153,15 @@ public abstract class World implements IBlockAccess
     /**
      * Gets the biome for a given set of x/z coordinates
      */
-    public BiomeGenBase getBiomeGenForCoords(final int par1, final int par2)
+    public BiomeGenBase getBiomeGenForCoords(final int p_72807_1_, final int p_72807_2_)
     {
-        if (this.blockExists(par1, 0, par2))
+        if (this.blockExists(p_72807_1_, 0, p_72807_2_))
         {
-            Chunk var3 = this.getChunkFromBlockCoords(par1, par2);
+            Chunk var3 = this.getChunkFromBlockCoords(p_72807_1_, p_72807_2_);
 
             try
             {
-                return var3.getBiomeGenForWorldCoords(par1 & 15, par2 & 15, this.provider.worldChunkMgr);
+                return var3.getBiomeGenForWorldCoords(p_72807_1_ & 15, p_72807_2_ & 15, this.provider.worldChunkMgr);
             }
             catch (Throwable var7)
             {
@@ -175,7 +172,7 @@ public abstract class World implements IBlockAccess
                     private static final String __OBFID = "CL_00000141";
                     public String call()
                     {
-                        return CrashReportCategory.getLocationInfo(par1, 0, par2);
+                        return CrashReportCategory.getLocationInfo(p_72807_1_, 0, p_72807_2_);
                     }
                 });
                 throw new ReportedException(var5);
@@ -183,7 +180,7 @@ public abstract class World implements IBlockAccess
         }
         else
         {
-            return this.provider.worldChunkMgr.getBiomeGenAt(par1, par2);
+            return this.provider.worldChunkMgr.getBiomeGenAt(p_72807_1_, p_72807_2_);
         }
     }
 
@@ -307,7 +304,7 @@ public abstract class World implements IBlockAccess
      */
     protected abstract IChunkProvider createChunkProvider();
 
-    protected void initialize(WorldSettings par1WorldSettings)
+    protected void initialize(WorldSettings p_72963_1_)
     {
         this.worldInfo.setServerInitialized(true);
     }
@@ -369,34 +366,34 @@ public abstract class World implements IBlockAccess
     /**
      * Returns whether a block exists at world coordinates x, y, z
      */
-    public boolean blockExists(int par1, int par2, int par3)
+    public boolean blockExists(int p_72899_1_, int p_72899_2_, int p_72899_3_)
     {
-        return par2 >= 0 && par2 < 256 ? this.chunkExists(par1 >> 4, par3 >> 4) : false;
+        return p_72899_2_ >= 0 && p_72899_2_ < 256 ? this.chunkExists(p_72899_1_ >> 4, p_72899_3_ >> 4) : false;
     }
 
     /**
      * Checks if any of the chunks within distance (argument 4) blocks of the given block exist
      */
-    public boolean doChunksNearChunkExist(int par1, int par2, int par3, int par4)
+    public boolean doChunksNearChunkExist(int p_72873_1_, int p_72873_2_, int p_72873_3_, int p_72873_4_)
     {
-        return this.checkChunksExist(par1 - par4, par2 - par4, par3 - par4, par1 + par4, par2 + par4, par3 + par4);
+        return this.checkChunksExist(p_72873_1_ - p_72873_4_, p_72873_2_ - p_72873_4_, p_72873_3_ - p_72873_4_, p_72873_1_ + p_72873_4_, p_72873_2_ + p_72873_4_, p_72873_3_ + p_72873_4_);
     }
 
     /**
      * Checks between a min and max all the chunks inbetween actually exist. Args: minX, minY, minZ, maxX, maxY, maxZ
      */
-    public boolean checkChunksExist(int par1, int par2, int par3, int par4, int par5, int par6)
+    public boolean checkChunksExist(int p_72904_1_, int p_72904_2_, int p_72904_3_, int p_72904_4_, int p_72904_5_, int p_72904_6_)
     {
-        if (par5 >= 0 && par2 < 256)
+        if (p_72904_5_ >= 0 && p_72904_2_ < 256)
         {
-            par1 >>= 4;
-            par3 >>= 4;
-            par4 >>= 4;
-            par6 >>= 4;
+            p_72904_1_ >>= 4;
+            p_72904_3_ >>= 4;
+            p_72904_4_ >>= 4;
+            p_72904_6_ >>= 4;
 
-            for (int var7 = par1; var7 <= par4; ++var7)
+            for (int var7 = p_72904_1_; var7 <= p_72904_4_; ++var7)
             {
-                for (int var8 = par3; var8 <= par6; ++var8)
+                for (int var8 = p_72904_3_; var8 <= p_72904_6_; ++var8)
                 {
                     if (!this.chunkExists(var7, var8))
                     {
@@ -416,25 +413,25 @@ public abstract class World implements IBlockAccess
     /**
      * Returns whether a chunk exists at chunk coordinates x, y
      */
-    protected boolean chunkExists(int par1, int par2)
+    protected boolean chunkExists(int p_72916_1_, int p_72916_2_)
     {
-        return this.chunkProvider.chunkExists(par1, par2);
+        return this.chunkProvider.chunkExists(p_72916_1_, p_72916_2_);
     }
 
     /**
      * Returns a chunk looked up by block coordinates. Args: x, z
      */
-    public Chunk getChunkFromBlockCoords(int par1, int par2)
+    public Chunk getChunkFromBlockCoords(int p_72938_1_, int p_72938_2_)
     {
-        return this.getChunkFromChunkCoords(par1 >> 4, par2 >> 4);
+        return this.getChunkFromChunkCoords(p_72938_1_ >> 4, p_72938_2_ >> 4);
     }
 
     /**
      * Returns back a chunk looked up by chunk coordinates Args: x, y
      */
-    public Chunk getChunkFromChunkCoords(int par1, int par2)
+    public Chunk getChunkFromChunkCoords(int p_72964_1_, int p_72964_2_)
     {
-        return this.chunkProvider.provideChunk(par1, par2);
+        return this.chunkProvider.provideChunk(p_72964_1_, p_72964_2_);
     }
 
     /**
@@ -499,24 +496,24 @@ public abstract class World implements IBlockAccess
     /**
      * Returns the block metadata at coords x,y,z
      */
-    public int getBlockMetadata(int par1, int par2, int par3)
+    public int getBlockMetadata(int p_72805_1_, int p_72805_2_, int p_72805_3_)
     {
-        if (par1 >= -30000000 && par3 >= -30000000 && par1 < 30000000 && par3 < 30000000)
+        if (p_72805_1_ >= -30000000 && p_72805_3_ >= -30000000 && p_72805_1_ < 30000000 && p_72805_3_ < 30000000)
         {
-            if (par2 < 0)
+            if (p_72805_2_ < 0)
             {
                 return 0;
             }
-            else if (par2 >= 256)
+            else if (p_72805_2_ >= 256)
             {
                 return 0;
             }
             else
             {
-                Chunk var4 = this.getChunkFromChunkCoords(par1 >> 4, par3 >> 4);
-                par1 &= 15;
-                par3 &= 15;
-                return var4.getBlockMetadata(par1, par2, par3);
+                Chunk var4 = this.getChunkFromChunkCoords(p_72805_1_ >> 4, p_72805_3_ >> 4);
+                p_72805_1_ &= 15;
+                p_72805_3_ &= 15;
+                return var4.getBlockMetadata(p_72805_1_, p_72805_2_, p_72805_3_);
             }
         }
         else
@@ -529,41 +526,41 @@ public abstract class World implements IBlockAccess
      * Sets the blocks metadata and if set will then notify blocks that this block changed, depending on the flag. Args:
      * x, y, z, metadata, flag. See setBlock for flag description
      */
-    public boolean setBlockMetadataWithNotify(int par1, int par2, int par3, int par4, int par5)
+    public boolean setBlockMetadataWithNotify(int p_72921_1_, int p_72921_2_, int p_72921_3_, int p_72921_4_, int p_72921_5_)
     {
-        if (par1 >= -30000000 && par3 >= -30000000 && par1 < 30000000 && par3 < 30000000)
+        if (p_72921_1_ >= -30000000 && p_72921_3_ >= -30000000 && p_72921_1_ < 30000000 && p_72921_3_ < 30000000)
         {
-            if (par2 < 0)
+            if (p_72921_2_ < 0)
             {
                 return false;
             }
-            else if (par2 >= 256)
+            else if (p_72921_2_ >= 256)
             {
                 return false;
             }
             else
             {
-                Chunk var6 = this.getChunkFromChunkCoords(par1 >> 4, par3 >> 4);
-                int var7 = par1 & 15;
-                int var8 = par3 & 15;
-                boolean var9 = var6.setBlockMetadata(var7, par2, var8, par4);
+                Chunk var6 = this.getChunkFromChunkCoords(p_72921_1_ >> 4, p_72921_3_ >> 4);
+                int var7 = p_72921_1_ & 15;
+                int var8 = p_72921_3_ & 15;
+                boolean var9 = var6.setBlockMetadata(var7, p_72921_2_, var8, p_72921_4_);
 
                 if (var9)
                 {
-                    Block var10 = var6.func_150810_a(var7, par2, var8);
+                    Block var10 = var6.func_150810_a(var7, p_72921_2_, var8);
 
-                    if ((par5 & 2) != 0 && (!this.isClient || (par5 & 4) == 0) && var6.func_150802_k())
+                    if ((p_72921_5_ & 2) != 0 && (!this.isClient || (p_72921_5_ & 4) == 0) && var6.func_150802_k())
                     {
-                        this.func_147471_g(par1, par2, par3);
+                        this.func_147471_g(p_72921_1_, p_72921_2_, p_72921_3_);
                     }
 
-                    if (!this.isClient && (par5 & 1) != 0)
+                    if (!this.isClient && (p_72921_5_ & 1) != 0)
                     {
-                        this.notifyBlockChange(par1, par2, par3, var10);
+                        this.notifyBlockChange(p_72921_1_, p_72921_2_, p_72921_3_, var10);
 
                         if (var10.hasComparatorInputOverride())
                         {
-                            this.func_147453_f(par1, par2, par3, var10);
+                            this.func_147453_f(p_72921_1_, p_72921_2_, p_72921_3_, var10);
                         }
                     }
                 }
@@ -631,26 +628,26 @@ public abstract class World implements IBlockAccess
     /**
      * marks a vertical line of blocks as dirty
      */
-    public void markBlocksDirtyVertical(int par1, int par2, int par3, int par4)
+    public void markBlocksDirtyVertical(int p_72975_1_, int p_72975_2_, int p_72975_3_, int p_72975_4_)
     {
         int var5;
 
-        if (par3 > par4)
+        if (p_72975_3_ > p_72975_4_)
         {
-            var5 = par4;
-            par4 = par3;
-            par3 = var5;
+            var5 = p_72975_4_;
+            p_72975_4_ = p_72975_3_;
+            p_72975_3_ = var5;
         }
 
         if (!this.provider.hasNoSky)
         {
-            for (var5 = par3; var5 <= par4; ++var5)
+            for (var5 = p_72975_3_; var5 <= p_72975_4_; ++var5)
             {
-                this.updateLightByType(EnumSkyBlock.Sky, par1, var5, par2);
+                this.updateLightByType(EnumSkyBlock.Sky, p_72975_1_, var5, p_72975_2_);
             }
         }
 
-        this.markBlockRangeForRenderUpdate(par1, par3, par2, par1, par4, par2);
+        this.markBlockRangeForRenderUpdate(p_72975_1_, p_72975_3_, p_72975_2_, p_72975_1_, p_72975_4_, p_72975_2_);
     }
 
     public void markBlockRangeForRenderUpdate(int p_147458_1_, int p_147458_2_, int p_147458_3_, int p_147458_4_, int p_147458_5_, int p_147458_6_)
@@ -758,37 +755,37 @@ public abstract class World implements IBlockAccess
     /**
      * Checks if the specified block is able to see the sky
      */
-    public boolean canBlockSeeTheSky(int par1, int par2, int par3)
+    public boolean canBlockSeeTheSky(int p_72937_1_, int p_72937_2_, int p_72937_3_)
     {
-        return this.getChunkFromChunkCoords(par1 >> 4, par3 >> 4).canBlockSeeTheSky(par1 & 15, par2, par3 & 15);
+        return this.getChunkFromChunkCoords(p_72937_1_ >> 4, p_72937_3_ >> 4).canBlockSeeTheSky(p_72937_1_ & 15, p_72937_2_, p_72937_3_ & 15);
     }
 
     /**
      * Does the same as getBlockLightValue_do but without checking if its not a normal block
      */
-    public int getFullBlockLightValue(int par1, int par2, int par3)
+    public int getFullBlockLightValue(int p_72883_1_, int p_72883_2_, int p_72883_3_)
     {
-        if (par2 < 0)
+        if (p_72883_2_ < 0)
         {
             return 0;
         }
         else
         {
-            if (par2 >= 256)
+            if (p_72883_2_ >= 256)
             {
-                par2 = 255;
+                p_72883_2_ = 255;
             }
 
-            return this.getChunkFromChunkCoords(par1 >> 4, par3 >> 4).getBlockLightValue(par1 & 15, par2, par3 & 15, 0);
+            return this.getChunkFromChunkCoords(p_72883_1_ >> 4, p_72883_3_ >> 4).getBlockLightValue(p_72883_1_ & 15, p_72883_2_, p_72883_3_ & 15, 0);
         }
     }
 
     /**
      * Gets the light value of a block location
      */
-    public int getBlockLightValue(int par1, int par2, int par3)
+    public int getBlockLightValue(int p_72957_1_, int p_72957_2_, int p_72957_3_)
     {
-        return this.getBlockLightValue_do(par1, par2, par3, true);
+        return this.getBlockLightValue_do(p_72957_1_, p_72957_2_, p_72957_3_, true);
     }
 
     /**
@@ -796,17 +793,17 @@ public abstract class World implements IBlockAccess
      * that indicates if its a half step block to get the maximum light value of a direct neighboring block (left,
      * right, forward, back, and up)
      */
-    public int getBlockLightValue_do(int par1, int par2, int par3, boolean par4)
+    public int getBlockLightValue_do(int p_72849_1_, int p_72849_2_, int p_72849_3_, boolean p_72849_4_)
     {
-        if (par1 >= -30000000 && par3 >= -30000000 && par1 < 30000000 && par3 < 30000000)
+        if (p_72849_1_ >= -30000000 && p_72849_3_ >= -30000000 && p_72849_1_ < 30000000 && p_72849_3_ < 30000000)
         {
-            if (par4 && this.getBlock(par1, par2, par3).func_149710_n())
+            if (p_72849_4_ && this.getBlock(p_72849_1_, p_72849_2_, p_72849_3_).func_149710_n())
             {
-                int var10 = this.getBlockLightValue_do(par1, par2 + 1, par3, false);
-                int var6 = this.getBlockLightValue_do(par1 + 1, par2, par3, false);
-                int var7 = this.getBlockLightValue_do(par1 - 1, par2, par3, false);
-                int var8 = this.getBlockLightValue_do(par1, par2, par3 + 1, false);
-                int var9 = this.getBlockLightValue_do(par1, par2, par3 - 1, false);
+                int var10 = this.getBlockLightValue_do(p_72849_1_, p_72849_2_ + 1, p_72849_3_, false);
+                int var6 = this.getBlockLightValue_do(p_72849_1_ + 1, p_72849_2_, p_72849_3_, false);
+                int var7 = this.getBlockLightValue_do(p_72849_1_ - 1, p_72849_2_, p_72849_3_, false);
+                int var8 = this.getBlockLightValue_do(p_72849_1_, p_72849_2_, p_72849_3_ + 1, false);
+                int var9 = this.getBlockLightValue_do(p_72849_1_, p_72849_2_, p_72849_3_ - 1, false);
 
                 if (var6 > var10)
                 {
@@ -830,21 +827,21 @@ public abstract class World implements IBlockAccess
 
                 return var10;
             }
-            else if (par2 < 0)
+            else if (p_72849_2_ < 0)
             {
                 return 0;
             }
             else
             {
-                if (par2 >= 256)
+                if (p_72849_2_ >= 256)
                 {
-                    par2 = 255;
+                    p_72849_2_ = 255;
                 }
 
-                Chunk var5 = this.getChunkFromChunkCoords(par1 >> 4, par3 >> 4);
-                par1 &= 15;
-                par3 &= 15;
-                return var5.getBlockLightValue(par1, par2, par3, this.skylightSubtracted);
+                Chunk var5 = this.getChunkFromChunkCoords(p_72849_1_ >> 4, p_72849_3_ >> 4);
+                p_72849_1_ &= 15;
+                p_72849_3_ &= 15;
+                return var5.getBlockLightValue(p_72849_1_, p_72849_2_, p_72849_3_, this.skylightSubtracted);
             }
         }
         else
@@ -856,18 +853,18 @@ public abstract class World implements IBlockAccess
     /**
      * Returns the y coordinate with a block in it at this x, z coordinate
      */
-    public int getHeightValue(int par1, int par2)
+    public int getHeightValue(int p_72976_1_, int p_72976_2_)
     {
-        if (par1 >= -30000000 && par2 >= -30000000 && par1 < 30000000 && par2 < 30000000)
+        if (p_72976_1_ >= -30000000 && p_72976_2_ >= -30000000 && p_72976_1_ < 30000000 && p_72976_2_ < 30000000)
         {
-            if (!this.chunkExists(par1 >> 4, par2 >> 4))
+            if (!this.chunkExists(p_72976_1_ >> 4, p_72976_2_ >> 4))
             {
                 return 0;
             }
             else
             {
-                Chunk var3 = this.getChunkFromChunkCoords(par1 >> 4, par2 >> 4);
-                return var3.getHeightValue(par1 & 15, par2 & 15);
+                Chunk var3 = this.getChunkFromChunkCoords(p_72976_1_ >> 4, p_72976_2_ >> 4);
+                return var3.getHeightValue(p_72976_1_ & 15, p_72976_2_ & 15);
             }
         }
         else
@@ -880,17 +877,17 @@ public abstract class World implements IBlockAccess
      * Gets the heightMapMinimum field of the given chunk, or 0 if the chunk is not loaded. Coords are in blocks. Args:
      * X, Z
      */
-    public int getChunkHeightMapMinimum(int par1, int par2)
+    public int getChunkHeightMapMinimum(int p_82734_1_, int p_82734_2_)
     {
-        if (par1 >= -30000000 && par2 >= -30000000 && par1 < 30000000 && par2 < 30000000)
+        if (p_82734_1_ >= -30000000 && p_82734_2_ >= -30000000 && p_82734_1_ < 30000000 && p_82734_2_ < 30000000)
         {
-            if (!this.chunkExists(par1 >> 4, par2 >> 4))
+            if (!this.chunkExists(p_82734_1_ >> 4, p_82734_2_ >> 4))
             {
                 return 0;
             }
             else
             {
-                Chunk var3 = this.getChunkFromChunkCoords(par1 >> 4, par2 >> 4);
+                Chunk var3 = this.getChunkFromChunkCoords(p_82734_1_ >> 4, p_82734_2_ >> 4);
                 return var3.heightMapMinimum;
             }
         }
@@ -904,39 +901,39 @@ public abstract class World implements IBlockAccess
      * Brightness for SkyBlock.Sky is clear white and (through color computing it is assumed) DEPENDENT ON DAYTIME.
      * Brightness for SkyBlock.Block is yellowish and independent.
      */
-    public int getSkyBlockTypeBrightness(EnumSkyBlock par1EnumSkyBlock, int par2, int par3, int par4)
+    public int getSkyBlockTypeBrightness(EnumSkyBlock p_72925_1_, int p_72925_2_, int p_72925_3_, int p_72925_4_)
     {
-        if (this.provider.hasNoSky && par1EnumSkyBlock == EnumSkyBlock.Sky)
+        if (this.provider.hasNoSky && p_72925_1_ == EnumSkyBlock.Sky)
         {
             return 0;
         }
         else
         {
-            if (par3 < 0)
+            if (p_72925_3_ < 0)
             {
-                par3 = 0;
+                p_72925_3_ = 0;
             }
 
-            if (par3 >= 256)
+            if (p_72925_3_ >= 256)
             {
-                return par1EnumSkyBlock.defaultLightValue;
+                return p_72925_1_.defaultLightValue;
             }
-            else if (par2 >= -30000000 && par4 >= -30000000 && par2 < 30000000 && par4 < 30000000)
+            else if (p_72925_2_ >= -30000000 && p_72925_4_ >= -30000000 && p_72925_2_ < 30000000 && p_72925_4_ < 30000000)
             {
-                int var5 = par2 >> 4;
-                int var6 = par4 >> 4;
+                int var5 = p_72925_2_ >> 4;
+                int var6 = p_72925_4_ >> 4;
 
                 if (!this.chunkExists(var5, var6))
                 {
-                    return par1EnumSkyBlock.defaultLightValue;
+                    return p_72925_1_.defaultLightValue;
                 }
-                else if (this.getBlock(par2, par3, par4).func_149710_n())
+                else if (this.getBlock(p_72925_2_, p_72925_3_, p_72925_4_).func_149710_n())
                 {
-                    int var12 = this.getSavedLightValue(par1EnumSkyBlock, par2, par3 + 1, par4);
-                    int var8 = this.getSavedLightValue(par1EnumSkyBlock, par2 + 1, par3, par4);
-                    int var9 = this.getSavedLightValue(par1EnumSkyBlock, par2 - 1, par3, par4);
-                    int var10 = this.getSavedLightValue(par1EnumSkyBlock, par2, par3, par4 + 1);
-                    int var11 = this.getSavedLightValue(par1EnumSkyBlock, par2, par3, par4 - 1);
+                    int var12 = this.getSavedLightValue(p_72925_1_, p_72925_2_, p_72925_3_ + 1, p_72925_4_);
+                    int var8 = this.getSavedLightValue(p_72925_1_, p_72925_2_ + 1, p_72925_3_, p_72925_4_);
+                    int var9 = this.getSavedLightValue(p_72925_1_, p_72925_2_ - 1, p_72925_3_, p_72925_4_);
+                    int var10 = this.getSavedLightValue(p_72925_1_, p_72925_2_, p_72925_3_, p_72925_4_ + 1);
+                    int var11 = this.getSavedLightValue(p_72925_1_, p_72925_2_, p_72925_3_, p_72925_4_ - 1);
 
                     if (var8 > var12)
                     {
@@ -963,12 +960,12 @@ public abstract class World implements IBlockAccess
                 else
                 {
                     Chunk var7 = this.getChunkFromChunkCoords(var5, var6);
-                    return var7.getSavedLightValue(par1EnumSkyBlock, par2 & 15, par3, par4 & 15);
+                    return var7.getSavedLightValue(p_72925_1_, p_72925_2_ & 15, p_72925_3_, p_72925_4_ & 15);
                 }
             }
             else
             {
-                return par1EnumSkyBlock.defaultLightValue;
+                return p_72925_1_.defaultLightValue;
             }
         }
     }
@@ -977,36 +974,36 @@ public abstract class World implements IBlockAccess
      * Returns saved light value without taking into account the time of day.  Either looks in the sky light map or
      * block light map based on the enumSkyBlock arg.
      */
-    public int getSavedLightValue(EnumSkyBlock par1EnumSkyBlock, int par2, int par3, int par4)
+    public int getSavedLightValue(EnumSkyBlock p_72972_1_, int p_72972_2_, int p_72972_3_, int p_72972_4_)
     {
-        if (par3 < 0)
+        if (p_72972_3_ < 0)
         {
-            par3 = 0;
+            p_72972_3_ = 0;
         }
 
-        if (par3 >= 256)
+        if (p_72972_3_ >= 256)
         {
-            par3 = 255;
+            p_72972_3_ = 255;
         }
 
-        if (par2 >= -30000000 && par4 >= -30000000 && par2 < 30000000 && par4 < 30000000)
+        if (p_72972_2_ >= -30000000 && p_72972_4_ >= -30000000 && p_72972_2_ < 30000000 && p_72972_4_ < 30000000)
         {
-            int var5 = par2 >> 4;
-            int var6 = par4 >> 4;
+            int var5 = p_72972_2_ >> 4;
+            int var6 = p_72972_4_ >> 4;
 
             if (!this.chunkExists(var5, var6))
             {
-                return par1EnumSkyBlock.defaultLightValue;
+                return p_72972_1_.defaultLightValue;
             }
             else
             {
                 Chunk var7 = this.getChunkFromChunkCoords(var5, var6);
-                return var7.getSavedLightValue(par1EnumSkyBlock, par2 & 15, par3, par4 & 15);
+                return var7.getSavedLightValue(p_72972_1_, p_72972_2_ & 15, p_72972_3_, p_72972_4_ & 15);
             }
         }
         else
         {
-            return par1EnumSkyBlock.defaultLightValue;
+            return p_72972_1_.defaultLightValue;
         }
     }
 
@@ -1014,22 +1011,22 @@ public abstract class World implements IBlockAccess
      * Sets the light value either into the sky map or block map depending on if enumSkyBlock is set to sky or block.
      * Args: enumSkyBlock, x, y, z, lightValue
      */
-    public void setLightValue(EnumSkyBlock par1EnumSkyBlock, int par2, int par3, int par4, int par5)
+    public void setLightValue(EnumSkyBlock p_72915_1_, int p_72915_2_, int p_72915_3_, int p_72915_4_, int p_72915_5_)
     {
-        if (par2 >= -30000000 && par4 >= -30000000 && par2 < 30000000 && par4 < 30000000)
+        if (p_72915_2_ >= -30000000 && p_72915_4_ >= -30000000 && p_72915_2_ < 30000000 && p_72915_4_ < 30000000)
         {
-            if (par3 >= 0)
+            if (p_72915_3_ >= 0)
             {
-                if (par3 < 256)
+                if (p_72915_3_ < 256)
                 {
-                    if (this.chunkExists(par2 >> 4, par4 >> 4))
+                    if (this.chunkExists(p_72915_2_ >> 4, p_72915_4_ >> 4))
                     {
-                        Chunk var6 = this.getChunkFromChunkCoords(par2 >> 4, par4 >> 4);
-                        var6.setLightValue(par1EnumSkyBlock, par2 & 15, par3, par4 & 15, par5);
+                        Chunk var6 = this.getChunkFromChunkCoords(p_72915_2_ >> 4, p_72915_4_ >> 4);
+                        var6.setLightValue(p_72915_1_, p_72915_2_ & 15, p_72915_3_, p_72915_4_ & 15, p_72915_5_);
 
                         for (int var7 = 0; var7 < this.worldAccesses.size(); ++var7)
                         {
-                            ((IWorldAccess)this.worldAccesses.get(var7)).markBlockForRenderUpdate(par2, par3, par4);
+                            ((IWorldAccess)this.worldAccesses.get(var7)).markBlockForRenderUpdate(p_72915_2_, p_72915_3_, p_72915_4_);
                         }
                     }
                 }
@@ -1048,14 +1045,14 @@ public abstract class World implements IBlockAccess
     /**
      * Any Light rendered on a 1.8 Block goes through here
      */
-    public int getLightBrightnessForSkyBlocks(int par1, int par2, int par3, int par4)
+    public int getLightBrightnessForSkyBlocks(int p_72802_1_, int p_72802_2_, int p_72802_3_, int p_72802_4_)
     {
-        int var5 = this.getSkyBlockTypeBrightness(EnumSkyBlock.Sky, par1, par2, par3);
-        int var6 = this.getSkyBlockTypeBrightness(EnumSkyBlock.Block, par1, par2, par3);
+        int var5 = this.getSkyBlockTypeBrightness(EnumSkyBlock.Sky, p_72802_1_, p_72802_2_, p_72802_3_);
+        int var6 = this.getSkyBlockTypeBrightness(EnumSkyBlock.Block, p_72802_1_, p_72802_2_, p_72802_3_);
 
-        if (var6 < par4)
+        if (var6 < p_72802_4_)
         {
-            var6 = par4;
+            var6 = p_72802_4_;
         }
 
         return var5 << 20 | var6 << 4;
@@ -1065,9 +1062,9 @@ public abstract class World implements IBlockAccess
      * Returns how bright the block is shown as which is the block's light value looked up in a lookup table (light
      * values aren't linear for brightness). Args: x, y, z
      */
-    public float getLightBrightness(int par1, int par2, int par3)
+    public float getLightBrightness(int p_72801_1_, int p_72801_2_, int p_72801_3_)
     {
-        return this.provider.lightBrightnessTable[this.getBlockLightValue(par1, par2, par3)];
+        return this.provider.lightBrightnessTable[this.getBlockLightValue(p_72801_1_, p_72801_2_, p_72801_3_)];
     }
 
     /**
@@ -1081,17 +1078,17 @@ public abstract class World implements IBlockAccess
     /**
      * Performs a raycast against all blocks in the world except liquids.
      */
-    public MovingObjectPosition rayTraceBlocks(Vec3 par1Vec3, Vec3 par2Vec3)
+    public MovingObjectPosition rayTraceBlocks(Vec3 p_72933_1_, Vec3 p_72933_2_)
     {
-        return this.func_147447_a(par1Vec3, par2Vec3, false, false, false);
+        return this.func_147447_a(p_72933_1_, p_72933_2_, false, false, false);
     }
 
     /**
      * Performs a raycast against all blocks in the world, and optionally liquids.
      */
-    public MovingObjectPosition rayTraceBlocks(Vec3 par1Vec3, Vec3 par2Vec3, boolean par3)
+    public MovingObjectPosition rayTraceBlocks(Vec3 p_72901_1_, Vec3 p_72901_2_, boolean p_72901_3_)
     {
-        return this.func_147447_a(par1Vec3, par2Vec3, par3, false, false);
+        return this.func_147447_a(p_72901_1_, p_72901_2_, p_72901_3_, false, false);
     }
 
     public MovingObjectPosition func_147447_a(Vec3 p_147447_1_, Vec3 p_147447_2_, boolean p_147447_3_, boolean p_147447_4_, boolean p_147447_5_)
@@ -1251,7 +1248,7 @@ public abstract class World implements IBlockAccess
                         p_147447_1_.zCoord = var21;
                     }
 
-                    Vec3 var36 = this.getWorldVec3Pool().getVecFromPool(p_147447_1_.xCoord, p_147447_1_.yCoord, p_147447_1_.zCoord);
+                    Vec3 var36 = Vec3.createVectorHelper(p_147447_1_.xCoord, p_147447_1_.yCoord, p_147447_1_.zCoord);
                     var9 = (int)(var36.xCoord = (double)MathHelper.floor_double(p_147447_1_.xCoord));
 
                     if (var42 == 5)
@@ -1314,22 +1311,22 @@ public abstract class World implements IBlockAccess
      * Plays a sound at the entity's position. Args: entity, sound, volume (relative to 1.0), and frequency (or pitch,
      * also relative to 1.0).
      */
-    public void playSoundAtEntity(Entity par1Entity, String par2Str, float par3, float par4)
+    public void playSoundAtEntity(Entity p_72956_1_, String p_72956_2_, float p_72956_3_, float p_72956_4_)
     {
         for (int var5 = 0; var5 < this.worldAccesses.size(); ++var5)
         {
-            ((IWorldAccess)this.worldAccesses.get(var5)).playSound(par2Str, par1Entity.posX, par1Entity.posY - (double)par1Entity.yOffset, par1Entity.posZ, par3, par4);
+            ((IWorldAccess)this.worldAccesses.get(var5)).playSound(p_72956_2_, p_72956_1_.posX, p_72956_1_.posY - (double)p_72956_1_.yOffset, p_72956_1_.posZ, p_72956_3_, p_72956_4_);
         }
     }
 
     /**
      * Plays sound to all near players except the player reference given
      */
-    public void playSoundToNearExcept(EntityPlayer par1EntityPlayer, String par2Str, float par3, float par4)
+    public void playSoundToNearExcept(EntityPlayer p_85173_1_, String p_85173_2_, float p_85173_3_, float p_85173_4_)
     {
         for (int var5 = 0; var5 < this.worldAccesses.size(); ++var5)
         {
-            ((IWorldAccess)this.worldAccesses.get(var5)).playSoundToNearExcept(par1EntityPlayer, par2Str, par1EntityPlayer.posX, par1EntityPlayer.posY - (double)par1EntityPlayer.yOffset, par1EntityPlayer.posZ, par3, par4);
+            ((IWorldAccess)this.worldAccesses.get(var5)).playSoundToNearExcept(p_85173_1_, p_85173_2_, p_85173_1_.posX, p_85173_1_.posY - (double)p_85173_1_.yOffset, p_85173_1_.posZ, p_85173_3_, p_85173_4_);
         }
     }
 
@@ -1338,60 +1335,60 @@ public abstract class World implements IBlockAccess
      * (double)i + 0.5D, (double)j + 0.5D, (double)k + 0.5D, 'random.door_open', 1.0F, world.rand.nextFloat() * 0.1F +
      * 0.9F with i,j,k position of the block.
      */
-    public void playSoundEffect(double par1, double par3, double par5, String par7Str, float par8, float par9)
+    public void playSoundEffect(double p_72908_1_, double p_72908_3_, double p_72908_5_, String p_72908_7_, float p_72908_8_, float p_72908_9_)
     {
         for (int var10 = 0; var10 < this.worldAccesses.size(); ++var10)
         {
-            ((IWorldAccess)this.worldAccesses.get(var10)).playSound(par7Str, par1, par3, par5, par8, par9);
+            ((IWorldAccess)this.worldAccesses.get(var10)).playSound(p_72908_7_, p_72908_1_, p_72908_3_, p_72908_5_, p_72908_8_, p_72908_9_);
         }
     }
 
     /**
      * par8 is loudness, all pars passed to minecraftInstance.sndManager.playSound
      */
-    public void playSound(double par1, double par3, double par5, String par7Str, float par8, float par9, boolean par10) {}
+    public void playSound(double p_72980_1_, double p_72980_3_, double p_72980_5_, String p_72980_7_, float p_72980_8_, float p_72980_9_, boolean p_72980_10_) {}
 
     /**
      * Plays a record at the specified coordinates of the specified name. Args: recordName, x, y, z
      */
-    public void playRecord(String par1Str, int par2, int par3, int par4)
+    public void playRecord(String p_72934_1_, int p_72934_2_, int p_72934_3_, int p_72934_4_)
     {
         for (int var5 = 0; var5 < this.worldAccesses.size(); ++var5)
         {
-            ((IWorldAccess)this.worldAccesses.get(var5)).playRecord(par1Str, par2, par3, par4);
+            ((IWorldAccess)this.worldAccesses.get(var5)).playRecord(p_72934_1_, p_72934_2_, p_72934_3_, p_72934_4_);
         }
     }
 
     /**
      * Spawns a particle.  Args particleName, x, y, z, velX, velY, velZ
      */
-    public void spawnParticle(String par1Str, double par2, double par4, double par6, double par8, double par10, double par12)
+    public void spawnParticle(String p_72869_1_, double p_72869_2_, double p_72869_4_, double p_72869_6_, double p_72869_8_, double p_72869_10_, double p_72869_12_)
     {
         for (int var14 = 0; var14 < this.worldAccesses.size(); ++var14)
         {
-            ((IWorldAccess)this.worldAccesses.get(var14)).spawnParticle(par1Str, par2, par4, par6, par8, par10, par12);
+            ((IWorldAccess)this.worldAccesses.get(var14)).spawnParticle(p_72869_1_, p_72869_2_, p_72869_4_, p_72869_6_, p_72869_8_, p_72869_10_, p_72869_12_);
         }
     }
 
     /**
      * adds a lightning bolt to the list of lightning bolts in this world.
      */
-    public boolean addWeatherEffect(Entity par1Entity)
+    public boolean addWeatherEffect(Entity p_72942_1_)
     {
-        this.weatherEffects.add(par1Entity);
+        this.weatherEffects.add(p_72942_1_);
         return true;
     }
 
     /**
      * Called to place all entities as part of a world
      */
-    public boolean spawnEntityInWorld(Entity par1Entity)
+    public boolean spawnEntityInWorld(Entity p_72838_1_)
     {
-        int var2 = MathHelper.floor_double(par1Entity.posX / 16.0D);
-        int var3 = MathHelper.floor_double(par1Entity.posZ / 16.0D);
-        boolean var4 = par1Entity.forceSpawn;
+        int var2 = MathHelper.floor_double(p_72838_1_.posX / 16.0D);
+        int var3 = MathHelper.floor_double(p_72838_1_.posZ / 16.0D);
+        boolean var4 = p_72838_1_.forceSpawn;
 
-        if (par1Entity instanceof EntityPlayer)
+        if (p_72838_1_ instanceof EntityPlayer)
         {
             var4 = true;
         }
@@ -1402,114 +1399,115 @@ public abstract class World implements IBlockAccess
         }
         else
         {
-            if (par1Entity instanceof EntityPlayer)
+            if (p_72838_1_ instanceof EntityPlayer)
             {
-                EntityPlayer var5 = (EntityPlayer)par1Entity;
+                EntityPlayer var5 = (EntityPlayer)p_72838_1_;
                 this.playerEntities.add(var5);
                 this.updateAllPlayersSleepingFlag();
             }
 
-            this.getChunkFromChunkCoords(var2, var3).addEntity(par1Entity);
-            this.loadedEntityList.add(par1Entity);
-            this.onEntityAdded(par1Entity);
+            this.getChunkFromChunkCoords(var2, var3).addEntity(p_72838_1_);
+            this.loadedEntityList.add(p_72838_1_);
+            this.onEntityAdded(p_72838_1_);
             return true;
         }
     }
 
-    protected void onEntityAdded(Entity par1Entity)
+    protected void onEntityAdded(Entity p_72923_1_)
     {
         for (int var2 = 0; var2 < this.worldAccesses.size(); ++var2)
         {
-            ((IWorldAccess)this.worldAccesses.get(var2)).onEntityCreate(par1Entity);
+            ((IWorldAccess)this.worldAccesses.get(var2)).onEntityCreate(p_72923_1_);
         }
     }
 
-    protected void onEntityRemoved(Entity par1Entity)
+    protected void onEntityRemoved(Entity p_72847_1_)
     {
         for (int var2 = 0; var2 < this.worldAccesses.size(); ++var2)
         {
-            ((IWorldAccess)this.worldAccesses.get(var2)).onEntityDestroy(par1Entity);
+            ((IWorldAccess)this.worldAccesses.get(var2)).onEntityDestroy(p_72847_1_);
         }
     }
 
     /**
      * Schedule the entity for removal during the next tick. Marks the entity dead in anticipation.
      */
-    public void removeEntity(Entity par1Entity)
+    public void removeEntity(Entity p_72900_1_)
     {
-        if (par1Entity.riddenByEntity != null)
+        if (p_72900_1_.riddenByEntity != null)
         {
-            par1Entity.riddenByEntity.mountEntity((Entity)null);
+            p_72900_1_.riddenByEntity.mountEntity((Entity)null);
         }
 
-        if (par1Entity.ridingEntity != null)
+        if (p_72900_1_.ridingEntity != null)
         {
-            par1Entity.mountEntity((Entity)null);
+            p_72900_1_.mountEntity((Entity)null);
         }
 
-        par1Entity.setDead();
+        p_72900_1_.setDead();
 
-        if (par1Entity instanceof EntityPlayer)
+        if (p_72900_1_ instanceof EntityPlayer)
         {
-            this.playerEntities.remove(par1Entity);
+            this.playerEntities.remove(p_72900_1_);
             this.updateAllPlayersSleepingFlag();
+            this.onEntityRemoved(p_72900_1_);
         }
     }
 
     /**
      * Do NOT use this method to remove normal entities- use normal removeEntity
      */
-    public void removePlayerEntityDangerously(Entity par1Entity)
+    public void removePlayerEntityDangerously(Entity p_72973_1_)
     {
-        par1Entity.setDead();
+        p_72973_1_.setDead();
 
-        if (par1Entity instanceof EntityPlayer)
+        if (p_72973_1_ instanceof EntityPlayer)
         {
-            this.playerEntities.remove(par1Entity);
+            this.playerEntities.remove(p_72973_1_);
             this.updateAllPlayersSleepingFlag();
         }
 
-        int var2 = par1Entity.chunkCoordX;
-        int var3 = par1Entity.chunkCoordZ;
+        int var2 = p_72973_1_.chunkCoordX;
+        int var3 = p_72973_1_.chunkCoordZ;
 
-        if (par1Entity.addedToChunk && this.chunkExists(var2, var3))
+        if (p_72973_1_.addedToChunk && this.chunkExists(var2, var3))
         {
-            this.getChunkFromChunkCoords(var2, var3).removeEntity(par1Entity);
+            this.getChunkFromChunkCoords(var2, var3).removeEntity(p_72973_1_);
         }
 
-        this.loadedEntityList.remove(par1Entity);
-        this.onEntityRemoved(par1Entity);
+        this.loadedEntityList.remove(p_72973_1_);
+        this.onEntityRemoved(p_72973_1_);
     }
 
     /**
      * Adds a IWorldAccess to the list of worldAccesses
      */
-    public void addWorldAccess(IWorldAccess par1IWorldAccess)
+    public void addWorldAccess(IWorldAccess p_72954_1_)
     {
-        this.worldAccesses.add(par1IWorldAccess);
+        this.worldAccesses.add(p_72954_1_);
     }
 
     /**
      * Removes a worldAccess from the worldAccesses object
      */
-    public void removeWorldAccess(IWorldAccess par1IWorldAccess)
+    public void removeWorldAccess(IWorldAccess p_72848_1_)
     {
-        this.worldAccesses.remove(par1IWorldAccess);
+        this.worldAccesses.remove(p_72848_1_);
     }
 
     /**
      * Returns a list of bounding boxes that collide with aabb excluding the passed in entity's collision. Args: entity,
      * aabb
      */
-    public List getCollidingBoundingBoxes(Entity par1Entity, AxisAlignedBB par2AxisAlignedBB)
+    public List getCollidingBoundingBoxes(Entity p_72945_1_, AxisAlignedBB p_72945_2_)
     {
         this.collidingBoundingBoxes.clear();
-        int var3 = MathHelper.floor_double(par2AxisAlignedBB.minX);
-        int var4 = MathHelper.floor_double(par2AxisAlignedBB.maxX + 1.0D);
-        int var5 = MathHelper.floor_double(par2AxisAlignedBB.minY);
-        int var6 = MathHelper.floor_double(par2AxisAlignedBB.maxY + 1.0D);
-        int var7 = MathHelper.floor_double(par2AxisAlignedBB.minZ);
-        int var8 = MathHelper.floor_double(par2AxisAlignedBB.maxZ + 1.0D);
+        int var3 = MathHelper.floor_double(p_72945_2_.minX);
+        int var4 = MathHelper.floor_double(p_72945_2_.maxX + 1.0D);
+        int var5 = MathHelper.floor_double(p_72945_2_.minY);
+        int var6 = MathHelper.floor_double(p_72945_2_.maxY + 1.0D);
+        int var7 = MathHelper.floor_double(p_72945_2_.minZ);
+        int var8 = MathHelper.floor_double(p_72945_2_.maxZ + 1.0D);
 
         for (int var9 = var3; var9 < var4; ++var9)
         {
@@ -1530,27 +1528,27 @@ public abstract class World implements IBlockAccess
                             var12 = Blocks.stone;
                         }
 
-                        var12.addCollisionBoxesToList(this, var9, var11, var10, par2AxisAlignedBB, this.collidingBoundingBoxes, par1Entity);
+                        var12.addCollisionBoxesToList(this, var9, var11, var10, p_72945_2_, this.collidingBoundingBoxes, p_72945_1_);
                     }
                 }
             }
         }
 
         double var14 = 0.25D;
-        List var15 = this.getEntitiesWithinAABBExcludingEntity(par1Entity, par2AxisAlignedBB.expand(var14, var14, var14));
+        List var15 = this.getEntitiesWithinAABBExcludingEntity(p_72945_1_, p_72945_2_.expand(var14, var14, var14));
 
         for (int var16 = 0; var16 < var15.size(); ++var16)
         {
             AxisAlignedBB var13 = ((Entity)var15.get(var16)).getBoundingBox();
 
-            if (var13 != null && var13.intersectsWith(par2AxisAlignedBB))
+            if (var13 != null && var13.intersectsWith(p_72945_2_))
             {
                 this.collidingBoundingBoxes.add(var13);
             }
 
-            var13 = par1Entity.getCollisionBox((Entity)var15.get(var16));
+            var13 = p_72945_1_.getCollisionBox((Entity)var15.get(var16));
 
-            if (var13 != null && var13.intersectsWith(par2AxisAlignedBB))
+            if (var13 != null && var13.intersectsWith(p_72945_2_))
             {
                 this.collidingBoundingBoxes.add(var13);
             }
@@ -1600,9 +1598,9 @@ public abstract class World implements IBlockAccess
     /**
      * Returns the amount of skylight subtracted for the current time
      */
-    public int calculateSkylightSubtracted(float par1)
+    public int calculateSkylightSubtracted(float p_72967_1_)
     {
-        float var2 = this.getCelestialAngle(par1);
+        float var2 = this.getCelestialAngle(p_72967_1_);
         float var3 = 1.0F - (MathHelper.cos(var2 * (float)Math.PI * 2.0F) * 2.0F + 0.5F);
 
         if (var3 < 0.0F)
@@ -1616,8 +1614,8 @@ public abstract class World implements IBlockAccess
         }
 
         var3 = 1.0F - var3;
-        var3 = (float)((double)var3 * (1.0D - (double)(this.getRainStrength(par1) * 5.0F) / 16.0D));
-        var3 = (float)((double)var3 * (1.0D - (double)(this.getWeightedThunderStrength(par1) * 5.0F) / 16.0D));
+        var3 = (float)((double)var3 * (1.0D - (double)(this.getRainStrength(p_72967_1_) * 5.0F) / 16.0D));
+        var3 = (float)((double)var3 * (1.0D - (double)(this.getWeightedThunderStrength(p_72967_1_) * 5.0F) / 16.0D));
         var3 = 1.0F - var3;
         return (int)(var3 * 11.0F);
     }
@@ -1625,9 +1623,9 @@ public abstract class World implements IBlockAccess
     /**
      * Returns the sun brightness - checks time of day, rain and thunder
      */
-    public float getSunBrightness(float par1)
+    public float getSunBrightness(float p_72971_1_)
     {
-        float var2 = this.getCelestialAngle(par1);
+        float var2 = this.getCelestialAngle(p_72971_1_);
         float var3 = 1.0F - (MathHelper.cos(var2 * (float)Math.PI * 2.0F) * 2.0F + 0.2F);
 
         if (var3 < 0.0F)
@@ -1641,17 +1639,17 @@ public abstract class World implements IBlockAccess
         }
 
         var3 = 1.0F - var3;
-        var3 = (float)((double)var3 * (1.0D - (double)(this.getRainStrength(par1) * 5.0F) / 16.0D));
-        var3 = (float)((double)var3 * (1.0D - (double)(this.getWeightedThunderStrength(par1) * 5.0F) / 16.0D));
+        var3 = (float)((double)var3 * (1.0D - (double)(this.getRainStrength(p_72971_1_) * 5.0F) / 16.0D));
+        var3 = (float)((double)var3 * (1.0D - (double)(this.getWeightedThunderStrength(p_72971_1_) * 5.0F) / 16.0D));
         return var3 * 0.8F + 0.2F;
     }
 
     /**
      * Calculates the color for the skybox
      */
-    public Vec3 getSkyColor(Entity par1Entity, float par2)
+    public Vec3 getSkyColor(Entity p_72833_1_, float p_72833_2_)
     {
-        float var3 = this.getCelestialAngle(par2);
+        float var3 = this.getCelestialAngle(p_72833_2_);
         float var4 = MathHelper.cos(var3 * (float)Math.PI * 2.0F) * 2.0F + 0.5F;
 
         if (var4 < 0.0F)
@@ -1664,9 +1662,9 @@ public abstract class World implements IBlockAccess
             var4 = 1.0F;
         }
 
-        int var5 = MathHelper.floor_double(par1Entity.posX);
-        int var6 = MathHelper.floor_double(par1Entity.posY);
-        int var7 = MathHelper.floor_double(par1Entity.posZ);
+        int var5 = MathHelper.floor_double(p_72833_1_.posX);
+        int var6 = MathHelper.floor_double(p_72833_1_.posY);
+        int var7 = MathHelper.floor_double(p_72833_1_.posZ);
         BiomeGenBase var8 = this.getBiomeGenForCoords(var5, var7);
         float var9 = var8.getFloatTemperature(var5, var6, var7);
         int var10 = var8.getSkyColorByTemp(var9);
@@ -1676,7 +1674,7 @@ public abstract class World implements IBlockAccess
         var11 *= var4;
         var12 *= var4;
         var13 *= var4;
-        float var14 = this.getRainStrength(par2);
+        float var14 = this.getRainStrength(p_72833_2_);
         float var15;
         float var16;
 
@@ -1689,7 +1687,7 @@ public abstract class World implements IBlockAccess
             var13 = var13 * var16 + var15 * (1.0F - var16);
         }
 
-        var15 = this.getWeightedThunderStrength(par2);
+        var15 = this.getWeightedThunderStrength(p_72833_2_);
 
         if (var15 > 0.0F)
         {
@@ -1702,7 +1700,7 @@ public abstract class World implements IBlockAccess
 
         if (this.lastLightningBolt > 0)
         {
-            var16 = (float)this.lastLightningBolt - par2;
+            var16 = (float)this.lastLightningBolt - p_72833_2_;
 
             if (var16 > 1.0F)
             {
@@ -1715,15 +1713,15 @@ public abstract class World implements IBlockAccess
             var13 = var13 * (1.0F - var16) + 1.0F * var16;
         }
 
-        return this.getWorldVec3Pool().getVecFromPool((double)var11, (double)var12, (double)var13);
+        return Vec3.createVectorHelper((double)var11, (double)var12, (double)var13);
     }
 
     /**
      * calls calculateCelestialAngle
      */
-    public float getCelestialAngle(float par1)
+    public float getCelestialAngle(float p_72826_1_)
     {
-        return this.provider.calculateCelestialAngle(this.worldInfo.getWorldTime(), par1);
+        return this.provider.calculateCelestialAngle(this.worldInfo.getWorldTime(), p_72826_1_);
     }
 
     public int getMoonPhase()
@@ -1742,15 +1740,15 @@ public abstract class World implements IBlockAccess
     /**
      * Return getCelestialAngle()*2*PI
      */
-    public float getCelestialAngleRadians(float par1)
+    public float getCelestialAngleRadians(float p_72929_1_)
     {
-        float var2 = this.getCelestialAngle(par1);
+        float var2 = this.getCelestialAngle(p_72929_1_);
         return var2 * (float)Math.PI * 2.0F;
     }
 
-    public Vec3 getCloudColour(float par1)
+    public Vec3 getCloudColour(float p_72824_1_)
     {
-        float var2 = this.getCelestialAngle(par1);
+        float var2 = this.getCelestialAngle(p_72824_1_);
         float var3 = MathHelper.cos(var2 * (float)Math.PI * 2.0F) * 2.0F + 0.5F;
 
         if (var3 < 0.0F)
@@ -1766,7 +1764,7 @@ public abstract class World implements IBlockAccess
         float var4 = (float)(this.cloudColour >> 16 & 255L) / 255.0F;
         float var5 = (float)(this.cloudColour >> 8 & 255L) / 255.0F;
         float var6 = (float)(this.cloudColour & 255L) / 255.0F;
-        float var7 = this.getRainStrength(par1);
+        float var7 = this.getRainStrength(p_72824_1_);
         float var8;
         float var9;
 
@@ -1782,7 +1780,7 @@ public abstract class World implements IBlockAccess
         var4 *= var3 * 0.9F + 0.1F;
         var5 *= var3 * 0.9F + 0.1F;
         var6 *= var3 * 0.85F + 0.15F;
-        var8 = this.getWeightedThunderStrength(par1);
+        var8 = this.getWeightedThunderStrength(p_72824_1_);
 
         if (var8 > 0.0F)
         {
@@ -1793,38 +1791,38 @@ public abstract class World implements IBlockAccess
             var6 = var6 * var10 + var9 * (1.0F - var10);
         }
 
-        return this.getWorldVec3Pool().getVecFromPool((double)var4, (double)var5, (double)var6);
+        return Vec3.createVectorHelper((double)var4, (double)var5, (double)var6);
     }
 
     /**
      * Returns vector(ish) with R/G/B for fog
      */
-    public Vec3 getFogColor(float par1)
+    public Vec3 getFogColor(float p_72948_1_)
     {
-        float var2 = this.getCelestialAngle(par1);
-        return this.provider.getFogColor(var2, par1);
+        float var2 = this.getCelestialAngle(p_72948_1_);
+        return this.provider.getFogColor(var2, p_72948_1_);
     }
 
     /**
      * Gets the height to which rain/snow will fall. Calculates it if not already stored.
      */
-    public int getPrecipitationHeight(int par1, int par2)
+    public int getPrecipitationHeight(int p_72874_1_, int p_72874_2_)
     {
-        return this.getChunkFromBlockCoords(par1, par2).getPrecipitationHeight(par1 & 15, par2 & 15);
+        return this.getChunkFromBlockCoords(p_72874_1_, p_72874_2_).getPrecipitationHeight(p_72874_1_ & 15, p_72874_2_ & 15);
     }
 
     /**
      * Finds the highest block on the x, z coordinate that is solid and returns its y coord. Args x, z
      */
-    public int getTopSolidOrLiquidBlock(int par1, int par2)
+    public int getTopSolidOrLiquidBlock(int p_72825_1_, int p_72825_2_)
     {
-        Chunk var3 = this.getChunkFromBlockCoords(par1, par2);
+        Chunk var3 = this.getChunkFromBlockCoords(p_72825_1_, p_72825_2_);
         int var4 = var3.getTopFilledSegment() + 15;
-        par1 &= 15;
+        p_72825_1_ &= 15;
 
-        for (par2 &= 15; var4 > 0; --var4)
+        for (p_72825_2_ &= 15; var4 > 0; --var4)
         {
-            Block var5 = var3.func_150810_a(par1, var4, par2);
+            Block var5 = var3.func_150810_a(p_72825_1_, var4, p_72825_2_);
 
             if (var5.getMaterial().blocksMovement() && var5.getMaterial() != Material.leaves)
             {
@@ -1838,9 +1836,9 @@ public abstract class World implements IBlockAccess
     /**
      * How bright are stars in the sky
      */
-    public float getStarBrightness(float par1)
+    public float getStarBrightness(float p_72880_1_)
     {
-        float var2 = this.getCelestialAngle(par1);
+        float var2 = this.getCelestialAngle(p_72880_1_);
         float var3 = 1.0F - (MathHelper.cos(var2 * (float)Math.PI * 2.0F) * 2.0F + 0.25F);
 
         if (var3 < 0.0F)
@@ -1912,17 +1910,17 @@ public abstract class World implements IBlockAccess
         this.theProfiler.endStartSection("remove");
         this.loadedEntityList.removeAll(this.unloadedEntityList);
         int var3;
-        int var13;
+        int var14;
 
         for (var1 = 0; var1 < this.unloadedEntityList.size(); ++var1)
         {
             var2 = (Entity)this.unloadedEntityList.get(var1);
             var3 = var2.chunkCoordX;
-            var13 = var2.chunkCoordZ;
+            var14 = var2.chunkCoordZ;
 
-            if (var2.addedToChunk && this.chunkExists(var3, var13))
+            if (var2.addedToChunk && this.chunkExists(var3, var14))
             {
-                this.getChunkFromChunkCoords(var3, var13).removeEntity(var2);
+                this.getChunkFromChunkCoords(var3, var14).removeEntity(var2);
             }
         }
 
@@ -1972,11 +1970,11 @@ public abstract class World implements IBlockAccess
             if (var2.isDead)
             {
                 var3 = var2.chunkCoordX;
-                var13 = var2.chunkCoordZ;
+                var14 = var2.chunkCoordZ;
 
-                if (var2.addedToChunk && this.chunkExists(var3, var13))
+                if (var2.addedToChunk && this.chunkExists(var3, var14))
                 {
-                    this.getChunkFromChunkCoords(var3, var13).removeEntity(var2);
+                    this.getChunkFromChunkCoords(var3, var14).removeEntity(var2);
                 }
 
                 this.loadedEntityList.remove(var1--);
@@ -1988,38 +1986,38 @@ public abstract class World implements IBlockAccess
 
         this.theProfiler.endStartSection("blockEntities");
         this.field_147481_N = true;
-        Iterator var14 = this.field_147482_g.iterator();
+        Iterator var9 = this.field_147482_g.iterator();
 
-        while (var14.hasNext())
+        while (var9.hasNext())
         {
-            TileEntity var9 = (TileEntity)var14.next();
+            TileEntity var10 = (TileEntity)var9.next();
 
-            if (!var9.isInvalid() && var9.hasWorldObj() && this.blockExists(var9.field_145851_c, var9.field_145848_d, var9.field_145849_e))
+            if (!var10.isInvalid() && var10.hasWorldObj() && this.blockExists(var10.field_145851_c, var10.field_145848_d, var10.field_145849_e))
             {
                 try
                 {
-                    var9.updateEntity();
+                    var10.updateEntity();
                 }
                 catch (Throwable var6)
                 {
                     var4 = CrashReport.makeCrashReport(var6, "Ticking block entity");
                     var5 = var4.makeCategory("Block entity being ticked");
-                    var9.func_145828_a(var5);
+                    var10.func_145828_a(var5);
                     throw new ReportedException(var4);
                 }
             }
 
-            if (var9.isInvalid())
+            if (var10.isInvalid())
             {
-                var14.remove();
+                var9.remove();
 
-                if (this.chunkExists(var9.field_145851_c >> 4, var9.field_145849_e >> 4))
+                if (this.chunkExists(var10.field_145851_c >> 4, var10.field_145849_e >> 4))
                 {
-                    Chunk var11 = this.getChunkFromChunkCoords(var9.field_145851_c >> 4, var9.field_145849_e >> 4);
+                    Chunk var12 = this.getChunkFromChunkCoords(var10.field_145851_c >> 4, var10.field_145849_e >> 4);
 
-                    if (var11 != null)
+                    if (var12 != null)
                     {
-                        var11.removeTileEntity(var9.field_145851_c & 15, var9.field_145848_d, var9.field_145849_e & 15);
+                        var12.removeTileEntity(var10.field_145851_c & 15, var10.field_145848_d, var10.field_145849_e & 15);
                     }
                 }
             }
@@ -2037,28 +2035,28 @@ public abstract class World implements IBlockAccess
 
         if (!this.field_147484_a.isEmpty())
         {
-            for (int var10 = 0; var10 < this.field_147484_a.size(); ++var10)
+            for (int var11 = 0; var11 < this.field_147484_a.size(); ++var11)
             {
-                TileEntity var12 = (TileEntity)this.field_147484_a.get(var10);
+                TileEntity var13 = (TileEntity)this.field_147484_a.get(var11);
 
-                if (!var12.isInvalid())
+                if (!var13.isInvalid())
                 {
-                    if (!this.field_147482_g.contains(var12))
+                    if (!this.field_147482_g.contains(var13))
                     {
-                        this.field_147482_g.add(var12);
+                        this.field_147482_g.add(var13);
                     }
 
-                    if (this.chunkExists(var12.field_145851_c >> 4, var12.field_145849_e >> 4))
+                    if (this.chunkExists(var13.field_145851_c >> 4, var13.field_145849_e >> 4))
                     {
-                        Chunk var15 = this.getChunkFromChunkCoords(var12.field_145851_c >> 4, var12.field_145849_e >> 4);
+                        Chunk var15 = this.getChunkFromChunkCoords(var13.field_145851_c >> 4, var13.field_145849_e >> 4);
 
                         if (var15 != null)
                         {
-                            var15.func_150812_a(var12.field_145851_c & 15, var12.field_145848_d, var12.field_145849_e & 15, var12);
+                            var15.func_150812_a(var13.field_145851_c & 15, var13.field_145848_d, var13.field_145849_e & 15, var13);
                         }
                     }
 
-                    this.func_147471_g(var12.field_145851_c, var12.field_145848_d, var12.field_145849_e);
+                    this.func_147471_g(var13.field_145851_c, var13.field_145848_d, var13.field_145849_e);
                 }
             }
 
@@ -2084,104 +2082,104 @@ public abstract class World implements IBlockAccess
     /**
      * Will update the entity in the world if the chunk the entity is in is currently loaded. Args: entity
      */
-    public void updateEntity(Entity par1Entity)
+    public void updateEntity(Entity p_72870_1_)
     {
-        this.updateEntityWithOptionalForce(par1Entity, true);
+        this.updateEntityWithOptionalForce(p_72870_1_, true);
     }
 
     /**
      * Will update the entity in the world if the chunk the entity is in is currently loaded or its forced to update.
      * Args: entity, forceUpdate
      */
-    public void updateEntityWithOptionalForce(Entity par1Entity, boolean par2)
+    public void updateEntityWithOptionalForce(Entity p_72866_1_, boolean p_72866_2_)
     {
-        int var3 = MathHelper.floor_double(par1Entity.posX);
-        int var4 = MathHelper.floor_double(par1Entity.posZ);
+        int var3 = MathHelper.floor_double(p_72866_1_.posX);
+        int var4 = MathHelper.floor_double(p_72866_1_.posZ);
         byte var5 = 32;
 
-        if (!par2 || this.checkChunksExist(var3 - var5, 0, var4 - var5, var3 + var5, 0, var4 + var5))
+        if (!p_72866_2_ || this.checkChunksExist(var3 - var5, 0, var4 - var5, var3 + var5, 0, var4 + var5))
         {
-            par1Entity.lastTickPosX = par1Entity.posX;
-            par1Entity.lastTickPosY = par1Entity.posY;
-            par1Entity.lastTickPosZ = par1Entity.posZ;
-            par1Entity.prevRotationYaw = par1Entity.rotationYaw;
-            par1Entity.prevRotationPitch = par1Entity.rotationPitch;
+            p_72866_1_.lastTickPosX = p_72866_1_.posX;
+            p_72866_1_.lastTickPosY = p_72866_1_.posY;
+            p_72866_1_.lastTickPosZ = p_72866_1_.posZ;
+            p_72866_1_.prevRotationYaw = p_72866_1_.rotationYaw;
+            p_72866_1_.prevRotationPitch = p_72866_1_.rotationPitch;
 
-            if (par2 && par1Entity.addedToChunk)
+            if (p_72866_2_ && p_72866_1_.addedToChunk)
             {
-                ++par1Entity.ticksExisted;
+                ++p_72866_1_.ticksExisted;
 
-                if (par1Entity.ridingEntity != null)
+                if (p_72866_1_.ridingEntity != null)
                 {
-                    par1Entity.updateRidden();
+                    p_72866_1_.updateRidden();
                 }
                 else
                 {
-                    par1Entity.onUpdate();
+                    p_72866_1_.onUpdate();
                 }
             }
 
             this.theProfiler.startSection("chunkCheck");
 
-            if (Double.isNaN(par1Entity.posX) || Double.isInfinite(par1Entity.posX))
+            if (Double.isNaN(p_72866_1_.posX) || Double.isInfinite(p_72866_1_.posX))
             {
-                par1Entity.posX = par1Entity.lastTickPosX;
+                p_72866_1_.posX = p_72866_1_.lastTickPosX;
             }
 
-            if (Double.isNaN(par1Entity.posY) || Double.isInfinite(par1Entity.posY))
+            if (Double.isNaN(p_72866_1_.posY) || Double.isInfinite(p_72866_1_.posY))
             {
-                par1Entity.posY = par1Entity.lastTickPosY;
+                p_72866_1_.posY = p_72866_1_.lastTickPosY;
             }
 
-            if (Double.isNaN(par1Entity.posZ) || Double.isInfinite(par1Entity.posZ))
+            if (Double.isNaN(p_72866_1_.posZ) || Double.isInfinite(p_72866_1_.posZ))
             {
-                par1Entity.posZ = par1Entity.lastTickPosZ;
+                p_72866_1_.posZ = p_72866_1_.lastTickPosZ;
             }
 
-            if (Double.isNaN((double)par1Entity.rotationPitch) || Double.isInfinite((double)par1Entity.rotationPitch))
+            if (Double.isNaN((double)p_72866_1_.rotationPitch) || Double.isInfinite((double)p_72866_1_.rotationPitch))
             {
-                par1Entity.rotationPitch = par1Entity.prevRotationPitch;
+                p_72866_1_.rotationPitch = p_72866_1_.prevRotationPitch;
             }
 
-            if (Double.isNaN((double)par1Entity.rotationYaw) || Double.isInfinite((double)par1Entity.rotationYaw))
+            if (Double.isNaN((double)p_72866_1_.rotationYaw) || Double.isInfinite((double)p_72866_1_.rotationYaw))
             {
-                par1Entity.rotationYaw = par1Entity.prevRotationYaw;
+                p_72866_1_.rotationYaw = p_72866_1_.prevRotationYaw;
             }
 
-            int var6 = MathHelper.floor_double(par1Entity.posX / 16.0D);
-            int var7 = MathHelper.floor_double(par1Entity.posY / 16.0D);
-            int var8 = MathHelper.floor_double(par1Entity.posZ / 16.0D);
+            int var6 = MathHelper.floor_double(p_72866_1_.posX / 16.0D);
+            int var7 = MathHelper.floor_double(p_72866_1_.posY / 16.0D);
+            int var8 = MathHelper.floor_double(p_72866_1_.posZ / 16.0D);
 
-            if (!par1Entity.addedToChunk || par1Entity.chunkCoordX != var6 || par1Entity.chunkCoordY != var7 || par1Entity.chunkCoordZ != var8)
+            if (!p_72866_1_.addedToChunk || p_72866_1_.chunkCoordX != var6 || p_72866_1_.chunkCoordY != var7 || p_72866_1_.chunkCoordZ != var8)
             {
-                if (par1Entity.addedToChunk && this.chunkExists(par1Entity.chunkCoordX, par1Entity.chunkCoordZ))
+                if (p_72866_1_.addedToChunk && this.chunkExists(p_72866_1_.chunkCoordX, p_72866_1_.chunkCoordZ))
                 {
-                    this.getChunkFromChunkCoords(par1Entity.chunkCoordX, par1Entity.chunkCoordZ).removeEntityAtIndex(par1Entity, par1Entity.chunkCoordY);
+                    this.getChunkFromChunkCoords(p_72866_1_.chunkCoordX, p_72866_1_.chunkCoordZ).removeEntityAtIndex(p_72866_1_, p_72866_1_.chunkCoordY);
                 }
 
                 if (this.chunkExists(var6, var8))
                 {
-                    par1Entity.addedToChunk = true;
-                    this.getChunkFromChunkCoords(var6, var8).addEntity(par1Entity);
+                    p_72866_1_.addedToChunk = true;
+                    this.getChunkFromChunkCoords(var6, var8).addEntity(p_72866_1_);
                 }
                 else
                 {
-                    par1Entity.addedToChunk = false;
+                    p_72866_1_.addedToChunk = false;
                 }
             }
 
             this.theProfiler.endSection();
 
-            if (par2 && par1Entity.addedToChunk && par1Entity.riddenByEntity != null)
+            if (p_72866_2_ && p_72866_1_.addedToChunk && p_72866_1_.riddenByEntity != null)
             {
-                if (!par1Entity.riddenByEntity.isDead && par1Entity.riddenByEntity.ridingEntity == par1Entity)
+                if (!p_72866_1_.riddenByEntity.isDead && p_72866_1_.riddenByEntity.ridingEntity == p_72866_1_)
                 {
-                    this.updateEntity(par1Entity.riddenByEntity);
+                    this.updateEntity(p_72866_1_.riddenByEntity);
                 }
                 else
                 {
-                    par1Entity.riddenByEntity.ridingEntity = null;
-                    par1Entity.riddenByEntity = null;
+                    p_72866_1_.riddenByEntity.ridingEntity = null;
+                    p_72866_1_.riddenByEntity = null;
                 }
             }
         }
@@ -2190,23 +2188,23 @@ public abstract class World implements IBlockAccess
     /**
      * Returns true if there are no solid, live entities in the specified AxisAlignedBB
      */
-    public boolean checkNoEntityCollision(AxisAlignedBB par1AxisAlignedBB)
+    public boolean checkNoEntityCollision(AxisAlignedBB p_72855_1_)
     {
-        return this.checkNoEntityCollision(par1AxisAlignedBB, (Entity)null);
+        return this.checkNoEntityCollision(p_72855_1_, (Entity)null);
     }
 
     /**
      * Returns true if there are no solid, live entities in the specified AxisAlignedBB, excluding the given entity
      */
-    public boolean checkNoEntityCollision(AxisAlignedBB par1AxisAlignedBB, Entity par2Entity)
+    public boolean checkNoEntityCollision(AxisAlignedBB p_72917_1_, Entity p_72917_2_)
     {
-        List var3 = this.getEntitiesWithinAABBExcludingEntity((Entity)null, par1AxisAlignedBB);
+        List var3 = this.getEntitiesWithinAABBExcludingEntity((Entity)null, p_72917_1_);
 
         for (int var4 = 0; var4 < var3.size(); ++var4)
         {
             Entity var5 = (Entity)var3.get(var4);
 
-            if (!var5.isDead && var5.preventEntitySpawning && var5 != par2Entity)
+            if (!var5.isDead && var5.preventEntitySpawning && var5 != p_72917_2_)
             {
                 return false;
             }
@@ -2218,26 +2216,26 @@ public abstract class World implements IBlockAccess
     /**
      * Returns true if there are any blocks in the region constrained by an AxisAlignedBB
      */
-    public boolean checkBlockCollision(AxisAlignedBB par1AxisAlignedBB)
+    public boolean checkBlockCollision(AxisAlignedBB p_72829_1_)
     {
-        int var2 = MathHelper.floor_double(par1AxisAlignedBB.minX);
-        int var3 = MathHelper.floor_double(par1AxisAlignedBB.maxX + 1.0D);
-        int var4 = MathHelper.floor_double(par1AxisAlignedBB.minY);
-        int var5 = MathHelper.floor_double(par1AxisAlignedBB.maxY + 1.0D);
-        int var6 = MathHelper.floor_double(par1AxisAlignedBB.minZ);
-        int var7 = MathHelper.floor_double(par1AxisAlignedBB.maxZ + 1.0D);
+        int var2 = MathHelper.floor_double(p_72829_1_.minX);
+        int var3 = MathHelper.floor_double(p_72829_1_.maxX + 1.0D);
+        int var4 = MathHelper.floor_double(p_72829_1_.minY);
+        int var5 = MathHelper.floor_double(p_72829_1_.maxY + 1.0D);
+        int var6 = MathHelper.floor_double(p_72829_1_.minZ);
+        int var7 = MathHelper.floor_double(p_72829_1_.maxZ + 1.0D);
 
-        if (par1AxisAlignedBB.minX < 0.0D)
+        if (p_72829_1_.minX < 0.0D)
         {
             --var2;
         }
 
-        if (par1AxisAlignedBB.minY < 0.0D)
+        if (p_72829_1_.minY < 0.0D)
         {
             --var4;
         }
 
-        if (par1AxisAlignedBB.minZ < 0.0D)
+        if (p_72829_1_.minZ < 0.0D)
         {
             --var6;
         }
@@ -2264,26 +2262,26 @@ public abstract class World implements IBlockAccess
     /**
      * Returns if any of the blocks within the aabb are liquids. Args: aabb
      */
-    public boolean isAnyLiquid(AxisAlignedBB par1AxisAlignedBB)
+    public boolean isAnyLiquid(AxisAlignedBB p_72953_1_)
     {
-        int var2 = MathHelper.floor_double(par1AxisAlignedBB.minX);
-        int var3 = MathHelper.floor_double(par1AxisAlignedBB.maxX + 1.0D);
-        int var4 = MathHelper.floor_double(par1AxisAlignedBB.minY);
-        int var5 = MathHelper.floor_double(par1AxisAlignedBB.maxY + 1.0D);
-        int var6 = MathHelper.floor_double(par1AxisAlignedBB.minZ);
-        int var7 = MathHelper.floor_double(par1AxisAlignedBB.maxZ + 1.0D);
+        int var2 = MathHelper.floor_double(p_72953_1_.minX);
+        int var3 = MathHelper.floor_double(p_72953_1_.maxX + 1.0D);
+        int var4 = MathHelper.floor_double(p_72953_1_.minY);
+        int var5 = MathHelper.floor_double(p_72953_1_.maxY + 1.0D);
+        int var6 = MathHelper.floor_double(p_72953_1_.minZ);
+        int var7 = MathHelper.floor_double(p_72953_1_.maxZ + 1.0D);
 
-        if (par1AxisAlignedBB.minX < 0.0D)
+        if (p_72953_1_.minX < 0.0D)
         {
             --var2;
         }
 
-        if (par1AxisAlignedBB.minY < 0.0D)
+        if (p_72953_1_.minY < 0.0D)
         {
             --var4;
         }
 
-        if (par1AxisAlignedBB.minZ < 0.0D)
+        if (p_72953_1_.minZ < 0.0D)
         {
             --var6;
         }
@@ -2341,14 +2339,14 @@ public abstract class World implements IBlockAccess
     /**
      * handles the acceleration of an object whilst in water. Not sure if it is used elsewhere.
      */
-    public boolean handleMaterialAcceleration(AxisAlignedBB par1AxisAlignedBB, Material par2Material, Entity par3Entity)
+    public boolean handleMaterialAcceleration(AxisAlignedBB p_72918_1_, Material p_72918_2_, Entity p_72918_3_)
     {
-        int var4 = MathHelper.floor_double(par1AxisAlignedBB.minX);
-        int var5 = MathHelper.floor_double(par1AxisAlignedBB.maxX + 1.0D);
-        int var6 = MathHelper.floor_double(par1AxisAlignedBB.minY);
-        int var7 = MathHelper.floor_double(par1AxisAlignedBB.maxY + 1.0D);
-        int var8 = MathHelper.floor_double(par1AxisAlignedBB.minZ);
-        int var9 = MathHelper.floor_double(par1AxisAlignedBB.maxZ + 1.0D);
+        int var4 = MathHelper.floor_double(p_72918_1_.minX);
+        int var5 = MathHelper.floor_double(p_72918_1_.maxX + 1.0D);
+        int var6 = MathHelper.floor_double(p_72918_1_.minY);
+        int var7 = MathHelper.floor_double(p_72918_1_.maxY + 1.0D);
+        int var8 = MathHelper.floor_double(p_72918_1_.minZ);
+        int var9 = MathHelper.floor_double(p_72918_1_.maxZ + 1.0D);
 
         if (!this.checkChunksExist(var4, var6, var8, var5, var7, var9))
         {
@@ -2357,7 +2355,7 @@ public abstract class World implements IBlockAccess
         else
         {
             boolean var10 = false;
-            Vec3 var11 = this.getWorldVec3Pool().getVecFromPool(0.0D, 0.0D, 0.0D);
+            Vec3 var11 = Vec3.createVectorHelper(0.0D, 0.0D, 0.0D);
 
             for (int var12 = var4; var12 < var5; ++var12)
             {
@@ -2367,27 +2365,27 @@ public abstract class World implements IBlockAccess
                     {
                         Block var15 = this.getBlock(var12, var13, var14);
 
-                        if (var15.getMaterial() == par2Material)
+                        if (var15.getMaterial() == p_72918_2_)
                         {
                             double var16 = (double)((float)(var13 + 1) - BlockLiquid.func_149801_b(this.getBlockMetadata(var12, var13, var14)));
 
                             if ((double)var7 >= var16)
                             {
                                 var10 = true;
-                                var15.velocityToAddToEntity(this, var12, var13, var14, par3Entity, var11);
+                                var15.velocityToAddToEntity(this, var12, var13, var14, p_72918_3_, var11);
                             }
                         }
                     }
                 }
             }
 
-            if (var11.lengthVector() > 0.0D && par3Entity.isPushedByWater())
+            if (var11.lengthVector() > 0.0D && p_72918_3_.isPushedByWater())
             {
                 var11 = var11.normalize();
                 double var18 = 0.014D;
-                par3Entity.motionX += var11.xCoord * var18;
-                par3Entity.motionY += var11.yCoord * var18;
-                par3Entity.motionZ += var11.zCoord * var18;
+                p_72918_3_.motionX += var11.xCoord * var18;
+                p_72918_3_.motionY += var11.yCoord * var18;
+                p_72918_3_.motionZ += var11.zCoord * var18;
             }
 
             return var10;
@@ -2397,14 +2395,14 @@ public abstract class World implements IBlockAccess
     /**
      * Returns true if the given bounding box contains the given material
      */
-    public boolean isMaterialInBB(AxisAlignedBB par1AxisAlignedBB, Material par2Material)
+    public boolean isMaterialInBB(AxisAlignedBB p_72875_1_, Material p_72875_2_)
     {
-        int var3 = MathHelper.floor_double(par1AxisAlignedBB.minX);
-        int var4 = MathHelper.floor_double(par1AxisAlignedBB.maxX + 1.0D);
-        int var5 = MathHelper.floor_double(par1AxisAlignedBB.minY);
-        int var6 = MathHelper.floor_double(par1AxisAlignedBB.maxY + 1.0D);
-        int var7 = MathHelper.floor_double(par1AxisAlignedBB.minZ);
-        int var8 = MathHelper.floor_double(par1AxisAlignedBB.maxZ + 1.0D);
+        int var3 = MathHelper.floor_double(p_72875_1_.minX);
+        int var4 = MathHelper.floor_double(p_72875_1_.maxX + 1.0D);
+        int var5 = MathHelper.floor_double(p_72875_1_.minY);
+        int var6 = MathHelper.floor_double(p_72875_1_.maxY + 1.0D);
+        int var7 = MathHelper.floor_double(p_72875_1_.minZ);
+        int var8 = MathHelper.floor_double(p_72875_1_.maxZ + 1.0D);
 
         for (int var9 = var3; var9 < var4; ++var9)
         {
@@ -2412,7 +2410,7 @@ public abstract class World implements IBlockAccess
             {
                 for (int var11 = var7; var11 < var8; ++var11)
                 {
-                    if (this.getBlock(var9, var10, var11).getMaterial() == par2Material)
+                    if (this.getBlock(var9, var10, var11).getMaterial() == p_72875_2_)
                     {
                         return true;
                     }
@@ -2426,14 +2424,14 @@ public abstract class World implements IBlockAccess
     /**
      * checks if the given AABB is in the material given. Used while swimming.
      */
-    public boolean isAABBInMaterial(AxisAlignedBB par1AxisAlignedBB, Material par2Material)
+    public boolean isAABBInMaterial(AxisAlignedBB p_72830_1_, Material p_72830_2_)
     {
-        int var3 = MathHelper.floor_double(par1AxisAlignedBB.minX);
-        int var4 = MathHelper.floor_double(par1AxisAlignedBB.maxX + 1.0D);
-        int var5 = MathHelper.floor_double(par1AxisAlignedBB.minY);
-        int var6 = MathHelper.floor_double(par1AxisAlignedBB.maxY + 1.0D);
-        int var7 = MathHelper.floor_double(par1AxisAlignedBB.minZ);
-        int var8 = MathHelper.floor_double(par1AxisAlignedBB.maxZ + 1.0D);
+        int var3 = MathHelper.floor_double(p_72830_1_.minX);
+        int var4 = MathHelper.floor_double(p_72830_1_.maxX + 1.0D);
+        int var5 = MathHelper.floor_double(p_72830_1_.minY);
+        int var6 = MathHelper.floor_double(p_72830_1_.maxY + 1.0D);
+        int var7 = MathHelper.floor_double(p_72830_1_.minZ);
+        int var8 = MathHelper.floor_double(p_72830_1_.maxZ + 1.0D);
 
         for (int var9 = var3; var9 < var4; ++var9)
         {
@@ -2443,7 +2441,7 @@ public abstract class World implements IBlockAccess
                 {
                     Block var12 = this.getBlock(var9, var10, var11);
 
-                    if (var12.getMaterial() == par2Material)
+                    if (var12.getMaterial() == p_72830_2_)
                     {
                         int var13 = this.getBlockMetadata(var9, var10, var11);
                         double var14 = (double)(var10 + 1);
@@ -2453,7 +2451,7 @@ public abstract class World implements IBlockAccess
                             var14 = (double)(var10 + 1) - (double)var13 / 8.0D;
                         }
 
-                        if (var14 >= par1AxisAlignedBB.minY)
+                        if (var14 >= p_72830_1_.minY)
                         {
                             return true;
                         }
@@ -2468,19 +2466,19 @@ public abstract class World implements IBlockAccess
     /**
      * Creates an explosion. Args: entity, x, y, z, strength
      */
-    public Explosion createExplosion(Entity par1Entity, double par2, double par4, double par6, float par8, boolean par9)
+    public Explosion createExplosion(Entity p_72876_1_, double p_72876_2_, double p_72876_4_, double p_72876_6_, float p_72876_8_, boolean p_72876_9_)
     {
-        return this.newExplosion(par1Entity, par2, par4, par6, par8, false, par9);
+        return this.newExplosion(p_72876_1_, p_72876_2_, p_72876_4_, p_72876_6_, p_72876_8_, false, p_72876_9_);
     }
 
     /**
      * returns a new explosion. Does initiation (at time of writing Explosion is not finished)
      */
-    public Explosion newExplosion(Entity par1Entity, double par2, double par4, double par6, float par8, boolean par9, boolean par10)
+    public Explosion newExplosion(Entity p_72885_1_, double p_72885_2_, double p_72885_4_, double p_72885_6_, float p_72885_8_, boolean p_72885_9_, boolean p_72885_10_)
     {
-        Explosion var11 = new Explosion(this, par1Entity, par2, par4, par6, par8);
-        var11.isFlaming = par9;
-        var11.isSmoking = par10;
+        Explosion var11 = new Explosion(this, p_72885_1_, p_72885_2_, p_72885_4_, p_72885_6_, p_72885_8_);
+        var11.isFlaming = p_72885_9_;
+        var11.isSmoking = p_72885_10_;
         var11.doExplosionA();
         var11.doExplosionB(true);
         return var11;
@@ -2489,77 +2487,85 @@ public abstract class World implements IBlockAccess
     /**
      * Gets the percentage of real blocks within within a bounding box, along a specified vector.
      */
-    public float getBlockDensity(Vec3 par1Vec3, AxisAlignedBB par2AxisAlignedBB)
+    public float getBlockDensity(Vec3 p_72842_1_, AxisAlignedBB p_72842_2_)
     {
-        double var3 = 1.0D / ((par2AxisAlignedBB.maxX - par2AxisAlignedBB.minX) * 2.0D + 1.0D);
-        double var5 = 1.0D / ((par2AxisAlignedBB.maxY - par2AxisAlignedBB.minY) * 2.0D + 1.0D);
-        double var7 = 1.0D / ((par2AxisAlignedBB.maxZ - par2AxisAlignedBB.minZ) * 2.0D + 1.0D);
-        int var9 = 0;
-        int var10 = 0;
+        double var3 = 1.0D / ((p_72842_2_.maxX - p_72842_2_.minX) * 2.0D + 1.0D);
+        double var5 = 1.0D / ((p_72842_2_.maxY - p_72842_2_.minY) * 2.0D + 1.0D);
+        double var7 = 1.0D / ((p_72842_2_.maxZ - p_72842_2_.minZ) * 2.0D + 1.0D);
 
-        for (float var11 = 0.0F; var11 <= 1.0F; var11 = (float)((double)var11 + var3))
+        if (var3 >= 0.0D && var5 >= 0.0D && var7 >= 0.0D)
         {
-            for (float var12 = 0.0F; var12 <= 1.0F; var12 = (float)((double)var12 + var5))
+            int var9 = 0;
+            int var10 = 0;
+
+            for (float var11 = 0.0F; var11 <= 1.0F; var11 = (float)((double)var11 + var3))
             {
-                for (float var13 = 0.0F; var13 <= 1.0F; var13 = (float)((double)var13 + var7))
+                for (float var12 = 0.0F; var12 <= 1.0F; var12 = (float)((double)var12 + var5))
                 {
-                    double var14 = par2AxisAlignedBB.minX + (par2AxisAlignedBB.maxX - par2AxisAlignedBB.minX) * (double)var11;
-                    double var16 = par2AxisAlignedBB.minY + (par2AxisAlignedBB.maxY - par2AxisAlignedBB.minY) * (double)var12;
-                    double var18 = par2AxisAlignedBB.minZ + (par2AxisAlignedBB.maxZ - par2AxisAlignedBB.minZ) * (double)var13;
-
-                    if (this.rayTraceBlocks(this.getWorldVec3Pool().getVecFromPool(var14, var16, var18), par1Vec3) == null)
+                    for (float var13 = 0.0F; var13 <= 1.0F; var13 = (float)((double)var13 + var7))
                     {
-                        ++var9;
-                    }
+                        double var14 = p_72842_2_.minX + (p_72842_2_.maxX - p_72842_2_.minX) * (double)var11;
+                        double var16 = p_72842_2_.minY + (p_72842_2_.maxY - p_72842_2_.minY) * (double)var12;
+                        double var18 = p_72842_2_.minZ + (p_72842_2_.maxZ - p_72842_2_.minZ) * (double)var13;
 
-                    ++var10;
+                        if (this.rayTraceBlocks(Vec3.createVectorHelper(var14, var16, var18), p_72842_1_) == null)
+                        {
+                            ++var9;
+                        }
+
+                        ++var10;
+                    }
                 }
             }
-        }
 
-        return (float)var9 / (float)var10;
+            return (float)var9 / (float)var10;
+        }
+        else
+        {
+            return 0.0F;
+        }
     }
 
     /**
      * If the block in the given direction of the given coordinate is fire, extinguish it. Args: Player, X,Y,Z,
      * blockDirection
      */
-    public boolean extinguishFire(EntityPlayer par1EntityPlayer, int par2, int par3, int par4, int par5)
+    public boolean extinguishFire(EntityPlayer p_72886_1_, int p_72886_2_, int p_72886_3_, int p_72886_4_, int p_72886_5_)
     {
-        if (par5 == 0)
+        if (p_72886_5_ == 0)
         {
-            --par3;
+            --p_72886_3_;
         }
 
-        if (par5 == 1)
+        if (p_72886_5_ == 1)
         {
-            ++par3;
+            ++p_72886_3_;
         }
 
-        if (par5 == 2)
+        if (p_72886_5_ == 2)
         {
-            --par4;
+            --p_72886_4_;
         }
 
-        if (par5 == 3)
+        if (p_72886_5_ == 3)
         {
-            ++par4;
+            ++p_72886_4_;
         }
 
-        if (par5 == 4)
+        if (p_72886_5_ == 4)
         {
-            --par2;
+            --p_72886_2_;
         }
 
-        if (par5 == 5)
+        if (p_72886_5_ == 5)
         {
-            ++par2;
+            ++p_72886_2_;
         }
 
-        if (this.getBlock(par2, par3, par4) == Blocks.fire)
+        if (this.getBlock(p_72886_2_, p_72886_3_, p_72886_4_) == Blocks.fire)
         {
-            this.playAuxSFXAtEntity(par1EntityPlayer, 1004, par2, par3, par4, 0);
-            this.setBlockToAir(par2, par3, par4);
+            this.playAuxSFXAtEntity(p_72886_1_, 1004, p_72886_2_, p_72886_3_, p_72886_4_, 0);
+            this.setBlockToAir(p_72886_2_, p_72886_3_, p_72886_4_);
             return true;
         }
         else
@@ -2764,10 +2770,10 @@ public abstract class World implements IBlockAccess
     /**
      * Set which types of mobs are allowed to spawn (peaceful vs hostile).
      */
-    public void setAllowedSpawnTypes(boolean par1, boolean par2)
+    public void setAllowedSpawnTypes(boolean p_72891_1_, boolean p_72891_2_)
     {
-        this.spawnHostileMobs = par1;
-        this.spawnPeacefulMobs = par2;
+        this.spawnHostileMobs = p_72891_1_;
+        this.spawnPeacefulMobs = p_72891_2_;
     }
 
     /**
@@ -2887,13 +2893,14 @@ public abstract class World implements IBlockAccess
         EntityPlayer var2;
         int var3;
         int var4;
+        int var5;
 
         for (var1 = 0; var1 < this.playerEntities.size(); ++var1)
         {
             var2 = (EntityPlayer)this.playerEntities.get(var1);
             var3 = MathHelper.floor_double(var2.posX / 16.0D);
             var4 = MathHelper.floor_double(var2.posZ / 16.0D);
-            byte var5 = 7;
+            var5 = this.func_152379_p();
 
             for (int var6 = -var5; var6 <= var5; ++var6)
             {
@@ -2919,12 +2926,14 @@ public abstract class World implements IBlockAccess
             var2 = (EntityPlayer)this.playerEntities.get(var1);
             var3 = MathHelper.floor_double(var2.posX) + this.rand.nextInt(11) - 5;
             var4 = MathHelper.floor_double(var2.posY) + this.rand.nextInt(11) - 5;
-            int var8 = MathHelper.floor_double(var2.posZ) + this.rand.nextInt(11) - 5;
-            this.func_147451_t(var3, var4, var8);
+            var5 = MathHelper.floor_double(var2.posZ) + this.rand.nextInt(11) - 5;
+            this.func_147451_t(var3, var4, var5);
         }
 
         this.theProfiler.endSection();
     }
+
+    protected abstract int func_152379_p();
 
     protected void func_147467_a(int p_147467_1_, int p_147467_2_, Chunk p_147467_3_)
     {
@@ -2965,27 +2974,27 @@ public abstract class World implements IBlockAccess
     /**
      * checks to see if a given block is both water and is cold enough to freeze
      */
-    public boolean isBlockFreezable(int par1, int par2, int par3)
+    public boolean isBlockFreezable(int p_72884_1_, int p_72884_2_, int p_72884_3_)
     {
-        return this.canBlockFreeze(par1, par2, par3, false);
+        return this.canBlockFreeze(p_72884_1_, p_72884_2_, p_72884_3_, false);
     }
 
     /**
      * checks to see if a given block is both water and has at least one immediately adjacent non-water block
      */
-    public boolean isBlockFreezableNaturally(int par1, int par2, int par3)
+    public boolean isBlockFreezableNaturally(int p_72850_1_, int p_72850_2_, int p_72850_3_)
     {
-        return this.canBlockFreeze(par1, par2, par3, true);
+        return this.canBlockFreeze(p_72850_1_, p_72850_2_, p_72850_3_, true);
     }
 
     /**
      * checks to see if a given block is both water, and cold enough to freeze - if the par4 boolean is set, this will
      * only return true if there is a non-water block immediately adjacent to the specified block
      */
-    public boolean canBlockFreeze(int par1, int par2, int par3, boolean par4)
+    public boolean canBlockFreeze(int p_72834_1_, int p_72834_2_, int p_72834_3_, boolean p_72834_4_)
     {
-        BiomeGenBase var5 = this.getBiomeGenForCoords(par1, par3);
-        float var6 = var5.getFloatTemperature(par1, par2, par3);
+        BiomeGenBase var5 = this.getBiomeGenForCoords(p_72834_1_, p_72834_3_);
+        float var6 = var5.getFloatTemperature(p_72834_1_, p_72834_2_, p_72834_3_);
 
         if (var6 > 0.15F)
         {
@@ -2993,35 +3002,35 @@ public abstract class World implements IBlockAccess
         }
         else
         {
-            if (par2 >= 0 && par2 < 256 && this.getSavedLightValue(EnumSkyBlock.Block, par1, par2, par3) < 10)
+            if (p_72834_2_ >= 0 && p_72834_2_ < 256 && this.getSavedLightValue(EnumSkyBlock.Block, p_72834_1_, p_72834_2_, p_72834_3_) < 10)
             {
-                Block var7 = this.getBlock(par1, par2, par3);
+                Block var7 = this.getBlock(p_72834_1_, p_72834_2_, p_72834_3_);
 
-                if ((var7 == Blocks.water || var7 == Blocks.flowing_water) && this.getBlockMetadata(par1, par2, par3) == 0)
+                if ((var7 == Blocks.water || var7 == Blocks.flowing_water) && this.getBlockMetadata(p_72834_1_, p_72834_2_, p_72834_3_) == 0)
                 {
-                    if (!par4)
+                    if (!p_72834_4_)
                     {
                         return true;
                     }
 
                     boolean var8 = true;
 
-                    if (var8 && this.getBlock(par1 - 1, par2, par3).getMaterial() != Material.water)
+                    if (var8 && this.getBlock(p_72834_1_ - 1, p_72834_2_, p_72834_3_).getMaterial() != Material.water)
                     {
                         var8 = false;
                     }
 
-                    if (var8 && this.getBlock(par1 + 1, par2, par3).getMaterial() != Material.water)
+                    if (var8 && this.getBlock(p_72834_1_ + 1, p_72834_2_, p_72834_3_).getMaterial() != Material.water)
                     {
                         var8 = false;
                     }
 
-                    if (var8 && this.getBlock(par1, par2, par3 - 1).getMaterial() != Material.water)
+                    if (var8 && this.getBlock(p_72834_1_, p_72834_2_, p_72834_3_ - 1).getMaterial() != Material.water)
                     {
                         var8 = false;
                     }
 
-                    if (var8 && this.getBlock(par1, par2, par3 + 1).getMaterial() != Material.water)
+                    if (var8 && this.getBlock(p_72834_1_, p_72834_2_, p_72834_3_ + 1).getMaterial() != Material.water)
                     {
                         var8 = false;
                     }
@@ -3079,16 +3088,16 @@ public abstract class World implements IBlockAccess
         return var4;
     }
 
-    private int computeLightValue(int par1, int par2, int par3, EnumSkyBlock par4EnumSkyBlock)
+    private int computeLightValue(int p_98179_1_, int p_98179_2_, int p_98179_3_, EnumSkyBlock p_98179_4_)
     {
-        if (par4EnumSkyBlock == EnumSkyBlock.Sky && this.canBlockSeeTheSky(par1, par2, par3))
+        if (p_98179_4_ == EnumSkyBlock.Sky && this.canBlockSeeTheSky(p_98179_1_, p_98179_2_, p_98179_3_))
         {
             return 15;
         }
         else
         {
-            Block var5 = this.getBlock(par1, par2, par3);
-            int var6 = par4EnumSkyBlock == EnumSkyBlock.Sky ? 0 : var5.getLightValue();
+            Block var5 = this.getBlock(p_98179_1_, p_98179_2_, p_98179_3_);
+            int var6 = p_98179_4_ == EnumSkyBlock.Sky ? 0 : var5.getLightValue();
             int var7 = var5.getLightOpacity();
 
             if (var7 >= 15 && var5.getLightValue() > 0)
@@ -3113,10 +3122,10 @@ public abstract class World implements IBlockAccess
             {
                 for (int var8 = 0; var8 < 6; ++var8)
                 {
-                    int var9 = par1 + Facing.offsetsXForSide[var8];
-                    int var10 = par2 + Facing.offsetsYForSide[var8];
-                    int var11 = par3 + Facing.offsetsZForSide[var8];
-                    int var12 = this.getSavedLightValue(par4EnumSkyBlock, var9, var10, var11) - var7;
+                    int var9 = p_98179_1_ + Facing.offsetsXForSide[var8];
+                    int var10 = p_98179_2_ + Facing.offsetsYForSide[var8];
+                    int var11 = p_98179_3_ + Facing.offsetsZForSide[var8];
+                    int var12 = this.getSavedLightValue(p_98179_4_, var9, var10, var11) - var7;
 
                     if (var12 > var6)
                     {
@@ -3154,8 +3163,8 @@ public abstract class World implements IBlockAccess
             int var13;
             int var14;
             int var15;
-            int var17;
             int var16;
+            int var17;
 
             if (var8 > var7)
             {
@@ -3274,12 +3283,12 @@ public abstract class World implements IBlockAccess
     /**
      * Runs through the list of updates to run and ticks them
      */
-    public boolean tickUpdates(boolean par1)
+    public boolean tickUpdates(boolean p_72955_1_)
     {
         return false;
     }
 
-    public List getPendingBlockUpdates(Chunk par1Chunk, boolean par2)
+    public List getPendingBlockUpdates(Chunk p_72920_1_, boolean p_72920_2_)
     {
         return null;
     }
@@ -3287,18 +3296,18 @@ public abstract class World implements IBlockAccess
     /**
      * Will get all entities within the specified AABB excluding the one passed into it. Args: entityToExclude, aabb
      */
-    public List getEntitiesWithinAABBExcludingEntity(Entity par1Entity, AxisAlignedBB par2AxisAlignedBB)
+    public List getEntitiesWithinAABBExcludingEntity(Entity p_72839_1_, AxisAlignedBB p_72839_2_)
     {
-        return this.getEntitiesWithinAABBExcludingEntity(par1Entity, par2AxisAlignedBB, (IEntitySelector)null);
+        return this.getEntitiesWithinAABBExcludingEntity(p_72839_1_, p_72839_2_, (IEntitySelector)null);
     }
 
-    public List getEntitiesWithinAABBExcludingEntity(Entity par1Entity, AxisAlignedBB par2AxisAlignedBB, IEntitySelector par3IEntitySelector)
+    public List getEntitiesWithinAABBExcludingEntity(Entity p_94576_1_, AxisAlignedBB p_94576_2_, IEntitySelector p_94576_3_)
     {
         ArrayList var4 = new ArrayList();
-        int var5 = MathHelper.floor_double((par2AxisAlignedBB.minX - 2.0D) / 16.0D);
-        int var6 = MathHelper.floor_double((par2AxisAlignedBB.maxX + 2.0D) / 16.0D);
-        int var7 = MathHelper.floor_double((par2AxisAlignedBB.minZ - 2.0D) / 16.0D);
-        int var8 = MathHelper.floor_double((par2AxisAlignedBB.maxZ + 2.0D) / 16.0D);
+        int var5 = MathHelper.floor_double((p_94576_2_.minX - 2.0D) / 16.0D);
+        int var6 = MathHelper.floor_double((p_94576_2_.maxX + 2.0D) / 16.0D);
+        int var7 = MathHelper.floor_double((p_94576_2_.minZ - 2.0D) / 16.0D);
+        int var8 = MathHelper.floor_double((p_94576_2_.maxZ + 2.0D) / 16.0D);
 
         for (int var9 = var5; var9 <= var6; ++var9)
         {
@@ -3306,7 +3315,7 @@ public abstract class World implements IBlockAccess
             {
                 if (this.chunkExists(var9, var10))
                 {
-                    this.getChunkFromChunkCoords(var9, var10).getEntitiesWithinAABBForEntity(par1Entity, par2AxisAlignedBB, var4, par3IEntitySelector);
+                    this.getChunkFromChunkCoords(var9, var10).getEntitiesWithinAABBForEntity(p_94576_1_, p_94576_2_, var4, p_94576_3_);
                 }
             }
         }
@@ -3317,17 +3326,17 @@ public abstract class World implements IBlockAccess
     /**
      * Returns all entities of the specified class type which intersect with the AABB. Args: entityClass, aabb
      */
-    public List getEntitiesWithinAABB(Class par1Class, AxisAlignedBB par2AxisAlignedBB)
+    public List getEntitiesWithinAABB(Class p_72872_1_, AxisAlignedBB p_72872_2_)
     {
-        return this.selectEntitiesWithinAABB(par1Class, par2AxisAlignedBB, (IEntitySelector)null);
+        return this.selectEntitiesWithinAABB(p_72872_1_, p_72872_2_, (IEntitySelector)null);
     }
 
-    public List selectEntitiesWithinAABB(Class par1Class, AxisAlignedBB par2AxisAlignedBB, IEntitySelector par3IEntitySelector)
+    public List selectEntitiesWithinAABB(Class p_82733_1_, AxisAlignedBB p_82733_2_, IEntitySelector p_82733_3_)
     {
-        int var4 = MathHelper.floor_double((par2AxisAlignedBB.minX - 2.0D) / 16.0D);
-        int var5 = MathHelper.floor_double((par2AxisAlignedBB.maxX + 2.0D) / 16.0D);
-        int var6 = MathHelper.floor_double((par2AxisAlignedBB.minZ - 2.0D) / 16.0D);
-        int var7 = MathHelper.floor_double((par2AxisAlignedBB.maxZ + 2.0D) / 16.0D);
+        int var4 = MathHelper.floor_double((p_82733_2_.minX - 2.0D) / 16.0D);
+        int var5 = MathHelper.floor_double((p_82733_2_.maxX + 2.0D) / 16.0D);
+        int var6 = MathHelper.floor_double((p_82733_2_.minZ - 2.0D) / 16.0D);
+        int var7 = MathHelper.floor_double((p_82733_2_.maxZ + 2.0D) / 16.0D);
         ArrayList var8 = new ArrayList();
 
         for (int var9 = var4; var9 <= var5; ++var9)
@@ -3336,7 +3345,7 @@ public abstract class World implements IBlockAccess
             {
                 if (this.chunkExists(var9, var10))
                 {
-                    this.getChunkFromChunkCoords(var9, var10).getEntitiesOfTypeWithinAAAB(par1Class, par2AxisAlignedBB, var8, par3IEntitySelector);
+                    this.getChunkFromChunkCoords(var9, var10).getEntitiesOfTypeWithinAAAB(p_82733_1_, p_82733_2_, var8, p_82733_3_);
                 }
             }
         }
@@ -3344,9 +3353,9 @@ public abstract class World implements IBlockAccess
         return var8;
     }
 
-    public Entity findNearestEntityWithinAABB(Class par1Class, AxisAlignedBB par2AxisAlignedBB, Entity par3Entity)
+    public Entity findNearestEntityWithinAABB(Class p_72857_1_, AxisAlignedBB p_72857_2_, Entity p_72857_3_)
     {
-        List var4 = this.getEntitiesWithinAABB(par1Class, par2AxisAlignedBB);
+        List var4 = this.getEntitiesWithinAABB(p_72857_1_, p_72857_2_);
         Entity var5 = null;
         double var6 = Double.MAX_VALUE;
 
@@ -3354,9 +3363,9 @@ public abstract class World implements IBlockAccess
         {
             Entity var9 = (Entity)var4.get(var8);
 
-            if (var9 != par3Entity)
+            if (var9 != p_72857_3_)
             {
-                double var10 = par3Entity.getDistanceSqToEntity(var9);
+                double var10 = p_72857_3_.getDistanceSqToEntity(var9);
 
                 if (var10 <= var6)
                 {
@@ -3372,7 +3381,7 @@ public abstract class World implements IBlockAccess
     /**
      * Returns the Entity with the given ID, or null if it doesn't exist in this World.
      */
-    public abstract Entity getEntityByID(int var1);
+    public abstract Entity getEntityByID(int p_73045_1_);
 
     /**
      * Accessor for world Loaded Entity List
@@ -3393,7 +3402,7 @@ public abstract class World implements IBlockAccess
     /**
      * Counts how many entities of an entity class exist in the world. Args: entityClass
      */
-    public int countEntities(Class par1Class)
+    public int countEntities(Class p_72907_1_)
     {
         int var2 = 0;
 
@@ -3401,7 +3410,7 @@ public abstract class World implements IBlockAccess
         {
             Entity var4 = (Entity)this.loadedEntityList.get(var3);
 
-            if ((!(var4 instanceof EntityLiving) || !((EntityLiving)var4).isNoDespawnRequired()) && par1Class.isAssignableFrom(var4.getClass()))
+            if ((!(var4 instanceof EntityLiving) || !((EntityLiving)var4).isNoDespawnRequired()) && p_72907_1_.isAssignableFrom(var4.getClass()))
             {
                 ++var2;
             }
@@ -3413,22 +3422,22 @@ public abstract class World implements IBlockAccess
     /**
      * adds entities to the loaded entities list, and loads thier skins.
      */
-    public void addLoadedEntities(List par1List)
+    public void addLoadedEntities(List p_72868_1_)
     {
-        this.loadedEntityList.addAll(par1List);
+        this.loadedEntityList.addAll(p_72868_1_);
 
-        for (int var2 = 0; var2 < par1List.size(); ++var2)
+        for (int var2 = 0; var2 < p_72868_1_.size(); ++var2)
         {
-            this.onEntityAdded((Entity)par1List.get(var2));
+            this.onEntityAdded((Entity)p_72868_1_.get(var2));
         }
     }
 
     /**
      * Adds a list of entities to be unloaded on the next pass of World.updateEntities()
      */
-    public void unloadEntities(List par1List)
+    public void unloadEntities(List p_72828_1_)
     {
-        this.unloadedEntityList.addAll(par1List);
+        this.unloadedEntityList.addAll(p_72828_1_);
     }
 
     public boolean canPlaceEntityOnSide(Block p_147472_1_, int p_147472_2_, int p_147472_3_, int p_147472_4_, boolean p_147472_5_, int p_147472_6_, Entity p_147472_7_, ItemStack p_147472_8_)
@@ -3438,13 +3447,13 @@ public abstract class World implements IBlockAccess
         return var10 != null && !this.checkNoEntityCollision(var10, p_147472_7_) ? false : (var9.getMaterial() == Material.circuits && p_147472_1_ == Blocks.anvil ? true : var9.getMaterial().isReplaceable() && p_147472_1_.canReplace(this, p_147472_2_, p_147472_3_, p_147472_4_, p_147472_6_, p_147472_8_));
     }
 
-    public PathEntity getPathEntityToEntity(Entity par1Entity, Entity par2Entity, float par3, boolean par4, boolean par5, boolean par6, boolean par7)
+    public PathEntity getPathEntityToEntity(Entity p_72865_1_, Entity p_72865_2_, float p_72865_3_, boolean p_72865_4_, boolean p_72865_5_, boolean p_72865_6_, boolean p_72865_7_)
     {
         this.theProfiler.startSection("pathfind");
-        int var8 = MathHelper.floor_double(par1Entity.posX);
-        int var9 = MathHelper.floor_double(par1Entity.posY + 1.0D);
-        int var10 = MathHelper.floor_double(par1Entity.posZ);
-        int var11 = (int)(par3 + 16.0F);
+        int var8 = MathHelper.floor_double(p_72865_1_.posX);
+        int var9 = MathHelper.floor_double(p_72865_1_.posY + 1.0D);
+        int var10 = MathHelper.floor_double(p_72865_1_.posZ);
+        int var11 = (int)(p_72865_3_ + 16.0F);
         int var12 = var8 - var11;
         int var13 = var9 - var11;
         int var14 = var10 - var11;
@@ -3452,18 +3461,18 @@ public abstract class World implements IBlockAccess
         int var16 = var9 + var11;
         int var17 = var10 + var11;
         ChunkCache var18 = new ChunkCache(this, var12, var13, var14, var15, var16, var17, 0);
-        PathEntity var19 = (new PathFinder(var18, par4, par5, par6, par7)).createEntityPathTo(par1Entity, par2Entity, par3);
+        PathEntity var19 = (new PathFinder(var18, p_72865_4_, p_72865_5_, p_72865_6_, p_72865_7_)).createEntityPathTo(p_72865_1_, p_72865_2_, p_72865_3_);
         this.theProfiler.endSection();
         return var19;
     }
 
-    public PathEntity getEntityPathToXYZ(Entity par1Entity, int par2, int par3, int par4, float par5, boolean par6, boolean par7, boolean par8, boolean par9)
+    public PathEntity getEntityPathToXYZ(Entity p_72844_1_, int p_72844_2_, int p_72844_3_, int p_72844_4_, float p_72844_5_, boolean p_72844_6_, boolean p_72844_7_, boolean p_72844_8_, boolean p_72844_9_)
     {
         this.theProfiler.startSection("pathfind");
-        int var10 = MathHelper.floor_double(par1Entity.posX);
-        int var11 = MathHelper.floor_double(par1Entity.posY);
-        int var12 = MathHelper.floor_double(par1Entity.posZ);
-        int var13 = (int)(par5 + 8.0F);
+        int var10 = MathHelper.floor_double(p_72844_1_.posX);
+        int var11 = MathHelper.floor_double(p_72844_1_.posY);
+        int var12 = MathHelper.floor_double(p_72844_1_.posZ);
+        int var13 = (int)(p_72844_5_ + 8.0F);
         int var14 = var10 - var13;
         int var15 = var11 - var13;
         int var16 = var12 - var13;
@@ -3471,7 +3480,7 @@ public abstract class World implements IBlockAccess
         int var18 = var11 + var13;
         int var19 = var12 + var13;
         ChunkCache var20 = new ChunkCache(this, var14, var15, var16, var17, var18, var19, 0);
-        PathEntity var21 = (new PathFinder(var20, par6, par7, par8, par9)).createEntityPathTo(par1Entity, par2, par3, par4, par5);
+        PathEntity var21 = (new PathFinder(var20, p_72844_6_, p_72844_7_, p_72844_8_, p_72844_9_)).createEntityPathTo(p_72844_1_, p_72844_2_, p_72844_3_, p_72844_4_, p_72844_5_);
         this.theProfiler.endSection();
         return var21;
     }
@@ -3479,18 +3488,18 @@ public abstract class World implements IBlockAccess
     /**
      * Is this block powering in the specified direction Args: x, y, z, direction
      */
-    public int isBlockProvidingPowerTo(int par1, int par2, int par3, int par4)
+    public int isBlockProvidingPowerTo(int p_72879_1_, int p_72879_2_, int p_72879_3_, int p_72879_4_)
     {
-        return this.getBlock(par1, par2, par3).isProvidingStrongPower(this, par1, par2, par3, par4);
+        return this.getBlock(p_72879_1_, p_72879_2_, p_72879_3_).isProvidingStrongPower(this, p_72879_1_, p_72879_2_, p_72879_3_, p_72879_4_);
     }
 
     /**
      * Returns the highest redstone signal strength powering the given block. Args: X, Y, Z.
      */
-    public int getBlockPowerInput(int par1, int par2, int par3)
+    public int getBlockPowerInput(int p_94577_1_, int p_94577_2_, int p_94577_3_)
     {
         byte var4 = 0;
-        int var5 = Math.max(var4, this.isBlockProvidingPowerTo(par1, par2 - 1, par3, 0));
+        int var5 = Math.max(var4, this.isBlockProvidingPowerTo(p_94577_1_, p_94577_2_ - 1, p_94577_3_, 0));
 
         if (var5 >= 15)
         {
@@ -3498,7 +3507,7 @@ public abstract class World implements IBlockAccess
         }
         else
         {
-            var5 = Math.max(var5, this.isBlockProvidingPowerTo(par1, par2 + 1, par3, 1));
+            var5 = Math.max(var5, this.isBlockProvidingPowerTo(p_94577_1_, p_94577_2_ + 1, p_94577_3_, 1));
 
             if (var5 >= 15)
             {
@@ -3506,7 +3515,7 @@ public abstract class World implements IBlockAccess
             }
             else
             {
-                var5 = Math.max(var5, this.isBlockProvidingPowerTo(par1, par2, par3 - 1, 2));
+                var5 = Math.max(var5, this.isBlockProvidingPowerTo(p_94577_1_, p_94577_2_, p_94577_3_ - 1, 2));
 
                 if (var5 >= 15)
                 {
@@ -3514,7 +3523,7 @@ public abstract class World implements IBlockAccess
                 }
                 else
                 {
-                    var5 = Math.max(var5, this.isBlockProvidingPowerTo(par1, par2, par3 + 1, 3));
+                    var5 = Math.max(var5, this.isBlockProvidingPowerTo(p_94577_1_, p_94577_2_, p_94577_3_ + 1, 3));
 
                     if (var5 >= 15)
                     {
@@ -3522,7 +3531,7 @@ public abstract class World implements IBlockAccess
                     }
                     else
                     {
-                        var5 = Math.max(var5, this.isBlockProvidingPowerTo(par1 - 1, par2, par3, 4));
+                        var5 = Math.max(var5, this.isBlockProvidingPowerTo(p_94577_1_ - 1, p_94577_2_, p_94577_3_, 4));
 
                         if (var5 >= 15)
                         {
@@ -3530,7 +3539,7 @@ public abstract class World implements IBlockAccess
                         }
                         else
                         {
-                            var5 = Math.max(var5, this.isBlockProvidingPowerTo(par1 + 1, par2, par3, 5));
+                            var5 = Math.max(var5, this.isBlockProvidingPowerTo(p_94577_1_ + 1, p_94577_2_, p_94577_3_, 5));
                             return var5 >= 15 ? var5 : var5;
                         }
                     }
@@ -3543,35 +3552,35 @@ public abstract class World implements IBlockAccess
      * Returns the indirect signal strength being outputted by the given block in the *opposite* of the given direction.
      * Args: X, Y, Z, direction
      */
-    public boolean getIndirectPowerOutput(int par1, int par2, int par3, int par4)
+    public boolean getIndirectPowerOutput(int p_94574_1_, int p_94574_2_, int p_94574_3_, int p_94574_4_)
     {
-        return this.getIndirectPowerLevelTo(par1, par2, par3, par4) > 0;
+        return this.getIndirectPowerLevelTo(p_94574_1_, p_94574_2_, p_94574_3_, p_94574_4_) > 0;
     }
 
     /**
      * Gets the power level from a certain block face.  Args: x, y, z, direction
      */
-    public int getIndirectPowerLevelTo(int par1, int par2, int par3, int par4)
+    public int getIndirectPowerLevelTo(int p_72878_1_, int p_72878_2_, int p_72878_3_, int p_72878_4_)
     {
-        return this.getBlock(par1, par2, par3).isNormalCube() ? this.getBlockPowerInput(par1, par2, par3) : this.getBlock(par1, par2, par3).isProvidingWeakPower(this, par1, par2, par3, par4);
+        return this.getBlock(p_72878_1_, p_72878_2_, p_72878_3_).isNormalCube() ? this.getBlockPowerInput(p_72878_1_, p_72878_2_, p_72878_3_) : this.getBlock(p_72878_1_, p_72878_2_, p_72878_3_).isProvidingWeakPower(this, p_72878_1_, p_72878_2_, p_72878_3_, p_72878_4_);
     }
 
     /**
      * Used to see if one of the blocks next to you or your block is getting power from a neighboring block. Used by
      * items like TNT or Doors so they don't have redstone going straight into them.  Args: x, y, z
      */
-    public boolean isBlockIndirectlyGettingPowered(int par1, int par2, int par3)
+    public boolean isBlockIndirectlyGettingPowered(int p_72864_1_, int p_72864_2_, int p_72864_3_)
     {
-        return this.getIndirectPowerLevelTo(par1, par2 - 1, par3, 0) > 0 ? true : (this.getIndirectPowerLevelTo(par1, par2 + 1, par3, 1) > 0 ? true : (this.getIndirectPowerLevelTo(par1, par2, par3 - 1, 2) > 0 ? true : (this.getIndirectPowerLevelTo(par1, par2, par3 + 1, 3) > 0 ? true : (this.getIndirectPowerLevelTo(par1 - 1, par2, par3, 4) > 0 ? true : this.getIndirectPowerLevelTo(par1 + 1, par2, par3, 5) > 0))));
+        return this.getIndirectPowerLevelTo(p_72864_1_, p_72864_2_ - 1, p_72864_3_, 0) > 0 ? true : (this.getIndirectPowerLevelTo(p_72864_1_, p_72864_2_ + 1, p_72864_3_, 1) > 0 ? true : (this.getIndirectPowerLevelTo(p_72864_1_, p_72864_2_, p_72864_3_ - 1, 2) > 0 ? true : (this.getIndirectPowerLevelTo(p_72864_1_, p_72864_2_, p_72864_3_ + 1, 3) > 0 ? true : (this.getIndirectPowerLevelTo(p_72864_1_ - 1, p_72864_2_, p_72864_3_, 4) > 0 ? true : this.getIndirectPowerLevelTo(p_72864_1_ + 1, p_72864_2_, p_72864_3_, 5) > 0))));
     }
 
-    public int getStrongestIndirectPower(int par1, int par2, int par3)
+    public int getStrongestIndirectPower(int p_94572_1_, int p_94572_2_, int p_94572_3_)
     {
         int var4 = 0;
 
         for (int var5 = 0; var5 < 6; ++var5)
         {
-            int var6 = this.getIndirectPowerLevelTo(par1 + Facing.offsetsXForSide[var5], par2 + Facing.offsetsYForSide[var5], par3 + Facing.offsetsZForSide[var5], var5);
+            int var6 = this.getIndirectPowerLevelTo(p_94572_1_ + Facing.offsetsXForSide[var5], p_94572_2_ + Facing.offsetsYForSide[var5], p_94572_3_ + Facing.offsetsZForSide[var5], var5);
 
             if (var6 >= 15)
             {
@@ -3591,16 +3600,16 @@ public abstract class World implements IBlockAccess
      * Gets the closest player to the entity within the specified distance (if distance is less than 0 then ignored).
      * Args: entity, dist
      */
-    public EntityPlayer getClosestPlayerToEntity(Entity par1Entity, double par2)
+    public EntityPlayer getClosestPlayerToEntity(Entity p_72890_1_, double p_72890_2_)
     {
-        return this.getClosestPlayer(par1Entity.posX, par1Entity.posY, par1Entity.posZ, par2);
+        return this.getClosestPlayer(p_72890_1_.posX, p_72890_1_.posY, p_72890_1_.posZ, p_72890_2_);
     }
 
     /**
      * Gets the closest player to the point within the specified distance (distance can be set to less than 0 to not
      * limit the distance). Args: x, y, z, dist
      */
-    public EntityPlayer getClosestPlayer(double par1, double par3, double par5, double par7)
+    public EntityPlayer getClosestPlayer(double p_72977_1_, double p_72977_3_, double p_72977_5_, double p_72977_7_)
     {
         double var9 = -1.0D;
         EntityPlayer var11 = null;
@@ -3608,9 +3617,9 @@ public abstract class World implements IBlockAccess
         for (int var12 = 0; var12 < this.playerEntities.size(); ++var12)
         {
             EntityPlayer var13 = (EntityPlayer)this.playerEntities.get(var12);
-            double var14 = var13.getDistanceSq(par1, par3, par5);
+            double var14 = var13.getDistanceSq(p_72977_1_, p_72977_3_, p_72977_5_);
 
-            if ((par7 < 0.0D || var14 < par7 * par7) && (var9 == -1.0D || var14 < var9))
+            if ((p_72977_7_ < 0.0D || var14 < p_72977_7_ * p_72977_7_) && (var9 == -1.0D || var14 < var9))
             {
                 var9 = var14;
                 var11 = var13;
@@ -3623,15 +3632,15 @@ public abstract class World implements IBlockAccess
     /**
      * Returns the closest vulnerable player to this entity within the given radius, or null if none is found
      */
-    public EntityPlayer getClosestVulnerablePlayerToEntity(Entity par1Entity, double par2)
+    public EntityPlayer getClosestVulnerablePlayerToEntity(Entity p_72856_1_, double p_72856_2_)
     {
-        return this.getClosestVulnerablePlayer(par1Entity.posX, par1Entity.posY, par1Entity.posZ, par2);
+        return this.getClosestVulnerablePlayer(p_72856_1_.posX, p_72856_1_.posY, p_72856_1_.posZ, p_72856_2_);
     }
 
     /**
      * Returns the closest vulnerable player within the given radius, or null if none is found.
      */
-    public EntityPlayer getClosestVulnerablePlayer(double par1, double par3, double par5, double par7)
+    public EntityPlayer getClosestVulnerablePlayer(double p_72846_1_, double p_72846_3_, double p_72846_5_, double p_72846_7_)
     {
         double var9 = -1.0D;
         EntityPlayer var11 = null;
@@ -3642,12 +3651,12 @@ public abstract class World implements IBlockAccess
 
             if (!var13.capabilities.disableDamage && var13.isEntityAlive())
             {
-                double var14 = var13.getDistanceSq(par1, par3, par5);
-                double var16 = par7;
+                double var14 = var13.getDistanceSq(p_72846_1_, p_72846_3_, p_72846_5_);
+                double var16 = p_72846_7_;
 
                 if (var13.isSneaking())
                 {
-                    var16 = par7 * 0.800000011920929D;
+                    var16 = p_72846_7_ * 0.800000011920929D;
                 }
 
                 if (var13.isInvisible())
@@ -3662,7 +3671,7 @@ public abstract class World implements IBlockAccess
                     var16 *= (double)(0.7F * var18);
                 }
 
-                if ((par7 < 0.0D || var14 < var16 * var16) && (var9 == -1.0D || var14 < var9))
+                if ((p_72846_7_ < 0.0D || var14 < var16 * var16) && (var9 == -1.0D || var14 < var9))
                 {
                     var9 = var14;
                     var11 = var13;
@@ -3676,13 +3685,30 @@ public abstract class World implements IBlockAccess
     /**
      * Find a player by name in this world.
      */
-    public EntityPlayer getPlayerEntityByName(String par1Str)
+    public EntityPlayer getPlayerEntityByName(String p_72924_1_)
     {
         for (int var2 = 0; var2 < this.playerEntities.size(); ++var2)
         {
-            if (par1Str.equals(((EntityPlayer)this.playerEntities.get(var2)).getCommandSenderName()))
+            EntityPlayer var3 = (EntityPlayer)this.playerEntities.get(var2);
+
+            if (p_72924_1_.equals(var3.getCommandSenderName()))
             {
-                return (EntityPlayer)this.playerEntities.get(var2);
+                return var3;
+            }
+        }
+
+        return null;
+    }
+
+    public EntityPlayer func_152378_a(UUID p_152378_1_)
+    {
+        for (int var2 = 0; var2 < this.playerEntities.size(); ++var2)
+        {
+            EntityPlayer var3 = (EntityPlayer)this.playerEntities.get(var2);
+
+            if (p_152378_1_.equals(var3.getUniqueID()))
+            {
+                return var3;
             }
         }
 
@@ -3702,9 +3728,9 @@ public abstract class World implements IBlockAccess
         this.saveHandler.checkSessionLock();
     }
 
-    public void func_82738_a(long par1)
+    public void func_82738_a(long p_82738_1_)
     {
-        this.worldInfo.incrementTotalWorldTime(par1);
+        this.worldInfo.incrementTotalWorldTime(p_82738_1_);
     }
 
     /**
@@ -3728,9 +3754,9 @@ public abstract class World implements IBlockAccess
     /**
      * Sets the world time.
      */
-    public void setWorldTime(long par1)
+    public void setWorldTime(long p_72877_1_)
     {
-        this.worldInfo.setWorldTime(par1);
+        this.worldInfo.setWorldTime(p_72877_1_);
     }
 
     /**
@@ -3741,18 +3767,18 @@ public abstract class World implements IBlockAccess
         return new ChunkCoordinates(this.worldInfo.getSpawnX(), this.worldInfo.getSpawnY(), this.worldInfo.getSpawnZ());
     }
 
-    public void setSpawnLocation(int par1, int par2, int par3)
+    public void setSpawnLocation(int p_72950_1_, int p_72950_2_, int p_72950_3_)
     {
-        this.worldInfo.setSpawnPosition(par1, par2, par3);
+        this.worldInfo.setSpawnPosition(p_72950_1_, p_72950_2_, p_72950_3_);
     }
 
     /**
-     * spawns an entity and loads surrounding chunks
+     * spwans an entity and loads surrounding chunks
      */
-    public void joinEntityInSurroundings(Entity par1Entity)
+    public void joinEntityInSurroundings(Entity p_72897_1_)
     {
-        int var2 = MathHelper.floor_double(par1Entity.posX / 16.0D);
-        int var3 = MathHelper.floor_double(par1Entity.posZ / 16.0D);
+        int var2 = MathHelper.floor_double(p_72897_1_.posX / 16.0D);
+        int var3 = MathHelper.floor_double(p_72897_1_.posZ / 16.0D);
         byte var4 = 2;
 
         for (int var5 = var2 - var4; var5 <= var2 + var4; ++var5)
@@ -3763,16 +3789,16 @@ public abstract class World implements IBlockAccess
             }
         }
 
-        if (!this.loadedEntityList.contains(par1Entity))
+        if (!this.loadedEntityList.contains(p_72897_1_))
         {
-            this.loadedEntityList.add(par1Entity);
+            this.loadedEntityList.add(p_72897_1_);
         }
     }
 
     /**
      * Called when checking if a certain block can be mined or not. The 'spawn safe zone' check is located here.
      */
-    public boolean canMineBlock(EntityPlayer par1EntityPlayer, int par2, int par3, int par4)
+    public boolean canMineBlock(EntityPlayer p_72962_1_, int p_72962_2_, int p_72962_3_, int p_72962_4_)
     {
         return true;
     }
@@ -3780,7 +3806,7 @@ public abstract class World implements IBlockAccess
     /**
      * sends a Packet 38 (Entity Status) to all tracked players of that entity
      */
-    public void setEntityState(Entity par1Entity, byte par2) {}
+    public void setEntityState(Entity p_72960_1_, byte p_72960_2_) {}
 
     /**
      * gets the IChunkProvider this world uses.
@@ -3824,9 +3850,9 @@ public abstract class World implements IBlockAccess
      */
     public void updateAllPlayersSleepingFlag() {}
 
-    public float getWeightedThunderStrength(float par1)
+    public float getWeightedThunderStrength(float p_72819_1_)
     {
-        return (this.prevThunderingStrength + (this.thunderingStrength - this.prevThunderingStrength) * par1) * this.getRainStrength(par1);
+        return (this.prevThunderingStrength + (this.thunderingStrength - this.prevThunderingStrength) * p_72819_1_) * this.getRainStrength(p_72819_1_);
     }
 
     /**
@@ -3841,18 +3867,18 @@ public abstract class World implements IBlockAccess
     /**
      * Not sure about this actually. Reverting this one myself.
      */
-    public float getRainStrength(float par1)
+    public float getRainStrength(float p_72867_1_)
     {
-        return this.prevRainingStrength + (this.rainingStrength - this.prevRainingStrength) * par1;
+        return this.prevRainingStrength + (this.rainingStrength - this.prevRainingStrength) * p_72867_1_;
     }
 
     /**
      * Sets the strength of the rain.
      */
-    public void setRainStrength(float par1)
+    public void setRainStrength(float p_72894_1_)
     {
-        this.prevRainingStrength = par1;
-        this.rainingStrength = par1;
+        this.prevRainingStrength = p_72894_1_;
+        this.rainingStrength = p_72894_1_;
     }
 
     /**
@@ -3871,33 +3897,33 @@ public abstract class World implements IBlockAccess
         return (double)this.getRainStrength(1.0F) > 0.2D;
     }
 
-    public boolean canLightningStrikeAt(int par1, int par2, int par3)
+    public boolean canLightningStrikeAt(int p_72951_1_, int p_72951_2_, int p_72951_3_)
     {
         if (!this.isRaining())
         {
             return false;
         }
-        else if (!this.canBlockSeeTheSky(par1, par2, par3))
+        else if (!this.canBlockSeeTheSky(p_72951_1_, p_72951_2_, p_72951_3_))
         {
             return false;
         }
-        else if (this.getPrecipitationHeight(par1, par3) > par2)
+        else if (this.getPrecipitationHeight(p_72951_1_, p_72951_3_) > p_72951_2_)
         {
             return false;
         }
         else
         {
-            BiomeGenBase var4 = this.getBiomeGenForCoords(par1, par3);
-            return var4.getEnableSnow() ? false : (this.func_147478_e(par1, par2, par3, false) ? false : var4.canSpawnLightningBolt());
+            BiomeGenBase var4 = this.getBiomeGenForCoords(p_72951_1_, p_72951_3_);
+            return var4.getEnableSnow() ? false : (this.func_147478_e(p_72951_1_, p_72951_2_, p_72951_3_, false) ? false : var4.canSpawnLightningBolt());
         }
     }
 
     /**
      * Checks to see if the biome rainfall values for a given x,y,z coordinate set are extremely high
      */
-    public boolean isBlockHighHumidity(int par1, int par2, int par3)
+    public boolean isBlockHighHumidity(int p_72958_1_, int p_72958_2_, int p_72958_3_)
     {
-        BiomeGenBase var4 = this.getBiomeGenForCoords(par1, par3);
+        BiomeGenBase var4 = this.getBiomeGenForCoords(p_72958_1_, p_72958_3_);
         return var4.isHighHumidity();
     }
 
@@ -3905,65 +3931,65 @@ public abstract class World implements IBlockAccess
      * Assigns the given String id to the given MapDataBase using the MapStorage, removing any existing ones of the same
      * id.
      */
-    public void setItemData(String par1Str, WorldSavedData par2WorldSavedData)
+    public void setItemData(String p_72823_1_, WorldSavedData p_72823_2_)
     {
-        this.mapStorage.setData(par1Str, par2WorldSavedData);
+        this.mapStorage.setData(p_72823_1_, p_72823_2_);
     }
 
     /**
      * Loads an existing MapDataBase corresponding to the given String id from disk using the MapStorage, instantiating
      * the given Class, or returns null if none such file exists. args: Class to instantiate, String dataid
      */
-    public WorldSavedData loadItemData(Class par1Class, String par2Str)
+    public WorldSavedData loadItemData(Class p_72943_1_, String p_72943_2_)
     {
-        return this.mapStorage.loadData(par1Class, par2Str);
+        return this.mapStorage.loadData(p_72943_1_, p_72943_2_);
     }
 
     /**
      * Returns an unique new data id from the MapStorage for the given prefix and saves the idCounts map to the
      * 'idcounts' file.
      */
-    public int getUniqueDataId(String par1Str)
+    public int getUniqueDataId(String p_72841_1_)
     {
-        return this.mapStorage.getUniqueDataId(par1Str);
+        return this.mapStorage.getUniqueDataId(p_72841_1_);
     }
 
-    public void playBroadcastSound(int par1, int par2, int par3, int par4, int par5)
+    public void playBroadcastSound(int p_82739_1_, int p_82739_2_, int p_82739_3_, int p_82739_4_, int p_82739_5_)
     {
         for (int var6 = 0; var6 < this.worldAccesses.size(); ++var6)
         {
-            ((IWorldAccess)this.worldAccesses.get(var6)).broadcastSound(par1, par2, par3, par4, par5);
+            ((IWorldAccess)this.worldAccesses.get(var6)).broadcastSound(p_82739_1_, p_82739_2_, p_82739_3_, p_82739_4_, p_82739_5_);
         }
     }
 
     /**
      * See description for playAuxSFX.
      */
-    public void playAuxSFX(int par1, int par2, int par3, int par4, int par5)
+    public void playAuxSFX(int p_72926_1_, int p_72926_2_, int p_72926_3_, int p_72926_4_, int p_72926_5_)
     {
-        this.playAuxSFXAtEntity((EntityPlayer)null, par1, par2, par3, par4, par5);
+        this.playAuxSFXAtEntity((EntityPlayer)null, p_72926_1_, p_72926_2_, p_72926_3_, p_72926_4_, p_72926_5_);
     }
 
     /**
      * See description for playAuxSFX.
      */
-    public void playAuxSFXAtEntity(EntityPlayer par1EntityPlayer, int par2, int par3, int par4, int par5, int par6)
+    public void playAuxSFXAtEntity(EntityPlayer p_72889_1_, int p_72889_2_, int p_72889_3_, int p_72889_4_, int p_72889_5_, int p_72889_6_)
     {
         try
         {
             for (int var7 = 0; var7 < this.worldAccesses.size(); ++var7)
             {
-                ((IWorldAccess)this.worldAccesses.get(var7)).playAuxSFX(par1EntityPlayer, par2, par3, par4, par5, par6);
+                ((IWorldAccess)this.worldAccesses.get(var7)).playAuxSFX(p_72889_1_, p_72889_2_, p_72889_3_, p_72889_4_, p_72889_5_, p_72889_6_);
             }
         }
         catch (Throwable var10)
         {
             CrashReport var8 = CrashReport.makeCrashReport(var10, "Playing level event");
             CrashReportCategory var9 = var8.makeCategory("Level event being played");
-            var9.addCrashSection("Block coordinates", CrashReportCategory.getLocationInfo(par3, par4, par5));
-            var9.addCrashSection("Event source", par1EntityPlayer);
-            var9.addCrashSection("Event type", Integer.valueOf(par2));
-            var9.addCrashSection("Event data", Integer.valueOf(par6));
+            var9.addCrashSection("Block coordinates", CrashReportCategory.getLocationInfo(p_72889_3_, p_72889_4_, p_72889_5_));
+            var9.addCrashSection("Event source", p_72889_1_);
+            var9.addCrashSection("Event type", Integer.valueOf(p_72889_2_));
+            var9.addCrashSection("Event data", Integer.valueOf(p_72889_6_));
             throw new ReportedException(var8);
         }
     }
@@ -3987,9 +4013,9 @@ public abstract class World implements IBlockAccess
     /**
      * puts the World Random seed to a specific state dependant on the inputs
      */
-    public Random setRandomSeed(int par1, int par2, int par3)
+    public Random setRandomSeed(int p_72843_1_, int p_72843_2_, int p_72843_3_)
     {
-        long var4 = (long)par1 * 341873128712L + (long)par2 * 132897987541L + this.getWorldInfo().getSeed() + (long)par3;
+        long var4 = (long)p_72843_1_ * 341873128712L + (long)p_72843_2_ * 132897987541L + this.getWorldInfo().getSeed() + (long)p_72843_3_;
         this.rand.setSeed(var4);
         return this.rand;
     }
@@ -4021,9 +4047,9 @@ public abstract class World implements IBlockAccess
     /**
      * Adds some basic stats of the world to the given crash report.
      */
-    public CrashReportCategory addWorldInfoToCrashReport(CrashReport par1CrashReport)
+    public CrashReportCategory addWorldInfoToCrashReport(CrashReport p_72914_1_)
     {
-        CrashReportCategory var2 = par1CrashReport.makeCategoryDepth("Affected level", 1);
+        CrashReportCategory var2 = p_72914_1_.makeCategoryDepth("Affected level", 1);
         var2.addCrashSection("Level name", this.worldInfo == null ? "????" : this.worldInfo.getWorldName());
         var2.addCrashSectionCallable("All players", new Callable()
         {
@@ -4068,14 +4094,6 @@ public abstract class World implements IBlockAccess
     }
 
     /**
-     * Return the Vec3Pool object for this world.
-     */
-    public Vec3Pool getWorldVec3Pool()
-    {
-        return this.vecPool;
-    }
-
-    /**
      * returns a calendar object containing the current date
      */
     public Calendar getCurrentDate()
@@ -4088,7 +4106,7 @@ public abstract class World implements IBlockAccess
         return this.theCalendar;
     }
 
-    public void makeFireworks(double par1, double par3, double par5, double par7, double par9, double par11, NBTTagCompound par13NBTTagCompound) {}
+    public void makeFireworks(double p_92088_1_, double p_92088_3_, double p_92088_5_, double p_92088_7_, double p_92088_9_, double p_92088_11_, NBTTagCompound p_92088_13_) {}
 
     public Scoreboard getScoreboard()
     {

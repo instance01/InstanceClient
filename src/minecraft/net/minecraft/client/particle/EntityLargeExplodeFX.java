@@ -18,18 +18,18 @@ public class EntityLargeExplodeFX extends EntityFX
     private float field_70582_as;
     private static final String __OBFID = "CL_00000910";
 
-    public EntityLargeExplodeFX(TextureManager par1TextureManager, World par2World, double par3, double par5, double par7, double par9, double par11, double par13)
+    public EntityLargeExplodeFX(TextureManager p_i1213_1_, World p_i1213_2_, double p_i1213_3_, double p_i1213_5_, double p_i1213_7_, double p_i1213_9_, double p_i1213_11_, double p_i1213_13_)
     {
-        super(par2World, par3, par5, par7, 0.0D, 0.0D, 0.0D);
-        this.theRenderEngine = par1TextureManager;
+        super(p_i1213_2_, p_i1213_3_, p_i1213_5_, p_i1213_7_, 0.0D, 0.0D, 0.0D);
+        this.theRenderEngine = p_i1213_1_;
         this.field_70584_aq = 6 + this.rand.nextInt(4);
         this.particleRed = this.particleGreen = this.particleBlue = this.rand.nextFloat() * 0.6F + 0.4F;
-        this.field_70582_as = 1.0F - (float)par9 * 0.5F;
+        this.field_70582_as = 1.0F - (float)p_i1213_9_ * 0.5F;
     }
 
-    public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7)
+    public void renderParticle(Tessellator p_70539_1_, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_)
     {
-        int var8 = (int)(((float)this.field_70581_a + par2) * 15.0F / (float)this.field_70584_aq);
+        int var8 = (int)(((float)this.field_70581_a + p_70539_2_) * 15.0F / (float)this.field_70584_aq);
 
         if (var8 <= 15)
         {
@@ -39,27 +39,27 @@ public class EntityLargeExplodeFX extends EntityFX
             float var11 = (float)(var8 / 4) / 4.0F;
             float var12 = var11 + 0.24975F;
             float var13 = 2.0F * this.field_70582_as;
-            float var14 = (float)(this.prevPosX + (this.posX - this.prevPosX) * (double)par2 - interpPosX);
-            float var15 = (float)(this.prevPosY + (this.posY - this.prevPosY) * (double)par2 - interpPosY);
-            float var16 = (float)(this.prevPosZ + (this.posZ - this.prevPosZ) * (double)par2 - interpPosZ);
+            float var14 = (float)(this.prevPosX + (this.posX - this.prevPosX) * (double)p_70539_2_ - interpPosX);
+            float var15 = (float)(this.prevPosY + (this.posY - this.prevPosY) * (double)p_70539_2_ - interpPosY);
+            float var16 = (float)(this.prevPosZ + (this.posZ - this.prevPosZ) * (double)p_70539_2_ - interpPosZ);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             GL11.glDisable(GL11.GL_LIGHTING);
             RenderHelper.disableStandardItemLighting();
-            par1Tessellator.startDrawingQuads();
-            par1Tessellator.setColorRGBA_F(this.particleRed, this.particleGreen, this.particleBlue, 1.0F);
-            par1Tessellator.setNormal(0.0F, 1.0F, 0.0F);
-            par1Tessellator.setBrightness(240);
-            par1Tessellator.addVertexWithUV((double)(var14 - par3 * var13 - par6 * var13), (double)(var15 - par4 * var13), (double)(var16 - par5 * var13 - par7 * var13), (double)var10, (double)var12);
-            par1Tessellator.addVertexWithUV((double)(var14 - par3 * var13 + par6 * var13), (double)(var15 + par4 * var13), (double)(var16 - par5 * var13 + par7 * var13), (double)var10, (double)var11);
-            par1Tessellator.addVertexWithUV((double)(var14 + par3 * var13 + par6 * var13), (double)(var15 + par4 * var13), (double)(var16 + par5 * var13 + par7 * var13), (double)var9, (double)var11);
-            par1Tessellator.addVertexWithUV((double)(var14 + par3 * var13 - par6 * var13), (double)(var15 - par4 * var13), (double)(var16 + par5 * var13 - par7 * var13), (double)var9, (double)var12);
-            par1Tessellator.draw();
+            p_70539_1_.startDrawingQuads();
+            p_70539_1_.setColorRGBA_F(this.particleRed, this.particleGreen, this.particleBlue, 1.0F);
+            p_70539_1_.setNormal(0.0F, 1.0F, 0.0F);
+            p_70539_1_.setBrightness(240);
+            p_70539_1_.addVertexWithUV((double)(var14 - p_70539_3_ * var13 - p_70539_6_ * var13), (double)(var15 - p_70539_4_ * var13), (double)(var16 - p_70539_5_ * var13 - p_70539_7_ * var13), (double)var10, (double)var12);
+            p_70539_1_.addVertexWithUV((double)(var14 - p_70539_3_ * var13 + p_70539_6_ * var13), (double)(var15 + p_70539_4_ * var13), (double)(var16 - p_70539_5_ * var13 + p_70539_7_ * var13), (double)var10, (double)var11);
+            p_70539_1_.addVertexWithUV((double)(var14 + p_70539_3_ * var13 + p_70539_6_ * var13), (double)(var15 + p_70539_4_ * var13), (double)(var16 + p_70539_5_ * var13 + p_70539_7_ * var13), (double)var9, (double)var11);
+            p_70539_1_.addVertexWithUV((double)(var14 + p_70539_3_ * var13 - p_70539_6_ * var13), (double)(var15 - p_70539_4_ * var13), (double)(var16 + p_70539_5_ * var13 - p_70539_7_ * var13), (double)var9, (double)var12);
+            p_70539_1_.draw();
             GL11.glPolygonOffset(0.0F, 0.0F);
             GL11.glEnable(GL11.GL_LIGHTING);
         }
     }
 
-    public int getBrightnessForRender(float par1)
+    public int getBrightnessForRender(float p_70070_1_)
     {
         return 61680;
     }

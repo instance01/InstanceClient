@@ -26,13 +26,13 @@ public class GuiTextField extends Gui
     private boolean field_146220_v = true;
     private static final String __OBFID = "CL_00000670";
 
-    public GuiTextField(FontRenderer par1FontRenderer, int par2, int par3, int par4, int par5)
+    public GuiTextField(FontRenderer p_i1032_1_, int p_i1032_2_, int p_i1032_3_, int p_i1032_4_, int p_i1032_5_)
     {
-        this.field_146211_a = par1FontRenderer;
-        this.field_146209_f = par2;
-        this.field_146210_g = par3;
-        this.field_146218_h = par4;
-        this.field_146219_i = par5;
+        this.field_146211_a = p_i1032_1_;
+        this.field_146209_f = p_i1032_2_;
+        this.field_146210_g = p_i1032_3_;
+        this.field_146218_h = p_i1032_4_;
+        this.field_146219_i = p_i1032_5_;
     }
 
     /**

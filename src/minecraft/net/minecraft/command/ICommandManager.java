@@ -5,17 +5,17 @@ import java.util.Map;
 
 public interface ICommandManager
 {
-    int executeCommand(ICommandSender var1, String var2);
+    int executeCommand(ICommandSender p_71556_1_, String p_71556_2_);
 
     /**
      * Performs a "begins with" string match on each token in par2. Only returns commands that par1 can use.
      */
-    List getPossibleCommands(ICommandSender var1, String var2);
+    List getPossibleCommands(ICommandSender p_71558_1_, String p_71558_2_);
 
     /**
      * returns all commands that the commandSender can use
      */
-    List getPossibleCommands(ICommandSender var1);
+    List getPossibleCommands(ICommandSender p_71557_1_);
 
     /**
      * returns a map of string to commads. All commands are returned, not just ones which someone has permission to use.

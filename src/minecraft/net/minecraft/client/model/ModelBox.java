@@ -32,41 +32,41 @@ public class ModelBox
     public String field_78247_g;
     private static final String __OBFID = "CL_00000872";
 
-    public ModelBox(ModelRenderer par1ModelRenderer, int par2, int par3, float par4, float par5, float par6, int par7, int par8, int par9, float par10)
+    public ModelBox(ModelRenderer p_i1171_1_, int p_i1171_2_, int p_i1171_3_, float p_i1171_4_, float p_i1171_5_, float p_i1171_6_, int p_i1171_7_, int p_i1171_8_, int p_i1171_9_, float p_i1171_10_)
     {
-        this.posX1 = par4;
-        this.posY1 = par5;
-        this.posZ1 = par6;
-        this.posX2 = par4 + (float)par7;
-        this.posY2 = par5 + (float)par8;
-        this.posZ2 = par6 + (float)par9;
+        this.posX1 = p_i1171_4_;
+        this.posY1 = p_i1171_5_;
+        this.posZ1 = p_i1171_6_;
+        this.posX2 = p_i1171_4_ + (float)p_i1171_7_;
+        this.posY2 = p_i1171_5_ + (float)p_i1171_8_;
+        this.posZ2 = p_i1171_6_ + (float)p_i1171_9_;
         this.vertexPositions = new PositionTextureVertex[8];
         this.quadList = new TexturedQuad[6];
-        float var11 = par4 + (float)par7;
-        float var12 = par5 + (float)par8;
-        float var13 = par6 + (float)par9;
-        par4 -= par10;
-        par5 -= par10;
-        par6 -= par10;
-        var11 += par10;
-        var12 += par10;
-        var13 += par10;
+        float var11 = p_i1171_4_ + (float)p_i1171_7_;
+        float var12 = p_i1171_5_ + (float)p_i1171_8_;
+        float var13 = p_i1171_6_ + (float)p_i1171_9_;
+        p_i1171_4_ -= p_i1171_10_;
+        p_i1171_5_ -= p_i1171_10_;
+        p_i1171_6_ -= p_i1171_10_;
+        var11 += p_i1171_10_;
+        var12 += p_i1171_10_;
+        var13 += p_i1171_10_;
 
-        if (par1ModelRenderer.mirror)
+        if (p_i1171_1_.mirror)
         {
             float var14 = var11;
-            var11 = par4;
-            par4 = var14;
+            var11 = p_i1171_4_;
+            p_i1171_4_ = var14;
         }
 
-        PositionTextureVertex var23 = new PositionTextureVertex(par4, par5, par6, 0.0F, 0.0F);
-        PositionTextureVertex var15 = new PositionTextureVertex(var11, par5, par6, 0.0F, 8.0F);
-        PositionTextureVertex var16 = new PositionTextureVertex(var11, var12, par6, 8.0F, 8.0F);
-        PositionTextureVertex var17 = new PositionTextureVertex(par4, var12, par6, 8.0F, 0.0F);
-        PositionTextureVertex var18 = new PositionTextureVertex(par4, par5, var13, 0.0F, 0.0F);
-        PositionTextureVertex var19 = new PositionTextureVertex(var11, par5, var13, 0.0F, 8.0F);
+        PositionTextureVertex var23 = new PositionTextureVertex(p_i1171_4_, p_i1171_5_, p_i1171_6_, 0.0F, 0.0F);
+        PositionTextureVertex var15 = new PositionTextureVertex(var11, p_i1171_5_, p_i1171_6_, 0.0F, 8.0F);
+        PositionTextureVertex var16 = new PositionTextureVertex(var11, var12, p_i1171_6_, 8.0F, 8.0F);
+        PositionTextureVertex var17 = new PositionTextureVertex(p_i1171_4_, var12, p_i1171_6_, 8.0F, 0.0F);
+        PositionTextureVertex var18 = new PositionTextureVertex(p_i1171_4_, p_i1171_5_, var13, 0.0F, 0.0F);
+        PositionTextureVertex var19 = new PositionTextureVertex(var11, p_i1171_5_, var13, 0.0F, 8.0F);
         PositionTextureVertex var20 = new PositionTextureVertex(var11, var12, var13, 8.0F, 8.0F);
-        PositionTextureVertex var21 = new PositionTextureVertex(par4, var12, var13, 8.0F, 0.0F);
+        PositionTextureVertex var21 = new PositionTextureVertex(p_i1171_4_, var12, var13, 8.0F, 0.0F);
         this.vertexPositions[0] = var23;
         this.vertexPositions[1] = var15;
         this.vertexPositions[2] = var16;
@@ -75,14 +75,14 @@ public class ModelBox
         this.vertexPositions[5] = var19;
         this.vertexPositions[6] = var20;
         this.vertexPositions[7] = var21;
-        this.quadList[0] = new TexturedQuad(new PositionTextureVertex[] {var19, var15, var16, var20}, par2 + par9 + par7, par3 + par9, par2 + par9 + par7 + par9, par3 + par9 + par8, par1ModelRenderer.textureWidth, par1ModelRenderer.textureHeight);
-        this.quadList[1] = new TexturedQuad(new PositionTextureVertex[] {var23, var18, var21, var17}, par2, par3 + par9, par2 + par9, par3 + par9 + par8, par1ModelRenderer.textureWidth, par1ModelRenderer.textureHeight);
-        this.quadList[2] = new TexturedQuad(new PositionTextureVertex[] {var19, var18, var23, var15}, par2 + par9, par3, par2 + par9 + par7, par3 + par9, par1ModelRenderer.textureWidth, par1ModelRenderer.textureHeight);
-        this.quadList[3] = new TexturedQuad(new PositionTextureVertex[] {var16, var17, var21, var20}, par2 + par9 + par7, par3 + par9, par2 + par9 + par7 + par7, par3, par1ModelRenderer.textureWidth, par1ModelRenderer.textureHeight);
-        this.quadList[4] = new TexturedQuad(new PositionTextureVertex[] {var15, var23, var17, var16}, par2 + par9, par3 + par9, par2 + par9 + par7, par3 + par9 + par8, par1ModelRenderer.textureWidth, par1ModelRenderer.textureHeight);
-        this.quadList[5] = new TexturedQuad(new PositionTextureVertex[] {var18, var19, var20, var21}, par2 + par9 + par7 + par9, par3 + par9, par2 + par9 + par7 + par9 + par7, par3 + par9 + par8, par1ModelRenderer.textureWidth, par1ModelRenderer.textureHeight);
+        this.quadList[0] = new TexturedQuad(new PositionTextureVertex[] {var19, var15, var16, var20}, p_i1171_2_ + p_i1171_9_ + p_i1171_7_, p_i1171_3_ + p_i1171_9_, p_i1171_2_ + p_i1171_9_ + p_i1171_7_ + p_i1171_9_, p_i1171_3_ + p_i1171_9_ + p_i1171_8_, p_i1171_1_.textureWidth, p_i1171_1_.textureHeight);
+        this.quadList[1] = new TexturedQuad(new PositionTextureVertex[] {var23, var18, var21, var17}, p_i1171_2_, p_i1171_3_ + p_i1171_9_, p_i1171_2_ + p_i1171_9_, p_i1171_3_ + p_i1171_9_ + p_i1171_8_, p_i1171_1_.textureWidth, p_i1171_1_.textureHeight);
+        this.quadList[2] = new TexturedQuad(new PositionTextureVertex[] {var19, var18, var23, var15}, p_i1171_2_ + p_i1171_9_, p_i1171_3_, p_i1171_2_ + p_i1171_9_ + p_i1171_7_, p_i1171_3_ + p_i1171_9_, p_i1171_1_.textureWidth, p_i1171_1_.textureHeight);
+        this.quadList[3] = new TexturedQuad(new PositionTextureVertex[] {var16, var17, var21, var20}, p_i1171_2_ + p_i1171_9_ + p_i1171_7_, p_i1171_3_ + p_i1171_9_, p_i1171_2_ + p_i1171_9_ + p_i1171_7_ + p_i1171_7_, p_i1171_3_, p_i1171_1_.textureWidth, p_i1171_1_.textureHeight);
+        this.quadList[4] = new TexturedQuad(new PositionTextureVertex[] {var15, var23, var17, var16}, p_i1171_2_ + p_i1171_9_, p_i1171_3_ + p_i1171_9_, p_i1171_2_ + p_i1171_9_ + p_i1171_7_, p_i1171_3_ + p_i1171_9_ + p_i1171_8_, p_i1171_1_.textureWidth, p_i1171_1_.textureHeight);
+        this.quadList[5] = new TexturedQuad(new PositionTextureVertex[] {var18, var19, var20, var21}, p_i1171_2_ + p_i1171_9_ + p_i1171_7_ + p_i1171_9_, p_i1171_3_ + p_i1171_9_, p_i1171_2_ + p_i1171_9_ + p_i1171_7_ + p_i1171_9_ + p_i1171_7_, p_i1171_3_ + p_i1171_9_ + p_i1171_8_, p_i1171_1_.textureWidth, p_i1171_1_.textureHeight);
 
-        if (par1ModelRenderer.mirror)
+        if (p_i1171_1_.mirror)
         {
             for (int var22 = 0; var22 < this.quadList.length; ++var22)
             {
@@ -94,17 +94,17 @@ public class ModelBox
     /**
      * Draw the six sided box defined by this ModelBox
      */
-    public void render(Tessellator par1Tessellator, float par2)
+    public void render(Tessellator p_78245_1_, float p_78245_2_)
     {
         for (int var3 = 0; var3 < this.quadList.length; ++var3)
         {
-            this.quadList[var3].draw(par1Tessellator, par2);
+            this.quadList[var3].draw(p_78245_1_, p_78245_2_);
         }
     }
 
-    public ModelBox func_78244_a(String par1Str)
+    public ModelBox func_78244_a(String p_78244_1_)
     {
-        this.field_78247_g = par1Str;
+        this.field_78247_g = p_78244_1_;
         return this;
     }
 }

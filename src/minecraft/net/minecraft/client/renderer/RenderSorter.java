@@ -9,31 +9,31 @@ public class RenderSorter implements Comparator
     private EntityLivingBase baseEntity;
     private static final String __OBFID = "CL_00000943";
 
-    public RenderSorter(EntityLivingBase par1EntityLivingBase)
+    public RenderSorter(EntityLivingBase p_i1241_1_)
     {
-        this.baseEntity = par1EntityLivingBase;
+        this.baseEntity = p_i1241_1_;
     }
 
-    public int compare(WorldRenderer par1WorldRenderer, WorldRenderer par2WorldRenderer)
+    public int compare(WorldRenderer p_compare_1_, WorldRenderer p_compare_2_)
     {
-        if (par1WorldRenderer.isInFrustum && !par2WorldRenderer.isInFrustum)
+        if (p_compare_1_.isInFrustum && !p_compare_2_.isInFrustum)
         {
             return 1;
         }
-        else if (par2WorldRenderer.isInFrustum && !par1WorldRenderer.isInFrustum)
+        else if (p_compare_2_.isInFrustum && !p_compare_1_.isInFrustum)
         {
             return -1;
         }
         else
         {
-            double var3 = (double)par1WorldRenderer.distanceToEntitySquared(this.baseEntity);
-            double var5 = (double)par2WorldRenderer.distanceToEntitySquared(this.baseEntity);
-            return var3 < var5 ? 1 : (var3 > var5 ? -1 : (par1WorldRenderer.chunkIndex < par2WorldRenderer.chunkIndex ? 1 : -1));
+            double var3 = (double)p_compare_1_.distanceToEntitySquared(this.baseEntity);
+            double var5 = (double)p_compare_2_.distanceToEntitySquared(this.baseEntity);
+            return var3 < var5 ? 1 : (var3 > var5 ? -1 : (p_compare_1_.chunkIndex < p_compare_2_.chunkIndex ? 1 : -1));
         }
     }
 
-    public int compare(Object par1Obj, Object par2Obj)
+    public int compare(Object p_compare_1_, Object p_compare_2_)
     {
-        return this.compare((WorldRenderer)par1Obj, (WorldRenderer)par2Obj);
+        return this.compare((WorldRenderer)p_compare_1_, (WorldRenderer)p_compare_2_);
     }
 }

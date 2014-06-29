@@ -18,9 +18,9 @@ public class C0DPacketCloseWindow extends Packet
         this.field_149556_a = p_i45247_1_;
     }
 
-    public void processPacket(INetHandlerPlayServer p_149555_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149555_1_.processCloseWindow(this);
+        p_148833_1_.processCloseWindow(this);
     }
 
     /**

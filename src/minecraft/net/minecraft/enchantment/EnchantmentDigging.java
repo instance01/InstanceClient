@@ -7,26 +7,26 @@ public class EnchantmentDigging extends Enchantment
 {
     private static final String __OBFID = "CL_00000104";
 
-    protected EnchantmentDigging(int par1, int par2)
+    protected EnchantmentDigging(int p_i1925_1_, int p_i1925_2_)
     {
-        super(par1, par2, EnumEnchantmentType.digger);
+        super(p_i1925_1_, p_i1925_2_, EnumEnchantmentType.digger);
         this.setName("digging");
     }
 
     /**
      * Returns the minimal value of enchantability needed on the enchantment level passed.
      */
-    public int getMinEnchantability(int par1)
+    public int getMinEnchantability(int p_77321_1_)
     {
-        return 1 + 10 * (par1 - 1);
+        return 1 + 10 * (p_77321_1_ - 1);
     }
 
     /**
      * Returns the maximum value of enchantability nedded on the enchantment level passed.
      */
-    public int getMaxEnchantability(int par1)
+    public int getMaxEnchantability(int p_77317_1_)
     {
-        return super.getMinEnchantability(par1) + 50;
+        return super.getMinEnchantability(p_77317_1_) + 50;
     }
 
     /**
@@ -37,8 +37,8 @@ public class EnchantmentDigging extends Enchantment
         return 5;
     }
 
-    public boolean canApply(ItemStack par1ItemStack)
+    public boolean canApply(ItemStack p_92089_1_)
     {
-        return par1ItemStack.getItem() == Items.shears ? true : super.canApply(par1ItemStack);
+        return p_92089_1_.getItem() == Items.shears ? true : super.canApply(p_92089_1_);
     }
 }

@@ -16,37 +16,37 @@ public class WorldGenSavannaTree extends WorldGenAbstractTree
         super(p_i45463_1_);
     }
 
-    public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
+    public boolean generate(World p_76484_1_, Random p_76484_2_, int p_76484_3_, int p_76484_4_, int p_76484_5_)
     {
-        int var6 = par2Random.nextInt(3) + par2Random.nextInt(3) + 5;
+        int var6 = p_76484_2_.nextInt(3) + p_76484_2_.nextInt(3) + 5;
         boolean var7 = true;
 
-        if (par4 >= 1 && par4 + var6 + 1 <= 256)
+        if (p_76484_4_ >= 1 && p_76484_4_ + var6 + 1 <= 256)
         {
             int var10;
             int var11;
 
-            for (int var8 = par4; var8 <= par4 + 1 + var6; ++var8)
+            for (int var8 = p_76484_4_; var8 <= p_76484_4_ + 1 + var6; ++var8)
             {
                 byte var9 = 1;
 
-                if (var8 == par4)
+                if (var8 == p_76484_4_)
                 {
                     var9 = 0;
                 }
 
-                if (var8 >= par4 + 1 + var6 - 2)
+                if (var8 >= p_76484_4_ + 1 + var6 - 2)
                 {
                     var9 = 2;
                 }
 
-                for (var10 = par3 - var9; var10 <= par3 + var9 && var7; ++var10)
+                for (var10 = p_76484_3_ - var9; var10 <= p_76484_3_ + var9 && var7; ++var10)
                 {
-                    for (var11 = par5 - var9; var11 <= par5 + var9 && var7; ++var11)
+                    for (var11 = p_76484_5_ - var9; var11 <= p_76484_5_ + var9 && var7; ++var11)
                     {
                         if (var8 >= 0 && var8 < 256)
                         {
-                            Block var12 = par1World.getBlock(var10, var8, var11);
+                            Block var12 = p_76484_1_.getBlock(var10, var8, var11);
 
                             if (!this.func_150523_a(var12))
                             {
@@ -67,23 +67,23 @@ public class WorldGenSavannaTree extends WorldGenAbstractTree
             }
             else
             {
-                Block var21 = par1World.getBlock(par3, par4 - 1, par5);
+                Block var21 = p_76484_1_.getBlock(p_76484_3_, p_76484_4_ - 1, p_76484_5_);
 
-                if ((var21 == Blocks.grass || var21 == Blocks.dirt) && par4 < 256 - var6 - 1)
+                if ((var21 == Blocks.grass || var21 == Blocks.dirt) && p_76484_4_ < 256 - var6 - 1)
                 {
-                    this.func_150515_a(par1World, par3, par4 - 1, par5, Blocks.dirt);
-                    int var22 = par2Random.nextInt(4);
-                    var10 = var6 - par2Random.nextInt(4) - 1;
-                    var11 = 3 - par2Random.nextInt(3);
-                    int var23 = par3;
-                    int var13 = par5;
+                    this.func_150515_a(p_76484_1_, p_76484_3_, p_76484_4_ - 1, p_76484_5_, Blocks.dirt);
+                    int var22 = p_76484_2_.nextInt(4);
+                    var10 = var6 - p_76484_2_.nextInt(4) - 1;
+                    var11 = 3 - p_76484_2_.nextInt(3);
+                    int var23 = p_76484_3_;
+                    int var13 = p_76484_5_;
                     int var14 = 0;
                     int var15;
                     int var16;
 
                     for (var15 = 0; var15 < var6; ++var15)
                     {
-                        var16 = par4 + var15;
+                        var16 = p_76484_4_ + var15;
 
                         if (var15 >= var10 && var11 > 0)
                         {
@@ -92,11 +92,11 @@ public class WorldGenSavannaTree extends WorldGenAbstractTree
                             --var11;
                         }
 
-                        Block var17 = par1World.getBlock(var23, var16, var13);
+                        Block var17 = p_76484_1_.getBlock(var23, var16, var13);
 
                         if (var17.getMaterial() == Material.air || var17.getMaterial() == Material.leaves)
                         {
-                            this.func_150516_a(par1World, var23, var16, var13, Blocks.log2, 0);
+                            this.func_150516_a(p_76484_1_, var23, var16, var13, Blocks.log2, 0);
                             var14 = var16;
                         }
                     }
@@ -105,14 +105,14 @@ public class WorldGenSavannaTree extends WorldGenAbstractTree
                     {
                         for (var16 = -1; var16 <= 1; ++var16)
                         {
-                            this.func_150525_a(par1World, var23 + var15, var14 + 1, var13 + var16);
+                            this.func_150525_a(p_76484_1_, var23 + var15, var14 + 1, var13 + var16);
                         }
                     }
 
-                    this.func_150525_a(par1World, var23 + 2, var14 + 1, var13);
-                    this.func_150525_a(par1World, var23 - 2, var14 + 1, var13);
-                    this.func_150525_a(par1World, var23, var14 + 1, var13 + 2);
-                    this.func_150525_a(par1World, var23, var14 + 1, var13 - 2);
+                    this.func_150525_a(p_76484_1_, var23 + 2, var14 + 1, var13);
+                    this.func_150525_a(p_76484_1_, var23 - 2, var14 + 1, var13);
+                    this.func_150525_a(p_76484_1_, var23, var14 + 1, var13 + 2);
+                    this.func_150525_a(p_76484_1_, var23, var14 + 1, var13 - 2);
 
                     for (var15 = -3; var15 <= 3; ++var15)
                     {
@@ -120,35 +120,35 @@ public class WorldGenSavannaTree extends WorldGenAbstractTree
                         {
                             if (Math.abs(var15) != 3 || Math.abs(var16) != 3)
                             {
-                                this.func_150525_a(par1World, var23 + var15, var14, var13 + var16);
+                                this.func_150525_a(p_76484_1_, var23 + var15, var14, var13 + var16);
                             }
                         }
                     }
 
-                    var23 = par3;
-                    var13 = par5;
-                    var15 = par2Random.nextInt(4);
+                    var23 = p_76484_3_;
+                    var13 = p_76484_5_;
+                    var15 = p_76484_2_.nextInt(4);
 
                     if (var15 != var22)
                     {
-                        var16 = var10 - par2Random.nextInt(2) - 1;
-                        int var24 = 1 + par2Random.nextInt(3);
+                        var16 = var10 - p_76484_2_.nextInt(2) - 1;
+                        int var24 = 1 + p_76484_2_.nextInt(3);
                         var14 = 0;
-                        int var19;
                         int var18;
+                        int var19;
 
                         for (var18 = var16; var18 < var6 && var24 > 0; --var24)
                         {
                             if (var18 >= 1)
                             {
-                                var19 = par4 + var18;
+                                var19 = p_76484_4_ + var18;
                                 var23 += Direction.offsetX[var15];
                                 var13 += Direction.offsetZ[var15];
-                                Block var20 = par1World.getBlock(var23, var19, var13);
+                                Block var20 = p_76484_1_.getBlock(var23, var19, var13);
 
                                 if (var20.getMaterial() == Material.air || var20.getMaterial() == Material.leaves)
                                 {
-                                    this.func_150516_a(par1World, var23, var19, var13, Blocks.log2, 0);
+                                    this.func_150516_a(p_76484_1_, var23, var19, var13, Blocks.log2, 0);
                                     var14 = var19;
                                 }
                             }
@@ -162,7 +162,7 @@ public class WorldGenSavannaTree extends WorldGenAbstractTree
                             {
                                 for (var19 = -1; var19 <= 1; ++var19)
                                 {
-                                    this.func_150525_a(par1World, var23 + var18, var14 + 1, var13 + var19);
+                                    this.func_150525_a(p_76484_1_, var23 + var18, var14 + 1, var13 + var19);
                                 }
                             }
 
@@ -172,7 +172,7 @@ public class WorldGenSavannaTree extends WorldGenAbstractTree
                                 {
                                     if (Math.abs(var18) != 2 || Math.abs(var19) != 2)
                                     {
-                                        this.func_150525_a(par1World, var23 + var18, var14, var13 + var19);
+                                        this.func_150525_a(p_76484_1_, var23 + var18, var14, var13 + var19);
                                     }
                                 }
                             }

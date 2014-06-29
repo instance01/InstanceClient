@@ -57,9 +57,9 @@ public class S2CPacketSpawnGlobalEntity extends Packet
         p_148840_1_.writeInt(this.field_149055_d);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149054_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149054_1_.handleSpawnGlobalEntity(this);
+        p_148833_1_.handleSpawnGlobalEntity(this);
     }
 
     /**

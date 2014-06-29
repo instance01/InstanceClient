@@ -24,18 +24,18 @@ public class StatBase
     public static IStatType simpleStatType = new IStatType()
     {
         private static final String __OBFID = "CL_00001473";
-        public String format(int par1)
+        public String format(int p_75843_1_)
         {
-            return StatBase.numberFormat.format((long)par1);
+            return StatBase.numberFormat.format((long)p_75843_1_);
         }
     };
     private static DecimalFormat decimalFormat = new DecimalFormat("########0.00");
     public static IStatType timeStatType = new IStatType()
     {
         private static final String __OBFID = "CL_00001474";
-        public String format(int par1)
+        public String format(int p_75843_1_)
         {
-            double var2 = (double)par1 / 20.0D;
+            double var2 = (double)p_75843_1_ / 20.0D;
             double var4 = var2 / 60.0D;
             double var6 = var4 / 60.0D;
             double var8 = var6 / 24.0D;
@@ -46,19 +46,19 @@ public class StatBase
     public static IStatType distanceStatType = new IStatType()
     {
         private static final String __OBFID = "CL_00001475";
-        public String format(int par1)
+        public String format(int p_75843_1_)
         {
-            double var2 = (double)par1 / 100.0D;
+            double var2 = (double)p_75843_1_ / 100.0D;
             double var4 = var2 / 1000.0D;
-            return var4 > 0.5D ? StatBase.decimalFormat.format(var4) + " km" : (var2 > 0.5D ? StatBase.decimalFormat.format(var2) + " m" : par1 + " cm");
+            return var4 > 0.5D ? StatBase.decimalFormat.format(var4) + " km" : (var2 > 0.5D ? StatBase.decimalFormat.format(var2) + " m" : p_75843_1_ + " cm");
         }
     };
     public static IStatType field_111202_k = new IStatType()
     {
         private static final String __OBFID = "CL_00001476";
-        public String format(int par1)
+        public String format(int p_75843_1_)
         {
-            return StatBase.decimalFormat.format((double)par1 * 0.1D);
+            return StatBase.decimalFormat.format((double)p_75843_1_ * 0.1D);
         }
     };
     private static final String __OBFID = "CL_00001472";
@@ -112,9 +112,9 @@ public class StatBase
         return false;
     }
 
-    public String func_75968_a(int par1)
+    public String func_75968_a(int p_75968_1_)
     {
-        return this.type.format(par1);
+        return this.type.format(p_75968_1_);
     }
 
     public IChatComponent func_150951_e()
@@ -133,15 +133,15 @@ public class StatBase
         return var2;
     }
 
-    public boolean equals(Object par1Obj)
+    public boolean equals(Object p_equals_1_)
     {
-        if (this == par1Obj)
+        if (this == p_equals_1_)
         {
             return true;
         }
-        else if (par1Obj != null && this.getClass() == par1Obj.getClass())
+        else if (p_equals_1_ != null && this.getClass() == p_equals_1_.getClass())
         {
-            StatBase var2 = (StatBase)par1Obj;
+            StatBase var2 = (StatBase)p_equals_1_;
             return this.statId.equals(var2.statId);
         }
         else

@@ -15,27 +15,27 @@ public class CrashReportCategory
     private StackTraceElement[] stackTrace = new StackTraceElement[0];
     private static final String __OBFID = "CL_00001409";
 
-    public CrashReportCategory(CrashReport par1CrashReport, String par2Str)
+    public CrashReportCategory(CrashReport p_i1353_1_, String p_i1353_2_)
     {
-        this.theCrashReport = par1CrashReport;
-        this.field_85076_b = par2Str;
+        this.theCrashReport = p_i1353_1_;
+        this.field_85076_b = p_i1353_2_;
     }
 
-    public static String func_85074_a(double par0, double par2, double par4)
+    public static String func_85074_a(double p_85074_0_, double p_85074_2_, double p_85074_4_)
     {
-        return String.format("%.2f,%.2f,%.2f - %s", new Object[] {Double.valueOf(par0), Double.valueOf(par2), Double.valueOf(par4), getLocationInfo(MathHelper.floor_double(par0), MathHelper.floor_double(par2), MathHelper.floor_double(par4))});
+        return String.format("%.2f,%.2f,%.2f - %s", new Object[] {Double.valueOf(p_85074_0_), Double.valueOf(p_85074_2_), Double.valueOf(p_85074_4_), getLocationInfo(MathHelper.floor_double(p_85074_0_), MathHelper.floor_double(p_85074_2_), MathHelper.floor_double(p_85074_4_))});
     }
 
     /**
      * Returns a string with world information on location.Args:x,y,z
      */
-    public static String getLocationInfo(int par0, int par1, int par2)
+    public static String getLocationInfo(int p_85071_0_, int p_85071_1_, int p_85071_2_)
     {
         StringBuilder var3 = new StringBuilder();
 
         try
         {
-            var3.append(String.format("World: (%d,%d,%d)", new Object[] {Integer.valueOf(par0), Integer.valueOf(par1), Integer.valueOf(par2)}));
+            var3.append(String.format("World: (%d,%d,%d)", new Object[] {Integer.valueOf(p_85071_0_), Integer.valueOf(p_85071_1_), Integer.valueOf(p_85071_2_)}));
         }
         catch (Throwable var16)
         {
@@ -55,11 +55,11 @@ public class CrashReportCategory
 
         try
         {
-            var4 = par0 >> 4;
-            var5 = par2 >> 4;
-            var6 = par0 & 15;
-            var7 = par1 >> 4;
-            var8 = par2 & 15;
+            var4 = p_85071_0_ >> 4;
+            var5 = p_85071_2_ >> 4;
+            var6 = p_85071_0_ & 15;
+            var7 = p_85071_1_ >> 4;
+            var8 = p_85071_2_ & 15;
             var9 = var4 << 4;
             var10 = var5 << 4;
             var11 = (var4 + 1 << 4) - 1;
@@ -75,8 +75,8 @@ public class CrashReportCategory
 
         try
         {
-            var4 = par0 >> 9;
-            var5 = par2 >> 9;
+            var4 = p_85071_0_ >> 9;
+            var5 = p_85071_2_ >> 9;
             var6 = var4 << 5;
             var7 = var5 << 5;
             var8 = (var4 + 1 << 5) - 1;
@@ -98,39 +98,39 @@ public class CrashReportCategory
     /**
      * Adds a Crashreport section with the given name with the value set to the result of the given Callable;
      */
-    public void addCrashSectionCallable(String par1Str, Callable par2Callable)
+    public void addCrashSectionCallable(String p_71500_1_, Callable p_71500_2_)
     {
         try
         {
-            this.addCrashSection(par1Str, par2Callable.call());
+            this.addCrashSection(p_71500_1_, p_71500_2_.call());
         }
         catch (Throwable var4)
         {
-            this.addCrashSectionThrowable(par1Str, var4);
+            this.addCrashSectionThrowable(p_71500_1_, var4);
         }
     }
 
     /**
      * Adds a Crashreport section with the given name with the given value (convered .toString())
      */
-    public void addCrashSection(String par1Str, Object par2Obj)
+    public void addCrashSection(String p_71507_1_, Object p_71507_2_)
     {
-        this.field_85077_c.add(new CrashReportCategory.Entry(par1Str, par2Obj));
+        this.field_85077_c.add(new CrashReportCategory.Entry(p_71507_1_, p_71507_2_));
     }
 
     /**
      * Adds a Crashreport section with the given name with the given Throwable
      */
-    public void addCrashSectionThrowable(String par1Str, Throwable par2Throwable)
+    public void addCrashSectionThrowable(String p_71499_1_, Throwable p_71499_2_)
     {
-        this.addCrashSection(par1Str, par2Throwable);
+        this.addCrashSection(p_71499_1_, p_71499_2_);
     }
 
     /**
      * Resets our stack trace according to the current trace, pruning the deepest 3 entries.  The parameter indicates
      * how many additional deepest entries to prune.  Returns the number of entries in the resulting pruned stack trace.
      */
-    public int getPrunedStackTrace(int par1)
+    public int getPrunedStackTrace(int p_85073_1_)
     {
         StackTraceElement[] var2 = Thread.currentThread().getStackTrace();
 
@@ -140,8 +140,8 @@ public class CrashReportCategory
         }
         else
         {
-            this.stackTrace = new StackTraceElement[var2.length - 3 - par1];
-            System.arraycopy(var2, 3 + par1, this.stackTrace, 0, this.stackTrace.length);
+            this.stackTrace = new StackTraceElement[var2.length - 3 - p_85073_1_];
+            System.arraycopy(var2, 3 + p_85073_1_, this.stackTrace, 0, this.stackTrace.length);
             return this.stackTrace.length;
         }
     }
@@ -149,25 +149,25 @@ public class CrashReportCategory
     /**
      * Do the deepest two elements of our saved stack trace match the given elements, in order from the deepest?
      */
-    public boolean firstTwoElementsOfStackTraceMatch(StackTraceElement par1StackTraceElement, StackTraceElement par2StackTraceElement)
+    public boolean firstTwoElementsOfStackTraceMatch(StackTraceElement p_85069_1_, StackTraceElement p_85069_2_)
     {
-        if (this.stackTrace.length != 0 && par1StackTraceElement != null)
+        if (this.stackTrace.length != 0 && p_85069_1_ != null)
         {
             StackTraceElement var3 = this.stackTrace[0];
 
-            if (var3.isNativeMethod() == par1StackTraceElement.isNativeMethod() && var3.getClassName().equals(par1StackTraceElement.getClassName()) && var3.getFileName().equals(par1StackTraceElement.getFileName()) && var3.getMethodName().equals(par1StackTraceElement.getMethodName()))
+            if (var3.isNativeMethod() == p_85069_1_.isNativeMethod() && var3.getClassName().equals(p_85069_1_.getClassName()) && var3.getFileName().equals(p_85069_1_.getFileName()) && var3.getMethodName().equals(p_85069_1_.getMethodName()))
             {
-                if (par2StackTraceElement != null != this.stackTrace.length > 1)
+                if (p_85069_2_ != null != this.stackTrace.length > 1)
                 {
                     return false;
                 }
-                else if (par2StackTraceElement != null && !this.stackTrace[1].equals(par2StackTraceElement))
+                else if (p_85069_2_ != null && !this.stackTrace[1].equals(p_85069_2_))
                 {
                     return false;
                 }
                 else
                 {
-                    this.stackTrace[0] = par1StackTraceElement;
+                    this.stackTrace[0] = p_85069_1_;
                     return true;
                 }
             }
@@ -185,39 +185,39 @@ public class CrashReportCategory
     /**
      * Removes the given number entries from the bottom of the stack trace.
      */
-    public void trimStackTraceEntriesFromBottom(int par1)
+    public void trimStackTraceEntriesFromBottom(int p_85070_1_)
     {
-        StackTraceElement[] var2 = new StackTraceElement[this.stackTrace.length - par1];
+        StackTraceElement[] var2 = new StackTraceElement[this.stackTrace.length - p_85070_1_];
         System.arraycopy(this.stackTrace, 0, var2, 0, var2.length);
         this.stackTrace = var2;
     }
 
-    public void appendToStringBuilder(StringBuilder par1StringBuilder)
+    public void appendToStringBuilder(StringBuilder p_85072_1_)
     {
-        par1StringBuilder.append("-- ").append(this.field_85076_b).append(" --\n");
-        par1StringBuilder.append("Details:");
+        p_85072_1_.append("-- ").append(this.field_85076_b).append(" --\n");
+        p_85072_1_.append("Details:");
         Iterator var2 = this.field_85077_c.iterator();
 
         while (var2.hasNext())
         {
             CrashReportCategory.Entry var3 = (CrashReportCategory.Entry)var2.next();
-            par1StringBuilder.append("\n\t");
-            par1StringBuilder.append(var3.func_85089_a());
-            par1StringBuilder.append(": ");
-            par1StringBuilder.append(var3.func_85090_b());
+            p_85072_1_.append("\n\t");
+            p_85072_1_.append(var3.func_85089_a());
+            p_85072_1_.append(": ");
+            p_85072_1_.append(var3.func_85090_b());
         }
 
         if (this.stackTrace != null && this.stackTrace.length > 0)
         {
-            par1StringBuilder.append("\nStacktrace:");
+            p_85072_1_.append("\nStacktrace:");
             StackTraceElement[] var6 = this.stackTrace;
             int var7 = var6.length;
 
             for (int var4 = 0; var4 < var7; ++var4)
             {
                 StackTraceElement var5 = var6[var4];
-                par1StringBuilder.append("\n\tat ");
-                par1StringBuilder.append(var5.toString());
+                p_85072_1_.append("\n\tat ");
+                p_85072_1_.append(var5.toString());
             }
         }
     }
@@ -277,22 +277,22 @@ public class CrashReportCategory
         private final String field_85091_b;
         private static final String __OBFID = "CL_00001489";
 
-        public Entry(String par1Str, Object par2Obj)
+        public Entry(String p_i1352_1_, Object p_i1352_2_)
         {
-            this.field_85092_a = par1Str;
+            this.field_85092_a = p_i1352_1_;
 
-            if (par2Obj == null)
+            if (p_i1352_2_ == null)
             {
                 this.field_85091_b = "~~NULL~~";
             }
-            else if (par2Obj instanceof Throwable)
+            else if (p_i1352_2_ instanceof Throwable)
             {
-                Throwable var3 = (Throwable)par2Obj;
+                Throwable var3 = (Throwable)p_i1352_2_;
                 this.field_85091_b = "~~ERROR~~ " + var3.getClass().getSimpleName() + ": " + var3.getMessage();
             }
             else
             {
-                this.field_85091_b = par2Obj.toString();
+                this.field_85091_b = p_i1352_2_.toString();
             }
         }
 

@@ -13,21 +13,21 @@ public class EntityCrit2FX extends EntityFX
     private String particleName;
     private static final String __OBFID = "CL_00000899";
 
-    public EntityCrit2FX(World par1World, Entity par2Entity)
+    public EntityCrit2FX(World p_i1199_1_, Entity p_i1199_2_)
     {
-        this(par1World, par2Entity, "crit");
+        this(p_i1199_1_, p_i1199_2_, "crit");
     }
 
-    public EntityCrit2FX(World par1World, Entity par2Entity, String par3Str)
+    public EntityCrit2FX(World p_i1200_1_, Entity p_i1200_2_, String p_i1200_3_)
     {
-        super(par1World, par2Entity.posX, par2Entity.boundingBox.minY + (double)(par2Entity.height / 2.0F), par2Entity.posZ, par2Entity.motionX, par2Entity.motionY, par2Entity.motionZ);
-        this.theEntity = par2Entity;
+        super(p_i1200_1_, p_i1200_2_.posX, p_i1200_2_.boundingBox.minY + (double)(p_i1200_2_.height / 2.0F), p_i1200_2_.posZ, p_i1200_2_.motionX, p_i1200_2_.motionY, p_i1200_2_.motionZ);
+        this.theEntity = p_i1200_2_;
         this.maximumLife = 3;
-        this.particleName = par3Str;
+        this.particleName = p_i1200_3_;
         this.onUpdate();
     }
 
-    public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7) {}
+    public void renderParticle(Tessellator p_70539_1_, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_) {}
 
     /**
      * Called to update the entity's position/logic.

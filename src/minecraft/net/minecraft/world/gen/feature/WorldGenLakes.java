@@ -18,34 +18,34 @@ public class WorldGenLakes extends WorldGenerator
         this.field_150556_a = p_i45455_1_;
     }
 
-    public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
+    public boolean generate(World p_76484_1_, Random p_76484_2_, int p_76484_3_, int p_76484_4_, int p_76484_5_)
     {
-        par3 -= 8;
+        p_76484_3_ -= 8;
 
-        for (par5 -= 8; par4 > 5 && par1World.isAirBlock(par3, par4, par5); --par4)
+        for (p_76484_5_ -= 8; p_76484_4_ > 5 && p_76484_1_.isAirBlock(p_76484_3_, p_76484_4_, p_76484_5_); --p_76484_4_)
         {
             ;
         }
 
-        if (par4 <= 4)
+        if (p_76484_4_ <= 4)
         {
             return false;
         }
         else
         {
-            par4 -= 4;
+            p_76484_4_ -= 4;
             boolean[] var6 = new boolean[2048];
-            int var7 = par2Random.nextInt(4) + 4;
+            int var7 = p_76484_2_.nextInt(4) + 4;
             int var8;
 
             for (var8 = 0; var8 < var7; ++var8)
             {
-                double var9 = par2Random.nextDouble() * 6.0D + 3.0D;
-                double var11 = par2Random.nextDouble() * 4.0D + 2.0D;
-                double var13 = par2Random.nextDouble() * 6.0D + 3.0D;
-                double var15 = par2Random.nextDouble() * (16.0D - var9 - 2.0D) + 1.0D + var9 / 2.0D;
-                double var17 = par2Random.nextDouble() * (8.0D - var11 - 4.0D) + 2.0D + var11 / 2.0D;
-                double var19 = par2Random.nextDouble() * (16.0D - var13 - 2.0D) + 1.0D + var13 / 2.0D;
+                double var9 = p_76484_2_.nextDouble() * 6.0D + 3.0D;
+                double var11 = p_76484_2_.nextDouble() * 4.0D + 2.0D;
+                double var13 = p_76484_2_.nextDouble() * 6.0D + 3.0D;
+                double var15 = p_76484_2_.nextDouble() * (16.0D - var9 - 2.0D) + 1.0D + var9 / 2.0D;
+                double var17 = p_76484_2_.nextDouble() * (8.0D - var11 - 4.0D) + 2.0D + var11 / 2.0D;
+                double var19 = p_76484_2_.nextDouble() * (16.0D - var13 - 2.0D) + 1.0D + var13 / 2.0D;
 
                 for (int var21 = 1; var21 < 15; ++var21)
                 {
@@ -69,7 +69,7 @@ public class WorldGenLakes extends WorldGenerator
 
             int var10;
             int var32;
-            boolean var33;
+            boolean var34;
 
             for (var8 = 0; var8 < 16; ++var8)
             {
@@ -77,18 +77,18 @@ public class WorldGenLakes extends WorldGenerator
                 {
                     for (var10 = 0; var10 < 8; ++var10)
                     {
-                        var33 = !var6[(var8 * 16 + var32) * 8 + var10] && (var8 < 15 && var6[((var8 + 1) * 16 + var32) * 8 + var10] || var8 > 0 && var6[((var8 - 1) * 16 + var32) * 8 + var10] || var32 < 15 && var6[(var8 * 16 + var32 + 1) * 8 + var10] || var32 > 0 && var6[(var8 * 16 + (var32 - 1)) * 8 + var10] || var10 < 7 && var6[(var8 * 16 + var32) * 8 + var10 + 1] || var10 > 0 && var6[(var8 * 16 + var32) * 8 + (var10 - 1)]);
+                        var34 = !var6[(var8 * 16 + var32) * 8 + var10] && (var8 < 15 && var6[((var8 + 1) * 16 + var32) * 8 + var10] || var8 > 0 && var6[((var8 - 1) * 16 + var32) * 8 + var10] || var32 < 15 && var6[(var8 * 16 + var32 + 1) * 8 + var10] || var32 > 0 && var6[(var8 * 16 + (var32 - 1)) * 8 + var10] || var10 < 7 && var6[(var8 * 16 + var32) * 8 + var10 + 1] || var10 > 0 && var6[(var8 * 16 + var32) * 8 + (var10 - 1)]);
 
-                        if (var33)
+                        if (var34)
                         {
-                            Material var12 = par1World.getBlock(par3 + var8, par4 + var10, par5 + var32).getMaterial();
+                            Material var12 = p_76484_1_.getBlock(p_76484_3_ + var8, p_76484_4_ + var10, p_76484_5_ + var32).getMaterial();
 
                             if (var10 >= 4 && var12.isLiquid())
                             {
                                 return false;
                             }
 
-                            if (var10 < 4 && !var12.isSolid() && par1World.getBlock(par3 + var8, par4 + var10, par5 + var32) != this.field_150556_a)
+                            if (var10 < 4 && !var12.isSolid() && p_76484_1_.getBlock(p_76484_3_ + var8, p_76484_4_ + var10, p_76484_5_ + var32) != this.field_150556_a)
                             {
                                 return false;
                             }
@@ -105,7 +105,7 @@ public class WorldGenLakes extends WorldGenerator
                     {
                         if (var6[(var8 * 16 + var32) * 8 + var10])
                         {
-                            par1World.setBlock(par3 + var8, par4 + var10, par5 + var32, var10 >= 4 ? Blocks.air : this.field_150556_a, 0, 2);
+                            p_76484_1_.setBlock(p_76484_3_ + var8, p_76484_4_ + var10, p_76484_5_ + var32, var10 >= 4 ? Blocks.air : this.field_150556_a, 0, 2);
                         }
                     }
                 }
@@ -117,17 +117,17 @@ public class WorldGenLakes extends WorldGenerator
                 {
                     for (var10 = 4; var10 < 8; ++var10)
                     {
-                        if (var6[(var8 * 16 + var32) * 8 + var10] && par1World.getBlock(par3 + var8, par4 + var10 - 1, par5 + var32) == Blocks.dirt && par1World.getSavedLightValue(EnumSkyBlock.Sky, par3 + var8, par4 + var10, par5 + var32) > 0)
+                        if (var6[(var8 * 16 + var32) * 8 + var10] && p_76484_1_.getBlock(p_76484_3_ + var8, p_76484_4_ + var10 - 1, p_76484_5_ + var32) == Blocks.dirt && p_76484_1_.getSavedLightValue(EnumSkyBlock.Sky, p_76484_3_ + var8, p_76484_4_ + var10, p_76484_5_ + var32) > 0)
                         {
-                            BiomeGenBase var35 = par1World.getBiomeGenForCoords(par3 + var8, par5 + var32);
+                            BiomeGenBase var35 = p_76484_1_.getBiomeGenForCoords(p_76484_3_ + var8, p_76484_5_ + var32);
 
                             if (var35.topBlock == Blocks.mycelium)
                             {
-                                par1World.setBlock(par3 + var8, par4 + var10 - 1, par5 + var32, Blocks.mycelium, 0, 2);
+                                p_76484_1_.setBlock(p_76484_3_ + var8, p_76484_4_ + var10 - 1, p_76484_5_ + var32, Blocks.mycelium, 0, 2);
                             }
                             else
                             {
-                                par1World.setBlock(par3 + var8, par4 + var10 - 1, par5 + var32, Blocks.grass, 0, 2);
+                                p_76484_1_.setBlock(p_76484_3_ + var8, p_76484_4_ + var10 - 1, p_76484_5_ + var32, Blocks.grass, 0, 2);
                             }
                         }
                     }
@@ -142,11 +142,11 @@ public class WorldGenLakes extends WorldGenerator
                     {
                         for (var10 = 0; var10 < 8; ++var10)
                         {
-                            var33 = !var6[(var8 * 16 + var32) * 8 + var10] && (var8 < 15 && var6[((var8 + 1) * 16 + var32) * 8 + var10] || var8 > 0 && var6[((var8 - 1) * 16 + var32) * 8 + var10] || var32 < 15 && var6[(var8 * 16 + var32 + 1) * 8 + var10] || var32 > 0 && var6[(var8 * 16 + (var32 - 1)) * 8 + var10] || var10 < 7 && var6[(var8 * 16 + var32) * 8 + var10 + 1] || var10 > 0 && var6[(var8 * 16 + var32) * 8 + (var10 - 1)]);
+                            var34 = !var6[(var8 * 16 + var32) * 8 + var10] && (var8 < 15 && var6[((var8 + 1) * 16 + var32) * 8 + var10] || var8 > 0 && var6[((var8 - 1) * 16 + var32) * 8 + var10] || var32 < 15 && var6[(var8 * 16 + var32 + 1) * 8 + var10] || var32 > 0 && var6[(var8 * 16 + (var32 - 1)) * 8 + var10] || var10 < 7 && var6[(var8 * 16 + var32) * 8 + var10 + 1] || var10 > 0 && var6[(var8 * 16 + var32) * 8 + (var10 - 1)]);
 
-                            if (var33 && (var10 < 4 || par2Random.nextInt(2) != 0) && par1World.getBlock(par3 + var8, par4 + var10, par5 + var32).getMaterial().isSolid())
+                            if (var34 && (var10 < 4 || p_76484_2_.nextInt(2) != 0) && p_76484_1_.getBlock(p_76484_3_ + var8, p_76484_4_ + var10, p_76484_5_ + var32).getMaterial().isSolid())
                             {
-                                par1World.setBlock(par3 + var8, par4 + var10, par5 + var32, Blocks.stone, 0, 2);
+                                p_76484_1_.setBlock(p_76484_3_ + var8, p_76484_4_ + var10, p_76484_5_ + var32, Blocks.stone, 0, 2);
                             }
                         }
                     }
@@ -159,11 +159,11 @@ public class WorldGenLakes extends WorldGenerator
                 {
                     for (var32 = 0; var32 < 16; ++var32)
                     {
-                        byte var34 = 4;
+                        byte var33 = 4;
 
-                        if (par1World.isBlockFreezable(par3 + var8, par4 + var34, par5 + var32))
+                        if (p_76484_1_.isBlockFreezable(p_76484_3_ + var8, p_76484_4_ + var33, p_76484_5_ + var32))
                         {
-                            par1World.setBlock(par3 + var8, par4 + var34, par5 + var32, Blocks.ice, 0, 2);
+                            p_76484_1_.setBlock(p_76484_3_ + var8, p_76484_4_ + var33, p_76484_5_ + var32, Blocks.ice, 0, 2);
                         }
                     }
                 }

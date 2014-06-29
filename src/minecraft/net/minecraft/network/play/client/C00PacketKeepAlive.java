@@ -18,9 +18,9 @@ public class C00PacketKeepAlive extends Packet
         this.field_149461_a = p_i45252_1_;
     }
 
-    public void processPacket(INetHandlerPlayServer p_149459_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149459_1_.processKeepAlive(this);
+        p_148833_1_.processKeepAlive(this);
     }
 
     /**

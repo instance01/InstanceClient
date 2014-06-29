@@ -35,9 +35,9 @@ public class S40PacketDisconnect extends Packet
         p_148840_1_.writeStringToBuffer(IChatComponent.Serializer.func_150696_a(this.field_149167_a));
     }
 
-    public void processPacket(INetHandlerPlayClient p_149166_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149166_1_.handleDisconnect(this);
+        p_148833_1_.handleDisconnect(this);
     }
 
     /**

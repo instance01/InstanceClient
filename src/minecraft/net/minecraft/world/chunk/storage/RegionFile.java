@@ -28,19 +28,19 @@ public class RegionFile
     private long lastModified;
     private static final String __OBFID = "CL_00000381";
 
-    public RegionFile(File par1File)
+    public RegionFile(File p_i2001_1_)
     {
-        this.fileName = par1File;
+        this.fileName = p_i2001_1_;
         this.sizeDelta = 0;
 
         try
         {
-            if (par1File.exists())
+            if (p_i2001_1_.exists())
             {
-                this.lastModified = par1File.lastModified();
+                this.lastModified = p_i2001_1_.lastModified();
             }
 
-            this.dataFile = new RandomAccessFile(par1File, "rw");
+            this.dataFile = new RandomAccessFile(p_i2001_1_, "rw");
             int var2;
 
             if (this.dataFile.length() < 4096L)
@@ -109,10 +109,9 @@ public class RegionFile
     /**
      * args: x, y - get uncompressed chunk stream from the region file
      */
-
-    public synchronized DataInputStream getChunkDataInputStream(int par1, int par2)
+    public synchronized DataInputStream getChunkDataInputStream(int p_76704_1_, int p_76704_2_)
     {
-        if (this.outOfBounds(par1, par2))
+        if (this.outOfBounds(p_76704_1_, p_76704_2_))
         {
             return null;
         }
@@ -120,7 +119,7 @@ public class RegionFile
         {
             try
             {
-                int var3 = this.getOffset(par1, par2);
+                int var3 = this.getOffset(p_76704_1_, p_76704_2_);
 
                 if (var3 == 0)
                 {
@@ -183,24 +182,22 @@ public class RegionFile
     /**
      * args: x, z - get an output stream used to write chunk data, data is on disk when the returned stream is closed
      */
-    @SuppressWarnings("resource")
-	public DataOutputStream getChunkDataOutputStream(int par1, int par2)
+    public DataOutputStream getChunkDataOutputStream(int p_76710_1_, int p_76710_2_)
     {
-        return this.outOfBounds(par1, par2) ? null : new DataOutputStream(new DeflaterOutputStream(new RegionFile.ChunkBuffer(par1, par2)));
+        return this.outOfBounds(p_76710_1_, p_76710_2_) ? null : new DataOutputStream(new DeflaterOutputStream(new RegionFile.ChunkBuffer(p_76710_1_, p_76710_2_)));
     }
 
     /**
      * args: x, z, data, length - write chunk data at (x, z) to disk
      */
-
-    protected synchronized void write(int par1, int par2, byte[] par3ArrayOfByte, int par4)
+    protected synchronized void write(int p_76706_1_, int p_76706_2_, byte[] p_76706_3_, int p_76706_4_)
     {
         try
         {
-            int var5 = this.getOffset(par1, par2);
+            int var5 = this.getOffset(p_76706_1_, p_76706_2_);
             int var6 = var5 >> 8;
             int var7 = var5 & 255;
-            int var8 = (par4 + 5) / 4096 + 1;
+            int var8 = (p_76706_4_ + 5) / 4096 + 1;
 
             if (var8 >= 256)
             {
@@ -209,7 +206,7 @@ public class RegionFile
 
             if (var6 != 0 && var7 == var8)
             {
-                this.write(var6, par3ArrayOfByte, par4);
+                this.write(var6, p_76706_3_, p_76706_4_);
             }
             else
             {
@@ -255,14 +252,14 @@ public class RegionFile
                 if (var10 >= var8)
                 {
                     var6 = var9;
-                    this.setOffset(par1, par2, var9 << 8 | var8);
+                    this.setOffset(p_76706_1_, p_76706_2_, var9 << 8 | var8);
 
                     for (var11 = 0; var11 < var8; ++var11)
                     {
                         this.sectorFree.set(var6 + var11, Boolean.valueOf(false));
                     }
 
-                    this.write(var6, par3ArrayOfByte, par4);
+                    this.write(var6, p_76706_3_, p_76706_4_);
                 }
                 else
                 {
@@ -276,12 +273,12 @@ public class RegionFile
                     }
 
                     this.sizeDelta += 4096 * var8;
-                    this.write(var6, par3ArrayOfByte, par4);
-                    this.setOffset(par1, par2, var6 << 8 | var8);
+                    this.write(var6, p_76706_3_, p_76706_4_);
+                    this.setOffset(p_76706_1_, p_76706_2_, var6 << 8 | var8);
                 }
             }
 
-            this.setChunkTimestamp(par1, par2, (int)(MinecraftServer.getSystemTimeMillis() / 1000L));
+            this.setChunkTimestamp(p_76706_1_, p_76706_2_, (int)(MinecraftServer.getSystemTimeMillis() / 1000L));
         }
         catch (IOException var12)
         {
@@ -292,56 +289,56 @@ public class RegionFile
     /**
      * args: sectorNumber, data, length - write the chunk data to this RegionFile
      */
-    private void write(int par1, byte[] par2ArrayOfByte, int par3) throws IOException
+    private void write(int p_76712_1_, byte[] p_76712_2_, int p_76712_3_) throws IOException
     {
-        this.dataFile.seek((long)(par1 * 4096));
-        this.dataFile.writeInt(par3 + 1);
+        this.dataFile.seek((long)(p_76712_1_ * 4096));
+        this.dataFile.writeInt(p_76712_3_ + 1);
         this.dataFile.writeByte(2);
-        this.dataFile.write(par2ArrayOfByte, 0, par3);
+        this.dataFile.write(p_76712_2_, 0, p_76712_3_);
     }
 
     /**
      * args: x, z - check region bounds
      */
-    private boolean outOfBounds(int par1, int par2)
+    private boolean outOfBounds(int p_76705_1_, int p_76705_2_)
     {
-        return par1 < 0 || par1 >= 32 || par2 < 0 || par2 >= 32;
+        return p_76705_1_ < 0 || p_76705_1_ >= 32 || p_76705_2_ < 0 || p_76705_2_ >= 32;
     }
 
     /**
      * args: x, y - get chunk's offset in region file
      */
-    private int getOffset(int par1, int par2)
+    private int getOffset(int p_76707_1_, int p_76707_2_)
     {
-        return this.offsets[par1 + par2 * 32];
+        return this.offsets[p_76707_1_ + p_76707_2_ * 32];
     }
 
     /**
      * args: x, z, - true if chunk has been saved / converted
      */
-    public boolean isChunkSaved(int par1, int par2)
+    public boolean isChunkSaved(int p_76709_1_, int p_76709_2_)
     {
-        return this.getOffset(par1, par2) != 0;
+        return this.getOffset(p_76709_1_, p_76709_2_) != 0;
     }
 
     /**
      * args: x, z, offset - sets the chunk's offset in the region file
      */
-    private void setOffset(int par1, int par2, int par3) throws IOException
+    private void setOffset(int p_76711_1_, int p_76711_2_, int p_76711_3_) throws IOException
     {
-        this.offsets[par1 + par2 * 32] = par3;
-        this.dataFile.seek((long)((par1 + par2 * 32) * 4));
-        this.dataFile.writeInt(par3);
+        this.offsets[p_76711_1_ + p_76711_2_ * 32] = p_76711_3_;
+        this.dataFile.seek((long)((p_76711_1_ + p_76711_2_ * 32) * 4));
+        this.dataFile.writeInt(p_76711_3_);
     }
 
     /**
      * args: x, z, timestamp - sets the chunk's write timestamp
      */
-    private void setChunkTimestamp(int par1, int par2, int par3) throws IOException
+    private void setChunkTimestamp(int p_76713_1_, int p_76713_2_, int p_76713_3_) throws IOException
     {
-        this.chunkTimestamps[par1 + par2 * 32] = par3;
-        this.dataFile.seek((long)(4096 + (par1 + par2 * 32) * 4));
-        this.dataFile.writeInt(par3);
+        this.chunkTimestamps[p_76713_1_ + p_76713_2_ * 32] = p_76713_3_;
+        this.dataFile.seek((long)(4096 + (p_76713_1_ + p_76713_2_ * 32) * 4));
+        this.dataFile.writeInt(p_76713_3_);
     }
 
     /**
@@ -361,11 +358,11 @@ public class RegionFile
         private int chunkZ;
         private static final String __OBFID = "CL_00000382";
 
-        public ChunkBuffer(int par2, int par3)
+        public ChunkBuffer(int p_i2000_2_, int p_i2000_3_)
         {
             super(8096);
-            this.chunkX = par2;
-            this.chunkZ = par3;
+            this.chunkX = p_i2000_2_;
+            this.chunkZ = p_i2000_3_;
         }
 
         public void close() throws IOException

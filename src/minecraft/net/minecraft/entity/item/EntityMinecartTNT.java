@@ -14,14 +14,14 @@ public class EntityMinecartTNT extends EntityMinecart
     private int minecartTNTFuse = -1;
     private static final String __OBFID = "CL_00001680";
 
-    public EntityMinecartTNT(World par1World)
+    public EntityMinecartTNT(World p_i1727_1_)
     {
-        super(par1World);
+        super(p_i1727_1_);
     }
 
-    public EntityMinecartTNT(World par1World, double par2, double par4, double par6)
+    public EntityMinecartTNT(World p_i1728_1_, double p_i1728_2_, double p_i1728_4_, double p_i1728_6_)
     {
-        super(par1World, par2, par4, par6);
+        super(p_i1728_1_, p_i1728_2_, p_i1728_4_, p_i1728_6_);
     }
 
     public int getMinecartType()
@@ -62,17 +62,17 @@ public class EntityMinecartTNT extends EntityMinecart
         }
     }
 
-    public void killMinecart(DamageSource par1DamageSource)
+    public void killMinecart(DamageSource p_94095_1_)
     {
-        super.killMinecart(par1DamageSource);
+        super.killMinecart(p_94095_1_);
         double var2 = this.motionX * this.motionX + this.motionZ * this.motionZ;
 
-        if (!par1DamageSource.isExplosion())
+        if (!p_94095_1_.isExplosion())
         {
             this.entityDropItem(new ItemStack(Blocks.tnt, 1), 0.0F);
         }
 
-        if (par1DamageSource.isFireDamage() || par1DamageSource.isExplosion() || var2 >= 0.009999999776482582D)
+        if (p_94095_1_.isFireDamage() || p_94095_1_.isExplosion() || var2 >= 0.009999999776482582D)
         {
             this.explodeCart(var2);
         }
@@ -81,11 +81,11 @@ public class EntityMinecartTNT extends EntityMinecart
     /**
      * Makes the minecart explode.
      */
-    protected void explodeCart(double par1)
+    protected void explodeCart(double p_94103_1_)
     {
         if (!this.worldObj.isClient)
         {
-            double var3 = Math.sqrt(par1);
+            double var3 = Math.sqrt(p_94103_1_);
 
             if (var3 > 5.0D)
             {
@@ -100,37 +100,37 @@ public class EntityMinecartTNT extends EntityMinecart
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
-    protected void fall(float par1)
+    protected void fall(float p_70069_1_)
     {
-        if (par1 >= 3.0F)
+        if (p_70069_1_ >= 3.0F)
         {
-            float var2 = par1 / 10.0F;
+            float var2 = p_70069_1_ / 10.0F;
             this.explodeCart((double)(var2 * var2));
         }
 
-        super.fall(par1);
+        super.fall(p_70069_1_);
     }
 
     /**
      * Called every tick the minecart is on an activator rail. Args: x, y, z, is the rail receiving power
      */
-    public void onActivatorRailPass(int par1, int par2, int par3, boolean par4)
+    public void onActivatorRailPass(int p_96095_1_, int p_96095_2_, int p_96095_3_, boolean p_96095_4_)
     {
-        if (par4 && this.minecartTNTFuse < 0)
+        if (p_96095_4_ && this.minecartTNTFuse < 0)
         {
             this.ignite();
         }
     }
 
-    public void handleHealthUpdate(byte par1)
+    public void handleHealthUpdate(byte p_70103_1_)
     {
-        if (par1 == 10)
+        if (p_70103_1_ == 10)
         {
             this.ignite();
         }
         else
         {
-            super.handleHealthUpdate(par1);
+            super.handleHealthUpdate(p_70103_1_);
         }
     }
 
@@ -174,22 +174,22 @@ public class EntityMinecartTNT extends EntityMinecart
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    protected void readEntityFromNBT(NBTTagCompound p_70037_1_)
     {
-        super.readEntityFromNBT(par1NBTTagCompound);
+        super.readEntityFromNBT(p_70037_1_);
 
-        if (par1NBTTagCompound.func_150297_b("TNTFuse", 99))
+        if (p_70037_1_.func_150297_b("TNTFuse", 99))
         {
-            this.minecartTNTFuse = par1NBTTagCompound.getInteger("TNTFuse");
+            this.minecartTNTFuse = p_70037_1_.getInteger("TNTFuse");
         }
     }
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    protected void writeEntityToNBT(NBTTagCompound p_70014_1_)
     {
-        super.writeEntityToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setInteger("TNTFuse", this.minecartTNTFuse);
+        super.writeEntityToNBT(p_70014_1_);
+        p_70014_1_.setInteger("TNTFuse", this.minecartTNTFuse);
     }
 }

@@ -47,11 +47,11 @@ public abstract class WorldProvider
     /**
      * associate an existing world with a World provider, and setup its lightbrightness table
      */
-    public final void registerWorld(World par1World)
+    public final void registerWorld(World p_76558_1_)
     {
-        this.worldObj = par1World;
-        this.terrainType = par1World.getWorldInfo().getTerrainType();
-        this.field_82913_c = par1World.getWorldInfo().getGeneratorOptions();
+        this.worldObj = p_76558_1_;
+        this.terrainType = p_76558_1_.getWorldInfo().getTerrainType();
+        this.field_82913_c = p_76558_1_.getWorldInfo().getGeneratorOptions();
         this.registerWorldChunkManager();
         this.generateLightBrightnessTable();
     }
@@ -97,18 +97,18 @@ public abstract class WorldProvider
     /**
      * Will check if the x, z position specified is alright to be set as the map spawn point
      */
-    public boolean canCoordinateBeSpawn(int par1, int par2)
+    public boolean canCoordinateBeSpawn(int p_76566_1_, int p_76566_2_)
     {
-        return this.worldObj.getTopBlock(par1, par2) == Blocks.grass;
+        return this.worldObj.getTopBlock(p_76566_1_, p_76566_2_) == Blocks.grass;
     }
 
     /**
      * Calculates the angle of sun and moon in the sky relative to a specified time (usually worldTime)
      */
-    public float calculateCelestialAngle(long par1, float par3)
+    public float calculateCelestialAngle(long p_76563_1_, float p_76563_3_)
     {
-        int var4 = (int)(par1 % 24000L);
-        float var5 = ((float)var4 + par3) / 24000.0F - 0.25F;
+        int var4 = (int)(p_76563_1_ % 24000L);
+        float var5 = ((float)var4 + p_76563_3_) / 24000.0F - 0.25F;
 
         if (var5 < 0.0F)
         {
@@ -126,9 +126,9 @@ public abstract class WorldProvider
         return var5;
     }
 
-    public int getMoonPhase(long par1)
+    public int getMoonPhase(long p_76559_1_)
     {
-        return (int)(par1 / 24000L % 8L + 8L) % 8;
+        return (int)(p_76559_1_ / 24000L % 8L + 8L) % 8;
     }
 
     /**
@@ -142,10 +142,10 @@ public abstract class WorldProvider
     /**
      * Returns array with sunrise/sunset colors
      */
-    public float[] calcSunriseSunsetColors(float par1, float par2)
+    public float[] calcSunriseSunsetColors(float p_76560_1_, float p_76560_2_)
     {
         float var3 = 0.4F;
-        float var4 = MathHelper.cos(par1 * (float)Math.PI * 2.0F) - 0.0F;
+        float var4 = MathHelper.cos(p_76560_1_ * (float)Math.PI * 2.0F) - 0.0F;
         float var5 = -0.0F;
 
         if (var4 >= var5 - var3 && var4 <= var5 + var3)
@@ -168,9 +168,9 @@ public abstract class WorldProvider
     /**
      * Return Vec3D with biome specific fog color
      */
-    public Vec3 getFogColor(float par1, float par2)
+    public Vec3 getFogColor(float p_76562_1_, float p_76562_2_)
     {
-        float var3 = MathHelper.cos(par1 * (float)Math.PI * 2.0F) * 2.0F + 0.5F;
+        float var3 = MathHelper.cos(p_76562_1_ * (float)Math.PI * 2.0F) * 2.0F + 0.5F;
 
         if (var3 < 0.0F)
         {
@@ -188,7 +188,7 @@ public abstract class WorldProvider
         var4 *= var3 * 0.94F + 0.06F;
         var5 *= var3 * 0.94F + 0.06F;
         var6 *= var3 * 0.91F + 0.09F;
-        return this.worldObj.getWorldVec3Pool().getVecFromPool((double)var4, (double)var5, (double)var6);
+        return Vec3.createVectorHelper((double)var4, (double)var5, (double)var6);
     }
 
     /**
@@ -199,9 +199,9 @@ public abstract class WorldProvider
         return true;
     }
 
-    public static WorldProvider getProviderForDimension(int par0)
+    public static WorldProvider getProviderForDimension(int p_76570_0_)
     {
-        return (WorldProvider)(par0 == -1 ? new WorldProviderHell() : (par0 == 0 ? new WorldProviderSurface() : (par0 == 1 ? new WorldProviderEnd() : null)));
+        return (WorldProvider)(p_76570_0_ == -1 ? new WorldProviderHell() : (p_76570_0_ == 0 ? new WorldProviderSurface() : (p_76570_0_ == 1 ? new WorldProviderEnd() : null)));
     }
 
     /**
@@ -252,7 +252,7 @@ public abstract class WorldProvider
     /**
      * Returns true if the given X,Z coordinate should show environmental fog.
      */
-    public boolean doesXZShowFog(int par1, int par2)
+    public boolean doesXZShowFog(int p_76568_1_, int p_76568_2_)
     {
         return false;
     }

@@ -31,11 +31,11 @@ public class GuiMerchant extends GuiContainer
     private String field_147040_A;
     private static final String __OBFID = "CL_00000762";
 
-    public GuiMerchant(InventoryPlayer par1InventoryPlayer, IMerchant par2IMerchant, World par3World, String par4Str)
+    public GuiMerchant(InventoryPlayer p_i1096_1_, IMerchant p_i1096_2_, World p_i1096_3_, String p_i1096_4_)
     {
-        super(new ContainerMerchant(par1InventoryPlayer, par2IMerchant, par3World));
-        this.field_147037_w = par2IMerchant;
-        this.field_147040_A = par4Str != null && par4Str.length() >= 1 ? par4Str : I18n.format("entity.Villager.name", new Object[0]);
+        super(new ContainerMerchant(p_i1096_1_, p_i1096_2_, p_i1096_3_));
+        this.field_147037_w = p_i1096_2_;
+        this.field_147040_A = p_i1096_4_ != null && p_i1096_4_.length() >= 1 ? p_i1096_4_ : I18n.format("entity.Villager.name", new Object[0]);
     }
 
     /**
@@ -137,9 +137,9 @@ public class GuiMerchant extends GuiContainer
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
         MerchantRecipeList var4 = this.field_147037_w.getRecipes(this.mc.thePlayer);
 
         if (var4 != null && !var4.isEmpty())
@@ -172,17 +172,17 @@ public class GuiMerchant extends GuiContainer
             itemRender.zLevel = 0.0F;
             GL11.glDisable(GL11.GL_LIGHTING);
 
-            if (this.func_146978_c(36, 24, 16, 16, par1, par2))
+            if (this.func_146978_c(36, 24, 16, 16, p_73863_1_, p_73863_2_))
             {
-                this.func_146285_a(var9, par1, par2);
+                this.func_146285_a(var9, p_73863_1_, p_73863_2_);
             }
-            else if (var10 != null && this.func_146978_c(62, 24, 16, 16, par1, par2))
+            else if (var10 != null && this.func_146978_c(62, 24, 16, 16, p_73863_1_, p_73863_2_))
             {
-                this.func_146285_a(var10, par1, par2);
+                this.func_146285_a(var10, p_73863_1_, p_73863_2_);
             }
-            else if (this.func_146978_c(120, 24, 16, 16, par1, par2))
+            else if (this.func_146978_c(120, 24, 16, 16, p_73863_1_, p_73863_2_))
             {
-                this.func_146285_a(var11, par1, par2);
+                this.func_146285_a(var11, p_73863_1_, p_73863_2_);
             }
 
             GL11.glPopMatrix();
@@ -202,10 +202,10 @@ public class GuiMerchant extends GuiContainer
         private final boolean field_146157_o;
         private static final String __OBFID = "CL_00000763";
 
-        public MerchantButton(int par1, int par2, int par3, boolean par4)
+        public MerchantButton(int p_i1095_1_, int p_i1095_2_, int p_i1095_3_, boolean p_i1095_4_)
         {
-            super(par1, par2, par3, 12, 19, "");
-            this.field_146157_o = par4;
+            super(p_i1095_1_, p_i1095_2_, p_i1095_3_, 12, 19, "");
+            this.field_146157_o = p_i1095_4_;
         }
 
         public void drawButton(Minecraft p_146112_1_, int p_146112_2_, int p_146112_3_)

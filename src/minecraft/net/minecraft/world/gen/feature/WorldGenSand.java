@@ -20,33 +20,33 @@ public class WorldGenSand extends WorldGenerator
         this.radius = p_i45462_2_;
     }
 
-    public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
+    public boolean generate(World p_76484_1_, Random p_76484_2_, int p_76484_3_, int p_76484_4_, int p_76484_5_)
     {
-        if (par1World.getBlock(par3, par4, par5).getMaterial() != Material.water)
+        if (p_76484_1_.getBlock(p_76484_3_, p_76484_4_, p_76484_5_).getMaterial() != Material.water)
         {
             return false;
         }
         else
         {
-            int var6 = par2Random.nextInt(this.radius - 2) + 2;
+            int var6 = p_76484_2_.nextInt(this.radius - 2) + 2;
             byte var7 = 2;
 
-            for (int var8 = par3 - var6; var8 <= par3 + var6; ++var8)
+            for (int var8 = p_76484_3_ - var6; var8 <= p_76484_3_ + var6; ++var8)
             {
-                for (int var9 = par5 - var6; var9 <= par5 + var6; ++var9)
+                for (int var9 = p_76484_5_ - var6; var9 <= p_76484_5_ + var6; ++var9)
                 {
-                    int var10 = var8 - par3;
-                    int var11 = var9 - par5;
+                    int var10 = var8 - p_76484_3_;
+                    int var11 = var9 - p_76484_5_;
 
                     if (var10 * var10 + var11 * var11 <= var6 * var6)
                     {
-                        for (int var12 = par4 - var7; var12 <= par4 + var7; ++var12)
+                        for (int var12 = p_76484_4_ - var7; var12 <= p_76484_4_ + var7; ++var12)
                         {
-                            Block var13 = par1World.getBlock(var8, var12, var9);
+                            Block var13 = p_76484_1_.getBlock(var8, var12, var9);
 
                             if (var13 == Blocks.dirt || var13 == Blocks.grass)
                             {
-                                par1World.setBlock(var8, var12, var9, this.field_150517_a, 0, 2);
+                                p_76484_1_.setBlock(var8, var12, var9, this.field_150517_a, 0, 2);
                             }
                         }
                     }

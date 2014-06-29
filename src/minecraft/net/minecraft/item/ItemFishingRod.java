@@ -39,33 +39,33 @@ public class ItemFishingRod extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    public ItemStack onItemRightClick(ItemStack p_77659_1_, World p_77659_2_, EntityPlayer p_77659_3_)
     {
-        if (par3EntityPlayer.fishEntity != null)
+        if (p_77659_3_.fishEntity != null)
         {
-            int var4 = par3EntityPlayer.fishEntity.func_146034_e();
-            par1ItemStack.damageItem(var4, par3EntityPlayer);
-            par3EntityPlayer.swingItem();
+            int var4 = p_77659_3_.fishEntity.func_146034_e();
+            p_77659_1_.damageItem(var4, p_77659_3_);
+            p_77659_3_.swingItem();
         }
         else
         {
-            par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+            p_77659_2_.playSoundAtEntity(p_77659_3_, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
-            if (!par2World.isClient)
+            if (!p_77659_2_.isClient)
             {
-                par2World.spawnEntityInWorld(new EntityFishHook(par2World, par3EntityPlayer));
+                p_77659_2_.spawnEntityInWorld(new EntityFishHook(p_77659_2_, p_77659_3_));
             }
 
-            par3EntityPlayer.swingItem();
+            p_77659_3_.swingItem();
         }
 
-        return par1ItemStack;
+        return p_77659_1_;
     }
 
-    public void registerIcons(IIconRegister par1IconRegister)
+    public void registerIcons(IIconRegister p_94581_1_)
     {
-        this.itemIcon = par1IconRegister.registerIcon(this.getIconString() + "_uncast");
-        this.theIcon = par1IconRegister.registerIcon(this.getIconString() + "_cast");
+        this.itemIcon = p_94581_1_.registerIcon(this.getIconString() + "_uncast");
+        this.theIcon = p_94581_1_.registerIcon(this.getIconString() + "_cast");
     }
 
     public IIcon func_94597_g()
@@ -76,9 +76,9 @@ public class ItemFishingRod extends Item
     /**
      * Checks isDamagable and if it cannot be stacked
      */
-    public boolean isItemTool(ItemStack par1ItemStack)
+    public boolean isItemTool(ItemStack p_77616_1_)
     {
-        return super.isItemTool(par1ItemStack);
+        return super.isItemTool(p_77616_1_);
     }
 
     /**

@@ -13,17 +13,17 @@ public class EnchantmentFishingSpeed extends Enchantment
     /**
      * Returns the minimal value of enchantability needed on the enchantment level passed.
      */
-    public int getMinEnchantability(int par1)
+    public int getMinEnchantability(int p_77321_1_)
     {
-        return 15 + (par1 - 1) * 9;
+        return 15 + (p_77321_1_ - 1) * 9;
     }
 
     /**
      * Returns the maximum value of enchantability nedded on the enchantment level passed.
      */
-    public int getMaxEnchantability(int par1)
+    public int getMaxEnchantability(int p_77317_1_)
     {
-        return super.getMinEnchantability(par1) + 50;
+        return super.getMinEnchantability(p_77317_1_) + 50;
     }
 
     /**

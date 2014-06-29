@@ -23,9 +23,9 @@ public class S2FPacketSetSlot extends Packet
         this.field_149178_c = p_i45188_3_ == null ? null : p_i45188_3_.copy();
     }
 
-    public void processPacket(INetHandlerPlayClient p_149176_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149176_1_.handleSetSlot(this);
+        p_148833_1_.handleSetSlot(this);
     }
 
     /**
@@ -33,7 +33,7 @@ public class S2FPacketSetSlot extends Packet
      */
     public void readPacketData(PacketBuffer p_148837_1_) throws IOException
     {
-        this.field_149179_a = p_148837_1_.readUnsignedByte();
+        this.field_149179_a = p_148837_1_.readByte();
         this.field_149177_b = p_148837_1_.readShort();
         this.field_149178_c = p_148837_1_.readItemStackFromBuffer();
     }

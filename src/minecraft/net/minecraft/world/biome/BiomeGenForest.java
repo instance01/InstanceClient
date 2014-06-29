@@ -98,7 +98,7 @@ public class BiomeGenForest extends BiomeGenBase
         }
     }
 
-    public void decorate(World par1World, Random par2Random, int par3, int par4)
+    public void decorate(World p_76728_1_, Random p_76728_2_, int p_76728_3_, int p_76728_4_)
     {
         int var5;
         int var6;
@@ -112,30 +112,30 @@ public class BiomeGenForest extends BiomeGenBase
             {
                 for (var6 = 0; var6 < 4; ++var6)
                 {
-                    var7 = par3 + var5 * 4 + 1 + 8 + par2Random.nextInt(3);
-                    var8 = par4 + var6 * 4 + 1 + 8 + par2Random.nextInt(3);
-                    var9 = par1World.getHeightValue(var7, var8);
+                    var7 = p_76728_3_ + var5 * 4 + 1 + 8 + p_76728_2_.nextInt(3);
+                    var8 = p_76728_4_ + var6 * 4 + 1 + 8 + p_76728_2_.nextInt(3);
+                    var9 = p_76728_1_.getHeightValue(var7, var8);
 
-                    if (par2Random.nextInt(20) == 0)
+                    if (p_76728_2_.nextInt(20) == 0)
                     {
                         WorldGenBigMushroom var10 = new WorldGenBigMushroom();
-                        var10.generate(par1World, par2Random, var7, var9, var8);
+                        var10.generate(p_76728_1_, p_76728_2_, var7, var9, var8);
                     }
                     else
                     {
-                        WorldGenAbstractTree var12 = this.func_150567_a(par2Random);
+                        WorldGenAbstractTree var12 = this.func_150567_a(p_76728_2_);
                         var12.setScale(1.0D, 1.0D, 1.0D);
 
-                        if (var12.generate(par1World, par2Random, var7, var9, var8))
+                        if (var12.generate(p_76728_1_, p_76728_2_, var7, var9, var8))
                         {
-                            var12.func_150524_b(par1World, par2Random, var7, var9, var8);
+                            var12.func_150524_b(p_76728_1_, p_76728_2_, var7, var9, var8);
                         }
                     }
                 }
             }
         }
 
-        var5 = par2Random.nextInt(5) - 3;
+        var5 = p_76728_2_.nextInt(5) - 3;
 
         if (this.field_150632_aF == 1)
         {
@@ -146,7 +146,7 @@ public class BiomeGenForest extends BiomeGenBase
 
         while (var6 < var5)
         {
-            var7 = par2Random.nextInt(3);
+            var7 = p_76728_2_.nextInt(3);
 
             if (var7 == 0)
             {
@@ -167,11 +167,11 @@ public class BiomeGenForest extends BiomeGenBase
             {
                 if (var8 < 5)
                 {
-                    var9 = par3 + par2Random.nextInt(16) + 8;
-                    int var13 = par4 + par2Random.nextInt(16) + 8;
-                    int var11 = par2Random.nextInt(par1World.getHeightValue(var9, var13) + 32);
+                    var9 = p_76728_3_ + p_76728_2_.nextInt(16) + 8;
+                    int var13 = p_76728_4_ + p_76728_2_.nextInt(16) + 8;
+                    int var11 = p_76728_2_.nextInt(p_76728_1_.getHeightValue(var9, var13) + 32);
 
-                    if (!field_150610_ae.generate(par1World, par2Random, var9, var11, var13))
+                    if (!field_150610_ae.generate(p_76728_1_, p_76728_2_, var9, var11, var13))
                     {
                         ++var8;
                         continue;
@@ -183,7 +183,7 @@ public class BiomeGenForest extends BiomeGenBase
             }
         }
 
-        super.decorate(par1World, par2Random, par3, par4);
+        super.decorate(p_76728_1_, p_76728_2_, p_76728_3_, p_76728_4_);
     }
 
     /**
@@ -210,16 +210,17 @@ public class BiomeGenForest extends BiomeGenBase
         {
             return this.biomeID != BiomeGenBase.field_150583_P.biomeID && this.biomeID != BiomeGenBase.field_150582_Q.biomeID ? new BiomeGenMutated(this.biomeID + 128, this)
             {
-                public void decorate(World var1, Random var2, int var3, int var4)
+                private static final String __OBFID = "CL_00000172";
+                public void decorate(World p_76728_1_, Random p_76728_2_, int p_76728_3_, int p_76728_4_)
                 {
-                    this.field_150611_aD.decorate(var1, var2, var3, var4);
+                    this.field_150611_aD.decorate(p_76728_1_, p_76728_2_, p_76728_3_, p_76728_4_);
                 }
             }: new BiomeGenMutated(this.biomeID + 128, this)
             {
-                private static final String __OBFID = "CL_00000172";
-                public WorldGenAbstractTree func_150567_a(Random var1)
+                private static final String __OBFID = "CL_00001861";
+                public WorldGenAbstractTree func_150567_a(Random p_150567_1_)
                 {
-                    return var1.nextBoolean() ? BiomeGenForest.field_150629_aC : BiomeGenForest.field_150630_aD;
+                    return p_150567_1_.nextBoolean() ? BiomeGenForest.field_150629_aC : BiomeGenForest.field_150630_aD;
                 }
             };
         }

@@ -59,7 +59,7 @@ public abstract class BlockRotatedPillar extends Block
         return var3 == 0 && (p_149691_1_ == 1 || p_149691_1_ == 0) ? this.func_150161_d(var4) : (var3 == 4 && (p_149691_1_ == 5 || p_149691_1_ == 4) ? this.func_150161_d(var4) : (var3 == 8 && (p_149691_1_ == 2 || p_149691_1_ == 3) ? this.func_150161_d(var4) : this.func_150163_b(var4)));
     }
 
-    protected abstract IIcon func_150163_b(int var1);
+    protected abstract IIcon func_150163_b(int p_150163_1_);
 
     protected IIcon func_150161_d(int p_150161_1_)
     {

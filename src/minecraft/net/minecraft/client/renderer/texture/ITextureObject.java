@@ -5,7 +5,7 @@ import net.minecraft.client.resources.IResourceManager;
 
 public interface ITextureObject
 {
-    void loadTexture(IResourceManager var1) throws IOException;
+    void loadTexture(IResourceManager p_110551_1_) throws IOException;
 
     int getGlTextureId();
 }

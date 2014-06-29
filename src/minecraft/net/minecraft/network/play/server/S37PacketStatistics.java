@@ -24,9 +24,9 @@ public class S37PacketStatistics extends Packet
         this.field_148976_a = p_i45173_1_;
     }
 
-    public void processPacket(INetHandlerPlayClient p_148975_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_148975_1_.handleStatistics(this);
+        p_148833_1_.handleStatistics(this);
     }
 
     /**

@@ -151,8 +151,8 @@ public class BlockTripWireHook extends Block
         int var17 = Direction.offsetZ[var10];
         int var18 = 0;
         int[] var19 = new int[42];
-        int var21;
         int var20;
+        int var21;
         int var22;
         int var24;
 

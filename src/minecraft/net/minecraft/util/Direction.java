@@ -26,8 +26,8 @@ public class Direction
     /**
      * Returns the movement direction from a velocity vector.
      */
-    public static int getMovementDirection(double par0, double par2)
+    public static int getMovementDirection(double p_82372_0_, double p_82372_2_)
     {
-        return MathHelper.abs((float)par0) > MathHelper.abs((float)par2) ? (par0 > 0.0D ? 1 : 3) : (par2 > 0.0D ? 2 : 0);
+        return MathHelper.abs((float)p_82372_0_) > MathHelper.abs((float)p_82372_2_) ? (p_82372_0_ > 0.0D ? 1 : 3) : (p_82372_2_ > 0.0D ? 2 : 0);
     }
 }

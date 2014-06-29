@@ -15,11 +15,11 @@ public class NBTTagString extends NBTBase
         this.data = "";
     }
 
-    public NBTTagString(String par1Str)
+    public NBTTagString(String p_i1389_1_)
     {
-        this.data = par1Str;
+        this.data = p_i1389_1_;
 
-        if (par1Str == null)
+        if (p_i1389_1_ == null)
         {
             throw new IllegalArgumentException("Empty string not allowed");
         }
@@ -28,17 +28,15 @@ public class NBTTagString extends NBTBase
     /**
      * Write the actual data contents of the tag, implemented in NBT extension classes
      */
-    void write(DataOutput par1DataOutput) throws IOException
+    void write(DataOutput p_74734_1_) throws IOException
     {
-        par1DataOutput.writeUTF(this.data);
+        p_74734_1_.writeUTF(this.data);
     }
 
-    /**
-     * Read the actual data contents of the tag, implemented in NBT extension classes
-     */
-    void load(DataInput par1DataInput, int par2) throws IOException
+    void func_152446_a(DataInput p_152446_1_, int p_152446_2_, NBTSizeTracker p_152446_3_) throws IOException
     {
-        this.data = par1DataInput.readUTF();
+        this.data = p_152446_1_.readUTF();
+        p_152446_3_.func_152450_a((long)(16 * this.data.length()));
     }
 
     /**
@@ -62,15 +60,15 @@ public class NBTTagString extends NBTBase
         return new NBTTagString(this.data);
     }
 
-    public boolean equals(Object par1Obj)
+    public boolean equals(Object p_equals_1_)
     {
-        if (!super.equals(par1Obj))
+        if (!super.equals(p_equals_1_))
         {
             return false;
         }
         else
         {
-            NBTTagString var2 = (NBTTagString)par1Obj;
+            NBTTagString var2 = (NBTTagString)p_equals_1_;
             return this.data == null && var2.data == null || this.data != null && this.data.equals(var2.data);
         }
     }

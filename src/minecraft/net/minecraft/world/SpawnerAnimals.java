@@ -36,9 +36,9 @@ public final class SpawnerAnimals
      * adds all chunks within the spawn radius of the players to eligibleChunksForSpawning. pars: the world,
      * hostileCreatures, passiveCreatures. returns number of eligible chunks.
      */
-    public int findChunksForSpawning(WorldServer par1WorldServer, boolean par2, boolean par3, boolean par4)
+    public int findChunksForSpawning(WorldServer p_77192_1_, boolean p_77192_2_, boolean p_77192_3_, boolean p_77192_4_)
     {
-        if (!par2 && !par3)
+        if (!p_77192_2_ && !p_77192_3_)
         {
             return 0;
         }
@@ -48,9 +48,9 @@ public final class SpawnerAnimals
             int var5;
             int var8;
 
-            for (var5 = 0; var5 < par1WorldServer.playerEntities.size(); ++var5)
+            for (var5 = 0; var5 < p_77192_1_.playerEntities.size(); ++var5)
             {
-                EntityPlayer var6 = (EntityPlayer)par1WorldServer.playerEntities.get(var5);
+                EntityPlayer var6 = (EntityPlayer)p_77192_1_.playerEntities.get(var5);
                 int var7 = MathHelper.floor_double(var6.posX / 16.0D);
                 var8 = MathHelper.floor_double(var6.posZ / 16.0D);
                 byte var9 = 8;
@@ -75,7 +75,7 @@ public final class SpawnerAnimals
             }
 
             var5 = 0;
-            ChunkCoordinates var34 = par1WorldServer.getSpawnPoint();
+            ChunkCoordinates var34 = p_77192_1_.getSpawnPoint();
             EnumCreatureType[] var35 = EnumCreatureType.values();
             var8 = var35.length;
 
@@ -83,23 +83,23 @@ public final class SpawnerAnimals
             {
                 EnumCreatureType var37 = var35[var36];
 
-                if ((!var37.getPeacefulCreature() || par3) && (var37.getPeacefulCreature() || par2) && (!var37.getAnimal() || par4) && par1WorldServer.countEntities(var37.getCreatureClass()) <= var37.getMaxNumberOfCreature() * this.eligibleChunksForSpawning.size() / 256)
+                if ((!var37.getPeacefulCreature() || p_77192_3_) && (var37.getPeacefulCreature() || p_77192_2_) && (!var37.getAnimal() || p_77192_4_) && p_77192_1_.countEntities(var37.getCreatureClass()) <= var37.getMaxNumberOfCreature() * this.eligibleChunksForSpawning.size() / 256)
                 {
-                    Iterator var39 = this.eligibleChunksForSpawning.keySet().iterator();
+                    Iterator var38 = this.eligibleChunksForSpawning.keySet().iterator();
                     label110:
 
-                    while (var39.hasNext())
+                    while (var38.hasNext())
                     {
-                        ChunkCoordIntPair var38 = (ChunkCoordIntPair)var39.next();
+                        ChunkCoordIntPair var39 = (ChunkCoordIntPair)var38.next();
 
-                        if (!((Boolean)this.eligibleChunksForSpawning.get(var38)).booleanValue())
+                        if (!((Boolean)this.eligibleChunksForSpawning.get(var39)).booleanValue())
                         {
-                            ChunkPosition var40 = func_151350_a(par1WorldServer, var38.chunkXPos, var38.chunkZPos);
+                            ChunkPosition var40 = func_151350_a(p_77192_1_, var39.chunkXPos, var39.chunkZPos);
                             int var14 = var40.field_151329_a;
                             int var15 = var40.field_151327_b;
                             int var16 = var40.field_151328_c;
 
-                            if (!par1WorldServer.getBlock(var14, var15, var16).isNormalCube() && par1WorldServer.getBlock(var14, var15, var16).getMaterial() == var37.getCreatureMaterial())
+                            if (!p_77192_1_.getBlock(var14, var15, var16).isNormalCube() && p_77192_1_.getBlock(var14, var15, var16).getMaterial() == var37.getCreatureMaterial())
                             {
                                 int var17 = 0;
                                 int var18 = 0;
@@ -120,17 +120,17 @@ public final class SpawnerAnimals
                                         {
                                             label103:
                                             {
-                                                var19 += par1WorldServer.rand.nextInt(var22) - par1WorldServer.rand.nextInt(var22);
-                                                var20 += par1WorldServer.rand.nextInt(1) - par1WorldServer.rand.nextInt(1);
-                                                var21 += par1WorldServer.rand.nextInt(var22) - par1WorldServer.rand.nextInt(var22);
+                                                var19 += p_77192_1_.rand.nextInt(var22) - p_77192_1_.rand.nextInt(var22);
+                                                var20 += p_77192_1_.rand.nextInt(1) - p_77192_1_.rand.nextInt(1);
+                                                var21 += p_77192_1_.rand.nextInt(var22) - p_77192_1_.rand.nextInt(var22);
 
-                                                if (canCreatureTypeSpawnAtLocation(var37, par1WorldServer, var19, var20, var21))
+                                                if (canCreatureTypeSpawnAtLocation(var37, p_77192_1_, var19, var20, var21))
                                                 {
                                                     float var26 = (float)var19 + 0.5F;
                                                     float var27 = (float)var20;
                                                     float var28 = (float)var21 + 0.5F;
 
-                                                    if (par1WorldServer.getClosestPlayer((double)var26, (double)var27, (double)var28, 24.0D) == null)
+                                                    if (p_77192_1_.getClosestPlayer((double)var26, (double)var27, (double)var28, 24.0D) == null)
                                                     {
                                                         float var29 = var26 - (float)var34.posX;
                                                         float var30 = var27 - (float)var34.posY;
@@ -141,7 +141,7 @@ public final class SpawnerAnimals
                                                         {
                                                             if (var23 == null)
                                                             {
-                                                                var23 = par1WorldServer.spawnRandomCreature(var37, var19, var20, var21);
+                                                                var23 = p_77192_1_.spawnRandomCreature(var37, var19, var20, var21);
 
                                                                 if (var23 == null)
                                                                 {
@@ -153,7 +153,7 @@ public final class SpawnerAnimals
 
                                                             try
                                                             {
-                                                                var41 = (EntityLiving)var23.entityClass.getConstructor(new Class[] {World.class}).newInstance(new Object[] {par1WorldServer});
+                                                                var41 = (EntityLiving)var23.entityClass.getConstructor(new Class[] {World.class}).newInstance(new Object[] {p_77192_1_});
                                                             }
                                                             catch (Exception var33)
                                                             {
@@ -161,12 +161,12 @@ public final class SpawnerAnimals
                                                                 return var5;
                                                             }
 
-                                                            var41.setLocationAndAngles((double)var26, (double)var27, (double)var28, par1WorldServer.rand.nextFloat() * 360.0F, 0.0F);
+                                                            var41.setLocationAndAngles((double)var26, (double)var27, (double)var28, p_77192_1_.rand.nextFloat() * 360.0F, 0.0F);
 
                                                             if (var41.getCanSpawnHere())
                                                             {
                                                                 ++var17;
-                                                                par1WorldServer.spawnEntityInWorld(var41);
+                                                                p_77192_1_.spawnEntityInWorld(var41);
                                                                 var24 = var41.onSpawnWithEgg(var24);
 
                                                                 if (var17 >= var41.getMaxSpawnedInChunk())
@@ -202,39 +202,39 @@ public final class SpawnerAnimals
     /**
      * Returns whether or not the specified creature type can spawn at the specified location.
      */
-    public static boolean canCreatureTypeSpawnAtLocation(EnumCreatureType par0EnumCreatureType, World par1World, int par2, int par3, int par4)
+    public static boolean canCreatureTypeSpawnAtLocation(EnumCreatureType p_77190_0_, World p_77190_1_, int p_77190_2_, int p_77190_3_, int p_77190_4_)
     {
-        if (par0EnumCreatureType.getCreatureMaterial() == Material.water)
+        if (p_77190_0_.getCreatureMaterial() == Material.water)
         {
-            return par1World.getBlock(par2, par3, par4).getMaterial().isLiquid() && par1World.getBlock(par2, par3 - 1, par4).getMaterial().isLiquid() && !par1World.getBlock(par2, par3 + 1, par4).isNormalCube();
+            return p_77190_1_.getBlock(p_77190_2_, p_77190_3_, p_77190_4_).getMaterial().isLiquid() && p_77190_1_.getBlock(p_77190_2_, p_77190_3_ - 1, p_77190_4_).getMaterial().isLiquid() && !p_77190_1_.getBlock(p_77190_2_, p_77190_3_ + 1, p_77190_4_).isNormalCube();
         }
-        else if (!World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4))
+        else if (!World.doesBlockHaveSolidTopSurface(p_77190_1_, p_77190_2_, p_77190_3_ - 1, p_77190_4_))
         {
             return false;
         }
         else
         {
-            Block var5 = par1World.getBlock(par2, par3 - 1, par4);
-            return var5 != Blocks.bedrock && !par1World.getBlock(par2, par3, par4).isNormalCube() && !par1World.getBlock(par2, par3, par4).getMaterial().isLiquid() && !par1World.getBlock(par2, par3 + 1, par4).isNormalCube();
+            Block var5 = p_77190_1_.getBlock(p_77190_2_, p_77190_3_ - 1, p_77190_4_);
+            return var5 != Blocks.bedrock && !p_77190_1_.getBlock(p_77190_2_, p_77190_3_, p_77190_4_).isNormalCube() && !p_77190_1_.getBlock(p_77190_2_, p_77190_3_, p_77190_4_).getMaterial().isLiquid() && !p_77190_1_.getBlock(p_77190_2_, p_77190_3_ + 1, p_77190_4_).isNormalCube();
         }
     }
 
     /**
      * Called during chunk generation to spawn initial creatures.
      */
-    public static void performWorldGenSpawning(World par0World, BiomeGenBase par1BiomeGenBase, int par2, int par3, int par4, int par5, Random par6Random)
+    public static void performWorldGenSpawning(World p_77191_0_, BiomeGenBase p_77191_1_, int p_77191_2_, int p_77191_3_, int p_77191_4_, int p_77191_5_, Random p_77191_6_)
     {
-        List var7 = par1BiomeGenBase.getSpawnableList(EnumCreatureType.creature);
+        List var7 = p_77191_1_.getSpawnableList(EnumCreatureType.creature);
 
         if (!var7.isEmpty())
         {
-            while (par6Random.nextFloat() < par1BiomeGenBase.getSpawningChance())
+            while (p_77191_6_.nextFloat() < p_77191_1_.getSpawningChance())
             {
-                BiomeGenBase.SpawnListEntry var8 = (BiomeGenBase.SpawnListEntry)WeightedRandom.getRandomItem(par0World.rand, var7);
+                BiomeGenBase.SpawnListEntry var8 = (BiomeGenBase.SpawnListEntry)WeightedRandom.getRandomItem(p_77191_0_.rand, var7);
                 IEntityLivingData var9 = null;
-                int var10 = var8.minGroupCount + par6Random.nextInt(1 + var8.maxGroupCount - var8.minGroupCount);
-                int var11 = par2 + par6Random.nextInt(par4);
-                int var12 = par3 + par6Random.nextInt(par5);
+                int var10 = var8.minGroupCount + p_77191_6_.nextInt(1 + var8.maxGroupCount - var8.minGroupCount);
+                int var11 = p_77191_2_ + p_77191_6_.nextInt(p_77191_4_);
+                int var12 = p_77191_3_ + p_77191_6_.nextInt(p_77191_5_);
                 int var13 = var11;
                 int var14 = var12;
 
@@ -244,9 +244,9 @@ public final class SpawnerAnimals
 
                     for (int var17 = 0; !var16 && var17 < 4; ++var17)
                     {
-                        int var18 = par0World.getTopSolidOrLiquidBlock(var11, var12);
+                        int var18 = p_77191_0_.getTopSolidOrLiquidBlock(var11, var12);
 
-                        if (canCreatureTypeSpawnAtLocation(EnumCreatureType.creature, par0World, var11, var18, var12))
+                        if (canCreatureTypeSpawnAtLocation(EnumCreatureType.creature, p_77191_0_, var11, var18, var12))
                         {
                             float var19 = (float)var11 + 0.5F;
                             float var20 = (float)var18;
@@ -255,7 +255,7 @@ public final class SpawnerAnimals
 
                             try
                             {
-                                var22 = (EntityLiving)var8.entityClass.getConstructor(new Class[] {World.class}).newInstance(new Object[] {par0World});
+                                var22 = (EntityLiving)var8.entityClass.getConstructor(new Class[] {World.class}).newInstance(new Object[] {p_77191_0_});
                             }
                             catch (Exception var24)
                             {
@@ -263,17 +263,17 @@ public final class SpawnerAnimals
                                 continue;
                             }
 
-                            var22.setLocationAndAngles((double)var19, (double)var20, (double)var21, par6Random.nextFloat() * 360.0F, 0.0F);
-                            par0World.spawnEntityInWorld(var22);
+                            var22.setLocationAndAngles((double)var19, (double)var20, (double)var21, p_77191_6_.nextFloat() * 360.0F, 0.0F);
+                            p_77191_0_.spawnEntityInWorld(var22);
                             var9 = var22.onSpawnWithEgg(var9);
                             var16 = true;
                         }
 
-                        var11 += par6Random.nextInt(5) - par6Random.nextInt(5);
+                        var11 += p_77191_6_.nextInt(5) - p_77191_6_.nextInt(5);
 
-                        for (var12 += par6Random.nextInt(5) - par6Random.nextInt(5); var11 < par2 || var11 >= par2 + par4 || var12 < par3 || var12 >= par3 + par4; var12 = var14 + par6Random.nextInt(5) - par6Random.nextInt(5))
+                        for (var12 += p_77191_6_.nextInt(5) - p_77191_6_.nextInt(5); var11 < p_77191_2_ || var11 >= p_77191_2_ + p_77191_4_ || var12 < p_77191_3_ || var12 >= p_77191_3_ + p_77191_4_; var12 = var14 + p_77191_6_.nextInt(5) - p_77191_6_.nextInt(5))
                         {
-                            var11 = var13 + par6Random.nextInt(5) - par6Random.nextInt(5);
+                            var11 = var13 + p_77191_6_.nextInt(5) - p_77191_6_.nextInt(5);
                         }
                     }
                 }

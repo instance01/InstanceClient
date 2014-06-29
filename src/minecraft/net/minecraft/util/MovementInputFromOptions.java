@@ -7,9 +7,9 @@ public class MovementInputFromOptions extends MovementInput
     private GameSettings gameSettings;
     private static final String __OBFID = "CL_00000937";
 
-    public MovementInputFromOptions(GameSettings par1GameSettings)
+    public MovementInputFromOptions(GameSettings p_i1237_1_)
     {
-        this.gameSettings = par1GameSettings;
+        this.gameSettings = p_i1237_1_;
     }
 
     public void updatePlayerMoveState()

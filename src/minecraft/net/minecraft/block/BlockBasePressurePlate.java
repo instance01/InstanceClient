@@ -153,7 +153,7 @@ public abstract class BlockBasePressurePlate extends Block
     protected AxisAlignedBB func_150061_a(int p_150061_1_, int p_150061_2_, int p_150061_3_)
     {
         float var4 = 0.125F;
-        return AxisAlignedBB.getAABBPool().getAABB((double)((float)p_150061_1_ + var4), (double)p_150061_2_, (double)((float)p_150061_3_ + var4), (double)((float)(p_150061_1_ + 1) - var4), (double)p_150061_2_ + 0.25D, (double)((float)(p_150061_3_ + 1) - var4));
+        return AxisAlignedBB.getBoundingBox((double)((float)p_150061_1_ + var4), (double)p_150061_2_, (double)((float)p_150061_3_ + var4), (double)((float)(p_150061_1_ + 1) - var4), (double)p_150061_2_ + 0.25D, (double)((float)(p_150061_3_ + 1) - var4));
     }
 
     public void breakBlock(World p_149749_1_, int p_149749_2_, int p_149749_3_, int p_149749_4_, Block p_149749_5_, int p_149749_6_)
@@ -206,11 +206,11 @@ public abstract class BlockBasePressurePlate extends Block
         return 1;
     }
 
-    protected abstract int func_150065_e(World var1, int var2, int var3, int var4);
+    protected abstract int func_150065_e(World p_150065_1_, int p_150065_2_, int p_150065_3_, int p_150065_4_);
 
-    protected abstract int func_150060_c(int var1);
+    protected abstract int func_150060_c(int p_150060_1_);
 
-    protected abstract int func_150066_d(int var1);
+    protected abstract int func_150066_d(int p_150066_1_);
 
     public void registerBlockIcons(IIconRegister p_149651_1_)
     {

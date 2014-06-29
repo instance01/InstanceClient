@@ -15,10 +15,10 @@ public class PathEntity
     private int pathLength;
     private static final String __OBFID = "CL_00000575";
 
-    public PathEntity(PathPoint[] par1ArrayOfPathPoint)
+    public PathEntity(PathPoint[] p_i2136_1_)
     {
-        this.points = par1ArrayOfPathPoint;
-        this.pathLength = par1ArrayOfPathPoint.length;
+        this.points = p_i2136_1_;
+        this.pathLength = p_i2136_1_.length;
     }
 
     /**
@@ -48,9 +48,9 @@ public class PathEntity
     /**
      * return the PathPoint located at the specified PathIndex, usually the current one
      */
-    public PathPoint getPathPointFromIndex(int par1)
+    public PathPoint getPathPointFromIndex(int p_75877_1_)
     {
-        return this.points[par1];
+        return this.points[p_75877_1_];
     }
 
     public int getCurrentPathLength()
@@ -58,9 +58,9 @@ public class PathEntity
         return this.pathLength;
     }
 
-    public void setCurrentPathLength(int par1)
+    public void setCurrentPathLength(int p_75871_1_)
     {
-        this.pathLength = par1;
+        this.pathLength = p_75871_1_;
     }
 
     public int getCurrentPathIndex()
@@ -68,40 +68,40 @@ public class PathEntity
         return this.currentPathIndex;
     }
 
-    public void setCurrentPathIndex(int par1)
+    public void setCurrentPathIndex(int p_75872_1_)
     {
-        this.currentPathIndex = par1;
+        this.currentPathIndex = p_75872_1_;
     }
 
     /**
      * Gets the vector of the PathPoint associated with the given index.
      */
-    public Vec3 getVectorFromIndex(Entity par1Entity, int par2)
+    public Vec3 getVectorFromIndex(Entity p_75881_1_, int p_75881_2_)
     {
-        double var3 = (double)this.points[par2].xCoord + (double)((int)(par1Entity.width + 1.0F)) * 0.5D;
-        double var5 = (double)this.points[par2].yCoord;
-        double var7 = (double)this.points[par2].zCoord + (double)((int)(par1Entity.width + 1.0F)) * 0.5D;
-        return par1Entity.worldObj.getWorldVec3Pool().getVecFromPool(var3, var5, var7);
+        double var3 = (double)this.points[p_75881_2_].xCoord + (double)((int)(p_75881_1_.width + 1.0F)) * 0.5D;
+        double var5 = (double)this.points[p_75881_2_].yCoord;
+        double var7 = (double)this.points[p_75881_2_].zCoord + (double)((int)(p_75881_1_.width + 1.0F)) * 0.5D;
+        return Vec3.createVectorHelper(var3, var5, var7);
     }
 
     /**
      * returns the current PathEntity target node as Vec3D
      */
-    public Vec3 getPosition(Entity par1Entity)
+    public Vec3 getPosition(Entity p_75878_1_)
     {
-        return this.getVectorFromIndex(par1Entity, this.currentPathIndex);
+        return this.getVectorFromIndex(p_75878_1_, this.currentPathIndex);
     }
 
     /**
      * Returns true if the EntityPath are the same. Non instance related equals.
      */
-    public boolean isSamePath(PathEntity par1PathEntity)
+    public boolean isSamePath(PathEntity p_75876_1_)
     {
-        if (par1PathEntity == null)
+        if (p_75876_1_ == null)
         {
             return false;
         }
-        else if (par1PathEntity.points.length != this.points.length)
+        else if (p_75876_1_.points.length != this.points.length)
         {
             return false;
         }
@@ -109,7 +109,7 @@ public class PathEntity
         {
             for (int var2 = 0; var2 < this.points.length; ++var2)
             {
-                if (this.points[var2].xCoord != par1PathEntity.points[var2].xCoord || this.points[var2].yCoord != par1PathEntity.points[var2].yCoord || this.points[var2].zCoord != par1PathEntity.points[var2].zCoord)
+                if (this.points[var2].xCoord != p_75876_1_.points[var2].xCoord || this.points[var2].yCoord != p_75876_1_.points[var2].yCoord || this.points[var2].zCoord != p_75876_1_.points[var2].zCoord)
                 {
                     return false;
                 }
@@ -122,9 +122,9 @@ public class PathEntity
     /**
      * Returns true if the final PathPoint in the PathEntity is equal to Vec3D coords.
      */
-    public boolean isDestinationSame(Vec3 par1Vec3)
+    public boolean isDestinationSame(Vec3 p_75880_1_)
     {
         PathPoint var2 = this.getFinalPathPoint();
-        return var2 == null ? false : var2.xCoord == (int)par1Vec3.xCoord && var2.zCoord == (int)par1Vec3.zCoord;
+        return var2 == null ? false : var2.xCoord == (int)p_75880_1_.xCoord && var2.zCoord == (int)p_75880_1_.zCoord;
     }
 }

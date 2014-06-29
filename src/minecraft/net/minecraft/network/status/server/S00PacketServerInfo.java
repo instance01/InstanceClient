@@ -41,9 +41,9 @@ public class S00PacketServerInfo extends Packet
         p_148840_1_.writeStringToBuffer(field_149297_a.toJson(this.field_149296_b));
     }
 
-    public void processPacket(INetHandlerStatusClient p_149295_1_)
+    public void processPacket(INetHandlerStatusClient p_148833_1_)
     {
-        p_149295_1_.handleServerInfo(this);
+        p_148833_1_.handleServerInfo(this);
     }
 
     public ServerStatusResponse func_149294_c()

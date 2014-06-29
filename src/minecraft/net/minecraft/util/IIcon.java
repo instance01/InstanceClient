@@ -25,7 +25,7 @@ public interface IIcon
     /**
      * Gets a U coordinate on the icon. 0 returns uMin and 16 returns uMax. Other arguments return in-between values.
      */
-    float getInterpolatedU(double var1);
+    float getInterpolatedU(double p_94214_1_);
 
     /**
      * Returns the minimum V coordinate to use when rendering with this icon.
@@ -40,7 +40,7 @@ public interface IIcon
     /**
      * Gets a V coordinate on the icon. 0 returns vMin and 16 returns vMax. Other arguments return in-between values.
      */
-    float getInterpolatedV(double var1);
+    float getInterpolatedV(double p_94207_1_);
 
     String getIconName();
 }

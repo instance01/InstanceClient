@@ -28,26 +28,26 @@ public class CommandPardonIp extends CommandBase
     /**
      * Returns true if the given command sender is allowed to use this command.
      */
-    public boolean canCommandSenderUseCommand(ICommandSender par1ICommandSender)
+    public boolean canCommandSenderUseCommand(ICommandSender p_71519_1_)
     {
-        return MinecraftServer.getServer().getConfigurationManager().getBannedIPs().isListActive() && super.canCommandSenderUseCommand(par1ICommandSender);
+        return MinecraftServer.getServer().getConfigurationManager().getBannedIPs().func_152689_b() && super.canCommandSenderUseCommand(p_71519_1_);
     }
 
-    public String getCommandUsage(ICommandSender par1ICommandSender)
+    public String getCommandUsage(ICommandSender p_71518_1_)
     {
         return "commands.unbanip.usage";
     }
 
-    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_)
     {
-        if (par2ArrayOfStr.length == 1 && par2ArrayOfStr[0].length() > 1)
+        if (p_71515_2_.length == 1 && p_71515_2_[0].length() > 1)
         {
-            Matcher var3 = CommandBanIp.field_147211_a.matcher(par2ArrayOfStr[0]);
+            Matcher var3 = CommandBanIp.field_147211_a.matcher(p_71515_2_[0]);
 
             if (var3.matches())
             {
-                MinecraftServer.getServer().getConfigurationManager().getBannedIPs().remove(par2ArrayOfStr[0]);
-                notifyAdmins(par1ICommandSender, "commands.unbanip.success", new Object[] {par2ArrayOfStr[0]});
+                MinecraftServer.getServer().getConfigurationManager().getBannedIPs().func_152684_c(p_71515_2_[0]);
+                func_152373_a(p_71515_1_, this, "commands.unbanip.success", new Object[] {p_71515_2_[0]});
             }
             else
             {
@@ -63,8 +63,8 @@ public class CommandPardonIp extends CommandBase
     /**
      * Adds the strings available in this command to the given list of tab completion options.
      */
-    public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public List addTabCompletionOptions(ICommandSender p_71516_1_, String[] p_71516_2_)
     {
-        return par2ArrayOfStr.length == 1 ? getListOfStringsFromIterableMatchingLastWord(par2ArrayOfStr, MinecraftServer.getServer().getConfigurationManager().getBannedIPs().getBannedList().keySet()) : null;
+        return p_71516_2_.length == 1 ? getListOfStringsMatchingLastWord(p_71516_2_, MinecraftServer.getServer().getConfigurationManager().getBannedIPs().func_152685_a()) : null;
     }
 }

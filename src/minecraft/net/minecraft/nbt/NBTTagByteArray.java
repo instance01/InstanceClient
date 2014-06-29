@@ -21,20 +21,18 @@ public class NBTTagByteArray extends NBTBase
     /**
      * Write the actual data contents of the tag, implemented in NBT extension classes
      */
-    void write(DataOutput par1DataOutput) throws IOException
+    void write(DataOutput p_74734_1_) throws IOException
     {
-        par1DataOutput.writeInt(this.byteArray.length);
-        par1DataOutput.write(this.byteArray);
+        p_74734_1_.writeInt(this.byteArray.length);
+        p_74734_1_.write(this.byteArray);
     }
 
-    /**
-     * Read the actual data contents of the tag, implemented in NBT extension classes
-     */
-    void load(DataInput par1DataInput, int par2) throws IOException
+    void func_152446_a(DataInput p_152446_1_, int p_152446_2_, NBTSizeTracker p_152446_3_) throws IOException
     {
-        int var3 = par1DataInput.readInt();
-        this.byteArray = new byte[var3];
-        par1DataInput.readFully(this.byteArray);
+        int var4 = p_152446_1_.readInt();
+        p_152446_3_.func_152450_a((long)(8 * var4));
+        this.byteArray = new byte[var4];
+        p_152446_1_.readFully(this.byteArray);
     }
 
     /**
@@ -60,9 +58,9 @@ public class NBTTagByteArray extends NBTBase
         return new NBTTagByteArray(var1);
     }
 
-    public boolean equals(Object par1Obj)
+    public boolean equals(Object p_equals_1_)
     {
-        return super.equals(par1Obj) ? Arrays.equals(this.byteArray, ((NBTTagByteArray)par1Obj).byteArray) : false;
+        return super.equals(p_equals_1_) ? Arrays.equals(this.byteArray, ((NBTTagByteArray)p_equals_1_).byteArray) : false;
     }
 
     public int hashCode()

@@ -77,34 +77,31 @@ public class StringTranslate
     /**
      * Replaces all the current instance's translations with the ones that are passed in.
      */
-
-    public static synchronized void replaceWith(Map par0Map)
+    public static synchronized void replaceWith(Map p_135063_0_)
     {
         instance.languageList.clear();
-        instance.languageList.putAll(par0Map);
+        instance.languageList.putAll(p_135063_0_);
         instance.lastUpdateTimeInMilliseconds = System.currentTimeMillis();
     }
 
     /**
      * Translate a key to current language.
      */
-
-    public synchronized String translateKey(String par1Str)
+    public synchronized String translateKey(String p_74805_1_)
     {
-        return this.tryTranslateKey(par1Str);
+        return this.tryTranslateKey(p_74805_1_);
     }
 
     /**
      * Translate a key to current language applying String.format()
      */
-
-    public synchronized String translateKeyFormat(String par1Str, Object ... par2ArrayOfObj)
+    public synchronized String translateKeyFormat(String p_74803_1_, Object ... p_74803_2_)
     {
-        String var3 = this.tryTranslateKey(par1Str);
+        String var3 = this.tryTranslateKey(p_74803_1_);
 
         try
         {
-            return String.format(var3, par2ArrayOfObj);
+            return String.format(var3, p_74803_2_);
         }
         catch (IllegalFormatException var5)
         {
@@ -115,15 +112,15 @@ public class StringTranslate
     /**
      * Tries to look up a translation for the given key; spits back the key if no result was found.
      */
-    private String tryTranslateKey(String par1Str)
+    private String tryTranslateKey(String p_135064_1_)
     {
-        String var2 = (String)this.languageList.get(par1Str);
-        return var2 == null ? par1Str : var2;
+        String var2 = (String)this.languageList.get(p_135064_1_);
+        return var2 == null ? p_135064_1_ : var2;
     }
 
-    public synchronized boolean containsTranslateKey(String par1Str)
+    public synchronized boolean containsTranslateKey(String p_94520_1_)
     {
-        return this.languageList.containsKey(par1Str);
+        return this.languageList.containsKey(p_94520_1_);
     }
 
     /**

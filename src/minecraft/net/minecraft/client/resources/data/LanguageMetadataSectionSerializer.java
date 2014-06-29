@@ -16,9 +16,9 @@ public class LanguageMetadataSectionSerializer extends BaseMetadataSectionSerial
 {
     private static final String __OBFID = "CL_00001111";
 
-    public LanguageMetadataSection deserialize(JsonElement par1JsonElement, Type par2Type, JsonDeserializationContext par3JsonDeserializationContext)
+    public LanguageMetadataSection deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
     {
-        JsonObject var4 = par1JsonElement.getAsJsonObject();
+        JsonObject var4 = p_deserialize_1_.getAsJsonObject();
         HashSet var5 = Sets.newHashSet();
         Iterator var6 = var4.entrySet().iterator();
         String var8;

@@ -32,15 +32,15 @@ public class ClickEvent
         return this.value;
     }
 
-    public boolean equals(Object par1Obj)
+    public boolean equals(Object p_equals_1_)
     {
-        if (this == par1Obj)
+        if (this == p_equals_1_)
         {
             return true;
         }
-        else if (par1Obj != null && this.getClass() == par1Obj.getClass())
+        else if (p_equals_1_ != null && this.getClass() == p_equals_1_.getClass())
         {
-            ClickEvent var2 = (ClickEvent)par1Obj;
+            ClickEvent var2 = (ClickEvent)p_equals_1_;
 
             if (this.action != var2.action)
             {
@@ -86,12 +86,13 @@ public class ClickEvent
         OPEN_URL("OPEN_URL", 0, "open_url", true),
         OPEN_FILE("OPEN_FILE", 1, "open_file", false),
         RUN_COMMAND("RUN_COMMAND", 2, "run_command", true),
-        SUGGEST_COMMAND("SUGGEST_COMMAND", 3, "suggest_command", true);
+        TWITCH_USER_INFO("TWITCH_USER_INFO", 3, "twitch_user_info", false),
+        SUGGEST_COMMAND("SUGGEST_COMMAND", 4, "suggest_command", true);
         private static final Map nameMapping = Maps.newHashMap();
         private final boolean allowedInChat;
         private final String canonicalName;
 
-        private static final ClickEvent.Action[] $VALUES = new ClickEvent.Action[]{OPEN_URL, OPEN_FILE, RUN_COMMAND, SUGGEST_COMMAND};
+        private static final ClickEvent.Action[] $VALUES = new ClickEvent.Action[]{OPEN_URL, OPEN_FILE, RUN_COMMAND, TWITCH_USER_INFO, SUGGEST_COMMAND};
         private static final String __OBFID = "CL_00001261";
 
         private Action(String p_i45155_1_, int p_i45155_2_, String p_i45155_3_, boolean p_i45155_4_)

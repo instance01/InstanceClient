@@ -43,9 +43,9 @@ public class S04PacketEntityEquipment extends Packet
         p_148840_1_.writeItemStackToBuffer(this.field_149393_c);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149391_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149391_1_.handleEntityEquipment(this);
+        p_148833_1_.handleEntityEquipment(this);
     }
 
     public ItemStack func_149390_c()

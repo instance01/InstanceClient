@@ -34,9 +34,9 @@ public class TileEntityChest extends TileEntity implements IInventory
         this.field_145982_r = -1;
     }
 
-    public TileEntityChest(int par1)
+    public TileEntityChest(int p_i2350_1_)
     {
-        this.field_145982_r = par1;
+        this.field_145982_r = p_i2350_1_;
     }
 
     /**
@@ -50,35 +50,35 @@ public class TileEntityChest extends TileEntity implements IInventory
     /**
      * Returns the stack in slot i
      */
-    public ItemStack getStackInSlot(int par1)
+    public ItemStack getStackInSlot(int p_70301_1_)
     {
-        return this.field_145985_p[par1];
+        return this.field_145985_p[p_70301_1_];
     }
 
     /**
      * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
      * new stack.
      */
-    public ItemStack decrStackSize(int par1, int par2)
+    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_)
     {
-        if (this.field_145985_p[par1] != null)
+        if (this.field_145985_p[p_70298_1_] != null)
         {
             ItemStack var3;
 
-            if (this.field_145985_p[par1].stackSize <= par2)
+            if (this.field_145985_p[p_70298_1_].stackSize <= p_70298_2_)
             {
-                var3 = this.field_145985_p[par1];
-                this.field_145985_p[par1] = null;
+                var3 = this.field_145985_p[p_70298_1_];
+                this.field_145985_p[p_70298_1_] = null;
                 this.onInventoryChanged();
                 return var3;
             }
             else
             {
-                var3 = this.field_145985_p[par1].splitStack(par2);
+                var3 = this.field_145985_p[p_70298_1_].splitStack(p_70298_2_);
 
-                if (this.field_145985_p[par1].stackSize == 0)
+                if (this.field_145985_p[p_70298_1_].stackSize == 0)
                 {
-                    this.field_145985_p[par1] = null;
+                    this.field_145985_p[p_70298_1_] = null;
                 }
 
                 this.onInventoryChanged();
@@ -95,12 +95,12 @@ public class TileEntityChest extends TileEntity implements IInventory
      * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
      * like when you close a workbench GUI.
      */
-    public ItemStack getStackInSlotOnClosing(int par1)
+    public ItemStack getStackInSlotOnClosing(int p_70304_1_)
     {
-        if (this.field_145985_p[par1] != null)
+        if (this.field_145985_p[p_70304_1_] != null)
         {
-            ItemStack var2 = this.field_145985_p[par1];
-            this.field_145985_p[par1] = null;
+            ItemStack var2 = this.field_145985_p[p_70304_1_];
+            this.field_145985_p[p_70304_1_] = null;
             return var2;
         }
         else
@@ -112,13 +112,13 @@ public class TileEntityChest extends TileEntity implements IInventory
     /**
      * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      */
-    public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
+    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_)
     {
-        this.field_145985_p[par1] = par2ItemStack;
+        this.field_145985_p[p_70299_1_] = p_70299_2_;
 
-        if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
+        if (p_70299_2_ != null && p_70299_2_.stackSize > this.getInventoryStackLimit())
         {
-            par2ItemStack.stackSize = this.getInventoryStackLimit();
+            p_70299_2_.stackSize = this.getInventoryStackLimit();
         }
 
         this.onInventoryChanged();
@@ -203,9 +203,9 @@ public class TileEntityChest extends TileEntity implements IInventory
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
      */
-    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+    public boolean isUseableByPlayer(EntityPlayer p_70300_1_)
     {
-        return this.worldObj.getTileEntity(this.field_145851_c, this.field_145848_d, this.field_145849_e) != this ? false : par1EntityPlayer.getDistanceSq((double)this.field_145851_c + 0.5D, (double)this.field_145848_d + 0.5D, (double)this.field_145849_e + 0.5D) <= 64.0D;
+        return this.worldObj.getTileEntity(this.field_145851_c, this.field_145848_d, this.field_145849_e) != this ? false : p_70300_1_.getDistanceSq((double)this.field_145851_c + 0.5D, (double)this.field_145848_d + 0.5D, (double)this.field_145849_e + 0.5D) <= 64.0D;
     }
 
     public void updateContainingBlockInfo()
@@ -311,8 +311,15 @@ public class TileEntityChest extends TileEntity implements IInventory
 
     private boolean func_145977_a(int p_145977_1_, int p_145977_2_, int p_145977_3_)
     {
-        Block var4 = this.worldObj.getBlock(p_145977_1_, p_145977_2_, p_145977_3_);
-        return var4 instanceof BlockChest && ((BlockChest)var4).field_149956_a == this.func_145980_j();
+        if (this.worldObj == null)
+        {
+            return false;
+        }
+        else
+        {
+            Block var4 = this.worldObj.getBlock(p_145977_1_, p_145977_2_, p_145977_3_);
+            return var4 instanceof BlockChest && ((BlockChest)var4).field_149956_a == this.func_145980_j();
+        }
     }
 
     public void updateEntity()
@@ -326,7 +333,7 @@ public class TileEntityChest extends TileEntity implements IInventory
         {
             this.field_145987_o = 0;
             var1 = 5.0F;
-            List var2 = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getAABBPool().getAABB((double)((float)this.field_145851_c - var1), (double)((float)this.field_145848_d - var1), (double)((float)this.field_145849_e - var1), (double)((float)(this.field_145851_c + 1) + var1), (double)((float)(this.field_145848_d + 1) + var1), (double)((float)(this.field_145849_e + 1) + var1)));
+            List var2 = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox((double)((float)this.field_145851_c - var1), (double)((float)this.field_145848_d - var1), (double)((float)this.field_145849_e - var1), (double)((float)(this.field_145851_c + 1) + var1), (double)((float)(this.field_145848_d + 1) + var1), (double)((float)(this.field_145849_e + 1) + var1)));
             Iterator var3 = var2.iterator();
 
             while (var3.hasNext())
@@ -452,7 +459,7 @@ public class TileEntityChest extends TileEntity implements IInventory
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      */
-    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
+    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_)
     {
         return true;
     }

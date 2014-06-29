@@ -48,9 +48,9 @@ public class S03PacketTimeUpdate extends Packet
         p_148840_1_.writeLong(this.field_149368_b);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149367_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149367_1_.handleTimeUpdate(this);
+        p_148833_1_.handleTimeUpdate(this);
     }
 
     /**

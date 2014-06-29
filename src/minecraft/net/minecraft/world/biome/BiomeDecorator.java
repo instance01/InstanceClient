@@ -379,28 +379,28 @@ public class BiomeDecorator
     /**
      * Standard ore generation helper. Generates most ores.
      */
-    protected void genStandardOre1(int par1, WorldGenerator par2WorldGenerator, int par3, int par4)
+    protected void genStandardOre1(int p_76795_1_, WorldGenerator p_76795_2_, int p_76795_3_, int p_76795_4_)
     {
-        for (int var5 = 0; var5 < par1; ++var5)
+        for (int var5 = 0; var5 < p_76795_1_; ++var5)
         {
             int var6 = this.chunk_X + this.randomGenerator.nextInt(16);
-            int var7 = this.randomGenerator.nextInt(par4 - par3) + par3;
+            int var7 = this.randomGenerator.nextInt(p_76795_4_ - p_76795_3_) + p_76795_3_;
             int var8 = this.chunk_Z + this.randomGenerator.nextInt(16);
-            par2WorldGenerator.generate(this.currentWorld, this.randomGenerator, var6, var7, var8);
+            p_76795_2_.generate(this.currentWorld, this.randomGenerator, var6, var7, var8);
         }
     }
 
     /**
      * Standard ore generation helper. Generates Lapis Lazuli.
      */
-    protected void genStandardOre2(int par1, WorldGenerator par2WorldGenerator, int par3, int par4)
+    protected void genStandardOre2(int p_76793_1_, WorldGenerator p_76793_2_, int p_76793_3_, int p_76793_4_)
     {
-        for (int var5 = 0; var5 < par1; ++var5)
+        for (int var5 = 0; var5 < p_76793_1_; ++var5)
         {
             int var6 = this.chunk_X + this.randomGenerator.nextInt(16);
-            int var7 = this.randomGenerator.nextInt(par4) + this.randomGenerator.nextInt(par4) + (par3 - par4);
+            int var7 = this.randomGenerator.nextInt(p_76793_4_) + this.randomGenerator.nextInt(p_76793_4_) + (p_76793_3_ - p_76793_4_);
             int var8 = this.chunk_Z + this.randomGenerator.nextInt(16);
-            par2WorldGenerator.generate(this.currentWorld, this.randomGenerator, var6, var7, var8);
+            p_76793_2_.generate(this.currentWorld, this.randomGenerator, var6, var7, var8);
         }
     }
 

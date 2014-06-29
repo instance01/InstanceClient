@@ -65,11 +65,11 @@ public class GuiScreenOptionsSounds extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRendererObj, this.field_146507_a, this.width / 2, 15, 16777215);
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 
     protected String func_146504_a(SoundCategory p_146504_1_)
@@ -95,7 +95,7 @@ public class GuiScreenOptionsSounds extends GuiScreen
             this.field_146156_o = GuiScreenOptionsSounds.this.field_146506_g.getSoundLevel(p_i45024_5_);
         }
 
-        protected int getHoverState(boolean p_146114_1_)
+        public int getHoverState(boolean p_146114_1_)
         {
             return 0;
         }

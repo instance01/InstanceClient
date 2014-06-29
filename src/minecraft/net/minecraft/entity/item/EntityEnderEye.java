@@ -21,9 +21,9 @@ public class EntityEnderEye extends Entity
     private boolean shatterOrDrop;
     private static final String __OBFID = "CL_00001716";
 
-    public EntityEnderEye(World par1World)
+    public EntityEnderEye(World p_i1757_1_)
     {
-        super(par1World);
+        super(p_i1757_1_);
         this.setSize(0.25F, 0.25F);
     }
 
@@ -33,19 +33,19 @@ public class EntityEnderEye extends Entity
      * Checks if the entity is in range to render by using the past in distance and comparing it to its average edge
      * length * 64 * renderDistanceWeight Args: distance
      */
-    public boolean isInRangeToRenderDist(double par1)
+    public boolean isInRangeToRenderDist(double p_70112_1_)
     {
         double var3 = this.boundingBox.getAverageEdgeLength() * 4.0D;
         var3 *= 64.0D;
-        return par1 < var3 * var3;
+        return p_70112_1_ < var3 * var3;
     }
 
-    public EntityEnderEye(World par1World, double par2, double par4, double par6)
+    public EntityEnderEye(World p_i1758_1_, double p_i1758_2_, double p_i1758_4_, double p_i1758_6_)
     {
-        super(par1World);
+        super(p_i1758_1_);
         this.despawnTimer = 0;
         this.setSize(0.25F, 0.25F);
-        this.setPosition(par2, par4, par6);
+        this.setPosition(p_i1758_2_, p_i1758_4_, p_i1758_6_);
         this.yOffset = 0.0F;
     }
 
@@ -53,10 +53,10 @@ public class EntityEnderEye extends Entity
      * The location the eye should float/move towards. Currently used for moving towards the nearest stronghold. Args:
      * strongholdX, strongholdY, strongholdZ
      */
-    public void moveTowards(double par1, int par3, double par4)
+    public void moveTowards(double p_70220_1_, int p_70220_3_, double p_70220_4_)
     {
-        double var6 = par1 - this.posX;
-        double var8 = par4 - this.posZ;
+        double var6 = p_70220_1_ - this.posX;
+        double var8 = p_70220_4_ - this.posZ;
         float var10 = MathHelper.sqrt_double(var6 * var6 + var8 * var8);
 
         if (var10 > 12.0F)
@@ -67,9 +67,9 @@ public class EntityEnderEye extends Entity
         }
         else
         {
-            this.targetX = par1;
-            this.targetY = (double)par3;
-            this.targetZ = par4;
+            this.targetX = p_70220_1_;
+            this.targetY = (double)p_70220_3_;
+            this.targetZ = p_70220_4_;
         }
 
         this.despawnTimer = 0;
@@ -79,17 +79,17 @@ public class EntityEnderEye extends Entity
     /**
      * Sets the velocity to the args. Args: x, y, z
      */
-    public void setVelocity(double par1, double par3, double par5)
+    public void setVelocity(double p_70016_1_, double p_70016_3_, double p_70016_5_)
     {
-        this.motionX = par1;
-        this.motionY = par3;
-        this.motionZ = par5;
+        this.motionX = p_70016_1_;
+        this.motionY = p_70016_3_;
+        this.motionZ = p_70016_5_;
 
         if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F)
         {
-            float var7 = MathHelper.sqrt_double(par1 * par1 + par5 * par5);
-            this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(par1, par5) * 180.0D / Math.PI);
-            this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(par3, (double)var7) * 180.0D / Math.PI);
+            float var7 = MathHelper.sqrt_double(p_70016_1_ * p_70016_1_ + p_70016_5_ * p_70016_5_);
+            this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(p_70016_1_, p_70016_5_) * 180.0D / Math.PI);
+            this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(p_70016_3_, (double)var7) * 180.0D / Math.PI);
         }
     }
 
@@ -196,12 +196,12 @@ public class EntityEnderEye extends Entity
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {}
+    public void writeEntityToNBT(NBTTagCompound p_70014_1_) {}
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {}
+    public void readEntityFromNBT(NBTTagCompound p_70037_1_) {}
 
     public float getShadowSize()
     {
@@ -211,12 +211,12 @@ public class EntityEnderEye extends Entity
     /**
      * Gets how bright this entity is.
      */
-    public float getBrightness(float par1)
+    public float getBrightness(float p_70013_1_)
     {
         return 1.0F;
     }
 
-    public int getBrightnessForRender(float par1)
+    public int getBrightnessForRender(float p_70070_1_)
     {
         return 15728880;
     }

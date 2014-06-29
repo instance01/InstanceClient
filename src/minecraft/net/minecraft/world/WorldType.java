@@ -37,18 +37,18 @@ public class WorldType
     private boolean field_151361_l;
     private static final String __OBFID = "CL_00000150";
 
-    private WorldType(int par1, String par2Str)
+    private WorldType(int p_i1959_1_, String p_i1959_2_)
     {
-        this(par1, par2Str, 0);
+        this(p_i1959_1_, p_i1959_2_, 0);
     }
 
-    private WorldType(int par1, String par2Str, int par3)
+    private WorldType(int p_i1960_1_, String p_i1960_2_, int p_i1960_3_)
     {
-        this.worldType = par2Str;
-        this.generatorVersion = par3;
+        this.worldType = p_i1960_2_;
+        this.generatorVersion = p_i1960_3_;
         this.canBeCreated = true;
-        this.worldTypeId = par1;
-        worldTypes[par1] = this;
+        this.worldTypeId = p_i1960_1_;
+        worldTypes[p_i1960_1_] = this;
     }
 
     public String getWorldTypeName()
@@ -77,17 +77,17 @@ public class WorldType
         return this.generatorVersion;
     }
 
-    public WorldType getWorldTypeForGeneratorVersion(int par1)
+    public WorldType getWorldTypeForGeneratorVersion(int p_77132_1_)
     {
-        return this == DEFAULT && par1 == 0 ? DEFAULT_1_1 : this;
+        return this == DEFAULT && p_77132_1_ == 0 ? DEFAULT_1_1 : this;
     }
 
     /**
      * Sets canBeCreated to the provided value, and returns this.
      */
-    private WorldType setCanBeCreated(boolean par1)
+    private WorldType setCanBeCreated(boolean p_77124_1_)
     {
-        this.canBeCreated = par1;
+        this.canBeCreated = p_77124_1_;
         return this;
     }
 
@@ -116,11 +116,11 @@ public class WorldType
         return this.isWorldTypeVersioned;
     }
 
-    public static WorldType parseWorldType(String par0Str)
+    public static WorldType parseWorldType(String p_77130_0_)
     {
         for (int var1 = 0; var1 < worldTypes.length; ++var1)
         {
-            if (worldTypes[var1] != null && worldTypes[var1].worldType.equalsIgnoreCase(par0Str))
+            if (worldTypes[var1] != null && worldTypes[var1].worldType.equalsIgnoreCase(p_77130_0_))
             {
                 return worldTypes[var1];
             }

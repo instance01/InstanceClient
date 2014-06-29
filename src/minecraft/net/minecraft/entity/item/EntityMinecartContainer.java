@@ -20,19 +20,19 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
     private boolean dropContentsWhenDead = true;
     private static final String __OBFID = "CL_00001674";
 
-    public EntityMinecartContainer(World par1World)
+    public EntityMinecartContainer(World p_i1716_1_)
     {
-        super(par1World);
+        super(p_i1716_1_);
     }
 
-    public EntityMinecartContainer(World par1World, double par2, double par4, double par6)
+    public EntityMinecartContainer(World p_i1717_1_, double p_i1717_2_, double p_i1717_4_, double p_i1717_6_)
     {
-        super(par1World, par2, par4, par6);
+        super(p_i1717_1_, p_i1717_2_, p_i1717_4_, p_i1717_6_);
     }
 
-    public void killMinecart(DamageSource par1DamageSource)
+    public void killMinecart(DamageSource p_94095_1_)
     {
-        super.killMinecart(par1DamageSource);
+        super.killMinecart(p_94095_1_);
 
         for (int var2 = 0; var2 < this.getSizeInventory(); ++var2)
         {
@@ -68,34 +68,34 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
     /**
      * Returns the stack in slot i
      */
-    public ItemStack getStackInSlot(int par1)
+    public ItemStack getStackInSlot(int p_70301_1_)
     {
-        return this.minecartContainerItems[par1];
+        return this.minecartContainerItems[p_70301_1_];
     }
 
     /**
      * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
      * new stack.
      */
-    public ItemStack decrStackSize(int par1, int par2)
+    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_)
     {
-        if (this.minecartContainerItems[par1] != null)
+        if (this.minecartContainerItems[p_70298_1_] != null)
         {
             ItemStack var3;
 
-            if (this.minecartContainerItems[par1].stackSize <= par2)
+            if (this.minecartContainerItems[p_70298_1_].stackSize <= p_70298_2_)
             {
-                var3 = this.minecartContainerItems[par1];
-                this.minecartContainerItems[par1] = null;
+                var3 = this.minecartContainerItems[p_70298_1_];
+                this.minecartContainerItems[p_70298_1_] = null;
                 return var3;
             }
             else
             {
-                var3 = this.minecartContainerItems[par1].splitStack(par2);
+                var3 = this.minecartContainerItems[p_70298_1_].splitStack(p_70298_2_);
 
-                if (this.minecartContainerItems[par1].stackSize == 0)
+                if (this.minecartContainerItems[p_70298_1_].stackSize == 0)
                 {
-                    this.minecartContainerItems[par1] = null;
+                    this.minecartContainerItems[p_70298_1_] = null;
                 }
 
                 return var3;
@@ -111,12 +111,12 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
      * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
      * like when you close a workbench GUI.
      */
-    public ItemStack getStackInSlotOnClosing(int par1)
+    public ItemStack getStackInSlotOnClosing(int p_70304_1_)
     {
-        if (this.minecartContainerItems[par1] != null)
+        if (this.minecartContainerItems[p_70304_1_] != null)
         {
-            ItemStack var2 = this.minecartContainerItems[par1];
-            this.minecartContainerItems[par1] = null;
+            ItemStack var2 = this.minecartContainerItems[p_70304_1_];
+            this.minecartContainerItems[p_70304_1_] = null;
             return var2;
         }
         else
@@ -128,13 +128,13 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
     /**
      * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      */
-    public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
+    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_)
     {
-        this.minecartContainerItems[par1] = par2ItemStack;
+        this.minecartContainerItems[p_70299_1_] = p_70299_2_;
 
-        if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
+        if (p_70299_2_ != null && p_70299_2_.stackSize > this.getInventoryStackLimit())
         {
-            par2ItemStack.stackSize = this.getInventoryStackLimit();
+            p_70299_2_.stackSize = this.getInventoryStackLimit();
         }
     }
 
@@ -146,9 +146,9 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
      */
-    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+    public boolean isUseableByPlayer(EntityPlayer p_70300_1_)
     {
-        return this.isDead ? false : par1EntityPlayer.getDistanceSqToEntity(this) <= 64.0D;
+        return this.isDead ? false : p_70300_1_.getDistanceSqToEntity(this) <= 64.0D;
     }
 
     public void openInventory() {}
@@ -158,7 +158,7 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      */
-    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
+    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_)
     {
         return true;
     }
@@ -182,10 +182,10 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
     /**
      * Teleports the entity to another dimension. Params: Dimension number to teleport to
      */
-    public void travelToDimension(int par1)
+    public void travelToDimension(int p_71027_1_)
     {
         this.dropContentsWhenDead = false;
-        super.travelToDimension(par1);
+        super.travelToDimension(p_71027_1_);
     }
 
     /**
@@ -238,9 +238,9 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    protected void writeEntityToNBT(NBTTagCompound p_70014_1_)
     {
-        super.writeEntityToNBT(par1NBTTagCompound);
+        super.writeEntityToNBT(p_70014_1_);
         NBTTagList var2 = new NBTTagList();
 
         for (int var3 = 0; var3 < this.minecartContainerItems.length; ++var3)
@@ -254,16 +254,16 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
             }
         }
 
-        par1NBTTagCompound.setTag("Items", var2);
+        p_70014_1_.setTag("Items", var2);
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    protected void readEntityFromNBT(NBTTagCompound p_70037_1_)
     {
-        super.readEntityFromNBT(par1NBTTagCompound);
-        NBTTagList var2 = par1NBTTagCompound.getTagList("Items", 10);
+        super.readEntityFromNBT(p_70037_1_);
+        NBTTagList var2 = p_70037_1_.getTagList("Items", 10);
         this.minecartContainerItems = new ItemStack[this.getSizeInventory()];
 
         for (int var3 = 0; var3 < var2.tagCount(); ++var3)
@@ -281,11 +281,11 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
     /**
      * First layer of player interaction
      */
-    public boolean interactFirst(EntityPlayer par1EntityPlayer)
+    public boolean interactFirst(EntityPlayer p_130002_1_)
     {
         if (!this.worldObj.isClient)
         {
-            par1EntityPlayer.displayGUIChest(this);
+            p_130002_1_.displayGUIChest(this);
         }
 
         return true;

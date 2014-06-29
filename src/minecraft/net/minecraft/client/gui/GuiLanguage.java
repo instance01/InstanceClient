@@ -20,11 +20,11 @@ public class GuiLanguage extends GuiScreen
     private GuiOptionButton field_146452_r;
     private static final String __OBFID = "CL_00000698";
 
-    public GuiLanguage(GuiScreen par1GuiScreen, GameSettings par2GameSettings, LanguageManager par3LanguageManager)
+    public GuiLanguage(GuiScreen p_i1043_1_, GameSettings p_i1043_2_, LanguageManager p_i1043_3_)
     {
-        this.field_146453_a = par1GuiScreen;
-        this.field_146451_g = par2GameSettings;
-        this.field_146454_h = par3LanguageManager;
+        this.field_146453_a = p_i1043_1_;
+        this.field_146451_g = p_i1043_2_;
+        this.field_146454_h = p_i1043_3_;
     }
 
     /**
@@ -32,6 +32,13 @@ public class GuiLanguage extends GuiScreen
      */
     public void initGui()
     {
+        boolean var1 = false;
+
+        if (this.field_146455_i != null)
+        {
+            ;
+        }
+
         this.buttonList.add(this.field_146455_i = new GuiOptionButton(100, this.width / 2 - 155, this.height - 38, GameSettings.Options.FORCE_UNICODE_FONT, this.field_146451_g.getKeyBinding(GameSettings.Options.FORCE_UNICODE_FONT)));
         this.buttonList.add(this.field_146452_r = new GuiOptionButton(6, this.width / 2 - 155 + 160, this.height - 38, I18n.format("gui.done", new Object[0])));
         this.field_146450_f = new GuiLanguage.List();
@@ -56,6 +63,10 @@ public class GuiLanguage extends GuiScreen
                     {
                         this.field_146451_g.setOptionValue(((GuiOptionButton)p_146284_1_).func_146136_c(), 1);
                         p_146284_1_.displayString = this.field_146451_g.getKeyBinding(GameSettings.Options.FORCE_UNICODE_FONT);
+                        ScaledResolution var2 = new ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
+                        int var3 = var2.getScaledWidth();
+                        int var4 = var2.getScaledHeight();
+                        this.setWorldAndResolution(this.mc, var3, var4);
                     }
 
                     break;
@@ -69,12 +80,12 @@ public class GuiLanguage extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
-        this.field_146450_f.func_148128_a(par1, par2, par3);
+        this.field_146450_f.func_148128_a(p_73863_1_, p_73863_2_, p_73863_3_);
         this.drawCenteredString(this.fontRendererObj, I18n.format("options.language", new Object[0]), this.width / 2, 16, 16777215);
         this.drawCenteredString(this.fontRendererObj, "(" + I18n.format("options.languageWarning", new Object[0]) + ")", this.width / 2, this.height - 56, 8421504);
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 
     class List extends GuiSlot

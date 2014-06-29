@@ -7,8 +7,8 @@ public abstract class EntityWeatherEffect extends Entity
 {
     private static final String __OBFID = "CL_00001665";
 
-    public EntityWeatherEffect(World par1World)
+    public EntityWeatherEffect(World p_i1702_1_)
     {
-        super(par1World);
+        super(p_i1702_1_);
     }
 }

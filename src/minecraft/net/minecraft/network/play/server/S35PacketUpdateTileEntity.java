@@ -51,9 +51,9 @@ public class S35PacketUpdateTileEntity extends Packet
         p_148840_1_.writeNBTTagCompoundToBuffer(this.field_148860_e);
     }
 
-    public void processPacket(INetHandlerPlayClient p_148858_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_148858_1_.handleUpdateTileEntity(this);
+        p_148833_1_.handleUpdateTileEntity(this);
     }
 
     public int func_148856_c()

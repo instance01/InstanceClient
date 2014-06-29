@@ -14,15 +14,15 @@ public class GuiChest extends GuiContainer
     private int field_147018_x;
     private static final String __OBFID = "CL_00000749";
 
-    public GuiChest(IInventory par1IInventory, IInventory par2IInventory)
+    public GuiChest(IInventory p_i1083_1_, IInventory p_i1083_2_)
     {
-        super(new ContainerChest(par1IInventory, par2IInventory));
-        this.field_147016_v = par1IInventory;
-        this.field_147015_w = par2IInventory;
+        super(new ContainerChest(p_i1083_1_, p_i1083_2_));
+        this.field_147016_v = p_i1083_1_;
+        this.field_147015_w = p_i1083_2_;
         this.field_146291_p = false;
         short var3 = 222;
         int var4 = var3 - 108;
-        this.field_147018_x = par2IInventory.getSizeInventory() / 9;
+        this.field_147018_x = p_i1083_2_.getSizeInventory() / 9;
         this.field_147000_g = var4 + this.field_147018_x * 18;
     }
 

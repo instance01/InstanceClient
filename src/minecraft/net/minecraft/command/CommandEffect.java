@@ -24,22 +24,22 @@ public class CommandEffect extends CommandBase
         return 2;
     }
 
-    public String getCommandUsage(ICommandSender par1ICommandSender)
+    public String getCommandUsage(ICommandSender p_71518_1_)
     {
         return "commands.effect.usage";
     }
 
-    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_)
     {
-        if (par2ArrayOfStr.length < 2)
+        if (p_71515_2_.length < 2)
         {
             throw new WrongUsageException("commands.effect.usage", new Object[0]);
         }
         else
         {
-            EntityPlayerMP var3 = getPlayer(par1ICommandSender, par2ArrayOfStr[0]);
+            EntityPlayerMP var3 = getPlayer(p_71515_1_, p_71515_2_[0]);
 
-            if (par2ArrayOfStr[1].equals("clear"))
+            if (p_71515_2_[1].equals("clear"))
             {
                 if (var3.getActivePotionEffects().isEmpty())
                 {
@@ -47,11 +47,11 @@ public class CommandEffect extends CommandBase
                 }
 
                 var3.clearActivePotions();
-                notifyAdmins(par1ICommandSender, "commands.effect.success.removed.all", new Object[] {var3.getCommandSenderName()});
+                func_152373_a(p_71515_1_, this, "commands.effect.success.removed.all", new Object[] {var3.getCommandSenderName()});
             }
             else
             {
-                int var4 = parseIntWithMin(par1ICommandSender, par2ArrayOfStr[1], 1);
+                int var4 = parseIntWithMin(p_71515_1_, p_71515_2_[1], 1);
                 int var5 = 600;
                 int var6 = 30;
                 int var7 = 0;
@@ -61,9 +61,9 @@ public class CommandEffect extends CommandBase
                     throw new NumberInvalidException("commands.effect.notFound", new Object[] {Integer.valueOf(var4)});
                 }
 
-                if (par2ArrayOfStr.length >= 3)
+                if (p_71515_2_.length >= 3)
                 {
-                    var6 = parseIntBounded(par1ICommandSender, par2ArrayOfStr[2], 0, 1000000);
+                    var6 = parseIntBounded(p_71515_1_, p_71515_2_[2], 0, 1000000);
 
                     if (Potion.potionTypes[var4].isInstant())
                     {
@@ -79,9 +79,9 @@ public class CommandEffect extends CommandBase
                     var5 = 1;
                 }
 
-                if (par2ArrayOfStr.length >= 4)
+                if (p_71515_2_.length >= 4)
                 {
-                    var7 = parseIntBounded(par1ICommandSender, par2ArrayOfStr[3], 0, 255);
+                    var7 = parseIntBounded(p_71515_1_, p_71515_2_[3], 0, 255);
                 }
 
                 if (var6 == 0)
@@ -92,13 +92,13 @@ public class CommandEffect extends CommandBase
                     }
 
                     var3.removePotionEffect(var4);
-                    notifyAdmins(par1ICommandSender, "commands.effect.success.removed", new Object[] {new ChatComponentTranslation(Potion.potionTypes[var4].getName(), new Object[0]), var3.getCommandSenderName()});
+                    func_152373_a(p_71515_1_, this, "commands.effect.success.removed", new Object[] {new ChatComponentTranslation(Potion.potionTypes[var4].getName(), new Object[0]), var3.getCommandSenderName()});
                 }
                 else
                 {
                     PotionEffect var8 = new PotionEffect(var4, var5, var7);
                     var3.addPotionEffect(var8);
-                    notifyAdmins(par1ICommandSender, "commands.effect.success", new Object[] {new ChatComponentTranslation(var8.getEffectName(), new Object[0]), Integer.valueOf(var4), Integer.valueOf(var7), var3.getCommandSenderName(), Integer.valueOf(var6)});
+                    func_152373_a(p_71515_1_, this, "commands.effect.success", new Object[] {new ChatComponentTranslation(var8.getEffectName(), new Object[0]), Integer.valueOf(var4), Integer.valueOf(var7), var3.getCommandSenderName(), Integer.valueOf(var6)});
                 }
             }
         }
@@ -107,9 +107,9 @@ public class CommandEffect extends CommandBase
     /**
      * Adds the strings available in this command to the given list of tab completion options.
      */
-    public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public List addTabCompletionOptions(ICommandSender p_71516_1_, String[] p_71516_2_)
     {
-        return par2ArrayOfStr.length == 1 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, this.getAllUsernames()) : null;
+        return p_71516_2_.length == 1 ? getListOfStringsMatchingLastWord(p_71516_2_, this.getAllUsernames()) : null;
     }
 
     protected String[] getAllUsernames()
@@ -120,8 +120,8 @@ public class CommandEffect extends CommandBase
     /**
      * Return whether the specified command parameter index is a username parameter.
      */
-    public boolean isUsernameIndex(String[] par1ArrayOfStr, int par2)
+    public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_)
     {
-        return par2 == 0;
+        return p_82358_2_ == 0;
     }
 }

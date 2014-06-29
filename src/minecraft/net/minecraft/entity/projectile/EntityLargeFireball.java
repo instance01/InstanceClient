@@ -12,31 +12,31 @@ public class EntityLargeFireball extends EntityFireball
     public int field_92057_e = 1;
     private static final String __OBFID = "CL_00001719";
 
-    public EntityLargeFireball(World par1World)
+    public EntityLargeFireball(World p_i1767_1_)
     {
-        super(par1World);
+        super(p_i1767_1_);
     }
 
-    public EntityLargeFireball(World par1World, double par2, double par4, double par6, double par8, double par10, double par12)
+    public EntityLargeFireball(World p_i1768_1_, double p_i1768_2_, double p_i1768_4_, double p_i1768_6_, double p_i1768_8_, double p_i1768_10_, double p_i1768_12_)
     {
-        super(par1World, par2, par4, par6, par8, par10, par12);
+        super(p_i1768_1_, p_i1768_2_, p_i1768_4_, p_i1768_6_, p_i1768_8_, p_i1768_10_, p_i1768_12_);
     }
 
-    public EntityLargeFireball(World par1World, EntityLivingBase par2EntityLivingBase, double par3, double par5, double par7)
+    public EntityLargeFireball(World p_i1769_1_, EntityLivingBase p_i1769_2_, double p_i1769_3_, double p_i1769_5_, double p_i1769_7_)
     {
-        super(par1World, par2EntityLivingBase, par3, par5, par7);
+        super(p_i1769_1_, p_i1769_2_, p_i1769_3_, p_i1769_5_, p_i1769_7_);
     }
 
     /**
      * Called when this EntityFireball hits a block or entity.
      */
-    protected void onImpact(MovingObjectPosition par1MovingObjectPosition)
+    protected void onImpact(MovingObjectPosition p_70227_1_)
     {
         if (!this.worldObj.isClient)
         {
-            if (par1MovingObjectPosition.entityHit != null)
+            if (p_70227_1_.entityHit != null)
             {
-                par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 6.0F);
+                p_70227_1_.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 6.0F);
             }
 
             this.worldObj.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.field_92057_e, true, this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing"));
@@ -47,22 +47,22 @@ public class EntityLargeFireball extends EntityFireball
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    public void writeEntityToNBT(NBTTagCompound p_70014_1_)
     {
-        super.writeEntityToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setInteger("ExplosionPower", this.field_92057_e);
+        super.writeEntityToNBT(p_70014_1_);
+        p_70014_1_.setInteger("ExplosionPower", this.field_92057_e);
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    public void readEntityFromNBT(NBTTagCompound p_70037_1_)
     {
-        super.readEntityFromNBT(par1NBTTagCompound);
+        super.readEntityFromNBT(p_70037_1_);
 
-        if (par1NBTTagCompound.func_150297_b("ExplosionPower", 99))
+        if (p_70037_1_.func_150297_b("ExplosionPower", 99))
         {
-            this.field_92057_e = par1NBTTagCompound.getInteger("ExplosionPower");
+            this.field_92057_e = p_70037_1_.getInteger("ExplosionPower");
         }
     }
 }

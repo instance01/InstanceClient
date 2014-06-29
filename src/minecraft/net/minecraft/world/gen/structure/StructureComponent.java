@@ -30,9 +30,9 @@ public abstract class StructureComponent
 
     public StructureComponent() {}
 
-    protected StructureComponent(int par1)
+    protected StructureComponent(int p_i2091_1_)
     {
-        this.componentType = par1;
+        this.componentType = p_i2091_1_;
         this.coordBaseMode = -1;
     }
 
@@ -47,32 +47,32 @@ public abstract class StructureComponent
         return var1;
     }
 
-    protected abstract void func_143012_a(NBTTagCompound var1);
+    protected abstract void func_143012_a(NBTTagCompound p_143012_1_);
 
-    public void func_143009_a(World par1World, NBTTagCompound par2NBTTagCompound)
+    public void func_143009_a(World p_143009_1_, NBTTagCompound p_143009_2_)
     {
-        if (par2NBTTagCompound.hasKey("BB"))
+        if (p_143009_2_.hasKey("BB"))
         {
-            this.boundingBox = new StructureBoundingBox(par2NBTTagCompound.getIntArray("BB"));
+            this.boundingBox = new StructureBoundingBox(p_143009_2_.getIntArray("BB"));
         }
 
-        this.coordBaseMode = par2NBTTagCompound.getInteger("O");
-        this.componentType = par2NBTTagCompound.getInteger("GD");
-        this.func_143011_b(par2NBTTagCompound);
+        this.coordBaseMode = p_143009_2_.getInteger("O");
+        this.componentType = p_143009_2_.getInteger("GD");
+        this.func_143011_b(p_143009_2_);
     }
 
-    protected abstract void func_143011_b(NBTTagCompound var1);
+    protected abstract void func_143011_b(NBTTagCompound p_143011_1_);
 
     /**
      * Initiates construction of the Structure Component picked, at the current Location of StructGen
      */
-    public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random) {}
+    public void buildComponent(StructureComponent p_74861_1_, List p_74861_2_, Random p_74861_3_) {}
 
     /**
      * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at
      * the end, it adds Fences...
      */
-    public abstract boolean addComponentParts(World var1, Random var2, StructureBoundingBox var3);
+    public abstract boolean addComponentParts(World p_74875_1_, Random p_74875_2_, StructureBoundingBox p_74875_3_);
 
     public StructureBoundingBox getBoundingBox()
     {
@@ -90,9 +90,9 @@ public abstract class StructureComponent
     /**
      * Discover if bounding box can fit within the current bounding box object.
      */
-    public static StructureComponent findIntersecting(List par0List, StructureBoundingBox par1StructureBoundingBox)
+    public static StructureComponent findIntersecting(List p_74883_0_, StructureBoundingBox p_74883_1_)
     {
-        Iterator var2 = par0List.iterator();
+        Iterator var2 = p_74883_0_.iterator();
         StructureComponent var3;
 
         do
@@ -104,7 +104,7 @@ public abstract class StructureComponent
 
             var3 = (StructureComponent)var2.next();
         }
-        while (var3.getBoundingBox() == null || !var3.getBoundingBox().intersectsWith(par1StructureBoundingBox));
+        while (var3.getBoundingBox() == null || !var3.getBoundingBox().intersectsWith(p_74883_1_));
 
         return var3;
     }
@@ -117,14 +117,14 @@ public abstract class StructureComponent
     /**
      * checks the entire StructureBoundingBox for Liquids
      */
-    protected boolean isLiquidInStructureBoundingBox(World par1World, StructureBoundingBox par2StructureBoundingBox)
+    protected boolean isLiquidInStructureBoundingBox(World p_74860_1_, StructureBoundingBox p_74860_2_)
     {
-        int var3 = Math.max(this.boundingBox.minX - 1, par2StructureBoundingBox.minX);
-        int var4 = Math.max(this.boundingBox.minY - 1, par2StructureBoundingBox.minY);
-        int var5 = Math.max(this.boundingBox.minZ - 1, par2StructureBoundingBox.minZ);
-        int var6 = Math.min(this.boundingBox.maxX + 1, par2StructureBoundingBox.maxX);
-        int var7 = Math.min(this.boundingBox.maxY + 1, par2StructureBoundingBox.maxY);
-        int var8 = Math.min(this.boundingBox.maxZ + 1, par2StructureBoundingBox.maxZ);
+        int var3 = Math.max(this.boundingBox.minX - 1, p_74860_2_.minX);
+        int var4 = Math.max(this.boundingBox.minY - 1, p_74860_2_.minY);
+        int var5 = Math.max(this.boundingBox.minZ - 1, p_74860_2_.minZ);
+        int var6 = Math.min(this.boundingBox.maxX + 1, p_74860_2_.maxX);
+        int var7 = Math.min(this.boundingBox.maxY + 1, p_74860_2_.maxY);
+        int var8 = Math.min(this.boundingBox.maxZ + 1, p_74860_2_.maxZ);
         int var9;
         int var10;
 
@@ -132,12 +132,12 @@ public abstract class StructureComponent
         {
             for (var10 = var5; var10 <= var8; ++var10)
             {
-                if (par1World.getBlock(var9, var4, var10).getMaterial().isLiquid())
+                if (p_74860_1_.getBlock(var9, var4, var10).getMaterial().isLiquid())
                 {
                     return true;
                 }
 
-                if (par1World.getBlock(var9, var7, var10).getMaterial().isLiquid())
+                if (p_74860_1_.getBlock(var9, var7, var10).getMaterial().isLiquid())
                 {
                     return true;
                 }
@@ -148,12 +148,12 @@ public abstract class StructureComponent
         {
             for (var10 = var4; var10 <= var7; ++var10)
             {
-                if (par1World.getBlock(var9, var10, var5).getMaterial().isLiquid())
+                if (p_74860_1_.getBlock(var9, var10, var5).getMaterial().isLiquid())
                 {
                     return true;
                 }
 
-                if (par1World.getBlock(var9, var10, var8).getMaterial().isLiquid())
+                if (p_74860_1_.getBlock(var9, var10, var8).getMaterial().isLiquid())
                 {
                     return true;
                 }
@@ -164,12 +164,12 @@ public abstract class StructureComponent
         {
             for (var10 = var4; var10 <= var7; ++var10)
             {
-                if (par1World.getBlock(var3, var10, var9).getMaterial().isLiquid())
+                if (p_74860_1_.getBlock(var3, var10, var9).getMaterial().isLiquid())
                 {
                     return true;
                 }
 
-                if (par1World.getBlock(var6, var10, var9).getMaterial().isLiquid())
+                if (p_74860_1_.getBlock(var6, var10, var9).getMaterial().isLiquid())
                 {
                     return true;
                 }
@@ -179,46 +179,46 @@ public abstract class StructureComponent
         return false;
     }
 
-    protected int getXWithOffset(int par1, int par2)
+    protected int getXWithOffset(int p_74865_1_, int p_74865_2_)
     {
         switch (this.coordBaseMode)
         {
             case 0:
             case 2:
-                return this.boundingBox.minX + par1;
+                return this.boundingBox.minX + p_74865_1_;
 
             case 1:
-                return this.boundingBox.maxX - par2;
+                return this.boundingBox.maxX - p_74865_2_;
 
             case 3:
-                return this.boundingBox.minX + par2;
+                return this.boundingBox.minX + p_74865_2_;
 
             default:
-                return par1;
+                return p_74865_1_;
         }
     }
 
-    protected int getYWithOffset(int par1)
+    protected int getYWithOffset(int p_74862_1_)
     {
-        return this.coordBaseMode == -1 ? par1 : par1 + this.boundingBox.minY;
+        return this.coordBaseMode == -1 ? p_74862_1_ : p_74862_1_ + this.boundingBox.minY;
     }
 
-    protected int getZWithOffset(int par1, int par2)
+    protected int getZWithOffset(int p_74873_1_, int p_74873_2_)
     {
         switch (this.coordBaseMode)
         {
             case 0:
-                return this.boundingBox.minZ + par2;
+                return this.boundingBox.minZ + p_74873_2_;
 
             case 1:
             case 3:
-                return this.boundingBox.minZ + par1;
+                return this.boundingBox.minZ + p_74873_1_;
 
             case 2:
-                return this.boundingBox.maxZ - par2;
+                return this.boundingBox.maxZ - p_74873_2_;
 
             default:
-                return par2;
+                return p_74873_2_;
         }
     }
 
@@ -576,15 +576,15 @@ public abstract class StructureComponent
      * arguments: (World worldObj, StructureBoundingBox structBB, int minX, int minY, int minZ, int maxX, int maxY, int
      * maxZ)
      */
-    protected void fillWithAir(World par1World, StructureBoundingBox par2StructureBoundingBox, int par3, int par4, int par5, int par6, int par7, int par8)
+    protected void fillWithAir(World p_74878_1_, StructureBoundingBox p_74878_2_, int p_74878_3_, int p_74878_4_, int p_74878_5_, int p_74878_6_, int p_74878_7_, int p_74878_8_)
     {
-        for (int var9 = par4; var9 <= par7; ++var9)
+        for (int var9 = p_74878_4_; var9 <= p_74878_7_; ++var9)
         {
-            for (int var10 = par3; var10 <= par6; ++var10)
+            for (int var10 = p_74878_3_; var10 <= p_74878_6_; ++var10)
             {
-                for (int var11 = par5; var11 <= par8; ++var11)
+                for (int var11 = p_74878_5_; var11 <= p_74878_8_; ++var11)
                 {
-                    this.func_151550_a(par1World, Blocks.air, 0, var10, var9, var11, par2StructureBoundingBox);
+                    this.func_151550_a(p_74878_1_, Blocks.air, 0, var10, var9, var11, p_74878_2_);
                 }
             }
         }
@@ -642,18 +642,18 @@ public abstract class StructureComponent
      * arguments: World worldObj, StructureBoundingBox structBB, int minX, int minY, int minZ, int maxX, int maxY, int
      * maxZ, boolean alwaysreplace, Random rand, StructurePieceBlockSelector blockselector
      */
-    protected void fillWithRandomizedBlocks(World par1World, StructureBoundingBox par2StructureBoundingBox, int par3, int par4, int par5, int par6, int par7, int par8, boolean par9, Random par10Random, StructureComponent.BlockSelector par11StructurePieceBlockSelector)
+    protected void fillWithRandomizedBlocks(World p_74882_1_, StructureBoundingBox p_74882_2_, int p_74882_3_, int p_74882_4_, int p_74882_5_, int p_74882_6_, int p_74882_7_, int p_74882_8_, boolean p_74882_9_, Random p_74882_10_, StructureComponent.BlockSelector p_74882_11_)
     {
-        for (int var12 = par4; var12 <= par7; ++var12)
+        for (int var12 = p_74882_4_; var12 <= p_74882_7_; ++var12)
         {
-            for (int var13 = par3; var13 <= par6; ++var13)
+            for (int var13 = p_74882_3_; var13 <= p_74882_6_; ++var13)
             {
-                for (int var14 = par5; var14 <= par8; ++var14)
+                for (int var14 = p_74882_5_; var14 <= p_74882_8_; ++var14)
                 {
-                    if (!par9 || this.func_151548_a(par1World, var13, var12, var14, par2StructureBoundingBox).getMaterial() != Material.air)
+                    if (!p_74882_9_ || this.func_151548_a(p_74882_1_, var13, var12, var14, p_74882_2_).getMaterial() != Material.air)
                     {
-                        par11StructurePieceBlockSelector.selectBlocks(par10Random, var13, var12, var14, var12 == par4 || var12 == par7 || var13 == par3 || var13 == par6 || var14 == par5 || var14 == par8);
-                        this.func_151550_a(par1World, par11StructurePieceBlockSelector.func_151561_a(), par11StructurePieceBlockSelector.getSelectedBlockMetaData(), var13, var12, var14, par2StructureBoundingBox);
+                        p_74882_11_.selectBlocks(p_74882_10_, var13, var12, var14, var12 == p_74882_4_ || var12 == p_74882_7_ || var13 == p_74882_3_ || var13 == p_74882_6_ || var14 == p_74882_5_ || var14 == p_74882_8_);
+                        this.func_151550_a(p_74882_1_, p_74882_11_.func_151561_a(), p_74882_11_.getSelectedBlockMetaData(), var13, var12, var14, p_74882_2_);
                     }
                 }
             }
@@ -729,17 +729,17 @@ public abstract class StructureComponent
     /**
      * Deletes all continuous blocks from selected position upwards. Stops at hitting air.
      */
-    protected void clearCurrentPositionBlocksUpwards(World par1World, int par2, int par3, int par4, StructureBoundingBox par5StructureBoundingBox)
+    protected void clearCurrentPositionBlocksUpwards(World p_74871_1_, int p_74871_2_, int p_74871_3_, int p_74871_4_, StructureBoundingBox p_74871_5_)
     {
-        int var6 = this.getXWithOffset(par2, par4);
-        int var7 = this.getYWithOffset(par3);
-        int var8 = this.getZWithOffset(par2, par4);
+        int var6 = this.getXWithOffset(p_74871_2_, p_74871_4_);
+        int var7 = this.getYWithOffset(p_74871_3_);
+        int var8 = this.getZWithOffset(p_74871_2_, p_74871_4_);
 
-        if (par5StructureBoundingBox.isVecInside(var6, var7, var8))
+        if (p_74871_5_.isVecInside(var6, var7, var8))
         {
-            while (!par1World.isAirBlock(var6, var7, var8) && var7 < 255)
+            while (!p_74871_1_.isAirBlock(var6, var7, var8) && var7 < 255)
             {
-                par1World.setBlock(var6, var7, var8, Blocks.air, 0, 2);
+                p_74871_1_.setBlock(var6, var7, var8, Blocks.air, 0, 2);
                 ++var7;
             }
         }
@@ -764,20 +764,20 @@ public abstract class StructureComponent
     /**
      * Used to generate chests with items in it. ex: Temple Chests, Village Blacksmith Chests, Mineshaft Chests.
      */
-    protected boolean generateStructureChestContents(World par1World, StructureBoundingBox par2StructureBoundingBox, Random par3Random, int par4, int par5, int par6, WeightedRandomChestContent[] par7ArrayOfWeightedRandomChestContent, int par8)
+    protected boolean generateStructureChestContents(World p_74879_1_, StructureBoundingBox p_74879_2_, Random p_74879_3_, int p_74879_4_, int p_74879_5_, int p_74879_6_, WeightedRandomChestContent[] p_74879_7_, int p_74879_8_)
     {
-        int var9 = this.getXWithOffset(par4, par6);
-        int var10 = this.getYWithOffset(par5);
-        int var11 = this.getZWithOffset(par4, par6);
+        int var9 = this.getXWithOffset(p_74879_4_, p_74879_6_);
+        int var10 = this.getYWithOffset(p_74879_5_);
+        int var11 = this.getZWithOffset(p_74879_4_, p_74879_6_);
 
-        if (par2StructureBoundingBox.isVecInside(var9, var10, var11) && par1World.getBlock(var9, var10, var11) != Blocks.chest)
+        if (p_74879_2_.isVecInside(var9, var10, var11) && p_74879_1_.getBlock(var9, var10, var11) != Blocks.chest)
         {
-            par1World.setBlock(var9, var10, var11, Blocks.chest, 0, 2);
-            TileEntityChest var12 = (TileEntityChest)par1World.getTileEntity(var9, var10, var11);
+            p_74879_1_.setBlock(var9, var10, var11, Blocks.chest, 0, 2);
+            TileEntityChest var12 = (TileEntityChest)p_74879_1_.getTileEntity(var9, var10, var11);
 
             if (var12 != null)
             {
-                WeightedRandomChestContent.generateChestContents(par3Random, par7ArrayOfWeightedRandomChestContent, var12, par8);
+                WeightedRandomChestContent.generateChestContents(p_74879_3_, p_74879_7_, var12, p_74879_8_);
             }
 
             return true;
@@ -791,20 +791,20 @@ public abstract class StructureComponent
     /**
      * Used to generate dispenser contents for structures. ex: Jungle Temples.
      */
-    protected boolean generateStructureDispenserContents(World par1World, StructureBoundingBox par2StructureBoundingBox, Random par3Random, int par4, int par5, int par6, int par7, WeightedRandomChestContent[] par8ArrayOfWeightedRandomChestContent, int par9)
+    protected boolean generateStructureDispenserContents(World p_74869_1_, StructureBoundingBox p_74869_2_, Random p_74869_3_, int p_74869_4_, int p_74869_5_, int p_74869_6_, int p_74869_7_, WeightedRandomChestContent[] p_74869_8_, int p_74869_9_)
     {
-        int var10 = this.getXWithOffset(par4, par6);
-        int var11 = this.getYWithOffset(par5);
-        int var12 = this.getZWithOffset(par4, par6);
+        int var10 = this.getXWithOffset(p_74869_4_, p_74869_6_);
+        int var11 = this.getYWithOffset(p_74869_5_);
+        int var12 = this.getZWithOffset(p_74869_4_, p_74869_6_);
 
-        if (par2StructureBoundingBox.isVecInside(var10, var11, var12) && par1World.getBlock(var10, var11, var12) != Blocks.dispenser)
+        if (p_74869_2_.isVecInside(var10, var11, var12) && p_74869_1_.getBlock(var10, var11, var12) != Blocks.dispenser)
         {
-            par1World.setBlock(var10, var11, var12, Blocks.dispenser, this.func_151555_a(Blocks.dispenser, par7), 2);
-            TileEntityDispenser var13 = (TileEntityDispenser)par1World.getTileEntity(var10, var11, var12);
+            p_74869_1_.setBlock(var10, var11, var12, Blocks.dispenser, this.func_151555_a(Blocks.dispenser, p_74869_7_), 2);
+            TileEntityDispenser var13 = (TileEntityDispenser)p_74869_1_.getTileEntity(var10, var11, var12);
 
             if (var13 != null)
             {
-                WeightedRandomChestContent.func_150706_a(par3Random, par8ArrayOfWeightedRandomChestContent, var13, par9);
+                WeightedRandomChestContent.func_150706_a(p_74869_3_, p_74869_8_, var13, p_74869_9_);
             }
 
             return true;
@@ -815,15 +815,15 @@ public abstract class StructureComponent
         }
     }
 
-    protected void placeDoorAtCurrentPosition(World par1World, StructureBoundingBox par2StructureBoundingBox, Random par3Random, int par4, int par5, int par6, int par7)
+    protected void placeDoorAtCurrentPosition(World p_74881_1_, StructureBoundingBox p_74881_2_, Random p_74881_3_, int p_74881_4_, int p_74881_5_, int p_74881_6_, int p_74881_7_)
     {
-        int var8 = this.getXWithOffset(par4, par6);
-        int var9 = this.getYWithOffset(par5);
-        int var10 = this.getZWithOffset(par4, par6);
+        int var8 = this.getXWithOffset(p_74881_4_, p_74881_6_);
+        int var9 = this.getYWithOffset(p_74881_5_);
+        int var10 = this.getZWithOffset(p_74881_4_, p_74881_6_);
 
-        if (par2StructureBoundingBox.isVecInside(var8, var9, var10))
+        if (p_74881_2_.isVecInside(var8, var9, var10))
         {
-            ItemDoor.func_150924_a(par1World, var8, var9, var10, par7, Blocks.wooden_door);
+            ItemDoor.func_150924_a(p_74881_1_, var8, var9, var10, p_74881_7_, Blocks.wooden_door);
         }
     }
 
@@ -838,7 +838,7 @@ public abstract class StructureComponent
             this.field_151562_a = Blocks.air;
         }
 
-        public abstract void selectBlocks(Random var1, int var2, int var3, int var4, boolean var5);
+        public abstract void selectBlocks(Random p_75062_1_, int p_75062_2_, int p_75062_3_, int p_75062_4_, boolean p_75062_5_);
 
         public Block func_151561_a()
         {

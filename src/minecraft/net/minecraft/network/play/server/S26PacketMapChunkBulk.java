@@ -166,9 +166,9 @@ public class S26PacketMapChunkBulk extends Packet
         }
     }
 
-    public void processPacket(INetHandlerPlayClient p_149259_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149259_1_.handleMapChunkBulk(this);
+        p_148833_1_.handleMapChunkBulk(this);
     }
 
     public int func_149255_a(int p_149255_1_)

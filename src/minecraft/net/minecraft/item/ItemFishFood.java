@@ -40,7 +40,7 @@ public class ItemFishFood extends ItemFood
         return ItemFishFood.FishType.func_150978_a(p_150896_1_) == ItemFishFood.FishType.PUFFERFISH ? PotionHelper.field_151423_m : null;
     }
 
-    public void registerIcons(IIconRegister par1IconRegister)
+    public void registerIcons(IIconRegister p_94581_1_)
     {
         ItemFishFood.FishType[] var2 = ItemFishFood.FishType.values();
         int var3 = var2.length;
@@ -48,30 +48,30 @@ public class ItemFishFood extends ItemFood
         for (int var4 = 0; var4 < var3; ++var4)
         {
             ItemFishFood.FishType var5 = var2[var4];
-            var5.func_150968_a(par1IconRegister);
+            var5.func_150968_a(p_94581_1_);
         }
     }
 
-    protected void onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    protected void onFoodEaten(ItemStack p_77849_1_, World p_77849_2_, EntityPlayer p_77849_3_)
     {
-        ItemFishFood.FishType var4 = ItemFishFood.FishType.func_150978_a(par1ItemStack);
+        ItemFishFood.FishType var4 = ItemFishFood.FishType.func_150978_a(p_77849_1_);
 
         if (var4 == ItemFishFood.FishType.PUFFERFISH)
         {
-            par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.poison.id, 1200, 3));
-            par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.hunger.id, 300, 2));
-            par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.id, 300, 1));
+            p_77849_3_.addPotionEffect(new PotionEffect(Potion.poison.id, 1200, 3));
+            p_77849_3_.addPotionEffect(new PotionEffect(Potion.hunger.id, 300, 2));
+            p_77849_3_.addPotionEffect(new PotionEffect(Potion.confusion.id, 300, 1));
         }
 
-        super.onFoodEaten(par1ItemStack, par2World, par3EntityPlayer);
+        super.onFoodEaten(p_77849_1_, p_77849_2_, p_77849_3_);
     }
 
     /**
      * Gets an icon index based on an item's damage value
      */
-    public IIcon getIconFromDamage(int par1)
+    public IIcon getIconFromDamage(int p_77617_1_)
     {
-        ItemFishFood.FishType var2 = ItemFishFood.FishType.func_150974_a(par1);
+        ItemFishFood.FishType var2 = ItemFishFood.FishType.func_150974_a(p_77617_1_);
         return this.field_150907_b && var2.func_150973_i() ? var2.func_150979_h() : var2.func_150971_g();
     }
 
@@ -98,9 +98,9 @@ public class ItemFishFood extends ItemFood
      * Returns the unlocalized name of this item. This version accepts an ItemStack so different stacks can have
      * different names based on their damage or NBT.
      */
-    public String getUnlocalizedName(ItemStack par1ItemStack)
+    public String getUnlocalizedName(ItemStack p_77667_1_)
     {
-        ItemFishFood.FishType var2 = ItemFishFood.FishType.func_150978_a(par1ItemStack);
+        ItemFishFood.FishType var2 = ItemFishFood.FishType.func_150978_a(p_77667_1_);
         return this.getUnlocalizedName() + "." + var2.func_150972_b() + "." + (this.field_150907_b && var2.func_150973_i() ? "cooked" : "raw");
     }
 

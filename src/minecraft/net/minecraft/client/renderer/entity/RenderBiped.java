@@ -1,7 +1,9 @@
 package net.minecraft.client.renderer.entity;
 
 import com.google.common.collect.Maps;
+import com.mojang.authlib.GameProfile;
 import java.util.Map;
+import java.util.UUID;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -14,7 +16,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StringUtils;
 import org.lwjgl.opengl.GL11;
 
 public class RenderBiped extends RenderLiving
@@ -29,16 +34,16 @@ public class RenderBiped extends RenderLiving
     private static final String[] bipedArmorFilenamePrefix = new String[] {"leather", "chainmail", "iron", "diamond", "gold"};
     private static final String __OBFID = "CL_00001001";
 
-    public RenderBiped(ModelBiped par1ModelBiped, float par2)
+    public RenderBiped(ModelBiped p_i1257_1_, float p_i1257_2_)
     {
-        this(par1ModelBiped, par2, 1.0F);
+        this(p_i1257_1_, p_i1257_2_, 1.0F);
     }
 
-    public RenderBiped(ModelBiped par1ModelBiped, float par2, float par3)
+    public RenderBiped(ModelBiped p_i1258_1_, float p_i1258_2_, float p_i1258_3_)
     {
-        super(par1ModelBiped, par2);
-        this.modelBipedMain = par1ModelBiped;
-        this.field_77070_b = par3;
+        super(p_i1258_1_, p_i1258_2_);
+        this.modelBipedMain = p_i1258_1_;
+        this.field_77070_b = p_i1258_3_;
         this.func_82421_b();
     }
 
@@ -48,14 +53,14 @@ public class RenderBiped extends RenderLiving
         this.field_82425_h = new ModelBiped(0.5F);
     }
 
-    public static ResourceLocation func_110857_a(ItemArmor par0ItemArmor, int par1)
+    public static ResourceLocation func_110857_a(ItemArmor p_110857_0_, int p_110857_1_)
     {
-        return func_110858_a(par0ItemArmor, par1, (String)null);
+        return func_110858_a(p_110857_0_, p_110857_1_, (String)null);
     }
 
-    public static ResourceLocation func_110858_a(ItemArmor par0ItemArmor, int par1, String par2Str)
+    public static ResourceLocation func_110858_a(ItemArmor p_110858_0_, int p_110858_1_, String p_110858_2_)
     {
-        String var3 = String.format("textures/models/armor/%s_layer_%d%s.png", new Object[] {bipedArmorFilenamePrefix[par0ItemArmor.renderIndex], Integer.valueOf(par1 == 2 ? 2 : 1), par2Str == null ? "" : String.format("_%s", new Object[]{par2Str})});
+        String var3 = String.format("textures/models/armor/%s_layer_%d%s.png", new Object[] {bipedArmorFilenamePrefix[p_110858_0_.renderIndex], Integer.valueOf(p_110858_1_ == 2 ? 2 : 1), p_110858_2_ == null ? "" : String.format("_%s", new Object[]{p_110858_2_})});
         ResourceLocation var4 = (ResourceLocation)field_110859_k.get(var3);
 
         if (var4 == null)
@@ -70,9 +75,9 @@ public class RenderBiped extends RenderLiving
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntityLiving par1EntityLiving, int par2, float par3)
+    protected int shouldRenderPass(EntityLiving p_77032_1_, int p_77032_2_, float p_77032_3_)
     {
-        ItemStack var4 = par1EntityLiving.func_130225_q(3 - par2);
+        ItemStack var4 = p_77032_1_.func_130225_q(3 - p_77032_2_);
 
         if (var4 != null)
         {
@@ -81,15 +86,15 @@ public class RenderBiped extends RenderLiving
             if (var5 instanceof ItemArmor)
             {
                 ItemArmor var6 = (ItemArmor)var5;
-                this.bindTexture(func_110857_a(var6, par2));
-                ModelBiped var7 = par2 == 2 ? this.field_82425_h : this.field_82423_g;
-                var7.bipedHead.showModel = par2 == 0;
-                var7.bipedHeadwear.showModel = par2 == 0;
-                var7.bipedBody.showModel = par2 == 1 || par2 == 2;
-                var7.bipedRightArm.showModel = par2 == 1;
-                var7.bipedLeftArm.showModel = par2 == 1;
-                var7.bipedRightLeg.showModel = par2 == 2 || par2 == 3;
-                var7.bipedLeftLeg.showModel = par2 == 2 || par2 == 3;
+                this.bindTexture(func_110857_a(var6, p_77032_2_));
+                ModelBiped var7 = p_77032_2_ == 2 ? this.field_82425_h : this.field_82423_g;
+                var7.bipedHead.showModel = p_77032_2_ == 0;
+                var7.bipedHeadwear.showModel = p_77032_2_ == 0;
+                var7.bipedBody.showModel = p_77032_2_ == 1 || p_77032_2_ == 2;
+                var7.bipedRightArm.showModel = p_77032_2_ == 1;
+                var7.bipedLeftArm.showModel = p_77032_2_ == 1;
+                var7.bipedRightLeg.showModel = p_77032_2_ == 2 || p_77032_2_ == 3;
+                var7.bipedLeftLeg.showModel = p_77032_2_ == 2 || p_77032_2_ == 3;
                 this.setRenderPassModel(var7);
                 var7.onGround = this.mainModel.onGround;
                 var7.isRiding = this.mainModel.isRiding;
@@ -125,9 +130,9 @@ public class RenderBiped extends RenderLiving
         return -1;
     }
 
-    protected void func_82408_c(EntityLiving par1EntityLivingBase, int par2, float par3)
+    protected void func_82408_c(EntityLiving p_82408_1_, int p_82408_2_, float p_82408_3_)
     {
-        ItemStack var4 = par1EntityLivingBase.func_130225_q(3 - par2);
+        ItemStack var4 = p_82408_1_.func_130225_q(3 - p_82408_2_);
 
         if (var4 != null)
         {
@@ -135,7 +140,7 @@ public class RenderBiped extends RenderLiving
 
             if (var5 instanceof ItemArmor)
             {
-                this.bindTexture(func_110858_a((ItemArmor)var5, par2, "overlay"));
+                this.bindTexture(func_110858_a((ItemArmor)var5, p_82408_2_, "overlay"));
                 float var6 = 1.0F;
                 GL11.glColor3f(1.0F, 1.0F, 1.0F);
             }
@@ -148,19 +153,19 @@ public class RenderBiped extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntityLiving p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
-        ItemStack var10 = par1EntityLiving.getHeldItem();
-        this.func_82420_a(par1EntityLiving, var10);
-        double var11 = par4 - (double)par1EntityLiving.yOffset;
+        ItemStack var10 = p_76986_1_.getHeldItem();
+        this.func_82420_a(p_76986_1_, var10);
+        double var11 = p_76986_4_ - (double)p_76986_1_.yOffset;
 
-        if (par1EntityLiving.isSneaking())
+        if (p_76986_1_.isSneaking())
         {
             var11 -= 0.125D;
         }
 
-        super.doRender(par1EntityLiving, par2, var11, par6, par8, par9);
+        super.doRender(p_76986_1_, p_76986_2_, var11, p_76986_6_, p_76986_8_, p_76986_9_);
         this.field_82423_g.aimedBow = this.field_82425_h.aimedBow = this.modelBipedMain.aimedBow = false;
         this.field_82423_g.isSneak = this.field_82425_h.isSneak = this.modelBipedMain.isSneak = false;
         this.field_82423_g.heldItemRight = this.field_82425_h.heldItemRight = this.modelBipedMain.heldItemRight = 0;
@@ -169,23 +174,23 @@ public class RenderBiped extends RenderLiving
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntityLiving par1EntityLiving)
+    protected ResourceLocation getEntityTexture(EntityLiving p_110775_1_)
     {
         return null;
     }
 
-    protected void func_82420_a(EntityLiving par1EntityLiving, ItemStack par2ItemStack)
+    protected void func_82420_a(EntityLiving p_82420_1_, ItemStack p_82420_2_)
     {
-        this.field_82423_g.heldItemRight = this.field_82425_h.heldItemRight = this.modelBipedMain.heldItemRight = par2ItemStack != null ? 1 : 0;
-        this.field_82423_g.isSneak = this.field_82425_h.isSneak = this.modelBipedMain.isSneak = par1EntityLiving.isSneaking();
+        this.field_82423_g.heldItemRight = this.field_82425_h.heldItemRight = this.modelBipedMain.heldItemRight = p_82420_2_ != null ? 1 : 0;
+        this.field_82423_g.isSneak = this.field_82425_h.isSneak = this.modelBipedMain.isSneak = p_82420_1_.isSneaking();
     }
 
-    protected void renderEquippedItems(EntityLiving par1EntityLiving, float par2)
+    protected void renderEquippedItems(EntityLiving p_77029_1_, float p_77029_2_)
     {
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
-        super.renderEquippedItems(par1EntityLiving, par2);
-        ItemStack var3 = par1EntityLiving.getHeldItem();
-        ItemStack var4 = par1EntityLiving.func_130225_q(3);
+        super.renderEquippedItems(p_77029_1_, p_77029_2_);
+        ItemStack var3 = p_77029_1_.getHeldItem();
+        ItemStack var4 = p_77029_1_.func_130225_q(3);
         Item var5;
         float var6;
 
@@ -205,20 +210,29 @@ public class RenderBiped extends RenderLiving
                     GL11.glScalef(var6, -var6, -var6);
                 }
 
-                this.renderManager.itemRenderer.renderItem(par1EntityLiving, var4, 0);
+                this.renderManager.itemRenderer.renderItem(p_77029_1_, var4, 0);
             }
             else if (var5 == Items.skull)
             {
                 var6 = 1.0625F;
                 GL11.glScalef(var6, -var6, -var6);
-                String var7 = "";
+                GameProfile var7 = null;
 
-                if (var4.hasTagCompound() && var4.getTagCompound().func_150297_b("SkullOwner", 8))
+                if (var4.hasTagCompound())
                 {
-                    var7 = var4.getTagCompound().getString("SkullOwner");
+                    NBTTagCompound var8 = var4.getTagCompound();
+
+                    if (var8.func_150297_b("SkullOwner", 10))
+                    {
+                        var7 = NBTUtil.func_152459_a(var8.getCompoundTag("SkullOwner"));
+                    }
+                    else if (var8.func_150297_b("SkullOwner", 8) && !StringUtils.isNullOrEmpty(var8.getString("SkullOwner")))
+                    {
+                        var7 = new GameProfile((UUID)null, var8.getString("SkullOwner"));
+                    }
                 }
 
-                TileEntitySkullRenderer.field_147536_b.func_147530_a(-0.5F, 0.0F, -0.5F, 1, 180.0F, var4.getItemDamage(), var7);
+                TileEntitySkullRenderer.field_147536_b.func_152674_a(-0.5F, 0.0F, -0.5F, 1, 180.0F, var4.getItemDamage(), var7);
             }
 
             GL11.glPopMatrix();
@@ -283,30 +297,30 @@ public class RenderBiped extends RenderLiving
                 GL11.glRotatef(20.0F, 0.0F, 0.0F, 1.0F);
             }
 
-            float var8;
             float var9;
-            int var12;
+            int var11;
+            float var14;
 
             if (var3.getItem().requiresMultipleRenderPasses())
             {
-                for (var12 = 0; var12 <= 1; ++var12)
+                for (var11 = 0; var11 <= 1; ++var11)
                 {
-                    int var11 = var3.getItem().getColorFromItemStack(var3, var12);
-                    var8 = (float)(var11 >> 16 & 255) / 255.0F;
-                    var9 = (float)(var11 >> 8 & 255) / 255.0F;
-                    float var10 = (float)(var11 & 255) / 255.0F;
-                    GL11.glColor4f(var8, var9, var10, 1.0F);
-                    this.renderManager.itemRenderer.renderItem(par1EntityLiving, var3, var12);
+                    int var12 = var3.getItem().getColorFromItemStack(var3, var11);
+                    var14 = (float)(var12 >> 16 & 255) / 255.0F;
+                    var9 = (float)(var12 >> 8 & 255) / 255.0F;
+                    float var10 = (float)(var12 & 255) / 255.0F;
+                    GL11.glColor4f(var14, var9, var10, 1.0F);
+                    this.renderManager.itemRenderer.renderItem(p_77029_1_, var3, var11);
                 }
             }
             else
             {
-                var12 = var3.getItem().getColorFromItemStack(var3, 0);
-                float var13 = (float)(var12 >> 16 & 255) / 255.0F;
-                var8 = (float)(var12 >> 8 & 255) / 255.0F;
-                var9 = (float)(var12 & 255) / 255.0F;
-                GL11.glColor4f(var13, var8, var9, 1.0F);
-                this.renderManager.itemRenderer.renderItem(par1EntityLiving, var3, 0);
+                var11 = var3.getItem().getColorFromItemStack(var3, 0);
+                float var13 = (float)(var11 >> 16 & 255) / 255.0F;
+                var14 = (float)(var11 >> 8 & 255) / 255.0F;
+                var9 = (float)(var11 & 255) / 255.0F;
+                GL11.glColor4f(var13, var14, var9, 1.0F);
+                this.renderManager.itemRenderer.renderItem(p_77029_1_, var3, 0);
             }
 
             GL11.glPopMatrix();
@@ -318,22 +332,22 @@ public class RenderBiped extends RenderLiving
         GL11.glTranslatef(0.0F, 0.1875F, 0.0F);
     }
 
-    protected void func_82408_c(EntityLivingBase par1EntityLivingBase, int par2, float par3)
+    protected void func_82408_c(EntityLivingBase p_82408_1_, int p_82408_2_, float p_82408_3_)
     {
-        this.func_82408_c((EntityLiving)par1EntityLivingBase, par2, par3);
+        this.func_82408_c((EntityLiving)p_82408_1_, p_82408_2_, p_82408_3_);
     }
 
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3)
+    protected int shouldRenderPass(EntityLivingBase p_77032_1_, int p_77032_2_, float p_77032_3_)
     {
-        return this.shouldRenderPass((EntityLiving)par1EntityLivingBase, par2, par3);
+        return this.shouldRenderPass((EntityLiving)p_77032_1_, p_77032_2_, p_77032_3_);
     }
 
-    protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2)
+    protected void renderEquippedItems(EntityLivingBase p_77029_1_, float p_77029_2_)
     {
-        this.renderEquippedItems((EntityLiving)par1EntityLivingBase, par2);
+        this.renderEquippedItems((EntityLiving)p_77029_1_, p_77029_2_);
     }
 
     /**
@@ -342,17 +356,17 @@ public class RenderBiped extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityLivingBase par1Entity, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntityLivingBase p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityLiving)par1Entity, par2, par4, par6, par8, par9);
+        this.doRender((EntityLiving)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntityLiving)par1Entity);
+        return this.getEntityTexture((EntityLiving)p_110775_1_);
     }
 
     /**
@@ -361,8 +375,8 @@ public class RenderBiped extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityLiving)par1Entity, par2, par4, par6, par8, par9);
+        this.doRender((EntityLiving)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 }

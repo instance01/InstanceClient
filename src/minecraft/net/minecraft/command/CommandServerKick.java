@@ -18,19 +18,19 @@ public class CommandServerKick extends CommandBase
      */
     public int getRequiredPermissionLevel()
     {
-        return 3;
+        return 2;
     }
 
-    public String getCommandUsage(ICommandSender par1ICommandSender)
+    public String getCommandUsage(ICommandSender p_71518_1_)
     {
         return "commands.kick.usage";
     }
 
-    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_)
     {
-        if (par2ArrayOfStr.length > 0 && par2ArrayOfStr[0].length() > 1)
+        if (p_71515_2_.length > 0 && p_71515_2_[0].length() > 1)
         {
-            EntityPlayerMP var3 = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(par2ArrayOfStr[0]);
+            EntityPlayerMP var3 = MinecraftServer.getServer().getConfigurationManager().func_152612_a(p_71515_2_[0]);
             String var4 = "Kicked by an operator.";
             boolean var5 = false;
 
@@ -40,9 +40,9 @@ public class CommandServerKick extends CommandBase
             }
             else
             {
-                if (par2ArrayOfStr.length >= 2)
+                if (p_71515_2_.length >= 2)
                 {
-                    var4 = func_147178_a(par1ICommandSender, par2ArrayOfStr, 1).getUnformattedText();
+                    var4 = func_147178_a(p_71515_1_, p_71515_2_, 1).getUnformattedText();
                     var5 = true;
                 }
 
@@ -50,11 +50,11 @@ public class CommandServerKick extends CommandBase
 
                 if (var5)
                 {
-                    notifyAdmins(par1ICommandSender, "commands.kick.success.reason", new Object[] {var3.getCommandSenderName(), var4});
+                    func_152373_a(p_71515_1_, this, "commands.kick.success.reason", new Object[] {var3.getCommandSenderName(), var4});
                 }
                 else
                 {
-                    notifyAdmins(par1ICommandSender, "commands.kick.success", new Object[] {var3.getCommandSenderName()});
+                    func_152373_a(p_71515_1_, this, "commands.kick.success", new Object[] {var3.getCommandSenderName()});
                 }
             }
         }
@@ -67,8 +67,8 @@ public class CommandServerKick extends CommandBase
     /**
      * Adds the strings available in this command to the given list of tab completion options.
      */
-    public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public List addTabCompletionOptions(ICommandSender p_71516_1_, String[] p_71516_2_)
     {
-        return par2ArrayOfStr.length >= 1 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, MinecraftServer.getServer().getAllUsernames()) : null;
+        return p_71516_2_.length >= 1 ? getListOfStringsMatchingLastWord(p_71516_2_, MinecraftServer.getServer().getAllUsernames()) : null;
     }
 }

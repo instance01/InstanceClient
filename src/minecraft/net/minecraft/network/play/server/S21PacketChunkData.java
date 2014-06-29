@@ -121,9 +121,9 @@ public class S21PacketChunkData extends Packet
         p_148840_1_.writeBytes(this.field_149281_e, 0, this.field_149285_h);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149277_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149277_1_.handleChunkData(this);
+        p_148833_1_.handleChunkData(this);
     }
 
     /**
@@ -178,15 +178,15 @@ public class S21PacketChunkData extends Packet
             }
         }
 
-        NibbleArray var10;
+        NibbleArray var11;
 
         for (var8 = 0; var8 < var4.length; ++var8)
         {
             if (var4[var8] != null && (!p_149269_1_ || !var4[var8].isEmpty()) && (p_149269_2_ & 1 << var8) != 0)
             {
-                var10 = var4[var8].getMetadataArray();
-                System.arraycopy(var10.data, 0, var7, var3, var10.data.length);
-                var3 += var10.data.length;
+                var11 = var4[var8].getMetadataArray();
+                System.arraycopy(var11.data, 0, var7, var3, var11.data.length);
+                var3 += var11.data.length;
             }
         }
 
@@ -194,9 +194,9 @@ public class S21PacketChunkData extends Packet
         {
             if (var4[var8] != null && (!p_149269_1_ || !var4[var8].isEmpty()) && (p_149269_2_ & 1 << var8) != 0)
             {
-                var10 = var4[var8].getBlocklightArray();
-                System.arraycopy(var10.data, 0, var7, var3, var10.data.length);
-                var3 += var10.data.length;
+                var11 = var4[var8].getBlocklightArray();
+                System.arraycopy(var11.data, 0, var7, var3, var11.data.length);
+                var3 += var11.data.length;
             }
         }
 
@@ -206,9 +206,9 @@ public class S21PacketChunkData extends Packet
             {
                 if (var4[var8] != null && (!p_149269_1_ || !var4[var8].isEmpty()) && (p_149269_2_ & 1 << var8) != 0)
                 {
-                    var10 = var4[var8].getSkylightArray();
-                    System.arraycopy(var10.data, 0, var7, var3, var10.data.length);
-                    var3 += var10.data.length;
+                    var11 = var4[var8].getSkylightArray();
+                    System.arraycopy(var11.data, 0, var7, var3, var11.data.length);
+                    var3 += var11.data.length;
                 }
             }
         }
@@ -219,18 +219,18 @@ public class S21PacketChunkData extends Packet
             {
                 if (var4[var8] != null && (!p_149269_1_ || !var4[var8].isEmpty()) && var4[var8].getBlockMSBArray() != null && (p_149269_2_ & 1 << var8) != 0)
                 {
-                    var10 = var4[var8].getBlockMSBArray();
-                    System.arraycopy(var10.data, 0, var7, var3, var10.data.length);
-                    var3 += var10.data.length;
+                    var11 = var4[var8].getBlockMSBArray();
+                    System.arraycopy(var11.data, 0, var7, var3, var11.data.length);
+                    var3 += var11.data.length;
                 }
             }
         }
 
         if (p_149269_1_)
         {
-            byte[] var11 = p_149269_0_.getBiomeArray();
-            System.arraycopy(var11, 0, var7, var3, var11.length);
-            var3 += var11.length;
+            byte[] var10 = p_149269_0_.getBiomeArray();
+            System.arraycopy(var10, 0, var7, var3, var10.length);
+            var3 += var10.length;
         }
 
         var6.field_150282_a = new byte[var3];

@@ -18,17 +18,17 @@ public class RecipesIngots
     /**
      * Adds the ingot recipes to the CraftingManager.
      */
-    public void addRecipes(CraftingManager par1CraftingManager)
+    public void addRecipes(CraftingManager p_77590_1_)
     {
         for (int var2 = 0; var2 < this.recipeItems.length; ++var2)
         {
             Block var3 = (Block)this.recipeItems[var2][0];
             ItemStack var4 = (ItemStack)this.recipeItems[var2][1];
-            par1CraftingManager.addRecipe(new ItemStack(var3), new Object[] {"###", "###", "###", '#', var4});
-            par1CraftingManager.addRecipe(var4, new Object[] {"#", '#', var3});
+            p_77590_1_.addRecipe(new ItemStack(var3), new Object[] {"###", "###", "###", '#', var4});
+            p_77590_1_.addRecipe(var4, new Object[] {"#", '#', var3});
         }
 
-        par1CraftingManager.addRecipe(new ItemStack(Items.gold_ingot), new Object[] {"###", "###", "###", '#', Items.gold_nugget});
-        par1CraftingManager.addRecipe(new ItemStack(Items.gold_nugget, 9), new Object[] {"#", '#', Items.gold_ingot});
+        p_77590_1_.addRecipe(new ItemStack(Items.gold_ingot), new Object[] {"###", "###", "###", '#', Items.gold_nugget});
+        p_77590_1_.addRecipe(new ItemStack(Items.gold_nugget, 9), new Object[] {"#", '#', Items.gold_ingot});
     }
 }

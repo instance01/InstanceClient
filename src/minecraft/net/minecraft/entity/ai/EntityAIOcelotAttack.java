@@ -12,10 +12,10 @@ public class EntityAIOcelotAttack extends EntityAIBase
     int attackCountdown;
     private static final String __OBFID = "CL_00001600";
 
-    public EntityAIOcelotAttack(EntityLiving par1EntityLiving)
+    public EntityAIOcelotAttack(EntityLiving p_i1641_1_)
     {
-        this.theEntity = par1EntityLiving;
-        this.theWorld = par1EntityLiving.worldObj;
+        this.theEntity = p_i1641_1_;
+        this.theWorld = p_i1641_1_.worldObj;
         this.setMutexBits(3);
     }
 

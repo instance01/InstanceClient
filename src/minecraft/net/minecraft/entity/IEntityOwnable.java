@@ -2,7 +2,7 @@ package net.minecraft.entity;
 
 public interface IEntityOwnable
 {
-    String getOwnerName();
+    String func_152113_b();
 
     Entity getOwner();
 }

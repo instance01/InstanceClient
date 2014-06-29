@@ -16,11 +16,11 @@ public class EntityAIFleeSun extends EntityAIBase
     private World theWorld;
     private static final String __OBFID = "CL_00001583";
 
-    public EntityAIFleeSun(EntityCreature par1EntityCreature, double par2)
+    public EntityAIFleeSun(EntityCreature p_i1623_1_, double p_i1623_2_)
     {
-        this.theCreature = par1EntityCreature;
-        this.movementSpeed = par2;
-        this.theWorld = par1EntityCreature.worldObj;
+        this.theCreature = p_i1623_1_;
+        this.movementSpeed = p_i1623_2_;
+        this.theWorld = p_i1623_1_.worldObj;
         this.setMutexBits(1);
     }
 
@@ -87,7 +87,7 @@ public class EntityAIFleeSun extends EntityAIBase
 
             if (!this.theWorld.canBlockSeeTheSky(var3, var4, var5) && this.theCreature.getBlockPathWeight(var3, var4, var5) < 0.0F)
             {
-                return this.theWorld.getWorldVec3Pool().getVecFromPool((double)var3, (double)var4, (double)var5);
+                return Vec3.createVectorHelper((double)var3, (double)var4, (double)var5);
             }
         }
 

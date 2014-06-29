@@ -15,9 +15,9 @@ public class DemoWorldManager extends ItemInWorldManager
     private int field_73102_f;
     private static final String __OBFID = "CL_00001429";
 
-    public DemoWorldManager(World par1World)
+    public DemoWorldManager(World p_i1513_1_)
     {
-        super(par1World);
+        super(p_i1513_1_);
     }
 
     public void updateBlockRemoving()
@@ -84,7 +84,7 @@ public class DemoWorldManager extends ItemInWorldManager
      * if not creative, it calls destroyBlockInWorldPartially untill the block is broken first. par4 is the specific
      * side. tryHarvestBlock can also be the result of this call
      */
-    public void onBlockClicked(int par1, int par2, int par3, int par4)
+    public void onBlockClicked(int p_73074_1_, int p_73074_2_, int p_73074_3_, int p_73074_4_)
     {
         if (this.demoTimeExpired)
         {
@@ -92,30 +92,30 @@ public class DemoWorldManager extends ItemInWorldManager
         }
         else
         {
-            super.onBlockClicked(par1, par2, par3, par4);
+            super.onBlockClicked(p_73074_1_, p_73074_2_, p_73074_3_, p_73074_4_);
         }
     }
 
-    public void uncheckedTryHarvestBlock(int par1, int par2, int par3)
+    public void uncheckedTryHarvestBlock(int p_73082_1_, int p_73082_2_, int p_73082_3_)
     {
         if (!this.demoTimeExpired)
         {
-            super.uncheckedTryHarvestBlock(par1, par2, par3);
+            super.uncheckedTryHarvestBlock(p_73082_1_, p_73082_2_, p_73082_3_);
         }
     }
 
     /**
      * Attempts to harvest a block at the given coordinate
      */
-    public boolean tryHarvestBlock(int par1, int par2, int par3)
+    public boolean tryHarvestBlock(int p_73084_1_, int p_73084_2_, int p_73084_3_)
     {
-        return this.demoTimeExpired ? false : super.tryHarvestBlock(par1, par2, par3);
+        return this.demoTimeExpired ? false : super.tryHarvestBlock(p_73084_1_, p_73084_2_, p_73084_3_);
     }
 
     /**
      * Attempts to right-click use an item by the given EntityPlayer in the given World
      */
-    public boolean tryUseItem(EntityPlayer par1EntityPlayer, World par2World, ItemStack par3ItemStack)
+    public boolean tryUseItem(EntityPlayer p_73085_1_, World p_73085_2_, ItemStack p_73085_3_)
     {
         if (this.demoTimeExpired)
         {
@@ -124,7 +124,7 @@ public class DemoWorldManager extends ItemInWorldManager
         }
         else
         {
-            return super.tryUseItem(par1EntityPlayer, par2World, par3ItemStack);
+            return super.tryUseItem(p_73085_1_, p_73085_2_, p_73085_3_);
         }
     }
 
@@ -132,7 +132,7 @@ public class DemoWorldManager extends ItemInWorldManager
      * Activate the clicked on block, otherwise use the held item. Args: player, world, itemStack, x, y, z, side,
      * xOffset, yOffset, zOffset
      */
-    public boolean activateBlockOrUseItem(EntityPlayer par1EntityPlayer, World par2World, ItemStack par3ItemStack, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+    public boolean activateBlockOrUseItem(EntityPlayer p_73078_1_, World p_73078_2_, ItemStack p_73078_3_, int p_73078_4_, int p_73078_5_, int p_73078_6_, int p_73078_7_, float p_73078_8_, float p_73078_9_, float p_73078_10_)
     {
         if (this.demoTimeExpired)
         {
@@ -141,7 +141,7 @@ public class DemoWorldManager extends ItemInWorldManager
         }
         else
         {
-            return super.activateBlockOrUseItem(par1EntityPlayer, par2World, par3ItemStack, par4, par5, par6, par7, par8, par9, par10);
+            return super.activateBlockOrUseItem(p_73078_1_, p_73078_2_, p_73078_3_, p_73078_4_, p_73078_5_, p_73078_6_, p_73078_7_, p_73078_8_, p_73078_9_, p_73078_10_);
         }
     }
 }

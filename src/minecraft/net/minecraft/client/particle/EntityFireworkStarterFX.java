@@ -15,18 +15,18 @@ public class EntityFireworkStarterFX extends EntityFX
     boolean twinkle;
     private static final String __OBFID = "CL_00000906";
 
-    public EntityFireworkStarterFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12, EffectRenderer par14EffectRenderer, NBTTagCompound par15NBTTagCompound)
+    public EntityFireworkStarterFX(World p_i1208_1_, double p_i1208_2_, double p_i1208_4_, double p_i1208_6_, double p_i1208_8_, double p_i1208_10_, double p_i1208_12_, EffectRenderer p_i1208_14_, NBTTagCompound p_i1208_15_)
     {
-        super(par1World, par2, par4, par6, 0.0D, 0.0D, 0.0D);
-        this.motionX = par8;
-        this.motionY = par10;
-        this.motionZ = par12;
-        this.theEffectRenderer = par14EffectRenderer;
+        super(p_i1208_1_, p_i1208_2_, p_i1208_4_, p_i1208_6_, 0.0D, 0.0D, 0.0D);
+        this.motionX = p_i1208_8_;
+        this.motionY = p_i1208_10_;
+        this.motionZ = p_i1208_12_;
+        this.theEffectRenderer = p_i1208_14_;
         this.particleMaxAge = 8;
 
-        if (par15NBTTagCompound != null)
+        if (p_i1208_15_ != null)
         {
-            this.fireworkExplosions = par15NBTTagCompound.getTagList("Explosions", 10);
+            this.fireworkExplosions = p_i1208_15_.getTagList("Explosions", 10);
 
             if (this.fireworkExplosions.tagCount() == 0)
             {
@@ -51,7 +51,7 @@ public class EntityFireworkStarterFX extends EntityFX
         }
     }
 
-    public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7) {}
+    public void renderParticle(Tessellator p_70539_1_, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_) {}
 
     /**
      * Called to update the entity's position/logic.
@@ -83,8 +83,8 @@ public class EntityFireworkStarterFX extends EntityFX
                 }
             }
 
-            String var15 = "fireworks." + (var2 ? "largeBlast" : "blast") + (var1 ? "_far" : "");
-            this.worldObj.playSound(this.posX, this.posY, this.posZ, var15, 20.0F, 0.95F + this.rand.nextFloat() * 0.1F, true);
+            String var16 = "fireworks." + (var2 ? "largeBlast" : "blast") + (var1 ? "_far" : "");
+            this.worldObj.playSound(this.posX, this.posY, this.posZ, var16, 20.0F, 0.95F + this.rand.nextFloat() * 0.1F, true);
         }
 
         if (this.fireworkAge % 2 == 0 && this.fireworkExplosions != null && this.fireworkAge / 2 < this.fireworkExplosions.tagCount())
@@ -134,8 +134,8 @@ public class EntityFireworkStarterFX extends EntityFX
             if (this.twinkle)
             {
                 var1 = this.func_92037_i();
-                String var16 = "fireworks." + (var1 ? "twinkle_far" : "twinkle");
-                this.worldObj.playSound(this.posX, this.posY, this.posZ, var16, 20.0F, 0.9F + this.rand.nextFloat() * 0.15F, true);
+                String var15 = "fireworks." + (var1 ? "twinkle_far" : "twinkle");
+                this.worldObj.playSound(this.posX, this.posY, this.posZ, var15, 20.0F, 0.9F + this.rand.nextFloat() * 0.15F, true);
             }
 
             this.setDead();
@@ -152,17 +152,17 @@ public class EntityFireworkStarterFX extends EntityFX
      * Creates a single particle. Args: x, y, z, x velocity, y velocity, z velocity, colours, fade colours, whether to
      * trail, whether to twinkle
      */
-    private void createParticle(double par1, double par3, double par5, double par7, double par9, double par11, int[] par13ArrayOfInteger, int[] par14ArrayOfInteger, boolean par15, boolean par16)
+    private void createParticle(double p_92034_1_, double p_92034_3_, double p_92034_5_, double p_92034_7_, double p_92034_9_, double p_92034_11_, int[] p_92034_13_, int[] p_92034_14_, boolean p_92034_15_, boolean p_92034_16_)
     {
-        EntityFireworkSparkFX var17 = new EntityFireworkSparkFX(this.worldObj, par1, par3, par5, par7, par9, par11, this.theEffectRenderer);
-        var17.setTrail(par15);
-        var17.setTwinkle(par16);
-        int var18 = this.rand.nextInt(par13ArrayOfInteger.length);
-        var17.setColour(par13ArrayOfInteger[var18]);
+        EntityFireworkSparkFX var17 = new EntityFireworkSparkFX(this.worldObj, p_92034_1_, p_92034_3_, p_92034_5_, p_92034_7_, p_92034_9_, p_92034_11_, this.theEffectRenderer);
+        var17.setTrail(p_92034_15_);
+        var17.setTwinkle(p_92034_16_);
+        int var18 = this.rand.nextInt(p_92034_13_.length);
+        var17.setColour(p_92034_13_[var18]);
 
-        if (par14ArrayOfInteger != null && par14ArrayOfInteger.length > 0)
+        if (p_92034_14_ != null && p_92034_14_.length > 0)
         {
-            var17.setFadeColour(par14ArrayOfInteger[this.rand.nextInt(par14ArrayOfInteger.length)]);
+            var17.setFadeColour(p_92034_14_[this.rand.nextInt(p_92034_14_.length)]);
         }
 
         this.theEffectRenderer.addEffect(var17);
@@ -172,27 +172,27 @@ public class EntityFireworkStarterFX extends EntityFX
      * Creates a small ball or large ball type explosion. Args: particle speed, size, colours, fade colours, whether to
      * trail, whether to flicker
      */
-    private void createBall(double par1, int par3, int[] par4ArrayOfInteger, int[] par5ArrayOfInteger, boolean par6, boolean par7)
+    private void createBall(double p_92035_1_, int p_92035_3_, int[] p_92035_4_, int[] p_92035_5_, boolean p_92035_6_, boolean p_92035_7_)
     {
         double var8 = this.posX;
         double var10 = this.posY;
         double var12 = this.posZ;
 
-        for (int var14 = -par3; var14 <= par3; ++var14)
+        for (int var14 = -p_92035_3_; var14 <= p_92035_3_; ++var14)
         {
-            for (int var15 = -par3; var15 <= par3; ++var15)
+            for (int var15 = -p_92035_3_; var15 <= p_92035_3_; ++var15)
             {
-                for (int var16 = -par3; var16 <= par3; ++var16)
+                for (int var16 = -p_92035_3_; var16 <= p_92035_3_; ++var16)
                 {
                     double var17 = (double)var15 + (this.rand.nextDouble() - this.rand.nextDouble()) * 0.5D;
                     double var19 = (double)var14 + (this.rand.nextDouble() - this.rand.nextDouble()) * 0.5D;
                     double var21 = (double)var16 + (this.rand.nextDouble() - this.rand.nextDouble()) * 0.5D;
-                    double var23 = (double)MathHelper.sqrt_double(var17 * var17 + var19 * var19 + var21 * var21) / par1 + this.rand.nextGaussian() * 0.05D;
-                    this.createParticle(var8, var10, var12, var17 / var23, var19 / var23, var21 / var23, par4ArrayOfInteger, par5ArrayOfInteger, par6, par7);
+                    double var23 = (double)MathHelper.sqrt_double(var17 * var17 + var19 * var19 + var21 * var21) / p_92035_1_ + this.rand.nextGaussian() * 0.05D;
+                    this.createParticle(var8, var10, var12, var17 / var23, var19 / var23, var21 / var23, p_92035_4_, p_92035_5_, p_92035_6_, p_92035_7_);
 
-                    if (var14 != -par3 && var14 != par3 && var15 != -par3 && var15 != par3)
+                    if (var14 != -p_92035_3_ && var14 != p_92035_3_ && var15 != -p_92035_3_ && var15 != p_92035_3_)
                     {
-                        var16 += par3 * 2 - 1;
+                        var16 += p_92035_3_ * 2 - 1;
                     }
                 }
             }
@@ -203,13 +203,13 @@ public class EntityFireworkStarterFX extends EntityFX
      * Creates a creeper-shaped or star-shaped explosion. Args: particle speed, shape, colours, fade colours, whether to
      * trail, whether to flicker, unknown
      */
-    private void createShaped(double par1, double[][] par3ArrayOfDouble, int[] par4ArrayOfInteger, int[] par5ArrayOfInteger, boolean par6, boolean par7, boolean par8)
+    private void createShaped(double p_92038_1_, double[][] p_92038_3_, int[] p_92038_4_, int[] p_92038_5_, boolean p_92038_6_, boolean p_92038_7_, boolean p_92038_8_)
     {
-        double var9 = par3ArrayOfDouble[0][0];
-        double var11 = par3ArrayOfDouble[0][1];
-        this.createParticle(this.posX, this.posY, this.posZ, var9 * par1, var11 * par1, 0.0D, par4ArrayOfInteger, par5ArrayOfInteger, par6, par7);
+        double var9 = p_92038_3_[0][0];
+        double var11 = p_92038_3_[0][1];
+        this.createParticle(this.posX, this.posY, this.posZ, var9 * p_92038_1_, var11 * p_92038_1_, 0.0D, p_92038_4_, p_92038_5_, p_92038_6_, p_92038_7_);
         float var13 = this.rand.nextFloat() * (float)Math.PI;
-        double var14 = par8 ? 0.034D : 0.34D;
+        double var14 = p_92038_8_ ? 0.034D : 0.34D;
 
         for (int var16 = 0; var16 < 3; ++var16)
         {
@@ -217,21 +217,21 @@ public class EntityFireworkStarterFX extends EntityFX
             double var19 = var9;
             double var21 = var11;
 
-            for (int var23 = 1; var23 < par3ArrayOfDouble.length; ++var23)
+            for (int var23 = 1; var23 < p_92038_3_.length; ++var23)
             {
-                double var24 = par3ArrayOfDouble[var23][0];
-                double var26 = par3ArrayOfDouble[var23][1];
+                double var24 = p_92038_3_[var23][0];
+                double var26 = p_92038_3_[var23][1];
 
                 for (double var28 = 0.25D; var28 <= 1.0D; var28 += 0.25D)
                 {
-                    double var30 = (var19 + (var24 - var19) * var28) * par1;
-                    double var32 = (var21 + (var26 - var21) * var28) * par1;
+                    double var30 = (var19 + (var24 - var19) * var28) * p_92038_1_;
+                    double var32 = (var21 + (var26 - var21) * var28) * p_92038_1_;
                     double var34 = var30 * Math.sin(var17);
                     var30 *= Math.cos(var17);
 
                     for (double var36 = -1.0D; var36 <= 1.0D; var36 += 2.0D)
                     {
-                        this.createParticle(this.posX, this.posY, this.posZ, var30 * var36, var32, var34 * var36, par4ArrayOfInteger, par5ArrayOfInteger, par6, par7);
+                        this.createParticle(this.posX, this.posY, this.posZ, var30 * var36, var32, var34 * var36, p_92038_4_, p_92038_5_, p_92038_6_, p_92038_7_);
                     }
                 }
 
@@ -244,7 +244,7 @@ public class EntityFireworkStarterFX extends EntityFX
     /**
      * Creates a burst type explosion. Args: colours, fade colours, whether to trail, whether to flicker
      */
-    private void createBurst(int[] par1ArrayOfInteger, int[] par2ArrayOfInteger, boolean par3, boolean par4)
+    private void createBurst(int[] p_92036_1_, int[] p_92036_2_, boolean p_92036_3_, boolean p_92036_4_)
     {
         double var5 = this.rand.nextGaussian() * 0.05D;
         double var7 = this.rand.nextGaussian() * 0.05D;
@@ -254,7 +254,7 @@ public class EntityFireworkStarterFX extends EntityFX
             double var10 = this.motionX * 0.5D + this.rand.nextGaussian() * 0.15D + var5;
             double var12 = this.motionZ * 0.5D + this.rand.nextGaussian() * 0.15D + var7;
             double var14 = this.motionY * 0.5D + this.rand.nextDouble() * 0.5D;
-            this.createParticle(this.posX, this.posY, this.posZ, var10, var14, var12, par1ArrayOfInteger, par2ArrayOfInteger, par3, par4);
+            this.createParticle(this.posX, this.posY, this.posZ, var10, var14, var12, p_92036_1_, p_92036_2_, p_92036_3_, p_92036_4_);
         }
     }
 

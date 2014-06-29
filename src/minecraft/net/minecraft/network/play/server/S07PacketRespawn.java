@@ -27,9 +27,9 @@ public class S07PacketRespawn extends Packet
         this.field_149085_d = p_i45213_3_;
     }
 
-    public void processPacket(INetHandlerPlayClient p_149084_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149084_1_.handleRespawn(this);
+        p_148833_1_.handleRespawn(this);
     }
 
     /**

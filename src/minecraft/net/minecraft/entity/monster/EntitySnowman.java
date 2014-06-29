@@ -23,9 +23,9 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob
 {
     private static final String __OBFID = "CL_00001650";
 
-    public EntitySnowman(World par1World)
+    public EntitySnowman(World p_i1692_1_)
     {
-        super(par1World);
+        super(p_i1692_1_);
         this.setSize(0.4F, 1.8F);
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAIArrowAttack(this, 1.25D, 20, 10.0F));
@@ -92,7 +92,7 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob
     /**
      * Drop 0-2 items of this living's type
      */
-    protected void dropFewItems(boolean par1, int par2)
+    protected void dropFewItems(boolean p_70628_1_, int p_70628_2_)
     {
         int var3 = this.rand.nextInt(16);
 
@@ -105,12 +105,12 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob
     /**
      * Attack the specified entity using a ranged attack.
      */
-    public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2)
+    public void attackEntityWithRangedAttack(EntityLivingBase p_82196_1_, float p_82196_2_)
     {
         EntitySnowball var3 = new EntitySnowball(this.worldObj, this);
-        double var4 = par1EntityLivingBase.posX - this.posX;
-        double var6 = par1EntityLivingBase.posY + (double)par1EntityLivingBase.getEyeHeight() - 1.100000023841858D - var3.posY;
-        double var8 = par1EntityLivingBase.posZ - this.posZ;
+        double var4 = p_82196_1_.posX - this.posX;
+        double var6 = p_82196_1_.posY + (double)p_82196_1_.getEyeHeight() - 1.100000023841858D - var3.posY;
+        double var8 = p_82196_1_.posZ - this.posZ;
         float var10 = MathHelper.sqrt_double(var4 * var4 + var8 * var8) * 0.2F;
         var3.setThrowableHeading(var4, var6 + (double)var10, var8, 1.6F, 12.0F);
         this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));

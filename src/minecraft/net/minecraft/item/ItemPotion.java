@@ -49,12 +49,12 @@ public class ItemPotion extends Item
     /**
      * Returns a list of potion effects for the specified itemstack.
      */
-    public List getEffects(ItemStack par1ItemStack)
+    public List getEffects(ItemStack p_77832_1_)
     {
-        if (par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().func_150297_b("CustomPotionEffects", 9))
+        if (p_77832_1_.hasTagCompound() && p_77832_1_.getTagCompound().func_150297_b("CustomPotionEffects", 9))
         {
             ArrayList var7 = new ArrayList();
-            NBTTagList var3 = par1ItemStack.getTagCompound().getTagList("CustomPotionEffects", 10);
+            NBTTagList var3 = p_77832_1_.getTagCompound().getTagList("CustomPotionEffects", 10);
 
             for (int var4 = 0; var4 < var3.tagCount(); ++var4)
             {
@@ -71,12 +71,12 @@ public class ItemPotion extends Item
         }
         else
         {
-            List var2 = (List)this.effectCache.get(Integer.valueOf(par1ItemStack.getItemDamage()));
+            List var2 = (List)this.effectCache.get(Integer.valueOf(p_77832_1_.getItemDamage()));
 
             if (var2 == null)
             {
-                var2 = PotionHelper.getPotionEffects(par1ItemStack.getItemDamage(), false);
-                this.effectCache.put(Integer.valueOf(par1ItemStack.getItemDamage()), var2);
+                var2 = PotionHelper.getPotionEffects(p_77832_1_.getItemDamage(), false);
+                this.effectCache.put(Integer.valueOf(p_77832_1_.getItemDamage()), var2);
             }
 
             return var2;
@@ -86,29 +86,29 @@ public class ItemPotion extends Item
     /**
      * Returns a list of effects for the specified potion damage value.
      */
-    public List getEffects(int par1)
+    public List getEffects(int p_77834_1_)
     {
-        List var2 = (List)this.effectCache.get(Integer.valueOf(par1));
+        List var2 = (List)this.effectCache.get(Integer.valueOf(p_77834_1_));
 
         if (var2 == null)
         {
-            var2 = PotionHelper.getPotionEffects(par1, false);
-            this.effectCache.put(Integer.valueOf(par1), var2);
+            var2 = PotionHelper.getPotionEffects(p_77834_1_, false);
+            this.effectCache.put(Integer.valueOf(p_77834_1_), var2);
         }
 
         return var2;
     }
 
-    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    public ItemStack onEaten(ItemStack p_77654_1_, World p_77654_2_, EntityPlayer p_77654_3_)
     {
-        if (!par3EntityPlayer.capabilities.isCreativeMode)
+        if (!p_77654_3_.capabilities.isCreativeMode)
         {
-            --par1ItemStack.stackSize;
+            --p_77654_1_.stackSize;
         }
 
-        if (!par2World.isClient)
+        if (!p_77654_2_.isClient)
         {
-            List var4 = this.getEffects(par1ItemStack);
+            List var4 = this.getEffects(p_77654_1_);
 
             if (var4 != null)
             {
@@ -117,28 +117,28 @@ public class ItemPotion extends Item
                 while (var5.hasNext())
                 {
                     PotionEffect var6 = (PotionEffect)var5.next();
-                    par3EntityPlayer.addPotionEffect(new PotionEffect(var6));
+                    p_77654_3_.addPotionEffect(new PotionEffect(var6));
                 }
             }
         }
 
-        if (!par3EntityPlayer.capabilities.isCreativeMode)
+        if (!p_77654_3_.capabilities.isCreativeMode)
         {
-            if (par1ItemStack.stackSize <= 0)
+            if (p_77654_1_.stackSize <= 0)
             {
                 return new ItemStack(Items.glass_bottle);
             }
 
-            par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
+            p_77654_3_.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
         }
 
-        return par1ItemStack;
+        return p_77654_1_;
     }
 
     /**
      * How long it takes to use or consume an item
      */
-    public int getMaxItemUseDuration(ItemStack par1ItemStack)
+    public int getMaxItemUseDuration(ItemStack p_77626_1_)
     {
         return 32;
     }
@@ -146,7 +146,7 @@ public class ItemPotion extends Item
     /**
      * returns the action that specifies what animation to play when the items is being used
      */
-    public EnumAction getItemUseAction(ItemStack par1ItemStack)
+    public EnumAction getItemUseAction(ItemStack p_77661_1_)
     {
         return EnumAction.drink;
     }
@@ -154,28 +154,28 @@ public class ItemPotion extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    public ItemStack onItemRightClick(ItemStack p_77659_1_, World p_77659_2_, EntityPlayer p_77659_3_)
     {
-        if (isSplash(par1ItemStack.getItemDamage()))
+        if (isSplash(p_77659_1_.getItemDamage()))
         {
-            if (!par3EntityPlayer.capabilities.isCreativeMode)
+            if (!p_77659_3_.capabilities.isCreativeMode)
             {
-                --par1ItemStack.stackSize;
+                --p_77659_1_.stackSize;
             }
 
-            par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+            p_77659_2_.playSoundAtEntity(p_77659_3_, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
-            if (!par2World.isClient)
+            if (!p_77659_2_.isClient)
             {
-                par2World.spawnEntityInWorld(new EntityPotion(par2World, par3EntityPlayer, par1ItemStack));
+                p_77659_2_.spawnEntityInWorld(new EntityPotion(p_77659_2_, p_77659_3_, p_77659_1_));
             }
 
-            return par1ItemStack;
+            return p_77659_1_;
         }
         else
         {
-            par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
-            return par1ItemStack;
+            p_77659_3_.setItemInUse(p_77659_1_, this.getMaxItemUseDuration(p_77659_1_));
+            return p_77659_1_;
         }
     }
 
@@ -183,7 +183,7 @@ public class ItemPotion extends Item
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
      * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
      */
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+    public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World p_77648_3_, int p_77648_4_, int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
     {
         return false;
     }
@@ -191,35 +191,35 @@ public class ItemPotion extends Item
     /**
      * Gets an icon index based on an item's damage value
      */
-    public IIcon getIconFromDamage(int par1)
+    public IIcon getIconFromDamage(int p_77617_1_)
     {
-        return isSplash(par1) ? this.field_94591_c : this.field_94590_d;
+        return isSplash(p_77617_1_) ? this.field_94591_c : this.field_94590_d;
     }
 
     /**
      * Gets an icon index based on an item's damage value and the given render pass
      */
-    public IIcon getIconFromDamageForRenderPass(int par1, int par2)
+    public IIcon getIconFromDamageForRenderPass(int p_77618_1_, int p_77618_2_)
     {
-        return par2 == 0 ? this.field_94592_ct : super.getIconFromDamageForRenderPass(par1, par2);
+        return p_77618_2_ == 0 ? this.field_94592_ct : super.getIconFromDamageForRenderPass(p_77618_1_, p_77618_2_);
     }
 
     /**
      * returns wether or not a potion is a throwable splash potion based on damage value
      */
-    public static boolean isSplash(int par0)
+    public static boolean isSplash(int p_77831_0_)
     {
-        return (par0 & 16384) != 0;
+        return (p_77831_0_ & 16384) != 0;
     }
 
-    public int getColorFromDamage(int par1)
+    public int getColorFromDamage(int p_77620_1_)
     {
-        return PotionHelper.func_77915_a(par1, false);
+        return PotionHelper.func_77915_a(p_77620_1_, false);
     }
 
-    public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
+    public int getColorFromItemStack(ItemStack p_82790_1_, int p_82790_2_)
     {
-        return par2 > 0 ? 16777215 : this.getColorFromDamage(par1ItemStack.getItemDamage());
+        return p_82790_2_ > 0 ? 16777215 : this.getColorFromDamage(p_82790_1_.getItemDamage());
     }
 
     public boolean requiresMultipleRenderPasses()
@@ -227,9 +227,9 @@ public class ItemPotion extends Item
         return true;
     }
 
-    public boolean isEffectInstant(int par1)
+    public boolean isEffectInstant(int p_77833_1_)
     {
-        List var2 = this.getEffects(par1);
+        List var2 = this.getEffects(p_77833_1_);
 
         if (var2 != null && !var2.isEmpty())
         {
@@ -255,9 +255,9 @@ public class ItemPotion extends Item
         }
     }
 
-    public String getItemStackDisplayName(ItemStack par1ItemStack)
+    public String getItemStackDisplayName(ItemStack p_77653_1_)
     {
-        if (par1ItemStack.getItemDamage() == 0)
+        if (p_77653_1_.getItemDamage() == 0)
         {
             return StatCollector.translateToLocal("item.emptyPotion.name").trim();
         }
@@ -265,12 +265,12 @@ public class ItemPotion extends Item
         {
             String var2 = "";
 
-            if (isSplash(par1ItemStack.getItemDamage()))
+            if (isSplash(p_77653_1_.getItemDamage()))
             {
                 var2 = StatCollector.translateToLocal("potion.prefix.grenade").trim() + " ";
             }
 
-            List var3 = Items.potionitem.getEffects(par1ItemStack);
+            List var3 = Items.potionitem.getEffects(p_77653_1_);
             String var4;
 
             if (var3 != null && !var3.isEmpty())
@@ -281,8 +281,8 @@ public class ItemPotion extends Item
             }
             else
             {
-                var4 = PotionHelper.func_77905_c(par1ItemStack.getItemDamage());
-                return StatCollector.translateToLocal(var4).trim() + " " + super.getItemStackDisplayName(par1ItemStack);
+                var4 = PotionHelper.func_77905_c(p_77653_1_.getItemDamage());
+                return StatCollector.translateToLocal(var4).trim() + " " + super.getItemStackDisplayName(p_77653_1_);
             }
         }
     }
@@ -290,11 +290,11 @@ public class ItemPotion extends Item
     /**
      * allows items to add custom lines of information to the mouseover description
      */
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+    public void addInformation(ItemStack p_77624_1_, EntityPlayer p_77624_2_, List p_77624_3_, boolean p_77624_4_)
     {
-        if (par1ItemStack.getItemDamage() != 0)
+        if (p_77624_1_.getItemDamage() != 0)
         {
-            List var5 = Items.potionitem.getEffects(par1ItemStack);
+            List var5 = Items.potionitem.getEffects(p_77624_1_);
             HashMultimap var6 = HashMultimap.create();
             Iterator var16;
 
@@ -334,24 +334,24 @@ public class ItemPotion extends Item
 
                     if (var10.isBadEffect())
                     {
-                        par3List.add(EnumChatFormatting.RED + var9);
+                        p_77624_3_.add(EnumChatFormatting.RED + var9);
                     }
                     else
                     {
-                        par3List.add(EnumChatFormatting.GRAY + var9);
+                        p_77624_3_.add(EnumChatFormatting.GRAY + var9);
                     }
                 }
             }
             else
             {
                 String var7 = StatCollector.translateToLocal("potion.empty").trim();
-                par3List.add(EnumChatFormatting.GRAY + var7);
+                p_77624_3_.add(EnumChatFormatting.GRAY + var7);
             }
 
             if (!var6.isEmpty())
             {
-                par3List.add("");
-                par3List.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("potion.effects.whenDrank"));
+                p_77624_3_.add("");
+                p_77624_3_.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("potion.effects.whenDrank"));
                 var16 = var6.entries().iterator();
 
                 while (var16.hasNext())
@@ -372,21 +372,21 @@ public class ItemPotion extends Item
 
                     if (var19 > 0.0D)
                     {
-                        par3List.add(EnumChatFormatting.BLUE + StatCollector.translateToLocalFormatted("attribute.modifier.plus." + var18.getOperation(), new Object[] {ItemStack.field_111284_a.format(var20), StatCollector.translateToLocal("attribute.name." + (String)var17.getKey())}));
+                        p_77624_3_.add(EnumChatFormatting.BLUE + StatCollector.translateToLocalFormatted("attribute.modifier.plus." + var18.getOperation(), new Object[] {ItemStack.field_111284_a.format(var20), StatCollector.translateToLocal("attribute.name." + (String)var17.getKey())}));
                     }
                     else if (var19 < 0.0D)
                     {
                         var20 *= -1.0D;
-                        par3List.add(EnumChatFormatting.RED + StatCollector.translateToLocalFormatted("attribute.modifier.take." + var18.getOperation(), new Object[] {ItemStack.field_111284_a.format(var20), StatCollector.translateToLocal("attribute.name." + (String)var17.getKey())}));
+                        p_77624_3_.add(EnumChatFormatting.RED + StatCollector.translateToLocalFormatted("attribute.modifier.take." + var18.getOperation(), new Object[] {ItemStack.field_111284_a.format(var20), StatCollector.translateToLocal("attribute.name." + (String)var17.getKey())}));
                     }
                 }
             }
         }
     }
 
-    public boolean hasEffect(ItemStack par1ItemStack)
+    public boolean hasEffect(ItemStack p_77636_1_)
     {
-        List var2 = this.getEffects(par1ItemStack);
+        List var2 = this.getEffects(p_77636_1_);
         return var2 != null && !var2.isEmpty();
     }
 
@@ -451,15 +451,15 @@ public class ItemPotion extends Item
         }
     }
 
-    public void registerIcons(IIconRegister par1IconRegister)
+    public void registerIcons(IIconRegister p_94581_1_)
     {
-        this.field_94590_d = par1IconRegister.registerIcon(this.getIconString() + "_" + "bottle_drinkable");
-        this.field_94591_c = par1IconRegister.registerIcon(this.getIconString() + "_" + "bottle_splash");
-        this.field_94592_ct = par1IconRegister.registerIcon(this.getIconString() + "_" + "overlay");
+        this.field_94590_d = p_94581_1_.registerIcon(this.getIconString() + "_" + "bottle_drinkable");
+        this.field_94591_c = p_94581_1_.registerIcon(this.getIconString() + "_" + "bottle_splash");
+        this.field_94592_ct = p_94581_1_.registerIcon(this.getIconString() + "_" + "overlay");
     }
 
-    public static IIcon func_94589_d(String par0Str)
+    public static IIcon func_94589_d(String p_94589_0_)
     {
-        return par0Str.equals("bottle_drinkable") ? Items.potionitem.field_94590_d : (par0Str.equals("bottle_splash") ? Items.potionitem.field_94591_c : (par0Str.equals("overlay") ? Items.potionitem.field_94592_ct : null));
+        return p_94589_0_.equals("bottle_drinkable") ? Items.potionitem.field_94590_d : (p_94589_0_.equals("bottle_splash") ? Items.potionitem.field_94591_c : (p_94589_0_.equals("overlay") ? Items.potionitem.field_94592_ct : null));
     }
 }

@@ -111,9 +111,9 @@ public class S2APacketParticles extends Packet
         return this.field_149238_i;
     }
 
-    public void processPacket(INetHandlerPlayClient p_149229_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149229_1_.handleParticles(this);
+        p_148833_1_.handleParticles(this);
     }
 
     public void processPacket(INetHandler p_148833_1_)

@@ -42,9 +42,9 @@ public class C01PacketEncryptionResponse extends Packet
         writeBlob(p_148840_1_, this.field_149301_b);
     }
 
-    public void processPacket(INetHandlerLoginServer p_149298_1_)
+    public void processPacket(INetHandlerLoginServer p_148833_1_)
     {
-        p_149298_1_.processEncryptionResponse(this);
+        p_148833_1_.processEncryptionResponse(this);
     }
 
     public SecretKey func_149300_a(PrivateKey p_149300_1_)

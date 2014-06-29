@@ -39,9 +39,9 @@ public class C01PacketChatMessage extends Packet
         p_148840_1_.writeStringToBuffer(this.field_149440_a);
     }
 
-    public void processPacket(INetHandlerPlayServer p_149438_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149438_1_.processChatMessage(this);
+        p_148833_1_.processChatMessage(this);
     }
 
     /**

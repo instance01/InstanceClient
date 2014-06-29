@@ -23,9 +23,9 @@ public class EntitySilverfish extends EntityMob
     private int allySummonCooldown;
     private static final String __OBFID = "CL_00001696";
 
-    public EntitySilverfish(World par1World)
+    public EntitySilverfish(World p_i1740_1_)
     {
-        super(par1World);
+        super(p_i1740_1_);
         this.setSize(0.3F, 0.7F);
     }
 
@@ -83,7 +83,7 @@ public class EntitySilverfish extends EntityMob
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_)
     {
         if (this.isEntityInvulnerable())
         {
@@ -91,24 +91,24 @@ public class EntitySilverfish extends EntityMob
         }
         else
         {
-            if (this.allySummonCooldown <= 0 && (par1DamageSource instanceof EntityDamageSource || par1DamageSource == DamageSource.magic))
+            if (this.allySummonCooldown <= 0 && (p_70097_1_ instanceof EntityDamageSource || p_70097_1_ == DamageSource.magic))
             {
                 this.allySummonCooldown = 20;
             }
 
-            return super.attackEntityFrom(par1DamageSource, par2);
+            return super.attackEntityFrom(p_70097_1_, p_70097_2_);
         }
     }
 
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */
-    protected void attackEntity(Entity par1Entity, float par2)
+    protected void attackEntity(Entity p_70785_1_, float p_70785_2_)
     {
-        if (this.attackTime <= 0 && par2 < 1.2F && par1Entity.boundingBox.maxY > this.boundingBox.minY && par1Entity.boundingBox.minY < this.boundingBox.maxY)
+        if (this.attackTime <= 0 && p_70785_2_ < 1.2F && p_70785_1_.boundingBox.maxY > this.boundingBox.minY && p_70785_1_.boundingBox.minY < this.boundingBox.maxY)
         {
             this.attackTime = 20;
-            this.attackEntityAsMob(par1Entity);
+            this.attackEntityAsMob(p_70785_1_);
         }
     }
 
@@ -217,9 +217,9 @@ public class EntitySilverfish extends EntityMob
      * Takes a coordinate in and returns a weight to determine how likely this creature will try to path to the block.
      * Args: x, y, z
      */
-    public float getBlockPathWeight(int par1, int par2, int par3)
+    public float getBlockPathWeight(int p_70783_1_, int p_70783_2_, int p_70783_3_)
     {
-        return this.worldObj.getBlock(par1, par2 - 1, par3) == Blocks.stone ? 10.0F : super.getBlockPathWeight(par1, par2, par3);
+        return this.worldObj.getBlock(p_70783_1_, p_70783_2_ - 1, p_70783_3_) == Blocks.stone ? 10.0F : super.getBlockPathWeight(p_70783_1_, p_70783_2_, p_70783_3_);
     }
 
     /**

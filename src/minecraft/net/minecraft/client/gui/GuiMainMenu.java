@@ -8,20 +8,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.mco.ExceptionMcoService;
-import net.minecraft.client.mco.ExceptionRetryCall;
-import net.minecraft.client.mco.GuiScreenClientOutdated;
-import net.minecraft.client.mco.McoClient;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.realms.RealmsBridge;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Session;
 import net.minecraft.world.demo.DemoWorldServer;
 import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.WorldInfo;
@@ -29,11 +24,11 @@ import org.apache.commons.io.Charsets;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GLContext;
 import org.lwjgl.util.glu.Project;
 
-public class GuiMainMenu extends GuiScreen
+public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
 {
-    private static final AtomicInteger field_146973_f = new AtomicInteger(0);
     private static final Logger logger = LogManager.getLogger();
 
     /** The RNG used by the Main Menu Screen. */
@@ -53,9 +48,6 @@ public class GuiMainMenu extends GuiScreen
      * Texture allocated for the current viewport of the main menu's panorama background.
      */
     private DynamicTexture viewportTexture;
-    private boolean field_96141_q = true;
-    private static boolean field_96140_r;
-    private static boolean field_96139_s;
     private final Object field_104025_t = new Object();
     private String field_92025_p;
     private String field_146972_A;
@@ -73,7 +65,6 @@ public class GuiMainMenu extends GuiScreen
     private int field_92020_v;
     private int field_92019_w;
     private ResourceLocation field_110351_G;
-    private GuiButton minecraftRealmsButton;
     private static final String __OBFID = "CL_00001154";
 
     public GuiMainMenu()
@@ -129,10 +120,10 @@ public class GuiMainMenu extends GuiScreen
         this.updateCounter = rand.nextFloat();
         this.field_92025_p = "";
 
-        if (!OpenGlHelper.openGL21)
+        if (!GLContext.getCapabilities().OpenGL20 && !OpenGlHelper.func_153193_b())
         {
-            this.field_92025_p = "Old graphics card detected; this may prevent you from";
-            this.field_146972_A = "playing in the far future as OpenGL 2.1 will be required.";
+            this.field_92025_p = I18n.format("title.oldgl1", new Object[0]);
+            this.field_146972_A = I18n.format("title.oldgl2", new Object[0]);
             this.field_104024_v = "https://help.mojang.com/customer/portal/articles/325948?ref=game";
         }
     }
@@ -156,7 +147,7 @@ public class GuiMainMenu extends GuiScreen
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2) {}
+    protected void keyTyped(char p_73869_1_, int p_73869_2_) {}
 
     /**
      * Adds the buttons (and other controls) to the screen in question.
@@ -201,7 +192,6 @@ public class GuiMainMenu extends GuiScreen
             this.addSingleplayerMultiplayerButtons(var3, 24);
         }
 
-        this.func_130020_g();
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, var3 + 72 + 12, 98, 20, I18n.format("menu.options", new Object[0])));
         this.buttonList.add(new GuiButton(4, this.width / 2 + 2, var3 + 72 + 12, 98, 20, I18n.format("menu.quit", new Object[0])));
         this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 124, var3 + 72 + 12));
@@ -219,95 +209,23 @@ public class GuiMainMenu extends GuiScreen
         }
     }
 
-    private void func_130020_g()
-    {
-        if (this.field_96141_q)
-        {
-            if (!field_96140_r)
-            {
-                field_96140_r = true;
-                (new Thread("MCO Availability Checker #" + field_146973_f.incrementAndGet())
-                {
-                    private static final String __OBFID = "CL_00001155";
-                    public void run()
-                    {
-                        Session var1 = GuiMainMenu.this.mc.getSession();
-                        McoClient var2 = new McoClient(var1.getSessionID(), var1.getUsername(), "1.7.2", Minecraft.getMinecraft().getProxy());
-                        boolean var3 = false;
-
-                        for (int var4 = 0; var4 < 3; ++var4)
-                        {
-                            try
-                            {
-                                Boolean var5 = var2.func_148687_b();
-
-                                if (var5.booleanValue())
-                                {
-                                    GuiMainMenu.this.func_130022_h();
-                                }
-
-                                GuiMainMenu.field_96139_s = var5.booleanValue();
-                            }
-                            catch (ExceptionRetryCall var7)
-                            {
-                                var3 = true;
-                            }
-                            catch (ExceptionMcoService var8)
-                            {
-                                GuiMainMenu.logger.error("Couldn\'t connect to Realms");
-                            }
-                            catch (IOException var9)
-                            {
-                                GuiMainMenu.logger.error("Couldn\'t parse response connecting to Realms");
-                            }
-
-                            if (!var3)
-                            {
-                                break;
-                            }
-
-                            try
-                            {
-                                Thread.sleep(10000L);
-                            }
-                            catch (InterruptedException var6)
-                            {
-                                Thread.currentThread().interrupt();
-                            }
-                        }
-                    }
-                }).start();
-            }
-            else if (field_96139_s)
-            {
-                this.func_130022_h();
-            }
-        }
-    }
-
-    private void func_130022_h()
-    {
-        this.minecraftRealmsButton.field_146125_m = true;
-    }
-
     /**
      * Adds Singleplayer and Multiplayer buttons on Main Menu for players who have bought the game.
      */
-    private void addSingleplayerMultiplayerButtons(int par1, int par2)
+    private void addSingleplayerMultiplayerButtons(int p_73969_1_, int p_73969_2_)
     {
-        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, par1, I18n.format("menu.singleplayer", new Object[0])));
-        this.buttonList.add(new GuiButton(2, this.width / 2 - 100, par1 + par2 * 1, I18n.format("menu.multiplayer", new Object[0])));
-        this.buttonList.add(this.minecraftRealmsButton = new GuiButton(14, this.width / 2 - 100, par1 + par2 * 2, I18n.format("menu.online", new Object[0])));
-        this.minecraftRealmsButton.field_146125_m = false;
+        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, p_73969_1_, I18n.format("menu.singleplayer", new Object[0])));
+        this.buttonList.add(new GuiButton(2, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 1, I18n.format("menu.multiplayer", new Object[0])));
+        this.buttonList.add(new GuiButton(14, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 2, I18n.format("menu.online", new Object[0])));
     }
 
     /**
      * Adds Demo buttons on Main Menu for players who are playing Demo.
      */
-    private void addDemoButtons(int par1, int par2)
+    private void addDemoButtons(int p_73972_1_, int p_73972_2_)
     {
-        this.buttonList.add(new GuiButton(11, this.width / 2 - 100, par1, I18n.format("menu.playdemo", new Object[0])));
-        this.buttonList.add(this.buttonResetDemo = new GuiButton(12, this.width / 2 - 100, par1 + par2 * 1, I18n.format("menu.resetdemo", new Object[0])));
+        this.buttonList.add(new GuiButton(11, this.width / 2 - 100, p_73972_1_, I18n.format("menu.playdemo", new Object[0])));
+        this.buttonList.add(this.buttonResetDemo = new GuiButton(12, this.width / 2 - 100, p_73972_1_ + p_73972_2_ * 1, I18n.format("menu.resetdemo", new Object[0])));
         ISaveFormat var3 = this.mc.getSaveLoader();
         WorldInfo var4 = var3.getWorldInfo("Demo_World");
 
@@ -339,7 +257,7 @@ public class GuiMainMenu extends GuiScreen
             this.mc.displayGuiScreen(new GuiMultiplayer(this));
         }
 
-        if (p_146284_1_.id == 14 && this.minecraftRealmsButton.field_146125_m)
+        if (p_146284_1_.id == 14)
         {
             this.func_140005_i();
         }
@@ -361,7 +279,7 @@ public class GuiMainMenu extends GuiScreen
 
             if (var3 != null)
             {
-                GuiYesNo var4 = GuiSelectWorld.func_146623_a(this, var3.getWorldName(), 12);
+                GuiYesNo var4 = GuiSelectWorld.func_152129_a(this, var3.getWorldName(), 12);
                 this.mc.displayGuiScreen(var4);
             }
         }
@@ -369,42 +287,22 @@ public class GuiMainMenu extends GuiScreen
 
     private void func_140005_i()
     {
-        Session var1 = this.mc.getSession();
-        McoClient var2 = new McoClient(var1.getSessionID(), var1.getUsername(), "1.7.2", Minecraft.getMinecraft().getProxy());
-
-        try
-        {
-            if (var2.func_148695_c().booleanValue())
-            {
-                this.mc.displayGuiScreen(new GuiScreenClientOutdated(this));
-            }
-            else
-            {
-                this.mc.displayGuiScreen(new GuiScreenOnlineServers(this));
-            }
-        }
-        catch (ExceptionMcoService var4)
-        {
-            logger.error("Couldn\'t connect to realms");
-        }
-        catch (IOException var5)
-        {
-            logger.error("Couldn\'t connect to realms");
-        }
+        RealmsBridge var1 = new RealmsBridge();
+        var1.switchToRealms(this);
     }
 
-    public void confirmClicked(boolean par1, int par2)
+    public void confirmClicked(boolean p_73878_1_, int p_73878_2_)
     {
-        if (par1 && par2 == 12)
+        if (p_73878_1_ && p_73878_2_ == 12)
         {
             ISaveFormat var6 = this.mc.getSaveLoader();
             var6.flushCache();
             var6.deleteWorldDirectory("Demo_World");
             this.mc.displayGuiScreen(this);
         }
-        else if (par2 == 13)
+        else if (p_73878_2_ == 13)
         {
-            if (par1)
+            if (p_73878_1_)
             {
                 try
                 {
@@ -425,7 +323,7 @@ public class GuiMainMenu extends GuiScreen
     /**
      * Draws the main menu panorama
      */
-    private void drawPanorama(int par1, int par2, float par3)
+    private void drawPanorama(int p_73970_1_, int p_73970_2_, float p_73970_3_)
     {
         Tessellator var4 = Tessellator.instance;
         GL11.glMatrixMode(GL11.GL_PROJECTION);
@@ -452,8 +350,8 @@ public class GuiMainMenu extends GuiScreen
             float var8 = ((float)(var6 / var5) / (float)var5 - 0.5F) / 64.0F;
             float var9 = 0.0F;
             GL11.glTranslatef(var7, var8, var9);
-            GL11.glRotatef(MathHelper.sin(((float)this.panoramaTimer + par3) / 400.0F) * 25.0F + 20.0F, 1.0F, 0.0F, 0.0F);
-            GL11.glRotatef(-((float)this.panoramaTimer + par3) * 0.1F, 0.0F, 1.0F, 0.0F);
+            GL11.glRotatef(MathHelper.sin(((float)this.panoramaTimer + p_73970_3_) / 400.0F) * 25.0F + 20.0F, 1.0F, 0.0F, 0.0F);
+            GL11.glRotatef(-((float)this.panoramaTimer + p_73970_3_) * 0.1F, 0.0F, 1.0F, 0.0F);
 
             for (int var10 = 0; var10 < 6; ++var10)
             {
@@ -514,7 +412,7 @@ public class GuiMainMenu extends GuiScreen
     /**
      * Rotate and blurs the skybox view in the main menu
      */
-    private void rotateAndBlurSkybox(float par1)
+    private void rotateAndBlurSkybox(float p_73968_1_)
     {
         this.mc.getTextureManager().bindTexture(this.field_110351_G);
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
@@ -548,18 +446,18 @@ public class GuiMainMenu extends GuiScreen
     /**
      * Renders the skybox in the main menu
      */
-    private void renderSkybox(int par1, int par2, float par3)
+    private void renderSkybox(int p_73971_1_, int p_73971_2_, float p_73971_3_)
     {
         this.mc.getFramebuffer().unbindFramebuffer();
         GL11.glViewport(0, 0, 256, 256);
-        this.drawPanorama(par1, par2, par3);
-        this.rotateAndBlurSkybox(par3);
-        this.rotateAndBlurSkybox(par3);
-        this.rotateAndBlurSkybox(par3);
-        this.rotateAndBlurSkybox(par3);
-        this.rotateAndBlurSkybox(par3);
-        this.rotateAndBlurSkybox(par3);
-        this.rotateAndBlurSkybox(par3);
+        this.drawPanorama(p_73971_1_, p_73971_2_, p_73971_3_);
+        this.rotateAndBlurSkybox(p_73971_3_);
+        this.rotateAndBlurSkybox(p_73971_3_);
+        this.rotateAndBlurSkybox(p_73971_3_);
+        this.rotateAndBlurSkybox(p_73971_3_);
+        this.rotateAndBlurSkybox(p_73971_3_);
+        this.rotateAndBlurSkybox(p_73971_3_);
+        this.rotateAndBlurSkybox(p_73971_3_);
         this.mc.getFramebuffer().bindFramebuffer(true);
         GL11.glViewport(0, 0, this.mc.displayWidth, this.mc.displayHeight);
         Tessellator var4 = Tessellator.instance;
@@ -580,10 +478,10 @@ public class GuiMainMenu extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         GL11.glDisable(GL11.GL_ALPHA_TEST);
-        this.renderSkybox(par1, par2, par3);
+        this.renderSkybox(p_73863_1_, p_73863_2_, p_73863_3_);
         GL11.glEnable(GL11.GL_ALPHA_TEST);
         Tessellator var4 = Tessellator.instance;
         short var5 = 274;
@@ -617,7 +515,7 @@ public class GuiMainMenu extends GuiScreen
         GL11.glScalef(var8, var8, var8);
         this.drawCenteredString(this.fontRendererObj, this.splashText, 0, -8, -256);
         GL11.glPopMatrix();
-        String var9 = "Minecraft 1.7.2 (InstanceClient)";
+        String var9 = "Minecraft 1.7.10";
 
         if (this.mc.isDemo())
         {
@@ -635,20 +533,20 @@ public class GuiMainMenu extends GuiScreen
             this.drawString(this.fontRendererObj, this.field_146972_A, (this.width - this.field_92024_r) / 2, ((GuiButton)this.buttonList.get(0)).field_146129_i - 12, -1);
         }
 
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int par1, int par2, int par3)
+    protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_)
     {
-        super.mouseClicked(par1, par2, par3);
+        super.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
         Object var4 = this.field_104025_t;
 
         synchronized (this.field_104025_t)
         {
-            if (this.field_92025_p.length() > 0 && par1 >= this.field_92022_t && par1 <= this.field_92020_v && par2 >= this.field_92021_u && par2 <= this.field_92019_w)
+            if (this.field_92025_p.length() > 0 && p_73864_1_ >= this.field_92022_t && p_73864_1_ <= this.field_92020_v && p_73864_2_ >= this.field_92021_u && p_73864_2_ <= this.field_92019_w)
             {
                 GuiConfirmOpenLink var5 = new GuiConfirmOpenLink(this, this.field_104024_v, 13, true);
                 var5.func_146358_g();

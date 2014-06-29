@@ -10,21 +10,21 @@ public class TexturedQuad
     private boolean invertNormal;
     private static final String __OBFID = "CL_00000850";
 
-    public TexturedQuad(PositionTextureVertex[] par1ArrayOfPositionTextureVertex)
+    public TexturedQuad(PositionTextureVertex[] p_i1152_1_)
     {
-        this.vertexPositions = par1ArrayOfPositionTextureVertex;
-        this.nVertices = par1ArrayOfPositionTextureVertex.length;
+        this.vertexPositions = p_i1152_1_;
+        this.nVertices = p_i1152_1_.length;
     }
 
-    public TexturedQuad(PositionTextureVertex[] par1ArrayOfPositionTextureVertex, int par2, int par3, int par4, int par5, float par6, float par7)
+    public TexturedQuad(PositionTextureVertex[] p_i1153_1_, int p_i1153_2_, int p_i1153_3_, int p_i1153_4_, int p_i1153_5_, float p_i1153_6_, float p_i1153_7_)
     {
-        this(par1ArrayOfPositionTextureVertex);
-        float var8 = 0.0F / par6;
-        float var9 = 0.0F / par7;
-        par1ArrayOfPositionTextureVertex[0] = par1ArrayOfPositionTextureVertex[0].setTexturePosition((float)par4 / par6 - var8, (float)par3 / par7 + var9);
-        par1ArrayOfPositionTextureVertex[1] = par1ArrayOfPositionTextureVertex[1].setTexturePosition((float)par2 / par6 + var8, (float)par3 / par7 + var9);
-        par1ArrayOfPositionTextureVertex[2] = par1ArrayOfPositionTextureVertex[2].setTexturePosition((float)par2 / par6 + var8, (float)par5 / par7 - var9);
-        par1ArrayOfPositionTextureVertex[3] = par1ArrayOfPositionTextureVertex[3].setTexturePosition((float)par4 / par6 - var8, (float)par5 / par7 - var9);
+        this(p_i1153_1_);
+        float var8 = 0.0F / p_i1153_6_;
+        float var9 = 0.0F / p_i1153_7_;
+        p_i1153_1_[0] = p_i1153_1_[0].setTexturePosition((float)p_i1153_4_ / p_i1153_6_ - var8, (float)p_i1153_3_ / p_i1153_7_ + var9);
+        p_i1153_1_[1] = p_i1153_1_[1].setTexturePosition((float)p_i1153_2_ / p_i1153_6_ + var8, (float)p_i1153_3_ / p_i1153_7_ + var9);
+        p_i1153_1_[2] = p_i1153_1_[2].setTexturePosition((float)p_i1153_2_ / p_i1153_6_ + var8, (float)p_i1153_5_ / p_i1153_7_ - var9);
+        p_i1153_1_[3] = p_i1153_1_[3].setTexturePosition((float)p_i1153_4_ / p_i1153_6_ - var8, (float)p_i1153_5_ / p_i1153_7_ - var9);
     }
 
     public void flipFace()
@@ -39,28 +39,28 @@ public class TexturedQuad
         this.vertexPositions = var1;
     }
 
-    public void draw(Tessellator par1Tessellator, float par2)
+    public void draw(Tessellator p_78236_1_, float p_78236_2_)
     {
         Vec3 var3 = this.vertexPositions[1].vector3D.subtract(this.vertexPositions[0].vector3D);
         Vec3 var4 = this.vertexPositions[1].vector3D.subtract(this.vertexPositions[2].vector3D);
         Vec3 var5 = var4.crossProduct(var3).normalize();
-        par1Tessellator.startDrawingQuads();
+        p_78236_1_.startDrawingQuads();
 
         if (this.invertNormal)
         {
-            par1Tessellator.setNormal(-((float)var5.xCoord), -((float)var5.yCoord), -((float)var5.zCoord));
+            p_78236_1_.setNormal(-((float)var5.xCoord), -((float)var5.yCoord), -((float)var5.zCoord));
         }
         else
         {
-            par1Tessellator.setNormal((float)var5.xCoord, (float)var5.yCoord, (float)var5.zCoord);
+            p_78236_1_.setNormal((float)var5.xCoord, (float)var5.yCoord, (float)var5.zCoord);
         }
 
         for (int var6 = 0; var6 < 4; ++var6)
         {
             PositionTextureVertex var7 = this.vertexPositions[var6];
-            par1Tessellator.addVertexWithUV((double)((float)var7.vector3D.xCoord * par2), (double)((float)var7.vector3D.yCoord * par2), (double)((float)var7.vector3D.zCoord * par2), (double)var7.texturePositionX, (double)var7.texturePositionY);
+            p_78236_1_.addVertexWithUV((double)((float)var7.vector3D.xCoord * p_78236_2_), (double)((float)var7.vector3D.yCoord * p_78236_2_), (double)((float)var7.vector3D.zCoord * p_78236_2_), (double)var7.texturePositionX, (double)var7.texturePositionY);
         }
 
-        par1Tessellator.draw();
+        p_78236_1_.draw();
     }
 }

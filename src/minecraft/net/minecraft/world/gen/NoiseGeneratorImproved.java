@@ -8,6 +8,11 @@ public class NoiseGeneratorImproved extends NoiseGenerator
     public double xCoord;
     public double yCoord;
     public double zCoord;
+    private static final double[] field_152381_e = new double[] {1.0D, -1.0D, 1.0D, -1.0D, 1.0D, -1.0D, 1.0D, -1.0D, 0.0D, 0.0D, 0.0D, 0.0D, 1.0D, 0.0D, -1.0D, 0.0D};
+    private static final double[] field_152382_f = new double[] {1.0D, 1.0D, -1.0D, -1.0D, 0.0D, 0.0D, 0.0D, 0.0D, 1.0D, -1.0D, 1.0D, -1.0D, 1.0D, -1.0D, 1.0D, -1.0D};
+    private static final double[] field_152383_g = new double[] {0.0D, 0.0D, 0.0D, 0.0D, 1.0D, 1.0D, -1.0D, -1.0D, 1.0D, 1.0D, -1.0D, -1.0D, 0.0D, 1.0D, 0.0D, -1.0D};
+    private static final double[] field_152384_h = new double[] {1.0D, -1.0D, 1.0D, -1.0D, 1.0D, -1.0D, 1.0D, -1.0D, 0.0D, 0.0D, 0.0D, 0.0D, 1.0D, 0.0D, -1.0D, 0.0D};
+    private static final double[] field_152385_i = new double[] {0.0D, 0.0D, 0.0D, 0.0D, 1.0D, 1.0D, -1.0D, -1.0D, 1.0D, 1.0D, -1.0D, -1.0D, 0.0D, 1.0D, 0.0D, -1.0D};
     private static final String __OBFID = "CL_00000534";
 
     public NoiseGeneratorImproved()
@@ -38,59 +43,55 @@ public class NoiseGeneratorImproved extends NoiseGenerator
         }
     }
 
-    public final double lerp(double par1, double par3, double par5)
+    public final double lerp(double p_76311_1_, double p_76311_3_, double p_76311_5_)
     {
-        return par3 + par1 * (par5 - par3);
+        return p_76311_3_ + p_76311_1_ * (p_76311_5_ - p_76311_3_);
     }
 
-    public final double func_76309_a(int par1, double par2, double par4)
+    public final double func_76309_a(int p_76309_1_, double p_76309_2_, double p_76309_4_)
     {
-        int var6 = par1 & 15;
-        double var7 = (double)(1 - ((var6 & 8) >> 3)) * par2;
-        double var9 = var6 < 4 ? 0.0D : (var6 != 12 && var6 != 14 ? par4 : par2);
-        return ((var6 & 1) == 0 ? var7 : -var7) + ((var6 & 2) == 0 ? var9 : -var9);
+        int var6 = p_76309_1_ & 15;
+        return field_152384_h[var6] * p_76309_2_ + field_152385_i[var6] * p_76309_4_;
     }
 
-    public final double grad(int par1, double par2, double par4, double par6)
+    public final double grad(int p_76310_1_, double p_76310_2_, double p_76310_4_, double p_76310_6_)
     {
-        int var8 = par1 & 15;
-        double var9 = var8 < 8 ? par2 : par4;
-        double var11 = var8 < 4 ? par4 : (var8 != 12 && var8 != 14 ? par6 : par2);
-        return ((var8 & 1) == 0 ? var9 : -var9) + ((var8 & 2) == 0 ? var11 : -var11);
+        int var8 = p_76310_1_ & 15;
+        return field_152381_e[var8] * p_76310_2_ + field_152382_f[var8] * p_76310_4_ + field_152383_g[var8] * p_76310_6_;
     }
 
     /**
      * pars: noiseArray , xOffset , yOffset , zOffset , xSize , ySize , zSize , xScale, yScale , zScale , noiseScale.
      * noiseArray should be xSize*ySize*zSize in size
      */
-    public void populateNoiseArray(double[] par1ArrayOfDouble, double par2, double par4, double par6, int par8, int par9, int par10, double par11, double par13, double par15, double par17)
+    public void populateNoiseArray(double[] p_76308_1_, double p_76308_2_, double p_76308_4_, double p_76308_6_, int p_76308_8_, int p_76308_9_, int p_76308_10_, double p_76308_11_, double p_76308_13_, double p_76308_15_, double p_76308_17_)
     {
         int var19;
         int var22;
         double var31;
         double var35;
-        double var38;
         int var37;
-        double var42;
+        double var38;
         int var40;
         int var41;
+        double var42;
+        int var75;
         int var10001;
-        int var77;
 
-        if (par9 == 1)
+        if (p_76308_9_ == 1)
         {
-            boolean var66 = false;
+            boolean var64 = false;
             boolean var65 = false;
             boolean var21 = false;
-            boolean var67 = false;
-            double var72 = 0.0D;
-            double var71 = 0.0D;
-            var77 = 0;
-            double var74 = 1.0D / par17;
+            boolean var68 = false;
+            double var70 = 0.0D;
+            double var73 = 0.0D;
+            var75 = 0;
+            double var77 = 1.0D / p_76308_17_;
 
-            for (int var30 = 0; var30 < par8; ++var30)
+            for (int var30 = 0; var30 < p_76308_8_; ++var30)
             {
-                var31 = par2 + (double)var30 * par11 + this.xCoord;
+                var31 = p_76308_2_ + (double)var30 * p_76308_11_ + this.xCoord;
                 int var78 = (int)var31;
 
                 if (var31 < (double)var78)
@@ -102,9 +103,9 @@ public class NoiseGeneratorImproved extends NoiseGenerator
                 var31 -= (double)var78;
                 var35 = var31 * var31 * var31 * (var31 * (var31 * 6.0D - 15.0D) + 10.0D);
 
-                for (var37 = 0; var37 < par10; ++var37)
+                for (var37 = 0; var37 < p_76308_10_; ++var37)
                 {
-                    var38 = par6 + (double)var37 * par15 + this.zCoord;
+                    var38 = p_76308_6_ + (double)var37 * p_76308_15_ + this.zCoord;
                     var40 = (int)var38;
 
                     if (var38 < (double)var40)
@@ -116,21 +117,21 @@ public class NoiseGeneratorImproved extends NoiseGenerator
                     var38 -= (double)var40;
                     var42 = var38 * var38 * var38 * (var38 * (var38 * 6.0D - 15.0D) + 10.0D);
                     var19 = this.permutations[var34] + 0;
-                    int var64 = this.permutations[var19] + var41;
-                    int var69 = this.permutations[var34 + 1] + 0;
-                    var22 = this.permutations[var69] + var41;
-                    var72 = this.lerp(var35, this.func_76309_a(this.permutations[var64], var31, var38), this.grad(this.permutations[var22], var31 - 1.0D, 0.0D, var38));
-                    var71 = this.lerp(var35, this.grad(this.permutations[var64 + 1], var31, 0.0D, var38 - 1.0D), this.grad(this.permutations[var22 + 1], var31 - 1.0D, 0.0D, var38 - 1.0D));
-                    double var79 = this.lerp(var42, var72, var71);
-                    var10001 = var77++;
-                    par1ArrayOfDouble[var10001] += var79 * var74;
+                    int var66 = this.permutations[var19] + var41;
+                    int var67 = this.permutations[var34 + 1] + 0;
+                    var22 = this.permutations[var67] + var41;
+                    var70 = this.lerp(var35, this.func_76309_a(this.permutations[var66], var31, var38), this.grad(this.permutations[var22], var31 - 1.0D, 0.0D, var38));
+                    var73 = this.lerp(var35, this.grad(this.permutations[var66 + 1], var31, 0.0D, var38 - 1.0D), this.grad(this.permutations[var22 + 1], var31 - 1.0D, 0.0D, var38 - 1.0D));
+                    double var79 = this.lerp(var42, var70, var73);
+                    var10001 = var75++;
+                    p_76308_1_[var10001] += var79 * var77;
                 }
             }
         }
         else
         {
             var19 = 0;
-            double var20 = 1.0D / par17;
+            double var20 = 1.0D / p_76308_17_;
             var22 = -1;
             boolean var23 = false;
             boolean var24 = false;
@@ -143,9 +144,9 @@ public class NoiseGeneratorImproved extends NoiseGenerator
             double var33 = 0.0D;
             var35 = 0.0D;
 
-            for (var37 = 0; var37 < par8; ++var37)
+            for (var37 = 0; var37 < p_76308_8_; ++var37)
             {
-                var38 = par2 + (double)var37 * par11 + this.xCoord;
+                var38 = p_76308_2_ + (double)var37 * p_76308_11_ + this.xCoord;
                 var40 = (int)var38;
 
                 if (var38 < (double)var40)
@@ -157,9 +158,9 @@ public class NoiseGeneratorImproved extends NoiseGenerator
                 var38 -= (double)var40;
                 var42 = var38 * var38 * var38 * (var38 * (var38 * 6.0D - 15.0D) + 10.0D);
 
-                for (int var44 = 0; var44 < par10; ++var44)
+                for (int var44 = 0; var44 < p_76308_10_; ++var44)
                 {
-                    double var45 = par6 + (double)var44 * par15 + this.zCoord;
+                    double var45 = p_76308_6_ + (double)var44 * p_76308_15_ + this.zCoord;
                     int var47 = (int)var45;
 
                     if (var45 < (double)var47)
@@ -171,9 +172,9 @@ public class NoiseGeneratorImproved extends NoiseGenerator
                     var45 -= (double)var47;
                     double var49 = var45 * var45 * var45 * (var45 * (var45 * 6.0D - 15.0D) + 10.0D);
 
-                    for (int var51 = 0; var51 < par9; ++var51)
+                    for (int var51 = 0; var51 < p_76308_9_; ++var51)
                     {
-                        double var52 = par4 + (double)var51 * par13 + this.yCoord;
+                        double var52 = p_76308_4_ + (double)var51 * p_76308_13_ + this.yCoord;
                         int var54 = (int)var52;
 
                         if (var52 < (double)var54)
@@ -188,23 +189,23 @@ public class NoiseGeneratorImproved extends NoiseGenerator
                         if (var51 == 0 || var55 != var22)
                         {
                             var22 = var55;
-                            int var68 = this.permutations[var41] + var55;
-                            int var73 = this.permutations[var68] + var48;
-                            int var70 = this.permutations[var68 + 1] + var48;
-                            int var76 = this.permutations[var41 + 1] + var55;
-                            var77 = this.permutations[var76] + var48;
-                            int var75 = this.permutations[var76 + 1] + var48;
-                            var29 = this.lerp(var42, this.grad(this.permutations[var73], var38, var52, var45), this.grad(this.permutations[var77], var38 - 1.0D, var52, var45));
-                            var31 = this.lerp(var42, this.grad(this.permutations[var70], var38, var52 - 1.0D, var45), this.grad(this.permutations[var75], var38 - 1.0D, var52 - 1.0D, var45));
-                            var33 = this.lerp(var42, this.grad(this.permutations[var73 + 1], var38, var52, var45 - 1.0D), this.grad(this.permutations[var77 + 1], var38 - 1.0D, var52, var45 - 1.0D));
-                            var35 = this.lerp(var42, this.grad(this.permutations[var70 + 1], var38, var52 - 1.0D, var45 - 1.0D), this.grad(this.permutations[var75 + 1], var38 - 1.0D, var52 - 1.0D, var45 - 1.0D));
+                            int var69 = this.permutations[var41] + var55;
+                            int var71 = this.permutations[var69] + var48;
+                            int var72 = this.permutations[var69 + 1] + var48;
+                            int var74 = this.permutations[var41 + 1] + var55;
+                            var75 = this.permutations[var74] + var48;
+                            int var76 = this.permutations[var74 + 1] + var48;
+                            var29 = this.lerp(var42, this.grad(this.permutations[var71], var38, var52, var45), this.grad(this.permutations[var75], var38 - 1.0D, var52, var45));
+                            var31 = this.lerp(var42, this.grad(this.permutations[var72], var38, var52 - 1.0D, var45), this.grad(this.permutations[var76], var38 - 1.0D, var52 - 1.0D, var45));
+                            var33 = this.lerp(var42, this.grad(this.permutations[var71 + 1], var38, var52, var45 - 1.0D), this.grad(this.permutations[var75 + 1], var38 - 1.0D, var52, var45 - 1.0D));
+                            var35 = this.lerp(var42, this.grad(this.permutations[var72 + 1], var38, var52 - 1.0D, var45 - 1.0D), this.grad(this.permutations[var76 + 1], var38 - 1.0D, var52 - 1.0D, var45 - 1.0D));
                         }
 
                         double var58 = this.lerp(var56, var29, var31);
                         double var60 = this.lerp(var56, var33, var35);
                         double var62 = this.lerp(var49, var58, var60);
                         var10001 = var19++;
-                        par1ArrayOfDouble[var10001] += var62 * var20;
+                        p_76308_1_[var10001] += var62 * var20;
                     }
                 }
             }

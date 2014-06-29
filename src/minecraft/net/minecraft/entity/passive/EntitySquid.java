@@ -38,9 +38,9 @@ public class EntitySquid extends EntityWaterMob
     private float randomMotionVecZ;
     private static final String __OBFID = "CL_00001651";
 
-    public EntitySquid(World par1World)
+    public EntitySquid(World p_i1693_1_)
     {
-        super(par1World);
+        super(p_i1693_1_);
         this.setSize(0.95F, 0.95F);
         this.rotationVelocity = 1.0F / (this.rand.nextFloat() + 1.0F) * 0.2F;
     }
@@ -100,9 +100,9 @@ public class EntitySquid extends EntityWaterMob
     /**
      * Drop 0-2 items of this living's type
      */
-    protected void dropFewItems(boolean par1, int par2)
+    protected void dropFewItems(boolean p_70628_1_, int p_70628_2_)
     {
-        int var3 = this.rand.nextInt(3 + par2) + 1;
+        int var3 = this.rand.nextInt(3 + p_70628_2_) + 1;
 
         for (int var4 = 0; var4 < var3; ++var4)
         {
@@ -200,7 +200,7 @@ public class EntitySquid extends EntityWaterMob
     /**
      * Moves the entity based on the specified heading.  Args: strafe, forward
      */
-    public void moveEntityWithHeading(float par1, float par2)
+    public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_)
     {
         this.moveEntity(this.motionX, this.motionY, this.motionZ);
     }

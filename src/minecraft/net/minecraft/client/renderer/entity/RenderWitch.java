@@ -31,26 +31,26 @@ public class RenderWitch extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityWitch par1EntityWitch, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntityWitch p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        ItemStack var10 = par1EntityWitch.getHeldItem();
+        ItemStack var10 = p_76986_1_.getHeldItem();
         this.witchModel.field_82900_g = var10 != null;
-        super.doRender((EntityLiving)par1EntityWitch, par2, par4, par6, par8, par9);
+        super.doRender((EntityLiving)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntityWitch par1EntityWitch)
+    protected ResourceLocation getEntityTexture(EntityWitch p_110775_1_)
     {
         return witchTextures;
     }
 
-    protected void renderEquippedItems(EntityWitch par1EntityWitch, float par2)
+    protected void renderEquippedItems(EntityWitch p_77029_1_, float p_77029_2_)
     {
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
-        super.renderEquippedItems(par1EntityWitch, par2);
-        ItemStack var3 = par1EntityWitch.getHeldItem();
+        super.renderEquippedItems(p_77029_1_, p_77029_2_);
+        ItemStack var3 = p_77029_1_.getHeldItem();
 
         if (var3 != null)
         {
@@ -113,11 +113,11 @@ public class RenderWitch extends RenderLiving
 
             GL11.glRotatef(-15.0F, 1.0F, 0.0F, 0.0F);
             GL11.glRotatef(40.0F, 0.0F, 0.0F, 1.0F);
-            this.renderManager.itemRenderer.renderItem(par1EntityWitch, var3, 0);
+            this.renderManager.itemRenderer.renderItem(p_77029_1_, var3, 0);
 
             if (var3.getItem().requiresMultipleRenderPasses())
             {
-                this.renderManager.itemRenderer.renderItem(par1EntityWitch, var3, 1);
+                this.renderManager.itemRenderer.renderItem(p_77029_1_, var3, 1);
             }
 
             GL11.glPopMatrix();
@@ -133,7 +133,7 @@ public class RenderWitch extends RenderLiving
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityWitch par1EntityWitch, float par2)
+    protected void preRenderCallback(EntityWitch p_77041_1_, float p_77041_2_)
     {
         float var3 = 0.9375F;
         GL11.glScalef(var3, var3, var3);
@@ -145,23 +145,23 @@ public class RenderWitch extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntityLiving p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityWitch)par1EntityLiving, par2, par4, par6, par8, par9);
+        this.doRender((EntityWitch)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 
     /**
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+    protected void preRenderCallback(EntityLivingBase p_77041_1_, float p_77041_2_)
     {
-        this.preRenderCallback((EntityWitch)par1EntityLivingBase, par2);
+        this.preRenderCallback((EntityWitch)p_77041_1_, p_77041_2_);
     }
 
-    protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2)
+    protected void renderEquippedItems(EntityLivingBase p_77029_1_, float p_77029_2_)
     {
-        this.renderEquippedItems((EntityWitch)par1EntityLivingBase, par2);
+        this.renderEquippedItems((EntityWitch)p_77029_1_, p_77029_2_);
     }
 
     /**
@@ -170,17 +170,17 @@ public class RenderWitch extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityLivingBase par1Entity, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntityLivingBase p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityWitch)par1Entity, par2, par4, par6, par8, par9);
+        this.doRender((EntityWitch)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntityWitch)par1Entity);
+        return this.getEntityTexture((EntityWitch)p_110775_1_);
     }
 
     /**
@@ -189,8 +189,8 @@ public class RenderWitch extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityWitch)par1Entity, par2, par4, par6, par8, par9);
+        this.doRender((EntityWitch)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 }

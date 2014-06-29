@@ -24,9 +24,9 @@ public class ItemBlock extends Item
     /**
      * Sets the unlocalized name of this item to the string passed as the parameter, prefixed by "item."
      */
-    public ItemBlock setUnlocalizedName(String p_150937_1_)
+    public ItemBlock setUnlocalizedName(String p_77655_1_)
     {
-        super.setUnlocalizedName(p_150937_1_);
+        super.setUnlocalizedName(p_77655_1_);
         return this;
     }
 
@@ -41,7 +41,7 @@ public class ItemBlock extends Item
     /**
      * Gets an icon index based on an item's damage value
      */
-    public IIcon getIconFromDamage(int par1)
+    public IIcon getIconFromDamage(int p_77617_1_)
     {
         return this.field_150938_b != null ? this.field_150938_b : this.field_150939_a.getBlockTextureFromSide(1);
     }
@@ -50,74 +50,74 @@ public class ItemBlock extends Item
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
      * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
      */
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+    public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World p_77648_3_, int p_77648_4_, int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
     {
-        Block var11 = par3World.getBlock(par4, par5, par6);
+        Block var11 = p_77648_3_.getBlock(p_77648_4_, p_77648_5_, p_77648_6_);
 
-        if (var11 == Blocks.snow_layer && (par3World.getBlockMetadata(par4, par5, par6) & 7) < 1)
+        if (var11 == Blocks.snow_layer && (p_77648_3_.getBlockMetadata(p_77648_4_, p_77648_5_, p_77648_6_) & 7) < 1)
         {
-            par7 = 1;
+            p_77648_7_ = 1;
         }
         else if (var11 != Blocks.vine && var11 != Blocks.tallgrass && var11 != Blocks.deadbush)
         {
-            if (par7 == 0)
+            if (p_77648_7_ == 0)
             {
-                --par5;
+                --p_77648_5_;
             }
 
-            if (par7 == 1)
+            if (p_77648_7_ == 1)
             {
-                ++par5;
+                ++p_77648_5_;
             }
 
-            if (par7 == 2)
+            if (p_77648_7_ == 2)
             {
-                --par6;
+                --p_77648_6_;
             }
 
-            if (par7 == 3)
+            if (p_77648_7_ == 3)
             {
-                ++par6;
+                ++p_77648_6_;
             }
 
-            if (par7 == 4)
+            if (p_77648_7_ == 4)
             {
-                --par4;
+                --p_77648_4_;
             }
 
-            if (par7 == 5)
+            if (p_77648_7_ == 5)
             {
-                ++par4;
+                ++p_77648_4_;
             }
         }
 
-        if (par1ItemStack.stackSize == 0)
+        if (p_77648_1_.stackSize == 0)
         {
             return false;
         }
-        else if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7, par1ItemStack))
+        else if (!p_77648_2_.canPlayerEdit(p_77648_4_, p_77648_5_, p_77648_6_, p_77648_7_, p_77648_1_))
         {
             return false;
         }
-        else if (par5 == 255 && this.field_150939_a.getMaterial().isSolid())
+        else if (p_77648_5_ == 255 && this.field_150939_a.getMaterial().isSolid())
         {
             return false;
         }
-        else if (par3World.canPlaceEntityOnSide(this.field_150939_a, par4, par5, par6, false, par7, par2EntityPlayer, par1ItemStack))
+        else if (p_77648_3_.canPlaceEntityOnSide(this.field_150939_a, p_77648_4_, p_77648_5_, p_77648_6_, false, p_77648_7_, p_77648_2_, p_77648_1_))
         {
-            int var12 = this.getMetadata(par1ItemStack.getItemDamage());
-            int var13 = this.field_150939_a.onBlockPlaced(par3World, par4, par5, par6, par7, par8, par9, par10, var12);
+            int var12 = this.getMetadata(p_77648_1_.getItemDamage());
+            int var13 = this.field_150939_a.onBlockPlaced(p_77648_3_, p_77648_4_, p_77648_5_, p_77648_6_, p_77648_7_, p_77648_8_, p_77648_9_, p_77648_10_, var12);
 
-            if (par3World.setBlock(par4, par5, par6, this.field_150939_a, var13, 3))
+            if (p_77648_3_.setBlock(p_77648_4_, p_77648_5_, p_77648_6_, this.field_150939_a, var13, 3))
             {
-                if (par3World.getBlock(par4, par5, par6) == this.field_150939_a)
+                if (p_77648_3_.getBlock(p_77648_4_, p_77648_5_, p_77648_6_) == this.field_150939_a)
                 {
-                    this.field_150939_a.onBlockPlacedBy(par3World, par4, par5, par6, par2EntityPlayer, par1ItemStack);
-                    this.field_150939_a.onPostBlockPlaced(par3World, par4, par5, par6, var13);
+                    this.field_150939_a.onBlockPlacedBy(p_77648_3_, p_77648_4_, p_77648_5_, p_77648_6_, p_77648_2_, p_77648_1_);
+                    this.field_150939_a.onPostBlockPlaced(p_77648_3_, p_77648_4_, p_77648_5_, p_77648_6_, var13);
                 }
 
-                par3World.playSoundEffect((double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), this.field_150939_a.stepSound.func_150496_b(), (this.field_150939_a.stepSound.func_150497_c() + 1.0F) / 2.0F, this.field_150939_a.stepSound.func_150494_d() * 0.8F);
-                --par1ItemStack.stackSize;
+                p_77648_3_.playSoundEffect((double)((float)p_77648_4_ + 0.5F), (double)((float)p_77648_5_ + 0.5F), (double)((float)p_77648_6_ + 0.5F), this.field_150939_a.stepSound.func_150496_b(), (this.field_150939_a.stepSound.func_150497_c() + 1.0F) / 2.0F, this.field_150939_a.stepSound.func_150494_d() * 0.8F);
+                --p_77648_1_.stackSize;
             }
 
             return true;
@@ -176,7 +176,7 @@ public class ItemBlock extends Item
      * Returns the unlocalized name of this item. This version accepts an ItemStack so different stacks can have
      * different names based on their damage or NBT.
      */
-    public String getUnlocalizedName(ItemStack par1ItemStack)
+    public String getUnlocalizedName(ItemStack p_77667_1_)
     {
         return this.field_150939_a.getUnlocalizedName();
     }
@@ -205,13 +205,13 @@ public class ItemBlock extends Item
         this.field_150939_a.getSubBlocks(p_150895_1_, p_150895_2_, p_150895_3_);
     }
 
-    public void registerIcons(IIconRegister par1IconRegister)
+    public void registerIcons(IIconRegister p_94581_1_)
     {
         String var2 = this.field_150939_a.getItemIconName();
 
         if (var2 != null)
         {
-            this.field_150938_b = par1IconRegister.registerIcon(var2);
+            this.field_150938_b = p_94581_1_.registerIcon(var2);
         }
     }
 }

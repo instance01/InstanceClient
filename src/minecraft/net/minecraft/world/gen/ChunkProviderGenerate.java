@@ -71,12 +71,12 @@ public class ChunkProviderGenerate implements IChunkProvider
     int[][] field_73219_j = new int[32][32];
     private static final String __OBFID = "CL_00000396";
 
-    public ChunkProviderGenerate(World par1World, long par2, boolean par4)
+    public ChunkProviderGenerate(World p_i2006_1_, long p_i2006_2_, boolean p_i2006_4_)
     {
-        this.worldObj = par1World;
-        this.mapFeaturesEnabled = par4;
-        this.field_147435_p = par1World.getWorldInfo().getTerrainType();
-        this.rand = new Random(par2);
+        this.worldObj = p_i2006_1_;
+        this.mapFeaturesEnabled = p_i2006_4_;
+        this.field_147435_p = p_i2006_1_.getWorldInfo().getTerrainType();
+        this.rand = new Random(p_i2006_2_);
         this.field_147431_j = new NoiseGeneratorOctaves(this.rand, 16);
         this.field_147432_k = new NoiseGeneratorOctaves(this.rand, 16);
         this.field_147429_l = new NoiseGeneratorOctaves(this.rand, 8);
@@ -192,35 +192,35 @@ public class ChunkProviderGenerate implements IChunkProvider
     /**
      * loads or generates the chunk at the chunk location specified
      */
-    public Chunk loadChunk(int par1, int par2)
+    public Chunk loadChunk(int p_73158_1_, int p_73158_2_)
     {
-        return this.provideChunk(par1, par2);
+        return this.provideChunk(p_73158_1_, p_73158_2_);
     }
 
     /**
      * Will return back a chunk, if it doesn't exist and its not a MP client it will generates all the blocks for the
      * specified chunk from the map seed and chunk seed
      */
-    public Chunk provideChunk(int par1, int par2)
+    public Chunk provideChunk(int p_73154_1_, int p_73154_2_)
     {
-        this.rand.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
+        this.rand.setSeed((long)p_73154_1_ * 341873128712L + (long)p_73154_2_ * 132897987541L);
         Block[] var3 = new Block[65536];
         byte[] var4 = new byte[65536];
-        this.func_147424_a(par1, par2, var3);
-        this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
-        this.func_147422_a(par1, par2, var3, var4, this.biomesForGeneration);
-        this.caveGenerator.func_151539_a(this, this.worldObj, par1, par2, var3);
-        this.ravineGenerator.func_151539_a(this, this.worldObj, par1, par2, var3);
+        this.func_147424_a(p_73154_1_, p_73154_2_, var3);
+        this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, p_73154_1_ * 16, p_73154_2_ * 16, 16, 16);
+        this.func_147422_a(p_73154_1_, p_73154_2_, var3, var4, this.biomesForGeneration);
+        this.caveGenerator.func_151539_a(this, this.worldObj, p_73154_1_, p_73154_2_, var3);
+        this.ravineGenerator.func_151539_a(this, this.worldObj, p_73154_1_, p_73154_2_, var3);
 
         if (this.mapFeaturesEnabled)
         {
-            this.mineshaftGenerator.func_151539_a(this, this.worldObj, par1, par2, var3);
-            this.villageGenerator.func_151539_a(this, this.worldObj, par1, par2, var3);
-            this.strongholdGenerator.func_151539_a(this, this.worldObj, par1, par2, var3);
-            this.scatteredFeatureGenerator.func_151539_a(this, this.worldObj, par1, par2, var3);
+            this.mineshaftGenerator.func_151539_a(this, this.worldObj, p_73154_1_, p_73154_2_, var3);
+            this.villageGenerator.func_151539_a(this, this.worldObj, p_73154_1_, p_73154_2_, var3);
+            this.strongholdGenerator.func_151539_a(this, this.worldObj, p_73154_1_, p_73154_2_, var3);
+            this.scatteredFeatureGenerator.func_151539_a(this, this.worldObj, p_73154_1_, p_73154_2_, var3);
         }
 
-        Chunk var5 = new Chunk(this.worldObj, var3, var4, par1, par2);
+        Chunk var5 = new Chunk(this.worldObj, var3, var4, p_73154_1_, p_73154_2_);
         byte[] var6 = var5.getBiomeArray();
 
         for (int var7 = 0; var7 < var6.length; ++var7)
@@ -289,43 +289,43 @@ public class ChunkProviderGenerate implements IChunkProvider
                 var19 /= var20;
                 var18 = var18 * 0.9F + 0.1F;
                 var19 = (var19 * 4.0F - 1.0F) / 8.0F;
-                double var47 = this.field_147426_g[var13] / 8000.0D;
+                double var46 = this.field_147426_g[var13] / 8000.0D;
 
-                if (var47 < 0.0D)
+                if (var46 < 0.0D)
                 {
-                    var47 = -var47 * 0.3D;
+                    var46 = -var46 * 0.3D;
                 }
 
-                var47 = var47 * 3.0D - 2.0D;
+                var46 = var46 * 3.0D - 2.0D;
 
-                if (var47 < 0.0D)
+                if (var46 < 0.0D)
                 {
-                    var47 /= 2.0D;
+                    var46 /= 2.0D;
 
-                    if (var47 < -1.0D)
+                    if (var46 < -1.0D)
                     {
-                        var47 = -1.0D;
+                        var46 = -1.0D;
                     }
 
-                    var47 /= 1.4D;
-                    var47 /= 2.0D;
+                    var46 /= 1.4D;
+                    var46 /= 2.0D;
                 }
                 else
                 {
-                    if (var47 > 1.0D)
+                    if (var46 > 1.0D)
                     {
-                        var47 = 1.0D;
+                        var46 = 1.0D;
                     }
 
-                    var47 /= 8.0D;
+                    var46 /= 8.0D;
                 }
 
                 ++var13;
-                double var46 = (double)var19;
+                double var47 = (double)var19;
                 double var48 = (double)var18;
-                var46 += var47 * 0.2D;
-                var46 = var46 * 8.5D / 8.0D;
-                double var29 = 8.5D + var46 * 4.0D;
+                var47 += var46 * 0.2D;
+                var47 = var47 * 8.5D / 8.0D;
+                double var29 = 8.5D + var47 * 4.0D;
 
                 for (int var31 = 0; var31 < 33; ++var31)
                 {
@@ -357,7 +357,7 @@ public class ChunkProviderGenerate implements IChunkProvider
     /**
      * Checks to see if a chunk exists at x, y
      */
-    public boolean chunkExists(int par1, int par2)
+    public boolean chunkExists(int p_73149_1_, int p_73149_2_)
     {
         return true;
     }
@@ -365,24 +365,24 @@ public class ChunkProviderGenerate implements IChunkProvider
     /**
      * Populates chunk with ores etc etc
      */
-    public void populate(IChunkProvider par1IChunkProvider, int par2, int par3)
+    public void populate(IChunkProvider p_73153_1_, int p_73153_2_, int p_73153_3_)
     {
         BlockFalling.field_149832_M = true;
-        int var4 = par2 * 16;
-        int var5 = par3 * 16;
+        int var4 = p_73153_2_ * 16;
+        int var5 = p_73153_3_ * 16;
         BiomeGenBase var6 = this.worldObj.getBiomeGenForCoords(var4 + 16, var5 + 16);
         this.rand.setSeed(this.worldObj.getSeed());
         long var7 = this.rand.nextLong() / 2L * 2L + 1L;
         long var9 = this.rand.nextLong() / 2L * 2L + 1L;
-        this.rand.setSeed((long)par2 * var7 + (long)par3 * var9 ^ this.worldObj.getSeed());
+        this.rand.setSeed((long)p_73153_2_ * var7 + (long)p_73153_3_ * var9 ^ this.worldObj.getSeed());
         boolean var11 = false;
 
         if (this.mapFeaturesEnabled)
         {
-            this.mineshaftGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
-            var11 = this.villageGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
-            this.strongholdGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
-            this.scatteredFeatureGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
+            this.mineshaftGenerator.generateStructuresInChunk(this.worldObj, this.rand, p_73153_2_, p_73153_3_);
+            var11 = this.villageGenerator.generateStructuresInChunk(this.worldObj, this.rand, p_73153_2_, p_73153_3_);
+            this.strongholdGenerator.generateStructuresInChunk(this.worldObj, this.rand, p_73153_2_, p_73153_3_);
+            this.scatteredFeatureGenerator.generateStructuresInChunk(this.worldObj, this.rand, p_73153_2_, p_73153_3_);
         }
 
         int var12;
@@ -447,7 +447,7 @@ public class ChunkProviderGenerate implements IChunkProvider
      * Two modes of operation: if passed true, save all Chunks in one go.  If passed false, save up to two chunks.
      * Return true if all chunks have been saved.
      */
-    public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate)
+    public boolean saveChunks(boolean p_73151_1_, IProgressUpdate p_73151_2_)
     {
         return true;
     }
@@ -485,10 +485,10 @@ public class ChunkProviderGenerate implements IChunkProvider
     /**
      * Returns a list of creatures of the specified type that can spawn at the given location.
      */
-    public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int par2, int par3, int par4)
+    public List getPossibleCreatures(EnumCreatureType p_73155_1_, int p_73155_2_, int p_73155_3_, int p_73155_4_)
     {
-        BiomeGenBase var5 = this.worldObj.getBiomeGenForCoords(par2, par4);
-        return par1EnumCreatureType == EnumCreatureType.monster && this.scatteredFeatureGenerator.func_143030_a(par2, par3, par4) ? this.scatteredFeatureGenerator.getScatteredFeatureSpawnList() : var5.getSpawnableList(par1EnumCreatureType);
+        BiomeGenBase var5 = this.worldObj.getBiomeGenForCoords(p_73155_2_, p_73155_4_);
+        return p_73155_1_ == EnumCreatureType.monster && this.scatteredFeatureGenerator.func_143030_a(p_73155_2_, p_73155_3_, p_73155_4_) ? this.scatteredFeatureGenerator.getScatteredFeatureSpawnList() : var5.getSpawnableList(p_73155_1_);
     }
 
     public ChunkPosition func_147416_a(World p_147416_1_, String p_147416_2_, int p_147416_3_, int p_147416_4_, int p_147416_5_)
@@ -501,14 +501,14 @@ public class ChunkProviderGenerate implements IChunkProvider
         return 0;
     }
 
-    public void recreateStructures(int par1, int par2)
+    public void recreateStructures(int p_82695_1_, int p_82695_2_)
     {
         if (this.mapFeaturesEnabled)
         {
-            this.mineshaftGenerator.func_151539_a(this, this.worldObj, par1, par2, (Block[])null);
-            this.villageGenerator.func_151539_a(this, this.worldObj, par1, par2, (Block[])null);
-            this.strongholdGenerator.func_151539_a(this, this.worldObj, par1, par2, (Block[])null);
-            this.scatteredFeatureGenerator.func_151539_a(this, this.worldObj, par1, par2, (Block[])null);
+            this.mineshaftGenerator.func_151539_a(this, this.worldObj, p_82695_1_, p_82695_2_, (Block[])null);
+            this.villageGenerator.func_151539_a(this, this.worldObj, p_82695_1_, p_82695_2_, (Block[])null);
+            this.strongholdGenerator.func_151539_a(this, this.worldObj, p_82695_1_, p_82695_2_, (Block[])null);
+            this.scatteredFeatureGenerator.func_151539_a(this, this.worldObj, p_82695_1_, p_82695_2_, (Block[])null);
         }
     }
 }

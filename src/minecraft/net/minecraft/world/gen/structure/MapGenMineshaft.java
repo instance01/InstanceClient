@@ -17,9 +17,9 @@ public class MapGenMineshaft extends MapGenStructure
         return "Mineshaft";
     }
 
-    public MapGenMineshaft(Map par1Map)
+    public MapGenMineshaft(Map p_i2034_1_)
     {
-        Iterator var2 = par1Map.entrySet().iterator();
+        Iterator var2 = p_i2034_1_.entrySet().iterator();
 
         while (var2.hasNext())
         {
@@ -32,13 +32,13 @@ public class MapGenMineshaft extends MapGenStructure
         }
     }
 
-    protected boolean canSpawnStructureAtCoords(int par1, int par2)
+    protected boolean canSpawnStructureAtCoords(int p_75047_1_, int p_75047_2_)
     {
-        return this.rand.nextDouble() < this.field_82673_e && this.rand.nextInt(80) < Math.max(Math.abs(par1), Math.abs(par2));
+        return this.rand.nextDouble() < this.field_82673_e && this.rand.nextInt(80) < Math.max(Math.abs(p_75047_1_), Math.abs(p_75047_2_));
     }
 
-    protected StructureStart getStructureStart(int par1, int par2)
+    protected StructureStart getStructureStart(int p_75049_1_, int p_75049_2_)
     {
-        return new StructureMineshaftStart(this.worldObj, this.rand, par1, par2);
+        return new StructureMineshaftStart(this.worldObj, this.rand, p_75049_1_, p_75049_2_);
     }
 }

@@ -134,9 +134,9 @@ public class Achievement extends StatBase
         return var1;
     }
 
-    public Achievement func_150953_b(Class p_150958_1_)
+    public Achievement func_150953_b(Class p_150953_1_)
     {
-        return (Achievement)super.func_150953_b(p_150958_1_);
+        return (Achievement)super.func_150953_b(p_150953_1_);
     }
 
     /**
@@ -150,9 +150,9 @@ public class Achievement extends StatBase
     /**
      * Defines a string formatter for the achievement.
      */
-    public Achievement setStatStringFormatter(IStatStringFormat par1IStatStringFormat)
+    public Achievement setStatStringFormatter(IStatStringFormat p_75988_1_)
     {
-        this.statStringFormatter = par1IStatStringFormat;
+        this.statStringFormatter = p_75988_1_;
         return this;
     }
 

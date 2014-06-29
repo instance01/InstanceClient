@@ -13,6 +13,7 @@ temp
 .classpath
 .project
 *.bak
+*.sh
 *.rar
 *.zip
 *.bat

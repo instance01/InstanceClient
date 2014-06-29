@@ -13,22 +13,22 @@ public class RenderSlime extends RenderLiving
     private ModelBase scaleAmount;
     private static final String __OBFID = "CL_00001024";
 
-    public RenderSlime(ModelBase par1ModelBase, ModelBase par2ModelBase, float par3)
+    public RenderSlime(ModelBase p_i1267_1_, ModelBase p_i1267_2_, float p_i1267_3_)
     {
-        super(par1ModelBase, par3);
-        this.scaleAmount = par2ModelBase;
+        super(p_i1267_1_, p_i1267_3_);
+        this.scaleAmount = p_i1267_2_;
     }
 
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntitySlime par1EntitySlime, int par2, float par3)
+    protected int shouldRenderPass(EntitySlime p_77032_1_, int p_77032_2_, float p_77032_3_)
     {
-        if (par1EntitySlime.isInvisible())
+        if (p_77032_1_.isInvisible())
         {
             return 0;
         }
-        else if (par2 == 0)
+        else if (p_77032_2_ == 0)
         {
             this.setRenderPassModel(this.scaleAmount);
             GL11.glEnable(GL11.GL_NORMALIZE);
@@ -38,7 +38,7 @@ public class RenderSlime extends RenderLiving
         }
         else
         {
-            if (par2 == 1)
+            if (p_77032_2_ == 1)
             {
                 GL11.glDisable(GL11.GL_BLEND);
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -52,10 +52,10 @@ public class RenderSlime extends RenderLiving
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntitySlime par1EntitySlime, float par2)
+    protected void preRenderCallback(EntitySlime p_77041_1_, float p_77041_2_)
     {
-        float var3 = (float)par1EntitySlime.getSlimeSize();
-        float var4 = (par1EntitySlime.prevSquishFactor + (par1EntitySlime.squishFactor - par1EntitySlime.prevSquishFactor) * par2) / (var3 * 0.5F + 1.0F);
+        float var3 = (float)p_77041_1_.getSlimeSize();
+        float var4 = (p_77041_1_.prevSquishFactor + (p_77041_1_.squishFactor - p_77041_1_.prevSquishFactor) * p_77041_2_) / (var3 * 0.5F + 1.0F);
         float var5 = 1.0F / (var4 + 1.0F);
         GL11.glScalef(var5 * var3, 1.0F / var5 * var3, var5 * var3);
     }
@@ -63,7 +63,7 @@ public class RenderSlime extends RenderLiving
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntitySlime par1EntitySlime)
+    protected ResourceLocation getEntityTexture(EntitySlime p_110775_1_)
     {
         return slimeTextures;
     }
@@ -72,24 +72,24 @@ public class RenderSlime extends RenderLiving
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+    protected void preRenderCallback(EntityLivingBase p_77041_1_, float p_77041_2_)
     {
-        this.preRenderCallback((EntitySlime)par1EntityLivingBase, par2);
+        this.preRenderCallback((EntitySlime)p_77041_1_, p_77041_2_);
     }
 
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3)
+    protected int shouldRenderPass(EntityLivingBase p_77032_1_, int p_77032_2_, float p_77032_3_)
     {
-        return this.shouldRenderPass((EntitySlime)par1EntityLivingBase, par2, par3);
+        return this.shouldRenderPass((EntitySlime)p_77032_1_, p_77032_2_, p_77032_3_);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntitySlime)par1Entity);
+        return this.getEntityTexture((EntitySlime)p_110775_1_);
     }
 }

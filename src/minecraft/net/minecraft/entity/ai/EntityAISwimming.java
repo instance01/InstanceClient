@@ -7,11 +7,11 @@ public class EntityAISwimming extends EntityAIBase
     private EntityLiving theEntity;
     private static final String __OBFID = "CL_00001584";
 
-    public EntityAISwimming(EntityLiving par1EntityLiving)
+    public EntityAISwimming(EntityLiving p_i1624_1_)
     {
-        this.theEntity = par1EntityLiving;
+        this.theEntity = p_i1624_1_;
         this.setMutexBits(4);
-        par1EntityLiving.getNavigator().setCanSwim(true);
+        p_i1624_1_.getNavigator().setCanSwim(true);
     }
 
     /**

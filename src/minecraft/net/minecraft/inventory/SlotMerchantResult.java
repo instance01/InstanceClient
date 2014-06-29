@@ -18,18 +18,18 @@ public class SlotMerchantResult extends Slot
     private final IMerchant theMerchant;
     private static final String __OBFID = "CL_00001758";
 
-    public SlotMerchantResult(EntityPlayer par1EntityPlayer, IMerchant par2IMerchant, InventoryMerchant par3InventoryMerchant, int par4, int par5, int par6)
+    public SlotMerchantResult(EntityPlayer p_i1822_1_, IMerchant p_i1822_2_, InventoryMerchant p_i1822_3_, int p_i1822_4_, int p_i1822_5_, int p_i1822_6_)
     {
-        super(par3InventoryMerchant, par4, par5, par6);
-        this.thePlayer = par1EntityPlayer;
-        this.theMerchant = par2IMerchant;
-        this.theMerchantInventory = par3InventoryMerchant;
+        super(p_i1822_3_, p_i1822_4_, p_i1822_5_, p_i1822_6_);
+        this.thePlayer = p_i1822_1_;
+        this.theMerchant = p_i1822_2_;
+        this.theMerchantInventory = p_i1822_3_;
     }
 
     /**
      * Check if the stack is a valid item for this slot. Always true beside for the armor slots.
      */
-    public boolean isItemValid(ItemStack par1ItemStack)
+    public boolean isItemValid(ItemStack p_75214_1_)
     {
         return false;
     }
@@ -38,38 +38,38 @@ public class SlotMerchantResult extends Slot
      * Decrease the size of the stack in slot (first int arg) by the amount of the second int arg. Returns the new
      * stack.
      */
-    public ItemStack decrStackSize(int par1)
+    public ItemStack decrStackSize(int p_75209_1_)
     {
         if (this.getHasStack())
         {
-            this.field_75231_g += Math.min(par1, this.getStack().stackSize);
+            this.field_75231_g += Math.min(p_75209_1_, this.getStack().stackSize);
         }
 
-        return super.decrStackSize(par1);
+        return super.decrStackSize(p_75209_1_);
     }
 
     /**
      * the itemStack passed in is the output - ie, iron ingots, and pickaxes, not ore and wood. Typically increases an
      * internal count then calls onCrafting(item).
      */
-    protected void onCrafting(ItemStack par1ItemStack, int par2)
+    protected void onCrafting(ItemStack p_75210_1_, int p_75210_2_)
     {
-        this.field_75231_g += par2;
-        this.onCrafting(par1ItemStack);
+        this.field_75231_g += p_75210_2_;
+        this.onCrafting(p_75210_1_);
     }
 
     /**
      * the itemStack passed in is the output - ie, iron ingots, and pickaxes, not ore and wood.
      */
-    protected void onCrafting(ItemStack par1ItemStack)
+    protected void onCrafting(ItemStack p_75208_1_)
     {
-        par1ItemStack.onCrafting(this.thePlayer.worldObj, this.thePlayer, this.field_75231_g);
+        p_75208_1_.onCrafting(this.thePlayer.worldObj, this.thePlayer, this.field_75231_g);
         this.field_75231_g = 0;
     }
 
-    public void onPickupFromSlot(EntityPlayer par1EntityPlayer, ItemStack par2ItemStack)
+    public void onPickupFromSlot(EntityPlayer p_82870_1_, ItemStack p_82870_2_)
     {
-        this.onCrafting(par2ItemStack);
+        this.onCrafting(p_82870_2_);
         MerchantRecipe var3 = this.theMerchantInventory.getCurrentRecipe();
 
         if (var3 != null)
@@ -97,23 +97,23 @@ public class SlotMerchantResult extends Slot
         }
     }
 
-    private boolean func_75230_a(MerchantRecipe par1MerchantRecipe, ItemStack par2ItemStack, ItemStack par3ItemStack)
+    private boolean func_75230_a(MerchantRecipe p_75230_1_, ItemStack p_75230_2_, ItemStack p_75230_3_)
     {
-        ItemStack var4 = par1MerchantRecipe.getItemToBuy();
-        ItemStack var5 = par1MerchantRecipe.getSecondItemToBuy();
+        ItemStack var4 = p_75230_1_.getItemToBuy();
+        ItemStack var5 = p_75230_1_.getSecondItemToBuy();
 
-        if (par2ItemStack != null && par2ItemStack.getItem() == var4.getItem())
+        if (p_75230_2_ != null && p_75230_2_.getItem() == var4.getItem())
         {
-            if (var5 != null && par3ItemStack != null && var5.getItem() == par3ItemStack.getItem())
+            if (var5 != null && p_75230_3_ != null && var5.getItem() == p_75230_3_.getItem())
             {
-                par2ItemStack.stackSize -= var4.stackSize;
-                par3ItemStack.stackSize -= var5.stackSize;
+                p_75230_2_.stackSize -= var4.stackSize;
+                p_75230_3_.stackSize -= var5.stackSize;
                 return true;
             }
 
-            if (var5 == null && par3ItemStack == null)
+            if (var5 == null && p_75230_3_ == null)
             {
-                par2ItemStack.stackSize -= var4.stackSize;
+                p_75230_2_.stackSize -= var4.stackSize;
                 return true;
             }
         }

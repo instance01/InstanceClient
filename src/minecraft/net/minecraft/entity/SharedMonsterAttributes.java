@@ -26,10 +26,10 @@ public class SharedMonsterAttributes
     /**
      * Creates an NBTTagList from a BaseAttributeMap, including all its AttributeInstances
      */
-    public static NBTTagList writeBaseAttributeMapToNBT(BaseAttributeMap par0BaseAttributeMap)
+    public static NBTTagList writeBaseAttributeMapToNBT(BaseAttributeMap p_111257_0_)
     {
         NBTTagList var1 = new NBTTagList();
-        Iterator var2 = par0BaseAttributeMap.getAllAttributes().iterator();
+        Iterator var2 = p_111257_0_.getAllAttributes().iterator();
 
         while (var2.hasNext())
         {
@@ -43,13 +43,13 @@ public class SharedMonsterAttributes
     /**
      * Creates an NBTTagCompound from an AttributeInstance, including its AttributeModifiers
      */
-    private static NBTTagCompound writeAttributeInstanceToNBT(IAttributeInstance par0AttributeInstance)
+    private static NBTTagCompound writeAttributeInstanceToNBT(IAttributeInstance p_111261_0_)
     {
         NBTTagCompound var1 = new NBTTagCompound();
-        IAttribute var2 = par0AttributeInstance.getAttribute();
+        IAttribute var2 = p_111261_0_.getAttribute();
         var1.setString("Name", var2.getAttributeUnlocalizedName());
-        var1.setDouble("Base", par0AttributeInstance.getBaseValue());
-        Collection var3 = par0AttributeInstance.func_111122_c();
+        var1.setDouble("Base", p_111261_0_.getBaseValue());
+        Collection var3 = p_111261_0_.func_111122_c();
 
         if (var3 != null && !var3.isEmpty())
         {
@@ -75,14 +75,14 @@ public class SharedMonsterAttributes
     /**
      * Creates an NBTTagCompound from an AttributeModifier
      */
-    private static NBTTagCompound writeAttributeModifierToNBT(AttributeModifier par0AttributeModifier)
+    private static NBTTagCompound writeAttributeModifierToNBT(AttributeModifier p_111262_0_)
     {
         NBTTagCompound var1 = new NBTTagCompound();
-        var1.setString("Name", par0AttributeModifier.getName());
-        var1.setDouble("Amount", par0AttributeModifier.getAmount());
-        var1.setInteger("Operation", par0AttributeModifier.getOperation());
-        var1.setLong("UUIDMost", par0AttributeModifier.getID().getMostSignificantBits());
-        var1.setLong("UUIDLeast", par0AttributeModifier.getID().getLeastSignificantBits());
+        var1.setString("Name", p_111262_0_.getName());
+        var1.setDouble("Amount", p_111262_0_.getAmount());
+        var1.setInteger("Operation", p_111262_0_.getOperation());
+        var1.setLong("UUIDMost", p_111262_0_.getID().getMostSignificantBits());
+        var1.setLong("UUIDLeast", p_111262_0_.getID().getLeastSignificantBits());
         return var1;
     }
 
@@ -104,25 +104,25 @@ public class SharedMonsterAttributes
         }
     }
 
-    private static void applyModifiersToAttributeInstance(IAttributeInstance par0AttributeInstance, NBTTagCompound par1NBTTagCompound)
+    private static void applyModifiersToAttributeInstance(IAttributeInstance p_111258_0_, NBTTagCompound p_111258_1_)
     {
-        par0AttributeInstance.setBaseValue(par1NBTTagCompound.getDouble("Base"));
+        p_111258_0_.setBaseValue(p_111258_1_.getDouble("Base"));
 
-        if (par1NBTTagCompound.func_150297_b("Modifiers", 9))
+        if (p_111258_1_.func_150297_b("Modifiers", 9))
         {
-            NBTTagList var2 = par1NBTTagCompound.getTagList("Modifiers", 10);
+            NBTTagList var2 = p_111258_1_.getTagList("Modifiers", 10);
 
             for (int var3 = 0; var3 < var2.tagCount(); ++var3)
             {
                 AttributeModifier var4 = readAttributeModifierFromNBT(var2.getCompoundTagAt(var3));
-                AttributeModifier var5 = par0AttributeInstance.getModifier(var4.getID());
+                AttributeModifier var5 = p_111258_0_.getModifier(var4.getID());
 
                 if (var5 != null)
                 {
-                    par0AttributeInstance.removeModifier(var5);
+                    p_111258_0_.removeModifier(var5);
                 }
 
-                par0AttributeInstance.applyModifier(var4);
+                p_111258_0_.applyModifier(var4);
             }
         }
     }
@@ -130,9 +130,9 @@ public class SharedMonsterAttributes
     /**
      * Creates an AttributeModifier from an NBTTagCompound
      */
-    public static AttributeModifier readAttributeModifierFromNBT(NBTTagCompound par0NBTTagCompound)
+    public static AttributeModifier readAttributeModifierFromNBT(NBTTagCompound p_111259_0_)
     {
-        UUID var1 = new UUID(par0NBTTagCompound.getLong("UUIDMost"), par0NBTTagCompound.getLong("UUIDLeast"));
-        return new AttributeModifier(var1, par0NBTTagCompound.getString("Name"), par0NBTTagCompound.getDouble("Amount"), par0NBTTagCompound.getInteger("Operation"));
+        UUID var1 = new UUID(p_111259_0_.getLong("UUIDMost"), p_111259_0_.getLong("UUIDLeast"));
+        return new AttributeModifier(var1, p_111259_0_.getString("Name"), p_111259_0_.getDouble("Amount"), p_111259_0_.getInteger("Operation"));
     }
 }

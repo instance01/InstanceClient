@@ -15,17 +15,17 @@ public class RenderGiantZombie extends RenderLiving
     private float scale;
     private static final String __OBFID = "CL_00000998";
 
-    public RenderGiantZombie(ModelBase par1ModelBase, float par2, float par3)
+    public RenderGiantZombie(ModelBase p_i1255_1_, float p_i1255_2_, float p_i1255_3_)
     {
-        super(par1ModelBase, par2 * par3);
-        this.scale = par3;
+        super(p_i1255_1_, p_i1255_2_ * p_i1255_3_);
+        this.scale = p_i1255_3_;
     }
 
     /**
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityGiantZombie par1EntityGiantZombie, float par2)
+    protected void preRenderCallback(EntityGiantZombie p_77041_1_, float p_77041_2_)
     {
         GL11.glScalef(this.scale, this.scale, this.scale);
     }
@@ -33,7 +33,7 @@ public class RenderGiantZombie extends RenderLiving
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntityGiantZombie par1EntityGiantZombie)
+    protected ResourceLocation getEntityTexture(EntityGiantZombie p_110775_1_)
     {
         return zombieTextures;
     }
@@ -42,16 +42,16 @@ public class RenderGiantZombie extends RenderLiving
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+    protected void preRenderCallback(EntityLivingBase p_77041_1_, float p_77041_2_)
     {
-        this.preRenderCallback((EntityGiantZombie)par1EntityLivingBase, par2);
+        this.preRenderCallback((EntityGiantZombie)p_77041_1_, p_77041_2_);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntityGiantZombie)par1Entity);
+        return this.getEntityTexture((EntityGiantZombie)p_110775_1_);
     }
 }

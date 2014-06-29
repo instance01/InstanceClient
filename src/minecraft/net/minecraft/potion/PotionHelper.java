@@ -34,46 +34,46 @@ public class PotionHelper
     /**
      * Is the bit given set to 1?
      */
-    public static boolean checkFlag(int par0, int par1)
+    public static boolean checkFlag(int p_77914_0_, int p_77914_1_)
     {
-        return (par0 & 1 << par1) != 0;
+        return (p_77914_0_ & 1 << p_77914_1_) != 0;
     }
 
     /**
      * Returns 1 if the flag is set, 0 if it is not set.
      */
-    private static int isFlagSet(int par0, int par1)
+    private static int isFlagSet(int p_77910_0_, int p_77910_1_)
     {
-        return checkFlag(par0, par1) ? 1 : 0;
+        return checkFlag(p_77910_0_, p_77910_1_) ? 1 : 0;
     }
 
     /**
      * Returns 0 if the flag is set, 1 if it is not set.
      */
-    private static int isFlagUnset(int par0, int par1)
+    private static int isFlagUnset(int p_77916_0_, int p_77916_1_)
     {
-        return checkFlag(par0, par1) ? 0 : 1;
+        return checkFlag(p_77916_0_, p_77916_1_) ? 0 : 1;
     }
 
-    public static int func_77909_a(int par0)
+    public static int func_77909_a(int p_77909_0_)
     {
-        return func_77908_a(par0, 5, 4, 3, 2, 1);
+        return func_77908_a(p_77909_0_, 5, 4, 3, 2, 1);
     }
 
     /**
      * Given a {@link Collection}<{@link PotionEffect}> will return an Integer color.
      */
-    public static int calcPotionLiquidColor(Collection par0Collection)
+    public static int calcPotionLiquidColor(Collection p_77911_0_)
     {
         int var1 = 3694022;
 
-        if (par0Collection != null && !par0Collection.isEmpty())
+        if (p_77911_0_ != null && !p_77911_0_.isEmpty())
         {
             float var2 = 0.0F;
             float var3 = 0.0F;
             float var4 = 0.0F;
             float var5 = 0.0F;
-            Iterator var6 = par0Collection.iterator();
+            Iterator var6 = p_77911_0_.iterator();
 
             while (var6.hasNext())
             {
@@ -100,9 +100,9 @@ public class PotionHelper
         }
     }
 
-    public static boolean func_82817_b(Collection par0Collection)
+    public static boolean func_82817_b(Collection p_82817_0_)
     {
-        Iterator var1 = par0Collection.iterator();
+        Iterator var1 = p_82817_0_.iterator();
         PotionEffect var2;
 
         do
@@ -119,67 +119,67 @@ public class PotionHelper
         return false;
     }
 
-    public static int func_77915_a(int par0, boolean par1)
+    public static int func_77915_a(int p_77915_0_, boolean p_77915_1_)
     {
-        if (!par1)
+        if (!p_77915_1_)
         {
-            if (field_77925_n.containsKey(Integer.valueOf(par0)))
+            if (field_77925_n.containsKey(Integer.valueOf(p_77915_0_)))
             {
-                return ((Integer)field_77925_n.get(Integer.valueOf(par0))).intValue();
+                return ((Integer)field_77925_n.get(Integer.valueOf(p_77915_0_))).intValue();
             }
             else
             {
-                int var2 = calcPotionLiquidColor(getPotionEffects(par0, false));
-                field_77925_n.put(Integer.valueOf(par0), Integer.valueOf(var2));
+                int var2 = calcPotionLiquidColor(getPotionEffects(p_77915_0_, false));
+                field_77925_n.put(Integer.valueOf(p_77915_0_), Integer.valueOf(var2));
                 return var2;
             }
         }
         else
         {
-            return calcPotionLiquidColor(getPotionEffects(par0, par1));
+            return calcPotionLiquidColor(getPotionEffects(p_77915_0_, p_77915_1_));
         }
     }
 
-    public static String func_77905_c(int par0)
+    public static String func_77905_c(int p_77905_0_)
     {
-        int var1 = func_77909_a(par0);
+        int var1 = func_77909_a(p_77905_0_);
         return potionPrefixes[var1];
     }
 
-    private static int func_77904_a(boolean par0, boolean par1, boolean par2, int par3, int par4, int par5, int par6)
+    private static int func_77904_a(boolean p_77904_0_, boolean p_77904_1_, boolean p_77904_2_, int p_77904_3_, int p_77904_4_, int p_77904_5_, int p_77904_6_)
     {
         int var7 = 0;
 
-        if (par0)
+        if (p_77904_0_)
         {
-            var7 = isFlagUnset(par6, par4);
+            var7 = isFlagUnset(p_77904_6_, p_77904_4_);
         }
-        else if (par3 != -1)
+        else if (p_77904_3_ != -1)
         {
-            if (par3 == 0 && countSetFlags(par6) == par4)
+            if (p_77904_3_ == 0 && countSetFlags(p_77904_6_) == p_77904_4_)
             {
                 var7 = 1;
             }
-            else if (par3 == 1 && countSetFlags(par6) > par4)
+            else if (p_77904_3_ == 1 && countSetFlags(p_77904_6_) > p_77904_4_)
             {
                 var7 = 1;
             }
-            else if (par3 == 2 && countSetFlags(par6) < par4)
+            else if (p_77904_3_ == 2 && countSetFlags(p_77904_6_) < p_77904_4_)
             {
                 var7 = 1;
             }
         }
         else
         {
-            var7 = isFlagSet(par6, par4);
+            var7 = isFlagSet(p_77904_6_, p_77904_4_);
         }
 
-        if (par1)
+        if (p_77904_1_)
         {
-            var7 *= par5;
+            var7 *= p_77904_5_;
         }
 
-        if (par2)
+        if (p_77904_2_)
         {
             var7 *= -1;
         }
@@ -190,29 +190,29 @@ public class PotionHelper
     /**
      * Count the number of bits in an integer set to ON.
      */
-    private static int countSetFlags(int par0)
+    private static int countSetFlags(int p_77907_0_)
     {
         int var1;
 
-        for (var1 = 0; par0 > 0; ++var1)
+        for (var1 = 0; p_77907_0_ > 0; ++var1)
         {
-            par0 &= par0 - 1;
+            p_77907_0_ &= p_77907_0_ - 1;
         }
 
         return var1;
     }
 
-    private static int parsePotionEffects(String par0Str, int par1, int par2, int par3)
+    private static int parsePotionEffects(String p_77912_0_, int p_77912_1_, int p_77912_2_, int p_77912_3_)
     {
-        if (par1 < par0Str.length() && par2 >= 0 && par1 < par2)
+        if (p_77912_1_ < p_77912_0_.length() && p_77912_2_ >= 0 && p_77912_1_ < p_77912_2_)
         {
-            int var4 = par0Str.indexOf(124, par1);
+            int var4 = p_77912_0_.indexOf(124, p_77912_1_);
             int var5;
             int var17;
 
-            if (var4 >= 0 && var4 < par2)
+            if (var4 >= 0 && var4 < p_77912_2_)
             {
-                var5 = parsePotionEffects(par0Str, par1, var4 - 1, par3);
+                var5 = parsePotionEffects(p_77912_0_, p_77912_1_, var4 - 1, p_77912_3_);
 
                 if (var5 > 0)
                 {
@@ -220,17 +220,17 @@ public class PotionHelper
                 }
                 else
                 {
-                    var17 = parsePotionEffects(par0Str, var4 + 1, par2, par3);
+                    var17 = parsePotionEffects(p_77912_0_, var4 + 1, p_77912_2_, p_77912_3_);
                     return var17 > 0 ? var17 : 0;
                 }
             }
             else
             {
-                var5 = par0Str.indexOf(38, par1);
+                var5 = p_77912_0_.indexOf(38, p_77912_1_);
 
-                if (var5 >= 0 && var5 < par2)
+                if (var5 >= 0 && var5 < p_77912_2_)
                 {
-                    var17 = parsePotionEffects(par0Str, par1, var5 - 1, par3);
+                    var17 = parsePotionEffects(p_77912_0_, p_77912_1_, var5 - 1, p_77912_3_);
 
                     if (var17 <= 0)
                     {
@@ -238,7 +238,7 @@ public class PotionHelper
                     }
                     else
                     {
-                        int var18 = parsePotionEffects(par0Str, var5 + 1, par2, par3);
+                        int var18 = parsePotionEffects(p_77912_0_, var5 + 1, p_77912_2_, p_77912_3_);
                         return var18 <= 0 ? 0 : (var17 > var18 ? var17 : var18);
                     }
                 }
@@ -254,9 +254,9 @@ public class PotionHelper
                     int var13 = 0;
                     int var14 = 0;
 
-                    for (int var15 = par1; var15 < par2; ++var15)
+                    for (int var15 = p_77912_1_; var15 < p_77912_2_; ++var15)
                     {
-                        char var16 = par0Str.charAt(var15);
+                        char var16 = p_77912_0_.charAt(var15);
 
                         if (var16 >= 48 && var16 <= 57)
                         {
@@ -280,7 +280,7 @@ public class PotionHelper
                         {
                             if (var8)
                             {
-                                var14 += func_77904_a(var9, var7, var10, var11, var12, var13, par3);
+                                var14 += func_77904_a(var9, var7, var10, var11, var12, var13, p_77912_3_);
                                 var9 = false;
                                 var10 = false;
                                 var6 = false;
@@ -297,7 +297,7 @@ public class PotionHelper
                         {
                             if (var8)
                             {
-                                var14 += func_77904_a(var9, var7, var10, var11, var12, var13, par3);
+                                var14 += func_77904_a(var9, var7, var10, var11, var12, var13, p_77912_3_);
                                 var9 = false;
                                 var10 = false;
                                 var6 = false;
@@ -314,7 +314,7 @@ public class PotionHelper
                         {
                             if (var16 == 43 && var8)
                             {
-                                var14 += func_77904_a(var9, var7, var10, var11, var12, var13, par3);
+                                var14 += func_77904_a(var9, var7, var10, var11, var12, var13, p_77912_3_);
                                 var9 = false;
                                 var10 = false;
                                 var6 = false;
@@ -329,7 +329,7 @@ public class PotionHelper
                         {
                             if (var8)
                             {
-                                var14 += func_77904_a(var9, var7, var10, var11, var12, var13, par3);
+                                var14 += func_77904_a(var9, var7, var10, var11, var12, var13, p_77912_3_);
                                 var9 = false;
                                 var10 = false;
                                 var6 = false;
@@ -357,7 +357,7 @@ public class PotionHelper
 
                     if (var8)
                     {
-                        var14 += func_77904_a(var9, var7, var10, var11, var12, var13, par3);
+                        var14 += func_77904_a(var9, var7, var10, var11, var12, var13, p_77912_3_);
                     }
 
                     return var14;
@@ -373,7 +373,7 @@ public class PotionHelper
     /**
      * Returns a list of effects for the specified potion damage value.
      */
-    public static List getPotionEffects(int par0, boolean par1)
+    public static List getPotionEffects(int p_77917_0_, boolean p_77917_1_)
     {
         ArrayList var2 = null;
         Potion[] var3 = Potion.potionTypes;
@@ -383,13 +383,13 @@ public class PotionHelper
         {
             Potion var6 = var3[var5];
 
-            if (var6 != null && (!var6.isUsable() || par1))
+            if (var6 != null && (!var6.isUsable() || p_77917_1_))
             {
                 String var7 = (String)potionRequirements.get(Integer.valueOf(var6.getId()));
 
                 if (var7 != null)
                 {
-                    int var8 = parsePotionEffects(var7, 0, var7.length(), par0);
+                    int var8 = parsePotionEffects(var7, 0, var7.length(), p_77917_0_);
 
                     if (var8 > 0)
                     {
@@ -398,7 +398,7 @@ public class PotionHelper
 
                         if (var10 != null)
                         {
-                            var9 = parsePotionEffects(var10, 0, var10.length(), par0);
+                            var9 = parsePotionEffects(var10, 0, var10.length(), p_77917_0_);
 
                             if (var9 < 0)
                             {
@@ -416,7 +416,7 @@ public class PotionHelper
                             var8 >>= var9;
                             var8 = (int)Math.round((double)var8 * var6.getEffectiveness());
 
-                            if ((par0 & 16384) != 0)
+                            if ((p_77917_0_ & 16384) != 0)
                             {
                                 var8 = (int)Math.round((double)var8 * 0.75D + 0.5D);
                             }
@@ -429,7 +429,7 @@ public class PotionHelper
 
                         PotionEffect var11 = new PotionEffect(var6.getId(), var8, var9);
 
-                        if ((par0 & 16384) != 0)
+                        if ((p_77917_0_ & 16384) != 0)
                         {
                             var11.setSplashPotion(true);
                         }
@@ -448,46 +448,46 @@ public class PotionHelper
      * will be removed, whether the bit will be toggled (NOT), or whether the data field will be set to 0 if the bit is
      * not present.
      */
-    private static int brewBitOperations(int par0, int par1, boolean par2, boolean par3, boolean par4)
+    private static int brewBitOperations(int p_77906_0_, int p_77906_1_, boolean p_77906_2_, boolean p_77906_3_, boolean p_77906_4_)
     {
-        if (par4)
+        if (p_77906_4_)
         {
-            if (!checkFlag(par0, par1))
+            if (!checkFlag(p_77906_0_, p_77906_1_))
             {
                 return 0;
             }
         }
-        else if (par2)
+        else if (p_77906_2_)
         {
-            par0 &= ~(1 << par1);
+            p_77906_0_ &= ~(1 << p_77906_1_);
         }
-        else if (par3)
+        else if (p_77906_3_)
         {
-            if ((par0 & 1 << par1) == 0)
+            if ((p_77906_0_ & 1 << p_77906_1_) == 0)
             {
-                par0 |= 1 << par1;
+                p_77906_0_ |= 1 << p_77906_1_;
             }
             else
             {
-                par0 &= ~(1 << par1);
+                p_77906_0_ &= ~(1 << p_77906_1_);
             }
         }
         else
         {
-            par0 |= 1 << par1;
+            p_77906_0_ |= 1 << p_77906_1_;
         }
 
-        return par0;
+        return p_77906_0_;
     }
 
     /**
      * Generate a data value for a potion, given its previous data value and the encoded string of new effects it will
      * receive
      */
-    public static int applyIngredient(int par0, String par1Str)
+    public static int applyIngredient(int p_77913_0_, String p_77913_1_)
     {
         byte var2 = 0;
-        int var3 = par1Str.length();
+        int var3 = p_77913_1_.length();
         boolean var4 = false;
         boolean var5 = false;
         boolean var6 = false;
@@ -496,7 +496,7 @@ public class PotionHelper
 
         for (int var9 = var2; var9 < var3; ++var9)
         {
-            char var10 = par1Str.charAt(var9);
+            char var10 = p_77913_1_.charAt(var9);
 
             if (var10 >= 48 && var10 <= 57)
             {
@@ -508,7 +508,7 @@ public class PotionHelper
             {
                 if (var4)
                 {
-                    par0 = brewBitOperations(par0, var8, var6, var5, var7);
+                    p_77913_0_ = brewBitOperations(p_77913_0_, var8, var6, var5, var7);
                     var7 = false;
                     var5 = false;
                     var6 = false;
@@ -522,7 +522,7 @@ public class PotionHelper
             {
                 if (var4)
                 {
-                    par0 = brewBitOperations(par0, var8, var6, var5, var7);
+                    p_77913_0_ = brewBitOperations(p_77913_0_, var8, var6, var5, var7);
                     var7 = false;
                     var5 = false;
                     var6 = false;
@@ -536,7 +536,7 @@ public class PotionHelper
             {
                 if (var4)
                 {
-                    par0 = brewBitOperations(par0, var8, var6, var5, var7);
+                    p_77913_0_ = brewBitOperations(p_77913_0_, var8, var6, var5, var7);
                     var7 = false;
                     var5 = false;
                     var6 = false;
@@ -548,7 +548,7 @@ public class PotionHelper
             {
                 if (var4)
                 {
-                    par0 = brewBitOperations(par0, var8, var6, var5, var7);
+                    p_77913_0_ = brewBitOperations(p_77913_0_, var8, var6, var5, var7);
                     var7 = false;
                     var5 = false;
                     var6 = false;
@@ -562,15 +562,15 @@ public class PotionHelper
 
         if (var4)
         {
-            par0 = brewBitOperations(par0, var8, var6, var5, var7);
+            p_77913_0_ = brewBitOperations(p_77913_0_, var8, var6, var5, var7);
         }
 
-        return par0 & 32767;
+        return p_77913_0_ & 32767;
     }
 
-    public static int func_77908_a(int par0, int par1, int par2, int par3, int par4, int par5)
+    public static int func_77908_a(int p_77908_0_, int p_77908_1_, int p_77908_2_, int p_77908_3_, int p_77908_4_, int p_77908_5_)
     {
-        return (checkFlag(par0, par1) ? 16 : 0) | (checkFlag(par0, par2) ? 8 : 0) | (checkFlag(par0, par3) ? 4 : 0) | (checkFlag(par0, par4) ? 2 : 0) | (checkFlag(par0, par5) ? 1 : 0);
+        return (checkFlag(p_77908_0_, p_77908_1_) ? 16 : 0) | (checkFlag(p_77908_0_, p_77908_2_) ? 8 : 0) | (checkFlag(p_77908_0_, p_77908_3_) ? 4 : 0) | (checkFlag(p_77908_0_, p_77908_4_) ? 2 : 0) | (checkFlag(p_77908_0_, p_77908_5_) ? 1 : 0);
     }
 
     static

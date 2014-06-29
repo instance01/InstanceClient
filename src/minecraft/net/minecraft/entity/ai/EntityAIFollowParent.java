@@ -13,10 +13,10 @@ public class EntityAIFollowParent extends EntityAIBase
     private int field_75345_d;
     private static final String __OBFID = "CL_00001586";
 
-    public EntityAIFollowParent(EntityAnimal par1EntityAnimal, double par2)
+    public EntityAIFollowParent(EntityAnimal p_i1626_1_, double p_i1626_2_)
     {
-        this.childAnimal = par1EntityAnimal;
-        this.field_75347_c = par2;
+        this.childAnimal = p_i1626_1_;
+        this.field_75347_c = p_i1626_2_;
     }
 
     /**

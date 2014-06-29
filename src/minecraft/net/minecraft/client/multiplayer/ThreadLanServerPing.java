@@ -20,11 +20,11 @@ public class ThreadLanServerPing extends Thread
     private final String address;
     private static final String __OBFID = "CL_00001137";
 
-    public ThreadLanServerPing(String par1Str, String par2Str) throws IOException
+    public ThreadLanServerPing(String p_i1321_1_, String p_i1321_2_) throws IOException
     {
         super("LanServerPinger #" + field_148658_a.incrementAndGet());
-        this.motd = par1Str;
-        this.address = par2Str;
+        this.motd = p_i1321_1_;
+        this.address = p_i1321_2_;
         this.setDaemon(true);
         this.socket = new DatagramSocket();
     }
@@ -65,14 +65,14 @@ public class ThreadLanServerPing extends Thread
         this.isStopping = false;
     }
 
-    public static String getPingResponse(String par0Str, String par1Str)
+    public static String getPingResponse(String p_77525_0_, String p_77525_1_)
     {
-        return "[MOTD]" + par0Str + "[/MOTD][AD]" + par1Str + "[/AD]";
+        return "[MOTD]" + p_77525_0_ + "[/MOTD][AD]" + p_77525_1_ + "[/AD]";
     }
 
-    public static String getMotdFromPingResponse(String par0Str)
+    public static String getMotdFromPingResponse(String p_77524_0_)
     {
-        int var1 = par0Str.indexOf("[MOTD]");
+        int var1 = p_77524_0_.indexOf("[MOTD]");
 
         if (var1 < 0)
         {
@@ -80,14 +80,14 @@ public class ThreadLanServerPing extends Thread
         }
         else
         {
-            int var2 = par0Str.indexOf("[/MOTD]", var1 + "[MOTD]".length());
-            return var2 < var1 ? "missing no" : par0Str.substring(var1 + "[MOTD]".length(), var2);
+            int var2 = p_77524_0_.indexOf("[/MOTD]", var1 + "[MOTD]".length());
+            return var2 < var1 ? "missing no" : p_77524_0_.substring(var1 + "[MOTD]".length(), var2);
         }
     }
 
-    public static String getAdFromPingResponse(String par0Str)
+    public static String getAdFromPingResponse(String p_77523_0_)
     {
-        int var1 = par0Str.indexOf("[/MOTD]");
+        int var1 = p_77523_0_.indexOf("[/MOTD]");
 
         if (var1 < 0)
         {
@@ -95,7 +95,7 @@ public class ThreadLanServerPing extends Thread
         }
         else
         {
-            int var2 = par0Str.indexOf("[/MOTD]", var1 + "[/MOTD]".length());
+            int var2 = p_77523_0_.indexOf("[/MOTD]", var1 + "[/MOTD]".length());
 
             if (var2 >= 0)
             {
@@ -103,7 +103,7 @@ public class ThreadLanServerPing extends Thread
             }
             else
             {
-                int var3 = par0Str.indexOf("[AD]", var1 + "[/MOTD]".length());
+                int var3 = p_77523_0_.indexOf("[AD]", var1 + "[/MOTD]".length());
 
                 if (var3 < 0)
                 {
@@ -111,8 +111,8 @@ public class ThreadLanServerPing extends Thread
                 }
                 else
                 {
-                    int var4 = par0Str.indexOf("[/AD]", var3 + "[AD]".length());
-                    return var4 < var3 ? null : par0Str.substring(var3 + "[AD]".length(), var4);
+                    int var4 = p_77523_0_.indexOf("[/AD]", var3 + "[AD]".length());
+                    return var4 < var3 ? null : p_77523_0_.substring(var3 + "[AD]".length(), var4);
                 }
             }
         }

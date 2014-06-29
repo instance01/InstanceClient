@@ -320,7 +320,7 @@ public abstract class BlockLeaves extends BlockLeavesBase
     /**
      * Gets the block's texture. Args: side, meta
      */
-    public abstract IIcon getIcon(int var1, int var2);
+    public abstract IIcon getIcon(int p_149691_1_, int p_149691_2_);
 
     public void func_150122_b(boolean p_150122_1_)
     {

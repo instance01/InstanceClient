@@ -14,9 +14,9 @@ public abstract class InventoryEffectRenderer extends GuiContainer
     private boolean field_147045_u;
     private static final String __OBFID = "CL_00000755";
 
-    public InventoryEffectRenderer(Container par1Container)
+    public InventoryEffectRenderer(Container p_i1089_1_)
     {
-        super(par1Container);
+        super(p_i1089_1_);
     }
 
     /**
@@ -36,9 +36,9 @@ public abstract class InventoryEffectRenderer extends GuiContainer
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
 
         if (this.field_147045_u)
         {
@@ -82,15 +82,15 @@ public abstract class InventoryEffectRenderer extends GuiContainer
 
                 if (var7.getAmplifier() == 1)
                 {
-                    var11 = var11 + " II";
+                    var11 = var11 + " " + I18n.format("enchantment.level.2", new Object[0]);
                 }
                 else if (var7.getAmplifier() == 2)
                 {
-                    var11 = var11 + " III";
+                    var11 = var11 + " " + I18n.format("enchantment.level.3", new Object[0]);
                 }
                 else if (var7.getAmplifier() == 3)
                 {
-                    var11 = var11 + " IV";
+                    var11 = var11 + " " + I18n.format("enchantment.level.4", new Object[0]);
                 }
 
                 this.fontRendererObj.drawStringWithShadow(var11, var1 + 10 + 18, var2 + 6, 16777215);

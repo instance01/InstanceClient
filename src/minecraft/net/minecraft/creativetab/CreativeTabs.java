@@ -15,7 +15,7 @@ public abstract class CreativeTabs
     public static final CreativeTabs[] creativeTabArray = new CreativeTabs[12];
     public static final CreativeTabs tabBlock = new CreativeTabs(0, "buildingBlocks")
     {
-        private static final String __OBFID = "CL_00000010";
+        private static final String __OBFID = "CL_00000006";
         public Item getTabIconItem()
         {
             return Item.getItemFromBlock(Blocks.brick_block);
@@ -23,7 +23,7 @@ public abstract class CreativeTabs
     };
     public static final CreativeTabs tabDecorations = new CreativeTabs(1, "decorations")
     {
-        private static final String __OBFID = "CL_00000011";
+        private static final String __OBFID = "CL_00000010";
         public Item getTabIconItem()
         {
             return Item.getItemFromBlock(Blocks.double_plant);
@@ -35,7 +35,7 @@ public abstract class CreativeTabs
     };
     public static final CreativeTabs tabRedstone = new CreativeTabs(2, "redstone")
     {
-        private static final String __OBFID = "CL_00000012";
+        private static final String __OBFID = "CL_00000011";
         public Item getTabIconItem()
         {
             return Items.redstone;
@@ -43,7 +43,7 @@ public abstract class CreativeTabs
     };
     public static final CreativeTabs tabTransport = new CreativeTabs(3, "transportation")
     {
-        private static final String __OBFID = "CL_00000014";
+        private static final String __OBFID = "CL_00000012";
         public Item getTabIconItem()
         {
             return Item.getItemFromBlock(Blocks.golden_rail);
@@ -51,7 +51,7 @@ public abstract class CreativeTabs
     };
     public static final CreativeTabs tabMisc = (new CreativeTabs(4, "misc")
     {
-        private static final String __OBFID = "CL_00000015";
+        private static final String __OBFID = "CL_00000014";
         public Item getTabIconItem()
         {
             return Items.lava_bucket;
@@ -59,7 +59,7 @@ public abstract class CreativeTabs
     }).func_111229_a(new EnumEnchantmentType[] {EnumEnchantmentType.all});
     public static final CreativeTabs tabAllSearch = (new CreativeTabs(5, "search")
     {
-        private static final String __OBFID = "CL_00000016";
+        private static final String __OBFID = "CL_00000015";
         public Item getTabIconItem()
         {
             return Items.compass;
@@ -67,7 +67,7 @@ public abstract class CreativeTabs
     }).setBackgroundImageName("item_search.png");
     public static final CreativeTabs tabFood = new CreativeTabs(6, "food")
     {
-        private static final String __OBFID = "CL_00000017";
+        private static final String __OBFID = "CL_00000016";
         public Item getTabIconItem()
         {
             return Items.apple;
@@ -75,7 +75,7 @@ public abstract class CreativeTabs
     };
     public static final CreativeTabs tabTools = (new CreativeTabs(7, "tools")
     {
-        private static final String __OBFID = "CL_00000018";
+        private static final String __OBFID = "CL_00000017";
         public Item getTabIconItem()
         {
             return Items.iron_axe;
@@ -83,7 +83,7 @@ public abstract class CreativeTabs
     }).func_111229_a(new EnumEnchantmentType[] {EnumEnchantmentType.digger, EnumEnchantmentType.fishing_rod, EnumEnchantmentType.breakable});
     public static final CreativeTabs tabCombat = (new CreativeTabs(8, "combat")
     {
-        private static final String __OBFID = "CL_00000007";
+        private static final String __OBFID = "CL_00000018";
         public Item getTabIconItem()
         {
             return Items.golden_sword;
@@ -91,7 +91,7 @@ public abstract class CreativeTabs
     }).func_111229_a(new EnumEnchantmentType[] {EnumEnchantmentType.armor, EnumEnchantmentType.armor_feet, EnumEnchantmentType.armor_head, EnumEnchantmentType.armor_legs, EnumEnchantmentType.armor_torso, EnumEnchantmentType.bow, EnumEnchantmentType.weapon});
     public static final CreativeTabs tabBrewing = new CreativeTabs(9, "brewing")
     {
-        private static final String __OBFID = "CL_00000008";
+        private static final String __OBFID = "CL_00000007";
         public Item getTabIconItem()
         {
             return Items.potionitem;
@@ -99,7 +99,7 @@ public abstract class CreativeTabs
     };
     public static final CreativeTabs tabMaterials = new CreativeTabs(10, "materials")
     {
-        private static final String __OBFID = "CL_00000009";
+        private static final String __OBFID = "CL_00000008";
         public Item getTabIconItem()
         {
             return Items.stick;
@@ -107,7 +107,7 @@ public abstract class CreativeTabs
     };
     public static final CreativeTabs tabInventory = (new CreativeTabs(11, "inventory")
     {
-        private static final String __OBFID = "CL_00000006";
+        private static final String __OBFID = "CL_00000009";
         public Item getTabIconItem()
         {
             return Item.getItemFromBlock(Blocks.chest);
@@ -126,11 +126,11 @@ public abstract class CreativeTabs
     private ItemStack field_151245_t;
     private static final String __OBFID = "CL_00000005";
 
-    public CreativeTabs(int par1, String par2Str)
+    public CreativeTabs(int p_i1853_1_, String p_i1853_2_)
     {
-        this.tabIndex = par1;
-        this.tabLabel = par2Str;
-        creativeTabArray[par1] = this;
+        this.tabIndex = p_i1853_1_;
+        this.tabLabel = p_i1853_2_;
+        creativeTabArray[p_i1853_1_] = this;
     }
 
     public int getTabIndex()
@@ -173,9 +173,9 @@ public abstract class CreativeTabs
         return this.backgroundImageName;
     }
 
-    public CreativeTabs setBackgroundImageName(String par1Str)
+    public CreativeTabs setBackgroundImageName(String p_78025_1_)
     {
-        this.backgroundImageName = par1Str;
+        this.backgroundImageName = p_78025_1_;
         return this;
     }
 
@@ -222,13 +222,13 @@ public abstract class CreativeTabs
         return this.field_111230_s;
     }
 
-    public CreativeTabs func_111229_a(EnumEnchantmentType ... par1ArrayOfEnumEnchantmentType)
+    public CreativeTabs func_111229_a(EnumEnchantmentType ... p_111229_1_)
     {
-        this.field_111230_s = par1ArrayOfEnumEnchantmentType;
+        this.field_111230_s = p_111229_1_;
         return this;
     }
 
-    public boolean func_111226_a(EnumEnchantmentType par1EnumEnchantmentType)
+    public boolean func_111226_a(EnumEnchantmentType p_111226_1_)
     {
         if (this.field_111230_s == null)
         {
@@ -243,7 +243,7 @@ public abstract class CreativeTabs
             {
                 EnumEnchantmentType var5 = var2[var4];
 
-                if (var5 == par1EnumEnchantmentType)
+                if (var5 == p_111226_1_)
                 {
                     return true;
                 }
@@ -256,7 +256,7 @@ public abstract class CreativeTabs
     /**
      * only shows items which have tabToDisplayOn == this
      */
-    public void displayAllReleventItems(List par1List)
+    public void displayAllReleventItems(List p_78018_1_)
     {
         Iterator var2 = Item.itemRegistry.iterator();
 
@@ -266,20 +266,20 @@ public abstract class CreativeTabs
 
             if (var3 != null && var3.getCreativeTab() == this)
             {
-                var3.getSubItems(var3, this, par1List);
+                var3.getSubItems(var3, this, p_78018_1_);
             }
         }
 
         if (this.func_111225_m() != null)
         {
-            this.addEnchantmentBooksToList(par1List, this.func_111225_m());
+            this.addEnchantmentBooksToList(p_78018_1_, this.func_111225_m());
         }
     }
 
     /**
      * Adds the enchantment books from the supplied EnumEnchantmentType to the given list.
      */
-    public void addEnchantmentBooksToList(List par1List, EnumEnchantmentType ... par2ArrayOfEnumEnchantmentType)
+    public void addEnchantmentBooksToList(List p_92116_1_, EnumEnchantmentType ... p_92116_2_)
     {
         Enchantment[] var3 = Enchantment.enchantmentsList;
         int var4 = var3.length;
@@ -292,9 +292,9 @@ public abstract class CreativeTabs
             {
                 boolean var7 = false;
 
-                for (int var8 = 0; var8 < par2ArrayOfEnumEnchantmentType.length && !var7; ++var8)
+                for (int var8 = 0; var8 < p_92116_2_.length && !var7; ++var8)
                 {
-                    if (var6.type == par2ArrayOfEnumEnchantmentType[var8])
+                    if (var6.type == p_92116_2_[var8])
                     {
                         var7 = true;
                     }
@@ -302,7 +302,7 @@ public abstract class CreativeTabs
 
                 if (var7)
                 {
-                    par1List.add(Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(var6, var6.getMaxLevel())));
+                    p_92116_1_.add(Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(var6, var6.getMaxLevel())));
                 }
             }
         }

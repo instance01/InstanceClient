@@ -49,9 +49,9 @@ public abstract class EntityAIBase
      * Sets a bitmask telling which other tasks may not run concurrently. The test is a simple bitwise AND - if it
      * yields zero, the two tasks may run concurrently, if not - they must run exclusively from each other.
      */
-    public void setMutexBits(int par1)
+    public void setMutexBits(int p_75248_1_)
     {
-        this.mutexBits = par1;
+        this.mutexBits = p_75248_1_;
     }
 
     /**

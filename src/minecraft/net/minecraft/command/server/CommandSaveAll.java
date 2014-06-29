@@ -17,15 +17,15 @@ public class CommandSaveAll extends CommandBase
         return "save-all";
     }
 
-    public String getCommandUsage(ICommandSender par1ICommandSender)
+    public String getCommandUsage(ICommandSender p_71518_1_)
     {
         return "commands.save.usage";
     }
 
-    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_)
     {
         MinecraftServer var3 = MinecraftServer.getServer();
-        par1ICommandSender.addChatMessage(new ChatComponentTranslation("commands.save.start", new Object[0]));
+        p_71515_1_.addChatMessage(new ChatComponentTranslation("commands.save.start", new Object[0]));
 
         if (var3.getConfigurationManager() != null)
         {
@@ -50,9 +50,9 @@ public class CommandSaveAll extends CommandBase
                 }
             }
 
-            if (par2ArrayOfStr.length > 0 && "flush".equals(par2ArrayOfStr[0]))
+            if (p_71515_2_.length > 0 && "flush".equals(p_71515_2_[0]))
             {
-                par1ICommandSender.addChatMessage(new ChatComponentTranslation("commands.save.flushStart", new Object[0]));
+                p_71515_1_.addChatMessage(new ChatComponentTranslation("commands.save.flushStart", new Object[0]));
 
                 for (var4 = 0; var4 < var3.worldServers.length; ++var4)
                 {
@@ -66,15 +66,15 @@ public class CommandSaveAll extends CommandBase
                     }
                 }
 
-                par1ICommandSender.addChatMessage(new ChatComponentTranslation("commands.save.flushEnd", new Object[0]));
+                p_71515_1_.addChatMessage(new ChatComponentTranslation("commands.save.flushEnd", new Object[0]));
             }
         }
         catch (MinecraftException var7)
         {
-            notifyAdmins(par1ICommandSender, "commands.save.failed", new Object[] {var7.getMessage()});
+            func_152373_a(p_71515_1_, this, "commands.save.failed", new Object[] {var7.getMessage()});
             return;
         }
 
-        notifyAdmins(par1ICommandSender, "commands.save.success", new Object[0]);
+        func_152373_a(p_71515_1_, this, "commands.save.success", new Object[0]);
     }
 }

@@ -19,7 +19,7 @@ public class RecipesArmor
     /**
      * Adds the armor recipes to the CraftingManager.
      */
-    public void addRecipes(CraftingManager par1CraftingManager)
+    public void addRecipes(CraftingManager p_77609_1_)
     {
         for (int var2 = 0; var2 < this.recipeItems[0].length; ++var2)
         {
@@ -28,7 +28,7 @@ public class RecipesArmor
             for (int var4 = 0; var4 < this.recipeItems.length - 1; ++var4)
             {
                 Item var5 = (Item)this.recipeItems[var4 + 1][var2];
-                par1CraftingManager.addRecipe(new ItemStack(var5), new Object[] {this.recipePatterns[var4], 'X', var3});
+                p_77609_1_.addRecipe(new ItemStack(var5), new Object[] {this.recipePatterns[var4], 'X', var3});
             }
         }
     }

@@ -29,30 +29,30 @@ public class Teleporter
     private final List destinationCoordinateKeys = new ArrayList();
     private static final String __OBFID = "CL_00000153";
 
-    public Teleporter(WorldServer par1WorldServer)
+    public Teleporter(WorldServer p_i1963_1_)
     {
-        this.worldServerInstance = par1WorldServer;
-        this.random = new Random(par1WorldServer.getSeed());
+        this.worldServerInstance = p_i1963_1_;
+        this.random = new Random(p_i1963_1_.getSeed());
     }
 
     /**
      * Place an entity in a nearby portal, creating one if necessary.
      */
-    public void placeInPortal(Entity par1Entity, double par2, double par4, double par6, float par8)
+    public void placeInPortal(Entity p_77185_1_, double p_77185_2_, double p_77185_4_, double p_77185_6_, float p_77185_8_)
     {
         if (this.worldServerInstance.provider.dimensionId != 1)
         {
-            if (!this.placeInExistingPortal(par1Entity, par2, par4, par6, par8))
+            if (!this.placeInExistingPortal(p_77185_1_, p_77185_2_, p_77185_4_, p_77185_6_, p_77185_8_))
             {
-                this.makePortal(par1Entity);
-                this.placeInExistingPortal(par1Entity, par2, par4, par6, par8);
+                this.makePortal(p_77185_1_);
+                this.placeInExistingPortal(p_77185_1_, p_77185_2_, p_77185_4_, p_77185_6_, p_77185_8_);
             }
         }
         else
         {
-            int var9 = MathHelper.floor_double(par1Entity.posX);
-            int var10 = MathHelper.floor_double(par1Entity.posY) - 1;
-            int var11 = MathHelper.floor_double(par1Entity.posZ);
+            int var9 = MathHelper.floor_double(p_77185_1_.posX);
+            int var10 = MathHelper.floor_double(p_77185_1_.posY) - 1;
+            int var11 = MathHelper.floor_double(p_77185_1_.posZ);
             byte var12 = 1;
             byte var13 = 0;
 
@@ -71,23 +71,23 @@ public class Teleporter
                 }
             }
 
-            par1Entity.setLocationAndAngles((double)var9, (double)var10, (double)var11, par1Entity.rotationYaw, 0.0F);
-            par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
+            p_77185_1_.setLocationAndAngles((double)var9, (double)var10, (double)var11, p_77185_1_.rotationYaw, 0.0F);
+            p_77185_1_.motionX = p_77185_1_.motionY = p_77185_1_.motionZ = 0.0D;
         }
     }
 
     /**
      * Place an entity in a nearby portal which already exists.
      */
-    public boolean placeInExistingPortal(Entity par1Entity, double par2, double par4, double par6, float par8)
+    public boolean placeInExistingPortal(Entity p_77184_1_, double p_77184_2_, double p_77184_4_, double p_77184_6_, float p_77184_8_)
     {
         short var9 = 128;
         double var10 = -1.0D;
         int var12 = 0;
         int var13 = 0;
         int var14 = 0;
-        int var15 = MathHelper.floor_double(par1Entity.posX);
-        int var16 = MathHelper.floor_double(par1Entity.posZ);
+        int var15 = MathHelper.floor_double(p_77184_1_.posX);
+        int var16 = MathHelper.floor_double(p_77184_1_.posZ);
         long var17 = ChunkCoordIntPair.chunkXZ2Int(var15, var16);
         boolean var19 = true;
         double var27;
@@ -107,11 +107,11 @@ public class Teleporter
         {
             for (var48 = var15 - var9; var48 <= var15 + var9; ++var48)
             {
-                double var21 = (double)var48 + 0.5D - par1Entity.posX;
+                double var21 = (double)var48 + 0.5D - p_77184_1_.posX;
 
                 for (int var23 = var16 - var9; var23 <= var16 + var9; ++var23)
                 {
-                    double var24 = (double)var23 + 0.5D - par1Entity.posZ;
+                    double var24 = (double)var23 + 0.5D - p_77184_1_.posZ;
 
                     for (int var26 = this.worldServerInstance.getActualHeight() - 1; var26 >= 0; --var26)
                     {
@@ -122,7 +122,7 @@ public class Teleporter
                                 --var26;
                             }
 
-                            var27 = (double)var26 + 0.5D - par1Entity.posY;
+                            var27 = (double)var26 + 0.5D - p_77184_1_.posY;
                             double var29 = var21 * var21 + var27 * var27 + var24 * var24;
 
                             if (var10 < 0.0D || var29 < var10)
@@ -171,7 +171,7 @@ public class Teleporter
                 var50 = 1;
             }
 
-            int var30 = par1Entity.getTeleportDirection();
+            int var30 = p_77184_1_.getTeleportDirection();
 
             if (var50 > -1)
             {
@@ -243,18 +243,18 @@ public class Teleporter
                     var43 = 1.0F;
                 }
 
-                double var44 = par1Entity.motionX;
-                double var46 = par1Entity.motionZ;
-                par1Entity.motionX = var44 * (double)var40 + var46 * (double)var43;
-                par1Entity.motionZ = var44 * (double)var42 + var46 * (double)var41;
-                par1Entity.rotationYaw = par8 - (float)(var30 * 90) + (float)(var50 * 90);
+                double var44 = p_77184_1_.motionX;
+                double var46 = p_77184_1_.motionZ;
+                p_77184_1_.motionX = var44 * (double)var40 + var46 * (double)var43;
+                p_77184_1_.motionZ = var44 * (double)var42 + var46 * (double)var41;
+                p_77184_1_.rotationYaw = p_77184_8_ - (float)(var30 * 90) + (float)(var50 * 90);
             }
             else
             {
-                par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
+                p_77184_1_.motionX = p_77184_1_.motionY = p_77184_1_.motionZ = 0.0D;
             }
 
-            par1Entity.setLocationAndAngles(var49, var25, var27, par1Entity.rotationYaw, par1Entity.rotationPitch);
+            p_77184_1_.setLocationAndAngles(var49, var25, var27, p_77184_1_.rotationYaw, p_77184_1_.rotationPitch);
             return true;
         }
         else
@@ -263,13 +263,13 @@ public class Teleporter
         }
     }
 
-    public boolean makePortal(Entity par1Entity)
+    public boolean makePortal(Entity p_85188_1_)
     {
         byte var2 = 16;
         double var3 = -1.0D;
-        int var5 = MathHelper.floor_double(par1Entity.posX);
-        int var6 = MathHelper.floor_double(par1Entity.posY);
-        int var7 = MathHelper.floor_double(par1Entity.posZ);
+        int var5 = MathHelper.floor_double(p_85188_1_.posX);
+        int var6 = MathHelper.floor_double(p_85188_1_.posY);
+        int var7 = MathHelper.floor_double(p_85188_1_.posZ);
         int var8 = var5;
         int var9 = var6;
         int var10 = var7;
@@ -277,27 +277,27 @@ public class Teleporter
         int var12 = this.random.nextInt(4);
         int var13;
         double var14;
-        double var17;
         int var16;
+        double var17;
         int var19;
-        int var21;
         int var20;
-        int var23;
+        int var21;
         int var22;
-        int var25;
+        int var23;
         int var24;
-        int var27;
+        int var25;
         int var26;
+        int var27;
         double var31;
         double var32;
 
         for (var13 = var5 - var2; var13 <= var5 + var2; ++var13)
         {
-            var14 = (double)var13 + 0.5D - par1Entity.posX;
+            var14 = (double)var13 + 0.5D - p_85188_1_.posX;
 
             for (var16 = var7 - var2; var16 <= var7 + var2; ++var16)
             {
-                var17 = (double)var16 + 0.5D - par1Entity.posZ;
+                var17 = (double)var16 + 0.5D - p_85188_1_.posZ;
                 label274:
 
                 for (var19 = this.worldServerInstance.getActualHeight() - 1; var19 >= 0; --var19)
@@ -338,12 +338,12 @@ public class Teleporter
                                 }
                             }
 
-                            var32 = (double)var19 + 0.5D - par1Entity.posY;
-                            var31 = var14 * var14 + var32 * var32 + var17 * var17;
+                            var31 = (double)var19 + 0.5D - p_85188_1_.posY;
+                            var32 = var14 * var14 + var31 * var31 + var17 * var17;
 
-                            if (var3 < 0.0D || var31 < var3)
+                            if (var3 < 0.0D || var32 < var3)
                             {
-                                var3 = var31;
+                                var3 = var32;
                                 var8 = var13;
                                 var9 = var19;
                                 var10 = var16;
@@ -359,11 +359,11 @@ public class Teleporter
         {
             for (var13 = var5 - var2; var13 <= var5 + var2; ++var13)
             {
-                var14 = (double)var13 + 0.5D - par1Entity.posX;
+                var14 = (double)var13 + 0.5D - p_85188_1_.posX;
 
                 for (var16 = var7 - var2; var16 <= var7 + var2; ++var16)
                 {
-                    var17 = (double)var16 + 0.5D - par1Entity.posZ;
+                    var17 = (double)var16 + 0.5D - p_85188_1_.posZ;
                     label222:
 
                     for (var19 = this.worldServerInstance.getActualHeight() - 1; var19 >= 0; --var19)
@@ -395,12 +395,12 @@ public class Teleporter
                                     }
                                 }
 
-                                var32 = (double)var19 + 0.5D - par1Entity.posY;
-                                var31 = var14 * var14 + var32 * var32 + var17 * var17;
+                                var31 = (double)var19 + 0.5D - p_85188_1_.posY;
+                                var32 = var14 * var14 + var31 * var31 + var17 * var17;
 
-                                if (var3 < 0.0D || var31 < var3)
+                                if (var3 < 0.0D || var32 < var3)
                                 {
-                                    var3 = var31;
+                                    var3 = var32;
                                     var8 = var13;
                                     var9 = var19;
                                     var10 = var16;
@@ -490,12 +490,12 @@ public class Teleporter
      * called periodically to remove out-of-date portal locations from the cache list. Argument par1 is a
      * WorldServer.getTotalWorldTime() value.
      */
-    public void removeStalePortalLocations(long par1)
+    public void removeStalePortalLocations(long p_85189_1_)
     {
-        if (par1 % 100L == 0L)
+        if (p_85189_1_ % 100L == 0L)
         {
             Iterator var3 = this.destinationCoordinateKeys.iterator();
-            long var4 = par1 - 600L;
+            long var4 = p_85189_1_ - 600L;
 
             while (var3.hasNext())
             {
@@ -516,10 +516,10 @@ public class Teleporter
         public long lastUpdateTime;
         private static final String __OBFID = "CL_00000154";
 
-        public PortalPosition(int par2, int par3, int par4, long par5)
+        public PortalPosition(int p_i1962_2_, int p_i1962_3_, int p_i1962_4_, long p_i1962_5_)
         {
-            super(par2, par3, par4);
-            this.lastUpdateTime = par5;
+            super(p_i1962_2_, p_i1962_3_, p_i1962_4_);
+            this.lastUpdateTime = p_i1962_5_;
         }
     }
 }

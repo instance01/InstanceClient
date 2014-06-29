@@ -34,37 +34,37 @@ public class TileEntityChestRenderer extends TileEntitySpecialRenderer
         }
     }
 
-    public void renderTileEntityAt(TileEntityChest p_147502_1_, double p_147502_2_, double p_147502_4_, double p_147502_6_, float p_147502_8_)
+    public void renderTileEntityAt(TileEntityChest p_147500_1_, double p_147500_2_, double p_147500_4_, double p_147500_6_, float p_147500_8_)
     {
         int var9;
 
-        if (!p_147502_1_.hasWorldObj())
+        if (!p_147500_1_.hasWorldObj())
         {
             var9 = 0;
         }
         else
         {
-            Block var10 = p_147502_1_.getBlockType();
-            var9 = p_147502_1_.getBlockMetadata();
+            Block var10 = p_147500_1_.getBlockType();
+            var9 = p_147500_1_.getBlockMetadata();
 
             if (var10 instanceof BlockChest && var9 == 0)
             {
-                ((BlockChest)var10).func_149954_e(p_147502_1_.getWorldObj(), p_147502_1_.field_145851_c, p_147502_1_.field_145848_d, p_147502_1_.field_145849_e);
-                var9 = p_147502_1_.getBlockMetadata();
+                ((BlockChest)var10).func_149954_e(p_147500_1_.getWorldObj(), p_147500_1_.field_145851_c, p_147500_1_.field_145848_d, p_147500_1_.field_145849_e);
+                var9 = p_147500_1_.getBlockMetadata();
             }
 
-            p_147502_1_.func_145979_i();
+            p_147500_1_.func_145979_i();
         }
 
-        if (p_147502_1_.field_145992_i == null && p_147502_1_.field_145991_k == null)
+        if (p_147500_1_.field_145992_i == null && p_147500_1_.field_145991_k == null)
         {
             ModelChest var14;
 
-            if (p_147502_1_.field_145990_j == null && p_147502_1_.field_145988_l == null)
+            if (p_147500_1_.field_145990_j == null && p_147500_1_.field_145988_l == null)
             {
                 var14 = this.field_147510_h;
 
-                if (p_147502_1_.func_145980_j() == 1)
+                if (p_147500_1_.func_145980_j() == 1)
                 {
                     this.bindTexture(field_147506_e);
                 }
@@ -81,7 +81,7 @@ public class TileEntityChestRenderer extends TileEntitySpecialRenderer
             {
                 var14 = this.field_147511_i;
 
-                if (p_147502_1_.func_145980_j() == 1)
+                if (p_147500_1_.func_145980_j() == 1)
                 {
                     this.bindTexture(field_147507_b);
                 }
@@ -98,7 +98,7 @@ public class TileEntityChestRenderer extends TileEntitySpecialRenderer
             GL11.glPushMatrix();
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            GL11.glTranslatef((float)p_147502_2_, (float)p_147502_4_ + 1.0F, (float)p_147502_6_ + 1.0F);
+            GL11.glTranslatef((float)p_147500_2_, (float)p_147500_4_ + 1.0F, (float)p_147500_6_ + 1.0F);
             GL11.glScalef(1.0F, -1.0F, -1.0F);
             GL11.glTranslatef(0.5F, 0.5F, 0.5F);
             short var11 = 0;
@@ -123,24 +123,24 @@ public class TileEntityChestRenderer extends TileEntitySpecialRenderer
                 var11 = -90;
             }
 
-            if (var9 == 2 && p_147502_1_.field_145990_j != null)
+            if (var9 == 2 && p_147500_1_.field_145990_j != null)
             {
                 GL11.glTranslatef(1.0F, 0.0F, 0.0F);
             }
 
-            if (var9 == 5 && p_147502_1_.field_145988_l != null)
+            if (var9 == 5 && p_147500_1_.field_145988_l != null)
             {
                 GL11.glTranslatef(0.0F, 0.0F, -1.0F);
             }
 
             GL11.glRotatef((float)var11, 0.0F, 1.0F, 0.0F);
             GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-            float var12 = p_147502_1_.field_145986_n + (p_147502_1_.field_145989_m - p_147502_1_.field_145986_n) * p_147502_8_;
+            float var12 = p_147500_1_.field_145986_n + (p_147500_1_.field_145989_m - p_147500_1_.field_145986_n) * p_147500_8_;
             float var13;
 
-            if (p_147502_1_.field_145992_i != null)
+            if (p_147500_1_.field_145992_i != null)
             {
-                var13 = p_147502_1_.field_145992_i.field_145986_n + (p_147502_1_.field_145992_i.field_145989_m - p_147502_1_.field_145992_i.field_145986_n) * p_147502_8_;
+                var13 = p_147500_1_.field_145992_i.field_145986_n + (p_147500_1_.field_145992_i.field_145989_m - p_147500_1_.field_145992_i.field_145986_n) * p_147500_8_;
 
                 if (var13 > var12)
                 {
@@ -148,9 +148,9 @@ public class TileEntityChestRenderer extends TileEntitySpecialRenderer
                 }
             }
 
-            if (p_147502_1_.field_145991_k != null)
+            if (p_147500_1_.field_145991_k != null)
             {
-                var13 = p_147502_1_.field_145991_k.field_145986_n + (p_147502_1_.field_145991_k.field_145989_m - p_147502_1_.field_145991_k.field_145986_n) * p_147502_8_;
+                var13 = p_147500_1_.field_145991_k.field_145986_n + (p_147500_1_.field_145991_k.field_145989_m - p_147500_1_.field_145991_k.field_145986_n) * p_147500_8_;
 
                 if (var13 > var12)
                 {

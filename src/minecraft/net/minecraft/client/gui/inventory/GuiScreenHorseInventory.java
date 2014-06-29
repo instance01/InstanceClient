@@ -17,12 +17,12 @@ public class GuiScreenHorseInventory extends GuiContainer
     private float field_147032_z;
     private static final String __OBFID = "CL_00000760";
 
-    public GuiScreenHorseInventory(IInventory par1IInventory, IInventory par2IInventory, EntityHorse par3EntityHorse)
+    public GuiScreenHorseInventory(IInventory p_i1093_1_, IInventory p_i1093_2_, EntityHorse p_i1093_3_)
     {
-        super(new ContainerHorseInventory(par1IInventory, par2IInventory, par3EntityHorse));
-        this.field_147030_v = par1IInventory;
-        this.field_147029_w = par2IInventory;
-        this.field_147034_x = par3EntityHorse;
+        super(new ContainerHorseInventory(p_i1093_1_, p_i1093_2_, p_i1093_3_));
+        this.field_147030_v = p_i1093_1_;
+        this.field_147029_w = p_i1093_2_;
+        this.field_147034_x = p_i1093_3_;
         this.field_146291_p = false;
     }
 
@@ -56,10 +56,10 @@ public class GuiScreenHorseInventory extends GuiContainer
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
-        this.field_147033_y = (float)par1;
-        this.field_147032_z = (float)par2;
-        super.drawScreen(par1, par2, par3);
+        this.field_147033_y = (float)p_73863_1_;
+        this.field_147032_z = (float)p_73863_2_;
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 }

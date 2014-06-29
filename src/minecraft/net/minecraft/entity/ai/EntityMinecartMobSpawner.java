@@ -14,9 +14,9 @@ public class EntityMinecartMobSpawner extends EntityMinecart
     private final MobSpawnerBaseLogic mobSpawnerLogic = new MobSpawnerBaseLogic()
     {
         private static final String __OBFID = "CL_00001679";
-        public void func_98267_a(int par1)
+        public void func_98267_a(int p_98267_1_)
         {
-            EntityMinecartMobSpawner.this.worldObj.setEntityState(EntityMinecartMobSpawner.this, (byte)par1);
+            EntityMinecartMobSpawner.this.worldObj.setEntityState(EntityMinecartMobSpawner.this, (byte)p_98267_1_);
         }
         public World getSpawnerWorld()
         {
@@ -37,14 +37,14 @@ public class EntityMinecartMobSpawner extends EntityMinecart
     };
     private static final String __OBFID = "CL_00001678";
 
-    public EntityMinecartMobSpawner(World par1World)
+    public EntityMinecartMobSpawner(World p_i1725_1_)
     {
-        super(par1World);
+        super(p_i1725_1_);
     }
 
-    public EntityMinecartMobSpawner(World par1World, double par2, double par4, double par6)
+    public EntityMinecartMobSpawner(World p_i1726_1_, double p_i1726_2_, double p_i1726_4_, double p_i1726_6_)
     {
-        super(par1World, par2, par4, par6);
+        super(p_i1726_1_, p_i1726_2_, p_i1726_4_, p_i1726_6_);
     }
 
     public int getMinecartType()
@@ -60,24 +60,24 @@ public class EntityMinecartMobSpawner extends EntityMinecart
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    protected void readEntityFromNBT(NBTTagCompound p_70037_1_)
     {
-        super.readEntityFromNBT(par1NBTTagCompound);
-        this.mobSpawnerLogic.readFromNBT(par1NBTTagCompound);
+        super.readEntityFromNBT(p_70037_1_);
+        this.mobSpawnerLogic.readFromNBT(p_70037_1_);
     }
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    protected void writeEntityToNBT(NBTTagCompound p_70014_1_)
     {
-        super.writeEntityToNBT(par1NBTTagCompound);
-        this.mobSpawnerLogic.writeToNBT(par1NBTTagCompound);
+        super.writeEntityToNBT(p_70014_1_);
+        this.mobSpawnerLogic.writeToNBT(p_70014_1_);
     }
 
-    public void handleHealthUpdate(byte par1)
+    public void handleHealthUpdate(byte p_70103_1_)
     {
-        this.mobSpawnerLogic.setDelayToMin(par1);
+        this.mobSpawnerLogic.setDelayToMin(p_70103_1_);
     }
 
     /**

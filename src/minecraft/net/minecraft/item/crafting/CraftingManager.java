@@ -161,27 +161,27 @@ public class CraftingManager
         Collections.sort(this.recipes, new Comparator()
         {
             private static final String __OBFID = "CL_00000091";
-            public int compare(IRecipe par1IRecipe, IRecipe par2IRecipe)
+            public int compare(IRecipe p_compare_1_, IRecipe p_compare_2_)
             {
-                return par1IRecipe instanceof ShapelessRecipes && par2IRecipe instanceof ShapedRecipes ? 1 : (par2IRecipe instanceof ShapelessRecipes && par1IRecipe instanceof ShapedRecipes ? -1 : (par2IRecipe.getRecipeSize() < par1IRecipe.getRecipeSize() ? -1 : (par2IRecipe.getRecipeSize() > par1IRecipe.getRecipeSize() ? 1 : 0)));
+                return p_compare_1_ instanceof ShapelessRecipes && p_compare_2_ instanceof ShapedRecipes ? 1 : (p_compare_2_ instanceof ShapelessRecipes && p_compare_1_ instanceof ShapedRecipes ? -1 : (p_compare_2_.getRecipeSize() < p_compare_1_.getRecipeSize() ? -1 : (p_compare_2_.getRecipeSize() > p_compare_1_.getRecipeSize() ? 1 : 0)));
             }
-            public int compare(Object par1Obj, Object par2Obj)
+            public int compare(Object p_compare_1_, Object p_compare_2_)
             {
-                return this.compare((IRecipe)par1Obj, (IRecipe)par2Obj);
+                return this.compare((IRecipe)p_compare_1_, (IRecipe)p_compare_2_);
             }
         });
     }
 
-    ShapedRecipes addRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj)
+    ShapedRecipes addRecipe(ItemStack p_92103_1_, Object ... p_92103_2_)
     {
         String var3 = "";
         int var4 = 0;
         int var5 = 0;
         int var6 = 0;
 
-        if (par2ArrayOfObj[var4] instanceof String[])
+        if (p_92103_2_[var4] instanceof String[])
         {
-            String[] var7 = (String[])((String[])par2ArrayOfObj[var4++]);
+            String[] var7 = (String[])((String[])p_92103_2_[var4++]);
 
             for (int var8 = 0; var8 < var7.length; ++var8)
             {
@@ -193,9 +193,9 @@ public class CraftingManager
         }
         else
         {
-            while (par2ArrayOfObj[var4] instanceof String)
+            while (p_92103_2_[var4] instanceof String)
             {
-                String var11 = (String)par2ArrayOfObj[var4++];
+                String var11 = (String)p_92103_2_[var4++];
                 ++var6;
                 var5 = var11.length();
                 var3 = var3 + var11;
@@ -204,28 +204,28 @@ public class CraftingManager
 
         HashMap var12;
 
-        for (var12 = new HashMap(); var4 < par2ArrayOfObj.length; var4 += 2)
+        for (var12 = new HashMap(); var4 < p_92103_2_.length; var4 += 2)
         {
-            Character var13 = (Character)par2ArrayOfObj[var4];
-            ItemStack var14 = null;
+            Character var13 = (Character)p_92103_2_[var4];
+            ItemStack var15 = null;
 
-            if (par2ArrayOfObj[var4 + 1] instanceof Item)
+            if (p_92103_2_[var4 + 1] instanceof Item)
             {
-                var14 = new ItemStack((Item)par2ArrayOfObj[var4 + 1]);
+                var15 = new ItemStack((Item)p_92103_2_[var4 + 1]);
             }
-            else if (par2ArrayOfObj[var4 + 1] instanceof Block)
+            else if (p_92103_2_[var4 + 1] instanceof Block)
             {
-                var14 = new ItemStack((Block)par2ArrayOfObj[var4 + 1], 1, 32767);
+                var15 = new ItemStack((Block)p_92103_2_[var4 + 1], 1, 32767);
             }
-            else if (par2ArrayOfObj[var4 + 1] instanceof ItemStack)
+            else if (p_92103_2_[var4 + 1] instanceof ItemStack)
             {
-                var14 = (ItemStack)par2ArrayOfObj[var4 + 1];
+                var15 = (ItemStack)p_92103_2_[var4 + 1];
             }
 
-            var12.put(var13, var14);
+            var12.put(var13, var15);
         }
 
-        ItemStack[] var15 = new ItemStack[var5 * var6];
+        ItemStack[] var14 = new ItemStack[var5 * var6];
 
         for (int var16 = 0; var16 < var5 * var6; ++var16)
         {
@@ -233,24 +233,24 @@ public class CraftingManager
 
             if (var12.containsKey(Character.valueOf(var10)))
             {
-                var15[var16] = ((ItemStack)var12.get(Character.valueOf(var10))).copy();
+                var14[var16] = ((ItemStack)var12.get(Character.valueOf(var10))).copy();
             }
             else
             {
-                var15[var16] = null;
+                var14[var16] = null;
             }
         }
 
-        ShapedRecipes var17 = new ShapedRecipes(var5, var6, var15, par1ItemStack);
+        ShapedRecipes var17 = new ShapedRecipes(var5, var6, var14, p_92103_1_);
         this.recipes.add(var17);
         return var17;
     }
 
-    void addShapelessRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj)
+    void addShapelessRecipe(ItemStack p_77596_1_, Object ... p_77596_2_)
     {
         ArrayList var3 = new ArrayList();
-        Object[] var4 = par2ArrayOfObj;
-        int var5 = par2ArrayOfObj.length;
+        Object[] var4 = p_77596_2_;
+        int var5 = p_77596_2_.length;
 
         for (int var6 = 0; var6 < var5; ++var6)
         {
@@ -275,19 +275,19 @@ public class CraftingManager
             }
         }
 
-        this.recipes.add(new ShapelessRecipes(par1ItemStack, var3));
+        this.recipes.add(new ShapelessRecipes(p_77596_1_, var3));
     }
 
-    public ItemStack findMatchingRecipe(InventoryCrafting par1InventoryCrafting, World par2World)
+    public ItemStack findMatchingRecipe(InventoryCrafting p_82787_1_, World p_82787_2_)
     {
         int var3 = 0;
         ItemStack var4 = null;
         ItemStack var5 = null;
         int var6;
 
-        for (var6 = 0; var6 < par1InventoryCrafting.getSizeInventory(); ++var6)
+        for (var6 = 0; var6 < p_82787_1_.getSizeInventory(); ++var6)
         {
-            ItemStack var7 = par1InventoryCrafting.getStackInSlot(var6);
+            ItemStack var7 = p_82787_1_.getStackInSlot(var6);
 
             if (var7 != null)
             {
@@ -326,9 +326,9 @@ public class CraftingManager
             {
                 IRecipe var12 = (IRecipe)this.recipes.get(var6);
 
-                if (var12.matches(par1InventoryCrafting, par2World))
+                if (var12.matches(p_82787_1_, p_82787_2_))
                 {
-                    return var12.getCraftingResult(par1InventoryCrafting);
+                    return var12.getCraftingResult(p_82787_1_);
                 }
             }
 

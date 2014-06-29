@@ -28,9 +28,9 @@ public class EntityPig extends EntityAnimal
     private final EntityAIControlledByPlayer aiControlledByPlayer;
     private static final String __OBFID = "CL_00001647";
 
-    public EntityPig(World par1World)
+    public EntityPig(World p_i1689_1_)
     {
-        super(par1World);
+        super(p_i1689_1_);
         this.setSize(0.9F, 0.9F);
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -84,19 +84,19 @@ public class EntityPig extends EntityAnimal
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    public void writeEntityToNBT(NBTTagCompound p_70014_1_)
     {
-        super.writeEntityToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setBoolean("Saddle", this.getSaddled());
+        super.writeEntityToNBT(p_70014_1_);
+        p_70014_1_.setBoolean("Saddle", this.getSaddled());
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    public void readEntityFromNBT(NBTTagCompound p_70037_1_)
     {
-        super.readEntityFromNBT(par1NBTTagCompound);
-        this.setSaddled(par1NBTTagCompound.getBoolean("Saddle"));
+        super.readEntityFromNBT(p_70037_1_);
+        this.setSaddled(p_70037_1_.getBoolean("Saddle"));
     }
 
     /**
@@ -131,15 +131,15 @@ public class EntityPig extends EntityAnimal
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
-    public boolean interact(EntityPlayer par1EntityPlayer)
+    public boolean interact(EntityPlayer p_70085_1_)
     {
-        if (super.interact(par1EntityPlayer))
+        if (super.interact(p_70085_1_))
         {
             return true;
         }
-        else if (this.getSaddled() && !this.worldObj.isClient && (this.riddenByEntity == null || this.riddenByEntity == par1EntityPlayer))
+        else if (this.getSaddled() && !this.worldObj.isClient && (this.riddenByEntity == null || this.riddenByEntity == p_70085_1_))
         {
-            par1EntityPlayer.mountEntity(this);
+            p_70085_1_.mountEntity(this);
             return true;
         }
         else
@@ -156,9 +156,9 @@ public class EntityPig extends EntityAnimal
     /**
      * Drop 0-2 items of this living's type
      */
-    protected void dropFewItems(boolean par1, int par2)
+    protected void dropFewItems(boolean p_70628_1_, int p_70628_2_)
     {
-        int var3 = this.rand.nextInt(3) + 1 + this.rand.nextInt(1 + par2);
+        int var3 = this.rand.nextInt(3) + 1 + this.rand.nextInt(1 + p_70628_2_);
 
         for (int var4 = 0; var4 < var3; ++var4)
         {
@@ -189,9 +189,9 @@ public class EntityPig extends EntityAnimal
     /**
      * Set or remove the saddle of the pig.
      */
-    public void setSaddled(boolean par1)
+    public void setSaddled(boolean p_70900_1_)
     {
-        if (par1)
+        if (p_70900_1_)
         {
             this.dataWatcher.updateObject(16, Byte.valueOf((byte)1));
         }
@@ -204,7 +204,7 @@ public class EntityPig extends EntityAnimal
     /**
      * Called when a lightning bolt hits the entity.
      */
-    public void onStruckByLightning(EntityLightningBolt par1EntityLightningBolt)
+    public void onStruckByLightning(EntityLightningBolt p_70077_1_)
     {
         if (!this.worldObj.isClient)
         {
@@ -219,17 +219,17 @@ public class EntityPig extends EntityAnimal
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
-    protected void fall(float par1)
+    protected void fall(float p_70069_1_)
     {
-        super.fall(par1);
+        super.fall(p_70069_1_);
 
-        if (par1 > 5.0F && this.riddenByEntity instanceof EntityPlayer)
+        if (p_70069_1_ > 5.0F && this.riddenByEntity instanceof EntityPlayer)
         {
             ((EntityPlayer)this.riddenByEntity).triggerAchievement(AchievementList.flyPig);
         }
     }
 
-    public EntityPig createChild(EntityAgeable par1EntityAgeable)
+    public EntityPig createChild(EntityAgeable p_90011_1_)
     {
         return new EntityPig(this.worldObj);
     }
@@ -238,9 +238,9 @@ public class EntityPig extends EntityAnimal
      * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
      * the animal type)
      */
-    public boolean isBreedingItem(ItemStack par1ItemStack)
+    public boolean isBreedingItem(ItemStack p_70877_1_)
     {
-        return par1ItemStack != null && par1ItemStack.getItem() == Items.carrot;
+        return p_70877_1_ != null && p_70877_1_.getItem() == Items.carrot;
     }
 
     /**

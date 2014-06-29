@@ -19,31 +19,31 @@ public class ItemLeaves extends ItemBlock
     /**
      * Returns the metadata of the block which this Item (ItemBlock) can place
      */
-    public int getMetadata(int par1)
+    public int getMetadata(int p_77647_1_)
     {
-        return par1 | 4;
+        return p_77647_1_ | 4;
     }
 
     /**
      * Gets an icon index based on an item's damage value
      */
-    public IIcon getIconFromDamage(int par1)
+    public IIcon getIconFromDamage(int p_77617_1_)
     {
-        return this.field_150940_b.getIcon(0, par1);
+        return this.field_150940_b.getIcon(0, p_77617_1_);
     }
 
-    public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
+    public int getColorFromItemStack(ItemStack p_82790_1_, int p_82790_2_)
     {
-        return this.field_150940_b.getRenderColor(par1ItemStack.getItemDamage());
+        return this.field_150940_b.getRenderColor(p_82790_1_.getItemDamage());
     }
 
     /**
      * Returns the unlocalized name of this item. This version accepts an ItemStack so different stacks can have
      * different names based on their damage or NBT.
      */
-    public String getUnlocalizedName(ItemStack par1ItemStack)
+    public String getUnlocalizedName(ItemStack p_77667_1_)
     {
-        int var2 = par1ItemStack.getItemDamage();
+        int var2 = p_77667_1_.getItemDamage();
 
         if (var2 < 0 || var2 >= this.field_150940_b.func_150125_e().length)
         {

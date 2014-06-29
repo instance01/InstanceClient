@@ -51,9 +51,9 @@ public class Timer
     private double timeSyncAdjustment = 1.0D;
     private static final String __OBFID = "CL_00000658";
 
-    public Timer(float par1)
+    public Timer(float p_i1018_1_)
     {
-        this.ticksPerSecond = par1;
+        this.ticksPerSecond = p_i1018_1_;
         this.lastSyncSysClock = Minecraft.getSystemTime();
         this.lastSyncHRClock = System.nanoTime() / 1000000L;
     }

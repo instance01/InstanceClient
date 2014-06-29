@@ -22,12 +22,12 @@ public class DestroyBlockProgress
     private int createdAtCloudUpdateTick;
     private static final String __OBFID = "CL_00001427";
 
-    public DestroyBlockProgress(int par1, int par2, int par3, int par4)
+    public DestroyBlockProgress(int p_i1511_1_, int p_i1511_2_, int p_i1511_3_, int p_i1511_4_)
     {
-        this.miningPlayerEntId = par1;
-        this.partialBlockX = par2;
-        this.partialBlockY = par3;
-        this.partialBlockZ = par4;
+        this.miningPlayerEntId = p_i1511_1_;
+        this.partialBlockX = p_i1511_2_;
+        this.partialBlockY = p_i1511_3_;
+        this.partialBlockZ = p_i1511_4_;
     }
 
     public int getPartialBlockX()
@@ -49,14 +49,14 @@ public class DestroyBlockProgress
      * inserts damage value into this partially destroyed Block. -1 causes client renderer to delete it, otherwise
      * ranges from 1 to 10
      */
-    public void setPartialBlockDamage(int par1)
+    public void setPartialBlockDamage(int p_73107_1_)
     {
-        if (par1 > 10)
+        if (p_73107_1_ > 10)
         {
-            par1 = 10;
+            p_73107_1_ = 10;
         }
 
-        this.partialBlockProgress = par1;
+        this.partialBlockProgress = p_73107_1_;
     }
 
     public int getPartialBlockDamage()
@@ -67,9 +67,9 @@ public class DestroyBlockProgress
     /**
      * saves the current Cloud update tick into the PartiallyDestroyedBlock
      */
-    public void setCloudUpdateTick(int par1)
+    public void setCloudUpdateTick(int p_82744_1_)
     {
-        this.createdAtCloudUpdateTick = par1;
+        this.createdAtCloudUpdateTick = p_82744_1_;
     }
 
     /**

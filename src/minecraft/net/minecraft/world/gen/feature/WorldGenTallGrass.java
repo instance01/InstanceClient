@@ -17,24 +17,24 @@ public class WorldGenTallGrass extends WorldGenerator
         this.tallGrassMetadata = p_i45466_2_;
     }
 
-    public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
+    public boolean generate(World p_76484_1_, Random p_76484_2_, int p_76484_3_, int p_76484_4_, int p_76484_5_)
     {
         Block var6;
 
-        while (((var6 = par1World.getBlock(par3, par4, par5)).getMaterial() == Material.air || var6.getMaterial() == Material.leaves) && par4 > 0)
+        while (((var6 = p_76484_1_.getBlock(p_76484_3_, p_76484_4_, p_76484_5_)).getMaterial() == Material.air || var6.getMaterial() == Material.leaves) && p_76484_4_ > 0)
         {
-            --par4;
+            --p_76484_4_;
         }
 
         for (int var7 = 0; var7 < 128; ++var7)
         {
-            int var8 = par3 + par2Random.nextInt(8) - par2Random.nextInt(8);
-            int var9 = par4 + par2Random.nextInt(4) - par2Random.nextInt(4);
-            int var10 = par5 + par2Random.nextInt(8) - par2Random.nextInt(8);
+            int var8 = p_76484_3_ + p_76484_2_.nextInt(8) - p_76484_2_.nextInt(8);
+            int var9 = p_76484_4_ + p_76484_2_.nextInt(4) - p_76484_2_.nextInt(4);
+            int var10 = p_76484_5_ + p_76484_2_.nextInt(8) - p_76484_2_.nextInt(8);
 
-            if (par1World.isAirBlock(var8, var9, var10) && this.field_150522_a.canBlockStay(par1World, var8, var9, var10))
+            if (p_76484_1_.isAirBlock(var8, var9, var10) && this.field_150522_a.canBlockStay(p_76484_1_, var8, var9, var10))
             {
-                par1World.setBlock(var8, var9, var10, this.field_150522_a, this.tallGrassMetadata, 2);
+                p_76484_1_.setBlock(var8, var9, var10, this.field_150522_a, this.tallGrassMetadata, 2);
             }
         }
 

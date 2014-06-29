@@ -47,9 +47,9 @@ public class C00Handshake extends Packet
         p_148840_1_.writeVarIntToBuffer(this.field_149597_d.func_150759_c());
     }
 
-    public void processPacket(INetHandlerHandshakeServer p_149596_1_)
+    public void processPacket(INetHandlerHandshakeServer p_148833_1_)
     {
-        p_149596_1_.processHandshake(this);
+        p_148833_1_.processHandshake(this);
     }
 
     /**

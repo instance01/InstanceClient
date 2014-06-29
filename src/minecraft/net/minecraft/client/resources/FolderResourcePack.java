@@ -14,19 +14,19 @@ public class FolderResourcePack extends AbstractResourcePack
 {
     private static final String __OBFID = "CL_00001076";
 
-    public FolderResourcePack(File par1File)
+    public FolderResourcePack(File p_i1291_1_)
     {
-        super(par1File);
+        super(p_i1291_1_);
     }
 
-    protected InputStream getInputStreamByName(String par1Str) throws IOException
+    protected InputStream getInputStreamByName(String p_110591_1_) throws IOException
     {
-        return new BufferedInputStream(new FileInputStream(new File(this.resourcePackFile, par1Str)));
+        return new BufferedInputStream(new FileInputStream(new File(this.resourcePackFile, p_110591_1_)));
     }
 
-    protected boolean hasResourceName(String par1Str)
+    protected boolean hasResourceName(String p_110593_1_)
     {
-        return (new File(this.resourcePackFile, par1Str)).isFile();
+        return (new File(this.resourcePackFile, p_110593_1_)).isFile();
     }
 
     public Set getResourceDomains()

@@ -21,73 +21,73 @@ public class ItemSign extends Item
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
      * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
      */
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+    public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World p_77648_3_, int p_77648_4_, int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
     {
-        if (par7 == 0)
+        if (p_77648_7_ == 0)
         {
             return false;
         }
-        else if (!par3World.getBlock(par4, par5, par6).getMaterial().isSolid())
+        else if (!p_77648_3_.getBlock(p_77648_4_, p_77648_5_, p_77648_6_).getMaterial().isSolid())
         {
             return false;
         }
         else
         {
-            if (par7 == 1)
+            if (p_77648_7_ == 1)
             {
-                ++par5;
+                ++p_77648_5_;
             }
 
-            if (par7 == 2)
+            if (p_77648_7_ == 2)
             {
-                --par6;
+                --p_77648_6_;
             }
 
-            if (par7 == 3)
+            if (p_77648_7_ == 3)
             {
-                ++par6;
+                ++p_77648_6_;
             }
 
-            if (par7 == 4)
+            if (p_77648_7_ == 4)
             {
-                --par4;
+                --p_77648_4_;
             }
 
-            if (par7 == 5)
+            if (p_77648_7_ == 5)
             {
-                ++par4;
+                ++p_77648_4_;
             }
 
-            if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7, par1ItemStack))
+            if (!p_77648_2_.canPlayerEdit(p_77648_4_, p_77648_5_, p_77648_6_, p_77648_7_, p_77648_1_))
             {
                 return false;
             }
-            else if (!Blocks.standing_sign.canPlaceBlockAt(par3World, par4, par5, par6))
+            else if (!Blocks.standing_sign.canPlaceBlockAt(p_77648_3_, p_77648_4_, p_77648_5_, p_77648_6_))
             {
                 return false;
             }
-            else if (par3World.isClient)
+            else if (p_77648_3_.isClient)
             {
                 return true;
             }
             else
             {
-                if (par7 == 1)
+                if (p_77648_7_ == 1)
                 {
-                    int var11 = MathHelper.floor_double((double)((par2EntityPlayer.rotationYaw + 180.0F) * 16.0F / 360.0F) + 0.5D) & 15;
-                    par3World.setBlock(par4, par5, par6, Blocks.standing_sign, var11, 3);
+                    int var11 = MathHelper.floor_double((double)((p_77648_2_.rotationYaw + 180.0F) * 16.0F / 360.0F) + 0.5D) & 15;
+                    p_77648_3_.setBlock(p_77648_4_, p_77648_5_, p_77648_6_, Blocks.standing_sign, var11, 3);
                 }
                 else
                 {
-                    par3World.setBlock(par4, par5, par6, Blocks.wall_sign, par7, 3);
+                    p_77648_3_.setBlock(p_77648_4_, p_77648_5_, p_77648_6_, Blocks.wall_sign, p_77648_7_, 3);
                 }
 
-                --par1ItemStack.stackSize;
-                TileEntitySign var12 = (TileEntitySign)par3World.getTileEntity(par4, par5, par6);
+                --p_77648_1_.stackSize;
+                TileEntitySign var12 = (TileEntitySign)p_77648_3_.getTileEntity(p_77648_4_, p_77648_5_, p_77648_6_);
 
                 if (var12 != null)
                 {
-                    par2EntityPlayer.func_146100_a(var12);
+                    p_77648_2_.func_146100_a(var12);
                 }
 
                 return true;

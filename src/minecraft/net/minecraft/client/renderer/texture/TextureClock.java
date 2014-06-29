@@ -8,9 +8,9 @@ public class TextureClock extends TextureAtlasSprite
     private double field_94240_i;
     private static final String __OBFID = "CL_00001070";
 
-    public TextureClock(String par1Str)
+    public TextureClock(String p_i1285_1_)
     {
-        super(par1Str);
+        super(p_i1285_1_);
     }
 
     public void updateAnimation()

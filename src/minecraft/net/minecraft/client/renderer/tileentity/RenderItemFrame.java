@@ -35,9 +35,9 @@ public class RenderItemFrame extends Render
     private IIcon field_94147_f;
     private static final String __OBFID = "CL_00001002";
 
-    public void updateIcons(IIconRegister par1IconRegister)
+    public void updateIcons(IIconRegister p_94143_1_)
     {
-        this.field_94147_f = par1IconRegister.registerIcon("itemframe_background");
+        this.field_94147_f = p_94143_1_.registerIcon("itemframe_background");
     }
 
     /**
@@ -46,35 +46,35 @@ public class RenderItemFrame extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityItemFrame par1EntityItemFrame, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntityItemFrame p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
         GL11.glPushMatrix();
-        double var10 = par1EntityItemFrame.posX - par2 - 0.5D;
-        double var12 = par1EntityItemFrame.posY - par4 - 0.5D;
-        double var14 = par1EntityItemFrame.posZ - par6 - 0.5D;
-        int var16 = par1EntityItemFrame.field_146063_b + Direction.offsetX[par1EntityItemFrame.hangingDirection];
-        int var17 = par1EntityItemFrame.field_146064_c;
-        int var18 = par1EntityItemFrame.field_146062_d + Direction.offsetZ[par1EntityItemFrame.hangingDirection];
+        double var10 = p_76986_1_.posX - p_76986_2_ - 0.5D;
+        double var12 = p_76986_1_.posY - p_76986_4_ - 0.5D;
+        double var14 = p_76986_1_.posZ - p_76986_6_ - 0.5D;
+        int var16 = p_76986_1_.field_146063_b + Direction.offsetX[p_76986_1_.hangingDirection];
+        int var17 = p_76986_1_.field_146064_c;
+        int var18 = p_76986_1_.field_146062_d + Direction.offsetZ[p_76986_1_.hangingDirection];
         GL11.glTranslated((double)var16 - var10, (double)var17 - var12, (double)var18 - var14);
 
-        if (par1EntityItemFrame.getDisplayedItem() != null && par1EntityItemFrame.getDisplayedItem().getItem() == Items.filled_map)
+        if (p_76986_1_.getDisplayedItem() != null && p_76986_1_.getDisplayedItem().getItem() == Items.filled_map)
         {
-            this.func_147915_b(par1EntityItemFrame);
+            this.func_147915_b(p_76986_1_);
         }
         else
         {
-            this.renderFrameItemAsBlock(par1EntityItemFrame);
+            this.renderFrameItemAsBlock(p_76986_1_);
         }
 
-        this.func_82402_b(par1EntityItemFrame);
+        this.func_82402_b(p_76986_1_);
         GL11.glPopMatrix();
-        this.func_147914_a(par1EntityItemFrame, par2 + (double)((float)Direction.offsetX[par1EntityItemFrame.hangingDirection] * 0.3F), par4 - 0.25D, par6 + (double)((float)Direction.offsetZ[par1EntityItemFrame.hangingDirection] * 0.3F));
+        this.func_147914_a(p_76986_1_, p_76986_2_ + (double)((float)Direction.offsetX[p_76986_1_.hangingDirection] * 0.3F), p_76986_4_ - 0.25D, p_76986_6_ + (double)((float)Direction.offsetZ[p_76986_1_.hangingDirection] * 0.3F));
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntityItemFrame par1EntityItemFrame)
+    protected ResourceLocation getEntityTexture(EntityItemFrame p_110775_1_)
     {
         return null;
     }
@@ -120,10 +120,10 @@ public class RenderItemFrame extends Render
     /**
      * Render the item frame's item as a block.
      */
-    private void renderFrameItemAsBlock(EntityItemFrame par1EntityItemFrame)
+    private void renderFrameItemAsBlock(EntityItemFrame p_82403_1_)
     {
         GL11.glPushMatrix();
-        GL11.glRotatef(par1EntityItemFrame.rotationYaw, 0.0F, 1.0F, 0.0F);
+        GL11.glRotatef(p_82403_1_.rotationYaw, 0.0F, 1.0F, 0.0F);
         this.renderManager.renderEngine.bindTexture(TextureMap.locationBlocksTexture);
         Block var2 = Blocks.planks;
         float var3 = 0.0625F;
@@ -158,22 +158,22 @@ public class RenderItemFrame extends Render
         GL11.glPopMatrix();
     }
 
-    private void func_82402_b(EntityItemFrame par1EntityItemFrame)
+    private void func_82402_b(EntityItemFrame p_82402_1_)
     {
-        ItemStack var2 = par1EntityItemFrame.getDisplayedItem();
+        ItemStack var2 = p_82402_1_.getDisplayedItem();
 
         if (var2 != null)
         {
-            EntityItem var3 = new EntityItem(par1EntityItemFrame.worldObj, 0.0D, 0.0D, 0.0D, var2);
+            EntityItem var3 = new EntityItem(p_82402_1_.worldObj, 0.0D, 0.0D, 0.0D, var2);
             Item var4 = var3.getEntityItem().getItem();
             var3.getEntityItem().stackSize = 1;
             var3.hoverStart = 0.0F;
             GL11.glPushMatrix();
-            GL11.glTranslatef(-0.453125F * (float)Direction.offsetX[par1EntityItemFrame.hangingDirection], -0.18F, -0.453125F * (float)Direction.offsetZ[par1EntityItemFrame.hangingDirection]);
-            GL11.glRotatef(180.0F + par1EntityItemFrame.rotationYaw, 0.0F, 1.0F, 0.0F);
-            GL11.glRotatef((float)(-90 * par1EntityItemFrame.getRotation()), 0.0F, 0.0F, 1.0F);
+            GL11.glTranslatef(-0.453125F * (float)Direction.offsetX[p_82402_1_.hangingDirection], -0.18F, -0.453125F * (float)Direction.offsetZ[p_82402_1_.hangingDirection]);
+            GL11.glRotatef(180.0F + p_82402_1_.rotationYaw, 0.0F, 1.0F, 0.0F);
+            GL11.glRotatef((float)(-90 * p_82402_1_.getRotation()), 0.0F, 0.0F, 1.0F);
 
-            switch (par1EntityItemFrame.getRotation())
+            switch (p_82402_1_.getRotation())
             {
                 case 1:
                     GL11.glTranslatef(-0.16F, -0.16F, 0.0F);
@@ -196,7 +196,7 @@ public class RenderItemFrame extends Render
                 float var6 = 0.0078125F;
                 GL11.glScalef(var6, var6, var6);
 
-                switch (par1EntityItemFrame.getRotation())
+                switch (p_82402_1_.getRotation())
                 {
                     case 0:
                         GL11.glTranslatef(-64.0F, -87.0F, -1.5F);
@@ -215,7 +215,7 @@ public class RenderItemFrame extends Render
                 }
 
                 GL11.glNormal3f(0.0F, 0.0F, -1.0F);
-                MapData var7 = Items.filled_map.getMapData(var3.getEntityItem(), par1EntityItemFrame.worldObj);
+                MapData var7 = Items.filled_map.getMapData(var3.getEntityItem(), p_82402_1_.worldObj);
                 GL11.glTranslatef(0.0F, 0.0F, -1.0F);
 
                 if (var7 != null)
@@ -238,7 +238,7 @@ public class RenderItemFrame extends Render
                         double var10 = var15.angleDelta;
                         var15.currentAngle = 0.0D;
                         var15.angleDelta = 0.0D;
-                        var15.updateCompass(par1EntityItemFrame.worldObj, par1EntityItemFrame.posX, par1EntityItemFrame.posZ, (double)MathHelper.wrapAngleTo180_float((float)(180 + par1EntityItemFrame.hangingDirection * 90)), false, true);
+                        var15.updateCompass(p_82402_1_.worldObj, p_82402_1_.posX, p_82402_1_.posZ, (double)MathHelper.wrapAngleTo180_float((float)(180 + p_82402_1_.hangingDirection * 90)), false, true);
                         var15.currentAngle = var8;
                         var15.angleDelta = var10;
                     }
@@ -319,9 +319,9 @@ public class RenderItemFrame extends Render
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntityItemFrame)par1Entity);
+        return this.getEntityTexture((EntityItemFrame)p_110775_1_);
     }
 
     /**
@@ -330,8 +330,8 @@ public class RenderItemFrame extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityItemFrame)par1Entity, par2, par4, par6, par8, par9);
+        this.doRender((EntityItemFrame)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 }

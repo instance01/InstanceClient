@@ -4,5 +4,5 @@ import net.minecraft.util.IIcon;
 
 public interface IIconRegister
 {
-    IIcon registerIcon(String var1);
+    IIcon registerIcon(String p_94245_1_);
 }

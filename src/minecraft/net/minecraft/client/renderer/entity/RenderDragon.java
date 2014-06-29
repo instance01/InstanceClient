@@ -32,17 +32,17 @@ public class RenderDragon extends RenderLiving
         this.setRenderPassModel(this.mainModel);
     }
 
-    protected void rotateCorpse(EntityDragon par1EntityDragon, float par2, float par3, float par4)
+    protected void rotateCorpse(EntityDragon p_77043_1_, float p_77043_2_, float p_77043_3_, float p_77043_4_)
     {
-        float var5 = (float)par1EntityDragon.getMovementOffsets(7, par4)[0];
-        float var6 = (float)(par1EntityDragon.getMovementOffsets(5, par4)[1] - par1EntityDragon.getMovementOffsets(10, par4)[1]);
+        float var5 = (float)p_77043_1_.getMovementOffsets(7, p_77043_4_)[0];
+        float var6 = (float)(p_77043_1_.getMovementOffsets(5, p_77043_4_)[1] - p_77043_1_.getMovementOffsets(10, p_77043_4_)[1]);
         GL11.glRotatef(-var5, 0.0F, 1.0F, 0.0F);
         GL11.glRotatef(var6 * 10.0F, 1.0F, 0.0F, 0.0F);
         GL11.glTranslatef(0.0F, 0.0F, 1.0F);
 
-        if (par1EntityDragon.deathTime > 0)
+        if (p_77043_1_.deathTime > 0)
         {
-            float var7 = ((float)par1EntityDragon.deathTime + par4 - 1.0F) / 20.0F * 1.6F;
+            float var7 = ((float)p_77043_1_.deathTime + p_77043_4_ - 1.0F) / 20.0F * 1.6F;
             var7 = MathHelper.sqrt_float(var7);
 
             if (var7 > 1.0F)
@@ -50,38 +50,38 @@ public class RenderDragon extends RenderLiving
                 var7 = 1.0F;
             }
 
-            GL11.glRotatef(var7 * this.getDeathMaxRotation(par1EntityDragon), 0.0F, 0.0F, 1.0F);
+            GL11.glRotatef(var7 * this.getDeathMaxRotation(p_77043_1_), 0.0F, 0.0F, 1.0F);
         }
     }
 
     /**
      * Renders the model in RenderLiving
      */
-    protected void renderModel(EntityDragon par1EntityDragon, float par2, float par3, float par4, float par5, float par6, float par7)
+    protected void renderModel(EntityDragon p_77036_1_, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float p_77036_7_)
     {
-        if (par1EntityDragon.deathTicks > 0)
+        if (p_77036_1_.deathTicks > 0)
         {
-            float var8 = (float)par1EntityDragon.deathTicks / 200.0F;
+            float var8 = (float)p_77036_1_.deathTicks / 200.0F;
             GL11.glDepthFunc(GL11.GL_LEQUAL);
             GL11.glEnable(GL11.GL_ALPHA_TEST);
             GL11.glAlphaFunc(GL11.GL_GREATER, var8);
             this.bindTexture(enderDragonExplodingTextures);
-            this.mainModel.render(par1EntityDragon, par2, par3, par4, par5, par6, par7);
+            this.mainModel.render(p_77036_1_, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_);
             GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
             GL11.glDepthFunc(GL11.GL_EQUAL);
         }
 
-        this.bindEntityTexture(par1EntityDragon);
-        this.mainModel.render(par1EntityDragon, par2, par3, par4, par5, par6, par7);
+        this.bindEntityTexture(p_77036_1_);
+        this.mainModel.render(p_77036_1_, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_);
 
-        if (par1EntityDragon.hurtTime > 0)
+        if (p_77036_1_.hurtTime > 0)
         {
             GL11.glDepthFunc(GL11.GL_EQUAL);
             GL11.glDisable(GL11.GL_TEXTURE_2D);
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glColor4f(1.0F, 0.0F, 0.0F, 0.5F);
-            this.mainModel.render(par1EntityDragon, par2, par3, par4, par5, par6, par7);
+            this.mainModel.render(p_77036_1_, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_);
             GL11.glEnable(GL11.GL_TEXTURE_2D);
             GL11.glDisable(GL11.GL_BLEND);
             GL11.glDepthFunc(GL11.GL_LEQUAL);
@@ -94,23 +94,23 @@ public class RenderDragon extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityDragon par1EntityDragon, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntityDragon p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        BossStatus.setBossStatus(par1EntityDragon, false);
-        super.doRender((EntityLiving)par1EntityDragon, par2, par4, par6, par8, par9);
+        BossStatus.setBossStatus(p_76986_1_, false);
+        super.doRender((EntityLiving)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
 
-        if (par1EntityDragon.healingEnderCrystal != null)
+        if (p_76986_1_.healingEnderCrystal != null)
         {
-            float var10 = (float)par1EntityDragon.healingEnderCrystal.innerRotation + par9;
+            float var10 = (float)p_76986_1_.healingEnderCrystal.innerRotation + p_76986_9_;
             float var11 = MathHelper.sin(var10 * 0.2F) / 2.0F + 0.5F;
             var11 = (var11 * var11 + var11) * 0.2F;
-            float var12 = (float)(par1EntityDragon.healingEnderCrystal.posX - par1EntityDragon.posX - (par1EntityDragon.prevPosX - par1EntityDragon.posX) * (double)(1.0F - par9));
-            float var13 = (float)((double)var11 + par1EntityDragon.healingEnderCrystal.posY - 1.0D - par1EntityDragon.posY - (par1EntityDragon.prevPosY - par1EntityDragon.posY) * (double)(1.0F - par9));
-            float var14 = (float)(par1EntityDragon.healingEnderCrystal.posZ - par1EntityDragon.posZ - (par1EntityDragon.prevPosZ - par1EntityDragon.posZ) * (double)(1.0F - par9));
+            float var12 = (float)(p_76986_1_.healingEnderCrystal.posX - p_76986_1_.posX - (p_76986_1_.prevPosX - p_76986_1_.posX) * (double)(1.0F - p_76986_9_));
+            float var13 = (float)((double)var11 + p_76986_1_.healingEnderCrystal.posY - 1.0D - p_76986_1_.posY - (p_76986_1_.prevPosY - p_76986_1_.posY) * (double)(1.0F - p_76986_9_));
+            float var14 = (float)(p_76986_1_.healingEnderCrystal.posZ - p_76986_1_.posZ - (p_76986_1_.prevPosZ - p_76986_1_.posZ) * (double)(1.0F - p_76986_9_));
             float var15 = MathHelper.sqrt_float(var12 * var12 + var14 * var14);
             float var16 = MathHelper.sqrt_float(var12 * var12 + var13 * var13 + var14 * var14);
             GL11.glPushMatrix();
-            GL11.glTranslatef((float)par2, (float)par4 + 2.0F, (float)par6);
+            GL11.glTranslatef((float)p_76986_2_, (float)p_76986_4_ + 2.0F, (float)p_76986_6_);
             GL11.glRotatef((float)(-Math.atan2((double)var14, (double)var12)) * 180.0F / (float)Math.PI - 90.0F, 0.0F, 1.0F, 0.0F);
             GL11.glRotatef((float)(-Math.atan2((double)var15, (double)var13)) * 180.0F / (float)Math.PI - 90.0F, 1.0F, 0.0F, 0.0F);
             Tessellator var17 = Tessellator.instance;
@@ -118,8 +118,8 @@ public class RenderDragon extends RenderLiving
             GL11.glDisable(GL11.GL_CULL_FACE);
             this.bindTexture(enderDragonCrystalBeamTextures);
             GL11.glShadeModel(GL11.GL_SMOOTH);
-            float var18 = 0.0F - ((float)par1EntityDragon.ticksExisted + par9) * 0.01F;
-            float var19 = MathHelper.sqrt_float(var12 * var12 + var13 * var13 + var14 * var14) / 32.0F - ((float)par1EntityDragon.ticksExisted + par9) * 0.01F;
+            float var18 = 0.0F - ((float)p_76986_1_.ticksExisted + p_76986_9_) * 0.01F;
+            float var19 = MathHelper.sqrt_float(var12 * var12 + var13 * var13 + var14 * var14) / 32.0F - ((float)p_76986_1_.ticksExisted + p_76986_9_) * 0.01F;
             var17.startDrawing(5);
             byte var20 = 8;
 
@@ -145,20 +145,20 @@ public class RenderDragon extends RenderLiving
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntityDragon par1EntityDragon)
+    protected ResourceLocation getEntityTexture(EntityDragon p_110775_1_)
     {
         return enderDragonTextures;
     }
 
-    protected void renderEquippedItems(EntityDragon par1EntityDragon, float par2)
+    protected void renderEquippedItems(EntityDragon p_77029_1_, float p_77029_2_)
     {
-        super.renderEquippedItems(par1EntityDragon, par2);
+        super.renderEquippedItems(p_77029_1_, p_77029_2_);
         Tessellator var3 = Tessellator.instance;
 
-        if (par1EntityDragon.deathTicks > 0)
+        if (p_77029_1_.deathTicks > 0)
         {
             RenderHelper.disableStandardItemLighting();
-            float var4 = ((float)par1EntityDragon.deathTicks + par2) / 200.0F;
+            float var4 = ((float)p_77029_1_.deathTicks + p_77029_2_) / 200.0F;
             float var5 = 0.0F;
 
             if (var4 > 0.8F)
@@ -213,14 +213,14 @@ public class RenderDragon extends RenderLiving
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntityDragon par1EntityDragon, int par2, float par3)
+    protected int shouldRenderPass(EntityDragon p_77032_1_, int p_77032_2_, float p_77032_3_)
     {
-        if (par2 == 1)
+        if (p_77032_2_ == 1)
         {
             GL11.glDepthFunc(GL11.GL_LEQUAL);
         }
 
-        if (par2 != 0)
+        if (p_77032_2_ != 0)
         {
             return -1;
         }
@@ -248,35 +248,35 @@ public class RenderDragon extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntityLiving p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityDragon)par1EntityLiving, par2, par4, par6, par8, par9);
+        this.doRender((EntityDragon)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3)
+    protected int shouldRenderPass(EntityLivingBase p_77032_1_, int p_77032_2_, float p_77032_3_)
     {
-        return this.shouldRenderPass((EntityDragon)par1EntityLivingBase, par2, par3);
+        return this.shouldRenderPass((EntityDragon)p_77032_1_, p_77032_2_, p_77032_3_);
     }
 
-    protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2)
+    protected void renderEquippedItems(EntityLivingBase p_77029_1_, float p_77029_2_)
     {
-        this.renderEquippedItems((EntityDragon)par1EntityLivingBase, par2);
+        this.renderEquippedItems((EntityDragon)p_77029_1_, p_77029_2_);
     }
 
-    protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
+    protected void rotateCorpse(EntityLivingBase p_77043_1_, float p_77043_2_, float p_77043_3_, float p_77043_4_)
     {
-        this.rotateCorpse((EntityDragon)par1EntityLivingBase, par2, par3, par4);
+        this.rotateCorpse((EntityDragon)p_77043_1_, p_77043_2_, p_77043_3_, p_77043_4_);
     }
 
     /**
      * Renders the model in RenderLiving
      */
-    protected void renderModel(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4, float par5, float par6, float par7)
+    protected void renderModel(EntityLivingBase p_77036_1_, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float p_77036_7_)
     {
-        this.renderModel((EntityDragon)par1EntityLivingBase, par2, par3, par4, par5, par6, par7);
+        this.renderModel((EntityDragon)p_77036_1_, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_);
     }
 
     /**
@@ -285,17 +285,17 @@ public class RenderDragon extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityLivingBase par1Entity, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntityLivingBase p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityDragon)par1Entity, par2, par4, par6, par8, par9);
+        this.doRender((EntityDragon)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntityDragon)par1Entity);
+        return this.getEntityTexture((EntityDragon)p_110775_1_);
     }
 
     /**
@@ -304,8 +304,8 @@ public class RenderDragon extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityDragon)par1Entity, par2, par4, par6, par8, par9);
+        this.doRender((EntityDragon)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 }

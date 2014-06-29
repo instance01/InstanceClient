@@ -19,14 +19,14 @@ public class EntityAIFollowOwner extends EntityAIBase
     private boolean field_75344_i;
     private static final String __OBFID = "CL_00001585";
 
-    public EntityAIFollowOwner(EntityTameable par1EntityTameable, double par2, float par4, float par5)
+    public EntityAIFollowOwner(EntityTameable p_i1625_1_, double p_i1625_2_, float p_i1625_4_, float p_i1625_5_)
     {
-        this.thePet = par1EntityTameable;
-        this.theWorld = par1EntityTameable.worldObj;
-        this.field_75336_f = par2;
-        this.petPathfinder = par1EntityTameable.getNavigator();
-        this.minDist = par4;
-        this.maxDist = par5;
+        this.thePet = p_i1625_1_;
+        this.theWorld = p_i1625_1_.worldObj;
+        this.field_75336_f = p_i1625_2_;
+        this.petPathfinder = p_i1625_1_.getNavigator();
+        this.minDist = p_i1625_4_;
+        this.maxDist = p_i1625_5_;
         this.setMutexBits(3);
     }
 

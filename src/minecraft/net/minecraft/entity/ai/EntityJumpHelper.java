@@ -8,9 +8,9 @@ public class EntityJumpHelper
     private boolean isJumping;
     private static final String __OBFID = "CL_00001571";
 
-    public EntityJumpHelper(EntityLiving par1EntityLiving)
+    public EntityJumpHelper(EntityLiving p_i1612_1_)
     {
-        this.entity = par1EntityLiving;
+        this.entity = p_i1612_1_;
     }
 
     public void setJumping()

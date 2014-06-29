@@ -4,9 +4,9 @@ public class MaterialLiquid extends Material
 {
     private static final String __OBFID = "CL_00000541";
 
-    public MaterialLiquid(MapColor par1MapColor)
+    public MaterialLiquid(MapColor p_i2114_1_)
     {
-        super(par1MapColor);
+        super(p_i2114_1_);
         this.setReplaceable();
         this.setNoPushMobility();
     }

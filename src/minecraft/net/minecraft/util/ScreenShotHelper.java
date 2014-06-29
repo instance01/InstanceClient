@@ -132,14 +132,14 @@ public class ScreenShotHelper
      * the filename was unique when this method was called, but another process or thread created a file at the same
      * path immediately after this method returned.
      */
-    private static File getTimestampedPNGFileForDirectory(File par0File)
+    private static File getTimestampedPNGFileForDirectory(File p_74290_0_)
     {
         String var2 = dateFormat.format(new Date()).toString();
         int var3 = 1;
 
         while (true)
         {
-            File var1 = new File(par0File, var2 + (var3 == 1 ? "" : "_" + var3) + ".png");
+            File var1 = new File(p_74290_0_, var2 + (var3 == 1 ? "" : "_" + var3) + ".png");
 
             if (!var1.exists())
             {

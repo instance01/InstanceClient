@@ -15,17 +15,17 @@ public class EntityFootStepFX extends EntityFX
     private TextureManager currentFootSteps;
     private static final String __OBFID = "CL_00000908";
 
-    public EntityFootStepFX(TextureManager par1TextureManager, World par2World, double par3, double par5, double par7)
+    public EntityFootStepFX(TextureManager p_i1210_1_, World p_i1210_2_, double p_i1210_3_, double p_i1210_5_, double p_i1210_7_)
     {
-        super(par2World, par3, par5, par7, 0.0D, 0.0D, 0.0D);
-        this.currentFootSteps = par1TextureManager;
+        super(p_i1210_2_, p_i1210_3_, p_i1210_5_, p_i1210_7_, 0.0D, 0.0D, 0.0D);
+        this.currentFootSteps = p_i1210_1_;
         this.motionX = this.motionY = this.motionZ = 0.0D;
         this.footstepMaxAge = 200;
     }
 
-    public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7)
+    public void renderParticle(Tessellator p_70539_1_, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_)
     {
-        float var8 = ((float)this.footstepAge + par2) / (float)this.footstepMaxAge;
+        float var8 = ((float)this.footstepAge + p_70539_2_) / (float)this.footstepMaxAge;
         var8 *= var8;
         float var9 = 2.0F - var8 * 2.0F;
 
@@ -44,13 +44,13 @@ public class EntityFootStepFX extends EntityFX
         this.currentFootSteps.bindTexture(field_110126_a);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        par1Tessellator.startDrawingQuads();
-        par1Tessellator.setColorRGBA_F(var14, var14, var14, var9);
-        par1Tessellator.addVertexWithUV((double)(var11 - var10), (double)var12, (double)(var13 + var10), 0.0D, 1.0D);
-        par1Tessellator.addVertexWithUV((double)(var11 + var10), (double)var12, (double)(var13 + var10), 1.0D, 1.0D);
-        par1Tessellator.addVertexWithUV((double)(var11 + var10), (double)var12, (double)(var13 - var10), 1.0D, 0.0D);
-        par1Tessellator.addVertexWithUV((double)(var11 - var10), (double)var12, (double)(var13 - var10), 0.0D, 0.0D);
-        par1Tessellator.draw();
+        p_70539_1_.startDrawingQuads();
+        p_70539_1_.setColorRGBA_F(var14, var14, var14, var9);
+        p_70539_1_.addVertexWithUV((double)(var11 - var10), (double)var12, (double)(var13 + var10), 0.0D, 1.0D);
+        p_70539_1_.addVertexWithUV((double)(var11 + var10), (double)var12, (double)(var13 + var10), 1.0D, 1.0D);
+        p_70539_1_.addVertexWithUV((double)(var11 + var10), (double)var12, (double)(var13 - var10), 1.0D, 0.0D);
+        p_70539_1_.addVertexWithUV((double)(var11 - var10), (double)var12, (double)(var13 - var10), 0.0D, 0.0D);
+        p_70539_1_.draw();
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glEnable(GL11.GL_LIGHTING);
     }

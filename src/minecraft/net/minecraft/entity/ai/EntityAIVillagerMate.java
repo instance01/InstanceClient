@@ -15,10 +15,10 @@ public class EntityAIVillagerMate extends EntityAIBase
     Village villageObj;
     private static final String __OBFID = "CL_00001594";
 
-    public EntityAIVillagerMate(EntityVillager par1EntityVillager)
+    public EntityAIVillagerMate(EntityVillager p_i1634_1_)
     {
-        this.villagerObj = par1EntityVillager;
-        this.worldObj = par1EntityVillager.worldObj;
+        this.villagerObj = p_i1634_1_;
+        this.worldObj = p_i1634_1_.worldObj;
         this.setMutexBits(3);
     }
 

@@ -7,26 +7,26 @@ public class EntityMinecartEmpty extends EntityMinecart
 {
     private static final String __OBFID = "CL_00001677";
 
-    public EntityMinecartEmpty(World par1World)
+    public EntityMinecartEmpty(World p_i1722_1_)
     {
-        super(par1World);
+        super(p_i1722_1_);
     }
 
-    public EntityMinecartEmpty(World par1World, double par2, double par4, double par6)
+    public EntityMinecartEmpty(World p_i1723_1_, double p_i1723_2_, double p_i1723_4_, double p_i1723_6_)
     {
-        super(par1World, par2, par4, par6);
+        super(p_i1723_1_, p_i1723_2_, p_i1723_4_, p_i1723_6_);
     }
 
     /**
      * First layer of player interaction
      */
-    public boolean interactFirst(EntityPlayer par1EntityPlayer)
+    public boolean interactFirst(EntityPlayer p_130002_1_)
     {
-        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != par1EntityPlayer)
+        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != p_130002_1_)
         {
             return true;
         }
-        else if (this.riddenByEntity != null && this.riddenByEntity != par1EntityPlayer)
+        else if (this.riddenByEntity != null && this.riddenByEntity != p_130002_1_)
         {
             return false;
         }
@@ -34,7 +34,7 @@ public class EntityMinecartEmpty extends EntityMinecart
         {
             if (!this.worldObj.isClient)
             {
-                par1EntityPlayer.mountEntity(this);
+                p_130002_1_.mountEntity(this);
             }
 
             return true;

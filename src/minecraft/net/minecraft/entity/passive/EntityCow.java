@@ -21,9 +21,9 @@ public class EntityCow extends EntityAnimal
 {
     private static final String __OBFID = "CL_00001640";
 
-    public EntityCow(World par1World)
+    public EntityCow(World p_i1683_1_)
     {
-        super(par1World);
+        super(p_i1683_1_);
         this.setSize(0.9F, 1.3F);
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -96,9 +96,9 @@ public class EntityCow extends EntityAnimal
     /**
      * Drop 0-2 items of this living's type
      */
-    protected void dropFewItems(boolean par1, int par2)
+    protected void dropFewItems(boolean p_70628_1_, int p_70628_2_)
     {
-        int var3 = this.rand.nextInt(3) + this.rand.nextInt(1 + par2);
+        int var3 = this.rand.nextInt(3) + this.rand.nextInt(1 + p_70628_2_);
         int var4;
 
         for (var4 = 0; var4 < var3; ++var4)
@@ -106,7 +106,7 @@ public class EntityCow extends EntityAnimal
             this.func_145779_a(Items.leather, 1);
         }
 
-        var3 = this.rand.nextInt(3) + 1 + this.rand.nextInt(1 + par2);
+        var3 = this.rand.nextInt(3) + 1 + this.rand.nextInt(1 + p_70628_2_);
 
         for (var4 = 0; var4 < var3; ++var4)
         {
@@ -124,30 +124,30 @@ public class EntityCow extends EntityAnimal
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
-    public boolean interact(EntityPlayer par1EntityPlayer)
+    public boolean interact(EntityPlayer p_70085_1_)
     {
-        ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
+        ItemStack var2 = p_70085_1_.inventory.getCurrentItem();
 
-        if (var2 != null && var2.getItem() == Items.bucket && !par1EntityPlayer.capabilities.isCreativeMode)
+        if (var2 != null && var2.getItem() == Items.bucket && !p_70085_1_.capabilities.isCreativeMode)
         {
             if (var2.stackSize-- == 1)
             {
-                par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(Items.milk_bucket));
+                p_70085_1_.inventory.setInventorySlotContents(p_70085_1_.inventory.currentItem, new ItemStack(Items.milk_bucket));
             }
-            else if (!par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Items.milk_bucket)))
+            else if (!p_70085_1_.inventory.addItemStackToInventory(new ItemStack(Items.milk_bucket)))
             {
-                par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(Items.milk_bucket, 1, 0), false);
+                p_70085_1_.dropPlayerItemWithRandomChoice(new ItemStack(Items.milk_bucket, 1, 0), false);
             }
 
             return true;
         }
         else
         {
-            return super.interact(par1EntityPlayer);
+            return super.interact(p_70085_1_);
         }
     }
 
-    public EntityCow createChild(EntityAgeable par1EntityAgeable)
+    public EntityCow createChild(EntityAgeable p_90011_1_)
     {
         return new EntityCow(this.worldObj);
     }

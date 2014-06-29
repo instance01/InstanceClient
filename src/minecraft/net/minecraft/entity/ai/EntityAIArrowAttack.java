@@ -33,28 +33,28 @@ public class EntityAIArrowAttack extends EntityAIBase
     private float field_82642_h;
     private static final String __OBFID = "CL_00001609";
 
-    public EntityAIArrowAttack(IRangedAttackMob par1IRangedAttackMob, double par2, int par4, float par5)
+    public EntityAIArrowAttack(IRangedAttackMob p_i1649_1_, double p_i1649_2_, int p_i1649_4_, float p_i1649_5_)
     {
-        this(par1IRangedAttackMob, par2, par4, par4, par5);
+        this(p_i1649_1_, p_i1649_2_, p_i1649_4_, p_i1649_4_, p_i1649_5_);
     }
 
-    public EntityAIArrowAttack(IRangedAttackMob par1IRangedAttackMob, double par2, int par4, int par5, float par6)
+    public EntityAIArrowAttack(IRangedAttackMob p_i1650_1_, double p_i1650_2_, int p_i1650_4_, int p_i1650_5_, float p_i1650_6_)
     {
         this.rangedAttackTime = -1;
 
-        if (!(par1IRangedAttackMob instanceof EntityLivingBase))
+        if (!(p_i1650_1_ instanceof EntityLivingBase))
         {
             throw new IllegalArgumentException("ArrowAttackGoal requires Mob implements RangedAttackMob");
         }
         else
         {
-            this.rangedAttackEntityHost = par1IRangedAttackMob;
-            this.entityHost = (EntityLiving)par1IRangedAttackMob;
-            this.entityMoveSpeed = par2;
-            this.field_96561_g = par4;
-            this.maxRangedAttackTime = par5;
-            this.field_96562_i = par6;
-            this.field_82642_h = par6 * par6;
+            this.rangedAttackEntityHost = p_i1650_1_;
+            this.entityHost = (EntityLiving)p_i1650_1_;
+            this.entityMoveSpeed = p_i1650_2_;
+            this.field_96561_g = p_i1650_4_;
+            this.maxRangedAttackTime = p_i1650_5_;
+            this.field_96562_i = p_i1650_6_;
+            this.field_82642_h = p_i1650_6_ * p_i1650_6_;
             this.setMutexBits(3);
         }
     }

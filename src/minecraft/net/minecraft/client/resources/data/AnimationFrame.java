@@ -6,15 +6,15 @@ public class AnimationFrame
     private final int frameTime;
     private static final String __OBFID = "CL_00001104";
 
-    public AnimationFrame(int par1)
+    public AnimationFrame(int p_i1307_1_)
     {
-        this(par1, -1);
+        this(p_i1307_1_, -1);
     }
 
-    public AnimationFrame(int par1, int par2)
+    public AnimationFrame(int p_i1308_1_, int p_i1308_2_)
     {
-        this.frameIndex = par1;
-        this.frameTime = par2;
+        this.frameIndex = p_i1308_1_;
+        this.frameTime = p_i1308_2_;
     }
 
     public boolean hasNoTime()

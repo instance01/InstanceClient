@@ -12,12 +12,12 @@ public class EntityDragonPart extends Entity
     public final String field_146032_b;
     private static final String __OBFID = "CL_00001657";
 
-    public EntityDragonPart(IEntityMultiPart par1IEntityMultiPart, String par2Str, float par3, float par4)
+    public EntityDragonPart(IEntityMultiPart p_i1697_1_, String p_i1697_2_, float p_i1697_3_, float p_i1697_4_)
     {
-        super(par1IEntityMultiPart.func_82194_d());
-        this.setSize(par3, par4);
-        this.entityDragonObj = par1IEntityMultiPart;
-        this.field_146032_b = par2Str;
+        super(p_i1697_1_.func_82194_d());
+        this.setSize(p_i1697_3_, p_i1697_4_);
+        this.entityDragonObj = p_i1697_1_;
+        this.field_146032_b = p_i1697_2_;
     }
 
     protected void entityInit() {}
@@ -25,12 +25,12 @@ public class EntityDragonPart extends Entity
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {}
+    protected void readEntityFromNBT(NBTTagCompound p_70037_1_) {}
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {}
+    protected void writeEntityToNBT(NBTTagCompound p_70014_1_) {}
 
     /**
      * Returns true if other Entities should be prevented from moving through this Entity.
@@ -43,16 +43,16 @@ public class EntityDragonPart extends Entity
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_)
     {
-        return this.isEntityInvulnerable() ? false : this.entityDragonObj.attackEntityFromPart(this, par1DamageSource, par2);
+        return this.isEntityInvulnerable() ? false : this.entityDragonObj.attackEntityFromPart(this, p_70097_1_, p_70097_2_);
     }
 
     /**
      * Returns true if Entity argument is equal to this Entity
      */
-    public boolean isEntityEqual(Entity par1Entity)
+    public boolean isEntityEqual(Entity p_70028_1_)
     {
-        return this == par1Entity || this.entityDragonObj == par1Entity;
+        return this == p_70028_1_ || this.entityDragonObj == p_70028_1_;
     }
 }

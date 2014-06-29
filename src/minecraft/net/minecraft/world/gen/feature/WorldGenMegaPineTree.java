@@ -18,48 +18,48 @@ public class WorldGenMegaPineTree extends WorldGenHugeTrees
         this.field_150542_e = p_i45457_2_;
     }
 
-    public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
+    public boolean generate(World p_76484_1_, Random p_76484_2_, int p_76484_3_, int p_76484_4_, int p_76484_5_)
     {
-        int var6 = this.func_150533_a(par2Random);
+        int var6 = this.func_150533_a(p_76484_2_);
 
-        if (!this.func_150537_a(par1World, par2Random, par3, par4, par5, var6))
+        if (!this.func_150537_a(p_76484_1_, p_76484_2_, p_76484_3_, p_76484_4_, p_76484_5_, var6))
         {
             return false;
         }
         else
         {
-            this.func_150541_c(par1World, par3, par5, par4 + var6, 0, par2Random);
+            this.func_150541_c(p_76484_1_, p_76484_3_, p_76484_5_, p_76484_4_ + var6, 0, p_76484_2_);
 
             for (int var7 = 0; var7 < var6; ++var7)
             {
-                Block var8 = par1World.getBlock(par3, par4 + var7, par5);
+                Block var8 = p_76484_1_.getBlock(p_76484_3_, p_76484_4_ + var7, p_76484_5_);
 
                 if (var8.getMaterial() == Material.air || var8.getMaterial() == Material.leaves)
                 {
-                    this.func_150516_a(par1World, par3, par4 + var7, par5, Blocks.log, this.woodMetadata);
+                    this.func_150516_a(p_76484_1_, p_76484_3_, p_76484_4_ + var7, p_76484_5_, Blocks.log, this.woodMetadata);
                 }
 
                 if (var7 < var6 - 1)
                 {
-                    var8 = par1World.getBlock(par3 + 1, par4 + var7, par5);
+                    var8 = p_76484_1_.getBlock(p_76484_3_ + 1, p_76484_4_ + var7, p_76484_5_);
 
                     if (var8.getMaterial() == Material.air || var8.getMaterial() == Material.leaves)
                     {
-                        this.func_150516_a(par1World, par3 + 1, par4 + var7, par5, Blocks.log, this.woodMetadata);
+                        this.func_150516_a(p_76484_1_, p_76484_3_ + 1, p_76484_4_ + var7, p_76484_5_, Blocks.log, this.woodMetadata);
                     }
 
-                    var8 = par1World.getBlock(par3 + 1, par4 + var7, par5 + 1);
+                    var8 = p_76484_1_.getBlock(p_76484_3_ + 1, p_76484_4_ + var7, p_76484_5_ + 1);
 
                     if (var8.getMaterial() == Material.air || var8.getMaterial() == Material.leaves)
                     {
-                        this.func_150516_a(par1World, par3 + 1, par4 + var7, par5 + 1, Blocks.log, this.woodMetadata);
+                        this.func_150516_a(p_76484_1_, p_76484_3_ + 1, p_76484_4_ + var7, p_76484_5_ + 1, Blocks.log, this.woodMetadata);
                     }
 
-                    var8 = par1World.getBlock(par3, par4 + var7, par5 + 1);
+                    var8 = p_76484_1_.getBlock(p_76484_3_, p_76484_4_ + var7, p_76484_5_ + 1);
 
                     if (var8.getMaterial() == Material.air || var8.getMaterial() == Material.leaves)
                     {
-                        this.func_150516_a(par1World, par3, par4 + var7, par5 + 1, Blocks.log, this.woodMetadata);
+                        this.func_150516_a(p_76484_1_, p_76484_3_, p_76484_4_ + var7, p_76484_5_ + 1, Blocks.log, this.woodMetadata);
                     }
                 }
             }

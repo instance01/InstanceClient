@@ -33,18 +33,18 @@ public class EntityAIAttackOnCollide extends EntityAIBase
     private double field_151496_k;
     private static final String __OBFID = "CL_00001595";
 
-    public EntityAIAttackOnCollide(EntityCreature par1EntityCreature, Class par2Class, double par3, boolean par5)
+    public EntityAIAttackOnCollide(EntityCreature p_i1635_1_, Class p_i1635_2_, double p_i1635_3_, boolean p_i1635_5_)
     {
-        this(par1EntityCreature, par3, par5);
-        this.classTarget = par2Class;
+        this(p_i1635_1_, p_i1635_3_, p_i1635_5_);
+        this.classTarget = p_i1635_2_;
     }
 
-    public EntityAIAttackOnCollide(EntityCreature par1EntityCreature, double par2, boolean par4)
+    public EntityAIAttackOnCollide(EntityCreature p_i1636_1_, double p_i1636_2_, boolean p_i1636_4_)
     {
-        this.attacker = par1EntityCreature;
-        this.worldObj = par1EntityCreature.worldObj;
-        this.speedTowardsTarget = par2;
-        this.longMemory = par4;
+        this.attacker = p_i1636_1_;
+        this.worldObj = p_i1636_1_.worldObj;
+        this.speedTowardsTarget = p_i1636_2_;
+        this.longMemory = p_i1636_4_;
         this.setMutexBits(3);
     }
 

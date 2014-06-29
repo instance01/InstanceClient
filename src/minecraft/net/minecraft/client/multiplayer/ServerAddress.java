@@ -10,10 +10,10 @@ public class ServerAddress
     private final int serverPort;
     private static final String __OBFID = "CL_00000889";
 
-    private ServerAddress(String par1Str, int par2)
+    protected ServerAddress(String p_i1192_1_, int p_i1192_2_)
     {
-        this.ipAddress = par1Str;
-        this.serverPort = par2;
+        this.ipAddress = p_i1192_1_;
+        this.serverPort = p_i1192_2_;
     }
 
     public String getIP()
@@ -26,24 +26,24 @@ public class ServerAddress
         return this.serverPort;
     }
 
-    public static ServerAddress func_78860_a(String par0Str)
+    public static ServerAddress func_78860_a(String p_78860_0_)
     {
-        if (par0Str == null)
+        if (p_78860_0_ == null)
         {
             return null;
         }
         else
         {
-            String[] var1 = par0Str.split(":");
+            String[] var1 = p_78860_0_.split(":");
 
-            if (par0Str.startsWith("["))
+            if (p_78860_0_.startsWith("["))
             {
-                int var2 = par0Str.indexOf("]");
+                int var2 = p_78860_0_.indexOf("]");
 
                 if (var2 > 0)
                 {
-                    String var3 = par0Str.substring(1, var2);
-                    String var4 = par0Str.substring(var2 + 1).trim();
+                    String var3 = p_78860_0_.substring(1, var2);
+                    String var4 = p_78860_0_.substring(var2 + 1).trim();
 
                     if (var4.startsWith(":") && var4.length() > 0)
                     {
@@ -59,7 +59,7 @@ public class ServerAddress
 
             if (var1.length > 2)
             {
-                var1 = new String[] {par0Str};
+                var1 = new String[] {p_78860_0_};
             }
 
             String var5 = var1[0];
@@ -79,7 +79,7 @@ public class ServerAddress
     /**
      * Returns a server's address and port for the specified hostname, looking up the SRV record if possible
      */
-    private static String[] getServerAddress(String par0Str)
+    private static String[] getServerAddress(String p_78863_0_)
     {
         try
         {
@@ -90,25 +90,25 @@ public class ServerAddress
             var2.put("java.naming.provider.url", "dns:");
             var2.put("com.sun.jndi.dns.timeout.retries", "1");
             InitialDirContext var3 = new InitialDirContext(var2);
-            Attributes var4 = var3.getAttributes("_minecraft._tcp." + par0Str, new String[] {"SRV"});
+            Attributes var4 = var3.getAttributes("_minecraft._tcp." + p_78863_0_, new String[] {"SRV"});
             String[] var5 = var4.get("srv").get().toString().split(" ", 4);
             return new String[] {var5[3], var5[2]};
         }
         catch (Throwable var6)
         {
-            return new String[] {par0Str, Integer.toString(25565)};
+            return new String[] {p_78863_0_, Integer.toString(25565)};
         }
     }
 
-    private static int parseIntWithDefault(String par0Str, int par1)
+    private static int parseIntWithDefault(String p_78862_0_, int p_78862_1_)
     {
         try
         {
-            return Integer.parseInt(par0Str.trim());
+            return Integer.parseInt(p_78862_0_.trim());
         }
         catch (Exception var3)
         {
-            return par1;
+            return p_78862_1_;
         }
     }
 }

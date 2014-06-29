@@ -23,12 +23,12 @@ public class SimpleResource implements IResource
     private JsonObject mcmetaJson;
     private static final String __OBFID = "CL_00001093";
 
-    public SimpleResource(ResourceLocation par1ResourceLocation, InputStream par2InputStream, InputStream par3InputStream, IMetadataSerializer par4MetadataSerializer)
+    public SimpleResource(ResourceLocation p_i1300_1_, InputStream p_i1300_2_, InputStream p_i1300_3_, IMetadataSerializer p_i1300_4_)
     {
-        this.srResourceLocation = par1ResourceLocation;
-        this.resourceInputStream = par2InputStream;
-        this.mcmetaInputStream = par3InputStream;
-        this.srMetadataSerializer = par4MetadataSerializer;
+        this.srResourceLocation = p_i1300_1_;
+        this.resourceInputStream = p_i1300_2_;
+        this.mcmetaInputStream = p_i1300_3_;
+        this.srMetadataSerializer = p_i1300_4_;
     }
 
     public InputStream getInputStream()
@@ -41,7 +41,7 @@ public class SimpleResource implements IResource
         return this.mcmetaInputStream != null;
     }
 
-    public IMetadataSection getMetadata(String par1Str)
+    public IMetadataSection getMetadata(String p_110526_1_)
     {
         if (!this.hasMetadata())
         {
@@ -65,26 +65,26 @@ public class SimpleResource implements IResource
                 }
             }
 
-            IMetadataSection var6 = (IMetadataSection)this.mapMetadataSections.get(par1Str);
+            IMetadataSection var6 = (IMetadataSection)this.mapMetadataSections.get(p_110526_1_);
 
             if (var6 == null)
             {
-                var6 = this.srMetadataSerializer.parseMetadataSection(par1Str, this.mcmetaJson);
+                var6 = this.srMetadataSerializer.parseMetadataSection(p_110526_1_, this.mcmetaJson);
             }
 
             return var6;
         }
     }
 
-    public boolean equals(Object par1Obj)
+    public boolean equals(Object p_equals_1_)
     {
-        if (this == par1Obj)
+        if (this == p_equals_1_)
         {
             return true;
         }
-        else if (par1Obj instanceof SimpleResource)
+        else if (p_equals_1_ instanceof SimpleResource)
         {
-            SimpleResource var2 = (SimpleResource)par1Obj;
+            SimpleResource var2 = (SimpleResource)p_equals_1_;
             return this.srResourceLocation != null ? this.srResourceLocation.equals(var2.srResourceLocation) : var2.srResourceLocation == null;
         }
         else

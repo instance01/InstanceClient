@@ -22,32 +22,32 @@ public class CommandTestFor extends CommandBase
         return 2;
     }
 
-    public String getCommandUsage(ICommandSender par1ICommandSender)
+    public String getCommandUsage(ICommandSender p_71518_1_)
     {
         return "commands.testfor.usage";
     }
 
-    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_)
     {
-        if (par2ArrayOfStr.length != 1)
+        if (p_71515_2_.length != 1)
         {
             throw new WrongUsageException("commands.testfor.usage", new Object[0]);
         }
-        else if (!(par1ICommandSender instanceof CommandBlockLogic))
+        else if (!(p_71515_1_ instanceof CommandBlockLogic))
         {
             throw new CommandException("commands.testfor.failed", new Object[0]);
         }
         else
         {
-            getPlayer(par1ICommandSender, par2ArrayOfStr[0]);
+            getPlayer(p_71515_1_, p_71515_2_[0]);
         }
     }
 
     /**
      * Return whether the specified command parameter index is a username parameter.
      */
-    public boolean isUsernameIndex(String[] par1ArrayOfStr, int par2)
+    public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_)
     {
-        return par2 == 0;
+        return p_82358_2_ == 0;
     }
 }

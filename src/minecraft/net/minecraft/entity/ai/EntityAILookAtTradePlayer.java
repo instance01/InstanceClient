@@ -8,10 +8,10 @@ public class EntityAILookAtTradePlayer extends EntityAIWatchClosest
     private final EntityVillager theMerchant;
     private static final String __OBFID = "CL_00001593";
 
-    public EntityAILookAtTradePlayer(EntityVillager par1EntityVillager)
+    public EntityAILookAtTradePlayer(EntityVillager p_i1633_1_)
     {
-        super(par1EntityVillager, EntityPlayer.class, 8.0F);
-        this.theMerchant = par1EntityVillager;
+        super(p_i1633_1_, EntityPlayer.class, 8.0F);
+        this.theMerchant = p_i1633_1_;
     }
 
     /**

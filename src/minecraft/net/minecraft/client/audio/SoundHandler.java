@@ -57,11 +57,11 @@ public class SoundHandler implements IResourceManagerReloadListener, IUpdatePlay
         this.field_147694_f = new SoundManager(this, p_i45122_2_);
     }
 
-    public void onResourceManagerReload(IResourceManager par1ResourceManager)
+    public void onResourceManagerReload(IResourceManager p_110549_1_)
     {
         this.field_147694_f.func_148596_a();
         this.field_147697_e.func_148763_c();
-        Iterator var2 = par1ResourceManager.getResourceDomains().iterator();
+        Iterator var2 = p_110549_1_.getResourceDomains().iterator();
 
         while (var2.hasNext())
         {
@@ -69,11 +69,12 @@ public class SoundHandler implements IResourceManagerReloadListener, IUpdatePlay
 
             try
             {
-                List var4 = par1ResourceManager.getAllResources(new ResourceLocation(var3, "sounds.json"));
+                List var4 = p_110549_1_.getAllResources(new ResourceLocation(var3, "sounds.json"));
+                Iterator var5 = var4.iterator();
 
-                for (int var5 = var4.size() - 1; var5 >= 0; --var5)
+                while (var5.hasNext())
                 {
-                    IResource var6 = (IResource)var4.get(var5);
+                    IResource var6 = (IResource)var5.next();
 
                     try
                     {
@@ -109,6 +110,7 @@ public class SoundHandler implements IResourceManagerReloadListener, IUpdatePlay
         }
         else
         {
+            logger.debug("Registered/replaced new sound event location {}", new Object[] {p_147693_1_});
             var3 = new SoundEventAccessorComposite(p_147693_1_, 1.0D, 1.0D, p_147693_2_.func_148573_c());
             this.field_147697_e.func_148762_a(var3);
         }

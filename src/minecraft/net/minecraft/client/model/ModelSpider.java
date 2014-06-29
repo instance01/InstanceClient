@@ -81,20 +81,20 @@ public class ModelSpider extends ModelBase
     /**
      * Sets the models various rotation angles then renders the model.
      */
-    public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
+    public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_)
     {
-        this.setRotationAngles(par2, par3, par4, par5, par6, par7, par1Entity);
-        this.spiderHead.render(par7);
-        this.spiderNeck.render(par7);
-        this.spiderBody.render(par7);
-        this.spiderLeg1.render(par7);
-        this.spiderLeg2.render(par7);
-        this.spiderLeg3.render(par7);
-        this.spiderLeg4.render(par7);
-        this.spiderLeg5.render(par7);
-        this.spiderLeg6.render(par7);
-        this.spiderLeg7.render(par7);
-        this.spiderLeg8.render(par7);
+        this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, p_78088_7_, p_78088_1_);
+        this.spiderHead.render(p_78088_7_);
+        this.spiderNeck.render(p_78088_7_);
+        this.spiderBody.render(p_78088_7_);
+        this.spiderLeg1.render(p_78088_7_);
+        this.spiderLeg2.render(p_78088_7_);
+        this.spiderLeg3.render(p_78088_7_);
+        this.spiderLeg4.render(p_78088_7_);
+        this.spiderLeg5.render(p_78088_7_);
+        this.spiderLeg6.render(p_78088_7_);
+        this.spiderLeg7.render(p_78088_7_);
+        this.spiderLeg8.render(p_78088_7_);
     }
 
     /**
@@ -102,10 +102,10 @@ public class ModelSpider extends ModelBase
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
      * "far" arms and legs can swing at most.
      */
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
+    public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity p_78087_7_)
     {
-        this.spiderHead.rotateAngleY = par4 / (180F / (float)Math.PI);
-        this.spiderHead.rotateAngleX = par5 / (180F / (float)Math.PI);
+        this.spiderHead.rotateAngleY = p_78087_4_ / (180F / (float)Math.PI);
+        this.spiderHead.rotateAngleX = p_78087_5_ / (180F / (float)Math.PI);
         float var8 = ((float)Math.PI / 4F);
         this.spiderLeg1.rotateAngleZ = -var8;
         this.spiderLeg2.rotateAngleZ = var8;
@@ -125,14 +125,14 @@ public class ModelSpider extends ModelBase
         this.spiderLeg6.rotateAngleY = var10 * 1.0F - var9;
         this.spiderLeg7.rotateAngleY = -var10 * 2.0F + var9;
         this.spiderLeg8.rotateAngleY = var10 * 2.0F - var9;
-        float var11 = -(MathHelper.cos(par1 * 0.6662F * 2.0F + 0.0F) * 0.4F) * par2;
-        float var12 = -(MathHelper.cos(par1 * 0.6662F * 2.0F + (float)Math.PI) * 0.4F) * par2;
-        float var13 = -(MathHelper.cos(par1 * 0.6662F * 2.0F + ((float)Math.PI / 2F)) * 0.4F) * par2;
-        float var14 = -(MathHelper.cos(par1 * 0.6662F * 2.0F + ((float)Math.PI * 3F / 2F)) * 0.4F) * par2;
-        float var15 = Math.abs(MathHelper.sin(par1 * 0.6662F + 0.0F) * 0.4F) * par2;
-        float var16 = Math.abs(MathHelper.sin(par1 * 0.6662F + (float)Math.PI) * 0.4F) * par2;
-        float var17 = Math.abs(MathHelper.sin(par1 * 0.6662F + ((float)Math.PI / 2F)) * 0.4F) * par2;
-        float var18 = Math.abs(MathHelper.sin(par1 * 0.6662F + ((float)Math.PI * 3F / 2F)) * 0.4F) * par2;
+        float var11 = -(MathHelper.cos(p_78087_1_ * 0.6662F * 2.0F + 0.0F) * 0.4F) * p_78087_2_;
+        float var12 = -(MathHelper.cos(p_78087_1_ * 0.6662F * 2.0F + (float)Math.PI) * 0.4F) * p_78087_2_;
+        float var13 = -(MathHelper.cos(p_78087_1_ * 0.6662F * 2.0F + ((float)Math.PI / 2F)) * 0.4F) * p_78087_2_;
+        float var14 = -(MathHelper.cos(p_78087_1_ * 0.6662F * 2.0F + ((float)Math.PI * 3F / 2F)) * 0.4F) * p_78087_2_;
+        float var15 = Math.abs(MathHelper.sin(p_78087_1_ * 0.6662F + 0.0F) * 0.4F) * p_78087_2_;
+        float var16 = Math.abs(MathHelper.sin(p_78087_1_ * 0.6662F + (float)Math.PI) * 0.4F) * p_78087_2_;
+        float var17 = Math.abs(MathHelper.sin(p_78087_1_ * 0.6662F + ((float)Math.PI / 2F)) * 0.4F) * p_78087_2_;
+        float var18 = Math.abs(MathHelper.sin(p_78087_1_ * 0.6662F + ((float)Math.PI * 3F / 2F)) * 0.4F) * p_78087_2_;
         this.spiderLeg1.rotateAngleY += var11;
         this.spiderLeg2.rotateAngleY += -var11;
         this.spiderLeg3.rotateAngleY += var12;

@@ -15,22 +15,22 @@ public class InventoryLargeChest implements IInventory
     private IInventory lowerChest;
     private static final String __OBFID = "CL_00001507";
 
-    public InventoryLargeChest(String par1Str, IInventory par2IInventory, IInventory par3IInventory)
+    public InventoryLargeChest(String p_i1559_1_, IInventory p_i1559_2_, IInventory p_i1559_3_)
     {
-        this.name = par1Str;
+        this.name = p_i1559_1_;
 
-        if (par2IInventory == null)
+        if (p_i1559_2_ == null)
         {
-            par2IInventory = par3IInventory;
+            p_i1559_2_ = p_i1559_3_;
         }
 
-        if (par3IInventory == null)
+        if (p_i1559_3_ == null)
         {
-            par3IInventory = par2IInventory;
+            p_i1559_3_ = p_i1559_2_;
         }
 
-        this.upperChest = par2IInventory;
-        this.lowerChest = par3IInventory;
+        this.upperChest = p_i1559_2_;
+        this.lowerChest = p_i1559_3_;
     }
 
     /**
@@ -44,9 +44,9 @@ public class InventoryLargeChest implements IInventory
     /**
      * Return whether the given inventory is part of this large chest.
      */
-    public boolean isPartOfLargeChest(IInventory par1IInventory)
+    public boolean isPartOfLargeChest(IInventory p_90010_1_)
     {
-        return this.upperChest == par1IInventory || this.lowerChest == par1IInventory;
+        return this.upperChest == p_90010_1_ || this.lowerChest == p_90010_1_;
     }
 
     /**
@@ -68,41 +68,41 @@ public class InventoryLargeChest implements IInventory
     /**
      * Returns the stack in slot i
      */
-    public ItemStack getStackInSlot(int par1)
+    public ItemStack getStackInSlot(int p_70301_1_)
     {
-        return par1 >= this.upperChest.getSizeInventory() ? this.lowerChest.getStackInSlot(par1 - this.upperChest.getSizeInventory()) : this.upperChest.getStackInSlot(par1);
+        return p_70301_1_ >= this.upperChest.getSizeInventory() ? this.lowerChest.getStackInSlot(p_70301_1_ - this.upperChest.getSizeInventory()) : this.upperChest.getStackInSlot(p_70301_1_);
     }
 
     /**
      * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
      * new stack.
      */
-    public ItemStack decrStackSize(int par1, int par2)
+    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_)
     {
-        return par1 >= this.upperChest.getSizeInventory() ? this.lowerChest.decrStackSize(par1 - this.upperChest.getSizeInventory(), par2) : this.upperChest.decrStackSize(par1, par2);
+        return p_70298_1_ >= this.upperChest.getSizeInventory() ? this.lowerChest.decrStackSize(p_70298_1_ - this.upperChest.getSizeInventory(), p_70298_2_) : this.upperChest.decrStackSize(p_70298_1_, p_70298_2_);
     }
 
     /**
      * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
      * like when you close a workbench GUI.
      */
-    public ItemStack getStackInSlotOnClosing(int par1)
+    public ItemStack getStackInSlotOnClosing(int p_70304_1_)
     {
-        return par1 >= this.upperChest.getSizeInventory() ? this.lowerChest.getStackInSlotOnClosing(par1 - this.upperChest.getSizeInventory()) : this.upperChest.getStackInSlotOnClosing(par1);
+        return p_70304_1_ >= this.upperChest.getSizeInventory() ? this.lowerChest.getStackInSlotOnClosing(p_70304_1_ - this.upperChest.getSizeInventory()) : this.upperChest.getStackInSlotOnClosing(p_70304_1_);
     }
 
     /**
      * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      */
-    public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
+    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_)
     {
-        if (par1 >= this.upperChest.getSizeInventory())
+        if (p_70299_1_ >= this.upperChest.getSizeInventory())
         {
-            this.lowerChest.setInventorySlotContents(par1 - this.upperChest.getSizeInventory(), par2ItemStack);
+            this.lowerChest.setInventorySlotContents(p_70299_1_ - this.upperChest.getSizeInventory(), p_70299_2_);
         }
         else
         {
-            this.upperChest.setInventorySlotContents(par1, par2ItemStack);
+            this.upperChest.setInventorySlotContents(p_70299_1_, p_70299_2_);
         }
     }
 
@@ -126,9 +126,9 @@ public class InventoryLargeChest implements IInventory
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
      */
-    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+    public boolean isUseableByPlayer(EntityPlayer p_70300_1_)
     {
-        return this.upperChest.isUseableByPlayer(par1EntityPlayer) && this.lowerChest.isUseableByPlayer(par1EntityPlayer);
+        return this.upperChest.isUseableByPlayer(p_70300_1_) && this.lowerChest.isUseableByPlayer(p_70300_1_);
     }
 
     public void openInventory()
@@ -146,7 +146,7 @@ public class InventoryLargeChest implements IInventory
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      */
-    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
+    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_)
     {
         return true;
     }

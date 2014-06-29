@@ -21,23 +21,21 @@ public class GLAllocation
     /**
      * Generates the specified number of display lists and returns the first index.
      */
-
-    public static synchronized int generateDisplayLists(int par0)
+    public static synchronized int generateDisplayLists(int p_74526_0_)
     {
-        int var1 = GL11.glGenLists(par0);
-        mapDisplayLists.put(Integer.valueOf(var1), Integer.valueOf(par0));
+        int var1 = GL11.glGenLists(p_74526_0_);
+        mapDisplayLists.put(Integer.valueOf(var1), Integer.valueOf(p_74526_0_));
         return var1;
     }
 
-    public static synchronized void deleteDisplayLists(int par0)
+    public static synchronized void deleteDisplayLists(int p_74523_0_)
     {
-        GL11.glDeleteLists(par0, ((Integer)mapDisplayLists.remove(Integer.valueOf(par0))).intValue());
+        GL11.glDeleteLists(p_74523_0_, ((Integer)mapDisplayLists.remove(Integer.valueOf(p_74523_0_))).intValue());
     }
 
     /**
      * Deletes all textures and display lists. Called when Minecraft is shutdown to free up resources.
      */
-
     public static synchronized void deleteTexturesAndDisplayLists()
     {
         Iterator var0 = mapDisplayLists.entrySet().iterator();
@@ -54,26 +52,25 @@ public class GLAllocation
     /**
      * Creates and returns a direct byte buffer with the specified capacity. Applies native ordering to speed up access.
      */
-
-    public static synchronized ByteBuffer createDirectByteBuffer(int par0)
+    public static synchronized ByteBuffer createDirectByteBuffer(int p_74524_0_)
     {
-        return ByteBuffer.allocateDirect(par0).order(ByteOrder.nativeOrder());
+        return ByteBuffer.allocateDirect(p_74524_0_).order(ByteOrder.nativeOrder());
     }
 
     /**
      * Creates and returns a direct int buffer with the specified capacity. Applies native ordering to speed up access.
      */
-    public static IntBuffer createDirectIntBuffer(int par0)
+    public static IntBuffer createDirectIntBuffer(int p_74527_0_)
     {
-        return createDirectByteBuffer(par0 << 2).asIntBuffer();
+        return createDirectByteBuffer(p_74527_0_ << 2).asIntBuffer();
     }
 
     /**
      * Creates and returns a direct float buffer with the specified capacity. Applies native ordering to speed up
      * access.
      */
-    public static FloatBuffer createDirectFloatBuffer(int par0)
+    public static FloatBuffer createDirectFloatBuffer(int p_74529_0_)
     {
-        return createDirectByteBuffer(par0 << 2).asFloatBuffer();
+        return createDirectByteBuffer(p_74529_0_ << 2).asFloatBuffer();
     }
 }

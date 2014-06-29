@@ -42,9 +42,9 @@ public class S1FPacketSetExperience extends Packet
         p_148840_1_.writeShort(this.field_149399_b);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149398_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149398_1_.handleSetExperience(this);
+        p_148833_1_.handleSetExperience(this);
     }
 
     public float func_149397_c()

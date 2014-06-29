@@ -124,45 +124,45 @@ public abstract class ChatComponentStyle implements IChatComponent
         Iterator var1 = Iterators.concat(Iterators.transform(p_150262_0_.iterator(), new Function()
         {
             private static final String __OBFID = "CL_00001258";
-            public Iterator apply(IChatComponent p_150665_1_)
+            public Iterator apply(IChatComponent p_apply_1_)
             {
-                return p_150665_1_.iterator();
+                return p_apply_1_.iterator();
             }
-            public Object apply(Object par1Obj)
+            public Object apply(Object p_apply_1_)
             {
-                return this.apply((IChatComponent)par1Obj);
+                return this.apply((IChatComponent)p_apply_1_);
             }
         }));
         var1 = Iterators.transform(var1, new Function()
         {
             private static final String __OBFID = "CL_00001259";
-            public IChatComponent apply(IChatComponent p_150666_1_)
+            public IChatComponent apply(IChatComponent p_apply_1_)
             {
-                IChatComponent var2 = p_150666_1_.createCopy();
+                IChatComponent var2 = p_apply_1_.createCopy();
                 var2.setChatStyle(var2.getChatStyle().createDeepCopy());
                 return var2;
             }
-            public Object apply(Object par1Obj)
+            public Object apply(Object p_apply_1_)
             {
-                return this.apply((IChatComponent)par1Obj);
+                return this.apply((IChatComponent)p_apply_1_);
             }
         });
         return var1;
     }
 
-    public boolean equals(Object par1Obj)
+    public boolean equals(Object p_equals_1_)
     {
-        if (this == par1Obj)
+        if (this == p_equals_1_)
         {
             return true;
         }
-        else if (!(par1Obj instanceof ChatComponentStyle))
+        else if (!(p_equals_1_ instanceof ChatComponentStyle))
         {
             return false;
         }
         else
         {
-            ChatComponentStyle var2 = (ChatComponentStyle)par1Obj;
+            ChatComponentStyle var2 = (ChatComponentStyle)p_equals_1_;
             return this.siblings.equals(var2.siblings) && this.getChatStyle().equals(var2.getChatStyle());
         }
     }

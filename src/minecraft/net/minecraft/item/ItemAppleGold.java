@@ -17,38 +17,38 @@ public class ItemAppleGold extends ItemFood
         this.setHasSubtypes(true);
     }
 
-    public boolean hasEffect(ItemStack par1ItemStack)
+    public boolean hasEffect(ItemStack p_77636_1_)
     {
-        return par1ItemStack.getItemDamage() > 0;
+        return p_77636_1_.getItemDamage() > 0;
     }
 
     /**
      * Return an item rarity from EnumRarity
      */
-    public EnumRarity getRarity(ItemStack par1ItemStack)
+    public EnumRarity getRarity(ItemStack p_77613_1_)
     {
-        return par1ItemStack.getItemDamage() == 0 ? EnumRarity.rare : EnumRarity.epic;
+        return p_77613_1_.getItemDamage() == 0 ? EnumRarity.rare : EnumRarity.epic;
     }
 
-    protected void onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    protected void onFoodEaten(ItemStack p_77849_1_, World p_77849_2_, EntityPlayer p_77849_3_)
     {
-        if (!par2World.isClient)
+        if (!p_77849_2_.isClient)
         {
-            par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.field_76444_x.id, 2400, 0));
+            p_77849_3_.addPotionEffect(new PotionEffect(Potion.field_76444_x.id, 2400, 0));
         }
 
-        if (par1ItemStack.getItemDamage() > 0)
+        if (p_77849_1_.getItemDamage() > 0)
         {
-            if (!par2World.isClient)
+            if (!p_77849_2_.isClient)
             {
-                par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.id, 600, 4));
-                par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.resistance.id, 6000, 0));
-                par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 6000, 0));
+                p_77849_3_.addPotionEffect(new PotionEffect(Potion.regeneration.id, 600, 4));
+                p_77849_3_.addPotionEffect(new PotionEffect(Potion.resistance.id, 6000, 0));
+                p_77849_3_.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 6000, 0));
             }
         }
         else
         {
-            super.onFoodEaten(par1ItemStack, par2World, par3EntityPlayer);
+            super.onFoodEaten(p_77849_1_, p_77849_2_, p_77849_3_);
         }
     }
 

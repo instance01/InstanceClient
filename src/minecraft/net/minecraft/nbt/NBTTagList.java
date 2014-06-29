@@ -21,7 +21,7 @@ public class NBTTagList extends NBTBase
     /**
      * Write the actual data contents of the tag, implemented in NBT extension classes
      */
-    void write(DataOutput par1DataOutput) throws IOException
+    void write(DataOutput p_74734_1_) throws IOException
     {
         if (!this.tagList.isEmpty())
         {
@@ -32,35 +32,33 @@ public class NBTTagList extends NBTBase
             this.tagType = 0;
         }
 
-        par1DataOutput.writeByte(this.tagType);
-        par1DataOutput.writeInt(this.tagList.size());
+        p_74734_1_.writeByte(this.tagType);
+        p_74734_1_.writeInt(this.tagList.size());
 
         for (int var2 = 0; var2 < this.tagList.size(); ++var2)
         {
-            ((NBTBase)this.tagList.get(var2)).write(par1DataOutput);
+            ((NBTBase)this.tagList.get(var2)).write(p_74734_1_);
         }
     }
 
-    /**
-     * Read the actual data contents of the tag, implemented in NBT extension classes
-     */
-    void load(DataInput par1DataInput, int par2) throws IOException
+    void func_152446_a(DataInput p_152446_1_, int p_152446_2_, NBTSizeTracker p_152446_3_) throws IOException
     {
-        if (par2 > 512)
+        if (p_152446_2_ > 512)
         {
             throw new RuntimeException("Tried to read NBT tag with too high complexity, depth > 512");
         }
         else
         {
-            this.tagType = par1DataInput.readByte();
-            int var3 = par1DataInput.readInt();
+            p_152446_3_.func_152450_a(8L);
+            this.tagType = p_152446_1_.readByte();
+            int var4 = p_152446_1_.readInt();
             this.tagList = new ArrayList();
 
-            for (int var4 = 0; var4 < var3; ++var4)
+            for (int var5 = 0; var5 < var4; ++var5)
             {
-                NBTBase var5 = NBTBase.func_150284_a(this.tagType);
-                var5.load(par1DataInput, par2 + 1);
-                this.tagList.add(var5);
+                NBTBase var6 = NBTBase.func_150284_a(this.tagType);
+                var6.func_152446_a(p_152446_1_, p_152446_2_ + 1, p_152446_3_);
+                this.tagList.add(var6);
             }
         }
     }
@@ -91,19 +89,19 @@ public class NBTTagList extends NBTBase
      * Adds the provided tag to the end of the list. There is no check to verify this tag is of the same type as any
      * previous tag.
      */
-    public void appendTag(NBTBase par1NBTBase)
+    public void appendTag(NBTBase p_74742_1_)
     {
         if (this.tagType == 0)
         {
-            this.tagType = par1NBTBase.getId();
+            this.tagType = p_74742_1_.getId();
         }
-        else if (this.tagType != par1NBTBase.getId())
+        else if (this.tagType != p_74742_1_.getId())
         {
             System.err.println("WARNING: Adding mismatching tag types to tag list");
             return;
         }
 
-        this.tagList.add(par1NBTBase);
+        this.tagList.add(p_74742_1_);
     }
 
     public void func_150304_a(int p_150304_1_, NBTBase p_150304_2_)
@@ -131,9 +129,9 @@ public class NBTTagList extends NBTBase
     /**
      * Removes a tag at the given index.
      */
-    public NBTBase removeTag(int par1)
+    public NBTBase removeTag(int p_74744_1_)
     {
-        return (NBTBase)this.tagList.remove(par1);
+        return (NBTBase)this.tagList.remove(p_74744_1_);
     }
 
     /**
@@ -234,11 +232,11 @@ public class NBTTagList extends NBTBase
         return var1;
     }
 
-    public boolean equals(Object par1Obj)
+    public boolean equals(Object p_equals_1_)
     {
-        if (super.equals(par1Obj))
+        if (super.equals(p_equals_1_))
         {
-            NBTTagList var2 = (NBTTagList)par1Obj;
+            NBTTagList var2 = (NBTTagList)p_equals_1_;
 
             if (this.tagType == var2.tagType)
             {

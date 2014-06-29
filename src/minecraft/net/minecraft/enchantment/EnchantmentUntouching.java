@@ -7,16 +7,16 @@ public class EnchantmentUntouching extends Enchantment
 {
     private static final String __OBFID = "CL_00000123";
 
-    protected EnchantmentUntouching(int par1, int par2)
+    protected EnchantmentUntouching(int p_i1938_1_, int p_i1938_2_)
     {
-        super(par1, par2, EnumEnchantmentType.digger);
+        super(p_i1938_1_, p_i1938_2_, EnumEnchantmentType.digger);
         this.setName("untouching");
     }
 
     /**
      * Returns the minimal value of enchantability needed on the enchantment level passed.
      */
-    public int getMinEnchantability(int par1)
+    public int getMinEnchantability(int p_77321_1_)
     {
         return 15;
     }
@@ -24,9 +24,9 @@ public class EnchantmentUntouching extends Enchantment
     /**
      * Returns the maximum value of enchantability nedded on the enchantment level passed.
      */
-    public int getMaxEnchantability(int par1)
+    public int getMaxEnchantability(int p_77317_1_)
     {
-        return super.getMinEnchantability(par1) + 50;
+        return super.getMinEnchantability(p_77317_1_) + 50;
     }
 
     /**
@@ -40,13 +40,13 @@ public class EnchantmentUntouching extends Enchantment
     /**
      * Determines if the enchantment passed can be applyied together with this enchantment.
      */
-    public boolean canApplyTogether(Enchantment par1Enchantment)
+    public boolean canApplyTogether(Enchantment p_77326_1_)
     {
-        return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != fortune.effectId;
+        return super.canApplyTogether(p_77326_1_) && p_77326_1_.effectId != fortune.effectId;
     }
 
-    public boolean canApply(ItemStack par1ItemStack)
+    public boolean canApply(ItemStack p_92089_1_)
     {
-        return par1ItemStack.getItem() == Items.shears ? true : super.canApply(par1ItemStack);
+        return p_92089_1_.getItem() == Items.shears ? true : super.canApply(p_92089_1_);
     }
 }

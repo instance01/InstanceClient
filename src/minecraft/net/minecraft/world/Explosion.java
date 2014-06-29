@@ -41,14 +41,14 @@ public class Explosion
     private Map field_77288_k = new HashMap();
     private static final String __OBFID = "CL_00000134";
 
-    public Explosion(World par1World, Entity par2Entity, double par3, double par5, double par7, float par9)
+    public Explosion(World p_i1948_1_, Entity p_i1948_2_, double p_i1948_3_, double p_i1948_5_, double p_i1948_7_, float p_i1948_9_)
     {
-        this.worldObj = par1World;
-        this.exploder = par2Entity;
-        this.explosionSize = par9;
-        this.explosionX = par3;
-        this.explosionY = par5;
-        this.explosionZ = par7;
+        this.worldObj = p_i1948_1_;
+        this.exploder = p_i1948_2_;
+        this.explosionSize = p_i1948_9_;
+        this.explosionX = p_i1948_3_;
+        this.explosionY = p_i1948_5_;
+        this.explosionZ = p_i1948_7_;
     }
 
     /**
@@ -120,8 +120,8 @@ public class Explosion
         int var29 = MathHelper.floor_double(this.explosionY + (double)this.explosionSize + 1.0D);
         int var7 = MathHelper.floor_double(this.explosionZ - (double)this.explosionSize - 1.0D);
         int var30 = MathHelper.floor_double(this.explosionZ + (double)this.explosionSize + 1.0D);
-        List var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this.exploder, AxisAlignedBB.getAABBPool().getAABB((double)var3, (double)var5, (double)var7, (double)var4, (double)var29, (double)var30));
-        Vec3 var31 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.explosionX, this.explosionY, this.explosionZ);
+        List var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this.exploder, AxisAlignedBB.getBoundingBox((double)var3, (double)var5, (double)var7, (double)var4, (double)var29, (double)var30));
+        Vec3 var31 = Vec3.createVectorHelper(this.explosionX, this.explosionY, this.explosionZ);
 
         for (int var11 = 0; var11 < var9.size(); ++var11)
         {
@@ -133,15 +133,15 @@ public class Explosion
                 var15 = var32.posX - this.explosionX;
                 var17 = var32.posY + (double)var32.getEyeHeight() - this.explosionY;
                 var19 = var32.posZ - this.explosionZ;
-                double var34 = (double)MathHelper.sqrt_double(var15 * var15 + var17 * var17 + var19 * var19);
+                double var33 = (double)MathHelper.sqrt_double(var15 * var15 + var17 * var17 + var19 * var19);
 
-                if (var34 != 0.0D)
+                if (var33 != 0.0D)
                 {
-                    var15 /= var34;
-                    var17 /= var34;
-                    var19 /= var34;
-                    double var33 = (double)this.worldObj.getBlockDensity(var31, var32.boundingBox);
-                    double var35 = (1.0D - var13) * var33;
+                    var15 /= var33;
+                    var17 /= var33;
+                    var19 /= var33;
+                    double var34 = (double)this.worldObj.getBlockDensity(var31, var32.boundingBox);
+                    double var35 = (1.0D - var13) * var34;
                     var32.attackEntityFrom(DamageSource.setExplosionSource(this), (float)((int)((var35 * var35 + var35) / 2.0D * 8.0D * (double)this.explosionSize + 1.0D)));
                     double var27 = EnchantmentProtection.func_92092_a(var32, var35);
                     var32.motionX += var15 * var27;
@@ -150,7 +150,7 @@ public class Explosion
 
                     if (var32 instanceof EntityPlayer)
                     {
-                        this.field_77288_k.put((EntityPlayer)var32, this.worldObj.getWorldVec3Pool().getVecFromPool(var15 * var35, var17 * var35, var19 * var35));
+                        this.field_77288_k.put((EntityPlayer)var32, Vec3.createVectorHelper(var15 * var35, var17 * var35, var19 * var35));
                     }
                 }
             }
@@ -162,7 +162,7 @@ public class Explosion
     /**
      * Does the second part of the explosion (sound, particles, drop spawn)
      */
-    public void doExplosionB(boolean par1)
+    public void doExplosionB(boolean p_77279_1_)
     {
         this.worldObj.playSoundEffect(this.explosionX, this.explosionY, this.explosionZ, "random.explode", 4.0F, (1.0F + (this.worldObj.rand.nextFloat() - this.worldObj.rand.nextFloat()) * 0.2F) * 0.7F);
 
@@ -194,7 +194,7 @@ public class Explosion
                 var6 = var3.field_151328_c;
                 var7 = this.worldObj.getBlock(var4, var5, var6);
 
-                if (par1)
+                if (p_77279_1_)
                 {
                     double var8 = (double)((float)var4 + this.worldObj.rand.nextFloat());
                     double var10 = (double)((float)var5 + this.worldObj.rand.nextFloat());

@@ -39,9 +39,9 @@ public abstract class GuiResourcePackList extends GuiListExtended
         return this.func_148201_l().size();
     }
 
-    public ResourcePackListEntry func_148180_b(int p_148203_1_)
+    public ResourcePackListEntry func_148180_b(int p_148180_1_)
     {
-        return (ResourcePackListEntry)this.func_148201_l().get(p_148203_1_);
+        return (ResourcePackListEntry)this.func_148201_l().get(p_148180_1_);
     }
 
     public int func_148139_c()

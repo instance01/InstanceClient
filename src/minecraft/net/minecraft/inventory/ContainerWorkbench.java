@@ -18,13 +18,13 @@ public class ContainerWorkbench extends Container
     private int posZ;
     private static final String __OBFID = "CL_00001744";
 
-    public ContainerWorkbench(InventoryPlayer par1InventoryPlayer, World par2World, int par3, int par4, int par5)
+    public ContainerWorkbench(InventoryPlayer p_i1808_1_, World p_i1808_2_, int p_i1808_3_, int p_i1808_4_, int p_i1808_5_)
     {
-        this.worldObj = par2World;
-        this.posX = par3;
-        this.posY = par4;
-        this.posZ = par5;
-        this.addSlotToContainer(new SlotCrafting(par1InventoryPlayer.player, this.craftMatrix, this.craftResult, 0, 124, 35));
+        this.worldObj = p_i1808_2_;
+        this.posX = p_i1808_3_;
+        this.posY = p_i1808_4_;
+        this.posZ = p_i1808_5_;
+        this.addSlotToContainer(new SlotCrafting(p_i1808_1_.player, this.craftMatrix, this.craftResult, 0, 124, 35));
         int var6;
         int var7;
 
@@ -40,13 +40,13 @@ public class ContainerWorkbench extends Container
         {
             for (var7 = 0; var7 < 9; ++var7)
             {
-                this.addSlotToContainer(new Slot(par1InventoryPlayer, var7 + var6 * 9 + 9, 8 + var7 * 18, 84 + var6 * 18));
+                this.addSlotToContainer(new Slot(p_i1808_1_, var7 + var6 * 9 + 9, 8 + var7 * 18, 84 + var6 * 18));
             }
         }
 
         for (var6 = 0; var6 < 9; ++var6)
         {
-            this.addSlotToContainer(new Slot(par1InventoryPlayer, var6, 8 + var6 * 18, 142));
+            this.addSlotToContainer(new Slot(p_i1808_1_, var6, 8 + var6 * 18, 142));
         }
 
         this.onCraftMatrixChanged(this.craftMatrix);
@@ -55,7 +55,7 @@ public class ContainerWorkbench extends Container
     /**
      * Callback for when the crafting matrix is changed.
      */
-    public void onCraftMatrixChanged(IInventory par1IInventory)
+    public void onCraftMatrixChanged(IInventory p_75130_1_)
     {
         this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, this.worldObj));
     }
@@ -63,9 +63,9 @@ public class ContainerWorkbench extends Container
     /**
      * Called when the container is closed.
      */
-    public void onContainerClosed(EntityPlayer par1EntityPlayer)
+    public void onContainerClosed(EntityPlayer p_75134_1_)
     {
-        super.onContainerClosed(par1EntityPlayer);
+        super.onContainerClosed(p_75134_1_);
 
         if (!this.worldObj.isClient)
         {
@@ -75,31 +75,31 @@ public class ContainerWorkbench extends Container
 
                 if (var3 != null)
                 {
-                    par1EntityPlayer.dropPlayerItemWithRandomChoice(var3, false);
+                    p_75134_1_.dropPlayerItemWithRandomChoice(var3, false);
                 }
             }
         }
     }
 
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer)
+    public boolean canInteractWith(EntityPlayer p_75145_1_)
     {
-        return this.worldObj.getBlock(this.posX, this.posY, this.posZ) != Blocks.crafting_table ? false : par1EntityPlayer.getDistanceSq((double)this.posX + 0.5D, (double)this.posY + 0.5D, (double)this.posZ + 0.5D) <= 64.0D;
+        return this.worldObj.getBlock(this.posX, this.posY, this.posZ) != Blocks.crafting_table ? false : p_75145_1_.getDistanceSq((double)this.posX + 0.5D, (double)this.posY + 0.5D, (double)this.posZ + 0.5D) <= 64.0D;
     }
 
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+    public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int p_82846_2_)
     {
         ItemStack var3 = null;
-        Slot var4 = (Slot)this.inventorySlots.get(par2);
+        Slot var4 = (Slot)this.inventorySlots.get(p_82846_2_);
 
         if (var4 != null && var4.getHasStack())
         {
             ItemStack var5 = var4.getStack();
             var3 = var5.copy();
 
-            if (par2 == 0)
+            if (p_82846_2_ == 0)
             {
                 if (!this.mergeItemStack(var5, 10, 46, true))
                 {
@@ -108,14 +108,14 @@ public class ContainerWorkbench extends Container
 
                 var4.onSlotChange(var5, var3);
             }
-            else if (par2 >= 10 && par2 < 37)
+            else if (p_82846_2_ >= 10 && p_82846_2_ < 37)
             {
                 if (!this.mergeItemStack(var5, 37, 46, false))
                 {
                     return null;
                 }
             }
-            else if (par2 >= 37 && par2 < 46)
+            else if (p_82846_2_ >= 37 && p_82846_2_ < 46)
             {
                 if (!this.mergeItemStack(var5, 10, 37, false))
                 {
@@ -141,14 +141,14 @@ public class ContainerWorkbench extends Container
                 return null;
             }
 
-            var4.onPickupFromSlot(par1EntityPlayer, var5);
+            var4.onPickupFromSlot(p_82846_1_, var5);
         }
 
         return var3;
     }
 
-    public boolean func_94530_a(ItemStack par1ItemStack, Slot par2Slot)
+    public boolean func_94530_a(ItemStack p_94530_1_, Slot p_94530_2_)
     {
-        return par2Slot.inventory != this.craftResult && super.func_94530_a(par1ItemStack, par2Slot);
+        return p_94530_2_.inventory != this.craftResult && super.func_94530_a(p_94530_1_, p_94530_2_);
     }
 }

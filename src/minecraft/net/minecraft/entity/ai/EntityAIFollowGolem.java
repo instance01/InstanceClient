@@ -13,9 +13,9 @@ public class EntityAIFollowGolem extends EntityAIBase
     private boolean tookGolemRose;
     private static final String __OBFID = "CL_00001615";
 
-    public EntityAIFollowGolem(EntityVillager par1EntityVillager)
+    public EntityAIFollowGolem(EntityVillager p_i1656_1_)
     {
-        this.theVillager = par1EntityVillager;
+        this.theVillager = p_i1656_1_;
         this.setMutexBits(3);
     }
 

@@ -9,24 +9,24 @@ public class ScoreHealthCriteria extends ScoreDummyCriteria
 {
     private static final String __OBFID = "CL_00000623";
 
-    public ScoreHealthCriteria(String par1Str)
+    public ScoreHealthCriteria(String p_i2312_1_)
     {
-        super(par1Str);
+        super(p_i2312_1_);
     }
 
-    public int func_96635_a(List par1List)
+    public int func_96635_a(List p_96635_1_)
     {
         float var2 = 0.0F;
         EntityPlayer var4;
 
-        for (Iterator var3 = par1List.iterator(); var3.hasNext(); var2 += var4.getHealth() + var4.getAbsorptionAmount())
+        for (Iterator var3 = p_96635_1_.iterator(); var3.hasNext(); var2 += var4.getHealth() + var4.getAbsorptionAmount())
         {
             var4 = (EntityPlayer)var3.next();
         }
 
-        if (par1List.size() > 0)
+        if (p_96635_1_.size() > 0)
         {
-            var2 /= (float)par1List.size();
+            var2 /= (float)p_96635_1_.size();
         }
 
         return MathHelper.ceiling_float_int(var2);

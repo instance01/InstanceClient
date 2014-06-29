@@ -37,11 +37,11 @@ public class ModelSheep1 extends ModelQuadruped
      * Used for easily adding entity-dependent animations. The second and third float params here are the same second
      * and third as in the setRotationAngles method.
      */
-    public void setLivingAnimations(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
+    public void setLivingAnimations(EntityLivingBase p_78086_1_, float p_78086_2_, float p_78086_3_, float p_78086_4_)
     {
-        super.setLivingAnimations(par1EntityLivingBase, par2, par3, par4);
-        this.head.rotationPointY = 6.0F + ((EntitySheep)par1EntityLivingBase).func_70894_j(par4) * 9.0F;
-        this.field_78152_i = ((EntitySheep)par1EntityLivingBase).func_70890_k(par4);
+        super.setLivingAnimations(p_78086_1_, p_78086_2_, p_78086_3_, p_78086_4_);
+        this.head.rotationPointY = 6.0F + ((EntitySheep)p_78086_1_).func_70894_j(p_78086_4_) * 9.0F;
+        this.field_78152_i = ((EntitySheep)p_78086_1_).func_70890_k(p_78086_4_);
     }
 
     /**
@@ -49,9 +49,9 @@ public class ModelSheep1 extends ModelQuadruped
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
      * "far" arms and legs can swing at most.
      */
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
+    public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity p_78087_7_)
     {
-        super.setRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
+        super.setRotationAngles(p_78087_1_, p_78087_2_, p_78087_3_, p_78087_4_, p_78087_5_, p_78087_6_, p_78087_7_);
         this.head.rotateAngleX = this.field_78152_i;
     }
 }

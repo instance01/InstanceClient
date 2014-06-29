@@ -70,16 +70,16 @@ public class ModelBat extends ModelBase
     /**
      * Sets the models various rotation angles then renders the model.
      */
-    public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
+    public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_)
     {
-        EntityBat var8 = (EntityBat)par1Entity;
+        EntityBat var8 = (EntityBat)p_78088_1_;
         float var9;
 
         if (var8.getIsBatHanging())
         {
             var9 = (180F / (float)Math.PI);
-            this.batHead.rotateAngleX = par6 / (180F / (float)Math.PI);
-            this.batHead.rotateAngleY = (float)Math.PI - par5 / (180F / (float)Math.PI);
+            this.batHead.rotateAngleX = p_78088_6_ / (180F / (float)Math.PI);
+            this.batHead.rotateAngleY = (float)Math.PI - p_78088_5_ / (180F / (float)Math.PI);
             this.batHead.rotateAngleZ = (float)Math.PI;
             this.batHead.setRotationPoint(0.0F, -2.0F, 0.0F);
             this.batRightWing.setRotationPoint(-3.0F, 0.0F, 3.0F);
@@ -95,21 +95,21 @@ public class ModelBat extends ModelBase
         else
         {
             var9 = (180F / (float)Math.PI);
-            this.batHead.rotateAngleX = par6 / (180F / (float)Math.PI);
-            this.batHead.rotateAngleY = par5 / (180F / (float)Math.PI);
+            this.batHead.rotateAngleX = p_78088_6_ / (180F / (float)Math.PI);
+            this.batHead.rotateAngleY = p_78088_5_ / (180F / (float)Math.PI);
             this.batHead.rotateAngleZ = 0.0F;
             this.batHead.setRotationPoint(0.0F, 0.0F, 0.0F);
             this.batRightWing.setRotationPoint(0.0F, 0.0F, 0.0F);
             this.batLeftWing.setRotationPoint(0.0F, 0.0F, 0.0F);
-            this.batBody.rotateAngleX = ((float)Math.PI / 4F) + MathHelper.cos(par4 * 0.1F) * 0.15F;
+            this.batBody.rotateAngleX = ((float)Math.PI / 4F) + MathHelper.cos(p_78088_4_ * 0.1F) * 0.15F;
             this.batBody.rotateAngleY = 0.0F;
-            this.batRightWing.rotateAngleY = MathHelper.cos(par4 * 1.3F) * (float)Math.PI * 0.25F;
+            this.batRightWing.rotateAngleY = MathHelper.cos(p_78088_4_ * 1.3F) * (float)Math.PI * 0.25F;
             this.batLeftWing.rotateAngleY = -this.batRightWing.rotateAngleY;
             this.batOuterRightWing.rotateAngleY = this.batRightWing.rotateAngleY * 0.5F;
             this.batOuterLeftWing.rotateAngleY = -this.batRightWing.rotateAngleY * 0.5F;
         }
 
-        this.batHead.render(par7);
-        this.batBody.render(par7);
+        this.batHead.render(p_78088_7_);
+        this.batBody.render(p_78088_7_);
     }
 }

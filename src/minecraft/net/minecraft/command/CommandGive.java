@@ -28,39 +28,39 @@ public class CommandGive extends CommandBase
         return 2;
     }
 
-    public String getCommandUsage(ICommandSender par1ICommandSender)
+    public String getCommandUsage(ICommandSender p_71518_1_)
     {
         return "commands.give.usage";
     }
 
-    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_)
     {
-        if (par2ArrayOfStr.length < 2)
+        if (p_71515_2_.length < 2)
         {
             throw new WrongUsageException("commands.give.usage", new Object[0]);
         }
         else
         {
-            EntityPlayerMP var3 = getPlayer(par1ICommandSender, par2ArrayOfStr[0]);
-            Item var4 = getItemByText(par1ICommandSender, par2ArrayOfStr[1]);
+            EntityPlayerMP var3 = getPlayer(p_71515_1_, p_71515_2_[0]);
+            Item var4 = getItemByText(p_71515_1_, p_71515_2_[1]);
             int var5 = 1;
             int var6 = 0;
 
-            if (par2ArrayOfStr.length >= 3)
+            if (p_71515_2_.length >= 3)
             {
-                var5 = parseIntBounded(par1ICommandSender, par2ArrayOfStr[2], 1, 64);
+                var5 = parseIntBounded(p_71515_1_, p_71515_2_[2], 1, 64);
             }
 
-            if (par2ArrayOfStr.length >= 4)
+            if (p_71515_2_.length >= 4)
             {
-                var6 = parseInt(par1ICommandSender, par2ArrayOfStr[3]);
+                var6 = parseInt(p_71515_1_, p_71515_2_[3]);
             }
 
             ItemStack var7 = new ItemStack(var4, var5, var6);
 
-            if (par2ArrayOfStr.length >= 5)
+            if (p_71515_2_.length >= 5)
             {
-                String var8 = func_147178_a(par1ICommandSender, par2ArrayOfStr, 4).getUnformattedText();
+                String var8 = func_147178_a(p_71515_1_, p_71515_2_, 4).getUnformattedText();
 
                 try
                 {
@@ -68,7 +68,7 @@ public class CommandGive extends CommandBase
 
                     if (!(var9 instanceof NBTTagCompound))
                     {
-                        notifyAdmins(par1ICommandSender, "commands.give.tagError", new Object[] {"Not a valid tag"});
+                        func_152373_a(p_71515_1_, this, "commands.give.tagError", new Object[] {"Not a valid tag"});
                         return;
                     }
 
@@ -76,7 +76,7 @@ public class CommandGive extends CommandBase
                 }
                 catch (NBTException var10)
                 {
-                    notifyAdmins(par1ICommandSender, "commands.give.tagError", new Object[] {var10.getMessage()});
+                    func_152373_a(p_71515_1_, this, "commands.give.tagError", new Object[] {var10.getMessage()});
                     return;
                 }
             }
@@ -84,16 +84,16 @@ public class CommandGive extends CommandBase
             EntityItem var11 = var3.dropPlayerItemWithRandomChoice(var7, false);
             var11.delayBeforeCanPickup = 0;
             var11.func_145797_a(var3.getCommandSenderName());
-            notifyAdmins(par1ICommandSender, "commands.give.success", new Object[] {var7.func_151000_E(), Integer.valueOf(var5), var3.getCommandSenderName()});
+            func_152373_a(p_71515_1_, this, "commands.give.success", new Object[] {var7.func_151000_E(), Integer.valueOf(var5), var3.getCommandSenderName()});
         }
     }
 
     /**
      * Adds the strings available in this command to the given list of tab completion options.
      */
-    public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public List addTabCompletionOptions(ICommandSender p_71516_1_, String[] p_71516_2_)
     {
-        return par2ArrayOfStr.length == 1 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, this.getPlayers()) : (par2ArrayOfStr.length == 2 ? getListOfStringsFromIterableMatchingLastWord(par2ArrayOfStr, Item.itemRegistry.getKeys()) : null);
+        return p_71516_2_.length == 1 ? getListOfStringsMatchingLastWord(p_71516_2_, this.getPlayers()) : (p_71516_2_.length == 2 ? getListOfStringsFromIterableMatchingLastWord(p_71516_2_, Item.itemRegistry.getKeys()) : null);
     }
 
     protected String[] getPlayers()
@@ -104,8 +104,8 @@ public class CommandGive extends CommandBase
     /**
      * Return whether the specified command parameter index is a username parameter.
      */
-    public boolean isUsernameIndex(String[] par1ArrayOfStr, int par2)
+    public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_)
     {
-        return par2 == 0;
+        return p_82358_2_ == 0;
     }
 }

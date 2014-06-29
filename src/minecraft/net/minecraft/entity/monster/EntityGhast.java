@@ -33,9 +33,9 @@ public class EntityGhast extends EntityFlying implements IMob
     private int explosionStrength = 1;
     private static final String __OBFID = "CL_00001689";
 
-    public EntityGhast(World par1World)
+    public EntityGhast(World p_i1735_1_)
     {
-        super(par1World);
+        super(p_i1735_1_);
         this.setSize(4.0F, 4.0F);
         this.isImmuneToFire = true;
         this.experienceValue = 5;
@@ -49,21 +49,21 @@ public class EntityGhast extends EntityFlying implements IMob
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_)
     {
         if (this.isEntityInvulnerable())
         {
             return false;
         }
-        else if ("fireball".equals(par1DamageSource.getDamageType()) && par1DamageSource.getEntity() instanceof EntityPlayer)
+        else if ("fireball".equals(p_70097_1_.getDamageType()) && p_70097_1_.getEntity() instanceof EntityPlayer)
         {
-            super.attackEntityFrom(par1DamageSource, 1000.0F);
-            ((EntityPlayer)par1DamageSource.getEntity()).triggerAchievement(AchievementList.ghast);
+            super.attackEntityFrom(p_70097_1_, 1000.0F);
+            ((EntityPlayer)p_70097_1_.getEntity()).triggerAchievement(AchievementList.ghast);
             return true;
         }
         else
         {
-            return super.attackEntityFrom(par1DamageSource, par2);
+            return super.attackEntityFrom(p_70097_1_, p_70097_2_);
         }
     }
 
@@ -196,14 +196,14 @@ public class EntityGhast extends EntityFlying implements IMob
     /**
      * True if the ghast has an unobstructed line of travel to the waypoint.
      */
-    private boolean isCourseTraversable(double par1, double par3, double par5, double par7)
+    private boolean isCourseTraversable(double p_70790_1_, double p_70790_3_, double p_70790_5_, double p_70790_7_)
     {
-        double var9 = (this.waypointX - this.posX) / par7;
-        double var11 = (this.waypointY - this.posY) / par7;
-        double var13 = (this.waypointZ - this.posZ) / par7;
+        double var9 = (this.waypointX - this.posX) / p_70790_7_;
+        double var11 = (this.waypointY - this.posY) / p_70790_7_;
+        double var13 = (this.waypointZ - this.posZ) / p_70790_7_;
         AxisAlignedBB var15 = this.boundingBox.copy();
 
-        for (int var16 = 1; (double)var16 < par7; ++var16)
+        for (int var16 = 1; (double)var16 < p_70790_7_; ++var16)
         {
             var15.offset(var9, var11, var13);
 
@@ -248,9 +248,9 @@ public class EntityGhast extends EntityFlying implements IMob
     /**
      * Drop 0-2 items of this living's type
      */
-    protected void dropFewItems(boolean par1, int par2)
+    protected void dropFewItems(boolean p_70628_1_, int p_70628_2_)
     {
-        int var3 = this.rand.nextInt(2) + this.rand.nextInt(1 + par2);
+        int var3 = this.rand.nextInt(2) + this.rand.nextInt(1 + p_70628_2_);
         int var4;
 
         for (var4 = 0; var4 < var3; ++var4)
@@ -258,7 +258,7 @@ public class EntityGhast extends EntityFlying implements IMob
             this.func_145779_a(Items.ghast_tear, 1);
         }
 
-        var3 = this.rand.nextInt(3) + this.rand.nextInt(1 + par2);
+        var3 = this.rand.nextInt(3) + this.rand.nextInt(1 + p_70628_2_);
 
         for (var4 = 0; var4 < var3; ++var4)
         {
@@ -293,22 +293,22 @@ public class EntityGhast extends EntityFlying implements IMob
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    public void writeEntityToNBT(NBTTagCompound p_70014_1_)
     {
-        super.writeEntityToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setInteger("ExplosionPower", this.explosionStrength);
+        super.writeEntityToNBT(p_70014_1_);
+        p_70014_1_.setInteger("ExplosionPower", this.explosionStrength);
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    public void readEntityFromNBT(NBTTagCompound p_70037_1_)
     {
-        super.readEntityFromNBT(par1NBTTagCompound);
+        super.readEntityFromNBT(p_70037_1_);
 
-        if (par1NBTTagCompound.func_150297_b("ExplosionPower", 99))
+        if (p_70037_1_.func_150297_b("ExplosionPower", 99))
         {
-            this.explosionStrength = par1NBTTagCompound.getInteger("ExplosionPower");
+            this.explosionStrength = p_70037_1_.getInteger("ExplosionPower");
         }
     }
 }

@@ -6,25 +6,26 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import java.lang.reflect.Type;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.util.JsonUtils;
 
 public class PackMetadataSectionSerializer extends BaseMetadataSectionSerializer implements JsonSerializer
 {
     private static final String __OBFID = "CL_00001113";
 
-    public PackMetadataSection deserialize(JsonElement par1JsonElement, Type par2Type, JsonDeserializationContext par3JsonDeserializationContext)
+    public PackMetadataSection deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
     {
-        JsonObject var4 = par1JsonElement.getAsJsonObject();
-        String var5 = JsonUtils.getJsonObjectStringFieldValue(var4, "description");
+        JsonObject var4 = p_deserialize_1_.getAsJsonObject();
+        IChatComponent var5 = (IChatComponent)p_deserialize_3_.deserialize(var4.get("description"), IChatComponent.class);
         int var6 = JsonUtils.getJsonObjectIntegerFieldValue(var4, "pack_format");
         return new PackMetadataSection(var5, var6);
     }
 
-    public JsonElement serialize(PackMetadataSection par1PackMetadataSection, Type par2Type, JsonSerializationContext par3JsonSerializationContext)
+    public JsonElement serialize(PackMetadataSection p_serialize_1_, Type p_serialize_2_, JsonSerializationContext p_serialize_3_)
     {
         JsonObject var4 = new JsonObject();
-        var4.addProperty("pack_format", Integer.valueOf(par1PackMetadataSection.getPackFormat()));
-        var4.addProperty("description", par1PackMetadataSection.getPackDescription());
+        var4.addProperty("pack_format", Integer.valueOf(p_serialize_1_.getPackFormat()));
+        var4.add("description", p_serialize_3_.serialize(p_serialize_1_.func_152805_a()));
         return var4;
     }
 
@@ -36,8 +37,8 @@ public class PackMetadataSectionSerializer extends BaseMetadataSectionSerializer
         return "pack";
     }
 
-    public JsonElement serialize(Object par1Obj, Type par2Type, JsonSerializationContext par3JsonSerializationContext)
+    public JsonElement serialize(Object p_serialize_1_, Type p_serialize_2_, JsonSerializationContext p_serialize_3_)
     {
-        return this.serialize((PackMetadataSection)par1Obj, par2Type, par3JsonSerializationContext);
+        return this.serialize((PackMetadataSection)p_serialize_1_, p_serialize_2_, p_serialize_3_);
     }
 }

@@ -16,17 +16,17 @@ public class WorldGenLiquids extends WorldGenerator
         this.field_150521_a = p_i45465_1_;
     }
 
-    public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
+    public boolean generate(World p_76484_1_, Random p_76484_2_, int p_76484_3_, int p_76484_4_, int p_76484_5_)
     {
-        if (par1World.getBlock(par3, par4 + 1, par5) != Blocks.stone)
+        if (p_76484_1_.getBlock(p_76484_3_, p_76484_4_ + 1, p_76484_5_) != Blocks.stone)
         {
             return false;
         }
-        else if (par1World.getBlock(par3, par4 - 1, par5) != Blocks.stone)
+        else if (p_76484_1_.getBlock(p_76484_3_, p_76484_4_ - 1, p_76484_5_) != Blocks.stone)
         {
             return false;
         }
-        else if (par1World.getBlock(par3, par4, par5).getMaterial() != Material.air && par1World.getBlock(par3, par4, par5) != Blocks.stone)
+        else if (p_76484_1_.getBlock(p_76484_3_, p_76484_4_, p_76484_5_).getMaterial() != Material.air && p_76484_1_.getBlock(p_76484_3_, p_76484_4_, p_76484_5_) != Blocks.stone)
         {
             return false;
         }
@@ -34,54 +34,54 @@ public class WorldGenLiquids extends WorldGenerator
         {
             int var6 = 0;
 
-            if (par1World.getBlock(par3 - 1, par4, par5) == Blocks.stone)
+            if (p_76484_1_.getBlock(p_76484_3_ - 1, p_76484_4_, p_76484_5_) == Blocks.stone)
             {
                 ++var6;
             }
 
-            if (par1World.getBlock(par3 + 1, par4, par5) == Blocks.stone)
+            if (p_76484_1_.getBlock(p_76484_3_ + 1, p_76484_4_, p_76484_5_) == Blocks.stone)
             {
                 ++var6;
             }
 
-            if (par1World.getBlock(par3, par4, par5 - 1) == Blocks.stone)
+            if (p_76484_1_.getBlock(p_76484_3_, p_76484_4_, p_76484_5_ - 1) == Blocks.stone)
             {
                 ++var6;
             }
 
-            if (par1World.getBlock(par3, par4, par5 + 1) == Blocks.stone)
+            if (p_76484_1_.getBlock(p_76484_3_, p_76484_4_, p_76484_5_ + 1) == Blocks.stone)
             {
                 ++var6;
             }
 
             int var7 = 0;
 
-            if (par1World.isAirBlock(par3 - 1, par4, par5))
+            if (p_76484_1_.isAirBlock(p_76484_3_ - 1, p_76484_4_, p_76484_5_))
             {
                 ++var7;
             }
 
-            if (par1World.isAirBlock(par3 + 1, par4, par5))
+            if (p_76484_1_.isAirBlock(p_76484_3_ + 1, p_76484_4_, p_76484_5_))
             {
                 ++var7;
             }
 
-            if (par1World.isAirBlock(par3, par4, par5 - 1))
+            if (p_76484_1_.isAirBlock(p_76484_3_, p_76484_4_, p_76484_5_ - 1))
             {
                 ++var7;
             }
 
-            if (par1World.isAirBlock(par3, par4, par5 + 1))
+            if (p_76484_1_.isAirBlock(p_76484_3_, p_76484_4_, p_76484_5_ + 1))
             {
                 ++var7;
             }
 
             if (var6 == 3 && var7 == 1)
             {
-                par1World.setBlock(par3, par4, par5, this.field_150521_a, 0, 2);
-                par1World.scheduledUpdatesAreImmediate = true;
-                this.field_150521_a.updateTick(par1World, par3, par4, par5, par2Random);
-                par1World.scheduledUpdatesAreImmediate = false;
+                p_76484_1_.setBlock(p_76484_3_, p_76484_4_, p_76484_5_, this.field_150521_a, 0, 2);
+                p_76484_1_.scheduledUpdatesAreImmediate = true;
+                this.field_150521_a.updateTick(p_76484_1_, p_76484_3_, p_76484_4_, p_76484_5_, p_76484_2_);
+                p_76484_1_.scheduledUpdatesAreImmediate = false;
             }
 
             return true;

@@ -49,31 +49,31 @@ public class ContainerRepair extends Container
     private final EntityPlayer thePlayer;
     private static final String __OBFID = "CL_00001732";
 
-    public ContainerRepair(InventoryPlayer par1InventoryPlayer, final World par2World, final int par3, final int par4, final int par5, EntityPlayer par6EntityPlayer)
+    public ContainerRepair(InventoryPlayer p_i1800_1_, final World p_i1800_2_, final int p_i1800_3_, final int p_i1800_4_, final int p_i1800_5_, EntityPlayer p_i1800_6_)
     {
-        this.theWorld = par2World;
-        this.field_82861_i = par3;
-        this.field_82858_j = par4;
-        this.field_82859_k = par5;
-        this.thePlayer = par6EntityPlayer;
+        this.theWorld = p_i1800_2_;
+        this.field_82861_i = p_i1800_3_;
+        this.field_82858_j = p_i1800_4_;
+        this.field_82859_k = p_i1800_5_;
+        this.thePlayer = p_i1800_6_;
         this.addSlotToContainer(new Slot(this.inputSlots, 0, 27, 47));
         this.addSlotToContainer(new Slot(this.inputSlots, 1, 76, 47));
         this.addSlotToContainer(new Slot(this.outputSlot, 2, 134, 47)
         {
             private static final String __OBFID = "CL_00001734";
-            public boolean isItemValid(ItemStack par1ItemStack)
+            public boolean isItemValid(ItemStack p_75214_1_)
             {
                 return false;
             }
-            public boolean canTakeStack(EntityPlayer par1EntityPlayer)
+            public boolean canTakeStack(EntityPlayer p_82869_1_)
             {
-                return (par1EntityPlayer.capabilities.isCreativeMode || par1EntityPlayer.experienceLevel >= ContainerRepair.this.maximumCost) && ContainerRepair.this.maximumCost > 0 && this.getHasStack();
+                return (p_82869_1_.capabilities.isCreativeMode || p_82869_1_.experienceLevel >= ContainerRepair.this.maximumCost) && ContainerRepair.this.maximumCost > 0 && this.getHasStack();
             }
-            public void onPickupFromSlot(EntityPlayer par1EntityPlayer, ItemStack par2ItemStack)
+            public void onPickupFromSlot(EntityPlayer p_82870_1_, ItemStack p_82870_2_)
             {
-                if (!par1EntityPlayer.capabilities.isCreativeMode)
+                if (!p_82870_1_.capabilities.isCreativeMode)
                 {
-                    par1EntityPlayer.addExperienceLevel(-ContainerRepair.this.maximumCost);
+                    p_82870_1_.addExperienceLevel(-ContainerRepair.this.maximumCost);
                 }
 
                 ContainerRepair.this.inputSlots.setInventorySlotContents(0, (ItemStack)null);
@@ -99,27 +99,27 @@ public class ContainerRepair extends Container
 
                 ContainerRepair.this.maximumCost = 0;
 
-                if (!par1EntityPlayer.capabilities.isCreativeMode && !par2World.isClient && par2World.getBlock(par3, par4, par5) == Blocks.anvil && par1EntityPlayer.getRNG().nextFloat() < 0.12F)
+                if (!p_82870_1_.capabilities.isCreativeMode && !p_i1800_2_.isClient && p_i1800_2_.getBlock(p_i1800_3_, p_i1800_4_, p_i1800_5_) == Blocks.anvil && p_82870_1_.getRNG().nextFloat() < 0.12F)
                 {
-                    int var6 = par2World.getBlockMetadata(par3, par4, par5);
+                    int var6 = p_i1800_2_.getBlockMetadata(p_i1800_3_, p_i1800_4_, p_i1800_5_);
                     int var4 = var6 & 3;
                     int var5 = var6 >> 2;
                     ++var5;
 
                     if (var5 > 2)
                     {
-                        par2World.setBlockToAir(par3, par4, par5);
-                        par2World.playAuxSFX(1020, par3, par4, par5, 0);
+                        p_i1800_2_.setBlockToAir(p_i1800_3_, p_i1800_4_, p_i1800_5_);
+                        p_i1800_2_.playAuxSFX(1020, p_i1800_3_, p_i1800_4_, p_i1800_5_, 0);
                     }
                     else
                     {
-                        par2World.setBlockMetadataWithNotify(par3, par4, par5, var4 | var5 << 2, 2);
-                        par2World.playAuxSFX(1021, par3, par4, par5, 0);
+                        p_i1800_2_.setBlockMetadataWithNotify(p_i1800_3_, p_i1800_4_, p_i1800_5_, var4 | var5 << 2, 2);
+                        p_i1800_2_.playAuxSFX(1021, p_i1800_3_, p_i1800_4_, p_i1800_5_, 0);
                     }
                 }
-                else if (!par2World.isClient)
+                else if (!p_i1800_2_.isClient)
                 {
-                    par2World.playAuxSFX(1021, par3, par4, par5, 0);
+                    p_i1800_2_.playAuxSFX(1021, p_i1800_3_, p_i1800_4_, p_i1800_5_, 0);
                 }
             }
         });
@@ -129,24 +129,24 @@ public class ContainerRepair extends Container
         {
             for (int var8 = 0; var8 < 9; ++var8)
             {
-                this.addSlotToContainer(new Slot(par1InventoryPlayer, var8 + var7 * 9 + 9, 8 + var8 * 18, 84 + var7 * 18));
+                this.addSlotToContainer(new Slot(p_i1800_1_, var8 + var7 * 9 + 9, 8 + var8 * 18, 84 + var7 * 18));
             }
         }
 
         for (var7 = 0; var7 < 9; ++var7)
         {
-            this.addSlotToContainer(new Slot(par1InventoryPlayer, var7, 8 + var7 * 18, 142));
+            this.addSlotToContainer(new Slot(p_i1800_1_, var7, 8 + var7 * 18, 142));
         }
     }
 
     /**
      * Callback for when the crafting matrix is changed.
      */
-    public void onCraftMatrixChanged(IInventory par1IInventory)
+    public void onCraftMatrixChanged(IInventory p_75130_1_)
     {
-        super.onCraftMatrixChanged(par1IInventory);
+        super.onCraftMatrixChanged(p_75130_1_);
 
-        if (par1IInventory == this.inputSlots)
+        if (p_75130_1_ == this.inputSlots)
         {
             this.updateRepairOutput();
         }
@@ -443,26 +443,26 @@ public class ContainerRepair extends Container
         }
     }
 
-    public void addCraftingToCrafters(ICrafting par1ICrafting)
+    public void addCraftingToCrafters(ICrafting p_75132_1_)
     {
-        super.addCraftingToCrafters(par1ICrafting);
-        par1ICrafting.sendProgressBarUpdate(this, 0, this.maximumCost);
+        super.addCraftingToCrafters(p_75132_1_);
+        p_75132_1_.sendProgressBarUpdate(this, 0, this.maximumCost);
     }
 
-    public void updateProgressBar(int par1, int par2)
+    public void updateProgressBar(int p_75137_1_, int p_75137_2_)
     {
-        if (par1 == 0)
+        if (p_75137_1_ == 0)
         {
-            this.maximumCost = par2;
+            this.maximumCost = p_75137_2_;
         }
     }
 
     /**
      * Called when the container is closed.
      */
-    public void onContainerClosed(EntityPlayer par1EntityPlayer)
+    public void onContainerClosed(EntityPlayer p_75134_1_)
     {
-        super.onContainerClosed(par1EntityPlayer);
+        super.onContainerClosed(p_75134_1_);
 
         if (!this.theWorld.isClient)
         {
@@ -472,31 +472,31 @@ public class ContainerRepair extends Container
 
                 if (var3 != null)
                 {
-                    par1EntityPlayer.dropPlayerItemWithRandomChoice(var3, false);
+                    p_75134_1_.dropPlayerItemWithRandomChoice(var3, false);
                 }
             }
         }
     }
 
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer)
+    public boolean canInteractWith(EntityPlayer p_75145_1_)
     {
-        return this.theWorld.getBlock(this.field_82861_i, this.field_82858_j, this.field_82859_k) != Blocks.anvil ? false : par1EntityPlayer.getDistanceSq((double)this.field_82861_i + 0.5D, (double)this.field_82858_j + 0.5D, (double)this.field_82859_k + 0.5D) <= 64.0D;
+        return this.theWorld.getBlock(this.field_82861_i, this.field_82858_j, this.field_82859_k) != Blocks.anvil ? false : p_75145_1_.getDistanceSq((double)this.field_82861_i + 0.5D, (double)this.field_82858_j + 0.5D, (double)this.field_82859_k + 0.5D) <= 64.0D;
     }
 
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+    public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int p_82846_2_)
     {
         ItemStack var3 = null;
-        Slot var4 = (Slot)this.inventorySlots.get(par2);
+        Slot var4 = (Slot)this.inventorySlots.get(p_82846_2_);
 
         if (var4 != null && var4.getHasStack())
         {
             ItemStack var5 = var4.getStack();
             var3 = var5.copy();
 
-            if (par2 == 2)
+            if (p_82846_2_ == 2)
             {
                 if (!this.mergeItemStack(var5, 3, 39, true))
                 {
@@ -505,9 +505,9 @@ public class ContainerRepair extends Container
 
                 var4.onSlotChange(var5, var3);
             }
-            else if (par2 != 0 && par2 != 1)
+            else if (p_82846_2_ != 0 && p_82846_2_ != 1)
             {
-                if (par2 >= 3 && par2 < 39 && !this.mergeItemStack(var5, 0, 2, false))
+                if (p_82846_2_ >= 3 && p_82846_2_ < 39 && !this.mergeItemStack(var5, 0, 2, false))
                 {
                     return null;
                 }
@@ -531,7 +531,7 @@ public class ContainerRepair extends Container
                 return null;
             }
 
-            var4.onPickupFromSlot(par1EntityPlayer, var5);
+            var4.onPickupFromSlot(p_82846_1_, var5);
         }
 
         return var3;
@@ -540,15 +540,15 @@ public class ContainerRepair extends Container
     /**
      * used by the Anvil GUI to update the Item Name being typed by the player
      */
-    public void updateItemName(String par1Str)
+    public void updateItemName(String p_82850_1_)
     {
-        this.repairedItemName = par1Str;
+        this.repairedItemName = p_82850_1_;
 
         if (this.getSlot(2).getHasStack())
         {
             ItemStack var2 = this.getSlot(2).getStack();
 
-            if (StringUtils.isBlank(par1Str))
+            if (StringUtils.isBlank(p_82850_1_))
             {
                 var2.func_135074_t();
             }

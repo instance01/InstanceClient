@@ -13,20 +13,20 @@ public class MerchantRecipeList extends ArrayList
 
     public MerchantRecipeList() {}
 
-    public MerchantRecipeList(NBTTagCompound par1NBTTagCompound)
+    public MerchantRecipeList(NBTTagCompound p_i1944_1_)
     {
-        this.readRecipiesFromTags(par1NBTTagCompound);
+        this.readRecipiesFromTags(p_i1944_1_);
     }
 
     /**
      * can par1,par2 be used to in crafting recipe par3
      */
-    public MerchantRecipe canRecipeBeUsed(ItemStack par1ItemStack, ItemStack par2ItemStack, int par3)
+    public MerchantRecipe canRecipeBeUsed(ItemStack p_77203_1_, ItemStack p_77203_2_, int p_77203_3_)
     {
-        if (par3 > 0 && par3 < this.size())
+        if (p_77203_3_ > 0 && p_77203_3_ < this.size())
         {
-            MerchantRecipe var6 = (MerchantRecipe)this.get(par3);
-            return par1ItemStack.getItem() == var6.getItemToBuy().getItem() && (par2ItemStack == null && !var6.hasSecondItemToBuy() || var6.hasSecondItemToBuy() && par2ItemStack != null && var6.getSecondItemToBuy().getItem() == par2ItemStack.getItem()) && par1ItemStack.stackSize >= var6.getItemToBuy().stackSize && (!var6.hasSecondItemToBuy() || par2ItemStack.stackSize >= var6.getSecondItemToBuy().stackSize) ? var6 : null;
+            MerchantRecipe var6 = (MerchantRecipe)this.get(p_77203_3_);
+            return p_77203_1_.getItem() == var6.getItemToBuy().getItem() && (p_77203_2_ == null && !var6.hasSecondItemToBuy() || var6.hasSecondItemToBuy() && p_77203_2_ != null && var6.getSecondItemToBuy().getItem() == p_77203_2_.getItem()) && p_77203_1_.stackSize >= var6.getItemToBuy().stackSize && (!var6.hasSecondItemToBuy() || p_77203_2_.stackSize >= var6.getSecondItemToBuy().stackSize) ? var6 : null;
         }
         else
         {
@@ -34,7 +34,7 @@ public class MerchantRecipeList extends ArrayList
             {
                 MerchantRecipe var5 = (MerchantRecipe)this.get(var4);
 
-                if (par1ItemStack.getItem() == var5.getItemToBuy().getItem() && par1ItemStack.stackSize >= var5.getItemToBuy().stackSize && (!var5.hasSecondItemToBuy() && par2ItemStack == null || var5.hasSecondItemToBuy() && par2ItemStack != null && var5.getSecondItemToBuy().getItem() == par2ItemStack.getItem() && par2ItemStack.stackSize >= var5.getSecondItemToBuy().stackSize))
+                if (p_77203_1_.getItem() == var5.getItemToBuy().getItem() && p_77203_1_.stackSize >= var5.getItemToBuy().stackSize && (!var5.hasSecondItemToBuy() && p_77203_2_ == null || var5.hasSecondItemToBuy() && p_77203_2_ != null && var5.getSecondItemToBuy().getItem() == p_77203_2_.getItem() && p_77203_2_.stackSize >= var5.getSecondItemToBuy().stackSize))
                 {
                     return var5;
                 }
@@ -47,24 +47,24 @@ public class MerchantRecipeList extends ArrayList
     /**
      * checks if there is a recipie for the same ingredients already on the list, and replaces it. otherwise, adds it
      */
-    public void addToListWithCheck(MerchantRecipe par1MerchantRecipe)
+    public void addToListWithCheck(MerchantRecipe p_77205_1_)
     {
         for (int var2 = 0; var2 < this.size(); ++var2)
         {
             MerchantRecipe var3 = (MerchantRecipe)this.get(var2);
 
-            if (par1MerchantRecipe.hasSameIDsAs(var3))
+            if (p_77205_1_.hasSameIDsAs(var3))
             {
-                if (par1MerchantRecipe.hasSameItemsAs(var3))
+                if (p_77205_1_.hasSameItemsAs(var3))
                 {
-                    this.set(var2, par1MerchantRecipe);
+                    this.set(var2, p_77205_1_);
                 }
 
                 return;
             }
         }
 
-        this.add(par1MerchantRecipe);
+        this.add(p_77205_1_);
     }
 
     public void func_151391_a(PacketBuffer p_151391_1_) throws IOException
@@ -118,9 +118,9 @@ public class MerchantRecipeList extends ArrayList
         return var1;
     }
 
-    public void readRecipiesFromTags(NBTTagCompound par1NBTTagCompound)
+    public void readRecipiesFromTags(NBTTagCompound p_77201_1_)
     {
-        NBTTagList var2 = par1NBTTagCompound.getTagList("Recipes", 10);
+        NBTTagList var2 = p_77201_1_.getTagList("Recipes", 10);
 
         for (int var3 = 0; var3 < var2.tagCount(); ++var3)
         {

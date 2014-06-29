@@ -15,7 +15,7 @@ public interface IScoreObjectiveCriteria
 
     String func_96636_a();
 
-    int func_96635_a(List var1);
+    int func_96635_a(List p_96635_1_);
 
     boolean isReadOnly();
 }

@@ -33,9 +33,9 @@ public class S2DPacketOpenWindow extends Packet
         this.field_148904_f = p_i45185_6_;
     }
 
-    public void processPacket(INetHandlerPlayClient p_148903_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_148903_1_.handleOpenWindow(this);
+        p_148833_1_.handleOpenWindow(this);
     }
 
     /**

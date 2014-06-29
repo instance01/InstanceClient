@@ -16,9 +16,9 @@ public abstract class EntityMob extends EntityCreature implements IMob
 {
     private static final String __OBFID = "CL_00001692";
 
-    public EntityMob(World par1World)
+    public EntityMob(World p_i1738_1_)
     {
-        super(par1World);
+        super(p_i1738_1_);
         this.experienceValue = 5;
     }
 
@@ -75,15 +75,15 @@ public abstract class EntityMob extends EntityCreature implements IMob
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_)
     {
         if (this.isEntityInvulnerable())
         {
             return false;
         }
-        else if (super.attackEntityFrom(par1DamageSource, par2))
+        else if (super.attackEntityFrom(p_70097_1_, p_70097_2_))
         {
-            Entity var3 = par1DamageSource.getEntity();
+            Entity var3 = p_70097_1_.getEntity();
 
             if (this.riddenByEntity != var3 && this.ridingEntity != var3)
             {
@@ -126,24 +126,24 @@ public abstract class EntityMob extends EntityCreature implements IMob
         return p_146067_1_ > 4 ? "game.hostile.hurt.fall.big" : "game.hostile.hurt.fall.small";
     }
 
-    public boolean attackEntityAsMob(Entity par1Entity)
+    public boolean attackEntityAsMob(Entity p_70652_1_)
     {
         float var2 = (float)this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
         int var3 = 0;
 
-        if (par1Entity instanceof EntityLivingBase)
+        if (p_70652_1_ instanceof EntityLivingBase)
         {
-            var2 += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase)par1Entity);
-            var3 += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase)par1Entity);
+            var2 += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase)p_70652_1_);
+            var3 += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase)p_70652_1_);
         }
 
-        boolean var4 = par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
+        boolean var4 = p_70652_1_.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
 
         if (var4)
         {
             if (var3 > 0)
             {
-                par1Entity.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * (float)var3 * 0.5F), 0.1D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * (float)var3 * 0.5F));
+                p_70652_1_.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * (float)var3 * 0.5F), 0.1D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * (float)var3 * 0.5F));
                 this.motionX *= 0.6D;
                 this.motionZ *= 0.6D;
             }
@@ -152,15 +152,15 @@ public abstract class EntityMob extends EntityCreature implements IMob
 
             if (var5 > 0)
             {
-                par1Entity.setFire(var5 * 4);
+                p_70652_1_.setFire(var5 * 4);
             }
 
-            if (par1Entity instanceof EntityLivingBase)
+            if (p_70652_1_ instanceof EntityLivingBase)
             {
-                EnchantmentHelper.func_151384_a((EntityLivingBase)par1Entity, this);
+                EnchantmentHelper.func_151384_a((EntityLivingBase)p_70652_1_, this);
             }
 
-            EnchantmentHelper.func_151385_b(this, par1Entity);
+            EnchantmentHelper.func_151385_b(this, p_70652_1_);
         }
 
         return var4;
@@ -169,12 +169,12 @@ public abstract class EntityMob extends EntityCreature implements IMob
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */
-    protected void attackEntity(Entity par1Entity, float par2)
+    protected void attackEntity(Entity p_70785_1_, float p_70785_2_)
     {
-        if (this.attackTime <= 0 && par2 < 2.0F && par1Entity.boundingBox.maxY > this.boundingBox.minY && par1Entity.boundingBox.minY < this.boundingBox.maxY)
+        if (this.attackTime <= 0 && p_70785_2_ < 2.0F && p_70785_1_.boundingBox.maxY > this.boundingBox.minY && p_70785_1_.boundingBox.minY < this.boundingBox.maxY)
         {
             this.attackTime = 20;
-            this.attackEntityAsMob(par1Entity);
+            this.attackEntityAsMob(p_70785_1_);
         }
     }
 
@@ -182,9 +182,9 @@ public abstract class EntityMob extends EntityCreature implements IMob
      * Takes a coordinate in and returns a weight to determine how likely this creature will try to path to the block.
      * Args: x, y, z
      */
-    public float getBlockPathWeight(int par1, int par2, int par3)
+    public float getBlockPathWeight(int p_70783_1_, int p_70783_2_, int p_70783_3_)
     {
-        return 0.5F - this.worldObj.getLightBrightness(par1, par2, par3);
+        return 0.5F - this.worldObj.getLightBrightness(p_70783_1_, p_70783_2_, p_70783_3_);
     }
 
     /**

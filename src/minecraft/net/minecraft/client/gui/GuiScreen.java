@@ -56,27 +56,27 @@ public class GuiScreen extends Gui
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         int var4;
 
         for (var4 = 0; var4 < this.buttonList.size(); ++var4)
         {
-            ((GuiButton)this.buttonList.get(var4)).drawButton(this.mc, par1, par2);
+            ((GuiButton)this.buttonList.get(var4)).drawButton(this.mc, p_73863_1_, p_73863_2_);
         }
 
         for (var4 = 0; var4 < this.labelList.size(); ++var4)
         {
-            ((GuiLabel)this.labelList.get(var4)).func_146159_a(this.mc, par1, par2);
+            ((GuiLabel)this.labelList.get(var4)).func_146159_a(this.mc, p_73863_1_, p_73863_2_);
         }
     }
 
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2)
+    protected void keyTyped(char p_73869_1_, int p_73869_2_)
     {
-        if (par2 == 1)
+        if (p_73869_2_ == 1)
         {
             this.mc.displayGuiScreen((GuiScreen)null);
             this.mc.setIngameFocus();
@@ -226,15 +226,15 @@ public class GuiScreen extends Gui
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int par1, int par2, int par3)
+    protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_)
     {
-        if (par3 == 0)
+        if (p_73864_3_ == 0)
         {
             for (int var4 = 0; var4 < this.buttonList.size(); ++var4)
             {
                 GuiButton var5 = (GuiButton)this.buttonList.get(var4);
 
-                if (var5.mousePressed(this.mc, par1, par2))
+                if (var5.mousePressed(this.mc, p_73864_1_, p_73864_2_))
                 {
                     this.selectedButton = var5;
                     var5.func_146113_a(this.mc.getSoundHandler());
@@ -307,11 +307,6 @@ public class GuiScreen extends Gui
         int var2 = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
         int var3 = Mouse.getEventButton();
 
-        if (Minecraft.isRunningOnMac && var3 == 0 && (Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157)))
-        {
-            var3 = 1;
-        }
-
         if (Mouse.getEventButtonState())
         {
             if (this.mc.gameSettings.touchscreen && this.field_146298_h++ > 0)
@@ -347,17 +342,10 @@ public class GuiScreen extends Gui
     {
         if (Keyboard.getEventKeyState())
         {
-            int var1 = Keyboard.getEventKey();
-            char var2 = Keyboard.getEventCharacter();
-
-            if (var1 == 87)
-            {
-                this.mc.toggleFullscreen();
-                return;
-            }
-
-            this.keyTyped(var2, var1);
+            this.keyTyped(Keyboard.getEventCharacter(), Keyboard.getEventKey());
         }
+
+        this.mc.func_152348_aa();
     }
 
     /**
@@ -412,7 +400,7 @@ public class GuiScreen extends Gui
         return true;
     }
 
-    public void confirmClicked(boolean par1, int par2) {}
+    public void confirmClicked(boolean p_73878_1_, int p_73878_2_) {}
 
     /**
      * Returns true if either windows ctrl key is down or if either mac meta key is down

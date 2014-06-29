@@ -15,6 +15,7 @@ import io.netty.channel.local.LocalServerChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.timeout.ReadTimeoutHandler;
+import io.netty.handler.timeout.TimeoutException;
 import io.netty.util.AttributeKey;
 import io.netty.util.concurrent.GenericFutureListener;
 import java.net.InetAddress;
@@ -39,10 +40,12 @@ public class NetworkManager extends SimpleChannelInboundHandler
     private static final Logger logger = LogManager.getLogger();
     public static final Marker logMarkerNetwork = MarkerManager.getMarker("NETWORK");
     public static final Marker logMarkerPackets = MarkerManager.getMarker("NETWORK_PACKETS", logMarkerNetwork);
+    public static final Marker field_152461_c = MarkerManager.getMarker("NETWORK_STAT", logMarkerNetwork);
     public static final AttributeKey attrKeyConnectionState = new AttributeKey("protocol");
     public static final AttributeKey attrKeyReceivable = new AttributeKey("receivable_packets");
     public static final AttributeKey attrKeySendable = new AttributeKey("sendable_packets");
     public static final NioEventLoopGroup eventLoops = new NioEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Client IO #%d").setDaemon(true).build());
+    public static final NetworkStatistics field_152462_h = new NetworkStatistics();
 
     /**
      * Whether this NetworkManager deals with the client or server side of the connection
@@ -73,6 +76,7 @@ public class NetworkManager extends SimpleChannelInboundHandler
 
     /** A String indicating why the network has shutdown. */
     private IChatComponent terminationReason;
+    private boolean field_152463_r;
     private static final String __OBFID = "CL_00001240";
 
     public NetworkManager(boolean p_i45147_1_)
@@ -107,20 +111,31 @@ public class NetworkManager extends SimpleChannelInboundHandler
 
     public void exceptionCaught(ChannelHandlerContext p_exceptionCaught_1_, Throwable p_exceptionCaught_2_)
     {
-        this.closeChannel(new ChatComponentTranslation("disconnect.genericReason", new Object[] {"Internal Exception: " + p_exceptionCaught_2_}));
+        ChatComponentTranslation var3;
+
+        if (p_exceptionCaught_2_ instanceof TimeoutException)
+        {
+            var3 = new ChatComponentTranslation("disconnect.timeout", new Object[0]);
+        }
+        else
+        {
+            var3 = new ChatComponentTranslation("disconnect.genericReason", new Object[] {"Internal Exception: " + p_exceptionCaught_2_});
+        }
+
+        this.closeChannel(var3);
     }
 
-    protected void channelRead0(ChannelHandlerContext p_150728_1_, Packet p_150728_2_)
+    protected void channelRead0(ChannelHandlerContext p_channelRead0_1_, Packet p_channelRead0_2_)
     {
         if (this.channel.isOpen())
         {
-            if (p_150728_2_.hasPriority())
+            if (p_channelRead0_2_.hasPriority())
             {
-                p_150728_2_.processPacket(this.netHandler);
+                p_channelRead0_2_.processPacket(this.netHandler);
             }
             else
             {
-                this.receivedPacketsQueue.add(p_150728_2_);
+                this.receivedPacketsQueue.add(p_channelRead0_2_);
             }
         }
     }
@@ -301,7 +316,7 @@ public class NetworkManager extends SimpleChannelInboundHandler
                     ;
                 }
 
-                p_initChannel_1_.pipeline().addLast("timeout", new ReadTimeoutHandler(20)).addLast("splitter", new MessageDeserializer2()).addLast("decoder", new MessageDeserializer()).addLast("prepender", new MessageSerializer2()).addLast("encoder", new MessageSerializer()).addLast("packet_handler", var2);
+                p_initChannel_1_.pipeline().addLast("timeout", new ReadTimeoutHandler(20)).addLast("splitter", new MessageDeserializer2()).addLast("decoder", new MessageDeserializer(NetworkManager.field_152462_h)).addLast("prepender", new MessageSerializer2()).addLast("encoder", new MessageSerializer(NetworkManager.field_152462_h)).addLast("packet_handler", var2);
             }
         })).channel(NioSocketChannel.class)).connect(p_150726_0_, p_150726_1_).syncUninterruptibly();
         return var2;
@@ -332,6 +347,7 @@ public class NetworkManager extends SimpleChannelInboundHandler
     {
         this.channel.pipeline().addBefore("splitter", "decrypt", new NettyEncryptingDecoder(CryptManager.func_151229_a(2, p_150727_1_)));
         this.channel.pipeline().addBefore("prepender", "encrypt", new NettyEncryptingEncoder(CryptManager.func_151229_a(1, p_150727_1_)));
+        this.field_152463_r = true;
     }
 
     /**

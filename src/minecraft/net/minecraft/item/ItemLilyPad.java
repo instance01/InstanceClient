@@ -19,13 +19,13 @@ public class ItemLilyPad extends ItemColored
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    public ItemStack onItemRightClick(ItemStack p_77659_1_, World p_77659_2_, EntityPlayer p_77659_3_)
     {
-        MovingObjectPosition var4 = this.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, true);
+        MovingObjectPosition var4 = this.getMovingObjectPositionFromPlayer(p_77659_2_, p_77659_3_, true);
 
         if (var4 == null)
         {
-            return par1ItemStack;
+            return p_77659_1_;
         }
         else
         {
@@ -35,33 +35,33 @@ public class ItemLilyPad extends ItemColored
                 int var6 = var4.blockY;
                 int var7 = var4.blockZ;
 
-                if (!par2World.canMineBlock(par3EntityPlayer, var5, var6, var7))
+                if (!p_77659_2_.canMineBlock(p_77659_3_, var5, var6, var7))
                 {
-                    return par1ItemStack;
+                    return p_77659_1_;
                 }
 
-                if (!par3EntityPlayer.canPlayerEdit(var5, var6, var7, var4.sideHit, par1ItemStack))
+                if (!p_77659_3_.canPlayerEdit(var5, var6, var7, var4.sideHit, p_77659_1_))
                 {
-                    return par1ItemStack;
+                    return p_77659_1_;
                 }
 
-                if (par2World.getBlock(var5, var6, var7).getMaterial() == Material.water && par2World.getBlockMetadata(var5, var6, var7) == 0 && par2World.isAirBlock(var5, var6 + 1, var7))
+                if (p_77659_2_.getBlock(var5, var6, var7).getMaterial() == Material.water && p_77659_2_.getBlockMetadata(var5, var6, var7) == 0 && p_77659_2_.isAirBlock(var5, var6 + 1, var7))
                 {
-                    par2World.setBlock(var5, var6 + 1, var7, Blocks.waterlily);
+                    p_77659_2_.setBlock(var5, var6 + 1, var7, Blocks.waterlily);
 
-                    if (!par3EntityPlayer.capabilities.isCreativeMode)
+                    if (!p_77659_3_.capabilities.isCreativeMode)
                     {
-                        --par1ItemStack.stackSize;
+                        --p_77659_1_.stackSize;
                     }
                 }
             }
 
-            return par1ItemStack;
+            return p_77659_1_;
         }
     }
 
-    public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
+    public int getColorFromItemStack(ItemStack p_82790_1_, int p_82790_2_)
     {
-        return Blocks.waterlily.getRenderColor(par1ItemStack.getItemDamage());
+        return Blocks.waterlily.getRenderColor(p_82790_1_.getItemDamage());
     }
 }

@@ -21,9 +21,9 @@ public class ItemCoal extends Item
      * Returns the unlocalized name of this item. This version accepts an ItemStack so different stacks can have
      * different names based on their damage or NBT.
      */
-    public String getUnlocalizedName(ItemStack par1ItemStack)
+    public String getUnlocalizedName(ItemStack p_77667_1_)
     {
-        return par1ItemStack.getItemDamage() == 1 ? "item.charcoal" : "item.coal";
+        return p_77667_1_.getItemDamage() == 1 ? "item.charcoal" : "item.coal";
     }
 
     /**
@@ -38,14 +38,14 @@ public class ItemCoal extends Item
     /**
      * Gets an icon index based on an item's damage value
      */
-    public IIcon getIconFromDamage(int par1)
+    public IIcon getIconFromDamage(int p_77617_1_)
     {
-        return par1 == 1 ? this.field_111220_a : super.getIconFromDamage(par1);
+        return p_77617_1_ == 1 ? this.field_111220_a : super.getIconFromDamage(p_77617_1_);
     }
 
-    public void registerIcons(IIconRegister par1IconRegister)
+    public void registerIcons(IIconRegister p_94581_1_)
     {
-        super.registerIcons(par1IconRegister);
-        this.field_111220_a = par1IconRegister.registerIcon("charcoal");
+        super.registerIcons(p_94581_1_);
+        this.field_111220_a = p_94581_1_.registerIcon("charcoal");
     }
 }

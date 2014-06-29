@@ -28,9 +28,9 @@ public class EntityPigZombie extends EntityZombie
     private Entity field_110191_bu;
     private static final String __OBFID = "CL_00001693";
 
-    public EntityPigZombie(World par1World)
+    public EntityPigZombie(World p_i1739_1_)
     {
-        super(par1World);
+        super(p_i1739_1_);
         this.isImmuneToFire = true;
     }
 
@@ -87,19 +87,19 @@ public class EntityPigZombie extends EntityZombie
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    public void writeEntityToNBT(NBTTagCompound p_70014_1_)
     {
-        super.writeEntityToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setShort("Anger", (short)this.angerLevel);
+        super.writeEntityToNBT(p_70014_1_);
+        p_70014_1_.setShort("Anger", (short)this.angerLevel);
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    public void readEntityFromNBT(NBTTagCompound p_70037_1_)
     {
-        super.readEntityFromNBT(par1NBTTagCompound);
-        this.angerLevel = par1NBTTagCompound.getShort("Anger");
+        super.readEntityFromNBT(p_70037_1_);
+        this.angerLevel = p_70037_1_.getShort("Anger");
     }
 
     /**
@@ -114,7 +114,7 @@ public class EntityPigZombie extends EntityZombie
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_)
     {
         if (this.isEntityInvulnerable())
         {
@@ -122,7 +122,7 @@ public class EntityPigZombie extends EntityZombie
         }
         else
         {
-            Entity var3 = par1DamageSource.getEntity();
+            Entity var3 = p_70097_1_.getEntity();
 
             if (var3 instanceof EntityPlayer)
             {
@@ -142,16 +142,16 @@ public class EntityPigZombie extends EntityZombie
                 this.becomeAngryAt(var3);
             }
 
-            return super.attackEntityFrom(par1DamageSource, par2);
+            return super.attackEntityFrom(p_70097_1_, p_70097_2_);
         }
     }
 
     /**
      * Causes this PigZombie to become angry at the supplied Entity (which will be a player).
      */
-    private void becomeAngryAt(Entity par1Entity)
+    private void becomeAngryAt(Entity p_70835_1_)
     {
-        this.entityToAttack = par1Entity;
+        this.entityToAttack = p_70835_1_;
         this.angerLevel = 400 + this.rand.nextInt(400);
         this.randomSoundDelay = this.rand.nextInt(40);
     }
@@ -183,9 +183,9 @@ public class EntityPigZombie extends EntityZombie
     /**
      * Drop 0-2 items of this living's type
      */
-    protected void dropFewItems(boolean par1, int par2)
+    protected void dropFewItems(boolean p_70628_1_, int p_70628_2_)
     {
-        int var3 = this.rand.nextInt(2 + par2);
+        int var3 = this.rand.nextInt(2 + p_70628_2_);
         int var4;
 
         for (var4 = 0; var4 < var3; ++var4)
@@ -193,7 +193,7 @@ public class EntityPigZombie extends EntityZombie
             this.func_145779_a(Items.rotten_flesh, 1);
         }
 
-        var3 = this.rand.nextInt(2 + par2);
+        var3 = this.rand.nextInt(2 + p_70628_2_);
 
         for (var4 = 0; var4 < var3; ++var4)
         {
@@ -204,12 +204,12 @@ public class EntityPigZombie extends EntityZombie
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
-    public boolean interact(EntityPlayer par1EntityPlayer)
+    public boolean interact(EntityPlayer p_70085_1_)
     {
         return false;
     }
 
-    protected void dropRareDrop(int par1)
+    protected void dropRareDrop(int p_70600_1_)
     {
         this.func_145779_a(Items.gold_ingot, 1);
     }
@@ -222,10 +222,10 @@ public class EntityPigZombie extends EntityZombie
         this.setCurrentItemOrArmor(0, new ItemStack(Items.golden_sword));
     }
 
-    public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+    public IEntityLivingData onSpawnWithEgg(IEntityLivingData p_110161_1_)
     {
-        super.onSpawnWithEgg(par1EntityLivingData);
+        super.onSpawnWithEgg(p_110161_1_);
         this.setVillager(false);
-        return par1EntityLivingData;
+        return p_110161_1_;
     }
 }

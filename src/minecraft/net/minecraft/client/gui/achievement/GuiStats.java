@@ -42,10 +42,10 @@ public class GuiStats extends GuiScreen implements IProgressMeter
     private boolean field_146543_v = true;
     private static final String __OBFID = "CL_00000723";
 
-    public GuiStats(GuiScreen par1GuiScreen, StatFileWriter par2StatFileWriter)
+    public GuiStats(GuiScreen p_i1071_1_, StatFileWriter p_i1071_2_)
     {
-        this.field_146549_a = par1GuiScreen;
-        this.field_146546_t = par2StatFileWriter;
+        this.field_146549_a = p_i1071_1_;
+        this.field_146546_t = p_i1071_2_;
     }
 
     /**
@@ -62,10 +62,10 @@ public class GuiStats extends GuiScreen implements IProgressMeter
         this.buttonList.add(new GuiButton(0, this.width / 2 + 4, this.height - 28, 150, 20, I18n.format("gui.done", new Object[0])));
         this.buttonList.add(new GuiButton(1, this.width / 2 - 160, this.height - 52, 80, 20, I18n.format("stat.generalButton", new Object[0])));
         GuiButton var1;
-        this.buttonList.add(var1 = new GuiButton(2, this.width / 2 - 80, this.height - 52, 80, 20, I18n.format("stat.blocksButton", new Object[0])));
         GuiButton var2;
-        this.buttonList.add(var2 = new GuiButton(3, this.width / 2, this.height - 52, 80, 20, I18n.format("stat.itemsButton", new Object[0])));
         GuiButton var3;
+        this.buttonList.add(var1 = new GuiButton(2, this.width / 2 - 80, this.height - 52, 80, 20, I18n.format("stat.blocksButton", new Object[0])));
+        this.buttonList.add(var2 = new GuiButton(3, this.width / 2, this.height - 52, 80, 20, I18n.format("stat.itemsButton", new Object[0])));
         this.buttonList.add(var3 = new GuiButton(4, this.width / 2 + 80, this.height - 52, 80, 20, I18n.format("stat.mobsButton", new Object[0])));
 
         if (this.field_146548_r.getSize() == 0)
@@ -118,7 +118,7 @@ public class GuiStats extends GuiScreen implements IProgressMeter
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         if (this.field_146543_v)
         {
@@ -128,9 +128,9 @@ public class GuiStats extends GuiScreen implements IProgressMeter
         }
         else
         {
-            this.field_146545_u.func_148128_a(par1, par2, par3);
+            this.field_146545_u.func_148128_a(p_73863_1_, p_73863_2_, p_73863_3_);
             this.drawCenteredString(this.fontRendererObj, this.field_146542_f, this.width / 2, 20, 16777215);
-            super.drawScreen(par1, par2, par3);
+            super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
         }
     }
 
@@ -190,394 +190,6 @@ public class GuiStats extends GuiScreen implements IProgressMeter
         var9.addVertexWithUV((double)(p_146527_1_ + 18), (double)(p_146527_2_ + 0), (double)this.zLevel, (double)((float)(p_146527_3_ + 18) * 0.0078125F), (double)((float)(p_146527_4_ + 0) * 0.0078125F));
         var9.addVertexWithUV((double)(p_146527_1_ + 0), (double)(p_146527_2_ + 0), (double)this.zLevel, (double)((float)(p_146527_3_ + 0) * 0.0078125F), (double)((float)(p_146527_4_ + 0) * 0.0078125F));
         var9.draw();
-    }
-
-    class StatsMobsList extends GuiSlot
-    {
-        private final List field_148222_l = new ArrayList();
-        private static final String __OBFID = "CL_00000729";
-
-        public StatsMobsList()
-        {
-            super(GuiStats.this.mc, GuiStats.this.width, GuiStats.this.height, 32, GuiStats.this.height - 64, GuiStats.this.fontRendererObj.FONT_HEIGHT * 4);
-            this.func_148130_a(false);
-            Iterator var2 = EntityList.entityEggs.values().iterator();
-
-            while (var2.hasNext())
-            {
-                EntityList.EntityEggInfo var3 = (EntityList.EntityEggInfo)var2.next();
-
-                if (GuiStats.this.field_146546_t.writeStat(var3.field_151512_d) > 0 || GuiStats.this.field_146546_t.writeStat(var3.field_151513_e) > 0)
-                {
-                    this.field_148222_l.add(var3);
-                }
-            }
-        }
-
-        protected int getSize()
-        {
-            return this.field_148222_l.size();
-        }
-
-        protected void elementClicked(int p_148144_1_, boolean p_148144_2_, int p_148144_3_, int p_148144_4_) {}
-
-        protected boolean isSelected(int p_148131_1_)
-        {
-            return false;
-        }
-
-        protected int func_148138_e()
-        {
-            return this.getSize() * GuiStats.this.fontRendererObj.FONT_HEIGHT * 4;
-        }
-
-        protected void drawBackground()
-        {
-            GuiStats.this.drawDefaultBackground();
-        }
-
-        protected void drawSlot(int p_148126_1_, int p_148126_2_, int p_148126_3_, int p_148126_4_, Tessellator p_148126_5_, int p_148126_6_, int p_148126_7_)
-        {
-            EntityList.EntityEggInfo var8 = (EntityList.EntityEggInfo)this.field_148222_l.get(p_148126_1_);
-            String var9 = I18n.format("entity." + EntityList.getStringFromID(var8.spawnedID) + ".name", new Object[0]);
-            int var10 = GuiStats.this.field_146546_t.writeStat(var8.field_151512_d);
-            int var11 = GuiStats.this.field_146546_t.writeStat(var8.field_151513_e);
-            String var12 = I18n.format("stat.entityKills", new Object[] {Integer.valueOf(var10), var9});
-            String var13 = I18n.format("stat.entityKilledBy", new Object[] {var9, Integer.valueOf(var11)});
-
-            if (var10 == 0)
-            {
-                var12 = I18n.format("stat.entityKills.none", new Object[] {var9});
-            }
-
-            if (var11 == 0)
-            {
-                var13 = I18n.format("stat.entityKilledBy.none", new Object[] {var9});
-            }
-
-            GuiStats.this.drawString(GuiStats.this.fontRendererObj, var9, p_148126_2_ + 2 - 10, p_148126_3_ + 1, 16777215);
-            GuiStats.this.drawString(GuiStats.this.fontRendererObj, var12, p_148126_2_ + 2, p_148126_3_ + 1 + GuiStats.this.fontRendererObj.FONT_HEIGHT, var10 == 0 ? 6316128 : 9474192);
-            GuiStats.this.drawString(GuiStats.this.fontRendererObj, var13, p_148126_2_ + 2, p_148126_3_ + 1 + GuiStats.this.fontRendererObj.FONT_HEIGHT * 2, var11 == 0 ? 6316128 : 9474192);
-        }
-    }
-
-    class StatsBlock extends GuiStats.Stats
-    {
-        private static final String __OBFID = "CL_00000724";
-
-        public StatsBlock()
-        {
-            this.field_148219_m = new ArrayList();
-            Iterator var2 = StatList.objectMineStats.iterator();
-
-            while (var2.hasNext())
-            {
-                StatCrafting var3 = (StatCrafting)var2.next();
-                boolean var4 = false;
-                int var5 = Item.getIdFromItem(var3.func_150959_a());
-
-                if (GuiStats.this.field_146546_t.writeStat(var3) > 0)
-                {
-                    var4 = true;
-                }
-                else if (StatList.objectUseStats[var5] != null && GuiStats.this.field_146546_t.writeStat(StatList.objectUseStats[var5]) > 0)
-                {
-                    var4 = true;
-                }
-                else if (StatList.objectCraftStats[var5] != null && GuiStats.this.field_146546_t.writeStat(StatList.objectCraftStats[var5]) > 0)
-                {
-                    var4 = true;
-                }
-
-                if (var4)
-                {
-                    this.field_148219_m.add(var3);
-                }
-            }
-
-            this.field_148216_n = new Comparator()
-            {
-                private static final String __OBFID = "CL_00000725";
-                public int compare(StatCrafting p_148339_1_, StatCrafting p_148339_2_)
-                {
-                    int var3 = Item.getIdFromItem(p_148339_1_.func_150959_a());
-                    int var4 = Item.getIdFromItem(p_148339_2_.func_150959_a());
-                    StatBase var5 = null;
-                    StatBase var6 = null;
-
-                    if (StatsBlock.this.field_148217_o == 2)
-                    {
-                        var5 = StatList.mineBlockStatArray[var3];
-                        var6 = StatList.mineBlockStatArray[var4];
-                    }
-                    else if (StatsBlock.this.field_148217_o == 0)
-                    {
-                        var5 = StatList.objectCraftStats[var3];
-                        var6 = StatList.objectCraftStats[var4];
-                    }
-                    else if (StatsBlock.this.field_148217_o == 1)
-                    {
-                        var5 = StatList.objectUseStats[var3];
-                        var6 = StatList.objectUseStats[var4];
-                    }
-
-                    if (var5 != null || var6 != null)
-                    {
-                        if (var5 == null)
-                        {
-                            return 1;
-                        }
-
-                        if (var6 == null)
-                        {
-                            return -1;
-                        }
-
-                        int var7 = GuiStats.this.field_146546_t.writeStat(var5);
-                        int var8 = GuiStats.this.field_146546_t.writeStat(var6);
-
-                        if (var7 != var8)
-                        {
-                            return (var7 - var8) * StatsBlock.this.field_148215_p;
-                        }
-                    }
-
-                    return var3 - var4;
-                }
-                public int compare(Object par1Obj, Object par2Obj)
-                {
-                    return this.compare((StatCrafting)par1Obj, (StatCrafting)par2Obj);
-                }
-            };
-        }
-
-        protected void func_148129_a(int p_148129_1_, int p_148129_2_, Tessellator p_148129_3_)
-        {
-            super.func_148129_a(p_148129_1_, p_148129_2_, p_148129_3_);
-
-            if (this.field_148218_l == 0)
-            {
-                GuiStats.this.func_146527_c(p_148129_1_ + 115 - 18 + 1, p_148129_2_ + 1 + 1, 18, 18);
-            }
-            else
-            {
-                GuiStats.this.func_146527_c(p_148129_1_ + 115 - 18, p_148129_2_ + 1, 18, 18);
-            }
-
-            if (this.field_148218_l == 1)
-            {
-                GuiStats.this.func_146527_c(p_148129_1_ + 165 - 18 + 1, p_148129_2_ + 1 + 1, 36, 18);
-            }
-            else
-            {
-                GuiStats.this.func_146527_c(p_148129_1_ + 165 - 18, p_148129_2_ + 1, 36, 18);
-            }
-
-            if (this.field_148218_l == 2)
-            {
-                GuiStats.this.func_146527_c(p_148129_1_ + 215 - 18 + 1, p_148129_2_ + 1 + 1, 54, 18);
-            }
-            else
-            {
-                GuiStats.this.func_146527_c(p_148129_1_ + 215 - 18, p_148129_2_ + 1, 54, 18);
-            }
-        }
-
-        protected void drawSlot(int p_148126_1_, int p_148126_2_, int p_148126_3_, int p_148126_4_, Tessellator p_148126_5_, int p_148126_6_, int p_148126_7_)
-        {
-            StatCrafting var8 = this.func_148211_c(p_148126_1_);
-            Item var9 = var8.func_150959_a();
-            GuiStats.this.func_146521_a(p_148126_2_ + 40, p_148126_3_, var9);
-            int var10 = Item.getIdFromItem(var9);
-            this.func_148209_a(StatList.objectCraftStats[var10], p_148126_2_ + 115, p_148126_3_, p_148126_1_ % 2 == 0);
-            this.func_148209_a(StatList.objectUseStats[var10], p_148126_2_ + 165, p_148126_3_, p_148126_1_ % 2 == 0);
-            this.func_148209_a(var8, p_148126_2_ + 215, p_148126_3_, p_148126_1_ % 2 == 0);
-        }
-
-        protected String func_148210_b(int p_148210_1_)
-        {
-            return p_148210_1_ == 0 ? "stat.crafted" : (p_148210_1_ == 1 ? "stat.used" : "stat.mined");
-        }
-    }
-
-    class StatsItem extends GuiStats.Stats
-    {
-        private static final String __OBFID = "CL_00000727";
-
-        public StatsItem()
-        {
-            this.field_148219_m = new ArrayList();
-            Iterator var2 = StatList.itemStats.iterator();
-
-            while (var2.hasNext())
-            {
-                StatCrafting var3 = (StatCrafting)var2.next();
-                boolean var4 = false;
-                int var5 = Item.getIdFromItem(var3.func_150959_a());
-
-                if (GuiStats.this.field_146546_t.writeStat(var3) > 0)
-                {
-                    var4 = true;
-                }
-                else if (StatList.objectBreakStats[var5] != null && GuiStats.this.field_146546_t.writeStat(StatList.objectBreakStats[var5]) > 0)
-                {
-                    var4 = true;
-                }
-                else if (StatList.objectCraftStats[var5] != null && GuiStats.this.field_146546_t.writeStat(StatList.objectCraftStats[var5]) > 0)
-                {
-                    var4 = true;
-                }
-
-                if (var4)
-                {
-                    this.field_148219_m.add(var3);
-                }
-            }
-
-            this.field_148216_n = new Comparator()
-            {
-                private static final String __OBFID = "CL_00000728";
-                public int compare(StatCrafting p_148342_1_, StatCrafting p_148342_2_)
-                {
-                    int var3 = Item.getIdFromItem(p_148342_1_.func_150959_a());
-                    int var4 = Item.getIdFromItem(p_148342_2_.func_150959_a());
-                    StatBase var5 = null;
-                    StatBase var6 = null;
-
-                    if (StatsItem.this.field_148217_o == 0)
-                    {
-                        var5 = StatList.objectBreakStats[var3];
-                        var6 = StatList.objectBreakStats[var4];
-                    }
-                    else if (StatsItem.this.field_148217_o == 1)
-                    {
-                        var5 = StatList.objectCraftStats[var3];
-                        var6 = StatList.objectCraftStats[var4];
-                    }
-                    else if (StatsItem.this.field_148217_o == 2)
-                    {
-                        var5 = StatList.objectUseStats[var3];
-                        var6 = StatList.objectUseStats[var4];
-                    }
-
-                    if (var5 != null || var6 != null)
-                    {
-                        if (var5 == null)
-                        {
-                            return 1;
-                        }
-
-                        if (var6 == null)
-                        {
-                            return -1;
-                        }
-
-                        int var7 = GuiStats.this.field_146546_t.writeStat(var5);
-                        int var8 = GuiStats.this.field_146546_t.writeStat(var6);
-
-                        if (var7 != var8)
-                        {
-                            return (var7 - var8) * StatsItem.this.field_148215_p;
-                        }
-                    }
-
-                    return var3 - var4;
-                }
-                public int compare(Object par1Obj, Object par2Obj)
-                {
-                    return this.compare((StatCrafting)par1Obj, (StatCrafting)par2Obj);
-                }
-            };
-        }
-
-        protected void func_148129_a(int p_148129_1_, int p_148129_2_, Tessellator p_148129_3_)
-        {
-            super.func_148129_a(p_148129_1_, p_148129_2_, p_148129_3_);
-
-            if (this.field_148218_l == 0)
-            {
-                GuiStats.this.func_146527_c(p_148129_1_ + 115 - 18 + 1, p_148129_2_ + 1 + 1, 72, 18);
-            }
-            else
-            {
-                GuiStats.this.func_146527_c(p_148129_1_ + 115 - 18, p_148129_2_ + 1, 72, 18);
-            }
-
-            if (this.field_148218_l == 1)
-            {
-                GuiStats.this.func_146527_c(p_148129_1_ + 165 - 18 + 1, p_148129_2_ + 1 + 1, 18, 18);
-            }
-            else
-            {
-                GuiStats.this.func_146527_c(p_148129_1_ + 165 - 18, p_148129_2_ + 1, 18, 18);
-            }
-
-            if (this.field_148218_l == 2)
-            {
-                GuiStats.this.func_146527_c(p_148129_1_ + 215 - 18 + 1, p_148129_2_ + 1 + 1, 36, 18);
-            }
-            else
-            {
-                GuiStats.this.func_146527_c(p_148129_1_ + 215 - 18, p_148129_2_ + 1, 36, 18);
-            }
-        }
-
-        protected void drawSlot(int p_148126_1_, int p_148126_2_, int p_148126_3_, int p_148126_4_, Tessellator p_148126_5_, int p_148126_6_, int p_148126_7_)
-        {
-            StatCrafting var8 = this.func_148211_c(p_148126_1_);
-            Item var9 = var8.func_150959_a();
-            GuiStats.this.func_146521_a(p_148126_2_ + 40, p_148126_3_, var9);
-            int var10 = Item.getIdFromItem(var9);
-            this.func_148209_a(StatList.objectBreakStats[var10], p_148126_2_ + 115, p_148126_3_, p_148126_1_ % 2 == 0);
-            this.func_148209_a(StatList.objectCraftStats[var10], p_148126_2_ + 165, p_148126_3_, p_148126_1_ % 2 == 0);
-            this.func_148209_a(var8, p_148126_2_ + 215, p_148126_3_, p_148126_1_ % 2 == 0);
-        }
-
-        protected String func_148210_b(int p_148210_1_)
-        {
-            return p_148210_1_ == 1 ? "stat.crafted" : (p_148210_1_ == 2 ? "stat.used" : "stat.depleted");
-        }
-    }
-
-    class StatsGeneral extends GuiSlot
-    {
-        private static final String __OBFID = "CL_00000726";
-
-        public StatsGeneral()
-        {
-            super(GuiStats.this.mc, GuiStats.this.width, GuiStats.this.height, 32, GuiStats.this.height - 64, 10);
-            this.func_148130_a(false);
-        }
-
-        protected int getSize()
-        {
-            return StatList.generalStats.size();
-        }
-
-        protected void elementClicked(int p_148144_1_, boolean p_148144_2_, int p_148144_3_, int p_148144_4_) {}
-
-        protected boolean isSelected(int p_148131_1_)
-        {
-            return false;
-        }
-
-        protected int func_148138_e()
-        {
-            return this.getSize() * 10;
-        }
-
-        protected void drawBackground()
-        {
-            GuiStats.this.drawDefaultBackground();
-        }
-
-        protected void drawSlot(int p_148126_1_, int p_148126_2_, int p_148126_3_, int p_148126_4_, Tessellator p_148126_5_, int p_148126_6_, int p_148126_7_)
-        {
-            StatBase var8 = (StatBase)StatList.generalStats.get(p_148126_1_);
-            GuiStats.this.drawString(GuiStats.this.fontRendererObj, var8.func_150951_e().getUnformattedText(), p_148126_2_ + 2, p_148126_3_ + 1, p_148126_1_ % 2 == 0 ? 16777215 : 9474192);
-            String var9 = var8.func_75968_a(GuiStats.this.field_146546_t.writeStat(var8));
-            GuiStats.this.drawString(GuiStats.this.fontRendererObj, var9, p_148126_2_ + 2 + 213 - GuiStats.this.fontRendererObj.getStringWidth(var9), p_148126_3_ + 1, p_148126_1_ % 2 == 0 ? 16777215 : 9474192);
-        }
     }
 
     abstract class Stats extends GuiSlot
@@ -699,7 +311,7 @@ public class GuiStats extends GuiScreen implements IProgressMeter
             return (StatCrafting)this.field_148219_m.get(p_148211_1_);
         }
 
-        protected abstract String func_148210_b(int var1);
+        protected abstract String func_148210_b(int p_148210_1_);
 
         protected void func_148209_a(StatBase p_148209_1_, int p_148209_2_, int p_148209_3_, boolean p_148209_4_)
         {
@@ -806,6 +418,394 @@ public class GuiStats extends GuiScreen implements IProgressMeter
             }
 
             Collections.sort(this.field_148219_m, this.field_148216_n);
+        }
+    }
+
+    class StatsBlock extends GuiStats.Stats
+    {
+        private static final String __OBFID = "CL_00000724";
+
+        public StatsBlock()
+        {
+            this.field_148219_m = new ArrayList();
+            Iterator var2 = StatList.objectMineStats.iterator();
+
+            while (var2.hasNext())
+            {
+                StatCrafting var3 = (StatCrafting)var2.next();
+                boolean var4 = false;
+                int var5 = Item.getIdFromItem(var3.func_150959_a());
+
+                if (GuiStats.this.field_146546_t.writeStat(var3) > 0)
+                {
+                    var4 = true;
+                }
+                else if (StatList.objectUseStats[var5] != null && GuiStats.this.field_146546_t.writeStat(StatList.objectUseStats[var5]) > 0)
+                {
+                    var4 = true;
+                }
+                else if (StatList.objectCraftStats[var5] != null && GuiStats.this.field_146546_t.writeStat(StatList.objectCraftStats[var5]) > 0)
+                {
+                    var4 = true;
+                }
+
+                if (var4)
+                {
+                    this.field_148219_m.add(var3);
+                }
+            }
+
+            this.field_148216_n = new Comparator()
+            {
+                private static final String __OBFID = "CL_00000725";
+                public int compare(StatCrafting p_compare_1_, StatCrafting p_compare_2_)
+                {
+                    int var3 = Item.getIdFromItem(p_compare_1_.func_150959_a());
+                    int var4 = Item.getIdFromItem(p_compare_2_.func_150959_a());
+                    StatBase var5 = null;
+                    StatBase var6 = null;
+
+                    if (StatsBlock.this.field_148217_o == 2)
+                    {
+                        var5 = StatList.mineBlockStatArray[var3];
+                        var6 = StatList.mineBlockStatArray[var4];
+                    }
+                    else if (StatsBlock.this.field_148217_o == 0)
+                    {
+                        var5 = StatList.objectCraftStats[var3];
+                        var6 = StatList.objectCraftStats[var4];
+                    }
+                    else if (StatsBlock.this.field_148217_o == 1)
+                    {
+                        var5 = StatList.objectUseStats[var3];
+                        var6 = StatList.objectUseStats[var4];
+                    }
+
+                    if (var5 != null || var6 != null)
+                    {
+                        if (var5 == null)
+                        {
+                            return 1;
+                        }
+
+                        if (var6 == null)
+                        {
+                            return -1;
+                        }
+
+                        int var7 = GuiStats.this.field_146546_t.writeStat(var5);
+                        int var8 = GuiStats.this.field_146546_t.writeStat(var6);
+
+                        if (var7 != var8)
+                        {
+                            return (var7 - var8) * StatsBlock.this.field_148215_p;
+                        }
+                    }
+
+                    return var3 - var4;
+                }
+                public int compare(Object p_compare_1_, Object p_compare_2_)
+                {
+                    return this.compare((StatCrafting)p_compare_1_, (StatCrafting)p_compare_2_);
+                }
+            };
+        }
+
+        protected void func_148129_a(int p_148129_1_, int p_148129_2_, Tessellator p_148129_3_)
+        {
+            super.func_148129_a(p_148129_1_, p_148129_2_, p_148129_3_);
+
+            if (this.field_148218_l == 0)
+            {
+                GuiStats.this.func_146527_c(p_148129_1_ + 115 - 18 + 1, p_148129_2_ + 1 + 1, 18, 18);
+            }
+            else
+            {
+                GuiStats.this.func_146527_c(p_148129_1_ + 115 - 18, p_148129_2_ + 1, 18, 18);
+            }
+
+            if (this.field_148218_l == 1)
+            {
+                GuiStats.this.func_146527_c(p_148129_1_ + 165 - 18 + 1, p_148129_2_ + 1 + 1, 36, 18);
+            }
+            else
+            {
+                GuiStats.this.func_146527_c(p_148129_1_ + 165 - 18, p_148129_2_ + 1, 36, 18);
+            }
+
+            if (this.field_148218_l == 2)
+            {
+                GuiStats.this.func_146527_c(p_148129_1_ + 215 - 18 + 1, p_148129_2_ + 1 + 1, 54, 18);
+            }
+            else
+            {
+                GuiStats.this.func_146527_c(p_148129_1_ + 215 - 18, p_148129_2_ + 1, 54, 18);
+            }
+        }
+
+        protected void drawSlot(int p_148126_1_, int p_148126_2_, int p_148126_3_, int p_148126_4_, Tessellator p_148126_5_, int p_148126_6_, int p_148126_7_)
+        {
+            StatCrafting var8 = this.func_148211_c(p_148126_1_);
+            Item var9 = var8.func_150959_a();
+            GuiStats.this.func_146521_a(p_148126_2_ + 40, p_148126_3_, var9);
+            int var10 = Item.getIdFromItem(var9);
+            this.func_148209_a(StatList.objectCraftStats[var10], p_148126_2_ + 115, p_148126_3_, p_148126_1_ % 2 == 0);
+            this.func_148209_a(StatList.objectUseStats[var10], p_148126_2_ + 165, p_148126_3_, p_148126_1_ % 2 == 0);
+            this.func_148209_a(var8, p_148126_2_ + 215, p_148126_3_, p_148126_1_ % 2 == 0);
+        }
+
+        protected String func_148210_b(int p_148210_1_)
+        {
+            return p_148210_1_ == 0 ? "stat.crafted" : (p_148210_1_ == 1 ? "stat.used" : "stat.mined");
+        }
+    }
+
+    class StatsGeneral extends GuiSlot
+    {
+        private static final String __OBFID = "CL_00000726";
+
+        public StatsGeneral()
+        {
+            super(GuiStats.this.mc, GuiStats.this.width, GuiStats.this.height, 32, GuiStats.this.height - 64, 10);
+            this.func_148130_a(false);
+        }
+
+        protected int getSize()
+        {
+            return StatList.generalStats.size();
+        }
+
+        protected void elementClicked(int p_148144_1_, boolean p_148144_2_, int p_148144_3_, int p_148144_4_) {}
+
+        protected boolean isSelected(int p_148131_1_)
+        {
+            return false;
+        }
+
+        protected int func_148138_e()
+        {
+            return this.getSize() * 10;
+        }
+
+        protected void drawBackground()
+        {
+            GuiStats.this.drawDefaultBackground();
+        }
+
+        protected void drawSlot(int p_148126_1_, int p_148126_2_, int p_148126_3_, int p_148126_4_, Tessellator p_148126_5_, int p_148126_6_, int p_148126_7_)
+        {
+            StatBase var8 = (StatBase)StatList.generalStats.get(p_148126_1_);
+            GuiStats.this.drawString(GuiStats.this.fontRendererObj, var8.func_150951_e().getUnformattedText(), p_148126_2_ + 2, p_148126_3_ + 1, p_148126_1_ % 2 == 0 ? 16777215 : 9474192);
+            String var9 = var8.func_75968_a(GuiStats.this.field_146546_t.writeStat(var8));
+            GuiStats.this.drawString(GuiStats.this.fontRendererObj, var9, p_148126_2_ + 2 + 213 - GuiStats.this.fontRendererObj.getStringWidth(var9), p_148126_3_ + 1, p_148126_1_ % 2 == 0 ? 16777215 : 9474192);
+        }
+    }
+
+    class StatsItem extends GuiStats.Stats
+    {
+        private static final String __OBFID = "CL_00000727";
+
+        public StatsItem()
+        {
+            this.field_148219_m = new ArrayList();
+            Iterator var2 = StatList.itemStats.iterator();
+
+            while (var2.hasNext())
+            {
+                StatCrafting var3 = (StatCrafting)var2.next();
+                boolean var4 = false;
+                int var5 = Item.getIdFromItem(var3.func_150959_a());
+
+                if (GuiStats.this.field_146546_t.writeStat(var3) > 0)
+                {
+                    var4 = true;
+                }
+                else if (StatList.objectBreakStats[var5] != null && GuiStats.this.field_146546_t.writeStat(StatList.objectBreakStats[var5]) > 0)
+                {
+                    var4 = true;
+                }
+                else if (StatList.objectCraftStats[var5] != null && GuiStats.this.field_146546_t.writeStat(StatList.objectCraftStats[var5]) > 0)
+                {
+                    var4 = true;
+                }
+
+                if (var4)
+                {
+                    this.field_148219_m.add(var3);
+                }
+            }
+
+            this.field_148216_n = new Comparator()
+            {
+                private static final String __OBFID = "CL_00000728";
+                public int compare(StatCrafting p_compare_1_, StatCrafting p_compare_2_)
+                {
+                    int var3 = Item.getIdFromItem(p_compare_1_.func_150959_a());
+                    int var4 = Item.getIdFromItem(p_compare_2_.func_150959_a());
+                    StatBase var5 = null;
+                    StatBase var6 = null;
+
+                    if (StatsItem.this.field_148217_o == 0)
+                    {
+                        var5 = StatList.objectBreakStats[var3];
+                        var6 = StatList.objectBreakStats[var4];
+                    }
+                    else if (StatsItem.this.field_148217_o == 1)
+                    {
+                        var5 = StatList.objectCraftStats[var3];
+                        var6 = StatList.objectCraftStats[var4];
+                    }
+                    else if (StatsItem.this.field_148217_o == 2)
+                    {
+                        var5 = StatList.objectUseStats[var3];
+                        var6 = StatList.objectUseStats[var4];
+                    }
+
+                    if (var5 != null || var6 != null)
+                    {
+                        if (var5 == null)
+                        {
+                            return 1;
+                        }
+
+                        if (var6 == null)
+                        {
+                            return -1;
+                        }
+
+                        int var7 = GuiStats.this.field_146546_t.writeStat(var5);
+                        int var8 = GuiStats.this.field_146546_t.writeStat(var6);
+
+                        if (var7 != var8)
+                        {
+                            return (var7 - var8) * StatsItem.this.field_148215_p;
+                        }
+                    }
+
+                    return var3 - var4;
+                }
+                public int compare(Object p_compare_1_, Object p_compare_2_)
+                {
+                    return this.compare((StatCrafting)p_compare_1_, (StatCrafting)p_compare_2_);
+                }
+            };
+        }
+
+        protected void func_148129_a(int p_148129_1_, int p_148129_2_, Tessellator p_148129_3_)
+        {
+            super.func_148129_a(p_148129_1_, p_148129_2_, p_148129_3_);
+
+            if (this.field_148218_l == 0)
+            {
+                GuiStats.this.func_146527_c(p_148129_1_ + 115 - 18 + 1, p_148129_2_ + 1 + 1, 72, 18);
+            }
+            else
+            {
+                GuiStats.this.func_146527_c(p_148129_1_ + 115 - 18, p_148129_2_ + 1, 72, 18);
+            }
+
+            if (this.field_148218_l == 1)
+            {
+                GuiStats.this.func_146527_c(p_148129_1_ + 165 - 18 + 1, p_148129_2_ + 1 + 1, 18, 18);
+            }
+            else
+            {
+                GuiStats.this.func_146527_c(p_148129_1_ + 165 - 18, p_148129_2_ + 1, 18, 18);
+            }
+
+            if (this.field_148218_l == 2)
+            {
+                GuiStats.this.func_146527_c(p_148129_1_ + 215 - 18 + 1, p_148129_2_ + 1 + 1, 36, 18);
+            }
+            else
+            {
+                GuiStats.this.func_146527_c(p_148129_1_ + 215 - 18, p_148129_2_ + 1, 36, 18);
+            }
+        }
+
+        protected void drawSlot(int p_148126_1_, int p_148126_2_, int p_148126_3_, int p_148126_4_, Tessellator p_148126_5_, int p_148126_6_, int p_148126_7_)
+        {
+            StatCrafting var8 = this.func_148211_c(p_148126_1_);
+            Item var9 = var8.func_150959_a();
+            GuiStats.this.func_146521_a(p_148126_2_ + 40, p_148126_3_, var9);
+            int var10 = Item.getIdFromItem(var9);
+            this.func_148209_a(StatList.objectBreakStats[var10], p_148126_2_ + 115, p_148126_3_, p_148126_1_ % 2 == 0);
+            this.func_148209_a(StatList.objectCraftStats[var10], p_148126_2_ + 165, p_148126_3_, p_148126_1_ % 2 == 0);
+            this.func_148209_a(var8, p_148126_2_ + 215, p_148126_3_, p_148126_1_ % 2 == 0);
+        }
+
+        protected String func_148210_b(int p_148210_1_)
+        {
+            return p_148210_1_ == 1 ? "stat.crafted" : (p_148210_1_ == 2 ? "stat.used" : "stat.depleted");
+        }
+    }
+
+    class StatsMobsList extends GuiSlot
+    {
+        private final List field_148222_l = new ArrayList();
+        private static final String __OBFID = "CL_00000729";
+
+        public StatsMobsList()
+        {
+            super(GuiStats.this.mc, GuiStats.this.width, GuiStats.this.height, 32, GuiStats.this.height - 64, GuiStats.this.fontRendererObj.FONT_HEIGHT * 4);
+            this.func_148130_a(false);
+            Iterator var2 = EntityList.entityEggs.values().iterator();
+
+            while (var2.hasNext())
+            {
+                EntityList.EntityEggInfo var3 = (EntityList.EntityEggInfo)var2.next();
+
+                if (GuiStats.this.field_146546_t.writeStat(var3.field_151512_d) > 0 || GuiStats.this.field_146546_t.writeStat(var3.field_151513_e) > 0)
+                {
+                    this.field_148222_l.add(var3);
+                }
+            }
+        }
+
+        protected int getSize()
+        {
+            return this.field_148222_l.size();
+        }
+
+        protected void elementClicked(int p_148144_1_, boolean p_148144_2_, int p_148144_3_, int p_148144_4_) {}
+
+        protected boolean isSelected(int p_148131_1_)
+        {
+            return false;
+        }
+
+        protected int func_148138_e()
+        {
+            return this.getSize() * GuiStats.this.fontRendererObj.FONT_HEIGHT * 4;
+        }
+
+        protected void drawBackground()
+        {
+            GuiStats.this.drawDefaultBackground();
+        }
+
+        protected void drawSlot(int p_148126_1_, int p_148126_2_, int p_148126_3_, int p_148126_4_, Tessellator p_148126_5_, int p_148126_6_, int p_148126_7_)
+        {
+            EntityList.EntityEggInfo var8 = (EntityList.EntityEggInfo)this.field_148222_l.get(p_148126_1_);
+            String var9 = I18n.format("entity." + EntityList.getStringFromID(var8.spawnedID) + ".name", new Object[0]);
+            int var10 = GuiStats.this.field_146546_t.writeStat(var8.field_151512_d);
+            int var11 = GuiStats.this.field_146546_t.writeStat(var8.field_151513_e);
+            String var12 = I18n.format("stat.entityKills", new Object[] {Integer.valueOf(var10), var9});
+            String var13 = I18n.format("stat.entityKilledBy", new Object[] {var9, Integer.valueOf(var11)});
+
+            if (var10 == 0)
+            {
+                var12 = I18n.format("stat.entityKills.none", new Object[] {var9});
+            }
+
+            if (var11 == 0)
+            {
+                var13 = I18n.format("stat.entityKilledBy.none", new Object[] {var9});
+            }
+
+            GuiStats.this.drawString(GuiStats.this.fontRendererObj, var9, p_148126_2_ + 2 - 10, p_148126_3_ + 1, 16777215);
+            GuiStats.this.drawString(GuiStats.this.fontRendererObj, var12, p_148126_2_ + 2, p_148126_3_ + 1 + GuiStats.this.fontRendererObj.FONT_HEIGHT, var10 == 0 ? 6316128 : 9474192);
+            GuiStats.this.drawString(GuiStats.this.fontRendererObj, var13, p_148126_2_ + 2, p_148126_3_ + 1 + GuiStats.this.fontRendererObj.FONT_HEIGHT * 2, var11 == 0 ? 6316128 : 9474192);
         }
     }
 }

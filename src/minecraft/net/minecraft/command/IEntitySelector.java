@@ -12,48 +12,56 @@ public interface IEntitySelector
     IEntitySelector selectAnything = new IEntitySelector()
     {
         private static final String __OBFID = "CL_00001541";
-        public boolean isEntityApplicable(Entity par1Entity)
+        public boolean isEntityApplicable(Entity p_82704_1_)
         {
-            return par1Entity.isEntityAlive();
+            return p_82704_1_.isEntityAlive();
+        }
+    };
+    IEntitySelector field_152785_b = new IEntitySelector()
+    {
+        private static final String __OBFID = "CL_00001542";
+        public boolean isEntityApplicable(Entity p_82704_1_)
+        {
+            return p_82704_1_.isEntityAlive() && p_82704_1_.riddenByEntity == null && p_82704_1_.ridingEntity == null;
         }
     };
     IEntitySelector selectInventories = new IEntitySelector()
     {
-        private static final String __OBFID = "CL_00001542";
-        public boolean isEntityApplicable(Entity par1Entity)
+        private static final String __OBFID = "CL_00001867";
+        public boolean isEntityApplicable(Entity p_82704_1_)
         {
-            return par1Entity instanceof IInventory && par1Entity.isEntityAlive();
+            return p_82704_1_ instanceof IInventory && p_82704_1_.isEntityAlive();
         }
     };
 
     /**
      * Return whether the specified entity is applicable to this filter.
      */
-    boolean isEntityApplicable(Entity var1);
+    boolean isEntityApplicable(Entity p_82704_1_);
 
     public static class ArmoredMob implements IEntitySelector
     {
         private final ItemStack field_96567_c;
         private static final String __OBFID = "CL_00001543";
 
-        public ArmoredMob(ItemStack par1ItemStack)
+        public ArmoredMob(ItemStack p_i1584_1_)
         {
-            this.field_96567_c = par1ItemStack;
+            this.field_96567_c = p_i1584_1_;
         }
 
-        public boolean isEntityApplicable(Entity par1Entity)
+        public boolean isEntityApplicable(Entity p_82704_1_)
         {
-            if (!par1Entity.isEntityAlive())
+            if (!p_82704_1_.isEntityAlive())
             {
                 return false;
             }
-            else if (!(par1Entity instanceof EntityLivingBase))
+            else if (!(p_82704_1_ instanceof EntityLivingBase))
             {
                 return false;
             }
             else
             {
-                EntityLivingBase var2 = (EntityLivingBase)par1Entity;
+                EntityLivingBase var2 = (EntityLivingBase)p_82704_1_;
                 return var2.getEquipmentInSlot(EntityLiving.getArmorPosition(this.field_96567_c)) != null ? false : (var2 instanceof EntityLiving ? ((EntityLiving)var2).canPickUpLoot() : var2 instanceof EntityPlayer);
             }
         }

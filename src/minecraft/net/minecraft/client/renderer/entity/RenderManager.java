@@ -193,22 +193,22 @@ public class RenderManager
         }
     }
 
-    public Render getEntityClassRenderObject(Class par1Class)
+    public Render getEntityClassRenderObject(Class p_78715_1_)
     {
-        Render var2 = (Render)this.entityRenderMap.get(par1Class);
+        Render var2 = (Render)this.entityRenderMap.get(p_78715_1_);
 
-        if (var2 == null && par1Class != Entity.class)
+        if (var2 == null && p_78715_1_ != Entity.class)
         {
-            var2 = this.getEntityClassRenderObject(par1Class.getSuperclass());
-            this.entityRenderMap.put(par1Class, var2);
+            var2 = this.getEntityClassRenderObject(p_78715_1_.getSuperclass());
+            this.entityRenderMap.put(p_78715_1_, var2);
         }
 
         return var2;
     }
 
-    public Render getEntityRenderObject(Entity par1Entity)
+    public Render getEntityRenderObject(Entity p_78713_1_)
     {
-        return this.getEntityClassRenderObject(par1Entity.getClass());
+        return this.getEntityClassRenderObject(p_78713_1_.getClass());
     }
 
     public void func_147938_a(World p_147938_1_, TextureManager p_147938_2_, FontRenderer p_147938_3_, EntityLivingBase p_147938_4_, Entity p_147938_5_, GameSettings p_147938_6_, float p_147938_7_)
@@ -299,15 +299,12 @@ public class RenderManager
                 {
                     try
                     {
-                        //TODO t
-                        if (InstanceMain.containsMod("coloredmobs"))
+                    	//TODO t
+                        if (InstanceMain.coloredmobs)
                         {
-                            if (InstanceMain.getMod("coloredmobs").isEnabled())
-                            {
-                                com.comze_instancelabs.client.InstanceRender.drawESP(p_147939_1_.posX, p_147939_1_.posY, p_147939_1_.posZ, 155, 155, 0);
-                            }
+                        	com.comze_instancelabs.client.InstanceRender.drawESP(p_147939_1_.posX, p_147939_1_.posY, p_147939_1_.posZ, 155, 155, 0);
                         }
-
+                        
                         var11.doRender(p_147939_1_, p_147939_2_, p_147939_4_, p_147939_6_, p_147939_8_, p_147939_9_);
                     }
                     catch (Throwable var18)
@@ -325,23 +322,19 @@ public class RenderManager
                     }
 
                     //TODO t
-                    if (InstanceMain.containsMod("mobesp"))
+                    if (InstanceMain.mobesp)
                     {
-                        if (InstanceMain.getMod("mobesp").isEnabled())
+                        try
                         {
-                            try
-                            {
-                                this.func_85094_b(p_147939_1_, p_147939_2_, p_147939_4_, p_147939_6_, p_147939_8_, p_147939_9_);
-                            }
-                            catch (Throwable var16)
-                            {
-                                throw new ReportedException(CrashReport.makeCrashReport(var16, "Rendering entity hitbox in world"));
-                            }
+                            this.func_85094_b(p_147939_1_, p_147939_2_, p_147939_4_, p_147939_6_, p_147939_8_, p_147939_9_);
+                        }
+                        catch (Throwable var16)
+                        {
+                            throw new ReportedException(CrashReport.makeCrashReport(var16, "Rendering entity hitbox in world"));
                         }
                     }
-
                     //
-
+                    
                     if (field_85095_o && !p_147939_1_.isInvisible() && !p_147939_10_)
                     {
                         try
@@ -378,8 +371,8 @@ public class RenderManager
 
     private void func_85094_b(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
-        float var10 = par1Entity.width / 2.0F;
-        AxisAlignedBB var11 = AxisAlignedBB.getAABBPool().getAABB(par2 - (double)var10, par4, par6 - (double)var10, par2 + (double)var10, par4 + (double)par1Entity.height, par6 + (double)var10);
+    	float var10 = par1Entity.width / 2.0F;
+        AxisAlignedBB var11 = AxisAlignedBB.getBoundingBox(par2 - (double)var10, par4, par6 - (double)var10, par2 + (double)var10, par4 + (double)par1Entity.height, par6 + (double)var10);
 
         //TODO t
         if (par1Entity instanceof EntityMob)
@@ -388,20 +381,21 @@ public class RenderManager
         }
         else if (par1Entity instanceof EntityPlayer)
         {
-        	var11 = AxisAlignedBB.getAABBPool().getAABB(par2 - (double)var10, par4 - (double)par1Entity.height, par6 - (double)var10, par2 + (double)var10, par4, par6 + (double)var10);
-        	InstanceMain.getRender().drawESP(var11, 105, 0, 154); // yellowish
+         var11 = AxisAlignedBB.getBoundingBox(par2 - (double)var10, par4 - (double)par1Entity.height, par6 - (double)var10, par2 + (double)var10, par4, par6 + (double)var10);
+         InstanceMain.getRender().drawESP(var11, 105, 0, 154); // yellowish
         }
         else
         {
             InstanceMain.getRender().drawESP(var11, 0, 0, 255); // green
         }
-
-        //
+        
         /*GL11.glDepthMask(false);
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_CULL_FACE);
         GL11.glDisable(GL11.GL_BLEND);
+        float var10 = p_85094_1_.width / 2.0F;
+        AxisAlignedBB var11 = AxisAlignedBB.getBoundingBox(p_85094_2_ - (double)var10, p_85094_4_, p_85094_6_ - (double)var10, p_85094_2_ + (double)var10, p_85094_4_ + (double)p_85094_1_.height, p_85094_6_ + (double)var10);
         RenderGlobal.drawOutlinedBoundingBox(var11, 16777215);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_LIGHTING);
@@ -413,16 +407,16 @@ public class RenderManager
     /**
      * World sets this RenderManager's worldObj to the world provided
      */
-    public void set(World par1World)
+    public void set(World p_78717_1_)
     {
-        this.worldObj = par1World;
+        this.worldObj = p_78717_1_;
     }
 
-    public double getDistanceToCamera(double par1, double par3, double par5)
+    public double getDistanceToCamera(double p_78714_1_, double p_78714_3_, double p_78714_5_)
     {
-        double var7 = par1 - this.viewerPosX;
-        double var9 = par3 - this.viewerPosY;
-        double var11 = par5 - this.viewerPosZ;
+        double var7 = p_78714_1_ - this.viewerPosX;
+        double var9 = p_78714_3_ - this.viewerPosY;
+        double var11 = p_78714_5_ - this.viewerPosZ;
         return var7 * var7 + var9 * var9 + var11 * var11;
     }
 
@@ -434,14 +428,14 @@ public class RenderManager
         return this.fontRenderer;
     }
 
-    public void updateIcons(IIconRegister par1IconRegister)
+    public void updateIcons(IIconRegister p_94178_1_)
     {
         Iterator var2 = this.entityRenderMap.values().iterator();
 
         while (var2.hasNext())
         {
             Render var3 = (Render)var2.next();
-            var3.updateIcons(par1IconRegister);
+            var3.updateIcons(p_94178_1_);
         }
     }
 }

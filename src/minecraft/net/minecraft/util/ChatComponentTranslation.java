@@ -160,7 +160,7 @@ public class ChatComponentTranslation extends ChatComponentStyle
             }
             else
             {
-                var3 = new ChatComponentText(var2.toString());
+                var3 = new ChatComponentText(var2 == null ? "null" : var2.toString());
                 ((IChatComponent)var3).getChatStyle().setParentStyle(this.getChatStyle());
             }
 
@@ -255,20 +255,20 @@ public class ChatComponentTranslation extends ChatComponentStyle
         return var5;
     }
 
-    public boolean equals(Object par1Obj)
+    public boolean equals(Object p_equals_1_)
     {
-        if (this == par1Obj)
+        if (this == p_equals_1_)
         {
             return true;
         }
-        else if (!(par1Obj instanceof ChatComponentTranslation))
+        else if (!(p_equals_1_ instanceof ChatComponentTranslation))
         {
             return false;
         }
         else
         {
-            ChatComponentTranslation var2 = (ChatComponentTranslation)par1Obj;
-            return Arrays.equals(this.formatArgs, var2.formatArgs) && this.key.equals(var2.key) && super.equals(par1Obj);
+            ChatComponentTranslation var2 = (ChatComponentTranslation)p_equals_1_;
+            return Arrays.equals(this.formatArgs, var2.formatArgs) && this.key.equals(var2.key) && super.equals(p_equals_1_);
         }
     }
 

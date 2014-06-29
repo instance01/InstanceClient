@@ -12,9 +12,9 @@ public class GuiPlayerInfo
     public int responseTime;
     private static final String __OBFID = "CL_00000888";
 
-    public GuiPlayerInfo(String par1Str)
+    public GuiPlayerInfo(String p_i1190_1_)
     {
-        this.name = par1Str;
-        this.nameinLowerCase = par1Str.toLowerCase();
+        this.name = p_i1190_1_;
+        this.nameinLowerCase = p_i1190_1_.toLowerCase();
     }
 }

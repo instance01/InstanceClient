@@ -25,27 +25,27 @@ public class VillageCollection extends WorldSavedData
     private int tickCounter;
     private static final String __OBFID = "CL_00001635";
 
-    public VillageCollection(String par1Str)
+    public VillageCollection(String p_i1677_1_)
     {
-        super(par1Str);
+        super(p_i1677_1_);
     }
 
-    public VillageCollection(World par1World)
+    public VillageCollection(World p_i1678_1_)
     {
         super("villages");
-        this.worldObj = par1World;
+        this.worldObj = p_i1678_1_;
         this.markDirty();
     }
 
-    public void func_82566_a(World par1World)
+    public void func_82566_a(World p_82566_1_)
     {
-        this.worldObj = par1World;
+        this.worldObj = p_82566_1_;
         Iterator var2 = this.villageList.iterator();
 
         while (var2.hasNext())
         {
             Village var3 = (Village)var2.next();
-            var3.func_82691_a(par1World);
+            var3.func_82691_a(p_82566_1_);
         }
     }
 
@@ -53,13 +53,13 @@ public class VillageCollection extends WorldSavedData
      * This is a black hole. You can add data to this list through a public interface, but you can't query that
      * information in any way and it's not used internally either.
      */
-    public void addVillagerPosition(int par1, int par2, int par3)
+    public void addVillagerPosition(int p_75551_1_, int p_75551_2_, int p_75551_3_)
     {
         if (this.villagerPositionsList.size() <= 64)
         {
-            if (!this.isVillagerPositionPresent(par1, par2, par3))
+            if (!this.isVillagerPositionPresent(p_75551_1_, p_75551_2_, p_75551_3_))
             {
-                this.villagerPositionsList.add(new ChunkCoordinates(par1, par2, par3));
+                this.villagerPositionsList.add(new ChunkCoordinates(p_75551_1_, p_75551_2_, p_75551_3_));
             }
         }
     }
@@ -116,7 +116,7 @@ public class VillageCollection extends WorldSavedData
      * Finds the nearest village, but only the given coordinates are withing it's bounding box plus the given the
      * distance.
      */
-    public Village findNearestVillage(int par1, int par2, int par3, int par4)
+    public Village findNearestVillage(int p_75550_1_, int p_75550_2_, int p_75550_3_, int p_75550_4_)
     {
         Village var5 = null;
         float var6 = Float.MAX_VALUE;
@@ -125,11 +125,11 @@ public class VillageCollection extends WorldSavedData
         while (var7.hasNext())
         {
             Village var8 = (Village)var7.next();
-            float var9 = var8.getCenter().getDistanceSquared(par1, par2, par3);
+            float var9 = var8.getCenter().getDistanceSquared(p_75550_1_, p_75550_2_, p_75550_3_);
 
             if (var9 < var6)
             {
-                float var10 = (float)(par4 + var8.getVillageRadius());
+                float var10 = (float)(p_75550_4_ + var8.getVillageRadius());
 
                 if (var9 <= var10 * var10)
                 {
@@ -193,17 +193,17 @@ public class VillageCollection extends WorldSavedData
         this.newDoors.clear();
     }
 
-    private void addUnassignedWoodenDoorsAroundToNewDoorsList(ChunkCoordinates par1ChunkCoordinates)
+    private void addUnassignedWoodenDoorsAroundToNewDoorsList(ChunkCoordinates p_75546_1_)
     {
         byte var2 = 16;
         byte var3 = 4;
         byte var4 = 16;
 
-        for (int var5 = par1ChunkCoordinates.posX - var2; var5 < par1ChunkCoordinates.posX + var2; ++var5)
+        for (int var5 = p_75546_1_.posX - var2; var5 < p_75546_1_.posX + var2; ++var5)
         {
-            for (int var6 = par1ChunkCoordinates.posY - var3; var6 < par1ChunkCoordinates.posY + var3; ++var6)
+            for (int var6 = p_75546_1_.posY - var3; var6 < p_75546_1_.posY + var3; ++var6)
             {
-                for (int var7 = par1ChunkCoordinates.posZ - var4; var7 < par1ChunkCoordinates.posZ + var4; ++var7)
+                for (int var7 = p_75546_1_.posZ - var4; var7 < p_75546_1_.posZ + var4; ++var7)
                 {
                     if (this.isWoodenDoorAt(var5, var6, var7))
                     {
@@ -223,7 +223,7 @@ public class VillageCollection extends WorldSavedData
         }
     }
 
-    private VillageDoorInfo getVillageDoorAt(int par1, int par2, int par3)
+    private VillageDoorInfo getVillageDoorAt(int p_75547_1_, int p_75547_2_, int p_75547_3_)
     {
         Iterator var4 = this.newDoors.iterator();
         VillageDoorInfo var5;
@@ -243,7 +243,7 @@ public class VillageCollection extends WorldSavedData
                     }
 
                     Village var7 = (Village)var4.next();
-                    var6 = var7.getVillageDoorAt(par1, par2, par3);
+                    var6 = var7.getVillageDoorAt(p_75547_1_, p_75547_2_, p_75547_3_);
                 }
                 while (var6 == null);
 
@@ -252,14 +252,14 @@ public class VillageCollection extends WorldSavedData
 
             var5 = (VillageDoorInfo)var4.next();
         }
-        while (var5.posX != par1 || var5.posZ != par3 || Math.abs(var5.posY - par2) > 1);
+        while (var5.posX != p_75547_1_ || var5.posZ != p_75547_3_ || Math.abs(var5.posY - p_75547_2_) > 1);
 
         return var5;
     }
 
-    private void addDoorToNewListIfAppropriate(int par1, int par2, int par3)
+    private void addDoorToNewListIfAppropriate(int p_75542_1_, int p_75542_2_, int p_75542_3_)
     {
-        int var4 = ((BlockDoor)Blocks.wooden_door).func_150013_e(this.worldObj, par1, par2, par3);
+        int var4 = ((BlockDoor)Blocks.wooden_door).func_150013_e(this.worldObj, p_75542_1_, p_75542_2_, p_75542_3_);
         int var5;
         int var6;
 
@@ -269,7 +269,7 @@ public class VillageCollection extends WorldSavedData
 
             for (var6 = -5; var6 < 0; ++var6)
             {
-                if (this.worldObj.canBlockSeeTheSky(par1, par2, par3 + var6))
+                if (this.worldObj.canBlockSeeTheSky(p_75542_1_, p_75542_2_, p_75542_3_ + var6))
                 {
                     --var5;
                 }
@@ -277,7 +277,7 @@ public class VillageCollection extends WorldSavedData
 
             for (var6 = 1; var6 <= 5; ++var6)
             {
-                if (this.worldObj.canBlockSeeTheSky(par1, par2, par3 + var6))
+                if (this.worldObj.canBlockSeeTheSky(p_75542_1_, p_75542_2_, p_75542_3_ + var6))
                 {
                     ++var5;
                 }
@@ -285,7 +285,7 @@ public class VillageCollection extends WorldSavedData
 
             if (var5 != 0)
             {
-                this.newDoors.add(new VillageDoorInfo(par1, par2, par3, 0, var5 > 0 ? -2 : 2, this.tickCounter));
+                this.newDoors.add(new VillageDoorInfo(p_75542_1_, p_75542_2_, p_75542_3_, 0, var5 > 0 ? -2 : 2, this.tickCounter));
             }
         }
         else
@@ -294,7 +294,7 @@ public class VillageCollection extends WorldSavedData
 
             for (var6 = -5; var6 < 0; ++var6)
             {
-                if (this.worldObj.canBlockSeeTheSky(par1 + var6, par2, par3))
+                if (this.worldObj.canBlockSeeTheSky(p_75542_1_ + var6, p_75542_2_, p_75542_3_))
                 {
                     --var5;
                 }
@@ -302,7 +302,7 @@ public class VillageCollection extends WorldSavedData
 
             for (var6 = 1; var6 <= 5; ++var6)
             {
-                if (this.worldObj.canBlockSeeTheSky(par1 + var6, par2, par3))
+                if (this.worldObj.canBlockSeeTheSky(p_75542_1_ + var6, p_75542_2_, p_75542_3_))
                 {
                     ++var5;
                 }
@@ -310,12 +310,12 @@ public class VillageCollection extends WorldSavedData
 
             if (var5 != 0)
             {
-                this.newDoors.add(new VillageDoorInfo(par1, par2, par3, var5 > 0 ? -2 : 2, 0, this.tickCounter));
+                this.newDoors.add(new VillageDoorInfo(p_75542_1_, p_75542_2_, p_75542_3_, var5 > 0 ? -2 : 2, 0, this.tickCounter));
             }
         }
     }
 
-    private boolean isVillagerPositionPresent(int par1, int par2, int par3)
+    private boolean isVillagerPositionPresent(int p_75548_1_, int p_75548_2_, int p_75548_3_)
     {
         Iterator var4 = this.villagerPositionsList.iterator();
         ChunkCoordinates var5;
@@ -329,23 +329,23 @@ public class VillageCollection extends WorldSavedData
 
             var5 = (ChunkCoordinates)var4.next();
         }
-        while (var5.posX != par1 || var5.posY != par2 || var5.posZ != par3);
+        while (var5.posX != p_75548_1_ || var5.posY != p_75548_2_ || var5.posZ != p_75548_3_);
 
         return true;
     }
 
-    private boolean isWoodenDoorAt(int par1, int par2, int par3)
+    private boolean isWoodenDoorAt(int p_75541_1_, int p_75541_2_, int p_75541_3_)
     {
-        return this.worldObj.getBlock(par1, par2, par3) == Blocks.wooden_door;
+        return this.worldObj.getBlock(p_75541_1_, p_75541_2_, p_75541_3_) == Blocks.wooden_door;
     }
 
     /**
      * reads in data from the NBTTagCompound into this MapDataBase
      */
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+    public void readFromNBT(NBTTagCompound p_76184_1_)
     {
-        this.tickCounter = par1NBTTagCompound.getInteger("Tick");
-        NBTTagList var2 = par1NBTTagCompound.getTagList("Villages", 10);
+        this.tickCounter = p_76184_1_.getInteger("Tick");
+        NBTTagList var2 = p_76184_1_.getTagList("Villages", 10);
 
         for (int var3 = 0; var3 < var2.tagCount(); ++var3)
         {
@@ -359,9 +359,9 @@ public class VillageCollection extends WorldSavedData
     /**
      * write data to NBTTagCompound from this MapDataBase, similar to Entities and TileEntities
      */
-    public void writeToNBT(NBTTagCompound par1NBTTagCompound)
+    public void writeToNBT(NBTTagCompound p_76187_1_)
     {
-        par1NBTTagCompound.setInteger("Tick", this.tickCounter);
+        p_76187_1_.setInteger("Tick", this.tickCounter);
         NBTTagList var2 = new NBTTagList();
         Iterator var3 = this.villageList.iterator();
 
@@ -373,6 +373,6 @@ public class VillageCollection extends WorldSavedData
             var2.appendTag(var5);
         }
 
-        par1NBTTagCompound.setTag("Villages", var2);
+        p_76187_1_.setTag("Villages", var2);
     }
 }

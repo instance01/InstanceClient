@@ -50,7 +50,7 @@ public class TileEntityBeacon extends TileEntity implements IInventory
                 var3 = 1;
             }
 
-            AxisAlignedBB var4 = AxisAlignedBB.getAABBPool().getAABB((double)this.field_145851_c, (double)this.field_145848_d, (double)this.field_145849_e, (double)(this.field_145851_c + 1), (double)(this.field_145848_d + 1), (double)(this.field_145849_e + 1)).expand(var1, var1, var1);
+            AxisAlignedBB var4 = AxisAlignedBB.getBoundingBox((double)this.field_145851_c, (double)this.field_145848_d, (double)this.field_145849_e, (double)(this.field_145851_c + 1), (double)(this.field_145848_d + 1), (double)(this.field_145849_e + 1)).expand(var1, var1, var1);
             var4.maxY = (double)this.worldObj.getHeight();
             List var5 = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, var4);
             Iterator var6 = var5.iterator();
@@ -128,7 +128,7 @@ public class TileEntityBeacon extends TileEntity implements IInventory
 
         if (!this.worldObj.isClient && this.field_146012_l == 4 && var1 < this.field_146012_l)
         {
-            Iterator var8 = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getAABBPool().getAABB((double)this.field_145851_c, (double)this.field_145848_d, (double)this.field_145849_e, (double)this.field_145851_c, (double)(this.field_145848_d - 4), (double)this.field_145849_e).expand(10.0D, 5.0D, 10.0D)).iterator();
+            Iterator var8 = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox((double)this.field_145851_c, (double)this.field_145848_d, (double)this.field_145849_e, (double)this.field_145851_c, (double)(this.field_145848_d - 4), (double)this.field_145849_e).expand(10.0D, 5.0D, 10.0D)).iterator();
 
             while (var8.hasNext())
             {
@@ -279,20 +279,20 @@ public class TileEntityBeacon extends TileEntity implements IInventory
     /**
      * Returns the stack in slot i
      */
-    public ItemStack getStackInSlot(int par1)
+    public ItemStack getStackInSlot(int p_70301_1_)
     {
-        return par1 == 0 ? this.field_146011_o : null;
+        return p_70301_1_ == 0 ? this.field_146011_o : null;
     }
 
     /**
      * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
      * new stack.
      */
-    public ItemStack decrStackSize(int par1, int par2)
+    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_)
     {
-        if (par1 == 0 && this.field_146011_o != null)
+        if (p_70298_1_ == 0 && this.field_146011_o != null)
         {
-            if (par2 >= this.field_146011_o.stackSize)
+            if (p_70298_2_ >= this.field_146011_o.stackSize)
             {
                 ItemStack var3 = this.field_146011_o;
                 this.field_146011_o = null;
@@ -300,8 +300,8 @@ public class TileEntityBeacon extends TileEntity implements IInventory
             }
             else
             {
-                this.field_146011_o.stackSize -= par2;
-                return new ItemStack(this.field_146011_o.getItem(), par2, this.field_146011_o.getItemDamage());
+                this.field_146011_o.stackSize -= p_70298_2_;
+                return new ItemStack(this.field_146011_o.getItem(), p_70298_2_, this.field_146011_o.getItemDamage());
             }
         }
         else
@@ -314,9 +314,9 @@ public class TileEntityBeacon extends TileEntity implements IInventory
      * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
      * like when you close a workbench GUI.
      */
-    public ItemStack getStackInSlotOnClosing(int par1)
+    public ItemStack getStackInSlotOnClosing(int p_70304_1_)
     {
-        if (par1 == 0 && this.field_146011_o != null)
+        if (p_70304_1_ == 0 && this.field_146011_o != null)
         {
             ItemStack var2 = this.field_146011_o;
             this.field_146011_o = null;
@@ -331,11 +331,11 @@ public class TileEntityBeacon extends TileEntity implements IInventory
     /**
      * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      */
-    public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
+    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_)
     {
-        if (par1 == 0)
+        if (p_70299_1_ == 0)
         {
-            this.field_146011_o = par2ItemStack;
+            this.field_146011_o = p_70299_2_;
         }
     }
 
@@ -371,9 +371,9 @@ public class TileEntityBeacon extends TileEntity implements IInventory
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
      */
-    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+    public boolean isUseableByPlayer(EntityPlayer p_70300_1_)
     {
-        return this.worldObj.getTileEntity(this.field_145851_c, this.field_145848_d, this.field_145849_e) != this ? false : par1EntityPlayer.getDistanceSq((double)this.field_145851_c + 0.5D, (double)this.field_145848_d + 0.5D, (double)this.field_145849_e + 0.5D) <= 64.0D;
+        return this.worldObj.getTileEntity(this.field_145851_c, this.field_145848_d, this.field_145849_e) != this ? false : p_70300_1_.getDistanceSq((double)this.field_145851_c + 0.5D, (double)this.field_145848_d + 0.5D, (double)this.field_145849_e + 0.5D) <= 64.0D;
     }
 
     public void openInventory() {}
@@ -383,8 +383,8 @@ public class TileEntityBeacon extends TileEntity implements IInventory
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      */
-    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
+    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_)
     {
-        return par2ItemStack.getItem() == Items.emerald || par2ItemStack.getItem() == Items.diamond || par2ItemStack.getItem() == Items.gold_ingot || par2ItemStack.getItem() == Items.iron_ingot;
+        return p_94041_2_.getItem() == Items.emerald || p_94041_2_.getItem() == Items.diamond || p_94041_2_.getItem() == Items.gold_ingot || p_94041_2_.getItem() == Items.iron_ingot;
     }
 }

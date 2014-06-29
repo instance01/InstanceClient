@@ -22,28 +22,28 @@ public class Slot
     public int yDisplayPosition;
     private static final String __OBFID = "CL_00001762";
 
-    public Slot(IInventory par1IInventory, int par2, int par3, int par4)
+    public Slot(IInventory p_i1824_1_, int p_i1824_2_, int p_i1824_3_, int p_i1824_4_)
     {
-        this.inventory = par1IInventory;
-        this.slotIndex = par2;
-        this.xDisplayPosition = par3;
-        this.yDisplayPosition = par4;
+        this.inventory = p_i1824_1_;
+        this.slotIndex = p_i1824_2_;
+        this.xDisplayPosition = p_i1824_3_;
+        this.yDisplayPosition = p_i1824_4_;
     }
 
     /**
      * if par2 has more items than par1, onCrafting(item,countIncrease) is called
      */
-    public void onSlotChange(ItemStack par1ItemStack, ItemStack par2ItemStack)
+    public void onSlotChange(ItemStack p_75220_1_, ItemStack p_75220_2_)
     {
-        if (par1ItemStack != null && par2ItemStack != null)
+        if (p_75220_1_ != null && p_75220_2_ != null)
         {
-            if (par1ItemStack.getItem() == par2ItemStack.getItem())
+            if (p_75220_1_.getItem() == p_75220_2_.getItem())
             {
-                int var3 = par2ItemStack.stackSize - par1ItemStack.stackSize;
+                int var3 = p_75220_2_.stackSize - p_75220_1_.stackSize;
 
                 if (var3 > 0)
                 {
-                    this.onCrafting(par1ItemStack, var3);
+                    this.onCrafting(p_75220_1_, var3);
                 }
             }
         }
@@ -53,14 +53,14 @@ public class Slot
      * the itemStack passed in is the output - ie, iron ingots, and pickaxes, not ore and wood. Typically increases an
      * internal count then calls onCrafting(item).
      */
-    protected void onCrafting(ItemStack par1ItemStack, int par2) {}
+    protected void onCrafting(ItemStack p_75210_1_, int p_75210_2_) {}
 
     /**
      * the itemStack passed in is the output - ie, iron ingots, and pickaxes, not ore and wood.
      */
-    protected void onCrafting(ItemStack par1ItemStack) {}
+    protected void onCrafting(ItemStack p_75208_1_) {}
 
-    public void onPickupFromSlot(EntityPlayer par1EntityPlayer, ItemStack par2ItemStack)
+    public void onPickupFromSlot(EntityPlayer p_82870_1_, ItemStack p_82870_2_)
     {
         this.onSlotChanged();
     }
@@ -68,7 +68,7 @@ public class Slot
     /**
      * Check if the stack is a valid item for this slot. Always true beside for the armor slots.
      */
-    public boolean isItemValid(ItemStack par1ItemStack)
+    public boolean isItemValid(ItemStack p_75214_1_)
     {
         return true;
     }
@@ -92,9 +92,9 @@ public class Slot
     /**
      * Helper method to put a stack in the slot.
      */
-    public void putStack(ItemStack par1ItemStack)
+    public void putStack(ItemStack p_75215_1_)
     {
-        this.inventory.setInventorySlotContents(this.slotIndex, par1ItemStack);
+        this.inventory.setInventorySlotContents(this.slotIndex, p_75215_1_);
         this.onSlotChanged();
     }
 
@@ -127,23 +127,23 @@ public class Slot
      * Decrease the size of the stack in slot (first int arg) by the amount of the second int arg. Returns the new
      * stack.
      */
-    public ItemStack decrStackSize(int par1)
+    public ItemStack decrStackSize(int p_75209_1_)
     {
-        return this.inventory.decrStackSize(this.slotIndex, par1);
+        return this.inventory.decrStackSize(this.slotIndex, p_75209_1_);
     }
 
     /**
      * returns true if this slot is in par2 of par1
      */
-    public boolean isSlotInInventory(IInventory par1IInventory, int par2)
+    public boolean isSlotInInventory(IInventory p_75217_1_, int p_75217_2_)
     {
-        return par1IInventory == this.inventory && par2 == this.slotIndex;
+        return p_75217_1_ == this.inventory && p_75217_2_ == this.slotIndex;
     }
 
     /**
      * Return whether this slot's stack can be taken from this slot.
      */
-    public boolean canTakeStack(EntityPlayer par1EntityPlayer)
+    public boolean canTakeStack(EntityPlayer p_82869_1_)
     {
         return true;
     }

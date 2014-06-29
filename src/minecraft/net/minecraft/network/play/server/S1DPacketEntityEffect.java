@@ -60,9 +60,9 @@ public class S1DPacketEntityEffect extends Packet
         return this.field_149431_d == 32767;
     }
 
-    public void processPacket(INetHandlerPlayClient p_149430_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149430_1_.handleEntityEffect(this);
+        p_148833_1_.handleEntityEffect(this);
     }
 
     public int func_149426_d()

@@ -14,9 +14,9 @@ public class ItemSoup extends ItemFood
         this.setMaxStackSize(1);
     }
 
-    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    public ItemStack onEaten(ItemStack p_77654_1_, World p_77654_2_, EntityPlayer p_77654_3_)
     {
-        super.onEaten(par1ItemStack, par2World, par3EntityPlayer);
+        super.onEaten(p_77654_1_, p_77654_2_, p_77654_3_);
         return new ItemStack(Items.bowl);
     }
 }

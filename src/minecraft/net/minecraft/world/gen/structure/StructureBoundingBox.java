@@ -25,16 +25,16 @@ public class StructureBoundingBox
 
     public StructureBoundingBox() {}
 
-    public StructureBoundingBox(int[] par1ArrayOfInteger)
+    public StructureBoundingBox(int[] p_i43000_1_)
     {
-        if (par1ArrayOfInteger.length == 6)
+        if (p_i43000_1_.length == 6)
         {
-            this.minX = par1ArrayOfInteger[0];
-            this.minY = par1ArrayOfInteger[1];
-            this.minZ = par1ArrayOfInteger[2];
-            this.maxX = par1ArrayOfInteger[3];
-            this.maxY = par1ArrayOfInteger[4];
-            this.maxZ = par1ArrayOfInteger[5];
+            this.minX = p_i43000_1_[0];
+            this.minY = p_i43000_1_[1];
+            this.minZ = p_i43000_1_[2];
+            this.maxX = p_i43000_1_[3];
+            this.maxY = p_i43000_1_[4];
+            this.maxZ = p_i43000_1_[5];
         }
     }
 
@@ -49,53 +49,53 @@ public class StructureBoundingBox
     /**
      * used to project a possible new component Bounding Box - to check if it would cut anything already spawned
      */
-    public static StructureBoundingBox getComponentToAddBoundingBox(int par0, int par1, int par2, int par3, int par4, int par5, int par6, int par7, int par8, int par9)
+    public static StructureBoundingBox getComponentToAddBoundingBox(int p_78889_0_, int p_78889_1_, int p_78889_2_, int p_78889_3_, int p_78889_4_, int p_78889_5_, int p_78889_6_, int p_78889_7_, int p_78889_8_, int p_78889_9_)
     {
-        switch (par9)
+        switch (p_78889_9_)
         {
             case 0:
-                return new StructureBoundingBox(par0 + par3, par1 + par4, par2 + par5, par0 + par6 - 1 + par3, par1 + par7 - 1 + par4, par2 + par8 - 1 + par5);
+                return new StructureBoundingBox(p_78889_0_ + p_78889_3_, p_78889_1_ + p_78889_4_, p_78889_2_ + p_78889_5_, p_78889_0_ + p_78889_6_ - 1 + p_78889_3_, p_78889_1_ + p_78889_7_ - 1 + p_78889_4_, p_78889_2_ + p_78889_8_ - 1 + p_78889_5_);
 
             case 1:
-                return new StructureBoundingBox(par0 - par8 + 1 + par5, par1 + par4, par2 + par3, par0 + par5, par1 + par7 - 1 + par4, par2 + par6 - 1 + par3);
+                return new StructureBoundingBox(p_78889_0_ - p_78889_8_ + 1 + p_78889_5_, p_78889_1_ + p_78889_4_, p_78889_2_ + p_78889_3_, p_78889_0_ + p_78889_5_, p_78889_1_ + p_78889_7_ - 1 + p_78889_4_, p_78889_2_ + p_78889_6_ - 1 + p_78889_3_);
 
             case 2:
-                return new StructureBoundingBox(par0 + par3, par1 + par4, par2 - par8 + 1 + par5, par0 + par6 - 1 + par3, par1 + par7 - 1 + par4, par2 + par5);
+                return new StructureBoundingBox(p_78889_0_ + p_78889_3_, p_78889_1_ + p_78889_4_, p_78889_2_ - p_78889_8_ + 1 + p_78889_5_, p_78889_0_ + p_78889_6_ - 1 + p_78889_3_, p_78889_1_ + p_78889_7_ - 1 + p_78889_4_, p_78889_2_ + p_78889_5_);
 
             case 3:
-                return new StructureBoundingBox(par0 + par5, par1 + par4, par2 + par3, par0 + par8 - 1 + par5, par1 + par7 - 1 + par4, par2 + par6 - 1 + par3);
+                return new StructureBoundingBox(p_78889_0_ + p_78889_5_, p_78889_1_ + p_78889_4_, p_78889_2_ + p_78889_3_, p_78889_0_ + p_78889_8_ - 1 + p_78889_5_, p_78889_1_ + p_78889_7_ - 1 + p_78889_4_, p_78889_2_ + p_78889_6_ - 1 + p_78889_3_);
 
             default:
-                return new StructureBoundingBox(par0 + par3, par1 + par4, par2 + par5, par0 + par6 - 1 + par3, par1 + par7 - 1 + par4, par2 + par8 - 1 + par5);
+                return new StructureBoundingBox(p_78889_0_ + p_78889_3_, p_78889_1_ + p_78889_4_, p_78889_2_ + p_78889_5_, p_78889_0_ + p_78889_6_ - 1 + p_78889_3_, p_78889_1_ + p_78889_7_ - 1 + p_78889_4_, p_78889_2_ + p_78889_8_ - 1 + p_78889_5_);
         }
     }
 
-    public StructureBoundingBox(StructureBoundingBox par1StructureBoundingBox)
+    public StructureBoundingBox(StructureBoundingBox p_i2031_1_)
     {
-        this.minX = par1StructureBoundingBox.minX;
-        this.minY = par1StructureBoundingBox.minY;
-        this.minZ = par1StructureBoundingBox.minZ;
-        this.maxX = par1StructureBoundingBox.maxX;
-        this.maxY = par1StructureBoundingBox.maxY;
-        this.maxZ = par1StructureBoundingBox.maxZ;
+        this.minX = p_i2031_1_.minX;
+        this.minY = p_i2031_1_.minY;
+        this.minZ = p_i2031_1_.minZ;
+        this.maxX = p_i2031_1_.maxX;
+        this.maxY = p_i2031_1_.maxY;
+        this.maxZ = p_i2031_1_.maxZ;
     }
 
-    public StructureBoundingBox(int par1, int par2, int par3, int par4, int par5, int par6)
+    public StructureBoundingBox(int p_i2032_1_, int p_i2032_2_, int p_i2032_3_, int p_i2032_4_, int p_i2032_5_, int p_i2032_6_)
     {
-        this.minX = par1;
-        this.minY = par2;
-        this.minZ = par3;
-        this.maxX = par4;
-        this.maxY = par5;
-        this.maxZ = par6;
+        this.minX = p_i2032_1_;
+        this.minY = p_i2032_2_;
+        this.minZ = p_i2032_3_;
+        this.maxX = p_i2032_4_;
+        this.maxY = p_i2032_5_;
+        this.maxZ = p_i2032_6_;
     }
 
-    public StructureBoundingBox(int par1, int par2, int par3, int par4)
+    public StructureBoundingBox(int p_i2033_1_, int p_i2033_2_, int p_i2033_3_, int p_i2033_4_)
     {
-        this.minX = par1;
-        this.minZ = par2;
-        this.maxX = par3;
-        this.maxZ = par4;
+        this.minX = p_i2033_1_;
+        this.minZ = p_i2033_2_;
+        this.maxX = p_i2033_3_;
+        this.maxZ = p_i2033_4_;
         this.minY = 1;
         this.maxY = 512;
     }
@@ -103,51 +103,51 @@ public class StructureBoundingBox
     /**
      * Returns whether the given bounding box intersects with this one. Args: structureboundingbox
      */
-    public boolean intersectsWith(StructureBoundingBox par1StructureBoundingBox)
+    public boolean intersectsWith(StructureBoundingBox p_78884_1_)
     {
-        return this.maxX >= par1StructureBoundingBox.minX && this.minX <= par1StructureBoundingBox.maxX && this.maxZ >= par1StructureBoundingBox.minZ && this.minZ <= par1StructureBoundingBox.maxZ && this.maxY >= par1StructureBoundingBox.minY && this.minY <= par1StructureBoundingBox.maxY;
+        return this.maxX >= p_78884_1_.minX && this.minX <= p_78884_1_.maxX && this.maxZ >= p_78884_1_.minZ && this.minZ <= p_78884_1_.maxZ && this.maxY >= p_78884_1_.minY && this.minY <= p_78884_1_.maxY;
     }
 
     /**
      * Discover if a coordinate is inside the bounding box area.
      */
-    public boolean intersectsWith(int par1, int par2, int par3, int par4)
+    public boolean intersectsWith(int p_78885_1_, int p_78885_2_, int p_78885_3_, int p_78885_4_)
     {
-        return this.maxX >= par1 && this.minX <= par3 && this.maxZ >= par2 && this.minZ <= par4;
+        return this.maxX >= p_78885_1_ && this.minX <= p_78885_3_ && this.maxZ >= p_78885_2_ && this.minZ <= p_78885_4_;
     }
 
     /**
      * Expands a bounding box's dimensions to include the supplied bounding box.
      */
-    public void expandTo(StructureBoundingBox par1StructureBoundingBox)
+    public void expandTo(StructureBoundingBox p_78888_1_)
     {
-        this.minX = Math.min(this.minX, par1StructureBoundingBox.minX);
-        this.minY = Math.min(this.minY, par1StructureBoundingBox.minY);
-        this.minZ = Math.min(this.minZ, par1StructureBoundingBox.minZ);
-        this.maxX = Math.max(this.maxX, par1StructureBoundingBox.maxX);
-        this.maxY = Math.max(this.maxY, par1StructureBoundingBox.maxY);
-        this.maxZ = Math.max(this.maxZ, par1StructureBoundingBox.maxZ);
+        this.minX = Math.min(this.minX, p_78888_1_.minX);
+        this.minY = Math.min(this.minY, p_78888_1_.minY);
+        this.minZ = Math.min(this.minZ, p_78888_1_.minZ);
+        this.maxX = Math.max(this.maxX, p_78888_1_.maxX);
+        this.maxY = Math.max(this.maxY, p_78888_1_.maxY);
+        this.maxZ = Math.max(this.maxZ, p_78888_1_.maxZ);
     }
 
     /**
      * Offsets the current bounding box by the specified coordinates. Args: x, y, z
      */
-    public void offset(int par1, int par2, int par3)
+    public void offset(int p_78886_1_, int p_78886_2_, int p_78886_3_)
     {
-        this.minX += par1;
-        this.minY += par2;
-        this.minZ += par3;
-        this.maxX += par1;
-        this.maxY += par2;
-        this.maxZ += par3;
+        this.minX += p_78886_1_;
+        this.minY += p_78886_2_;
+        this.minZ += p_78886_3_;
+        this.maxX += p_78886_1_;
+        this.maxY += p_78886_2_;
+        this.maxZ += p_78886_3_;
     }
 
     /**
      * Returns true if block is inside bounding box
      */
-    public boolean isVecInside(int par1, int par2, int par3)
+    public boolean isVecInside(int p_78890_1_, int p_78890_2_, int p_78890_3_)
     {
-        return par1 >= this.minX && par1 <= this.maxX && par3 >= this.minZ && par3 <= this.maxZ && par2 >= this.minY && par2 <= this.maxY;
+        return p_78890_1_ >= this.minX && p_78890_1_ <= this.maxX && p_78890_3_ >= this.minZ && p_78890_3_ <= this.maxZ && p_78890_2_ >= this.minY && p_78890_2_ <= this.maxY;
     }
 
     /**

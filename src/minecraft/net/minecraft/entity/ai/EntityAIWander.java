@@ -12,10 +12,10 @@ public class EntityAIWander extends EntityAIBase
     private double speed;
     private static final String __OBFID = "CL_00001608";
 
-    public EntityAIWander(EntityCreature par1EntityCreature, double par2)
+    public EntityAIWander(EntityCreature p_i1648_1_, double p_i1648_2_)
     {
-        this.entity = par1EntityCreature;
-        this.speed = par2;
+        this.entity = p_i1648_1_;
+        this.speed = p_i1648_2_;
         this.setMutexBits(1);
     }
 

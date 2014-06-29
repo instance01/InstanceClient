@@ -44,9 +44,9 @@ public class S13PacketDestroyEntities extends Packet
         }
     }
 
-    public void processPacket(INetHandlerPlayClient p_149099_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149099_1_.handleDestroyEntities(this);
+        p_148833_1_.handleDestroyEntities(this);
     }
 
     /**

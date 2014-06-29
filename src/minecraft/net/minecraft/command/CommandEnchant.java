@@ -24,21 +24,21 @@ public class CommandEnchant extends CommandBase
         return 2;
     }
 
-    public String getCommandUsage(ICommandSender par1ICommandSender)
+    public String getCommandUsage(ICommandSender p_71518_1_)
     {
         return "commands.enchant.usage";
     }
 
-    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_)
     {
-        if (par2ArrayOfStr.length < 2)
+        if (p_71515_2_.length < 2)
         {
             throw new WrongUsageException("commands.enchant.usage", new Object[0]);
         }
         else
         {
-            EntityPlayerMP var3 = getPlayer(par1ICommandSender, par2ArrayOfStr[0]);
-            int var4 = parseIntBounded(par1ICommandSender, par2ArrayOfStr[1], 0, Enchantment.enchantmentsList.length - 1);
+            EntityPlayerMP var3 = getPlayer(p_71515_1_, p_71515_2_[0]);
+            int var4 = parseIntBounded(p_71515_1_, p_71515_2_[1], 0, Enchantment.enchantmentsList.length - 1);
             int var5 = 1;
             ItemStack var6 = var3.getCurrentEquippedItem();
 
@@ -60,9 +60,9 @@ public class CommandEnchant extends CommandBase
                 }
                 else
                 {
-                    if (par2ArrayOfStr.length >= 3)
+                    if (p_71515_2_.length >= 3)
                     {
-                        var5 = parseIntBounded(par1ICommandSender, par2ArrayOfStr[2], var7.getMinLevel(), var7.getMaxLevel());
+                        var5 = parseIntBounded(p_71515_1_, p_71515_2_[2], var7.getMinLevel(), var7.getMaxLevel());
                     }
 
                     if (var6.hasTagCompound())
@@ -89,7 +89,7 @@ public class CommandEnchant extends CommandBase
                     }
 
                     var6.addEnchantment(var7, var5);
-                    notifyAdmins(par1ICommandSender, "commands.enchant.success", new Object[0]);
+                    func_152373_a(p_71515_1_, this, "commands.enchant.success", new Object[0]);
                 }
             }
         }
@@ -98,9 +98,9 @@ public class CommandEnchant extends CommandBase
     /**
      * Adds the strings available in this command to the given list of tab completion options.
      */
-    public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public List addTabCompletionOptions(ICommandSender p_71516_1_, String[] p_71516_2_)
     {
-        return par2ArrayOfStr.length == 1 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, this.getListOfPlayers()) : null;
+        return p_71516_2_.length == 1 ? getListOfStringsMatchingLastWord(p_71516_2_, this.getListOfPlayers()) : null;
     }
 
     protected String[] getListOfPlayers()
@@ -111,8 +111,8 @@ public class CommandEnchant extends CommandBase
     /**
      * Return whether the specified command parameter index is a username parameter.
      */
-    public boolean isUsernameIndex(String[] par1ArrayOfStr, int par2)
+    public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_)
     {
-        return par2 == 0;
+        return p_82358_2_ == 0;
     }
 }

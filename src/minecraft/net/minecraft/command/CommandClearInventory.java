@@ -14,7 +14,7 @@ public class CommandClearInventory extends CommandBase
         return "clear";
     }
 
-    public String getCommandUsage(ICommandSender par1ICommandSender)
+    public String getCommandUsage(ICommandSender p_71518_1_)
     {
         return "commands.clear.usage";
     }
@@ -27,13 +27,13 @@ public class CommandClearInventory extends CommandBase
         return 2;
     }
 
-    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_)
     {
-        EntityPlayerMP var3 = par2ArrayOfStr.length == 0 ? getCommandSenderAsPlayer(par1ICommandSender) : getPlayer(par1ICommandSender, par2ArrayOfStr[0]);
-        Item var4 = par2ArrayOfStr.length >= 2 ? getItemByText(par1ICommandSender, par2ArrayOfStr[1]) : null;
-        int var5 = par2ArrayOfStr.length >= 3 ? parseIntWithMin(par1ICommandSender, par2ArrayOfStr[2], 0) : -1;
+        EntityPlayerMP var3 = p_71515_2_.length == 0 ? getCommandSenderAsPlayer(p_71515_1_) : getPlayer(p_71515_1_, p_71515_2_[0]);
+        Item var4 = p_71515_2_.length >= 2 ? getItemByText(p_71515_1_, p_71515_2_[1]) : null;
+        int var5 = p_71515_2_.length >= 3 ? parseIntWithMin(p_71515_1_, p_71515_2_[2], 0) : -1;
 
-        if (par2ArrayOfStr.length >= 2 && var4 == null)
+        if (p_71515_2_.length >= 2 && var4 == null)
         {
             throw new CommandException("commands.clear.failure", new Object[] {var3.getCommandSenderName()});
         }
@@ -53,7 +53,7 @@ public class CommandClearInventory extends CommandBase
             }
             else
             {
-                notifyAdmins(par1ICommandSender, "commands.clear.success", new Object[] {var3.getCommandSenderName(), Integer.valueOf(var6)});
+                func_152373_a(p_71515_1_, this, "commands.clear.success", new Object[] {var3.getCommandSenderName(), Integer.valueOf(var6)});
             }
         }
     }
@@ -61,9 +61,9 @@ public class CommandClearInventory extends CommandBase
     /**
      * Adds the strings available in this command to the given list of tab completion options.
      */
-    public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public List addTabCompletionOptions(ICommandSender p_71516_1_, String[] p_71516_2_)
     {
-        return par2ArrayOfStr.length == 1 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, this.func_147209_d()) : (par2ArrayOfStr.length == 2 ? getListOfStringsFromIterableMatchingLastWord(par2ArrayOfStr, Item.itemRegistry.getKeys()) : null);
+        return p_71516_2_.length == 1 ? getListOfStringsMatchingLastWord(p_71516_2_, this.func_147209_d()) : (p_71516_2_.length == 2 ? getListOfStringsFromIterableMatchingLastWord(p_71516_2_, Item.itemRegistry.getKeys()) : null);
     }
 
     protected String[] func_147209_d()
@@ -74,8 +74,8 @@ public class CommandClearInventory extends CommandBase
     /**
      * Return whether the specified command parameter index is a username parameter.
      */
-    public boolean isUsernameIndex(String[] par1ArrayOfStr, int par2)
+    public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_)
     {
-        return par2 == 0;
+        return p_82358_2_ == 0;
     }
 }

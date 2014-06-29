@@ -1,6 +1,6 @@
 package net.minecraft.stats;
 
-import java.util.HashMap;
+import com.google.common.collect.Maps;
 import java.util.Map;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IJsonSerializable;
@@ -8,23 +8,23 @@ import net.minecraft.util.TupleIntJsonSerializable;
 
 public class StatFileWriter
 {
-    protected final Map field_150875_a = new HashMap();
+    protected final Map field_150875_a = Maps.newConcurrentMap();
     private static final String __OBFID = "CL_00001481";
 
     /**
      * Returns true if the achievement has been unlocked.
      */
-    public boolean hasAchievementUnlocked(Achievement par1Achievement)
+    public boolean hasAchievementUnlocked(Achievement p_77443_1_)
     {
-        return this.writeStat(par1Achievement) > 0;
+        return this.writeStat(p_77443_1_) > 0;
     }
 
     /**
      * Returns true if the parent has been unlocked, or there is no parent
      */
-    public boolean canUnlockAchievement(Achievement par1Achievement)
+    public boolean canUnlockAchievement(Achievement p_77442_1_)
     {
-        return par1Achievement.parentAchievement == null || this.hasAchievementUnlocked(par1Achievement.parentAchievement);
+        return p_77442_1_.parentAchievement == null || this.hasAchievementUnlocked(p_77442_1_.parentAchievement);
     }
 
     public int func_150874_c(Achievement p_150874_1_)
@@ -67,9 +67,9 @@ public class StatFileWriter
         var4.setIntegerValue(p_150873_3_);
     }
 
-    public int writeStat(StatBase par1StatBase)
+    public int writeStat(StatBase p_77444_1_)
     {
-        TupleIntJsonSerializable var2 = (TupleIntJsonSerializable)this.field_150875_a.get(par1StatBase);
+        TupleIntJsonSerializable var2 = (TupleIntJsonSerializable)this.field_150875_a.get(p_77444_1_);
         return var2 == null ? 0 : var2.getIntegerValue();
     }
 

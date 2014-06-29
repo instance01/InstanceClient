@@ -17,14 +17,14 @@ public class EntityMinecartFurnace extends EntityMinecart
     public double pushZ;
     private static final String __OBFID = "CL_00001675";
 
-    public EntityMinecartFurnace(World par1World)
+    public EntityMinecartFurnace(World p_i1718_1_)
     {
-        super(par1World);
+        super(p_i1718_1_);
     }
 
-    public EntityMinecartFurnace(World par1World, double par2, double par4, double par6)
+    public EntityMinecartFurnace(World p_i1719_1_, double p_i1719_2_, double p_i1719_4_, double p_i1719_6_)
     {
-        super(par1World, par2, par4, par6);
+        super(p_i1719_1_, p_i1719_2_, p_i1719_4_, p_i1719_6_);
     }
 
     public int getMinecartType()
@@ -63,11 +63,11 @@ public class EntityMinecartFurnace extends EntityMinecart
         }
     }
 
-    public void killMinecart(DamageSource par1DamageSource)
+    public void killMinecart(DamageSource p_94095_1_)
     {
-        super.killMinecart(par1DamageSource);
+        super.killMinecart(p_94095_1_);
 
-        if (!par1DamageSource.isExplosion())
+        if (!p_94095_1_.isExplosion())
         {
             this.entityDropItem(new ItemStack(Blocks.furnace, 1), 0.0F);
         }
@@ -126,45 +126,45 @@ public class EntityMinecartFurnace extends EntityMinecart
     /**
      * First layer of player interaction
      */
-    public boolean interactFirst(EntityPlayer par1EntityPlayer)
+    public boolean interactFirst(EntityPlayer p_130002_1_)
     {
-        ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
+        ItemStack var2 = p_130002_1_.inventory.getCurrentItem();
 
         if (var2 != null && var2.getItem() == Items.coal)
         {
-            if (!par1EntityPlayer.capabilities.isCreativeMode && --var2.stackSize == 0)
+            if (!p_130002_1_.capabilities.isCreativeMode && --var2.stackSize == 0)
             {
-                par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack)null);
+                p_130002_1_.inventory.setInventorySlotContents(p_130002_1_.inventory.currentItem, (ItemStack)null);
             }
 
             this.fuel += 3600;
         }
 
-        this.pushX = this.posX - par1EntityPlayer.posX;
-        this.pushZ = this.posZ - par1EntityPlayer.posZ;
+        this.pushX = this.posX - p_130002_1_.posX;
+        this.pushZ = this.posZ - p_130002_1_.posZ;
         return true;
     }
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    protected void writeEntityToNBT(NBTTagCompound p_70014_1_)
     {
-        super.writeEntityToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setDouble("PushX", this.pushX);
-        par1NBTTagCompound.setDouble("PushZ", this.pushZ);
-        par1NBTTagCompound.setShort("Fuel", (short)this.fuel);
+        super.writeEntityToNBT(p_70014_1_);
+        p_70014_1_.setDouble("PushX", this.pushX);
+        p_70014_1_.setDouble("PushZ", this.pushZ);
+        p_70014_1_.setShort("Fuel", (short)this.fuel);
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    protected void readEntityFromNBT(NBTTagCompound p_70037_1_)
     {
-        super.readEntityFromNBT(par1NBTTagCompound);
-        this.pushX = par1NBTTagCompound.getDouble("PushX");
-        this.pushZ = par1NBTTagCompound.getDouble("PushZ");
-        this.fuel = par1NBTTagCompound.getShort("Fuel");
+        super.readEntityFromNBT(p_70037_1_);
+        this.pushX = p_70037_1_.getDouble("PushX");
+        this.pushZ = p_70037_1_.getDouble("PushZ");
+        this.fuel = p_70037_1_.getShort("Fuel");
     }
 
     protected boolean isMinecartPowered()
@@ -172,9 +172,9 @@ public class EntityMinecartFurnace extends EntityMinecart
         return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
     }
 
-    protected void setMinecartPowered(boolean par1)
+    protected void setMinecartPowered(boolean p_94107_1_)
     {
-        if (par1)
+        if (p_94107_1_)
         {
             this.dataWatcher.updateObject(16, Byte.valueOf((byte)(this.dataWatcher.getWatchableObjectByte(16) | 1)));
         }

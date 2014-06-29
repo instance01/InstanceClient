@@ -9,8 +9,8 @@ public class SyntaxErrorException extends CommandException
         this("commands.generic.snytax", new Object[0]);
     }
 
-    public SyntaxErrorException(String par1Str, Object ... par2ArrayOfObj)
+    public SyntaxErrorException(String p_i1361_1_, Object ... p_i1361_2_)
     {
-        super(par1Str, par2ArrayOfObj);
+        super(p_i1361_1_, p_i1361_2_);
     }
 }

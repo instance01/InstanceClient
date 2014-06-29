@@ -22,9 +22,9 @@ public class S32PacketConfirmTransaction extends Packet
         this.field_148893_c = p_i45182_3_;
     }
 
-    public void processPacket(INetHandlerPlayClient p_148891_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_148891_1_.handleConfirmTransaction(this);
+        p_148833_1_.handleConfirmTransaction(this);
     }
 
     /**

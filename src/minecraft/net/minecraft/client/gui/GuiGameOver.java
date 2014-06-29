@@ -6,7 +6,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.EnumChatFormatting;
 import org.lwjgl.opengl.GL11;
 
-public class GuiGameOver extends GuiScreen
+public class GuiGameOver extends GuiScreen implements GuiYesNoCallback
 {
     private int field_146347_a;
     private boolean field_146346_f = false;
@@ -52,7 +52,7 @@ public class GuiGameOver extends GuiScreen
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2) {}
+    protected void keyTyped(char p_73869_1_, int p_73869_2_) {}
 
     protected void actionPerformed(GuiButton p_146284_1_)
     {
@@ -70,9 +70,9 @@ public class GuiGameOver extends GuiScreen
         }
     }
 
-    public void confirmClicked(boolean par1, int par2)
+    public void confirmClicked(boolean p_73878_1_, int p_73878_2_)
     {
-        if (par1)
+        if (p_73878_1_)
         {
             this.mc.theWorld.sendQuittingDisconnectingPacket();
             this.mc.loadWorld((WorldClient)null);
@@ -88,7 +88,7 @@ public class GuiGameOver extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         this.drawGradientRect(0, 0, this.width, this.height, 1615855616, -1602211792);
         GL11.glPushMatrix();
@@ -104,7 +104,7 @@ public class GuiGameOver extends GuiScreen
         }
 
         this.drawCenteredString(this.fontRendererObj, I18n.format("deathScreen.score", new Object[0]) + ": " + EnumChatFormatting.YELLOW + this.mc.thePlayer.getScore(), this.width / 2, 100, 16777215);
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 
     /**

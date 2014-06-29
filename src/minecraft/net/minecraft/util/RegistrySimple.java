@@ -23,22 +23,22 @@ public class RegistrySimple implements IRegistry
         return Maps.newHashMap();
     }
 
-    public Object getObject(Object par1Obj)
+    public Object getObject(Object p_82594_1_)
     {
-        return this.registryObjects.get(par1Obj);
+        return this.registryObjects.get(p_82594_1_);
     }
 
     /**
      * Register an object on this registry.
      */
-    public void putObject(Object par1Obj, Object par2Obj)
+    public void putObject(Object p_82595_1_, Object p_82595_2_)
     {
-        if (this.registryObjects.containsKey(par1Obj))
+        if (this.registryObjects.containsKey(p_82595_1_))
         {
-            logger.warn("Adding duplicate key \'" + par1Obj + "\' to registry");
+            logger.debug("Adding duplicate key \'" + p_82595_1_ + "\' to registry");
         }
 
-        this.registryObjects.put(par1Obj, par2Obj);
+        this.registryObjects.put(p_82595_1_, p_82595_2_);
     }
 
     /**

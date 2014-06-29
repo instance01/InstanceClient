@@ -8,38 +8,38 @@ public class EntityReddustFX extends EntityFX
     float reddustParticleScale;
     private static final String __OBFID = "CL_00000923";
 
-    public EntityReddustFX(World par1World, double par2, double par4, double par6, float par8, float par9, float par10)
+    public EntityReddustFX(World p_i1223_1_, double p_i1223_2_, double p_i1223_4_, double p_i1223_6_, float p_i1223_8_, float p_i1223_9_, float p_i1223_10_)
     {
-        this(par1World, par2, par4, par6, 1.0F, par8, par9, par10);
+        this(p_i1223_1_, p_i1223_2_, p_i1223_4_, p_i1223_6_, 1.0F, p_i1223_8_, p_i1223_9_, p_i1223_10_);
     }
 
-    public EntityReddustFX(World par1World, double par2, double par4, double par6, float par8, float par9, float par10, float par11)
+    public EntityReddustFX(World p_i1224_1_, double p_i1224_2_, double p_i1224_4_, double p_i1224_6_, float p_i1224_8_, float p_i1224_9_, float p_i1224_10_, float p_i1224_11_)
     {
-        super(par1World, par2, par4, par6, 0.0D, 0.0D, 0.0D);
+        super(p_i1224_1_, p_i1224_2_, p_i1224_4_, p_i1224_6_, 0.0D, 0.0D, 0.0D);
         this.motionX *= 0.10000000149011612D;
         this.motionY *= 0.10000000149011612D;
         this.motionZ *= 0.10000000149011612D;
 
-        if (par9 == 0.0F)
+        if (p_i1224_9_ == 0.0F)
         {
-            par9 = 1.0F;
+            p_i1224_9_ = 1.0F;
         }
 
         float var12 = (float)Math.random() * 0.4F + 0.6F;
-        this.particleRed = ((float)(Math.random() * 0.20000000298023224D) + 0.8F) * par9 * var12;
-        this.particleGreen = ((float)(Math.random() * 0.20000000298023224D) + 0.8F) * par10 * var12;
-        this.particleBlue = ((float)(Math.random() * 0.20000000298023224D) + 0.8F) * par11 * var12;
+        this.particleRed = ((float)(Math.random() * 0.20000000298023224D) + 0.8F) * p_i1224_9_ * var12;
+        this.particleGreen = ((float)(Math.random() * 0.20000000298023224D) + 0.8F) * p_i1224_10_ * var12;
+        this.particleBlue = ((float)(Math.random() * 0.20000000298023224D) + 0.8F) * p_i1224_11_ * var12;
         this.particleScale *= 0.75F;
-        this.particleScale *= par8;
+        this.particleScale *= p_i1224_8_;
         this.reddustParticleScale = this.particleScale;
         this.particleMaxAge = (int)(8.0D / (Math.random() * 0.8D + 0.2D));
-        this.particleMaxAge = (int)((float)this.particleMaxAge * par8);
+        this.particleMaxAge = (int)((float)this.particleMaxAge * p_i1224_8_);
         this.noClip = false;
     }
 
-    public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7)
+    public void renderParticle(Tessellator p_70539_1_, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_)
     {
-        float var8 = ((float)this.particleAge + par2) / (float)this.particleMaxAge * 32.0F;
+        float var8 = ((float)this.particleAge + p_70539_2_) / (float)this.particleMaxAge * 32.0F;
 
         if (var8 < 0.0F)
         {
@@ -52,7 +52,7 @@ public class EntityReddustFX extends EntityFX
         }
 
         this.particleScale = this.reddustParticleScale * var8;
-        super.renderParticle(par1Tessellator, par2, par3, par4, par5, par6, par7);
+        super.renderParticle(p_70539_1_, p_70539_2_, p_70539_3_, p_70539_4_, p_70539_5_, p_70539_6_, p_70539_7_);
     }
 
     /**

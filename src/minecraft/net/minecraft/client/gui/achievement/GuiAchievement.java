@@ -25,9 +25,9 @@ public class GuiAchievement extends Gui
     private boolean field_146262_n;
     private static final String __OBFID = "CL_00000721";
 
-    public GuiAchievement(Minecraft par1Minecraft)
+    public GuiAchievement(Minecraft p_i1063_1_)
     {
-        this.field_146259_f = par1Minecraft;
+        this.field_146259_f = p_i1063_1_;
         this.field_146264_m = new RenderItem();
     }
 
@@ -58,7 +58,7 @@ public class GuiAchievement extends Gui
         GL11.glLoadIdentity();
         this.field_146260_g = this.field_146259_f.displayWidth;
         this.field_146267_h = this.field_146259_f.displayHeight;
-        ScaledResolution var1 = new ScaledResolution(this.field_146259_f.gameSettings, this.field_146259_f.displayWidth, this.field_146259_f.displayHeight);
+        ScaledResolution var1 = new ScaledResolution(this.field_146259_f, this.field_146259_f.displayWidth, this.field_146259_f.displayHeight);
         this.field_146260_g = var1.getScaledWidth();
         this.field_146267_h = var1.getScaledHeight();
         GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);

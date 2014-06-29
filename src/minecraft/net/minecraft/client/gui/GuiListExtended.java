@@ -65,14 +65,14 @@ public abstract class GuiListExtended extends GuiSlot
         return false;
     }
 
-    public abstract GuiListExtended.IGuiListEntry func_148180_b(int var1);
+    public abstract GuiListExtended.IGuiListEntry func_148180_b(int p_148180_1_);
 
     public interface IGuiListEntry
     {
-        void func_148279_a(int var1, int var2, int var3, int var4, int var5, Tessellator var6, int var7, int var8, boolean var9);
+        void func_148279_a(int p_148279_1_, int p_148279_2_, int p_148279_3_, int p_148279_4_, int p_148279_5_, Tessellator p_148279_6_, int p_148279_7_, int p_148279_8_, boolean p_148279_9_);
 
-        boolean func_148278_a(int var1, int var2, int var3, int var4, int var5, int var6);
+        boolean func_148278_a(int p_148278_1_, int p_148278_2_, int p_148278_3_, int p_148278_4_, int p_148278_5_, int p_148278_6_);
 
-        void func_148277_b(int var1, int var2, int var3, int var4, int var5, int var6);
+        void func_148277_b(int p_148277_1_, int p_148277_2_, int p_148277_3_, int p_148277_4_, int p_148277_5_, int p_148277_6_);
     }
 }

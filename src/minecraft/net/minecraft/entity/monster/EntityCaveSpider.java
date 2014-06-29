@@ -13,9 +13,9 @@ public class EntityCaveSpider extends EntitySpider
 {
     private static final String __OBFID = "CL_00001683";
 
-    public EntityCaveSpider(World par1World)
+    public EntityCaveSpider(World p_i1732_1_)
     {
-        super(par1World);
+        super(p_i1732_1_);
         this.setSize(0.7F, 0.5F);
     }
 
@@ -25,11 +25,11 @@ public class EntityCaveSpider extends EntitySpider
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(12.0D);
     }
 
-    public boolean attackEntityAsMob(Entity par1Entity)
+    public boolean attackEntityAsMob(Entity p_70652_1_)
     {
-        if (super.attackEntityAsMob(par1Entity))
+        if (super.attackEntityAsMob(p_70652_1_))
         {
-            if (par1Entity instanceof EntityLivingBase)
+            if (p_70652_1_ instanceof EntityLivingBase)
             {
                 byte var2 = 0;
 
@@ -44,7 +44,7 @@ public class EntityCaveSpider extends EntitySpider
 
                 if (var2 > 0)
                 {
-                    ((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.poison.id, var2 * 20, 0));
+                    ((EntityLivingBase)p_70652_1_).addPotionEffect(new PotionEffect(Potion.poison.id, var2 * 20, 0));
                 }
             }
 
@@ -56,8 +56,8 @@ public class EntityCaveSpider extends EntitySpider
         }
     }
 
-    public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+    public IEntityLivingData onSpawnWithEgg(IEntityLivingData p_110161_1_)
     {
-        return par1EntityLivingData;
+        return p_110161_1_;
     }
 }

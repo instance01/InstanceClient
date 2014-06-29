@@ -21,11 +21,11 @@ public class ContainerPlayer extends Container
     private final EntityPlayer thePlayer;
     private static final String __OBFID = "CL_00001754";
 
-    public ContainerPlayer(final InventoryPlayer par1InventoryPlayer, boolean par2, EntityPlayer par3EntityPlayer)
+    public ContainerPlayer(final InventoryPlayer p_i1819_1_, boolean p_i1819_2_, EntityPlayer p_i1819_3_)
     {
-        this.isLocalWorld = par2;
-        this.thePlayer = par3EntityPlayer;
-        this.addSlotToContainer(new SlotCrafting(par1InventoryPlayer.player, this.craftMatrix, this.craftResult, 0, 144, 36));
+        this.isLocalWorld = p_i1819_2_;
+        this.thePlayer = p_i1819_3_;
+        this.addSlotToContainer(new SlotCrafting(p_i1819_1_.player, this.craftMatrix, this.craftResult, 0, 144, 36));
         int var4;
         int var5;
 
@@ -40,16 +40,16 @@ public class ContainerPlayer extends Container
         for (var4 = 0; var4 < 4; ++var4)
         {
             final int var44 = var4;
-            this.addSlotToContainer(new Slot(par1InventoryPlayer, par1InventoryPlayer.getSizeInventory() - 1 - var4, 8, 8 + var4 * 18)
+            this.addSlotToContainer(new Slot(p_i1819_1_, p_i1819_1_.getSizeInventory() - 1 - var4, 8, 8 + var4 * 18)
             {
                 private static final String __OBFID = "CL_00001755";
                 public int getSlotStackLimit()
                 {
                     return 1;
                 }
-                public boolean isItemValid(ItemStack par1ItemStack)
+                public boolean isItemValid(ItemStack p_75214_1_)
                 {
-                    return par1ItemStack == null ? false : (par1ItemStack.getItem() instanceof ItemArmor ? ((ItemArmor)par1ItemStack.getItem()).armorType == var44 : (par1ItemStack.getItem() != Item.getItemFromBlock(Blocks.pumpkin) && par1ItemStack.getItem() != Items.skull ? false : var44 == 0));
+                    return p_75214_1_ == null ? false : (p_75214_1_.getItem() instanceof ItemArmor ? ((ItemArmor)p_75214_1_.getItem()).armorType == var44 : (p_75214_1_.getItem() != Item.getItemFromBlock(Blocks.pumpkin) && p_75214_1_.getItem() != Items.skull ? false : var44 == 0));
                 }
                 public IIcon getBackgroundIconIndex()
                 {
@@ -62,13 +62,13 @@ public class ContainerPlayer extends Container
         {
             for (var5 = 0; var5 < 9; ++var5)
             {
-                this.addSlotToContainer(new Slot(par1InventoryPlayer, var5 + (var4 + 1) * 9, 8 + var5 * 18, 84 + var4 * 18));
+                this.addSlotToContainer(new Slot(p_i1819_1_, var5 + (var4 + 1) * 9, 8 + var5 * 18, 84 + var4 * 18));
             }
         }
 
         for (var4 = 0; var4 < 9; ++var4)
         {
-            this.addSlotToContainer(new Slot(par1InventoryPlayer, var4, 8 + var4 * 18, 142));
+            this.addSlotToContainer(new Slot(p_i1819_1_, var4, 8 + var4 * 18, 142));
         }
 
         this.onCraftMatrixChanged(this.craftMatrix);
@@ -77,7 +77,7 @@ public class ContainerPlayer extends Container
     /**
      * Callback for when the crafting matrix is changed.
      */
-    public void onCraftMatrixChanged(IInventory par1IInventory)
+    public void onCraftMatrixChanged(IInventory p_75130_1_)
     {
         this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, this.thePlayer.worldObj));
     }
@@ -85,9 +85,9 @@ public class ContainerPlayer extends Container
     /**
      * Called when the container is closed.
      */
-    public void onContainerClosed(EntityPlayer par1EntityPlayer)
+    public void onContainerClosed(EntityPlayer p_75134_1_)
     {
-        super.onContainerClosed(par1EntityPlayer);
+        super.onContainerClosed(p_75134_1_);
 
         for (int var2 = 0; var2 < 4; ++var2)
         {
@@ -95,14 +95,14 @@ public class ContainerPlayer extends Container
 
             if (var3 != null)
             {
-                par1EntityPlayer.dropPlayerItemWithRandomChoice(var3, false);
+                p_75134_1_.dropPlayerItemWithRandomChoice(var3, false);
             }
         }
 
         this.craftResult.setInventorySlotContents(0, (ItemStack)null);
     }
 
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer)
+    public boolean canInteractWith(EntityPlayer p_75145_1_)
     {
         return true;
     }
@@ -110,17 +110,17 @@ public class ContainerPlayer extends Container
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+    public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int p_82846_2_)
     {
         ItemStack var3 = null;
-        Slot var4 = (Slot)this.inventorySlots.get(par2);
+        Slot var4 = (Slot)this.inventorySlots.get(p_82846_2_);
 
         if (var4 != null && var4.getHasStack())
         {
             ItemStack var5 = var4.getStack();
             var3 = var5.copy();
 
-            if (par2 == 0)
+            if (p_82846_2_ == 0)
             {
                 if (!this.mergeItemStack(var5, 9, 45, true))
                 {
@@ -129,14 +129,14 @@ public class ContainerPlayer extends Container
 
                 var4.onSlotChange(var5, var3);
             }
-            else if (par2 >= 1 && par2 < 5)
+            else if (p_82846_2_ >= 1 && p_82846_2_ < 5)
             {
                 if (!this.mergeItemStack(var5, 9, 45, false))
                 {
                     return null;
                 }
             }
-            else if (par2 >= 5 && par2 < 9)
+            else if (p_82846_2_ >= 5 && p_82846_2_ < 9)
             {
                 if (!this.mergeItemStack(var5, 9, 45, false))
                 {
@@ -152,14 +152,14 @@ public class ContainerPlayer extends Container
                     return null;
                 }
             }
-            else if (par2 >= 9 && par2 < 36)
+            else if (p_82846_2_ >= 9 && p_82846_2_ < 36)
             {
                 if (!this.mergeItemStack(var5, 36, 45, false))
                 {
                     return null;
                 }
             }
-            else if (par2 >= 36 && par2 < 45)
+            else if (p_82846_2_ >= 36 && p_82846_2_ < 45)
             {
                 if (!this.mergeItemStack(var5, 9, 36, false))
                 {
@@ -185,14 +185,14 @@ public class ContainerPlayer extends Container
                 return null;
             }
 
-            var4.onPickupFromSlot(par1EntityPlayer, var5);
+            var4.onPickupFromSlot(p_82846_1_, var5);
         }
 
         return var3;
     }
 
-    public boolean func_94530_a(ItemStack par1ItemStack, Slot par2Slot)
+    public boolean func_94530_a(ItemStack p_94530_1_, Slot p_94530_2_)
     {
-        return par2Slot.inventory != this.craftResult && super.func_94530_a(par1ItemStack, par2Slot);
+        return p_94530_2_.inventory != this.craftResult && super.func_94530_a(p_94530_1_, p_94530_2_);
     }
 }

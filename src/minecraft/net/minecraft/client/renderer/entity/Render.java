@@ -38,45 +38,45 @@ public abstract class Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public abstract void doRender(Entity var1, double var2, double var4, double var6, float var8, float var9);
+    public abstract void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_);
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected abstract ResourceLocation getEntityTexture(Entity var1);
+    protected abstract ResourceLocation getEntityTexture(Entity p_110775_1_);
 
     public boolean func_147905_a()
     {
         return this.field_147908_f;
     }
 
-    protected void bindEntityTexture(Entity par1Entity)
+    protected void bindEntityTexture(Entity p_110777_1_)
     {
-        this.bindTexture(this.getEntityTexture(par1Entity));
+        this.bindTexture(this.getEntityTexture(p_110777_1_));
     }
 
-    protected void bindTexture(ResourceLocation par1ResourceLocation)
+    protected void bindTexture(ResourceLocation p_110776_1_)
     {
-        this.renderManager.renderEngine.bindTexture(par1ResourceLocation);
+        this.renderManager.renderEngine.bindTexture(p_110776_1_);
     }
 
     /**
      * Renders fire on top of the entity. Args: entity, x, y, z, partialTickTime
      */
-    private void renderEntityOnFire(Entity par1Entity, double par2, double par4, double par6, float par8)
+    private void renderEntityOnFire(Entity p_76977_1_, double p_76977_2_, double p_76977_4_, double p_76977_6_, float p_76977_8_)
     {
         GL11.glDisable(GL11.GL_LIGHTING);
         IIcon var9 = Blocks.fire.func_149840_c(0);
         IIcon var10 = Blocks.fire.func_149840_c(1);
         GL11.glPushMatrix();
-        GL11.glTranslatef((float)par2, (float)par4, (float)par6);
-        float var11 = par1Entity.width * 1.4F;
+        GL11.glTranslatef((float)p_76977_2_, (float)p_76977_4_, (float)p_76977_6_);
+        float var11 = p_76977_1_.width * 1.4F;
         GL11.glScalef(var11, var11, var11);
         Tessellator var12 = Tessellator.instance;
         float var13 = 0.5F;
         float var14 = 0.0F;
-        float var15 = par1Entity.height / var11;
-        float var16 = (float)(par1Entity.posY - par1Entity.boundingBox.minY);
+        float var15 = p_76977_1_.height / var11;
+        float var16 = (float)(p_76977_1_.posY - p_76977_1_.boundingBox.minY);
         GL11.glRotatef(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(0.0F, 0.0F, -0.3F + (float)((int)var15) * 0.02F);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -120,7 +120,7 @@ public abstract class Render
      * Renders the entity shadows at the position, shadow alpha and partialTickTime. Args: entity, x, y, z, shadowAlpha,
      * partialTickTime
      */
-    private void renderShadow(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    private void renderShadow(Entity p_76975_1_, double p_76975_2_, double p_76975_4_, double p_76975_6_, float p_76975_8_, float p_76975_9_)
     {
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -129,9 +129,9 @@ public abstract class Render
         GL11.glDepthMask(false);
         float var11 = this.shadowSize;
 
-        if (par1Entity instanceof EntityLiving)
+        if (p_76975_1_ instanceof EntityLiving)
         {
-            EntityLiving var12 = (EntityLiving)par1Entity;
+            EntityLiving var12 = (EntityLiving)p_76975_1_;
             var11 *= var12.getRenderSizeModifier();
 
             if (var12.isChild())
@@ -140,18 +140,18 @@ public abstract class Render
             }
         }
 
-        double var35 = par1Entity.lastTickPosX + (par1Entity.posX - par1Entity.lastTickPosX) * (double)par9;
-        double var14 = par1Entity.lastTickPosY + (par1Entity.posY - par1Entity.lastTickPosY) * (double)par9 + (double)par1Entity.getShadowSize();
-        double var16 = par1Entity.lastTickPosZ + (par1Entity.posZ - par1Entity.lastTickPosZ) * (double)par9;
+        double var35 = p_76975_1_.lastTickPosX + (p_76975_1_.posX - p_76975_1_.lastTickPosX) * (double)p_76975_9_;
+        double var14 = p_76975_1_.lastTickPosY + (p_76975_1_.posY - p_76975_1_.lastTickPosY) * (double)p_76975_9_ + (double)p_76975_1_.getShadowSize();
+        double var16 = p_76975_1_.lastTickPosZ + (p_76975_1_.posZ - p_76975_1_.lastTickPosZ) * (double)p_76975_9_;
         int var18 = MathHelper.floor_double(var35 - (double)var11);
         int var19 = MathHelper.floor_double(var35 + (double)var11);
         int var20 = MathHelper.floor_double(var14 - (double)var11);
         int var21 = MathHelper.floor_double(var14);
         int var22 = MathHelper.floor_double(var16 - (double)var11);
         int var23 = MathHelper.floor_double(var16 + (double)var11);
-        double var24 = par2 - var35;
-        double var26 = par4 - var14;
-        double var28 = par6 - var16;
+        double var24 = p_76975_2_ - var35;
+        double var26 = p_76975_4_ - var14;
+        double var28 = p_76975_6_ - var16;
         Tessellator var30 = Tessellator.instance;
         var30.startDrawingQuads();
 
@@ -165,7 +165,7 @@ public abstract class Render
 
                     if (var34.getMaterial() != Material.air && var10.getBlockLightValue(var31, var32, var33) > 3)
                     {
-                        this.func_147907_a(var34, par2, par4 + (double)par1Entity.getShadowSize(), par6, var31, var32, var33, par8, var11, var24, var26 + (double)par1Entity.getShadowSize(), var28);
+                        this.func_147907_a(var34, p_76975_2_, p_76975_4_ + (double)p_76975_1_.getShadowSize(), p_76975_6_, var31, var32, var33, p_76975_8_, var11, var24, var26 + (double)p_76975_1_.getShadowSize(), var28);
                     }
                 }
             }
@@ -221,43 +221,43 @@ public abstract class Render
     /**
      * Renders a white box with the bounds of the AABB translated by the offset. Args: aabb, x, y, z
      */
-    public static void renderOffsetAABB(AxisAlignedBB par0AxisAlignedBB, double par1, double par3, double par5)
+    public static void renderOffsetAABB(AxisAlignedBB p_76978_0_, double p_76978_1_, double p_76978_3_, double p_76978_5_)
     {
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         Tessellator var7 = Tessellator.instance;
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         var7.startDrawingQuads();
-        var7.setTranslation(par1, par3, par5);
+        var7.setTranslation(p_76978_1_, p_76978_3_, p_76978_5_);
         var7.setNormal(0.0F, 0.0F, -1.0F);
-        var7.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.minZ);
-        var7.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.minZ);
-        var7.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.minY, par0AxisAlignedBB.minZ);
-        var7.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.minY, par0AxisAlignedBB.minZ);
+        var7.addVertex(p_76978_0_.minX, p_76978_0_.maxY, p_76978_0_.minZ);
+        var7.addVertex(p_76978_0_.maxX, p_76978_0_.maxY, p_76978_0_.minZ);
+        var7.addVertex(p_76978_0_.maxX, p_76978_0_.minY, p_76978_0_.minZ);
+        var7.addVertex(p_76978_0_.minX, p_76978_0_.minY, p_76978_0_.minZ);
         var7.setNormal(0.0F, 0.0F, 1.0F);
-        var7.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.minY, par0AxisAlignedBB.maxZ);
-        var7.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.minY, par0AxisAlignedBB.maxZ);
-        var7.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.maxZ);
-        var7.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.maxZ);
+        var7.addVertex(p_76978_0_.minX, p_76978_0_.minY, p_76978_0_.maxZ);
+        var7.addVertex(p_76978_0_.maxX, p_76978_0_.minY, p_76978_0_.maxZ);
+        var7.addVertex(p_76978_0_.maxX, p_76978_0_.maxY, p_76978_0_.maxZ);
+        var7.addVertex(p_76978_0_.minX, p_76978_0_.maxY, p_76978_0_.maxZ);
         var7.setNormal(0.0F, -1.0F, 0.0F);
-        var7.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.minY, par0AxisAlignedBB.minZ);
-        var7.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.minY, par0AxisAlignedBB.minZ);
-        var7.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.minY, par0AxisAlignedBB.maxZ);
-        var7.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.minY, par0AxisAlignedBB.maxZ);
+        var7.addVertex(p_76978_0_.minX, p_76978_0_.minY, p_76978_0_.minZ);
+        var7.addVertex(p_76978_0_.maxX, p_76978_0_.minY, p_76978_0_.minZ);
+        var7.addVertex(p_76978_0_.maxX, p_76978_0_.minY, p_76978_0_.maxZ);
+        var7.addVertex(p_76978_0_.minX, p_76978_0_.minY, p_76978_0_.maxZ);
         var7.setNormal(0.0F, 1.0F, 0.0F);
-        var7.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.maxZ);
-        var7.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.maxZ);
-        var7.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.minZ);
-        var7.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.minZ);
+        var7.addVertex(p_76978_0_.minX, p_76978_0_.maxY, p_76978_0_.maxZ);
+        var7.addVertex(p_76978_0_.maxX, p_76978_0_.maxY, p_76978_0_.maxZ);
+        var7.addVertex(p_76978_0_.maxX, p_76978_0_.maxY, p_76978_0_.minZ);
+        var7.addVertex(p_76978_0_.minX, p_76978_0_.maxY, p_76978_0_.minZ);
         var7.setNormal(-1.0F, 0.0F, 0.0F);
-        var7.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.minY, par0AxisAlignedBB.maxZ);
-        var7.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.maxZ);
-        var7.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.minZ);
-        var7.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.minY, par0AxisAlignedBB.minZ);
+        var7.addVertex(p_76978_0_.minX, p_76978_0_.minY, p_76978_0_.maxZ);
+        var7.addVertex(p_76978_0_.minX, p_76978_0_.maxY, p_76978_0_.maxZ);
+        var7.addVertex(p_76978_0_.minX, p_76978_0_.maxY, p_76978_0_.minZ);
+        var7.addVertex(p_76978_0_.minX, p_76978_0_.minY, p_76978_0_.minZ);
         var7.setNormal(1.0F, 0.0F, 0.0F);
-        var7.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.minY, par0AxisAlignedBB.minZ);
-        var7.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.minZ);
-        var7.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.maxZ);
-        var7.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.minY, par0AxisAlignedBB.maxZ);
+        var7.addVertex(p_76978_0_.maxX, p_76978_0_.minY, p_76978_0_.minZ);
+        var7.addVertex(p_76978_0_.maxX, p_76978_0_.maxY, p_76978_0_.minZ);
+        var7.addVertex(p_76978_0_.maxX, p_76978_0_.maxY, p_76978_0_.maxZ);
+        var7.addVertex(p_76978_0_.maxX, p_76978_0_.minY, p_76978_0_.maxZ);
         var7.setTranslation(0.0D, 0.0D, 0.0D);
         var7.draw();
         GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -266,64 +266,64 @@ public abstract class Render
     /**
      * Adds to the tesselator a box using the aabb for the bounds. Args: aabb
      */
-    public static void renderAABB(AxisAlignedBB par0AxisAlignedBB)
+    public static void renderAABB(AxisAlignedBB p_76980_0_)
     {
         Tessellator var1 = Tessellator.instance;
         var1.startDrawingQuads();
-        var1.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.minZ);
-        var1.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.minZ);
-        var1.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.minY, par0AxisAlignedBB.minZ);
-        var1.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.minY, par0AxisAlignedBB.minZ);
-        var1.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.minY, par0AxisAlignedBB.maxZ);
-        var1.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.minY, par0AxisAlignedBB.maxZ);
-        var1.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.maxZ);
-        var1.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.maxZ);
-        var1.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.minY, par0AxisAlignedBB.minZ);
-        var1.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.minY, par0AxisAlignedBB.minZ);
-        var1.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.minY, par0AxisAlignedBB.maxZ);
-        var1.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.minY, par0AxisAlignedBB.maxZ);
-        var1.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.maxZ);
-        var1.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.maxZ);
-        var1.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.minZ);
-        var1.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.minZ);
-        var1.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.minY, par0AxisAlignedBB.maxZ);
-        var1.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.maxZ);
-        var1.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.minZ);
-        var1.addVertex(par0AxisAlignedBB.minX, par0AxisAlignedBB.minY, par0AxisAlignedBB.minZ);
-        var1.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.minY, par0AxisAlignedBB.minZ);
-        var1.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.minZ);
-        var1.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.maxY, par0AxisAlignedBB.maxZ);
-        var1.addVertex(par0AxisAlignedBB.maxX, par0AxisAlignedBB.minY, par0AxisAlignedBB.maxZ);
+        var1.addVertex(p_76980_0_.minX, p_76980_0_.maxY, p_76980_0_.minZ);
+        var1.addVertex(p_76980_0_.maxX, p_76980_0_.maxY, p_76980_0_.minZ);
+        var1.addVertex(p_76980_0_.maxX, p_76980_0_.minY, p_76980_0_.minZ);
+        var1.addVertex(p_76980_0_.minX, p_76980_0_.minY, p_76980_0_.minZ);
+        var1.addVertex(p_76980_0_.minX, p_76980_0_.minY, p_76980_0_.maxZ);
+        var1.addVertex(p_76980_0_.maxX, p_76980_0_.minY, p_76980_0_.maxZ);
+        var1.addVertex(p_76980_0_.maxX, p_76980_0_.maxY, p_76980_0_.maxZ);
+        var1.addVertex(p_76980_0_.minX, p_76980_0_.maxY, p_76980_0_.maxZ);
+        var1.addVertex(p_76980_0_.minX, p_76980_0_.minY, p_76980_0_.minZ);
+        var1.addVertex(p_76980_0_.maxX, p_76980_0_.minY, p_76980_0_.minZ);
+        var1.addVertex(p_76980_0_.maxX, p_76980_0_.minY, p_76980_0_.maxZ);
+        var1.addVertex(p_76980_0_.minX, p_76980_0_.minY, p_76980_0_.maxZ);
+        var1.addVertex(p_76980_0_.minX, p_76980_0_.maxY, p_76980_0_.maxZ);
+        var1.addVertex(p_76980_0_.maxX, p_76980_0_.maxY, p_76980_0_.maxZ);
+        var1.addVertex(p_76980_0_.maxX, p_76980_0_.maxY, p_76980_0_.minZ);
+        var1.addVertex(p_76980_0_.minX, p_76980_0_.maxY, p_76980_0_.minZ);
+        var1.addVertex(p_76980_0_.minX, p_76980_0_.minY, p_76980_0_.maxZ);
+        var1.addVertex(p_76980_0_.minX, p_76980_0_.maxY, p_76980_0_.maxZ);
+        var1.addVertex(p_76980_0_.minX, p_76980_0_.maxY, p_76980_0_.minZ);
+        var1.addVertex(p_76980_0_.minX, p_76980_0_.minY, p_76980_0_.minZ);
+        var1.addVertex(p_76980_0_.maxX, p_76980_0_.minY, p_76980_0_.minZ);
+        var1.addVertex(p_76980_0_.maxX, p_76980_0_.maxY, p_76980_0_.minZ);
+        var1.addVertex(p_76980_0_.maxX, p_76980_0_.maxY, p_76980_0_.maxZ);
+        var1.addVertex(p_76980_0_.maxX, p_76980_0_.minY, p_76980_0_.maxZ);
         var1.draw();
     }
 
     /**
      * Sets the RenderManager.
      */
-    public void setRenderManager(RenderManager par1RenderManager)
+    public void setRenderManager(RenderManager p_76976_1_)
     {
-        this.renderManager = par1RenderManager;
+        this.renderManager = p_76976_1_;
     }
 
     /**
      * Renders the entity's shadow and fire (if its on fire). Args: entity, x, y, z, yaw, partialTickTime
      */
-    public void doRenderShadowAndFire(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    public void doRenderShadowAndFire(Entity p_76979_1_, double p_76979_2_, double p_76979_4_, double p_76979_6_, float p_76979_8_, float p_76979_9_)
     {
-        if (this.renderManager.options.fancyGraphics && this.shadowSize > 0.0F && !par1Entity.isInvisible())
+        if (this.renderManager.options.fancyGraphics && this.shadowSize > 0.0F && !p_76979_1_.isInvisible())
         {
-            double var10 = this.renderManager.getDistanceToCamera(par1Entity.posX, par1Entity.posY, par1Entity.posZ);
+            double var10 = this.renderManager.getDistanceToCamera(p_76979_1_.posX, p_76979_1_.posY, p_76979_1_.posZ);
             float var12 = (float)((1.0D - var10 / 256.0D) * (double)this.shadowOpaque);
 
             if (var12 > 0.0F)
             {
-                this.renderShadow(par1Entity, par2, par4, par6, var12, par9);
+                this.renderShadow(p_76979_1_, p_76979_2_, p_76979_4_, p_76979_6_, var12, p_76979_9_);
             }
         }
 
-        if (par1Entity.canRenderOnFire())
+        if (p_76979_1_.canRenderOnFire())
         {
-            this.renderEntityOnFire(par1Entity, par2, par4, par6, par9);
+            this.renderEntityOnFire(p_76979_1_, p_76979_2_, p_76979_4_, p_76979_6_, p_76979_9_);
         }
     }
 
@@ -335,7 +335,7 @@ public abstract class Render
         return this.renderManager.getFontRenderer();
     }
 
-    public void updateIcons(IIconRegister par1IconRegister) {}
+    public void updateIcons(IIconRegister p_94143_1_) {}
 
     protected void func_147906_a(Entity p_147906_1_, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_)
     {

@@ -44,9 +44,9 @@ public class S01PacketEncryptionRequest extends Packet
         writeBlob(p_148840_1_, this.field_149611_c);
     }
 
-    public void processPacket(INetHandlerLoginClient p_149606_1_)
+    public void processPacket(INetHandlerLoginClient p_148833_1_)
     {
-        p_149606_1_.handleEncryptionRequest(this);
+        p_148833_1_.handleEncryptionRequest(this);
     }
 
     public String func_149609_c()

@@ -40,9 +40,9 @@ public class S19PacketEntityHeadLook extends Packet
         p_148840_1_.writeByte(this.field_149383_b);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149382_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149382_1_.handleEntityHeadLook(this);
+        p_148833_1_.handleEntityHeadLook(this);
     }
 
     /**

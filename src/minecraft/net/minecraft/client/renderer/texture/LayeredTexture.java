@@ -19,12 +19,12 @@ public class LayeredTexture extends AbstractTexture
     public final List layeredTextureNames;
     private static final String __OBFID = "CL_00001051";
 
-    public LayeredTexture(String ... par1ArrayOfStr)
+    public LayeredTexture(String ... p_i1274_1_)
     {
-        this.layeredTextureNames = Lists.newArrayList(par1ArrayOfStr);
+        this.layeredTextureNames = Lists.newArrayList(p_i1274_1_);
     }
 
-    public void loadTexture(IResourceManager par1ResourceManager) throws IOException
+    public void loadTexture(IResourceManager p_110551_1_) throws IOException
     {
         this.func_147631_c();
         BufferedImage var2 = null;
@@ -39,7 +39,7 @@ public class LayeredTexture extends AbstractTexture
 
                 if (var4 != null)
                 {
-                    InputStream var5 = par1ResourceManager.getResource(new ResourceLocation(var4)).getInputStream();
+                    InputStream var5 = p_110551_1_.getResource(new ResourceLocation(var4)).getInputStream();
                     BufferedImage var6 = ImageIO.read(var5);
 
                     if (var2 == null)

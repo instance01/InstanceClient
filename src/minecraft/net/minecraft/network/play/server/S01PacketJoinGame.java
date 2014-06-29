@@ -74,9 +74,9 @@ public class S01PacketJoinGame extends Packet
         p_148840_1_.writeStringToBuffer(this.field_149201_g.getWorldTypeName());
     }
 
-    public void processPacket(INetHandlerPlayClient p_149199_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149199_1_.handleJoinGame(this);
+        p_148833_1_.handleJoinGame(this);
     }
 
     /**

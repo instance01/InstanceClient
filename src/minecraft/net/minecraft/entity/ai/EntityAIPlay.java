@@ -14,10 +14,10 @@ public class EntityAIPlay extends EntityAIBase
     private int playTime;
     private static final String __OBFID = "CL_00001605";
 
-    public EntityAIPlay(EntityVillager par1EntityVillager, double par2)
+    public EntityAIPlay(EntityVillager p_i1646_1_, double p_i1646_2_)
     {
-        this.villagerObj = par1EntityVillager;
-        this.field_75261_c = par2;
+        this.villagerObj = p_i1646_1_;
+        this.field_75261_c = p_i1646_2_;
         this.setMutexBits(1);
     }
 

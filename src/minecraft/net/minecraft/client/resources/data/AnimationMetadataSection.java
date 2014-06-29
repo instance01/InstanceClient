@@ -14,12 +14,12 @@ public class AnimationMetadataSection implements IMetadataSection
     private final int frameTime;
     private static final String __OBFID = "CL_00001106";
 
-    public AnimationMetadataSection(List par1List, int par2, int par3, int par4)
+    public AnimationMetadataSection(List p_i1309_1_, int p_i1309_2_, int p_i1309_3_, int p_i1309_4_)
     {
-        this.animationFrames = par1List;
-        this.frameWidth = par2;
-        this.frameHeight = par3;
-        this.frameTime = par4;
+        this.animationFrames = p_i1309_1_;
+        this.frameWidth = p_i1309_2_;
+        this.frameHeight = p_i1309_3_;
+        this.frameTime = p_i1309_4_;
     }
 
     public int getFrameHeight()
@@ -42,25 +42,25 @@ public class AnimationMetadataSection implements IMetadataSection
         return this.frameTime;
     }
 
-    private AnimationFrame getAnimationFrame(int par1)
+    private AnimationFrame getAnimationFrame(int p_130072_1_)
     {
-        return (AnimationFrame)this.animationFrames.get(par1);
+        return (AnimationFrame)this.animationFrames.get(p_130072_1_);
     }
 
-    public int getFrameTimeSingle(int par1)
+    public int getFrameTimeSingle(int p_110472_1_)
     {
-        AnimationFrame var2 = this.getAnimationFrame(par1);
+        AnimationFrame var2 = this.getAnimationFrame(p_110472_1_);
         return var2.hasNoTime() ? this.frameTime : var2.getFrameTime();
     }
 
-    public boolean frameHasTime(int par1)
+    public boolean frameHasTime(int p_110470_1_)
     {
-        return !((AnimationFrame)this.animationFrames.get(par1)).hasNoTime();
+        return !((AnimationFrame)this.animationFrames.get(p_110470_1_)).hasNoTime();
     }
 
-    public int getFrameIndex(int par1)
+    public int getFrameIndex(int p_110468_1_)
     {
-        return ((AnimationFrame)this.animationFrames.get(par1)).getFrameIndex();
+        return ((AnimationFrame)this.animationFrames.get(p_110468_1_)).getFrameIndex();
     }
 
     public Set getFrameIndexSet()

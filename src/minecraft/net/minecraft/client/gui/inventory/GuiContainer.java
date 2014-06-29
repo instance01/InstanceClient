@@ -52,9 +52,9 @@ public abstract class GuiContainer extends GuiScreen
     private ItemStack field_146994_N;
     private static final String __OBFID = "CL_00000737";
 
-    public GuiContainer(Container par1Container)
+    public GuiContainer(Container p_i1072_1_)
     {
-        this.field_147002_h = par1Container;
+        this.field_147002_h = p_i1072_1_;
         this.field_146995_H = true;
     }
 
@@ -72,17 +72,17 @@ public abstract class GuiContainer extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         this.drawDefaultBackground();
         int var4 = this.field_147003_i;
         int var5 = this.field_147009_r;
-        this.func_146976_a(par3, par1, par2);
+        this.func_146976_a(p_73863_3_, p_73863_1_, p_73863_2_);
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         RenderHelper.disableStandardItemLighting();
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
         RenderHelper.enableGUIStandardItemLighting();
         GL11.glPushMatrix();
         GL11.glTranslatef((float)var4, (float)var5, 0.0F);
@@ -100,7 +100,7 @@ public abstract class GuiContainer extends GuiScreen
             Slot var9 = (Slot)this.field_147002_h.inventorySlots.get(var8);
             this.func_146977_a(var9);
 
-            if (this.func_146981_a(var9, par1, par2) && var9.func_111238_b())
+            if (this.func_146981_a(var9, p_73863_1_, p_73863_2_) && var9.func_111238_b())
             {
                 this.field_147006_u = var9;
                 GL11.glDisable(GL11.GL_LIGHTING);
@@ -115,7 +115,7 @@ public abstract class GuiContainer extends GuiScreen
             }
         }
 
-        this.func_146979_b(par1, par2);
+        this.func_146979_b(p_73863_1_, p_73863_2_);
         InventoryPlayer var15 = this.mc.thePlayer.inventory;
         ItemStack var16 = this.field_147012_x == null ? var15.getItemStack() : this.field_147012_x;
 
@@ -141,7 +141,7 @@ public abstract class GuiContainer extends GuiScreen
                 }
             }
 
-            this.func_146982_a(var16, par1 - var4 - var17, par2 - var5 - var11, var12);
+            this.func_146982_a(var16, p_73863_1_ - var4 - var17, p_73863_2_ - var5 - var11, var12);
         }
 
         if (this.field_146991_C != null)
@@ -166,7 +166,7 @@ public abstract class GuiContainer extends GuiScreen
         if (var15.getItemStack() == null && this.field_147006_u != null && this.field_147006_u.getHasStack())
         {
             ItemStack var19 = this.field_147006_u.getStack();
-            this.func_146285_a(var19, par1, par2);
+            this.func_146285_a(var19, p_73863_1_, p_73863_2_);
         }
 
         GL11.glEnable(GL11.GL_LIGHTING);
@@ -187,7 +187,7 @@ public abstract class GuiContainer extends GuiScreen
 
     protected void func_146979_b(int p_146979_1_, int p_146979_2_) {}
 
-    protected abstract void func_146976_a(float var1, int var2, int var3);
+    protected abstract void func_146976_a(float p_146976_1_, int p_146976_2_, int p_146976_3_);
 
     private void func_146977_a(Slot p_146977_1_)
     {
@@ -317,20 +317,20 @@ public abstract class GuiContainer extends GuiScreen
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int par1, int par2, int par3)
+    protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_)
     {
-        super.mouseClicked(par1, par2, par3);
-        boolean var4 = par3 == this.mc.gameSettings.keyBindPickBlock.getKeyCode() + 100;
-        Slot var5 = this.func_146975_c(par1, par2);
+        super.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
+        boolean var4 = p_73864_3_ == this.mc.gameSettings.keyBindPickBlock.getKeyCode() + 100;
+        Slot var5 = this.func_146975_c(p_73864_1_, p_73864_2_);
         long var6 = Minecraft.getSystemTime();
-        this.field_146993_M = this.field_146998_K == var5 && var6 - this.field_146997_J < 250L && this.field_146992_L == par3;
+        this.field_146993_M = this.field_146998_K == var5 && var6 - this.field_146997_J < 250L && this.field_146992_L == p_73864_3_;
         this.field_146995_H = false;
 
-        if (par3 == 0 || par3 == 1 || var4)
+        if (p_73864_3_ == 0 || p_73864_3_ == 1 || var4)
         {
             int var8 = this.field_147003_i;
             int var9 = this.field_147009_r;
-            boolean var10 = par1 < var8 || par2 < var9 || par1 >= var8 + this.field_146999_f || par2 >= var9 + this.field_147000_g;
+            boolean var10 = p_73864_1_ < var8 || p_73864_2_ < var9 || p_73864_1_ >= var8 + this.field_146999_f || p_73864_2_ >= var9 + this.field_147000_g;
             int var11 = -1;
 
             if (var5 != null)
@@ -357,7 +357,7 @@ public abstract class GuiContainer extends GuiScreen
                     {
                         this.field_147005_v = var5;
                         this.field_147012_x = null;
-                        this.field_147004_w = par3 == 1;
+                        this.field_147004_w = p_73864_3_ == 1;
                     }
                     else
                     {
@@ -368,9 +368,9 @@ public abstract class GuiContainer extends GuiScreen
                 {
                     if (this.mc.thePlayer.inventory.getItemStack() == null)
                     {
-                        if (par3 == this.mc.gameSettings.keyBindPickBlock.getKeyCode() + 100)
+                        if (p_73864_3_ == this.mc.gameSettings.keyBindPickBlock.getKeyCode() + 100)
                         {
-                            this.func_146984_a(var5, var11, par3, 3);
+                            this.func_146984_a(var5, var11, p_73864_3_, 3);
                         }
                         else
                         {
@@ -387,7 +387,7 @@ public abstract class GuiContainer extends GuiScreen
                                 var13 = 4;
                             }
 
-                            this.func_146984_a(var5, var11, par3, var13);
+                            this.func_146984_a(var5, var11, p_73864_3_, var13);
                         }
 
                         this.field_146995_H = true;
@@ -395,14 +395,14 @@ public abstract class GuiContainer extends GuiScreen
                     else
                     {
                         this.field_147007_t = true;
-                        this.field_146988_G = par3;
+                        this.field_146988_G = p_73864_3_;
                         this.field_147008_s.clear();
 
-                        if (par3 == 0)
+                        if (p_73864_3_ == 0)
                         {
                             this.field_146987_F = 0;
                         }
-                        else if (par3 == 1)
+                        else if (p_73864_3_ == 1)
                         {
                             this.field_146987_F = 1;
                         }
@@ -413,7 +413,7 @@ public abstract class GuiContainer extends GuiScreen
 
         this.field_146998_K = var5;
         this.field_146997_J = var6;
-        this.field_146992_L = par3;
+        this.field_146992_L = p_73864_3_;
     }
 
     protected void mouseClickMove(int p_146273_1_, int p_146273_2_, int p_146273_3_, long p_146273_4_)
@@ -639,22 +639,22 @@ public abstract class GuiContainer extends GuiScreen
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2)
+    protected void keyTyped(char p_73869_1_, int p_73869_2_)
     {
-        if (par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.getKeyCode())
+        if (p_73869_2_ == 1 || p_73869_2_ == this.mc.gameSettings.keyBindInventory.getKeyCode())
         {
             this.mc.thePlayer.closeScreen();
         }
 
-        this.func_146983_a(par2);
+        this.func_146983_a(p_73869_2_);
 
         if (this.field_147006_u != null && this.field_147006_u.getHasStack())
         {
-            if (par2 == this.mc.gameSettings.keyBindPickBlock.getKeyCode())
+            if (p_73869_2_ == this.mc.gameSettings.keyBindPickBlock.getKeyCode())
             {
                 this.func_146984_a(this.field_147006_u, this.field_147006_u.slotNumber, 0, 3);
             }
-            else if (par2 == this.mc.gameSettings.keyBindDrop.getKeyCode())
+            else if (p_73869_2_ == this.mc.gameSettings.keyBindDrop.getKeyCode())
             {
                 this.func_146984_a(this.field_147006_u, this.field_147006_u.slotNumber, isCtrlKeyDown() ? 1 : 0, 4);
             }

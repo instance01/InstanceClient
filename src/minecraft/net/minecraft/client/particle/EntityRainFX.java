@@ -9,9 +9,9 @@ public class EntityRainFX extends EntityFX
 {
     private static final String __OBFID = "CL_00000934";
 
-    public EntityRainFX(World par1World, double par2, double par4, double par6)
+    public EntityRainFX(World p_i1235_1_, double p_i1235_2_, double p_i1235_4_, double p_i1235_6_)
     {
-        super(par1World, par2, par4, par6, 0.0D, 0.0D, 0.0D);
+        super(p_i1235_1_, p_i1235_2_, p_i1235_4_, p_i1235_6_, 0.0D, 0.0D, 0.0D);
         this.motionX *= 0.30000001192092896D;
         this.motionY = (double)((float)Math.random() * 0.2F + 0.1F);
         this.motionZ *= 0.30000001192092896D;

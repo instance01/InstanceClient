@@ -102,15 +102,15 @@ public class GuiCommandBlock extends GuiScreen
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2)
+    protected void keyTyped(char p_73869_1_, int p_73869_2_)
     {
-        this.field_146485_f.textboxKeyTyped(par1, par2);
-        this.field_146486_g.textboxKeyTyped(par1, par2);
+        this.field_146485_f.textboxKeyTyped(p_73869_1_, p_73869_2_);
+        this.field_146486_g.textboxKeyTyped(p_73869_1_, p_73869_2_);
         this.field_146490_i.enabled = this.field_146485_f.getText().trim().length() > 0;
 
-        if (par2 != 28 && par2 != 156)
+        if (p_73869_2_ != 28 && p_73869_2_ != 156)
         {
-            if (par2 == 1)
+            if (p_73869_2_ == 1)
             {
                 this.actionPerformed(this.field_146487_r);
             }
@@ -124,17 +124,17 @@ public class GuiCommandBlock extends GuiScreen
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int par1, int par2, int par3)
+    protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_)
     {
-        super.mouseClicked(par1, par2, par3);
-        this.field_146485_f.mouseClicked(par1, par2, par3);
-        this.field_146486_g.mouseClicked(par1, par2, par3);
+        super.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
+        this.field_146485_f.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
+        this.field_146486_g.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
     }
 
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRendererObj, I18n.format("advMode.setCommand", new Object[0]), this.width / 2, 20, 16777215);
@@ -157,6 +157,6 @@ public class GuiCommandBlock extends GuiScreen
             this.field_146486_g.drawTextBox();
         }
 
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 }

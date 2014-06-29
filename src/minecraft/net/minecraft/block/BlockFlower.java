@@ -18,10 +18,10 @@ public class BlockFlower extends BlockBush
     private int field_149862_O;
     private static final String __OBFID = "CL_00000246";
 
-    protected BlockFlower(int par1)
+    protected BlockFlower(int p_i2173_1_)
     {
         super(Material.plants);
-        this.field_149862_O = par1;
+        this.field_149862_O = p_i2173_1_;
     }
 
     /**

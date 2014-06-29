@@ -8,11 +8,11 @@ public class EntityAIOpenDoor extends EntityAIDoorInteract
     int field_75360_j;
     private static final String __OBFID = "CL_00001603";
 
-    public EntityAIOpenDoor(EntityLiving par1EntityLiving, boolean par2)
+    public EntityAIOpenDoor(EntityLiving p_i1644_1_, boolean p_i1644_2_)
     {
-        super(par1EntityLiving);
-        this.theEntity = par1EntityLiving;
-        this.field_75361_i = par2;
+        super(p_i1644_1_);
+        this.theEntity = p_i1644_1_;
+        this.field_75361_i = p_i1644_2_;
     }
 
     /**

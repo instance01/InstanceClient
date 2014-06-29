@@ -12,9 +12,9 @@ public class GuiCrafting extends GuiContainer
     private static final ResourceLocation field_147019_u = new ResourceLocation("textures/gui/container/crafting_table.png");
     private static final String __OBFID = "CL_00000750";
 
-    public GuiCrafting(InventoryPlayer par1InventoryPlayer, World par2World, int par3, int par4, int par5)
+    public GuiCrafting(InventoryPlayer p_i1084_1_, World p_i1084_2_, int p_i1084_3_, int p_i1084_4_, int p_i1084_5_)
     {
-        super(new ContainerWorkbench(par1InventoryPlayer, par2World, par3, par4, par5));
+        super(new ContainerWorkbench(p_i1084_1_, p_i1084_2_, p_i1084_3_, p_i1084_4_, p_i1084_5_));
     }
 
     protected void func_146979_b(int p_146979_1_, int p_146979_2_)

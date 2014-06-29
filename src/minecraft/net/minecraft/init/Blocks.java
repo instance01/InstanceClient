@@ -22,6 +22,7 @@ import net.minecraft.block.BlockPortal;
 import net.minecraft.block.BlockRedstoneComparator;
 import net.minecraft.block.BlockRedstoneRepeater;
 import net.minecraft.block.BlockRedstoneWire;
+import net.minecraft.block.BlockSand;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStainedGlass;
 import net.minecraft.block.BlockStainedGlassPane;
@@ -42,7 +43,7 @@ public class Blocks
     public static final Block water = (Block)Block.blockRegistry.getObject("water");
     public static final BlockLiquid flowing_lava = (BlockLiquid)Block.blockRegistry.getObject("flowing_lava");
     public static final Block lava = (Block)Block.blockRegistry.getObject("lava");
-    public static final Block sand = (Block)Block.blockRegistry.getObject("sand");
+    public static final BlockSand sand = (BlockSand)Block.blockRegistry.getObject("sand");
     public static final Block gravel = (Block)Block.blockRegistry.getObject("gravel");
     public static final Block gold_ore = (Block)Block.blockRegistry.getObject("gold_ore");
     public static final Block iron_ore = (Block)Block.blockRegistry.getObject("iron_ore");

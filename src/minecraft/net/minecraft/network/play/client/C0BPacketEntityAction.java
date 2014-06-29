@@ -48,9 +48,9 @@ public class C0BPacketEntityAction extends Packet
         p_148840_1_.writeInt(this.field_149516_c);
     }
 
-    public void processPacket(INetHandlerPlayServer p_149514_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149514_1_.processEntityAction(this);
+        p_148833_1_.processEntityAction(this);
     }
 
     public int func_149513_d()

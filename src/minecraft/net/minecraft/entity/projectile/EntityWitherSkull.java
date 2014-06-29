@@ -15,15 +15,15 @@ public class EntityWitherSkull extends EntityFireball
 {
     private static final String __OBFID = "CL_00001728";
 
-    public EntityWitherSkull(World par1World)
+    public EntityWitherSkull(World p_i1793_1_)
     {
-        super(par1World);
+        super(p_i1793_1_);
         this.setSize(0.3125F, 0.3125F);
     }
 
-    public EntityWitherSkull(World par1World, EntityLivingBase par2EntityLivingBase, double par3, double par5, double par7)
+    public EntityWitherSkull(World p_i1794_1_, EntityLivingBase p_i1794_2_, double p_i1794_3_, double p_i1794_5_, double p_i1794_7_)
     {
-        super(par1World, par2EntityLivingBase, par3, par5, par7);
+        super(p_i1794_1_, p_i1794_2_, p_i1794_3_, p_i1794_5_, p_i1794_7_);
         this.setSize(0.3125F, 0.3125F);
     }
 
@@ -35,9 +35,9 @@ public class EntityWitherSkull extends EntityFireball
         return this.isInvulnerable() ? 0.73F : super.getMotionFactor();
     }
 
-    public EntityWitherSkull(World par1World, double par2, double par4, double par6, double par8, double par10, double par12)
+    public EntityWitherSkull(World p_i1795_1_, double p_i1795_2_, double p_i1795_4_, double p_i1795_6_, double p_i1795_8_, double p_i1795_10_, double p_i1795_12_)
     {
-        super(par1World, par2, par4, par6, par8, par10, par12);
+        super(p_i1795_1_, p_i1795_2_, p_i1795_4_, p_i1795_6_, p_i1795_8_, p_i1795_10_, p_i1795_12_);
         this.setSize(0.3125F, 0.3125F);
     }
 
@@ -64,25 +64,25 @@ public class EntityWitherSkull extends EntityFireball
     /**
      * Called when this EntityFireball hits a block or entity.
      */
-    protected void onImpact(MovingObjectPosition par1MovingObjectPosition)
+    protected void onImpact(MovingObjectPosition p_70227_1_)
     {
         if (!this.worldObj.isClient)
         {
-            if (par1MovingObjectPosition.entityHit != null)
+            if (p_70227_1_.entityHit != null)
             {
                 if (this.shootingEntity != null)
                 {
-                    if (par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeMobDamage(this.shootingEntity), 8.0F) && !par1MovingObjectPosition.entityHit.isEntityAlive())
+                    if (p_70227_1_.entityHit.attackEntityFrom(DamageSource.causeMobDamage(this.shootingEntity), 8.0F) && !p_70227_1_.entityHit.isEntityAlive())
                     {
                         this.shootingEntity.heal(5.0F);
                     }
                 }
                 else
                 {
-                    par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.magic, 5.0F);
+                    p_70227_1_.entityHit.attackEntityFrom(DamageSource.magic, 5.0F);
                 }
 
-                if (par1MovingObjectPosition.entityHit instanceof EntityLivingBase)
+                if (p_70227_1_.entityHit instanceof EntityLivingBase)
                 {
                     byte var2 = 0;
 
@@ -97,7 +97,7 @@ public class EntityWitherSkull extends EntityFireball
 
                     if (var2 > 0)
                     {
-                        ((EntityLivingBase)par1MovingObjectPosition.entityHit).addPotionEffect(new PotionEffect(Potion.wither.id, 20 * var2, 1));
+                        ((EntityLivingBase)p_70227_1_.entityHit).addPotionEffect(new PotionEffect(Potion.wither.id, 20 * var2, 1));
                     }
                 }
             }
@@ -118,7 +118,7 @@ public class EntityWitherSkull extends EntityFireball
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_)
     {
         return false;
     }
@@ -139,8 +139,8 @@ public class EntityWitherSkull extends EntityFireball
     /**
      * Set whether this skull comes from an invulnerable (aura) wither boss.
      */
-    public void setInvulnerable(boolean par1)
+    public void setInvulnerable(boolean p_82343_1_)
     {
-        this.dataWatcher.updateObject(10, Byte.valueOf((byte)(par1 ? 1 : 0)));
+        this.dataWatcher.updateObject(10, Byte.valueOf((byte)(p_82343_1_ ? 1 : 0)));
     }
 }

@@ -15,29 +15,29 @@ public class IntegratedPlayerList extends ServerConfigurationManager
     private NBTTagCompound hostPlayerData;
     private static final String __OBFID = "CL_00001128";
 
-    public IntegratedPlayerList(IntegratedServer par1IntegratedServer)
+    public IntegratedPlayerList(IntegratedServer p_i1314_1_)
     {
-        super(par1IntegratedServer);
-        this.viewDistance = 10;
+        super(p_i1314_1_);
+        this.func_152611_a(10);
     }
 
     /**
      * also stores the NBTTags if this is an intergratedPlayerList
      */
-    protected void writePlayerData(EntityPlayerMP par1EntityPlayerMP)
+    protected void writePlayerData(EntityPlayerMP p_72391_1_)
     {
-        if (par1EntityPlayerMP.getCommandSenderName().equals(this.getServerInstance().getServerOwner()))
+        if (p_72391_1_.getCommandSenderName().equals(this.getServerInstance().getServerOwner()))
         {
             this.hostPlayerData = new NBTTagCompound();
-            par1EntityPlayerMP.writeToNBT(this.hostPlayerData);
+            p_72391_1_.writeToNBT(this.hostPlayerData);
         }
 
-        super.writePlayerData(par1EntityPlayerMP);
+        super.writePlayerData(p_72391_1_);
     }
 
     public String func_148542_a(SocketAddress p_148542_1_, GameProfile p_148542_2_)
     {
-        return p_148542_2_.getName().equalsIgnoreCase(this.getServerInstance().getServerOwner()) && this.getPlayerForUsername(p_148542_2_.getName()) != null ? "That name is already taken." : super.func_148542_a(p_148542_1_, p_148542_2_);
+        return p_148542_2_.getName().equalsIgnoreCase(this.getServerInstance().getServerOwner()) && this.func_152612_a(p_148542_2_.getName()) != null ? "That name is already taken." : super.func_148542_a(p_148542_1_, p_148542_2_);
     }
 
     public IntegratedServer getServerInstance()

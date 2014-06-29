@@ -55,9 +55,9 @@ public class S33PacketUpdateSign extends Packet
         }
     }
 
-    public void processPacket(INetHandlerPlayClient p_149348_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149348_1_.handleUpdateSign(this);
+        p_148833_1_.handleUpdateSign(this);
     }
 
     public int func_149346_c()

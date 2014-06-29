@@ -172,7 +172,7 @@ public abstract class BlockLiquid extends Block
 
     private Vec3 func_149800_f(IBlockAccess p_149800_1_, int p_149800_2_, int p_149800_3_, int p_149800_4_)
     {
-        Vec3 var5 = p_149800_1_.getWorldVec3Pool().getVecFromPool(0.0D, 0.0D, 0.0D);
+        Vec3 var5 = Vec3.createVectorHelper(0.0D, 0.0D, 0.0D);
         int var6 = this.func_149798_e(p_149800_1_, p_149800_2_, p_149800_3_, p_149800_4_);
 
         for (int var7 = 0; var7 < 4; ++var7)
@@ -420,8 +420,8 @@ public abstract class BlockLiquid extends Block
         }
 
         double var21;
-        double var23;
         double var22;
+        double var23;
 
         if (this.blockMaterial == Material.lava && p_149734_1_.getBlock(p_149734_2_, p_149734_3_ + 1, p_149734_4_).getMaterial() == Material.air && !p_149734_1_.getBlock(p_149734_2_, p_149734_3_ + 1, p_149734_4_).isOpaqueCube())
         {

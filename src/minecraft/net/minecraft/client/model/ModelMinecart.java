@@ -41,13 +41,13 @@ public class ModelMinecart extends ModelBase
     /**
      * Sets the models various rotation angles then renders the model.
      */
-    public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
+    public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_)
     {
-        this.sideModels[5].rotationPointY = 4.0F - par4;
+        this.sideModels[5].rotationPointY = 4.0F - p_78088_4_;
 
         for (int var8 = 0; var8 < 6; ++var8)
         {
-            this.sideModels[var8].render(par7);
+            this.sideModels[var8].render(p_78088_7_);
         }
     }
 }

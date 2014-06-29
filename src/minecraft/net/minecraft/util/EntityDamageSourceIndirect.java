@@ -9,10 +9,10 @@ public class EntityDamageSourceIndirect extends EntityDamageSource
     private Entity indirectEntity;
     private static final String __OBFID = "CL_00001523";
 
-    public EntityDamageSourceIndirect(String par1Str, Entity par2Entity, Entity par3Entity)
+    public EntityDamageSourceIndirect(String p_i1568_1_, Entity p_i1568_2_, Entity p_i1568_3_)
     {
-        super(par1Str, par2Entity);
-        this.indirectEntity = par3Entity;
+        super(p_i1568_1_, p_i1568_2_);
+        this.indirectEntity = p_i1568_3_;
     }
 
     public Entity getSourceOfDamage()

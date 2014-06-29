@@ -24,9 +24,9 @@ public class WorldProviderHell extends WorldProvider
     /**
      * Return Vec3D with biome specific fog color
      */
-    public Vec3 getFogColor(float par1, float par2)
+    public Vec3 getFogColor(float p_76562_1_, float p_76562_2_)
     {
-        return this.worldObj.getWorldVec3Pool().getVecFromPool(0.20000000298023224D, 0.029999999329447746D, 0.029999999329447746D);
+        return Vec3.createVectorHelper(0.20000000298023224D, 0.029999999329447746D, 0.029999999329447746D);
     }
 
     /**
@@ -62,7 +62,7 @@ public class WorldProviderHell extends WorldProvider
     /**
      * Will check if the x, z position specified is alright to be set as the map spawn point
      */
-    public boolean canCoordinateBeSpawn(int par1, int par2)
+    public boolean canCoordinateBeSpawn(int p_76566_1_, int p_76566_2_)
     {
         return false;
     }
@@ -70,7 +70,7 @@ public class WorldProviderHell extends WorldProvider
     /**
      * Calculates the angle of sun and moon in the sky relative to a specified time (usually worldTime)
      */
-    public float calculateCelestialAngle(long par1, float par3)
+    public float calculateCelestialAngle(long p_76563_1_, float p_76563_3_)
     {
         return 0.5F;
     }
@@ -86,7 +86,7 @@ public class WorldProviderHell extends WorldProvider
     /**
      * Returns true if the given X,Z coordinate should show environmental fog.
      */
-    public boolean doesXZShowFog(int par1, int par2)
+    public boolean doesXZShowFog(int p_76568_1_, int p_76568_2_)
     {
         return true;
     }

@@ -128,9 +128,9 @@ public class S0EPacketSpawnObject extends Packet
         }
     }
 
-    public void processPacket(INetHandlerPlayClient p_149011_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149011_1_.handleSpawnObject(this);
+        p_148833_1_.handleSpawnObject(this);
     }
 
     /**

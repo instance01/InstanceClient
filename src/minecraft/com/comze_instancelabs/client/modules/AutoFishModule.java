@@ -12,7 +12,6 @@ import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFishingRod;
 import net.minecraft.util.Vec3;
-import net.minecraft.util.Vec3Pool;
 
 import com.comze_instancelabs.client.InstanceMain;
 import com.comze_instancelabs.client.Module;

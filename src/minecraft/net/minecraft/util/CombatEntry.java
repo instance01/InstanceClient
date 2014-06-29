@@ -12,14 +12,14 @@ public class CombatEntry
     private final float field_94564_f;
     private static final String __OBFID = "CL_00001519";
 
-    public CombatEntry(DamageSource par1DamageSource, int par2, float par3, float par4, String par5Str, float par6)
+    public CombatEntry(DamageSource p_i1564_1_, int p_i1564_2_, float p_i1564_3_, float p_i1564_4_, String p_i1564_5_, float p_i1564_6_)
     {
-        this.damageSrc = par1DamageSource;
-        this.field_94567_b = par2;
-        this.field_94568_c = par4;
-        this.field_94565_d = par3;
-        this.field_94566_e = par5Str;
-        this.field_94564_f = par6;
+        this.damageSrc = p_i1564_1_;
+        this.field_94567_b = p_i1564_2_;
+        this.field_94568_c = p_i1564_4_;
+        this.field_94565_d = p_i1564_3_;
+        this.field_94566_e = p_i1564_5_;
+        this.field_94564_f = p_i1564_6_;
     }
 
     /**

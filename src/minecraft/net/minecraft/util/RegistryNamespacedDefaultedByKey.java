@@ -24,9 +24,9 @@ public class RegistryNamespacedDefaultedByKey extends RegistryNamespaced
         super.addObject(p_148756_1_, p_148756_2_, p_148756_3_);
     }
 
-    public Object getObject(String p_148751_1_)
+    public Object getObject(String p_82594_1_)
     {
-        Object var2 = super.getObject(p_148751_1_);
+        Object var2 = super.getObject(p_82594_1_);
         return var2 == null ? this.field_148761_e : var2;
     }
 
@@ -39,8 +39,8 @@ public class RegistryNamespacedDefaultedByKey extends RegistryNamespaced
         return var2 == null ? this.field_148761_e : var2;
     }
 
-    public Object getObject(Object par1Obj)
+    public Object getObject(Object p_82594_1_)
     {
-        return this.getObject((String)par1Obj);
+        return this.getObject((String)p_82594_1_);
     }
 }

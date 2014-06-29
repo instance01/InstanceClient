@@ -26,9 +26,9 @@ public class C03PacketPlayer extends Packet
         this.field_149474_g = p_i45256_1_;
     }
 
-    public void processPacket(INetHandlerPlayServer p_149468_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149468_1_.processPlayer(this);
+        p_148833_1_.processPlayer(this);
     }
 
     /**
@@ -100,6 +100,49 @@ public class C03PacketPlayer extends Packet
     public void processPacket(INetHandler p_148833_1_)
     {
         this.processPacket((INetHandlerPlayServer)p_148833_1_);
+    }
+
+    public static class C04PacketPlayerPosition extends C03PacketPlayer
+    {
+        private static final String __OBFID = "CL_00001361";
+
+        public C04PacketPlayerPosition()
+        {
+            this.field_149480_h = true;
+        }
+
+        public C04PacketPlayerPosition(double p_i45253_1_, double p_i45253_3_, double p_i45253_5_, double p_i45253_7_, boolean p_i45253_9_)
+        {
+            this.field_149479_a = p_i45253_1_;
+            this.field_149477_b = p_i45253_3_;
+            this.field_149475_d = p_i45253_5_;
+            this.field_149478_c = p_i45253_7_;
+            this.field_149474_g = p_i45253_9_;
+            this.field_149480_h = true;
+        }
+
+        public void readPacketData(PacketBuffer p_148837_1_) throws IOException
+        {
+            this.field_149479_a = p_148837_1_.readDouble();
+            this.field_149477_b = p_148837_1_.readDouble();
+            this.field_149475_d = p_148837_1_.readDouble();
+            this.field_149478_c = p_148837_1_.readDouble();
+            super.readPacketData(p_148837_1_);
+        }
+
+        public void writePacketData(PacketBuffer p_148840_1_) throws IOException
+        {
+            p_148840_1_.writeDouble(this.field_149479_a);
+            p_148840_1_.writeDouble(this.field_149477_b);
+            p_148840_1_.writeDouble(this.field_149475_d);
+            p_148840_1_.writeDouble(this.field_149478_c);
+            super.writePacketData(p_148840_1_);
+        }
+
+        public void processPacket(INetHandler p_148833_1_)
+        {
+            super.processPacket((INetHandlerPlayServer)p_148833_1_);
+        }
     }
 
     public static class C05PacketPlayerLook extends C03PacketPlayer
@@ -181,49 +224,6 @@ public class C03PacketPlayer extends Packet
             p_148840_1_.writeDouble(this.field_149478_c);
             p_148840_1_.writeFloat(this.field_149476_e);
             p_148840_1_.writeFloat(this.field_149473_f);
-            super.writePacketData(p_148840_1_);
-        }
-
-        public void processPacket(INetHandler p_148833_1_)
-        {
-            super.processPacket((INetHandlerPlayServer)p_148833_1_);
-        }
-    }
-
-    public static class C04PacketPlayerPosition extends C03PacketPlayer
-    {
-        private static final String __OBFID = "CL_00001361";
-
-        public C04PacketPlayerPosition()
-        {
-            this.field_149480_h = true;
-        }
-
-        public C04PacketPlayerPosition(double p_i45253_1_, double p_i45253_3_, double p_i45253_5_, double p_i45253_7_, boolean p_i45253_9_)
-        {
-            this.field_149479_a = p_i45253_1_;
-            this.field_149477_b = p_i45253_3_;
-            this.field_149475_d = p_i45253_5_;
-            this.field_149478_c = p_i45253_7_;
-            this.field_149474_g = p_i45253_9_;
-            this.field_149480_h = true;
-        }
-
-        public void readPacketData(PacketBuffer p_148837_1_) throws IOException
-        {
-            this.field_149479_a = p_148837_1_.readDouble();
-            this.field_149477_b = p_148837_1_.readDouble();
-            this.field_149475_d = p_148837_1_.readDouble();
-            this.field_149478_c = p_148837_1_.readDouble();
-            super.readPacketData(p_148837_1_);
-        }
-
-        public void writePacketData(PacketBuffer p_148840_1_) throws IOException
-        {
-            p_148840_1_.writeDouble(this.field_149479_a);
-            p_148840_1_.writeDouble(this.field_149477_b);
-            p_148840_1_.writeDouble(this.field_149475_d);
-            p_148840_1_.writeDouble(this.field_149478_c);
             super.writePacketData(p_148840_1_);
         }
 

@@ -17,16 +17,16 @@ public class ItemFirework extends Item
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
      * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
      */
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+    public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World p_77648_3_, int p_77648_4_, int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
     {
-        if (!par3World.isClient)
+        if (!p_77648_3_.isClient)
         {
-            EntityFireworkRocket var11 = new EntityFireworkRocket(par3World, (double)((float)par4 + par8), (double)((float)par5 + par9), (double)((float)par6 + par10), par1ItemStack);
-            par3World.spawnEntityInWorld(var11);
+            EntityFireworkRocket var11 = new EntityFireworkRocket(p_77648_3_, (double)((float)p_77648_4_ + p_77648_8_), (double)((float)p_77648_5_ + p_77648_9_), (double)((float)p_77648_6_ + p_77648_10_), p_77648_1_);
+            p_77648_3_.spawnEntityInWorld(var11);
 
-            if (!par2EntityPlayer.capabilities.isCreativeMode)
+            if (!p_77648_2_.capabilities.isCreativeMode)
             {
-                --par1ItemStack.stackSize;
+                --p_77648_1_.stackSize;
             }
 
             return true;
@@ -40,17 +40,17 @@ public class ItemFirework extends Item
     /**
      * allows items to add custom lines of information to the mouseover description
      */
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+    public void addInformation(ItemStack p_77624_1_, EntityPlayer p_77624_2_, List p_77624_3_, boolean p_77624_4_)
     {
-        if (par1ItemStack.hasTagCompound())
+        if (p_77624_1_.hasTagCompound())
         {
-            NBTTagCompound var5 = par1ItemStack.getTagCompound().getCompoundTag("Fireworks");
+            NBTTagCompound var5 = p_77624_1_.getTagCompound().getCompoundTag("Fireworks");
 
             if (var5 != null)
             {
                 if (var5.func_150297_b("Flight", 99))
                 {
-                    par3List.add(StatCollector.translateToLocal("item.fireworks.flight") + " " + var5.getByte("Flight"));
+                    p_77624_3_.add(StatCollector.translateToLocal("item.fireworks.flight") + " " + var5.getByte("Flight"));
                 }
 
                 NBTTagList var6 = var5.getTagList("Explosions", 10);
@@ -70,7 +70,7 @@ public class ItemFirework extends Item
                                 var9.set(var10, "  " + (String)var9.get(var10));
                             }
 
-                            par3List.addAll(var9);
+                            p_77624_3_.addAll(var9);
                         }
                     }
                 }

@@ -4,9 +4,9 @@ public class MaterialPortal extends Material
 {
     private static final String __OBFID = "CL_00000545";
 
-    public MaterialPortal(MapColor par1MapColor)
+    public MaterialPortal(MapColor p_i2118_1_)
     {
-        super(par1MapColor);
+        super(p_i2118_1_);
     }
 
     public boolean isSolid()

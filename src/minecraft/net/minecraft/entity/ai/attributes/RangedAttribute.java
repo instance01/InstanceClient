@@ -7,29 +7,29 @@ public class RangedAttribute extends BaseAttribute
     private String description;
     private static final String __OBFID = "CL_00001568";
 
-    public RangedAttribute(String par1Str, double par2, double par4, double par6)
+    public RangedAttribute(String p_i1609_1_, double p_i1609_2_, double p_i1609_4_, double p_i1609_6_)
     {
-        super(par1Str, par2);
-        this.minimumValue = par4;
-        this.maximumValue = par6;
+        super(p_i1609_1_, p_i1609_2_);
+        this.minimumValue = p_i1609_4_;
+        this.maximumValue = p_i1609_6_;
 
-        if (par4 > par6)
+        if (p_i1609_4_ > p_i1609_6_)
         {
             throw new IllegalArgumentException("Minimum value cannot be bigger than maximum value!");
         }
-        else if (par2 < par4)
+        else if (p_i1609_2_ < p_i1609_4_)
         {
             throw new IllegalArgumentException("Default value cannot be lower than minimum value!");
         }
-        else if (par2 > par6)
+        else if (p_i1609_2_ > p_i1609_6_)
         {
             throw new IllegalArgumentException("Default value cannot be bigger than maximum value!");
         }
     }
 
-    public RangedAttribute setDescription(String par1Str)
+    public RangedAttribute setDescription(String p_111117_1_)
     {
-        this.description = par1Str;
+        this.description = p_111117_1_;
         return this;
     }
 
@@ -38,18 +38,18 @@ public class RangedAttribute extends BaseAttribute
         return this.description;
     }
 
-    public double clampValue(double par1)
+    public double clampValue(double p_111109_1_)
     {
-        if (par1 < this.minimumValue)
+        if (p_111109_1_ < this.minimumValue)
         {
-            par1 = this.minimumValue;
+            p_111109_1_ = this.minimumValue;
         }
 
-        if (par1 > this.maximumValue)
+        if (p_111109_1_ > this.maximumValue)
         {
-            par1 = this.maximumValue;
+            p_111109_1_ = this.maximumValue;
         }
 
-        return par1;
+        return p_111109_1_;
     }
 }

@@ -42,9 +42,9 @@ public class S38PacketPlayerListItem extends Packet
         p_148840_1_.writeShort(this.field_149125_c);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149123_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149123_1_.handlePlayerListItem(this);
+        p_148833_1_.handlePlayerListItem(this);
     }
 
     public String func_149122_c()

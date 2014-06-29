@@ -55,9 +55,9 @@ public class S10PacketSpawnPainting extends Packet
         p_148840_1_.writeInt(this.field_148970_e);
     }
 
-    public void processPacket(INetHandlerPlayClient p_148967_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_148967_1_.handleSpawnPainting(this);
+        p_148833_1_.handleSpawnPainting(this);
     }
 
     /**

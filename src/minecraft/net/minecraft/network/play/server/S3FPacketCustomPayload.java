@@ -25,9 +25,9 @@ public class S3FPacketCustomPayload extends Packet
         this.field_149172_a = p_i45190_1_;
         this.field_149171_b = p_i45190_2_;
 
-        if (p_i45190_2_.length >= 32767)
+        if (p_i45190_2_.length >= 1048576)
         {
-            throw new IllegalArgumentException("Payload may not be larger than 32767 bytes");
+            throw new IllegalArgumentException("Payload may not be larger than 1048576 bytes");
         }
     }
 
@@ -51,9 +51,9 @@ public class S3FPacketCustomPayload extends Packet
         p_148840_1_.writeBytes(this.field_149171_b);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149170_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149170_1_.handleCustomPayload(this);
+        p_148833_1_.handleCustomPayload(this);
     }
 
     public String func_149169_c()

@@ -25,17 +25,17 @@ public enum EnumEnchantmentType
     /**
      * Return true if the item passed can be enchanted by a enchantment of this type.
      */
-    public boolean canEnchantItem(Item par1Item)
+    public boolean canEnchantItem(Item p_77557_1_)
     {
         if (this == all)
         {
             return true;
         }
-        else if (this == breakable && par1Item.isDamageable())
+        else if (this == breakable && p_77557_1_.isDamageable())
         {
             return true;
         }
-        else if (par1Item instanceof ItemArmor)
+        else if (p_77557_1_ instanceof ItemArmor)
         {
             if (this == armor)
             {
@@ -43,13 +43,13 @@ public enum EnumEnchantmentType
             }
             else
             {
-                ItemArmor var2 = (ItemArmor)par1Item;
+                ItemArmor var2 = (ItemArmor)p_77557_1_;
                 return var2.armorType == 0 ? this == armor_head : (var2.armorType == 2 ? this == armor_legs : (var2.armorType == 1 ? this == armor_torso : (var2.armorType == 3 ? this == armor_feet : false)));
             }
         }
         else
         {
-            return par1Item instanceof ItemSword ? this == weapon : (par1Item instanceof ItemTool ? this == digger : (par1Item instanceof ItemBow ? this == bow : (par1Item instanceof ItemFishingRod ? this == fishing_rod : false)));
+            return p_77557_1_ instanceof ItemSword ? this == weapon : (p_77557_1_ instanceof ItemTool ? this == digger : (p_77557_1_ instanceof ItemBow ? this == bow : (p_77557_1_ instanceof ItemFishingRod ? this == fishing_rod : false)));
         }
     }
 }

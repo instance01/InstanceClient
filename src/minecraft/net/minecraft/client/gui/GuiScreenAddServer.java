@@ -6,16 +6,17 @@ import org.lwjgl.input.Keyboard;
 
 public class GuiScreenAddServer extends GuiScreen
 {
-    private GuiScreen field_146310_a;
+    private final GuiScreen field_146310_a;
+    private final ServerData field_146311_h;
     private GuiTextField field_146308_f;
     private GuiTextField field_146309_g;
-    private ServerData field_146311_h;
+    private GuiButton field_152176_i;
     private static final String __OBFID = "CL_00000695";
 
-    public GuiScreenAddServer(GuiScreen par1GuiScreen, ServerData par2ServerData)
+    public GuiScreenAddServer(GuiScreen p_i1033_1_, ServerData p_i1033_2_)
     {
-        this.field_146310_a = par1GuiScreen;
-        this.field_146311_h = par2ServerData;
+        this.field_146310_a = p_i1033_1_;
+        this.field_146311_h = p_i1033_2_;
     }
 
     /**
@@ -34,8 +35,9 @@ public class GuiScreenAddServer extends GuiScreen
     {
         Keyboard.enableRepeatEvents(true);
         this.buttonList.clear();
-        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 96 + 12, I18n.format("addServer.add", new Object[0])));
-        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 120 + 12, I18n.format("gui.cancel", new Object[0])));
+        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 96 + 18, I18n.format("addServer.add", new Object[0])));
+        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 120 + 18, I18n.format("gui.cancel", new Object[0])));
+        this.buttonList.add(this.field_152176_i = new GuiButton(2, this.width / 2 - 100, this.height / 4 + 72, I18n.format("addServer.resourcePack", new Object[0]) + ": " + this.field_146311_h.func_152586_b().func_152589_a().getFormattedText()));
         this.field_146309_g = new GuiTextField(this.fontRendererObj, this.width / 2 - 100, 66, 200, 20);
         this.field_146309_g.setFocused(true);
         this.field_146309_g.setText(this.field_146311_h.serverName);
@@ -57,7 +59,12 @@ public class GuiScreenAddServer extends GuiScreen
     {
         if (p_146284_1_.enabled)
         {
-            if (p_146284_1_.id == 1)
+            if (p_146284_1_.id == 2)
+            {
+                this.field_146311_h.func_152584_a(ServerData.ServerResourceMode.values()[(this.field_146311_h.func_152586_b().ordinal() + 1) % ServerData.ServerResourceMode.values().length]);
+                this.field_152176_i.displayString = I18n.format("addServer.resourcePack", new Object[0]) + ": " + this.field_146311_h.func_152586_b().func_152589_a().getFormattedText();
+            }
+            else if (p_146284_1_.id == 1)
             {
                 this.field_146310_a.confirmClicked(false, 0);
             }
@@ -73,18 +80,18 @@ public class GuiScreenAddServer extends GuiScreen
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2)
+    protected void keyTyped(char p_73869_1_, int p_73869_2_)
     {
-        this.field_146309_g.textboxKeyTyped(par1, par2);
-        this.field_146308_f.textboxKeyTyped(par1, par2);
+        this.field_146309_g.textboxKeyTyped(p_73869_1_, p_73869_2_);
+        this.field_146308_f.textboxKeyTyped(p_73869_1_, p_73869_2_);
 
-        if (par2 == 15)
+        if (p_73869_2_ == 15)
         {
             this.field_146309_g.setFocused(!this.field_146309_g.isFocused());
             this.field_146308_f.setFocused(!this.field_146308_f.isFocused());
         }
 
-        if (par2 == 28 || par2 == 156)
+        if (p_73869_2_ == 28 || p_73869_2_ == 156)
         {
             this.actionPerformed((GuiButton)this.buttonList.get(0));
         }
@@ -95,17 +102,17 @@ public class GuiScreenAddServer extends GuiScreen
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int par1, int par2, int par3)
+    protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_)
     {
-        super.mouseClicked(par1, par2, par3);
-        this.field_146308_f.mouseClicked(par1, par2, par3);
-        this.field_146309_g.mouseClicked(par1, par2, par3);
+        super.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
+        this.field_146308_f.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
+        this.field_146309_g.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
     }
 
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRendererObj, I18n.format("addServer.title", new Object[0]), this.width / 2, 17, 16777215);
@@ -113,6 +120,6 @@ public class GuiScreenAddServer extends GuiScreen
         this.drawString(this.fontRendererObj, I18n.format("addServer.enterIp", new Object[0]), this.width / 2 - 100, 94, 10526880);
         this.field_146309_g.drawTextBox();
         this.field_146308_f.drawTextBox();
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 }

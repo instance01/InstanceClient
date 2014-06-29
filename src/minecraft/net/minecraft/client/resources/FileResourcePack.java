@@ -21,9 +21,9 @@ public class FileResourcePack extends AbstractResourcePack implements Closeable
     private ZipFile resourcePackZipFile;
     private static final String __OBFID = "CL_00001075";
 
-    public FileResourcePack(File par1File)
+    public FileResourcePack(File p_i1290_1_)
     {
-        super(par1File);
+        super(p_i1290_1_);
     }
 
     private ZipFile getResourcePackZipFile() throws IOException
@@ -36,14 +36,14 @@ public class FileResourcePack extends AbstractResourcePack implements Closeable
         return this.resourcePackZipFile;
     }
 
-    protected InputStream getInputStreamByName(String par1Str) throws IOException
+    protected InputStream getInputStreamByName(String p_110591_1_) throws IOException
     {
         ZipFile var2 = this.getResourcePackZipFile();
-        ZipEntry var3 = var2.getEntry(par1Str);
+        ZipEntry var3 = var2.getEntry(p_110591_1_);
 
         if (var3 == null)
         {
-            throw new ResourcePackFileNotFoundException(this.resourcePackFile, par1Str);
+            throw new ResourcePackFileNotFoundException(this.resourcePackFile, p_110591_1_);
         }
         else
         {
@@ -51,11 +51,11 @@ public class FileResourcePack extends AbstractResourcePack implements Closeable
         }
     }
 
-    public boolean hasResourceName(String par1Str)
+    public boolean hasResourceName(String p_110593_1_)
     {
         try
         {
-            return this.getResourcePackZipFile().getEntry(par1Str) != null;
+            return this.getResourcePackZipFile().getEntry(p_110593_1_) != null;
         }
         catch (IOException var3)
         {

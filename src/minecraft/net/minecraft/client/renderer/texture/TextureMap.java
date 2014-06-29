@@ -47,10 +47,10 @@ public class TextureMap extends AbstractTexture implements ITickableTextureObjec
     private final TextureAtlasSprite missingImage = new TextureAtlasSprite("missingno");
     private static final String __OBFID = "CL_00001058";
 
-    public TextureMap(int par1, String par2Str)
+    public TextureMap(int p_i1281_1_, String p_i1281_2_)
     {
-        this.textureType = par1;
-        this.basePath = par2Str;
+        this.textureType = p_i1281_1_;
+        this.basePath = p_i1281_2_;
         this.registerIcons();
     }
 
@@ -81,14 +81,14 @@ public class TextureMap extends AbstractTexture implements ITickableTextureObjec
         this.missingImage.setFramesTextureData(Lists.newArrayList(new int[][][] {var5}));
     }
 
-    public void loadTexture(IResourceManager par1ResourceManager) throws IOException
+    public void loadTexture(IResourceManager p_110551_1_) throws IOException
     {
         this.initMissingImage();
         this.func_147631_c();
-        this.loadTextureAtlas(par1ResourceManager);
+        this.loadTextureAtlas(p_110551_1_);
     }
 
-    public void loadTextureAtlas(IResourceManager par1ResourceManager)
+    public void loadTextureAtlas(IResourceManager p_110571_1_)
     {
         int var2 = Minecraft.getGLMaximumTextureSize();
         Stitcher var3 = new Stitcher(var2, var2, true, 0, this.field_147636_j);
@@ -107,7 +107,7 @@ public class TextureMap extends AbstractTexture implements ITickableTextureObjec
 
             try
             {
-                IResource var10 = par1ResourceManager.getResource(var9);
+                IResource var10 = p_110571_1_.getResource(var9);
                 BufferedImage[] var11 = new BufferedImage[1 + this.field_147636_j];
                 var11[0] = ImageIO.read(var10.getInputStream());
                 TextureMetadataSection var12 = (TextureMetadataSection)var10.getMetadata("texture");
@@ -140,7 +140,7 @@ public class TextureMap extends AbstractTexture implements ITickableTextureObjec
 
                             try
                             {
-                                var11[var15] = ImageIO.read(par1ResourceManager.getResource(var16).getInputStream());
+                                var11[var15] = ImageIO.read(p_110571_1_.getResource(var16).getInputStream());
                             }
                             catch (IOException var21)
                             {
@@ -176,11 +176,11 @@ public class TextureMap extends AbstractTexture implements ITickableTextureObjec
             this.field_147636_j = var24;
         }
 
-        Iterator var26 = this.mapRegisteredSprites.values().iterator();
+        Iterator var25 = this.mapRegisteredSprites.values().iterator();
 
-        while (var26.hasNext())
+        while (var25.hasNext())
         {
-            final TextureAtlasSprite var27 = (TextureAtlasSprite)var26.next();
+            final TextureAtlasSprite var27 = (TextureAtlasSprite)var25.next();
 
             try
             {
@@ -189,8 +189,8 @@ public class TextureMap extends AbstractTexture implements ITickableTextureObjec
             catch (Throwable var20)
             {
                 CrashReport var29 = CrashReport.makeCrashReport(var20, "Applying mipmap");
-                CrashReportCategory var32 = var29.makeCategory("Sprite being mipmapped");
-                var32.addCrashSectionCallable("Sprite name", new Callable()
+                CrashReportCategory var31 = var29.makeCategory("Sprite being mipmapped");
+                var31.addCrashSectionCallable("Sprite name", new Callable()
                 {
                     private static final String __OBFID = "CL_00001059";
                     public String call()
@@ -198,7 +198,7 @@ public class TextureMap extends AbstractTexture implements ITickableTextureObjec
                         return var27.getIconName();
                     }
                 });
-                var32.addCrashSectionCallable("Sprite size", new Callable()
+                var31.addCrashSectionCallable("Sprite size", new Callable()
                 {
                     private static final String __OBFID = "CL_00001060";
                     public String call()
@@ -206,7 +206,7 @@ public class TextureMap extends AbstractTexture implements ITickableTextureObjec
                         return var27.getIconWidth() + " x " + var27.getIconHeight();
                     }
                 });
-                var32.addCrashSectionCallable("Sprite frames", new Callable()
+                var31.addCrashSectionCallable("Sprite frames", new Callable()
                 {
                     private static final String __OBFID = "CL_00001061";
                     public String call()
@@ -214,7 +214,7 @@ public class TextureMap extends AbstractTexture implements ITickableTextureObjec
                         return var27.getFrameCount() + " frames";
                     }
                 });
-                var32.addCrashSection("Mipmap levels", Integer.valueOf(this.field_147636_j));
+                var31.addCrashSection("Mipmap levels", Integer.valueOf(this.field_147636_j));
                 throw new ReportedException(var29);
             }
         }
@@ -233,14 +233,14 @@ public class TextureMap extends AbstractTexture implements ITickableTextureObjec
 
         logger.info("Created: {}x{} {}-atlas", new Object[] {Integer.valueOf(var3.getCurrentWidth()), Integer.valueOf(var3.getCurrentHeight()), this.basePath});
         TextureUtil.func_147946_a(this.getGlTextureId(), this.field_147636_j, var3.getCurrentWidth(), var3.getCurrentHeight(), (float)this.field_147637_k);
-        HashMap var25 = Maps.newHashMap(this.mapRegisteredSprites);
+        HashMap var26 = Maps.newHashMap(this.mapRegisteredSprites);
         Iterator var28 = var3.getStichSlots().iterator();
 
         while (var28.hasNext())
         {
             var8 = (TextureAtlasSprite)var28.next();
             String var30 = var8.getIconName();
-            var25.remove(var30);
+            var26.remove(var30);
             this.mapUploadedSprites.put(var30, var8);
 
             try
@@ -249,11 +249,11 @@ public class TextureMap extends AbstractTexture implements ITickableTextureObjec
             }
             catch (Throwable var18)
             {
-                CrashReport var31 = CrashReport.makeCrashReport(var18, "Stitching texture atlas");
-                CrashReportCategory var33 = var31.makeCategory("Texture being stitched together");
+                CrashReport var32 = CrashReport.makeCrashReport(var18, "Stitching texture atlas");
+                CrashReportCategory var33 = var32.makeCategory("Texture being stitched together");
                 var33.addCrashSection("Atlas path", this.basePath);
                 var33.addCrashSection("Sprite", var8);
-                throw new ReportedException(var31);
+                throw new ReportedException(var32);
             }
 
             if (var8.hasAnimationMetadata())
@@ -266,7 +266,7 @@ public class TextureMap extends AbstractTexture implements ITickableTextureObjec
             }
         }
 
-        var28 = var25.values().iterator();
+        var28 = var26.values().iterator();
 
         while (var28.hasNext())
         {
@@ -316,9 +316,9 @@ public class TextureMap extends AbstractTexture implements ITickableTextureObjec
         }
     }
 
-    public TextureAtlasSprite getAtlasSprite(String par1Str)
+    public TextureAtlasSprite getAtlasSprite(String p_110572_1_)
     {
-        TextureAtlasSprite var2 = (TextureAtlasSprite)this.mapUploadedSprites.get(par1Str);
+        TextureAtlasSprite var2 = (TextureAtlasSprite)this.mapUploadedSprites.get(p_110572_1_);
 
         if (var2 == null)
         {
@@ -340,39 +340,39 @@ public class TextureMap extends AbstractTexture implements ITickableTextureObjec
         }
     }
 
-    public IIcon registerIcon(String par1Str)
+    public IIcon registerIcon(String p_94245_1_)
     {
-        if (par1Str == null)
+        if (p_94245_1_ == null)
         {
             throw new IllegalArgumentException("Name cannot be null!");
         }
-        else if (par1Str.indexOf(47) == -1 && par1Str.indexOf(92) == -1)
+        else if (p_94245_1_.indexOf(47) == -1 && p_94245_1_.indexOf(92) == -1)
         {
-            Object var2 = (TextureAtlasSprite)this.mapRegisteredSprites.get(par1Str);
+            Object var2 = (TextureAtlasSprite)this.mapRegisteredSprites.get(p_94245_1_);
 
             if (var2 == null)
             {
                 if (this.textureType == 1)
                 {
-                    if ("clock".equals(par1Str))
+                    if ("clock".equals(p_94245_1_))
                     {
-                        var2 = new TextureClock(par1Str);
+                        var2 = new TextureClock(p_94245_1_);
                     }
-                    else if ("compass".equals(par1Str))
+                    else if ("compass".equals(p_94245_1_))
                     {
-                        var2 = new TextureCompass(par1Str);
+                        var2 = new TextureCompass(p_94245_1_);
                     }
                     else
                     {
-                        var2 = new TextureAtlasSprite(par1Str);
+                        var2 = new TextureAtlasSprite(p_94245_1_);
                     }
                 }
                 else
                 {
-                    var2 = new TextureAtlasSprite(par1Str);
+                    var2 = new TextureAtlasSprite(p_94245_1_);
                 }
 
-                this.mapRegisteredSprites.put(par1Str, var2);
+                this.mapRegisteredSprites.put(p_94245_1_, var2);
             }
 
             return (IIcon)var2;

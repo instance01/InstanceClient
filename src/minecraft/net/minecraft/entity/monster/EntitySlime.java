@@ -24,9 +24,9 @@ public class EntitySlime extends EntityLiving implements IMob
     private int slimeJumpDelay;
     private static final String __OBFID = "CL_00001698";
 
-    public EntitySlime(World par1World)
+    public EntitySlime(World p_i1742_1_)
     {
-        super(par1World);
+        super(p_i1742_1_);
         int var2 = 1 << this.rand.nextInt(3);
         this.yOffset = 0.0F;
         this.slimeJumpDelay = this.rand.nextInt(20) + 10;
@@ -39,14 +39,14 @@ public class EntitySlime extends EntityLiving implements IMob
         this.dataWatcher.addObject(16, new Byte((byte)1));
     }
 
-    protected void setSlimeSize(int par1)
+    protected void setSlimeSize(int p_70799_1_)
     {
-        this.dataWatcher.updateObject(16, new Byte((byte)par1));
-        this.setSize(0.6F * (float)par1, 0.6F * (float)par1);
+        this.dataWatcher.updateObject(16, new Byte((byte)p_70799_1_));
+        this.setSize(0.6F * (float)p_70799_1_, 0.6F * (float)p_70799_1_);
         this.setPosition(this.posX, this.posY, this.posZ);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue((double)(par1 * par1));
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue((double)(p_70799_1_ * p_70799_1_));
         this.setHealth(this.getMaxHealth());
-        this.experienceValue = par1;
+        this.experienceValue = p_70799_1_;
     }
 
     /**
@@ -60,19 +60,26 @@ public class EntitySlime extends EntityLiving implements IMob
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    public void writeEntityToNBT(NBTTagCompound p_70014_1_)
     {
-        super.writeEntityToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setInteger("Size", this.getSlimeSize() - 1);
+        super.writeEntityToNBT(p_70014_1_);
+        p_70014_1_.setInteger("Size", this.getSlimeSize() - 1);
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    public void readEntityFromNBT(NBTTagCompound p_70037_1_)
     {
-        super.readEntityFromNBT(par1NBTTagCompound);
-        this.setSlimeSize(par1NBTTagCompound.getInteger("Size") + 1);
+        super.readEntityFromNBT(p_70037_1_);
+        int var2 = p_70037_1_.getInteger("Size");
+
+        if (var2 < 0)
+        {
+            var2 = 0;
+        }
+
+        this.setSlimeSize(var2 + 1);
     }
 
     /**
@@ -227,13 +234,13 @@ public class EntitySlime extends EntityLiving implements IMob
     /**
      * Called by a player entity when they collide with an entity
      */
-    public void onCollideWithPlayer(EntityPlayer par1EntityPlayer)
+    public void onCollideWithPlayer(EntityPlayer p_70100_1_)
     {
         if (this.canDamagePlayer())
         {
             int var2 = this.getSlimeSize();
 
-            if (this.canEntityBeSeen(par1EntityPlayer) && this.getDistanceSqToEntity(par1EntityPlayer) < 0.6D * (double)var2 * 0.6D * (double)var2 && par1EntityPlayer.attackEntityFrom(DamageSource.causeMobDamage(this), (float)this.getAttackStrength()))
+            if (this.canEntityBeSeen(p_70100_1_) && this.getDistanceSqToEntity(p_70100_1_) < 0.6D * (double)var2 * 0.6D * (double)var2 && p_70100_1_.attackEntityFrom(DamageSource.causeMobDamage(this), (float)this.getAttackStrength()))
             {
                 this.playSound("mob.attack", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
             }

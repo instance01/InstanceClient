@@ -7,9 +7,9 @@ public class EntityAIRestrictSun extends EntityAIBase
     private EntityCreature theEntity;
     private static final String __OBFID = "CL_00001611";
 
-    public EntityAIRestrictSun(EntityCreature par1EntityCreature)
+    public EntityAIRestrictSun(EntityCreature p_i1652_1_)
     {
-        this.theEntity = par1EntityCreature;
+        this.theEntity = p_i1652_1_;
     }
 
     /**

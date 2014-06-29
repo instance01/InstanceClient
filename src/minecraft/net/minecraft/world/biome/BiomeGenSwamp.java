@@ -13,9 +13,9 @@ public class BiomeGenSwamp extends BiomeGenBase
 {
     private static final String __OBFID = "CL_00000185";
 
-    protected BiomeGenSwamp(int par1)
+    protected BiomeGenSwamp(int p_i1988_1_)
     {
-        super(par1);
+        super(p_i1988_1_);
         this.theBiomeDecorator.treesPerChunk = 2;
         this.theBiomeDecorator.flowersPerChunk = 1;
         this.theBiomeDecorator.deadBushPerChunk = 1;

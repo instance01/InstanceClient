@@ -27,9 +27,9 @@ public class VillageSiege
     private int field_75539_i;
     private static final String __OBFID = "CL_00001634";
 
-    public VillageSiege(World par1World)
+    public VillageSiege(World p_i1676_1_)
     {
-        this.worldObj = par1World;
+        this.worldObj = p_i1676_1_;
     }
 
     /**
@@ -208,17 +208,17 @@ public class VillageSiege
         }
     }
 
-    private Vec3 func_75527_a(int par1, int par2, int par3)
+    private Vec3 func_75527_a(int p_75527_1_, int p_75527_2_, int p_75527_3_)
     {
         for (int var4 = 0; var4 < 10; ++var4)
         {
-            int var5 = par1 + this.worldObj.rand.nextInt(16) - 8;
-            int var6 = par2 + this.worldObj.rand.nextInt(6) - 3;
-            int var7 = par3 + this.worldObj.rand.nextInt(16) - 8;
+            int var5 = p_75527_1_ + this.worldObj.rand.nextInt(16) - 8;
+            int var6 = p_75527_2_ + this.worldObj.rand.nextInt(6) - 3;
+            int var7 = p_75527_3_ + this.worldObj.rand.nextInt(16) - 8;
 
             if (this.theVillage.isInRange(var5, var6, var7) && SpawnerAnimals.canCreatureTypeSpawnAtLocation(EnumCreatureType.monster, this.worldObj, var5, var6, var7))
             {
-                this.worldObj.getWorldVec3Pool().getVecFromPool((double)var5, (double)var6, (double)var7);
+                Vec3.createVectorHelper((double)var5, (double)var6, (double)var7);
             }
         }
 

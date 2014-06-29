@@ -18,10 +18,10 @@ public class NpcMerchant implements IMerchant
     private MerchantRecipeList recipeList;
     private static final String __OBFID = "CL_00001705";
 
-    public NpcMerchant(EntityPlayer par1EntityPlayer)
+    public NpcMerchant(EntityPlayer p_i1746_1_)
     {
-        this.customer = par1EntityPlayer;
-        this.theMerchantInventory = new InventoryMerchant(par1EntityPlayer, this);
+        this.customer = p_i1746_1_;
+        this.theMerchantInventory = new InventoryMerchant(p_i1746_1_, this);
     }
 
     public EntityPlayer getCustomer()
@@ -29,19 +29,19 @@ public class NpcMerchant implements IMerchant
         return this.customer;
     }
 
-    public void setCustomer(EntityPlayer par1EntityPlayer) {}
+    public void setCustomer(EntityPlayer p_70932_1_) {}
 
-    public MerchantRecipeList getRecipes(EntityPlayer par1EntityPlayer)
+    public MerchantRecipeList getRecipes(EntityPlayer p_70934_1_)
     {
         return this.recipeList;
     }
 
-    public void setRecipes(MerchantRecipeList par1MerchantRecipeList)
+    public void setRecipes(MerchantRecipeList p_70930_1_)
     {
-        this.recipeList = par1MerchantRecipeList;
+        this.recipeList = p_70930_1_;
     }
 
-    public void useRecipe(MerchantRecipe par1MerchantRecipe) {}
+    public void useRecipe(MerchantRecipe p_70933_1_) {}
 
-    public void func_110297_a_(ItemStack par1ItemStack) {}
+    public void func_110297_a_(ItemStack p_110297_1_) {}
 }

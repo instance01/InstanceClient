@@ -17,14 +17,14 @@ public class FallbackResourceManager implements IResourceManager
     private final IMetadataSerializer frmMetadataSerializer;
     private static final String __OBFID = "CL_00001074";
 
-    public FallbackResourceManager(IMetadataSerializer par1MetadataSerializer)
+    public FallbackResourceManager(IMetadataSerializer p_i1289_1_)
     {
-        this.frmMetadataSerializer = par1MetadataSerializer;
+        this.frmMetadataSerializer = p_i1289_1_;
     }
 
-    public void addResourcePack(IResourcePack par1ResourcePack)
+    public void addResourcePack(IResourcePack p_110538_1_)
     {
-        this.resourcePacks.add(par1ResourcePack);
+        this.resourcePacks.add(p_110538_1_);
     }
 
     public Set getResourceDomains()
@@ -32,10 +32,10 @@ public class FallbackResourceManager implements IResourceManager
         return null;
     }
 
-    public IResource getResource(ResourceLocation par1ResourceLocation) throws IOException
+    public IResource getResource(ResourceLocation p_110536_1_) throws IOException
     {
         IResourcePack var2 = null;
-        ResourceLocation var3 = getLocationMcmeta(par1ResourceLocation);
+        ResourceLocation var3 = getLocationMcmeta(p_110536_1_);
 
         for (int var4 = this.resourcePacks.size() - 1; var4 >= 0; --var4)
         {
@@ -46,7 +46,7 @@ public class FallbackResourceManager implements IResourceManager
                 var2 = var5;
             }
 
-            if (var5.resourceExists(par1ResourceLocation))
+            if (var5.resourceExists(p_110536_1_))
             {
                 InputStream var6 = null;
 
@@ -55,33 +55,33 @@ public class FallbackResourceManager implements IResourceManager
                     var6 = var2.getInputStream(var3);
                 }
 
-                return new SimpleResource(par1ResourceLocation, var5.getInputStream(par1ResourceLocation), var6, this.frmMetadataSerializer);
+                return new SimpleResource(p_110536_1_, var5.getInputStream(p_110536_1_), var6, this.frmMetadataSerializer);
             }
         }
 
-        throw new FileNotFoundException(par1ResourceLocation.toString());
+        throw new FileNotFoundException(p_110536_1_.toString());
     }
 
-    public List getAllResources(ResourceLocation par1ResourceLocation) throws IOException
+    public List getAllResources(ResourceLocation p_135056_1_) throws IOException
     {
         ArrayList var2 = Lists.newArrayList();
-        ResourceLocation var3 = getLocationMcmeta(par1ResourceLocation);
+        ResourceLocation var3 = getLocationMcmeta(p_135056_1_);
         Iterator var4 = this.resourcePacks.iterator();
 
         while (var4.hasNext())
         {
             IResourcePack var5 = (IResourcePack)var4.next();
 
-            if (var5.resourceExists(par1ResourceLocation))
+            if (var5.resourceExists(p_135056_1_))
             {
                 InputStream var6 = var5.resourceExists(var3) ? var5.getInputStream(var3) : null;
-                var2.add(new SimpleResource(par1ResourceLocation, var5.getInputStream(par1ResourceLocation), var6, this.frmMetadataSerializer));
+                var2.add(new SimpleResource(p_135056_1_, var5.getInputStream(p_135056_1_), var6, this.frmMetadataSerializer));
             }
         }
 
         if (var2.isEmpty())
         {
-            throw new FileNotFoundException(par1ResourceLocation.toString());
+            throw new FileNotFoundException(p_135056_1_.toString());
         }
         else
         {
@@ -89,8 +89,8 @@ public class FallbackResourceManager implements IResourceManager
         }
     }
 
-    static ResourceLocation getLocationMcmeta(ResourceLocation par0ResourceLocation)
+    static ResourceLocation getLocationMcmeta(ResourceLocation p_110537_0_)
     {
-        return new ResourceLocation(par0ResourceLocation.getResourceDomain(), par0ResourceLocation.getResourcePath() + ".mcmeta");
+        return new ResourceLocation(p_110537_0_.getResourceDomain(), p_110537_0_.getResourcePath() + ".mcmeta");
     }
 }

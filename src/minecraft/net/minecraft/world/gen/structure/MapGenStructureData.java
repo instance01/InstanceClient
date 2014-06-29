@@ -8,35 +8,35 @@ public class MapGenStructureData extends WorldSavedData
     private NBTTagCompound field_143044_a = new NBTTagCompound();
     private static final String __OBFID = "CL_00000510";
 
-    public MapGenStructureData(String par1Str)
+    public MapGenStructureData(String p_i43001_1_)
     {
-        super(par1Str);
+        super(p_i43001_1_);
     }
 
     /**
      * reads in data from the NBTTagCompound into this MapDataBase
      */
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+    public void readFromNBT(NBTTagCompound p_76184_1_)
     {
-        this.field_143044_a = par1NBTTagCompound.getCompoundTag("Features");
+        this.field_143044_a = p_76184_1_.getCompoundTag("Features");
     }
 
     /**
      * write data to NBTTagCompound from this MapDataBase, similar to Entities and TileEntities
      */
-    public void writeToNBT(NBTTagCompound par1NBTTagCompound)
+    public void writeToNBT(NBTTagCompound p_76187_1_)
     {
-        par1NBTTagCompound.setTag("Features", this.field_143044_a);
+        p_76187_1_.setTag("Features", this.field_143044_a);
     }
 
-    public void func_143043_a(NBTTagCompound par1NBTTagCompound, int par2, int par3)
+    public void func_143043_a(NBTTagCompound p_143043_1_, int p_143043_2_, int p_143043_3_)
     {
-        this.field_143044_a.setTag(func_143042_b(par2, par3), par1NBTTagCompound);
+        this.field_143044_a.setTag(func_143042_b(p_143043_2_, p_143043_3_), p_143043_1_);
     }
 
-    public static String func_143042_b(int par1, int par2)
+    public static String func_143042_b(int p_143042_0_, int p_143042_1_)
     {
-        return "[" + par1 + "," + par2 + "]";
+        return "[" + p_143042_0_ + "," + p_143042_1_ + "]";
     }
 
     public NBTTagCompound func_143041_a()

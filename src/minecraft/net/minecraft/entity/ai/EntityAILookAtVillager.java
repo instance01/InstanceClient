@@ -10,9 +10,9 @@ public class EntityAILookAtVillager extends EntityAIBase
     private int lookTime;
     private static final String __OBFID = "CL_00001602";
 
-    public EntityAILookAtVillager(EntityIronGolem par1EntityIronGolem)
+    public EntityAILookAtVillager(EntityIronGolem p_i1643_1_)
     {
-        this.theGolem = par1EntityIronGolem;
+        this.theGolem = p_i1643_1_;
         this.setMutexBits(3);
     }
 

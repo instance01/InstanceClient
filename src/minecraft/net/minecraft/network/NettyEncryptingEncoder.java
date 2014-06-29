@@ -16,9 +16,9 @@ public class NettyEncryptingEncoder extends MessageToByteEncoder
         this.field_150750_a = new NettyEncryptionTranslator(p_i45142_1_);
     }
 
-    protected void encode(ChannelHandlerContext p_150749_1_, ByteBuf p_150749_2_, ByteBuf p_150749_3_) throws ShortBufferException
+    protected void encode(ChannelHandlerContext p_encode_1_, ByteBuf p_encode_2_, ByteBuf p_encode_3_) throws ShortBufferException
     {
-        this.field_150750_a.func_150504_a(p_150749_2_, p_150749_3_);
+        this.field_150750_a.func_150504_a(p_encode_2_, p_encode_3_);
     }
 
     protected void encode(ChannelHandlerContext p_encode_1_, Object p_encode_2_, ByteBuf p_encode_3_) throws ShortBufferException

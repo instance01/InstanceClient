@@ -79,15 +79,15 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
     private static final Map blacksmithSellingList = new HashMap();
     private static final String __OBFID = "CL_00001707";
 
-    public EntityVillager(World par1World)
+    public EntityVillager(World p_i1747_1_)
     {
-        this(par1World, 0);
+        this(p_i1747_1_, 0);
     }
 
-    public EntityVillager(World par1World, int par2)
+    public EntityVillager(World p_i1748_1_, int p_i1748_2_)
     {
-        super(par1World);
-        this.setProfession(par2);
+        super(p_i1748_1_);
+        this.setProfession(p_i1748_2_);
         this.setSize(0.6F, 1.8F);
         this.getNavigator().setBreakDoors(true);
         this.getNavigator().setAvoidsWater(true);
@@ -193,24 +193,24 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
-    public boolean interact(EntityPlayer par1EntityPlayer)
+    public boolean interact(EntityPlayer p_70085_1_)
     {
-        ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
+        ItemStack var2 = p_70085_1_.inventory.getCurrentItem();
         boolean var3 = var2 != null && var2.getItem() == Items.spawn_egg;
 
         if (!var3 && this.isEntityAlive() && !this.isTrading() && !this.isChild())
         {
             if (!this.worldObj.isClient)
             {
-                this.setCustomer(par1EntityPlayer);
-                par1EntityPlayer.displayGUIMerchant(this, this.getCustomNameTag());
+                this.setCustomer(p_70085_1_);
+                p_70085_1_.displayGUIMerchant(this, this.getCustomNameTag());
             }
 
             return true;
         }
         else
         {
-            return super.interact(par1EntityPlayer);
+            return super.interact(p_70085_1_);
         }
     }
 
@@ -223,30 +223,30 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    public void writeEntityToNBT(NBTTagCompound p_70014_1_)
     {
-        super.writeEntityToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setInteger("Profession", this.getProfession());
-        par1NBTTagCompound.setInteger("Riches", this.wealth);
+        super.writeEntityToNBT(p_70014_1_);
+        p_70014_1_.setInteger("Profession", this.getProfession());
+        p_70014_1_.setInteger("Riches", this.wealth);
 
         if (this.buyingList != null)
         {
-            par1NBTTagCompound.setTag("Offers", this.buyingList.getRecipiesAsTags());
+            p_70014_1_.setTag("Offers", this.buyingList.getRecipiesAsTags());
         }
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    public void readEntityFromNBT(NBTTagCompound p_70037_1_)
     {
-        super.readEntityFromNBT(par1NBTTagCompound);
-        this.setProfession(par1NBTTagCompound.getInteger("Profession"));
-        this.wealth = par1NBTTagCompound.getInteger("Riches");
+        super.readEntityFromNBT(p_70037_1_);
+        this.setProfession(p_70037_1_.getInteger("Profession"));
+        this.wealth = p_70037_1_.getInteger("Riches");
 
-        if (par1NBTTagCompound.func_150297_b("Offers", 10))
+        if (p_70037_1_.func_150297_b("Offers", 10))
         {
-            NBTTagCompound var2 = par1NBTTagCompound.getCompoundTag("Offers");
+            NBTTagCompound var2 = p_70037_1_.getCompoundTag("Offers");
             this.buyingList = new MerchantRecipeList(var2);
         }
     }
@@ -283,9 +283,9 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
         return "mob.villager.death";
     }
 
-    public void setProfession(int par1)
+    public void setProfession(int p_70938_1_)
     {
-        this.dataWatcher.updateObject(16, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(16, Integer.valueOf(p_70938_1_));
     }
 
     public int getProfession()
@@ -298,14 +298,14 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
         return this.isMating;
     }
 
-    public void setMating(boolean par1)
+    public void setMating(boolean p_70947_1_)
     {
-        this.isMating = par1;
+        this.isMating = p_70947_1_;
     }
 
-    public void setPlaying(boolean par1)
+    public void setPlaying(boolean p_70939_1_)
     {
-        this.isPlaying = par1;
+        this.isPlaying = p_70939_1_;
     }
 
     public boolean isPlaying()
@@ -313,15 +313,15 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
         return this.isPlaying;
     }
 
-    public void setRevengeTarget(EntityLivingBase par1EntityLivingBase)
+    public void setRevengeTarget(EntityLivingBase p_70604_1_)
     {
-        super.setRevengeTarget(par1EntityLivingBase);
+        super.setRevengeTarget(p_70604_1_);
 
-        if (this.villageObj != null && par1EntityLivingBase != null)
+        if (this.villageObj != null && p_70604_1_ != null)
         {
-            this.villageObj.addOrRenewAgressor(par1EntityLivingBase);
+            this.villageObj.addOrRenewAgressor(p_70604_1_);
 
-            if (par1EntityLivingBase instanceof EntityPlayer)
+            if (p_70604_1_ instanceof EntityPlayer)
             {
                 byte var2 = -1;
 
@@ -330,7 +330,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
                     var2 = -3;
                 }
 
-                this.villageObj.setReputationForPlayer(par1EntityLivingBase.getCommandSenderName(), var2);
+                this.villageObj.setReputationForPlayer(p_70604_1_.getCommandSenderName(), var2);
 
                 if (this.isEntityAlive())
                 {
@@ -343,11 +343,11 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
     /**
      * Called when the mob's health reaches 0.
      */
-    public void onDeath(DamageSource par1DamageSource)
+    public void onDeath(DamageSource p_70645_1_)
     {
         if (this.villageObj != null)
         {
-            Entity var2 = par1DamageSource.getEntity();
+            Entity var2 = p_70645_1_.getEntity();
 
             if (var2 != null)
             {
@@ -371,12 +371,12 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
             }
         }
 
-        super.onDeath(par1DamageSource);
+        super.onDeath(p_70645_1_);
     }
 
-    public void setCustomer(EntityPlayer par1EntityPlayer)
+    public void setCustomer(EntityPlayer p_70932_1_)
     {
-        this.buyingPlayer = par1EntityPlayer;
+        this.buyingPlayer = p_70932_1_;
     }
 
     public EntityPlayer getCustomer()
@@ -389,13 +389,13 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
         return this.buyingPlayer != null;
     }
 
-    public void useRecipe(MerchantRecipe par1MerchantRecipe)
+    public void useRecipe(MerchantRecipe p_70933_1_)
     {
-        par1MerchantRecipe.incrementToolUses();
+        p_70933_1_.incrementToolUses();
         this.livingSoundTime = -this.getTalkInterval();
         this.playSound("mob.villager.yes", this.getSoundVolume(), this.getSoundPitch());
 
-        if (par1MerchantRecipe.hasSameIDsAs((MerchantRecipe)this.buyingList.get(this.buyingList.size() - 1)))
+        if (p_70933_1_.hasSameIDsAs((MerchantRecipe)this.buyingList.get(this.buyingList.size() - 1)))
         {
             this.timeUntilReset = 40;
             this.needsInitilization = true;
@@ -410,19 +410,19 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
             }
         }
 
-        if (par1MerchantRecipe.getItemToBuy().getItem() == Items.emerald)
+        if (p_70933_1_.getItemToBuy().getItem() == Items.emerald)
         {
-            this.wealth += par1MerchantRecipe.getItemToBuy().stackSize;
+            this.wealth += p_70933_1_.getItemToBuy().stackSize;
         }
     }
 
-    public void func_110297_a_(ItemStack par1ItemStack)
+    public void func_110297_a_(ItemStack p_110297_1_)
     {
         if (!this.worldObj.isClient && this.livingSoundTime > -this.getTalkInterval() + 20)
         {
             this.livingSoundTime = -this.getTalkInterval();
 
-            if (par1ItemStack != null)
+            if (p_110297_1_ != null)
             {
                 this.playSound("mob.villager.yes", this.getSoundVolume(), this.getSoundPitch());
             }
@@ -433,7 +433,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
         }
     }
 
-    public MerchantRecipeList getRecipes(EntityPlayer par1EntityPlayer)
+    public MerchantRecipeList getRecipes(EntityPlayer p_70934_1_)
     {
         if (this.buyingList == null)
         {
@@ -446,9 +446,9 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
     /**
      * Adjusts the probability of obtaining a given recipe being offered by a villager
      */
-    private float adjustProbability(float par1)
+    private float adjustProbability(float p_82188_1_)
     {
-        float var2 = par1 + this.field_82191_bN;
+        float var2 = p_82188_1_ + this.field_82191_bN;
         return var2 > 0.9F ? 0.9F - (var2 - 0.9F) : var2;
     }
 
@@ -456,7 +456,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
      * based on the villagers profession add items, equipment, and recipies adds par1 random items to the list of things
      * that the villager wants to buy. (at most 1 of each wanted type is added)
      */
-    private void addDefaultEquipmentAndRecipies(int par1)
+    private void addDefaultEquipmentAndRecipies(int p_70950_1_)
     {
         if (this.buyingList != null)
         {
@@ -596,13 +596,13 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
             this.buyingList = new MerchantRecipeList();
         }
 
-        for (int var9 = 0; var9 < par1 && var9 < var2.size(); ++var9)
+        for (int var9 = 0; var9 < p_70950_1_ && var9 < var2.size(); ++var9)
         {
             this.buyingList.addToListWithCheck((MerchantRecipe)var2.get(var9));
         }
     }
 
-    public void setRecipes(MerchantRecipeList par1MerchantRecipeList) {}
+    public void setRecipes(MerchantRecipeList p_70930_1_) {}
 
     private static void func_146091_a(MerchantRecipeList p_146091_0_, Item p_146091_1_, Random p_146091_2_, float p_146091_3_)
     {
@@ -652,45 +652,45 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
         return var2 == null ? 1 : (((Integer)var2.getFirst()).intValue() >= ((Integer)var2.getSecond()).intValue() ? ((Integer)var2.getFirst()).intValue() : ((Integer)var2.getFirst()).intValue() + p_146090_1_.nextInt(((Integer)var2.getSecond()).intValue() - ((Integer)var2.getFirst()).intValue()));
     }
 
-    public void handleHealthUpdate(byte par1)
+    public void handleHealthUpdate(byte p_70103_1_)
     {
-        if (par1 == 12)
+        if (p_70103_1_ == 12)
         {
             this.generateRandomParticles("heart");
         }
-        else if (par1 == 13)
+        else if (p_70103_1_ == 13)
         {
             this.generateRandomParticles("angryVillager");
         }
-        else if (par1 == 14)
+        else if (p_70103_1_ == 14)
         {
             this.generateRandomParticles("happyVillager");
         }
         else
         {
-            super.handleHealthUpdate(par1);
+            super.handleHealthUpdate(p_70103_1_);
         }
     }
 
     /**
      * par1 is the particleName
      */
-    private void generateRandomParticles(String par1Str)
+    private void generateRandomParticles(String p_70942_1_)
     {
         for (int var2 = 0; var2 < 5; ++var2)
         {
             double var3 = this.rand.nextGaussian() * 0.02D;
             double var5 = this.rand.nextGaussian() * 0.02D;
             double var7 = this.rand.nextGaussian() * 0.02D;
-            this.worldObj.spawnParticle(par1Str, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 1.0D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, var3, var5, var7);
+            this.worldObj.spawnParticle(p_70942_1_, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 1.0D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, var3, var5, var7);
         }
     }
 
-    public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+    public IEntityLivingData onSpawnWithEgg(IEntityLivingData p_110161_1_)
     {
-        par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+        p_110161_1_ = super.onSpawnWithEgg(p_110161_1_);
         this.setProfession(this.worldObj.rand.nextInt(5));
-        return par1EntityLivingData;
+        return p_110161_1_;
     }
 
     public void setLookingForHome()
@@ -698,7 +698,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
         this.isLookingForHome = true;
     }
 
-    public EntityVillager createChild(EntityAgeable par1EntityAgeable)
+    public EntityVillager createChild(EntityAgeable p_90011_1_)
     {
         EntityVillager var2 = new EntityVillager(this.worldObj);
         var2.onSpawnWithEgg((IEntityLivingData)null);

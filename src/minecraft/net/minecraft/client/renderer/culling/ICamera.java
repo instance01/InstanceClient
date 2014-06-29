@@ -7,7 +7,7 @@ public interface ICamera
     /**
      * Returns true if the bounding box is inside all 6 clipping planes, otherwise returns false.
      */
-    boolean isBoundingBoxInFrustum(AxisAlignedBB var1);
+    boolean isBoundingBoxInFrustum(AxisAlignedBB p_78546_1_);
 
-    void setPosition(double var1, double var3, double var5);
+    void setPosition(double p_78547_1_, double p_78547_3_, double p_78547_5_);
 }

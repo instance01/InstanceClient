@@ -6,17 +6,29 @@ import net.minecraft.client.renderer.RenderList;
 
 public class RenderDistanceSorter implements Comparator
 {
+    int field_152632_a;
+    int field_152633_b;
     private static final String __OBFID = "CL_00000945";
 
-    public int compare(RenderList p_147714_1_, RenderList p_147714_2_)
+    public RenderDistanceSorter(int p_i1051_1_, int p_i1051_2_)
     {
-        int var3 = p_147714_2_.renderChunkX * p_147714_2_.renderChunkX + p_147714_2_.renderChunkY * p_147714_2_.renderChunkY + p_147714_2_.renderChunkZ * p_147714_2_.renderChunkZ;
-        int var4 = p_147714_1_.renderChunkX * p_147714_1_.renderChunkX + p_147714_1_.renderChunkY * p_147714_1_.renderChunkY + p_147714_1_.renderChunkZ * p_147714_1_.renderChunkZ;
-        return ComparisonChain.start().compare(var3, var4).result();
+        this.field_152632_a = p_i1051_1_;
+        this.field_152633_b = p_i1051_2_;
     }
 
-    public int compare(Object par1Obj, Object par2Obj)
+    public int compare(RenderList p_compare_1_, RenderList p_compare_2_)
     {
-        return this.compare((RenderList)par1Obj, (RenderList)par2Obj);
+        int var3 = p_compare_1_.renderChunkX - this.field_152632_a;
+        int var4 = p_compare_1_.renderChunkZ - this.field_152633_b;
+        int var5 = p_compare_2_.renderChunkX - this.field_152632_a;
+        int var6 = p_compare_2_.renderChunkZ - this.field_152633_b;
+        int var7 = var3 * var3 + var4 * var4;
+        int var8 = var5 * var5 + var6 * var6;
+        return ComparisonChain.start().compare(var8, var7).result();
+    }
+
+    public int compare(Object p_compare_1_, Object p_compare_2_)
+    {
+        return this.compare((RenderList)p_compare_1_, (RenderList)p_compare_2_);
     }
 }

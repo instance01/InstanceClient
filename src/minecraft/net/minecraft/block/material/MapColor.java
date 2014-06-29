@@ -52,13 +52,13 @@ public class MapColor
     public final int colorIndex;
     private static final String __OBFID = "CL_00000544";
 
-    private MapColor(int par1, int par2)
+    private MapColor(int p_i2117_1_, int p_i2117_2_)
     {
-        if (par1 >= 0 && par1 <= 63)
+        if (p_i2117_1_ >= 0 && p_i2117_1_ <= 63)
         {
-            this.colorIndex = par1;
-            this.colorValue = par2;
-            mapColorArray[par1] = this;
+            this.colorIndex = p_i2117_1_;
+            this.colorValue = p_i2117_2_;
+            mapColorArray[p_i2117_1_] = this;
         }
         else
         {

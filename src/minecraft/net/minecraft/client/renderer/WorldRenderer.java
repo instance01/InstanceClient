@@ -20,8 +20,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import org.lwjgl.opengl.GL11;
 
-import com.comze_instancelabs.client.InstanceMain;
-
 public class WorldRenderer
 {
     private TesselatorVertexState vertexState;
@@ -94,41 +92,41 @@ public class WorldRenderer
     private int bytesDrawn;
     private static final String __OBFID = "CL_00000942";
 
-    public WorldRenderer(World par1World, List par2List, int par3, int par4, int par5, int par6)
+    public WorldRenderer(World p_i1240_1_, List p_i1240_2_, int p_i1240_3_, int p_i1240_4_, int p_i1240_5_, int p_i1240_6_)
     {
-        this.worldObj = par1World;
+        this.worldObj = p_i1240_1_;
         this.vertexState = null;
-        this.tileEntities = par2List;
-        this.glRenderList = par6;
+        this.tileEntities = p_i1240_2_;
+        this.glRenderList = p_i1240_6_;
         this.posX = -999;
-        this.setPosition(par3, par4, par5);
+        this.setPosition(p_i1240_3_, p_i1240_4_, p_i1240_5_);
         this.needsUpdate = false;
     }
 
     /**
      * Sets a new position for the renderer and setting it up so it can be reloaded with the new data for that position
      */
-    public void setPosition(int par1, int par2, int par3)
+    public void setPosition(int p_78913_1_, int p_78913_2_, int p_78913_3_)
     {
-        if (par1 != this.posX || par2 != this.posY || par3 != this.posZ)
+        if (p_78913_1_ != this.posX || p_78913_2_ != this.posY || p_78913_3_ != this.posZ)
         {
             this.setDontDraw();
-            this.posX = par1;
-            this.posY = par2;
-            this.posZ = par3;
-            this.posXPlus = par1 + 8;
-            this.posYPlus = par2 + 8;
-            this.posZPlus = par3 + 8;
-            this.posXClip = par1 & 1023;
-            this.posYClip = par2;
-            this.posZClip = par3 & 1023;
-            this.posXMinus = par1 - this.posXClip;
-            this.posYMinus = par2 - this.posYClip;
-            this.posZMinus = par3 - this.posZClip;
+            this.posX = p_78913_1_;
+            this.posY = p_78913_2_;
+            this.posZ = p_78913_3_;
+            this.posXPlus = p_78913_1_ + 8;
+            this.posYPlus = p_78913_2_ + 8;
+            this.posZPlus = p_78913_3_ + 8;
+            this.posXClip = p_78913_1_ & 1023;
+            this.posYClip = p_78913_2_;
+            this.posZClip = p_78913_3_ & 1023;
+            this.posXMinus = p_78913_1_ - this.posXClip;
+            this.posYMinus = p_78913_2_ - this.posYClip;
+            this.posZMinus = p_78913_3_ - this.posZClip;
             float var4 = 6.0F;
-            this.rendererBoundingBox = AxisAlignedBB.getBoundingBox((double)((float)par1 - var4), (double)((float)par2 - var4), (double)((float)par3 - var4), (double)((float)(par1 + 16) + var4), (double)((float)(par2 + 16) + var4), (double)((float)(par3 + 16) + var4));
+            this.rendererBoundingBox = AxisAlignedBB.getBoundingBox((double)((float)p_78913_1_ - var4), (double)((float)p_78913_2_ - var4), (double)((float)p_78913_3_ - var4), (double)((float)(p_78913_1_ + 16) + var4), (double)((float)(p_78913_2_ + 16) + var4), (double)((float)(p_78913_3_ + 16) + var4));
             GL11.glNewList(this.glRenderList + 2, GL11.GL_COMPILE);
-            RenderItem.renderAABB(AxisAlignedBB.getAABBPool().getAABB((double)((float)this.posXClip - var4), (double)((float)this.posYClip - var4), (double)((float)this.posZClip - var4), (double)((float)(this.posXClip + 16) + var4), (double)((float)(this.posYClip + 16) + var4), (double)((float)(this.posZClip + 16) + var4)));
+            RenderItem.renderAABB(AxisAlignedBB.getBoundingBox((double)((float)this.posXClip - var4), (double)((float)this.posYClip - var4), (double)((float)this.posZClip - var4), (double)((float)(this.posXClip + 16) + var4), (double)((float)(this.posYClip + 16) + var4), (double)((float)(this.posZClip + 16) + var4)));
             GL11.glEndList();
             this.markDirty();
         }
@@ -306,11 +304,11 @@ public class WorldRenderer
      * Returns the distance of this chunk renderer to the entity without performing the final normalizing square root,
      * for performance reasons.
      */
-    public float distanceToEntitySquared(Entity par1Entity)
+    public float distanceToEntitySquared(Entity p_78912_1_)
     {
-        float var2 = (float)(par1Entity.posX - (double)this.posXPlus);
-        float var3 = (float)(par1Entity.posY - (double)this.posYPlus);
-        float var4 = (float)(par1Entity.posZ - (double)this.posZPlus);
+        float var2 = (float)(p_78912_1_.posX - (double)this.posXPlus);
+        float var3 = (float)(p_78912_1_.posY - (double)this.posYPlus);
+        float var4 = (float)(p_78912_1_.posZ - (double)this.posZPlus);
         return var2 * var2 + var3 * var3 + var4 * var4;
     }
 
@@ -338,14 +336,14 @@ public class WorldRenderer
     /**
      * Takes in the pass the call list is being requested for. Args: renderPass
      */
-    public int getGLCallListForPass(int par1)
+    public int getGLCallListForPass(int p_78909_1_)
     {
-        return !this.isInFrustum ? -1 : (!this.skipRenderPass[par1] ? this.glRenderList + par1 : -1);
+        return !this.isInFrustum ? -1 : (!this.skipRenderPass[p_78909_1_] ? this.glRenderList + p_78909_1_ : -1);
     }
 
-    public void updateInFrustum(ICamera par1ICamera)
+    public void updateInFrustum(ICamera p_78908_1_)
     {
-        this.isInFrustum = par1ICamera.isBoundingBoxInFrustum(this.rendererBoundingBox);
+        this.isInFrustum = p_78908_1_.isBoundingBoxInFrustum(this.rendererBoundingBox);
     }
 
     /**

@@ -66,7 +66,7 @@ public class EntityClientPlayerMP extends EntityPlayerSP
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_)
     {
         return false;
     }
@@ -74,18 +74,18 @@ public class EntityClientPlayerMP extends EntityPlayerSP
     /**
      * Heal living entity (param: amount of half-hearts)
      */
-    public void heal(float par1) {}
+    public void heal(float p_70691_1_) {}
 
     /**
      * Called when a player mounts an entity. e.g. mounts a pig, mounts a boat.
      */
-    public void mountEntity(Entity par1Entity)
+    public void mountEntity(Entity p_70078_1_)
     {
-        super.mountEntity(par1Entity);
+        super.mountEntity(p_70078_1_);
 
-        if (par1Entity instanceof EntityMinecart)
+        if (p_70078_1_ instanceof EntityMinecart)
         {
-            this.mc.getSoundHandler().playSound(new MovingSoundMinecartRiding(this, (EntityMinecart)par1Entity));
+            this.mc.getSoundHandler().playSound(new MovingSoundMinecartRiding(this, (EntityMinecart)p_70078_1_));
         }
     }
 
@@ -115,12 +115,12 @@ public class EntityClientPlayerMP extends EntityPlayerSP
      */
     public void sendMotionUpdates()
     {
-        //TODO t
+    	//TODO t
         if (InstanceMain.freecam)
         {
             return;
         }
-
+        
         boolean var1 = this.isSprinting();
 
         if (var1 != this.wasSneaking)
@@ -205,9 +205,9 @@ public class EntityClientPlayerMP extends EntityPlayerSP
     /**
      * Called when player presses the drop item key
      */
-    public EntityItem dropOneItem(boolean par1)
+    public EntityItem dropOneItem(boolean p_71040_1_)
     {
-        int var2 = par1 ? 3 : 4;
+        int var2 = p_71040_1_ ? 3 : 4;
         this.sendQueue.addToSendQueue(new C07PacketPlayerDigging(var2, 0, 0, 0, 0));
         return null;
     }
@@ -215,14 +215,14 @@ public class EntityClientPlayerMP extends EntityPlayerSP
     /**
      * Joins the passed in entity item with the world. Args: entityItem
      */
-    protected void joinEntityItemWithWorld(EntityItem par1EntityItem) {}
+    protected void joinEntityItemWithWorld(EntityItem p_71012_1_) {}
 
     /**
      * Sends a chat message from the player. Args: chatMessage
      */
-    public void sendChatMessage(String par1Str)
+    public void sendChatMessage(String p_71165_1_)
     {
-        this.sendQueue.addToSendQueue(new C01PacketChatMessage(par1Str));
+        this.sendQueue.addToSendQueue(new C01PacketChatMessage(p_71165_1_));
     }
 
     /**
@@ -243,11 +243,11 @@ public class EntityClientPlayerMP extends EntityPlayerSP
      * Deals damage to the entity. If its a EntityPlayer then will take damage from the armor first and then health
      * second with the reduced value. Args: damageAmount
      */
-    protected void damageEntity(DamageSource par1DamageSource, float par2)
+    protected void damageEntity(DamageSource p_70665_1_, float p_70665_2_)
     {
         if (!this.isEntityInvulnerable())
         {
-            this.setHealth(this.getHealth() - par2);
+            this.setHealth(this.getHealth() - p_70665_2_);
         }
     }
 
@@ -272,15 +272,15 @@ public class EntityClientPlayerMP extends EntityPlayerSP
     /**
      * Updates health locally.
      */
-    public void setPlayerSPHealth(float par1)
+    public void setPlayerSPHealth(float p_71150_1_)
     {
         if (this.hasSetHealth)
         {
-            super.setPlayerSPHealth(par1);
+            super.setPlayerSPHealth(p_71150_1_);
         }
         else
         {
-            this.setHealth(par1);
+            this.setHealth(p_71150_1_);
             this.hasSetHealth = true;
         }
     }
@@ -288,13 +288,13 @@ public class EntityClientPlayerMP extends EntityPlayerSP
     /**
      * Adds a value to a statistic field.
      */
-    public void addStat(StatBase par1StatBase, int par2)
+    public void addStat(StatBase p_71064_1_, int p_71064_2_)
     {
-        if (par1StatBase != null)
+        if (p_71064_1_ != null)
         {
-            if (par1StatBase.isIndependent)
+            if (p_71064_1_.isIndependent)
             {
-                super.addStat(par1StatBase, par2);
+                super.addStat(p_71064_1_, p_71064_2_);
             }
         }
     }
@@ -317,9 +317,9 @@ public class EntityClientPlayerMP extends EntityPlayerSP
         this.sendQueue.addToSendQueue(new C0BPacketEntityAction(this, 7));
     }
 
-    public void func_142020_c(String par1Str)
+    public void func_142020_c(String p_142020_1_)
     {
-        this.field_142022_ce = par1Str;
+        this.field_142022_ce = p_142020_1_;
     }
 
     public String func_142021_k()

@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.util.JsonBlendingMode;
@@ -22,7 +23,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GL20;
 
 public class ShaderManager
 {
@@ -84,18 +84,18 @@ public class ShaderManager
                 }
             }
 
-            JsonArray var30 = JsonUtils.getJsonObjectJsonArrayFieldOrDefault(var6, "attributes", (JsonArray)null);
-            Iterator var31;
+            JsonArray var29 = JsonUtils.getJsonObjectJsonArrayFieldOrDefault(var6, "attributes", (JsonArray)null);
+            Iterator var32;
 
-            if (var30 != null)
+            if (var29 != null)
             {
-                int var29 = 0;
-                this.field_148015_q = Lists.newArrayListWithCapacity(var30.size());
-                this.field_148014_r = Lists.newArrayListWithCapacity(var30.size());
+                int var30 = 0;
+                this.field_148015_q = Lists.newArrayListWithCapacity(var29.size());
+                this.field_148014_r = Lists.newArrayListWithCapacity(var29.size());
 
-                for (var31 = var30.iterator(); var31.hasNext(); ++var29)
+                for (var32 = var29.iterator(); var32.hasNext(); ++var30)
                 {
-                    JsonElement var13 = (JsonElement)var31.next();
+                    JsonElement var13 = (JsonElement)var32.next();
 
                     try
                     {
@@ -104,7 +104,7 @@ public class ShaderManager
                     catch (Exception var24)
                     {
                         JsonException var15 = JsonException.func_151379_a(var24);
-                        var15.func_151380_a("attributes[" + var29 + "]");
+                        var15.func_151380_a("attributes[" + var30 + "]");
                         throw var15;
                     }
                 }
@@ -115,15 +115,15 @@ public class ShaderManager
                 this.field_148014_r = null;
             }
 
-            JsonArray var33 = JsonUtils.getJsonObjectJsonArrayFieldOrDefault(var6, "uniforms", (JsonArray)null);
+            JsonArray var31 = JsonUtils.getJsonObjectJsonArrayFieldOrDefault(var6, "uniforms", (JsonArray)null);
 
-            if (var33 != null)
+            if (var31 != null)
             {
-                int var32 = 0;
+                int var33 = 0;
 
-                for (Iterator var35 = var33.iterator(); var35.hasNext(); ++var32)
+                for (Iterator var34 = var31.iterator(); var34.hasNext(); ++var33)
                 {
-                    JsonElement var36 = (JsonElement)var35.next();
+                    JsonElement var36 = (JsonElement)var34.next();
 
                     try
                     {
@@ -132,7 +132,7 @@ public class ShaderManager
                     catch (Exception var23)
                     {
                         JsonException var16 = JsonException.func_151379_a(var23);
-                        var16.func_151380_a("uniforms[" + var32 + "]");
+                        var16.func_151380_a("uniforms[" + var33 + "]");
                         throw var16;
                     }
                 }
@@ -148,12 +148,12 @@ public class ShaderManager
 
             if (this.field_148014_r != null)
             {
-                var31 = this.field_148014_r.iterator();
+                var32 = this.field_148014_r.iterator();
 
-                while (var31.hasNext())
+                while (var32.hasNext())
                 {
-                    String var34 = (String)var31.next();
-                    int var37 = GL20.glGetAttribLocation(this.field_148006_l, var34);
+                    String var35 = (String)var32.next();
+                    int var37 = OpenGlHelper.func_153164_b(this.field_148006_l, var35);
                     this.field_148015_q.add(Integer.valueOf(var37));
                 }
             }
@@ -179,7 +179,7 @@ public class ShaderManager
 
     public void func_147993_b()
     {
-        GL20.glUseProgram(0);
+        OpenGlHelper.func_153161_d(0);
         field_147999_d = -1;
         staticShaderManager = null;
         field_148000_e = true;
@@ -202,7 +202,7 @@ public class ShaderManager
 
         if (this.field_148006_l != field_147999_d)
         {
-            GL20.glUseProgram(this.field_148006_l);
+            OpenGlHelper.func_153161_d(this.field_148006_l);
             field_147999_d = this.field_148006_l;
         }
 
@@ -245,7 +245,7 @@ public class ShaderManager
                 if (var3 != -1)
                 {
                     GL11.glBindTexture(GL11.GL_TEXTURE_2D, var3);
-                    GL20.glUniform1i(GL20.glGetUniformLocation(this.field_148006_l, (CharSequence)this.field_147998_g.get(var1)), var1);
+                    OpenGlHelper.func_153163_f(OpenGlHelper.func_153194_a(this.field_148006_l, (CharSequence)this.field_147998_g.get(var1)), var1);
                 }
             }
         }
@@ -283,7 +283,7 @@ public class ShaderManager
         for (int var2 = 0; var1 < this.field_147998_g.size(); ++var2)
         {
             var3 = (String)this.field_147998_g.get(var1);
-            var4 = GL20.glGetUniformLocation(this.field_148006_l, var3);
+            var4 = OpenGlHelper.func_153194_a(this.field_148006_l, var3);
 
             if (var4 == -1)
             {
@@ -306,7 +306,7 @@ public class ShaderManager
         {
             ShaderUniform var6 = (ShaderUniform)var5.next();
             var3 = var6.func_148086_a();
-            var4 = GL20.glGetUniformLocation(this.field_148006_l, var3);
+            var4 = OpenGlHelper.func_153194_a(this.field_148006_l, var3);
 
             if (var4 == -1)
             {

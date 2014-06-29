@@ -55,9 +55,9 @@ public class C12PacketUpdateSign extends Packet
         }
     }
 
-    public void processPacket(INetHandlerPlayServer p_149587_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149587_1_.processUpdateSign(this);
+        p_148833_1_.processUpdateSign(this);
     }
 
     public int func_149588_c()

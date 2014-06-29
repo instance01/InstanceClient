@@ -43,9 +43,9 @@ public class S3BPacketScoreboardObjective extends Packet
         p_148840_1_.writeByte(this.field_149342_c);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149340_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149340_1_.handleScoreboardObjective(this);
+        p_148833_1_.handleScoreboardObjective(this);
     }
 
     public String func_149339_c()

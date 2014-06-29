@@ -8,32 +8,32 @@ public class EntitySnowShovelFX extends EntityFX
     float snowDigParticleScale;
     private static final String __OBFID = "CL_00000925";
 
-    public EntitySnowShovelFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12)
+    public EntitySnowShovelFX(World p_i1227_1_, double p_i1227_2_, double p_i1227_4_, double p_i1227_6_, double p_i1227_8_, double p_i1227_10_, double p_i1227_12_)
     {
-        this(par1World, par2, par4, par6, par8, par10, par12, 1.0F);
+        this(p_i1227_1_, p_i1227_2_, p_i1227_4_, p_i1227_6_, p_i1227_8_, p_i1227_10_, p_i1227_12_, 1.0F);
     }
 
-    public EntitySnowShovelFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12, float par14)
+    public EntitySnowShovelFX(World p_i1228_1_, double p_i1228_2_, double p_i1228_4_, double p_i1228_6_, double p_i1228_8_, double p_i1228_10_, double p_i1228_12_, float p_i1228_14_)
     {
-        super(par1World, par2, par4, par6, par8, par10, par12);
+        super(p_i1228_1_, p_i1228_2_, p_i1228_4_, p_i1228_6_, p_i1228_8_, p_i1228_10_, p_i1228_12_);
         this.motionX *= 0.10000000149011612D;
         this.motionY *= 0.10000000149011612D;
         this.motionZ *= 0.10000000149011612D;
-        this.motionX += par8;
-        this.motionY += par10;
-        this.motionZ += par12;
+        this.motionX += p_i1228_8_;
+        this.motionY += p_i1228_10_;
+        this.motionZ += p_i1228_12_;
         this.particleRed = this.particleGreen = this.particleBlue = 1.0F - (float)(Math.random() * 0.30000001192092896D);
         this.particleScale *= 0.75F;
-        this.particleScale *= par14;
+        this.particleScale *= p_i1228_14_;
         this.snowDigParticleScale = this.particleScale;
         this.particleMaxAge = (int)(8.0D / (Math.random() * 0.8D + 0.2D));
-        this.particleMaxAge = (int)((float)this.particleMaxAge * par14);
+        this.particleMaxAge = (int)((float)this.particleMaxAge * p_i1228_14_);
         this.noClip = false;
     }
 
-    public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7)
+    public void renderParticle(Tessellator p_70539_1_, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_)
     {
-        float var8 = ((float)this.particleAge + par2) / (float)this.particleMaxAge * 32.0F;
+        float var8 = ((float)this.particleAge + p_70539_2_) / (float)this.particleMaxAge * 32.0F;
 
         if (var8 < 0.0F)
         {
@@ -46,7 +46,7 @@ public class EntitySnowShovelFX extends EntityFX
         }
 
         this.particleScale = this.snowDigParticleScale * var8;
-        super.renderParticle(par1Tessellator, par2, par3, par4, par5, par6, par7);
+        super.renderParticle(p_70539_1_, p_70539_2_, p_70539_3_, p_70539_4_, p_70539_5_, p_70539_6_, p_70539_7_);
     }
 
     /**

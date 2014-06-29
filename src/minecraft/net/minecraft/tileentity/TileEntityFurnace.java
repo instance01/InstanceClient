@@ -40,34 +40,34 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
     /**
      * Returns the stack in slot i
      */
-    public ItemStack getStackInSlot(int par1)
+    public ItemStack getStackInSlot(int p_70301_1_)
     {
-        return this.field_145957_n[par1];
+        return this.field_145957_n[p_70301_1_];
     }
 
     /**
      * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
      * new stack.
      */
-    public ItemStack decrStackSize(int par1, int par2)
+    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_)
     {
-        if (this.field_145957_n[par1] != null)
+        if (this.field_145957_n[p_70298_1_] != null)
         {
             ItemStack var3;
 
-            if (this.field_145957_n[par1].stackSize <= par2)
+            if (this.field_145957_n[p_70298_1_].stackSize <= p_70298_2_)
             {
-                var3 = this.field_145957_n[par1];
-                this.field_145957_n[par1] = null;
+                var3 = this.field_145957_n[p_70298_1_];
+                this.field_145957_n[p_70298_1_] = null;
                 return var3;
             }
             else
             {
-                var3 = this.field_145957_n[par1].splitStack(par2);
+                var3 = this.field_145957_n[p_70298_1_].splitStack(p_70298_2_);
 
-                if (this.field_145957_n[par1].stackSize == 0)
+                if (this.field_145957_n[p_70298_1_].stackSize == 0)
                 {
-                    this.field_145957_n[par1] = null;
+                    this.field_145957_n[p_70298_1_] = null;
                 }
 
                 return var3;
@@ -83,12 +83,12 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
      * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
      * like when you close a workbench GUI.
      */
-    public ItemStack getStackInSlotOnClosing(int par1)
+    public ItemStack getStackInSlotOnClosing(int p_70304_1_)
     {
-        if (this.field_145957_n[par1] != null)
+        if (this.field_145957_n[p_70304_1_] != null)
         {
-            ItemStack var2 = this.field_145957_n[par1];
-            this.field_145957_n[par1] = null;
+            ItemStack var2 = this.field_145957_n[p_70304_1_];
+            this.field_145957_n[p_70304_1_] = null;
             return var2;
         }
         else
@@ -100,13 +100,13 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
     /**
      * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      */
-    public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
+    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_)
     {
-        this.field_145957_n[par1] = par2ItemStack;
+        this.field_145957_n[p_70299_1_] = p_70299_2_;
 
-        if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
+        if (p_70299_2_ != null && p_70299_2_.stackSize > this.getInventoryStackLimit())
         {
-            par2ItemStack.stackSize = this.getInventoryStackLimit();
+            p_70299_2_.stackSize = this.getInventoryStackLimit();
         }
     }
 
@@ -224,41 +224,44 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
 
         if (!this.worldObj.isClient)
         {
-            if (this.field_145956_a == 0 && this.func_145948_k())
+            if (this.field_145956_a != 0 || this.field_145957_n[1] != null && this.field_145957_n[0] != null)
             {
-                this.field_145963_i = this.field_145956_a = func_145952_a(this.field_145957_n[1]);
-
-                if (this.field_145956_a > 0)
+                if (this.field_145956_a == 0 && this.func_145948_k())
                 {
-                    var2 = true;
+                    this.field_145963_i = this.field_145956_a = func_145952_a(this.field_145957_n[1]);
 
-                    if (this.field_145957_n[1] != null)
+                    if (this.field_145956_a > 0)
                     {
-                        --this.field_145957_n[1].stackSize;
+                        var2 = true;
 
-                        if (this.field_145957_n[1].stackSize == 0)
+                        if (this.field_145957_n[1] != null)
                         {
-                            Item var3 = this.field_145957_n[1].getItem().getContainerItem();
-                            this.field_145957_n[1] = var3 != null ? new ItemStack(var3) : null;
+                            --this.field_145957_n[1].stackSize;
+
+                            if (this.field_145957_n[1].stackSize == 0)
+                            {
+                                Item var3 = this.field_145957_n[1].getItem().getContainerItem();
+                                this.field_145957_n[1] = var3 != null ? new ItemStack(var3) : null;
+                            }
                         }
                     }
                 }
-            }
 
-            if (this.func_145950_i() && this.func_145948_k())
-            {
-                ++this.field_145961_j;
+                if (this.func_145950_i() && this.func_145948_k())
+                {
+                    ++this.field_145961_j;
 
-                if (this.field_145961_j == 200)
+                    if (this.field_145961_j == 200)
+                    {
+                        this.field_145961_j = 0;
+                        this.func_145949_j();
+                        var2 = true;
+                    }
+                }
+                else
                 {
                     this.field_145961_j = 0;
-                    this.func_145949_j();
-                    var2 = true;
                 }
-            }
-            else
-            {
-                this.field_145961_j = 0;
             }
 
             if (var1 != this.field_145956_a > 0)
@@ -353,9 +356,9 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
      */
-    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+    public boolean isUseableByPlayer(EntityPlayer p_70300_1_)
     {
-        return this.worldObj.getTileEntity(this.field_145851_c, this.field_145848_d, this.field_145849_e) != this ? false : par1EntityPlayer.getDistanceSq((double)this.field_145851_c + 0.5D, (double)this.field_145848_d + 0.5D, (double)this.field_145849_e + 0.5D) <= 64.0D;
+        return this.worldObj.getTileEntity(this.field_145851_c, this.field_145848_d, this.field_145849_e) != this ? false : p_70300_1_.getDistanceSq((double)this.field_145851_c + 0.5D, (double)this.field_145848_d + 0.5D, (double)this.field_145849_e + 0.5D) <= 64.0D;
     }
 
     public void openInventory() {}
@@ -365,35 +368,35 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      */
-    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
+    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_)
     {
-        return par1 == 2 ? false : (par1 == 1 ? func_145954_b(par2ItemStack) : true);
+        return p_94041_1_ == 2 ? false : (p_94041_1_ == 1 ? func_145954_b(p_94041_2_) : true);
     }
 
     /**
      * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
      * block.
      */
-    public int[] getAccessibleSlotsFromSide(int par1)
+    public int[] getAccessibleSlotsFromSide(int p_94128_1_)
     {
-        return par1 == 0 ? field_145959_l : (par1 == 1 ? field_145962_k : field_145960_m);
+        return p_94128_1_ == 0 ? field_145959_l : (p_94128_1_ == 1 ? field_145962_k : field_145960_m);
     }
 
     /**
      * Returns true if automation can insert the given item in the given slot from the given side. Args: Slot, item,
      * side
      */
-    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3)
+    public boolean canInsertItem(int p_102007_1_, ItemStack p_102007_2_, int p_102007_3_)
     {
-        return this.isItemValidForSlot(par1, par2ItemStack);
+        return this.isItemValidForSlot(p_102007_1_, p_102007_2_);
     }
 
     /**
      * Returns true if automation can extract the given item in the given slot from the given side. Args: Slot, item,
      * side
      */
-    public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
+    public boolean canExtractItem(int p_102008_1_, ItemStack p_102008_2_, int p_102008_3_)
     {
-        return par3 != 0 || par1 != 1 || par2ItemStack.getItem() == Items.bucket;
+        return p_102008_3_ != 0 || p_102008_1_ != 1 || p_102008_2_.getItem() == Items.bucket;
     }
 }

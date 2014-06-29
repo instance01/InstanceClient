@@ -11,9 +11,9 @@ public class EntityAISit extends EntityAIBase
     private boolean isSitting;
     private static final String __OBFID = "CL_00001613";
 
-    public EntityAISit(EntityTameable par1EntityTameable)
+    public EntityAISit(EntityTameable p_i1654_1_)
     {
-        this.theEntity = par1EntityTameable;
+        this.theEntity = p_i1654_1_;
         this.setMutexBits(5);
     }
 
@@ -61,8 +61,8 @@ public class EntityAISit extends EntityAIBase
     /**
      * Sets the sitting flag.
      */
-    public void setSitting(boolean par1)
+    public void setSitting(boolean p_75270_1_)
     {
-        this.isSitting = par1;
+        this.isSitting = p_75270_1_;
     }
 }

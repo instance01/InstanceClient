@@ -19,9 +19,9 @@ public class GuiInventory extends InventoryEffectRenderer
     private float field_147047_v;
     private static final String __OBFID = "CL_00000761";
 
-    public GuiInventory(EntityPlayer par1EntityPlayer)
+    public GuiInventory(EntityPlayer p_i1094_1_)
     {
-        super(par1EntityPlayer.inventoryContainer);
+        super(p_i1094_1_.inventoryContainer);
         this.field_146291_p = true;
     }
 
@@ -61,11 +61,11 @@ public class GuiInventory extends InventoryEffectRenderer
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
-        super.drawScreen(par1, par2, par3);
-        this.field_147048_u = (float)par1;
-        this.field_147047_v = (float)par2;
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
+        this.field_147048_u = (float)p_73863_1_;
+        this.field_147047_v = (float)p_73863_2_;
     }
 
     protected void func_146976_a(float p_146976_1_, int p_146976_2_, int p_146976_3_)

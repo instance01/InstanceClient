@@ -52,9 +52,9 @@ public class S23PacketBlockChange extends Packet
         p_148840_1_.writeByte(this.field_148884_e);
     }
 
-    public void processPacket(INetHandlerPlayClient p_148882_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_148882_1_.handleBlockChange(this);
+        p_148833_1_.handleBlockChange(this);
     }
 
     /**

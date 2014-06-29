@@ -16,20 +16,20 @@ public class AttributeModifier
     private boolean isSaved;
     private static final String __OBFID = "CL_00001564";
 
-    public AttributeModifier(String par1Str, double par2, int par4)
+    public AttributeModifier(String p_i1605_1_, double p_i1605_2_, int p_i1605_4_)
     {
-        this(UUID.randomUUID(), par1Str, par2, par4);
+        this(UUID.randomUUID(), p_i1605_1_, p_i1605_2_, p_i1605_4_);
     }
 
-    public AttributeModifier(UUID par1UUID, String par2Str, double par3, int par5)
+    public AttributeModifier(UUID p_i1606_1_, String p_i1606_2_, double p_i1606_3_, int p_i1606_5_)
     {
         this.isSaved = true;
-        this.id = par1UUID;
-        this.name = par2Str;
-        this.amount = par3;
-        this.operation = par5;
-        Validate.notEmpty(par2Str, "Modifier name cannot be empty", new Object[0]);
-        Validate.inclusiveBetween(Integer.valueOf(0), Integer.valueOf(2), Integer.valueOf(par5), "Invalid operation", new Object[0]);
+        this.id = p_i1606_1_;
+        this.name = p_i1606_2_;
+        this.amount = p_i1606_3_;
+        this.operation = p_i1606_5_;
+        Validate.notEmpty(p_i1606_2_, "Modifier name cannot be empty", new Object[0]);
+        Validate.inclusiveBetween(Integer.valueOf(0), Integer.valueOf(2), Integer.valueOf(p_i1606_5_), "Invalid operation", new Object[0]);
     }
 
     public UUID getID()
@@ -63,21 +63,21 @@ public class AttributeModifier
     /**
      * @see #isSaved
      */
-    public AttributeModifier setSaved(boolean par1)
+    public AttributeModifier setSaved(boolean p_111168_1_)
     {
-        this.isSaved = par1;
+        this.isSaved = p_111168_1_;
         return this;
     }
 
-    public boolean equals(Object par1Obj)
+    public boolean equals(Object p_equals_1_)
     {
-        if (this == par1Obj)
+        if (this == p_equals_1_)
         {
             return true;
         }
-        else if (par1Obj != null && this.getClass() == par1Obj.getClass())
+        else if (p_equals_1_ != null && this.getClass() == p_equals_1_.getClass())
         {
-            AttributeModifier var2 = (AttributeModifier)par1Obj;
+            AttributeModifier var2 = (AttributeModifier)p_equals_1_;
 
             if (this.id != null)
             {

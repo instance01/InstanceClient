@@ -17,20 +17,20 @@ public class ItemFireworkCharge extends Item
     /**
      * Gets an icon index based on an item's damage value and the given render pass
      */
-    public IIcon getIconFromDamageForRenderPass(int par1, int par2)
+    public IIcon getIconFromDamageForRenderPass(int p_77618_1_, int p_77618_2_)
     {
-        return par2 > 0 ? this.field_150904_a : super.getIconFromDamageForRenderPass(par1, par2);
+        return p_77618_2_ > 0 ? this.field_150904_a : super.getIconFromDamageForRenderPass(p_77618_1_, p_77618_2_);
     }
 
-    public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
+    public int getColorFromItemStack(ItemStack p_82790_1_, int p_82790_2_)
     {
-        if (par2 != 1)
+        if (p_82790_2_ != 1)
         {
-            return super.getColorFromItemStack(par1ItemStack, par2);
+            return super.getColorFromItemStack(p_82790_1_, p_82790_2_);
         }
         else
         {
-            NBTBase var3 = func_150903_a(par1ItemStack, "Colors");
+            NBTBase var3 = func_150903_a(p_82790_1_, "Colors");
 
             if (var3 != null && var3 instanceof NBTTagIntArray)
             {
@@ -93,15 +93,15 @@ public class ItemFireworkCharge extends Item
     /**
      * allows items to add custom lines of information to the mouseover description
      */
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+    public void addInformation(ItemStack p_77624_1_, EntityPlayer p_77624_2_, List p_77624_3_, boolean p_77624_4_)
     {
-        if (par1ItemStack.hasTagCompound())
+        if (p_77624_1_.hasTagCompound())
         {
-            NBTTagCompound var5 = par1ItemStack.getTagCompound().getCompoundTag("Explosion");
+            NBTTagCompound var5 = p_77624_1_.getTagCompound().getCompoundTag("Explosion");
 
             if (var5 != null)
             {
-                func_150902_a(var5, par3List);
+                func_150902_a(var5, p_77624_3_);
             }
         }
     }
@@ -162,25 +162,25 @@ public class ItemFireworkCharge extends Item
         }
 
         int[] var13 = p_150902_0_.getIntArray("FadeColors");
-        boolean var16;
+        boolean var14;
 
         if (var13.length > 0)
         {
-            var16 = true;
-            String var14 = StatCollector.translateToLocal("item.fireworksCharge.fadeTo") + " ";
-            int[] var15 = var13;
+            var14 = true;
+            String var15 = StatCollector.translateToLocal("item.fireworksCharge.fadeTo") + " ";
+            int[] var17 = var13;
             var8 = var13.length;
 
             for (var9 = 0; var9 < var8; ++var9)
             {
-                int var18 = var15[var9];
+                int var18 = var17[var9];
 
-                if (!var16)
+                if (!var14)
                 {
-                    var14 = var14 + ", ";
+                    var15 = var15 + ", ";
                 }
 
-                var16 = false;
+                var14 = false;
                 boolean var19 = false;
 
                 for (int var12 = 0; var12 < 16; ++var12)
@@ -188,38 +188,38 @@ public class ItemFireworkCharge extends Item
                     if (var18 == ItemDye.field_150922_c[var12])
                     {
                         var19 = true;
-                        var14 = var14 + StatCollector.translateToLocal("item.fireworksCharge." + ItemDye.field_150923_a[var12]);
+                        var15 = var15 + StatCollector.translateToLocal("item.fireworksCharge." + ItemDye.field_150923_a[var12]);
                         break;
                     }
                 }
 
                 if (!var19)
                 {
-                    var14 = var14 + StatCollector.translateToLocal("item.fireworksCharge.customColor");
+                    var15 = var15 + StatCollector.translateToLocal("item.fireworksCharge.customColor");
                 }
             }
 
-            p_150902_1_.add(var14);
+            p_150902_1_.add(var15);
         }
 
-        var16 = p_150902_0_.getBoolean("Trail");
+        var14 = p_150902_0_.getBoolean("Trail");
 
-        if (var16)
+        if (var14)
         {
             p_150902_1_.add(StatCollector.translateToLocal("item.fireworksCharge.trail"));
         }
 
-        boolean var17 = p_150902_0_.getBoolean("Flicker");
+        boolean var16 = p_150902_0_.getBoolean("Flicker");
 
-        if (var17)
+        if (var16)
         {
             p_150902_1_.add(StatCollector.translateToLocal("item.fireworksCharge.flicker"));
         }
     }
 
-    public void registerIcons(IIconRegister par1IconRegister)
+    public void registerIcons(IIconRegister p_94581_1_)
     {
-        super.registerIcons(par1IconRegister);
-        this.field_150904_a = par1IconRegister.registerIcon(this.getIconString() + "_overlay");
+        super.registerIcons(p_94581_1_);
+        this.field_150904_a = p_94581_1_.registerIcon(this.getIconString() + "_overlay");
     }
 }

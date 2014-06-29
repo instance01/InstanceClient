@@ -8,12 +8,12 @@ public class Language implements Comparable
     private final boolean bidirectional;
     private static final String __OBFID = "CL_00001095";
 
-    public Language(String par1Str, String par2Str, String par3Str, boolean par4)
+    public Language(String p_i1303_1_, String p_i1303_2_, String p_i1303_3_, boolean p_i1303_4_)
     {
-        this.languageCode = par1Str;
-        this.region = par2Str;
-        this.name = par3Str;
-        this.bidirectional = par4;
+        this.languageCode = p_i1303_1_;
+        this.region = p_i1303_2_;
+        this.name = p_i1303_3_;
+        this.bidirectional = p_i1303_4_;
     }
 
     public String getLanguageCode()
@@ -31,9 +31,9 @@ public class Language implements Comparable
         return String.format("%s (%s)", new Object[] {this.name, this.region});
     }
 
-    public boolean equals(Object par1Obj)
+    public boolean equals(Object p_equals_1_)
     {
-        return this == par1Obj ? true : (!(par1Obj instanceof Language) ? false : this.languageCode.equals(((Language)par1Obj).languageCode));
+        return this == p_equals_1_ ? true : (!(p_equals_1_ instanceof Language) ? false : this.languageCode.equals(((Language)p_equals_1_).languageCode));
     }
 
     public int hashCode()
@@ -41,13 +41,13 @@ public class Language implements Comparable
         return this.languageCode.hashCode();
     }
 
-    public int compareTo(Language par1Language)
+    public int compareTo(Language p_compareTo_1_)
     {
-        return this.languageCode.compareTo(par1Language.languageCode);
+        return this.languageCode.compareTo(p_compareTo_1_.languageCode);
     }
 
-    public int compareTo(Object par1Obj)
+    public int compareTo(Object p_compareTo_1_)
     {
-        return this.compareTo((Language)par1Obj);
+        return this.compareTo((Language)p_compareTo_1_);
     }
 }

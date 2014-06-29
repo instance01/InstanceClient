@@ -7,9 +7,9 @@ public class EntityGiantZombie extends EntityMob
 {
     private static final String __OBFID = "CL_00001690";
 
-    public EntityGiantZombie(World par1World)
+    public EntityGiantZombie(World p_i1736_1_)
     {
-        super(par1World);
+        super(p_i1736_1_);
         this.yOffset *= 6.0F;
         this.setSize(this.width * 6.0F, this.height * 6.0F);
     }
@@ -26,8 +26,8 @@ public class EntityGiantZombie extends EntityMob
      * Takes a coordinate in and returns a weight to determine how likely this creature will try to path to the block.
      * Args: x, y, z
      */
-    public float getBlockPathWeight(int par1, int par2, int par3)
+    public float getBlockPathWeight(int p_70783_1_, int p_70783_2_, int p_70783_3_)
     {
-        return this.worldObj.getLightBrightness(par1, par2, par3) - 0.5F;
+        return this.worldObj.getLightBrightness(p_70783_1_, p_70783_2_, p_70783_3_) - 0.5F;
     }
 }

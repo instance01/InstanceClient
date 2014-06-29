@@ -7,10 +7,10 @@ public class FontMetadataSection implements IMetadataSection
     private final float[] charSpacings;
     private static final String __OBFID = "CL_00001108";
 
-    public FontMetadataSection(float[] par1ArrayOfFloat, float[] par2ArrayOfFloat, float[] par3ArrayOfFloat)
+    public FontMetadataSection(float[] p_i1310_1_, float[] p_i1310_2_, float[] p_i1310_3_)
     {
-        this.charWidths = par1ArrayOfFloat;
-        this.charLefts = par2ArrayOfFloat;
-        this.charSpacings = par3ArrayOfFloat;
+        this.charWidths = p_i1310_1_;
+        this.charLefts = p_i1310_2_;
+        this.charSpacings = p_i1310_3_;
     }
 }

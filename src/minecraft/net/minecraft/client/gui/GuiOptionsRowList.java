@@ -39,9 +39,9 @@ public class GuiOptionsRowList extends GuiListExtended
         }
     }
 
-    public GuiOptionsRowList.Row func_148180_b(int p_148183_1_)
+    public GuiOptionsRowList.Row func_148180_b(int p_148180_1_)
     {
-        return (GuiOptionsRowList.Row)this.field_148184_k.get(p_148183_1_);
+        return (GuiOptionsRowList.Row)this.field_148184_k.get(p_148180_1_);
     }
 
     protected int getSize()

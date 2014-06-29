@@ -49,8 +49,6 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.comze_instancelabs.client.InstanceMain;
-
 public class RenderBlocks
 {
     /** The IBlockAccess used by this instance of RenderBlocks */
@@ -61,6 +59,7 @@ public class RenderBlocks
      * Set to true if the texture should be flipped horizontally during render*Face
      */
     private boolean flipTexture;
+    private boolean field_152631_f;
     private boolean renderAllFaces;
     public static boolean fancyGrass = true;
     public boolean useInventoryTint = true;
@@ -151,9 +150,11 @@ public class RenderBlocks
     private float colorBlueTopRight;
     private static final String __OBFID = "CL_00000940";
 
-    public RenderBlocks(IBlockAccess par1IBlockAccess)
+    public RenderBlocks(IBlockAccess p_i1251_1_)
     {
-        this.blockAccess = par1IBlockAccess;
+        this.blockAccess = p_i1251_1_;
+        this.field_152631_f = false;
+        this.flipTexture = false;
         this.minecraftRB = Minecraft.getMinecraft();
     }
 
@@ -498,40 +499,40 @@ public class RenderBlocks
         }
 
         var5.setColorOpaque_F(var7, var8, var9);
-        IIcon var32 = this.getBlockIconFromSideAndMetadata(p_147741_1_, 0, 0);
+        IIcon var31 = this.getBlockIconFromSideAndMetadata(p_147741_1_, 0, 0);
 
         if (this.hasOverrideBlockTexture())
         {
-            var32 = this.overrideBlockTexture;
+            var31 = this.overrideBlockTexture;
         }
 
-        double var31 = (double)var32.getMinV();
-        double var13 = (double)var32.getMaxV();
+        double var32 = (double)var31.getMinV();
+        double var13 = (double)var31.getMaxV();
         int var15 = this.blockAccess.getBlockMetadata(p_147741_2_, p_147741_3_, p_147741_4_);
 
         for (int var16 = 0; var16 < 3; ++var16)
         {
             double var17 = (double)var16 * Math.PI * 2.0D / 3.0D + (Math.PI / 2D);
-            double var19 = (double)var32.getInterpolatedU(8.0D);
-            double var21 = (double)var32.getMaxU();
+            double var19 = (double)var31.getInterpolatedU(8.0D);
+            double var21 = (double)var31.getMaxU();
 
             if ((var15 & 1 << var16) != 0)
             {
-                var21 = (double)var32.getMinU();
+                var21 = (double)var31.getMinU();
             }
 
             double var23 = (double)p_147741_2_ + 0.5D;
             double var25 = (double)p_147741_2_ + 0.5D + Math.sin(var17) * 8.0D / 16.0D;
             double var27 = (double)p_147741_4_ + 0.5D;
             double var29 = (double)p_147741_4_ + 0.5D + Math.cos(var17) * 8.0D / 16.0D;
-            var5.addVertexWithUV(var23, (double)(p_147741_3_ + 1), var27, var19, var31);
+            var5.addVertexWithUV(var23, (double)(p_147741_3_ + 1), var27, var19, var32);
             var5.addVertexWithUV(var23, (double)(p_147741_3_ + 0), var27, var19, var13);
             var5.addVertexWithUV(var25, (double)(p_147741_3_ + 0), var29, var21, var13);
-            var5.addVertexWithUV(var25, (double)(p_147741_3_ + 1), var29, var21, var31);
-            var5.addVertexWithUV(var25, (double)(p_147741_3_ + 1), var29, var21, var31);
+            var5.addVertexWithUV(var25, (double)(p_147741_3_ + 1), var29, var21, var32);
+            var5.addVertexWithUV(var25, (double)(p_147741_3_ + 1), var29, var21, var32);
             var5.addVertexWithUV(var25, (double)(p_147741_3_ + 0), var29, var21, var13);
             var5.addVertexWithUV(var23, (double)(p_147741_3_ + 0), var27, var19, var13);
-            var5.addVertexWithUV(var23, (double)(p_147741_3_ + 1), var27, var19, var31);
+            var5.addVertexWithUV(var23, (double)(p_147741_3_ + 1), var27, var19, var32);
         }
 
         p_147741_1_.setBlockBoundsForItemRender();
@@ -1403,14 +1404,14 @@ public class RenderBlocks
         float var23 = 0.0625F;
         float var24 = 0.0625F;
         float var25 = 0.625F;
-        var22[0] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)(-var23), 0.0D, (double)(-var24));
-        var22[1] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)var23, 0.0D, (double)(-var24));
-        var22[2] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)var23, 0.0D, (double)var24);
-        var22[3] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)(-var23), 0.0D, (double)var24);
-        var22[4] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)(-var23), (double)var25, (double)(-var24));
-        var22[5] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)var23, (double)var25, (double)(-var24));
-        var22[6] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)var23, (double)var25, (double)var24);
-        var22[7] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)(-var23), (double)var25, (double)var24);
+        var22[0] = Vec3.createVectorHelper((double)(-var23), 0.0D, (double)(-var24));
+        var22[1] = Vec3.createVectorHelper((double)var23, 0.0D, (double)(-var24));
+        var22[2] = Vec3.createVectorHelper((double)var23, 0.0D, (double)var24);
+        var22[3] = Vec3.createVectorHelper((double)(-var23), 0.0D, (double)var24);
+        var22[4] = Vec3.createVectorHelper((double)(-var23), (double)var25, (double)(-var24));
+        var22[5] = Vec3.createVectorHelper((double)var23, (double)var25, (double)(-var24));
+        var22[6] = Vec3.createVectorHelper((double)var23, (double)var25, (double)var24);
+        var22[7] = Vec3.createVectorHelper((double)(-var23), (double)var25, (double)var24);
 
         for (int var26 = 0; var26 < 8; ++var26)
         {
@@ -1614,14 +1615,14 @@ public class RenderBlocks
         float var27 = 0.046875F;
         float var28 = 0.046875F;
         float var29 = 0.3125F;
-        var26[0] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)(-var27), 0.0D, (double)(-var28));
-        var26[1] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)var27, 0.0D, (double)(-var28));
-        var26[2] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)var27, 0.0D, (double)var28);
-        var26[3] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)(-var27), 0.0D, (double)var28);
-        var26[4] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)(-var27), (double)var29, (double)(-var28));
-        var26[5] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)var27, (double)var29, (double)(-var28));
-        var26[6] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)var27, (double)var29, (double)var28);
-        var26[7] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)(-var27), (double)var29, (double)var28);
+        var26[0] = Vec3.createVectorHelper((double)(-var27), 0.0D, (double)(-var28));
+        var26[1] = Vec3.createVectorHelper((double)var27, 0.0D, (double)(-var28));
+        var26[2] = Vec3.createVectorHelper((double)var27, 0.0D, (double)var28);
+        var26[3] = Vec3.createVectorHelper((double)(-var27), 0.0D, (double)var28);
+        var26[4] = Vec3.createVectorHelper((double)(-var27), (double)var29, (double)(-var28));
+        var26[5] = Vec3.createVectorHelper((double)var27, (double)var29, (double)(-var28));
+        var26[6] = Vec3.createVectorHelper((double)var27, (double)var29, (double)var28);
+        var26[7] = Vec3.createVectorHelper((double)(-var27), (double)var29, (double)var28);
 
         for (int var30 = 0; var30 < 8; ++var30)
         {
@@ -1741,14 +1742,14 @@ public class RenderBlocks
         float var61 = 0.09375F;
         float var39 = 0.09375F;
         float var40 = 0.03125F;
-        var26[0] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)(-var61), 0.0D, (double)(-var39));
-        var26[1] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)var61, 0.0D, (double)(-var39));
-        var26[2] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)var61, 0.0D, (double)var39);
-        var26[3] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)(-var61), 0.0D, (double)var39);
-        var26[4] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)(-var61), (double)var40, (double)(-var39));
-        var26[5] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)var61, (double)var40, (double)(-var39));
-        var26[6] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)var61, (double)var40, (double)var39);
-        var26[7] = this.blockAccess.getWorldVec3Pool().getVecFromPool((double)(-var61), (double)var40, (double)var39);
+        var26[0] = Vec3.createVectorHelper((double)(-var61), 0.0D, (double)(-var39));
+        var26[1] = Vec3.createVectorHelper((double)var61, 0.0D, (double)(-var39));
+        var26[2] = Vec3.createVectorHelper((double)var61, 0.0D, (double)var39);
+        var26[3] = Vec3.createVectorHelper((double)(-var61), 0.0D, (double)var39);
+        var26[4] = Vec3.createVectorHelper((double)(-var61), (double)var40, (double)(-var39));
+        var26[5] = Vec3.createVectorHelper((double)var61, (double)var40, (double)(-var39));
+        var26[6] = Vec3.createVectorHelper((double)var61, (double)var40, (double)var39);
+        var26[7] = Vec3.createVectorHelper((double)(-var61), (double)var40, (double)var39);
 
         for (int var41 = 0; var41 < 8; ++var41)
         {
@@ -2074,13 +2075,13 @@ public class RenderBlocks
         double var13 = (double)var8.getMaxU();
         double var15 = (double)var8.getMaxV();
         float var17 = 1.4F;
-        double var32;
         double var20;
         double var22;
         double var24;
         double var26;
         double var28;
         double var30;
+        double var32;
 
         if (!World.doesBlockHaveSolidTopSurface(this.blockAccess, p_147801_2_, p_147801_3_ - 1, p_147801_4_) && !Blocks.fire.func_149844_e(this.blockAccess, p_147801_2_, p_147801_3_ - 1, p_147801_4_))
         {
@@ -3128,8 +3129,8 @@ public class RenderBlocks
         }
 
         var6.setColorOpaque_F(var8, var9, var10);
-        IIcon var64;
         IIcon var63;
+        IIcon var64;
 
         if (this.hasOverrideBlockTexture())
         {
@@ -3138,12 +3139,12 @@ public class RenderBlocks
         }
         else
         {
-            int var66 = this.blockAccess.getBlockMetadata(p_147767_2_, p_147767_3_, p_147767_4_);
-            var63 = this.getBlockIconFromSideAndMetadata(p_147767_1_, 0, var66);
+            int var65 = this.blockAccess.getBlockMetadata(p_147767_2_, p_147767_3_, p_147767_4_);
+            var63 = this.getBlockIconFromSideAndMetadata(p_147767_1_, 0, var65);
             var64 = p_147767_1_.func_150097_e();
         }
 
-        double var65 = (double)var63.getMinU();
+        double var66 = (double)var63.getMinU();
         double var15 = (double)var63.getInterpolatedU(8.0D);
         double var17 = (double)var63.getMaxU();
         double var19 = (double)var63.getMinV();
@@ -3176,12 +3177,12 @@ public class RenderBlocks
         {
             if (var55 && !var56)
             {
-                var6.addVertexWithUV(var33, (double)(p_147767_3_ + 1), var41, var65, var19);
-                var6.addVertexWithUV(var33, (double)(p_147767_3_ + 0), var41, var65, var21);
+                var6.addVertexWithUV(var33, (double)(p_147767_3_ + 1), var41, var66, var19);
+                var6.addVertexWithUV(var33, (double)(p_147767_3_ + 0), var41, var66, var21);
                 var6.addVertexWithUV(var35, (double)(p_147767_3_ + 0), var41, var15, var21);
                 var6.addVertexWithUV(var35, (double)(p_147767_3_ + 1), var41, var15, var19);
-                var6.addVertexWithUV(var35, (double)(p_147767_3_ + 1), var41, var65, var19);
-                var6.addVertexWithUV(var35, (double)(p_147767_3_ + 0), var41, var65, var21);
+                var6.addVertexWithUV(var35, (double)(p_147767_3_ + 1), var41, var66, var19);
+                var6.addVertexWithUV(var35, (double)(p_147767_3_ + 0), var41, var66, var21);
                 var6.addVertexWithUV(var33, (double)(p_147767_3_ + 0), var41, var15, var21);
                 var6.addVertexWithUV(var33, (double)(p_147767_3_ + 1), var41, var15, var19);
 
@@ -3271,12 +3272,12 @@ public class RenderBlocks
         }
         else
         {
-            var6.addVertexWithUV(var33, (double)(p_147767_3_ + 1), var41, var65, var19);
-            var6.addVertexWithUV(var33, (double)(p_147767_3_ + 0), var41, var65, var21);
+            var6.addVertexWithUV(var33, (double)(p_147767_3_ + 1), var41, var66, var19);
+            var6.addVertexWithUV(var33, (double)(p_147767_3_ + 0), var41, var66, var21);
             var6.addVertexWithUV(var37, (double)(p_147767_3_ + 0), var41, var17, var21);
             var6.addVertexWithUV(var37, (double)(p_147767_3_ + 1), var41, var17, var19);
-            var6.addVertexWithUV(var37, (double)(p_147767_3_ + 1), var41, var65, var19);
-            var6.addVertexWithUV(var37, (double)(p_147767_3_ + 0), var41, var65, var21);
+            var6.addVertexWithUV(var37, (double)(p_147767_3_ + 1), var41, var66, var19);
+            var6.addVertexWithUV(var37, (double)(p_147767_3_ + 0), var41, var66, var21);
             var6.addVertexWithUV(var33, (double)(p_147767_3_ + 0), var41, var17, var21);
             var6.addVertexWithUV(var33, (double)(p_147767_3_ + 1), var41, var17, var19);
 
@@ -3361,12 +3362,12 @@ public class RenderBlocks
         {
             if (var53 && !var54)
             {
-                var6.addVertexWithUV(var35, (double)(p_147767_3_ + 1), var39, var65, var19);
-                var6.addVertexWithUV(var35, (double)(p_147767_3_ + 0), var39, var65, var21);
+                var6.addVertexWithUV(var35, (double)(p_147767_3_ + 1), var39, var66, var19);
+                var6.addVertexWithUV(var35, (double)(p_147767_3_ + 0), var39, var66, var21);
                 var6.addVertexWithUV(var35, (double)(p_147767_3_ + 0), var41, var15, var21);
                 var6.addVertexWithUV(var35, (double)(p_147767_3_ + 1), var41, var15, var19);
-                var6.addVertexWithUV(var35, (double)(p_147767_3_ + 1), var41, var65, var19);
-                var6.addVertexWithUV(var35, (double)(p_147767_3_ + 0), var41, var65, var21);
+                var6.addVertexWithUV(var35, (double)(p_147767_3_ + 1), var41, var66, var19);
+                var6.addVertexWithUV(var35, (double)(p_147767_3_ + 0), var41, var66, var21);
                 var6.addVertexWithUV(var35, (double)(p_147767_3_ + 0), var39, var15, var21);
                 var6.addVertexWithUV(var35, (double)(p_147767_3_ + 1), var39, var15, var19);
 
@@ -3456,12 +3457,12 @@ public class RenderBlocks
         }
         else
         {
-            var6.addVertexWithUV(var35, (double)(p_147767_3_ + 1), var43, var65, var19);
-            var6.addVertexWithUV(var35, (double)(p_147767_3_ + 0), var43, var65, var21);
+            var6.addVertexWithUV(var35, (double)(p_147767_3_ + 1), var43, var66, var19);
+            var6.addVertexWithUV(var35, (double)(p_147767_3_ + 0), var43, var66, var21);
             var6.addVertexWithUV(var35, (double)(p_147767_3_ + 0), var39, var17, var21);
             var6.addVertexWithUV(var35, (double)(p_147767_3_ + 1), var39, var17, var19);
-            var6.addVertexWithUV(var35, (double)(p_147767_3_ + 1), var39, var65, var19);
-            var6.addVertexWithUV(var35, (double)(p_147767_3_ + 0), var39, var65, var21);
+            var6.addVertexWithUV(var35, (double)(p_147767_3_ + 1), var39, var66, var19);
+            var6.addVertexWithUV(var35, (double)(p_147767_3_ + 0), var39, var66, var21);
             var6.addVertexWithUV(var35, (double)(p_147767_3_ + 0), var43, var17, var21);
             var6.addVertexWithUV(var35, (double)(p_147767_3_ + 1), var43, var17, var19);
 
@@ -4027,9 +4028,9 @@ public class RenderBlocks
             double var28 = (double)this.getFluidHeight(p_147721_2_ + 1, p_147721_3_, p_147721_4_ + 1, var22);
             double var30 = (double)this.getFluidHeight(p_147721_2_ + 1, p_147721_3_, p_147721_4_, var22);
             double var32 = 0.0010000000474974513D;
-            float var54;
-            float var53;
             float var52;
+            float var53;
+            float var54;
 
             if (this.renderAllFaces || var10)
             {
@@ -4046,14 +4047,14 @@ public class RenderBlocks
                 var26 -= var32;
                 var28 -= var32;
                 var30 -= var32;
-                double var38;
                 double var36;
-                double var42;
+                double var38;
                 double var40;
-                double var46;
+                double var42;
                 double var44;
-                double var50;
+                double var46;
                 double var48;
+                double var50;
 
                 if (var35 < -999.0F)
                 {
@@ -4087,6 +4088,10 @@ public class RenderBlocks
                 var5.addVertexWithUV((double)(p_147721_2_ + 0), (double)p_147721_3_ + var26, (double)(p_147721_4_ + 1), var38, var46);
                 var5.addVertexWithUV((double)(p_147721_2_ + 1), (double)p_147721_3_ + var28, (double)(p_147721_4_ + 1), var40, var48);
                 var5.addVertexWithUV((double)(p_147721_2_ + 1), (double)p_147721_3_ + var30, (double)(p_147721_4_ + 0), var42, var50);
+                var5.addVertexWithUV((double)(p_147721_2_ + 0), (double)p_147721_3_ + var24, (double)(p_147721_4_ + 0), var36, var44);
+                var5.addVertexWithUV((double)(p_147721_2_ + 1), (double)p_147721_3_ + var30, (double)(p_147721_4_ + 0), var42, var50);
+                var5.addVertexWithUV((double)(p_147721_2_ + 1), (double)p_147721_3_ + var28, (double)(p_147721_4_ + 1), var40, var48);
+                var5.addVertexWithUV((double)(p_147721_2_ + 0), (double)p_147721_3_ + var26, (double)(p_147721_4_ + 1), var38, var46);
             }
 
             if (this.renderAllFaces || var11)
@@ -4127,10 +4132,10 @@ public class RenderBlocks
                 if (this.renderAllFaces || var12[var57])
                 {
                     double var39;
-                    double var43;
                     double var41;
-                    double var47;
+                    double var43;
                     double var45;
+                    double var47;
                     double var49;
 
                     if (var57 == 0)
@@ -4184,6 +4189,10 @@ public class RenderBlocks
                     var5.addVertexWithUV(var47, (double)p_147721_3_ + var41, var49, (double)var52, (double)var54);
                     var5.addVertexWithUV(var47, (double)(p_147721_3_ + 0), var49, (double)var52, (double)var55);
                     var5.addVertexWithUV(var43, (double)(p_147721_3_ + 0), var45, (double)var51, (double)var55);
+                    var5.addVertexWithUV(var43, (double)(p_147721_3_ + 0), var45, (double)var51, (double)var55);
+                    var5.addVertexWithUV(var47, (double)(p_147721_3_ + 0), var49, (double)var52, (double)var55);
+                    var5.addVertexWithUV(var47, (double)p_147721_3_ + var41, var49, (double)var52, (double)var54);
+                    var5.addVertexWithUV(var43, (double)p_147721_3_ + var39, var45, (double)var51, (double)var53);
                 }
             }
 
@@ -4357,12 +4366,12 @@ public class RenderBlocks
             var13 = false;
         }
 
-        boolean var17;
         boolean var16;
-        boolean var19;
+        boolean var17;
         boolean var18;
-        float var21;
+        boolean var19;
         int var20;
+        float var21;
 
         if (this.renderAllFaces || p_147751_1_.shouldSideBeRendered(this.blockAccess, p_147751_2_, p_147751_3_ - 1, p_147751_4_, 0))
         {
@@ -5147,12 +5156,12 @@ public class RenderBlocks
             var13 = false;
         }
 
-        boolean var17;
         boolean var16;
-        boolean var19;
+        boolean var17;
         boolean var18;
-        float var21;
+        boolean var19;
         int var20;
+        float var21;
 
         if (this.renderAllFaces || p_147808_1_.shouldSideBeRendered(this.blockAccess, p_147808_2_, p_147808_3_ - 1, p_147808_4_, 0))
         {
@@ -5373,14 +5382,14 @@ public class RenderBlocks
             var8 = true;
         }
 
-        float var23;
         float var22;
-        float var25;
+        float var23;
         float var24;
-        int var27;
+        float var25;
         int var26;
-        int var29;
+        int var27;
         int var28;
+        int var29;
         IIcon var30;
 
         if (this.renderAllFaces || p_147808_1_.shouldSideBeRendered(this.blockAccess, p_147808_2_, p_147808_3_, p_147808_4_ - 1, 2))
@@ -6393,6 +6402,7 @@ public class RenderBlocks
         float var17 = var11 ? 1.0F : var7;
         float var18 = var12 ? 0.0F : var6;
         float var19 = var13 ? 1.0F : var7;
+        this.field_152631_f = true;
 
         if (var8)
         {
@@ -6425,6 +6435,7 @@ public class RenderBlocks
             var5 = true;
         }
 
+        this.field_152631_f = false;
         p_147735_1_.setBlockBoundsBasedOnState(this.blockAccess, p_147735_2_, p_147735_3_, p_147735_4_);
         return var5;
     }
@@ -6578,8 +6589,8 @@ public class RenderBlocks
 
         this.renderAllFaces = true;
         float var15;
-        float var17;
         float var16;
+        float var17;
         float var18;
 
         if (var8 != 3 && var8 != 1)
@@ -6619,8 +6630,8 @@ public class RenderBlocks
             }
 
             float var19;
-            float var21;
             float var20;
+            float var21;
 
             if (var8 == 3)
             {
@@ -6973,6 +6984,7 @@ public class RenderBlocks
         p_147722_1_.func_150147_e(this.blockAccess, p_147722_2_, p_147722_3_, p_147722_4_);
         this.setRenderBoundsFromBlock(p_147722_1_);
         this.renderStandardBlock(p_147722_1_, p_147722_2_, p_147722_3_, p_147722_4_);
+        this.field_152631_f = true;
         boolean var5 = p_147722_1_.func_150145_f(this.blockAccess, p_147722_2_, p_147722_3_, p_147722_4_);
         this.setRenderBoundsFromBlock(p_147722_1_);
         this.renderStandardBlock(p_147722_1_, p_147722_2_, p_147722_3_, p_147722_4_);
@@ -6983,6 +6995,7 @@ public class RenderBlocks
             this.renderStandardBlock(p_147722_1_, p_147722_2_, p_147722_3_, p_147722_4_);
         }
 
+        this.field_152631_f = false;
         return true;
     }
 
@@ -7263,8 +7276,15 @@ public class RenderBlocks
             p_147761_8_ = this.overrideBlockTexture;
         }
 
-        double var10 = (double)p_147761_8_.getInterpolatedU(this.renderMaxX * 16.0D);
-        double var12 = (double)p_147761_8_.getInterpolatedU(this.renderMinX * 16.0D);
+        double var10 = (double)p_147761_8_.getInterpolatedU(this.renderMinX * 16.0D);
+        double var12 = (double)p_147761_8_.getInterpolatedU(this.renderMaxX * 16.0D);
+
+        if (this.field_152631_f)
+        {
+            var12 = (double)p_147761_8_.getInterpolatedU((1.0D - this.renderMinX) * 16.0D);
+            var10 = (double)p_147761_8_.getInterpolatedU((1.0D - this.renderMaxX) * 16.0D);
+        }
+
         double var14 = (double)p_147761_8_.getInterpolatedV(16.0D - this.renderMaxY * 16.0D);
         double var16 = (double)p_147761_8_.getInterpolatedV(16.0D - this.renderMinY * 16.0D);
         double var18;
@@ -7296,8 +7316,8 @@ public class RenderBlocks
         if (this.uvRotateEast == 2)
         {
             var10 = (double)p_147761_8_.getInterpolatedU(this.renderMinY * 16.0D);
-            var14 = (double)p_147761_8_.getInterpolatedV(16.0D - this.renderMinX * 16.0D);
             var12 = (double)p_147761_8_.getInterpolatedU(this.renderMaxY * 16.0D);
+            var14 = (double)p_147761_8_.getInterpolatedV(16.0D - this.renderMinX * 16.0D);
             var16 = (double)p_147761_8_.getInterpolatedV(16.0D - this.renderMaxX * 16.0D);
             var22 = var14;
             var24 = var16;
@@ -7309,8 +7329,8 @@ public class RenderBlocks
         else if (this.uvRotateEast == 1)
         {
             var10 = (double)p_147761_8_.getInterpolatedU(16.0D - this.renderMaxY * 16.0D);
-            var14 = (double)p_147761_8_.getInterpolatedV(this.renderMaxX * 16.0D);
             var12 = (double)p_147761_8_.getInterpolatedU(16.0D - this.renderMinY * 16.0D);
+            var14 = (double)p_147761_8_.getInterpolatedV(this.renderMaxX * 16.0D);
             var16 = (double)p_147761_8_.getInterpolatedV(this.renderMinX * 16.0D);
             var18 = var12;
             var20 = var10;
@@ -7602,8 +7622,15 @@ public class RenderBlocks
             p_147764_8_ = this.overrideBlockTexture;
         }
 
-        double var10 = (double)p_147764_8_.getInterpolatedU(this.renderMaxZ * 16.0D);
-        double var12 = (double)p_147764_8_.getInterpolatedU(this.renderMinZ * 16.0D);
+        double var10 = (double)p_147764_8_.getInterpolatedU(this.renderMinZ * 16.0D);
+        double var12 = (double)p_147764_8_.getInterpolatedU(this.renderMaxZ * 16.0D);
+
+        if (this.field_152631_f)
+        {
+            var12 = (double)p_147764_8_.getInterpolatedU((1.0D - this.renderMinZ) * 16.0D);
+            var10 = (double)p_147764_8_.getInterpolatedU((1.0D - this.renderMaxZ) * 16.0D);
+        }
+
         double var14 = (double)p_147764_8_.getInterpolatedV(16.0D - this.renderMaxY * 16.0D);
         double var16 = (double)p_147764_8_.getInterpolatedV(16.0D - this.renderMinY * 16.0D);
         double var18;

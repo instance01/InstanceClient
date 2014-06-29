@@ -30,8 +30,13 @@ public class PingResponseHandler extends ChannelInboundHandlerAdapter
 
         try
         {
-            if (var3.readUnsignedByte() == 254)
+            try
             {
+                if (var3.readUnsignedByte() != 254)
+                {
+                    return;
+                }
+
                 InetSocketAddress var5 = (InetSocketAddress)p_channelRead_1_.channel().remoteAddress();
                 MinecraftServer var6 = this.field_151257_b.func_151267_d();
                 int var7 = var3.readableBytes();
@@ -57,33 +62,41 @@ public class PingResponseHandler extends ChannelInboundHandlerAdapter
                         break;
 
                     default:
-                        boolean var16 = var3.readUnsignedByte() == 1;
-                        var16 &= var3.readUnsignedByte() == 250;
-                        var16 &= "MC|PingHost".equals(new String(var3.readBytes(var3.readShort() * 2).array(), Charsets.UTF_16BE));
+                        boolean var23 = var3.readUnsignedByte() == 1;
+                        var23 &= var3.readUnsignedByte() == 250;
+                        var23 &= "MC|PingHost".equals(new String(var3.readBytes(var3.readShort() * 2).array(), Charsets.UTF_16BE));
                         int var9 = var3.readUnsignedShort();
-                        var16 &= var3.readUnsignedByte() >= 73;
-                        var16 &= 3 + var3.readBytes(var3.readShort() * 2).array().length + 4 == var9;
-                        var16 &= var3.readInt() <= 65535;
-                        var16 &= var3.readableBytes() == 0;
+                        var23 &= var3.readUnsignedByte() >= 73;
+                        var23 &= 3 + var3.readBytes(var3.readShort() * 2).array().length + 4 == var9;
+                        var23 &= var3.readInt() <= 65535;
+                        var23 &= var3.readableBytes() == 0;
 
-                        if (!var16)
+                        if (!var23)
                         {
                             return;
                         }
 
                         logger.debug("Ping: (1.6) from {}:{}", new Object[] {var5.getAddress(), Integer.valueOf(var5.getPort())});
                         String var10 = String.format("\u00a71\u0000%d\u0000%s\u0000%s\u0000%d\u0000%d", new Object[] {Integer.valueOf(127), var6.getMinecraftVersion(), var6.getMOTD(), Integer.valueOf(var6.getCurrentPlayerCount()), Integer.valueOf(var6.getMaxPlayers())});
-                        this.func_151256_a(p_channelRead_1_, this.func_151255_a(var10));
+                        ByteBuf var11 = this.func_151255_a(var10);
+
+                        try
+                        {
+                            this.func_151256_a(p_channelRead_1_, var11);
+                        }
+                        finally
+                        {
+                            var11.release();
+                        }
                 }
 
                 var3.release();
                 var4 = false;
-                return;
             }
-        }
-        catch (RuntimeException var14)
-        {
-            return;
+            catch (RuntimeException var21)
+            {
+                ;
+            }
         }
         finally
         {

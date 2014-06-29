@@ -54,9 +54,9 @@ public class S08PacketPlayerPosLook extends Packet
         p_148840_1_.writeBoolean(this.field_148935_f);
     }
 
-    public void processPacket(INetHandlerPlayClient p_148934_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_148934_1_.handlePlayerPosLook(this);
+        p_148833_1_.handlePlayerPosLook(this);
     }
 
     public double func_148932_c()

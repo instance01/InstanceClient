@@ -51,19 +51,19 @@ public class ModelSilverfish extends ModelBase
     /**
      * Sets the models various rotation angles then renders the model.
      */
-    public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
+    public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_)
     {
-        this.setRotationAngles(par2, par3, par4, par5, par6, par7, par1Entity);
+        this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, p_78088_7_, p_78088_1_);
         int var8;
 
         for (var8 = 0; var8 < this.silverfishBodyParts.length; ++var8)
         {
-            this.silverfishBodyParts[var8].render(par7);
+            this.silverfishBodyParts[var8].render(p_78088_7_);
         }
 
         for (var8 = 0; var8 < this.silverfishWings.length; ++var8)
         {
-            this.silverfishWings[var8].render(par7);
+            this.silverfishWings[var8].render(p_78088_7_);
         }
     }
 
@@ -72,12 +72,12 @@ public class ModelSilverfish extends ModelBase
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
      * "far" arms and legs can swing at most.
      */
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
+    public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity p_78087_7_)
     {
         for (int var8 = 0; var8 < this.silverfishBodyParts.length; ++var8)
         {
-            this.silverfishBodyParts[var8].rotateAngleY = MathHelper.cos(par3 * 0.9F + (float)var8 * 0.15F * (float)Math.PI) * (float)Math.PI * 0.05F * (float)(1 + Math.abs(var8 - 2));
-            this.silverfishBodyParts[var8].rotationPointX = MathHelper.sin(par3 * 0.9F + (float)var8 * 0.15F * (float)Math.PI) * (float)Math.PI * 0.2F * (float)Math.abs(var8 - 2);
+            this.silverfishBodyParts[var8].rotateAngleY = MathHelper.cos(p_78087_3_ * 0.9F + (float)var8 * 0.15F * (float)Math.PI) * (float)Math.PI * 0.05F * (float)(1 + Math.abs(var8 - 2));
+            this.silverfishBodyParts[var8].rotationPointX = MathHelper.sin(p_78087_3_ * 0.9F + (float)var8 * 0.15F * (float)Math.PI) * (float)Math.PI * 0.2F * (float)Math.abs(var8 - 2);
         }
 
         this.silverfishWings[0].rotateAngleY = this.silverfishBodyParts[2].rotateAngleY;

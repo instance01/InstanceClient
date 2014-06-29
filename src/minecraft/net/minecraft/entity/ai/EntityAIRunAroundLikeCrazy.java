@@ -14,10 +14,10 @@ public class EntityAIRunAroundLikeCrazy extends EntityAIBase
     private double field_111177_e;
     private static final String __OBFID = "CL_00001612";
 
-    public EntityAIRunAroundLikeCrazy(EntityHorse par1EntityHorse, double par2)
+    public EntityAIRunAroundLikeCrazy(EntityHorse p_i1653_1_, double p_i1653_2_)
     {
-        this.horseHost = par1EntityHorse;
-        this.field_111178_b = par2;
+        this.horseHost = p_i1653_1_;
+        this.field_111178_b = p_i1653_2_;
         this.setMutexBits(1);
     }
 

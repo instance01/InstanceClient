@@ -35,9 +35,9 @@ public class C14PacketTabComplete extends Packet
         p_148840_1_.writeStringToBuffer(StringUtils.substring(this.field_149420_a, 0, 32767));
     }
 
-    public void processPacket(INetHandlerPlayServer p_149418_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149418_1_.processTabComplete(this);
+        p_148833_1_.processTabComplete(this);
     }
 
     public String func_149419_c()

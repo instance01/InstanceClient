@@ -6,9 +6,9 @@ public class BiomeGenBeach extends BiomeGenBase
 {
     private static final String __OBFID = "CL_00000157";
 
-    public BiomeGenBeach(int par1)
+    public BiomeGenBeach(int p_i1969_1_)
     {
-        super(par1);
+        super(p_i1969_1_);
         this.spawnableCreatureList.clear();
         this.topBlock = Blocks.sand;
         this.fillerBlock = Blocks.sand;

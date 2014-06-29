@@ -34,9 +34,9 @@ public class C09PacketHeldItemChange extends Packet
         p_148840_1_.writeShort(this.field_149615_a);
     }
 
-    public void processPacket(INetHandlerPlayServer p_149613_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149613_1_.processHeldItemChange(this);
+        p_148833_1_.processHeldItemChange(this);
     }
 
     public int func_149614_c()

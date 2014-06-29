@@ -14,10 +14,10 @@ public class EntityAIDefendVillage extends EntityAITarget
     EntityLivingBase villageAgressorTarget;
     private static final String __OBFID = "CL_00001618";
 
-    public EntityAIDefendVillage(EntityIronGolem par1EntityIronGolem)
+    public EntityAIDefendVillage(EntityIronGolem p_i1659_1_)
     {
-        super(par1EntityIronGolem, false, true);
-        this.irongolem = par1EntityIronGolem;
+        super(p_i1659_1_, false, true);
+        this.irongolem = p_i1659_1_;
         this.setMutexBits(1);
     }
 

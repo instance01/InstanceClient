@@ -17,23 +17,23 @@ public class ItemNameTag extends Item
     /**
      * Returns true if the item can be used on the given entity, e.g. shears on sheep.
      */
-    public boolean itemInteractionForEntity(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase)
+    public boolean itemInteractionForEntity(ItemStack p_111207_1_, EntityPlayer p_111207_2_, EntityLivingBase p_111207_3_)
     {
-        if (!par1ItemStack.hasDisplayName())
+        if (!p_111207_1_.hasDisplayName())
         {
             return false;
         }
-        else if (par3EntityLivingBase instanceof EntityLiving)
+        else if (p_111207_3_ instanceof EntityLiving)
         {
-            EntityLiving var4 = (EntityLiving)par3EntityLivingBase;
-            var4.setCustomNameTag(par1ItemStack.getDisplayName());
+            EntityLiving var4 = (EntityLiving)p_111207_3_;
+            var4.setCustomNameTag(p_111207_1_.getDisplayName());
             var4.func_110163_bv();
-            --par1ItemStack.stackSize;
+            --p_111207_1_.stackSize;
             return true;
         }
         else
         {
-            return super.itemInteractionForEntity(par1ItemStack, par2EntityPlayer, par3EntityLivingBase);
+            return super.itemInteractionForEntity(p_111207_1_, p_111207_2_, p_111207_3_);
         }
     }
 }

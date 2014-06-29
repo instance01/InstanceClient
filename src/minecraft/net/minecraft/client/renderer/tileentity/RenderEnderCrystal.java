@@ -27,22 +27,22 @@ public class RenderEnderCrystal extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityEnderCrystal par1EntityEnderCrystal, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntityEnderCrystal p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        float var10 = (float)par1EntityEnderCrystal.innerRotation + par9;
+        float var10 = (float)p_76986_1_.innerRotation + p_76986_9_;
         GL11.glPushMatrix();
-        GL11.glTranslatef((float)par2, (float)par4, (float)par6);
+        GL11.glTranslatef((float)p_76986_2_, (float)p_76986_4_, (float)p_76986_6_);
         this.bindTexture(enderCrystalTextures);
         float var11 = MathHelper.sin(var10 * 0.2F) / 2.0F + 0.5F;
         var11 += var11 * var11;
-        this.field_76995_b.render(par1EntityEnderCrystal, 0.0F, var10 * 3.0F, var11 * 0.2F, 0.0F, 0.0F, 0.0625F);
+        this.field_76995_b.render(p_76986_1_, 0.0F, var10 * 3.0F, var11 * 0.2F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntityEnderCrystal par1EntityEnderCrystal)
+    protected ResourceLocation getEntityTexture(EntityEnderCrystal p_110775_1_)
     {
         return enderCrystalTextures;
     }
@@ -50,9 +50,9 @@ public class RenderEnderCrystal extends Render
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntityEnderCrystal)par1Entity);
+        return this.getEntityTexture((EntityEnderCrystal)p_110775_1_);
     }
 
     /**
@@ -61,8 +61,8 @@ public class RenderEnderCrystal extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityEnderCrystal)par1Entity, par2, par4, par6, par8, par9);
+        this.doRender((EntityEnderCrystal)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 }

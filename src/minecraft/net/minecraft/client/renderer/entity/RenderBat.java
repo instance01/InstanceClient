@@ -32,7 +32,7 @@ public class RenderBat extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityBat par1EntityBat, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntityBat p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
         int var10 = ((ModelBat)this.mainModel).getBatSize();
 
@@ -42,13 +42,13 @@ public class RenderBat extends RenderLiving
             this.mainModel = new ModelBat();
         }
 
-        super.doRender((EntityLiving)par1EntityBat, par2, par4, par6, par8, par9);
+        super.doRender((EntityLiving)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntityBat par1EntityBat)
+    protected ResourceLocation getEntityTexture(EntityBat p_110775_1_)
     {
         return batTextures;
     }
@@ -57,7 +57,7 @@ public class RenderBat extends RenderLiving
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityBat par1EntityBat, float par2)
+    protected void preRenderCallback(EntityBat p_77041_1_, float p_77041_2_)
     {
         GL11.glScalef(0.35F, 0.35F, 0.35F);
     }
@@ -65,23 +65,23 @@ public class RenderBat extends RenderLiving
     /**
      * Sets a simple glTranslate on a LivingEntity.
      */
-    protected void renderLivingAt(EntityBat par1EntityBat, double par2, double par4, double par6)
+    protected void renderLivingAt(EntityBat p_77039_1_, double p_77039_2_, double p_77039_4_, double p_77039_6_)
     {
-        super.renderLivingAt(par1EntityBat, par2, par4, par6);
+        super.renderLivingAt(p_77039_1_, p_77039_2_, p_77039_4_, p_77039_6_);
     }
 
-    protected void rotateCorpse(EntityBat par1EntityBat, float par2, float par3, float par4)
+    protected void rotateCorpse(EntityBat p_77043_1_, float p_77043_2_, float p_77043_3_, float p_77043_4_)
     {
-        if (!par1EntityBat.getIsBatHanging())
+        if (!p_77043_1_.getIsBatHanging())
         {
-            GL11.glTranslatef(0.0F, MathHelper.cos(par2 * 0.3F) * 0.1F, 0.0F);
+            GL11.glTranslatef(0.0F, MathHelper.cos(p_77043_2_ * 0.3F) * 0.1F, 0.0F);
         }
         else
         {
             GL11.glTranslatef(0.0F, -0.1F, 0.0F);
         }
 
-        super.rotateCorpse(par1EntityBat, par2, par3, par4);
+        super.rotateCorpse(p_77043_1_, p_77043_2_, p_77043_3_, p_77043_4_);
     }
 
     /**
@@ -90,31 +90,31 @@ public class RenderBat extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntityLiving p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityBat)par1EntityLiving, par2, par4, par6, par8, par9);
+        this.doRender((EntityBat)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 
     /**
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+    protected void preRenderCallback(EntityLivingBase p_77041_1_, float p_77041_2_)
     {
-        this.preRenderCallback((EntityBat)par1EntityLivingBase, par2);
+        this.preRenderCallback((EntityBat)p_77041_1_, p_77041_2_);
     }
 
-    protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
+    protected void rotateCorpse(EntityLivingBase p_77043_1_, float p_77043_2_, float p_77043_3_, float p_77043_4_)
     {
-        this.rotateCorpse((EntityBat)par1EntityLivingBase, par2, par3, par4);
+        this.rotateCorpse((EntityBat)p_77043_1_, p_77043_2_, p_77043_3_, p_77043_4_);
     }
 
     /**
      * Sets a simple glTranslate on a LivingEntity.
      */
-    protected void renderLivingAt(EntityLivingBase par1EntityLivingBase, double par2, double par4, double par6)
+    protected void renderLivingAt(EntityLivingBase p_77039_1_, double p_77039_2_, double p_77039_4_, double p_77039_6_)
     {
-        this.renderLivingAt((EntityBat)par1EntityLivingBase, par2, par4, par6);
+        this.renderLivingAt((EntityBat)p_77039_1_, p_77039_2_, p_77039_4_, p_77039_6_);
     }
 
     /**
@@ -123,17 +123,17 @@ public class RenderBat extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityLivingBase par1EntityLivingBase, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntityLivingBase p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityBat)par1EntityLivingBase, par2, par4, par6, par8, par9);
+        this.doRender((EntityBat)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntityBat)par1Entity);
+        return this.getEntityTexture((EntityBat)p_110775_1_);
     }
 
     /**
@@ -142,8 +142,8 @@ public class RenderBat extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityBat)par1Entity, par2, par4, par6, par8, par9);
+        this.doRender((EntityBat)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 }

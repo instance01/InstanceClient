@@ -13,20 +13,20 @@ public class TileEntityEnderChestRenderer extends TileEntitySpecialRenderer
     private ModelChest field_147521_c = new ModelChest();
     private static final String __OBFID = "CL_00000967";
 
-    public void renderTileEntityAt(TileEntityEnderChest p_147519_1_, double p_147519_2_, double p_147519_4_, double p_147519_6_, float p_147519_8_)
+    public void renderTileEntityAt(TileEntityEnderChest p_147500_1_, double p_147500_2_, double p_147500_4_, double p_147500_6_, float p_147500_8_)
     {
         int var9 = 0;
 
-        if (p_147519_1_.hasWorldObj())
+        if (p_147500_1_.hasWorldObj())
         {
-            var9 = p_147519_1_.getBlockMetadata();
+            var9 = p_147500_1_.getBlockMetadata();
         }
 
         this.bindTexture(field_147520_b);
         GL11.glPushMatrix();
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GL11.glTranslatef((float)p_147519_2_, (float)p_147519_4_ + 1.0F, (float)p_147519_6_ + 1.0F);
+        GL11.glTranslatef((float)p_147500_2_, (float)p_147500_4_ + 1.0F, (float)p_147500_6_ + 1.0F);
         GL11.glScalef(1.0F, -1.0F, -1.0F);
         GL11.glTranslatef(0.5F, 0.5F, 0.5F);
         short var10 = 0;
@@ -53,7 +53,7 @@ public class TileEntityEnderChestRenderer extends TileEntitySpecialRenderer
 
         GL11.glRotatef((float)var10, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-        float var11 = p_147519_1_.field_145975_i + (p_147519_1_.field_145972_a - p_147519_1_.field_145975_i) * p_147519_8_;
+        float var11 = p_147500_1_.field_145975_i + (p_147500_1_.field_145972_a - p_147500_1_.field_145975_i) * p_147500_8_;
         var11 = 1.0F - var11;
         var11 = 1.0F - var11 * var11 * var11;
         this.field_147521_c.chestLid.rotateAngleX = -(var11 * (float)Math.PI / 2.0F);

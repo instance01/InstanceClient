@@ -548,16 +548,16 @@ public class BlockStairs extends Block
         }
 
         int[] var21 = var11;
-        int var24 = var11.length;
+        int var23 = var11.length;
 
-        for (var14 = 0; var14 < var24; ++var14)
+        for (var14 = 0; var14 < var23; ++var14)
         {
             var15 = var21[var14];
             var7[var15] = null;
         }
 
-        MovingObjectPosition var23 = null;
-        double var22 = 0.0D;
+        MovingObjectPosition var22 = null;
+        double var24 = 0.0D;
         MovingObjectPosition[] var25 = var7;
         var16 = var7.length;
 
@@ -569,15 +569,15 @@ public class BlockStairs extends Block
             {
                 double var19 = var18.hitVec.squareDistanceTo(p_149731_6_);
 
-                if (var19 > var22)
+                if (var19 > var24)
                 {
-                    var23 = var18;
-                    var22 = var19;
+                    var22 = var18;
+                    var24 = var19;
                 }
             }
         }
 
-        return var23;
+        return var22;
     }
 
     public void registerBlockIcons(IIconRegister p_149651_1_) {}

@@ -21,15 +21,15 @@ public class CommandKill extends CommandBase
         return 0;
     }
 
-    public String getCommandUsage(ICommandSender par1ICommandSender)
+    public String getCommandUsage(ICommandSender p_71518_1_)
     {
         return "commands.kill.usage";
     }
 
-    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_)
     {
-        EntityPlayerMP var3 = getCommandSenderAsPlayer(par1ICommandSender);
+        EntityPlayerMP var3 = getCommandSenderAsPlayer(p_71515_1_);
         var3.attackEntityFrom(DamageSource.outOfWorld, Float.MAX_VALUE);
-        par1ICommandSender.addChatMessage(new ChatComponentTranslation("commands.kill.success", new Object[0]));
+        p_71515_1_.addChatMessage(new ChatComponentTranslation("commands.kill.success", new Object[0]));
     }
 }

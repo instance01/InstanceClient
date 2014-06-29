@@ -43,80 +43,80 @@ public class ModelRenderer
     public float offsetZ;
     private static final String __OBFID = "CL_00000874";
 
-    public ModelRenderer(ModelBase par1ModelBase, String par2Str)
+    public ModelRenderer(ModelBase p_i1172_1_, String p_i1172_2_)
     {
         this.textureWidth = 64.0F;
         this.textureHeight = 32.0F;
         this.showModel = true;
         this.cubeList = new ArrayList();
-        this.baseModel = par1ModelBase;
-        par1ModelBase.boxList.add(this);
-        this.boxName = par2Str;
-        this.setTextureSize(par1ModelBase.textureWidth, par1ModelBase.textureHeight);
+        this.baseModel = p_i1172_1_;
+        p_i1172_1_.boxList.add(this);
+        this.boxName = p_i1172_2_;
+        this.setTextureSize(p_i1172_1_.textureWidth, p_i1172_1_.textureHeight);
     }
 
-    public ModelRenderer(ModelBase par1ModelBase)
+    public ModelRenderer(ModelBase p_i1173_1_)
     {
-        this(par1ModelBase, (String)null);
+        this(p_i1173_1_, (String)null);
     }
 
-    public ModelRenderer(ModelBase par1ModelBase, int par2, int par3)
+    public ModelRenderer(ModelBase p_i1174_1_, int p_i1174_2_, int p_i1174_3_)
     {
-        this(par1ModelBase);
-        this.setTextureOffset(par2, par3);
+        this(p_i1174_1_);
+        this.setTextureOffset(p_i1174_2_, p_i1174_3_);
     }
 
     /**
      * Sets the current box's rotation points and rotation angles to another box.
      */
-    public void addChild(ModelRenderer par1ModelRenderer)
+    public void addChild(ModelRenderer p_78792_1_)
     {
         if (this.childModels == null)
         {
             this.childModels = new ArrayList();
         }
 
-        this.childModels.add(par1ModelRenderer);
+        this.childModels.add(p_78792_1_);
     }
 
-    public ModelRenderer setTextureOffset(int par1, int par2)
+    public ModelRenderer setTextureOffset(int p_78784_1_, int p_78784_2_)
     {
-        this.textureOffsetX = par1;
-        this.textureOffsetY = par2;
+        this.textureOffsetX = p_78784_1_;
+        this.textureOffsetY = p_78784_2_;
         return this;
     }
 
-    public ModelRenderer addBox(String par1Str, float par2, float par3, float par4, int par5, int par6, int par7)
+    public ModelRenderer addBox(String p_78786_1_, float p_78786_2_, float p_78786_3_, float p_78786_4_, int p_78786_5_, int p_78786_6_, int p_78786_7_)
     {
-        par1Str = this.boxName + "." + par1Str;
-        TextureOffset var8 = this.baseModel.getTextureOffset(par1Str);
+        p_78786_1_ = this.boxName + "." + p_78786_1_;
+        TextureOffset var8 = this.baseModel.getTextureOffset(p_78786_1_);
         this.setTextureOffset(var8.textureOffsetX, var8.textureOffsetY);
-        this.cubeList.add((new ModelBox(this, this.textureOffsetX, this.textureOffsetY, par2, par3, par4, par5, par6, par7, 0.0F)).func_78244_a(par1Str));
+        this.cubeList.add((new ModelBox(this, this.textureOffsetX, this.textureOffsetY, p_78786_2_, p_78786_3_, p_78786_4_, p_78786_5_, p_78786_6_, p_78786_7_, 0.0F)).func_78244_a(p_78786_1_));
         return this;
     }
 
-    public ModelRenderer addBox(float par1, float par2, float par3, int par4, int par5, int par6)
+    public ModelRenderer addBox(float p_78789_1_, float p_78789_2_, float p_78789_3_, int p_78789_4_, int p_78789_5_, int p_78789_6_)
     {
-        this.cubeList.add(new ModelBox(this, this.textureOffsetX, this.textureOffsetY, par1, par2, par3, par4, par5, par6, 0.0F));
+        this.cubeList.add(new ModelBox(this, this.textureOffsetX, this.textureOffsetY, p_78789_1_, p_78789_2_, p_78789_3_, p_78789_4_, p_78789_5_, p_78789_6_, 0.0F));
         return this;
     }
 
     /**
      * Creates a textured box. Args: originX, originY, originZ, width, height, depth, scaleFactor.
      */
-    public void addBox(float par1, float par2, float par3, int par4, int par5, int par6, float par7)
+    public void addBox(float p_78790_1_, float p_78790_2_, float p_78790_3_, int p_78790_4_, int p_78790_5_, int p_78790_6_, float p_78790_7_)
     {
-        this.cubeList.add(new ModelBox(this, this.textureOffsetX, this.textureOffsetY, par1, par2, par3, par4, par5, par6, par7));
+        this.cubeList.add(new ModelBox(this, this.textureOffsetX, this.textureOffsetY, p_78790_1_, p_78790_2_, p_78790_3_, p_78790_4_, p_78790_5_, p_78790_6_, p_78790_7_));
     }
 
-    public void setRotationPoint(float par1, float par2, float par3)
+    public void setRotationPoint(float p_78793_1_, float p_78793_2_, float p_78793_3_)
     {
-        this.rotationPointX = par1;
-        this.rotationPointY = par2;
-        this.rotationPointZ = par3;
+        this.rotationPointX = p_78793_1_;
+        this.rotationPointY = p_78793_2_;
+        this.rotationPointZ = p_78793_3_;
     }
 
-    public void render(float par1)
+    public void render(float p_78785_1_)
     {
         if (!this.isHidden)
         {
@@ -124,7 +124,7 @@ public class ModelRenderer
             {
                 if (!this.compiled)
                 {
-                    this.compileDisplayList(par1);
+                    this.compileDisplayList(p_78785_1_);
                 }
 
                 GL11.glTranslatef(this.offsetX, this.offsetY, this.offsetZ);
@@ -140,30 +140,30 @@ public class ModelRenderer
                         {
                             for (var2 = 0; var2 < this.childModels.size(); ++var2)
                             {
-                                ((ModelRenderer)this.childModels.get(var2)).render(par1);
+                                ((ModelRenderer)this.childModels.get(var2)).render(p_78785_1_);
                             }
                         }
                     }
                     else
                     {
-                        GL11.glTranslatef(this.rotationPointX * par1, this.rotationPointY * par1, this.rotationPointZ * par1);
+                        GL11.glTranslatef(this.rotationPointX * p_78785_1_, this.rotationPointY * p_78785_1_, this.rotationPointZ * p_78785_1_);
                         GL11.glCallList(this.displayList);
 
                         if (this.childModels != null)
                         {
                             for (var2 = 0; var2 < this.childModels.size(); ++var2)
                             {
-                                ((ModelRenderer)this.childModels.get(var2)).render(par1);
+                                ((ModelRenderer)this.childModels.get(var2)).render(p_78785_1_);
                             }
                         }
 
-                        GL11.glTranslatef(-this.rotationPointX * par1, -this.rotationPointY * par1, -this.rotationPointZ * par1);
+                        GL11.glTranslatef(-this.rotationPointX * p_78785_1_, -this.rotationPointY * p_78785_1_, -this.rotationPointZ * p_78785_1_);
                     }
                 }
                 else
                 {
                     GL11.glPushMatrix();
-                    GL11.glTranslatef(this.rotationPointX * par1, this.rotationPointY * par1, this.rotationPointZ * par1);
+                    GL11.glTranslatef(this.rotationPointX * p_78785_1_, this.rotationPointY * p_78785_1_, this.rotationPointZ * p_78785_1_);
 
                     if (this.rotateAngleZ != 0.0F)
                     {
@@ -186,7 +186,7 @@ public class ModelRenderer
                     {
                         for (var2 = 0; var2 < this.childModels.size(); ++var2)
                         {
-                            ((ModelRenderer)this.childModels.get(var2)).render(par1);
+                            ((ModelRenderer)this.childModels.get(var2)).render(p_78785_1_);
                         }
                     }
 
@@ -198,7 +198,7 @@ public class ModelRenderer
         }
     }
 
-    public void renderWithRotation(float par1)
+    public void renderWithRotation(float p_78791_1_)
     {
         if (!this.isHidden)
         {
@@ -206,11 +206,11 @@ public class ModelRenderer
             {
                 if (!this.compiled)
                 {
-                    this.compileDisplayList(par1);
+                    this.compileDisplayList(p_78791_1_);
                 }
 
                 GL11.glPushMatrix();
-                GL11.glTranslatef(this.rotationPointX * par1, this.rotationPointY * par1, this.rotationPointZ * par1);
+                GL11.glTranslatef(this.rotationPointX * p_78791_1_, this.rotationPointY * p_78791_1_, this.rotationPointZ * p_78791_1_);
 
                 if (this.rotateAngleY != 0.0F)
                 {
@@ -236,7 +236,7 @@ public class ModelRenderer
     /**
      * Allows the changing of Angles after a box has been rendered
      */
-    public void postRender(float par1)
+    public void postRender(float p_78794_1_)
     {
         if (!this.isHidden)
         {
@@ -244,19 +244,19 @@ public class ModelRenderer
             {
                 if (!this.compiled)
                 {
-                    this.compileDisplayList(par1);
+                    this.compileDisplayList(p_78794_1_);
                 }
 
                 if (this.rotateAngleX == 0.0F && this.rotateAngleY == 0.0F && this.rotateAngleZ == 0.0F)
                 {
                     if (this.rotationPointX != 0.0F || this.rotationPointY != 0.0F || this.rotationPointZ != 0.0F)
                     {
-                        GL11.glTranslatef(this.rotationPointX * par1, this.rotationPointY * par1, this.rotationPointZ * par1);
+                        GL11.glTranslatef(this.rotationPointX * p_78794_1_, this.rotationPointY * p_78794_1_, this.rotationPointZ * p_78794_1_);
                     }
                 }
                 else
                 {
-                    GL11.glTranslatef(this.rotationPointX * par1, this.rotationPointY * par1, this.rotationPointZ * par1);
+                    GL11.glTranslatef(this.rotationPointX * p_78794_1_, this.rotationPointY * p_78794_1_, this.rotationPointZ * p_78794_1_);
 
                     if (this.rotateAngleZ != 0.0F)
                     {
@@ -280,7 +280,7 @@ public class ModelRenderer
     /**
      * Compiles a GL display list for this model
      */
-    private void compileDisplayList(float par1)
+    private void compileDisplayList(float p_78788_1_)
     {
         this.displayList = GLAllocation.generateDisplayLists(1);
         GL11.glNewList(this.displayList, GL11.GL_COMPILE);
@@ -288,7 +288,7 @@ public class ModelRenderer
 
         for (int var3 = 0; var3 < this.cubeList.size(); ++var3)
         {
-            ((ModelBox)this.cubeList.get(var3)).render(var2, par1);
+            ((ModelBox)this.cubeList.get(var3)).render(var2, p_78788_1_);
         }
 
         GL11.glEndList();
@@ -298,10 +298,10 @@ public class ModelRenderer
     /**
      * Returns the model renderer with the new texture parameters.
      */
-    public ModelRenderer setTextureSize(int par1, int par2)
+    public ModelRenderer setTextureSize(int p_78787_1_, int p_78787_2_)
     {
-        this.textureWidth = (float)par1;
-        this.textureHeight = (float)par2;
+        this.textureWidth = (float)p_78787_1_;
+        this.textureHeight = (float)p_78787_2_;
         return this;
     }
 }

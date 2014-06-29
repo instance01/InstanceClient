@@ -30,10 +30,10 @@ public class ItemMonsterPlacer extends Item
         this.setCreativeTab(CreativeTabs.tabMisc);
     }
 
-    public String getItemStackDisplayName(ItemStack par1ItemStack)
+    public String getItemStackDisplayName(ItemStack p_77653_1_)
     {
         String var2 = ("" + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name")).trim();
-        String var3 = EntityList.getStringFromID(par1ItemStack.getItemDamage());
+        String var3 = EntityList.getStringFromID(p_77653_1_.getItemDamage());
 
         if (var3 != null)
         {
@@ -43,10 +43,10 @@ public class ItemMonsterPlacer extends Item
         return var2;
     }
 
-    public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
+    public int getColorFromItemStack(ItemStack p_82790_1_, int p_82790_2_)
     {
-        EntityList.EntityEggInfo var3 = (EntityList.EntityEggInfo)EntityList.entityEggs.get(Integer.valueOf(par1ItemStack.getItemDamage()));
-        return var3 != null ? (par2 == 0 ? var3.primaryColor : var3.secondaryColor) : 16777215;
+        EntityList.EntityEggInfo var3 = (EntityList.EntityEggInfo)EntityList.entityEggs.get(Integer.valueOf(p_82790_1_.getItemDamage()));
+        return var3 != null ? (p_82790_2_ == 0 ? var3.primaryColor : var3.secondaryColor) : 16777215;
     }
 
     public boolean requiresMultipleRenderPasses()
@@ -57,46 +57,46 @@ public class ItemMonsterPlacer extends Item
     /**
      * Gets an icon index based on an item's damage value and the given render pass
      */
-    public IIcon getIconFromDamageForRenderPass(int par1, int par2)
+    public IIcon getIconFromDamageForRenderPass(int p_77618_1_, int p_77618_2_)
     {
-        return par2 > 0 ? this.theIcon : super.getIconFromDamageForRenderPass(par1, par2);
+        return p_77618_2_ > 0 ? this.theIcon : super.getIconFromDamageForRenderPass(p_77618_1_, p_77618_2_);
     }
 
     /**
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
      * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
      */
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+    public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World p_77648_3_, int p_77648_4_, int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
     {
-        if (par3World.isClient)
+        if (p_77648_3_.isClient)
         {
             return true;
         }
         else
         {
-            Block var11 = par3World.getBlock(par4, par5, par6);
-            par4 += Facing.offsetsXForSide[par7];
-            par5 += Facing.offsetsYForSide[par7];
-            par6 += Facing.offsetsZForSide[par7];
+            Block var11 = p_77648_3_.getBlock(p_77648_4_, p_77648_5_, p_77648_6_);
+            p_77648_4_ += Facing.offsetsXForSide[p_77648_7_];
+            p_77648_5_ += Facing.offsetsYForSide[p_77648_7_];
+            p_77648_6_ += Facing.offsetsZForSide[p_77648_7_];
             double var12 = 0.0D;
 
-            if (par7 == 1 && var11.getRenderType() == 11)
+            if (p_77648_7_ == 1 && var11.getRenderType() == 11)
             {
                 var12 = 0.5D;
             }
 
-            Entity var14 = spawnCreature(par3World, par1ItemStack.getItemDamage(), (double)par4 + 0.5D, (double)par5 + var12, (double)par6 + 0.5D);
+            Entity var14 = spawnCreature(p_77648_3_, p_77648_1_.getItemDamage(), (double)p_77648_4_ + 0.5D, (double)p_77648_5_ + var12, (double)p_77648_6_ + 0.5D);
 
             if (var14 != null)
             {
-                if (var14 instanceof EntityLivingBase && par1ItemStack.hasDisplayName())
+                if (var14 instanceof EntityLivingBase && p_77648_1_.hasDisplayName())
                 {
-                    ((EntityLiving)var14).setCustomNameTag(par1ItemStack.getDisplayName());
+                    ((EntityLiving)var14).setCustomNameTag(p_77648_1_.getDisplayName());
                 }
 
-                if (!par2EntityPlayer.capabilities.isCreativeMode)
+                if (!p_77648_2_.capabilities.isCreativeMode)
                 {
-                    --par1ItemStack.stackSize;
+                    --p_77648_1_.stackSize;
                 }
             }
 
@@ -107,19 +107,19 @@ public class ItemMonsterPlacer extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    public ItemStack onItemRightClick(ItemStack p_77659_1_, World p_77659_2_, EntityPlayer p_77659_3_)
     {
-        if (par2World.isClient)
+        if (p_77659_2_.isClient)
         {
-            return par1ItemStack;
+            return p_77659_1_;
         }
         else
         {
-            MovingObjectPosition var4 = this.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, true);
+            MovingObjectPosition var4 = this.getMovingObjectPositionFromPlayer(p_77659_2_, p_77659_3_, true);
 
             if (var4 == null)
             {
-                return par1ItemStack;
+                return p_77659_1_;
             }
             else
             {
@@ -129,36 +129,36 @@ public class ItemMonsterPlacer extends Item
                     int var6 = var4.blockY;
                     int var7 = var4.blockZ;
 
-                    if (!par2World.canMineBlock(par3EntityPlayer, var5, var6, var7))
+                    if (!p_77659_2_.canMineBlock(p_77659_3_, var5, var6, var7))
                     {
-                        return par1ItemStack;
+                        return p_77659_1_;
                     }
 
-                    if (!par3EntityPlayer.canPlayerEdit(var5, var6, var7, var4.sideHit, par1ItemStack))
+                    if (!p_77659_3_.canPlayerEdit(var5, var6, var7, var4.sideHit, p_77659_1_))
                     {
-                        return par1ItemStack;
+                        return p_77659_1_;
                     }
 
-                    if (par2World.getBlock(var5, var6, var7) instanceof BlockLiquid)
+                    if (p_77659_2_.getBlock(var5, var6, var7) instanceof BlockLiquid)
                     {
-                        Entity var8 = spawnCreature(par2World, par1ItemStack.getItemDamage(), (double)var5, (double)var6, (double)var7);
+                        Entity var8 = spawnCreature(p_77659_2_, p_77659_1_.getItemDamage(), (double)var5, (double)var6, (double)var7);
 
                         if (var8 != null)
                         {
-                            if (var8 instanceof EntityLivingBase && par1ItemStack.hasDisplayName())
+                            if (var8 instanceof EntityLivingBase && p_77659_1_.hasDisplayName())
                             {
-                                ((EntityLiving)var8).setCustomNameTag(par1ItemStack.getDisplayName());
+                                ((EntityLiving)var8).setCustomNameTag(p_77659_1_.getDisplayName());
                             }
 
-                            if (!par3EntityPlayer.capabilities.isCreativeMode)
+                            if (!p_77659_3_.capabilities.isCreativeMode)
                             {
-                                --par1ItemStack.stackSize;
+                                --p_77659_1_.stackSize;
                             }
                         }
                     }
                 }
 
-                return par1ItemStack;
+                return p_77659_1_;
             }
         }
     }
@@ -167,9 +167,9 @@ public class ItemMonsterPlacer extends Item
      * Spawns the creature specified by the egg's type in the location specified by the last three parameters.
      * Parameters: world, entityID, x, y, z.
      */
-    public static Entity spawnCreature(World par0World, int par1, double par2, double par4, double par6)
+    public static Entity spawnCreature(World p_77840_0_, int p_77840_1_, double p_77840_2_, double p_77840_4_, double p_77840_6_)
     {
-        if (!EntityList.entityEggs.containsKey(Integer.valueOf(par1)))
+        if (!EntityList.entityEggs.containsKey(Integer.valueOf(p_77840_1_)))
         {
             return null;
         }
@@ -179,16 +179,16 @@ public class ItemMonsterPlacer extends Item
 
             for (int var9 = 0; var9 < 1; ++var9)
             {
-                var8 = EntityList.createEntityByID(par1, par0World);
+                var8 = EntityList.createEntityByID(p_77840_1_, p_77840_0_);
 
                 if (var8 != null && var8 instanceof EntityLivingBase)
                 {
                     EntityLiving var10 = (EntityLiving)var8;
-                    var8.setLocationAndAngles(par2, par4, par6, MathHelper.wrapAngleTo180_float(par0World.rand.nextFloat() * 360.0F), 0.0F);
+                    var8.setLocationAndAngles(p_77840_2_, p_77840_4_, p_77840_6_, MathHelper.wrapAngleTo180_float(p_77840_0_.rand.nextFloat() * 360.0F), 0.0F);
                     var10.rotationYawHead = var10.rotationYaw;
                     var10.renderYawOffset = var10.rotationYaw;
                     var10.onSpawnWithEgg((IEntityLivingData)null);
-                    par0World.spawnEntityInWorld(var8);
+                    p_77840_0_.spawnEntityInWorld(var8);
                     var10.playLivingSound();
                 }
             }
@@ -211,9 +211,9 @@ public class ItemMonsterPlacer extends Item
         }
     }
 
-    public void registerIcons(IIconRegister par1IconRegister)
+    public void registerIcons(IIconRegister p_94581_1_)
     {
-        super.registerIcons(par1IconRegister);
-        this.theIcon = par1IconRegister.registerIcon(this.getIconString() + "_overlay");
+        super.registerIcons(p_94581_1_);
+        this.theIcon = p_94581_1_.registerIcon(this.getIconString() + "_overlay");
     }
 }

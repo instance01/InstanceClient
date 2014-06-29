@@ -9,19 +9,19 @@ public class EntityExpBottle extends EntityThrowable
 {
     private static final String __OBFID = "CL_00001726";
 
-    public EntityExpBottle(World par1World)
+    public EntityExpBottle(World p_i1785_1_)
     {
-        super(par1World);
+        super(p_i1785_1_);
     }
 
-    public EntityExpBottle(World par1World, EntityLivingBase par2EntityLivingBase)
+    public EntityExpBottle(World p_i1786_1_, EntityLivingBase p_i1786_2_)
     {
-        super(par1World, par2EntityLivingBase);
+        super(p_i1786_1_, p_i1786_2_);
     }
 
-    public EntityExpBottle(World par1World, double par2, double par4, double par6)
+    public EntityExpBottle(World p_i1787_1_, double p_i1787_2_, double p_i1787_4_, double p_i1787_6_)
     {
-        super(par1World, par2, par4, par6);
+        super(p_i1787_1_, p_i1787_2_, p_i1787_4_, p_i1787_6_);
     }
 
     /**
@@ -45,7 +45,7 @@ public class EntityExpBottle extends EntityThrowable
     /**
      * Called when this EntityThrowable hits a block or entity.
      */
-    protected void onImpact(MovingObjectPosition par1MovingObjectPosition)
+    protected void onImpact(MovingObjectPosition p_70184_1_)
     {
         if (!this.worldObj.isClient)
         {

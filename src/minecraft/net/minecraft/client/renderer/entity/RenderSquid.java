@@ -13,9 +13,9 @@ public class RenderSquid extends RenderLiving
     private static final ResourceLocation squidTextures = new ResourceLocation("textures/entity/squid.png");
     private static final String __OBFID = "CL_00001028";
 
-    public RenderSquid(ModelBase par1ModelBase, float par2)
+    public RenderSquid(ModelBase p_i1268_1_, float p_i1268_2_)
     {
-        super(par1ModelBase, par2);
+        super(p_i1268_1_, p_i1268_2_);
     }
 
     /**
@@ -24,25 +24,25 @@ public class RenderSquid extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntitySquid par1EntitySquid, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntitySquid p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        super.doRender((EntityLiving)par1EntitySquid, par2, par4, par6, par8, par9);
+        super.doRender((EntityLiving)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntitySquid par1EntitySquid)
+    protected ResourceLocation getEntityTexture(EntitySquid p_110775_1_)
     {
         return squidTextures;
     }
 
-    protected void rotateCorpse(EntitySquid par1EntitySquid, float par2, float par3, float par4)
+    protected void rotateCorpse(EntitySquid p_77043_1_, float p_77043_2_, float p_77043_3_, float p_77043_4_)
     {
-        float var5 = par1EntitySquid.prevSquidPitch + (par1EntitySquid.squidPitch - par1EntitySquid.prevSquidPitch) * par4;
-        float var6 = par1EntitySquid.prevSquidYaw + (par1EntitySquid.squidYaw - par1EntitySquid.prevSquidYaw) * par4;
+        float var5 = p_77043_1_.prevSquidPitch + (p_77043_1_.squidPitch - p_77043_1_.prevSquidPitch) * p_77043_4_;
+        float var6 = p_77043_1_.prevSquidYaw + (p_77043_1_.squidYaw - p_77043_1_.prevSquidYaw) * p_77043_4_;
         GL11.glTranslatef(0.0F, 0.5F, 0.0F);
-        GL11.glRotatef(180.0F - par3, 0.0F, 1.0F, 0.0F);
+        GL11.glRotatef(180.0F - p_77043_3_, 0.0F, 1.0F, 0.0F);
         GL11.glRotatef(var5, 1.0F, 0.0F, 0.0F);
         GL11.glRotatef(var6, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(0.0F, -1.2F, 0.0F);
@@ -51,9 +51,9 @@ public class RenderSquid extends RenderLiving
     /**
      * Defines what float the third param in setRotationAngles of ModelBase is
      */
-    protected float handleRotationFloat(EntitySquid par1EntitySquid, float par2)
+    protected float handleRotationFloat(EntitySquid p_77044_1_, float p_77044_2_)
     {
-        return par1EntitySquid.lastTentacleAngle + (par1EntitySquid.tentacleAngle - par1EntitySquid.lastTentacleAngle) * par2;
+        return p_77044_1_.lastTentacleAngle + (p_77044_1_.tentacleAngle - p_77044_1_.lastTentacleAngle) * p_77044_2_;
     }
 
     /**
@@ -62,22 +62,22 @@ public class RenderSquid extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntityLiving p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntitySquid)par1EntityLiving, par2, par4, par6, par8, par9);
+        this.doRender((EntitySquid)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 
     /**
      * Defines what float the third param in setRotationAngles of ModelBase is
      */
-    protected float handleRotationFloat(EntityLivingBase par1EntityLivingBase, float par2)
+    protected float handleRotationFloat(EntityLivingBase p_77044_1_, float p_77044_2_)
     {
-        return this.handleRotationFloat((EntitySquid)par1EntityLivingBase, par2);
+        return this.handleRotationFloat((EntitySquid)p_77044_1_, p_77044_2_);
     }
 
-    protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
+    protected void rotateCorpse(EntityLivingBase p_77043_1_, float p_77043_2_, float p_77043_3_, float p_77043_4_)
     {
-        this.rotateCorpse((EntitySquid)par1EntityLivingBase, par2, par3, par4);
+        this.rotateCorpse((EntitySquid)p_77043_1_, p_77043_2_, p_77043_3_, p_77043_4_);
     }
 
     /**
@@ -86,17 +86,17 @@ public class RenderSquid extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(EntityLivingBase par1Entity, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(EntityLivingBase p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntitySquid)par1Entity, par2, par4, par6, par8, par9);
+        this.doRender((EntitySquid)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntitySquid)par1Entity);
+        return this.getEntityTexture((EntitySquid)p_110775_1_);
     }
 
     /**
@@ -105,8 +105,8 @@ public class RenderSquid extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntitySquid)par1Entity, par2, par4, par6, par8, par9);
+        this.doRender((EntitySquid)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 }

@@ -17,7 +17,7 @@ public class RecipeFireworks implements IRecipe
     /**
      * Used to check if a recipe matches current crafting inventory
      */
-    public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World)
+    public boolean matches(InventoryCrafting p_77569_1_, World p_77569_2_)
     {
         this.field_92102_a = null;
         int var3 = 0;
@@ -27,9 +27,9 @@ public class RecipeFireworks implements IRecipe
         int var7 = 0;
         int var8 = 0;
 
-        for (int var9 = 0; var9 < par1InventoryCrafting.getSizeInventory(); ++var9)
+        for (int var9 = 0; var9 < p_77569_1_.getSizeInventory(); ++var9)
         {
-            ItemStack var10 = par1InventoryCrafting.getStackInSlot(var9);
+            ItemStack var10 = p_77569_1_.getStackInSlot(var9);
 
             if (var10 != null)
             {
@@ -85,8 +85,8 @@ public class RecipeFireworks implements IRecipe
 
         if (var4 <= 3 && var3 <= 1)
         {
-            NBTTagCompound var15;
-            NBTTagCompound var18;
+            NBTTagCompound var16;
+            NBTTagCompound var19;
 
             if (var4 >= 1 && var3 == 1 && var7 == 0)
             {
@@ -94,24 +94,24 @@ public class RecipeFireworks implements IRecipe
 
                 if (var6 > 0)
                 {
-                    var15 = new NBTTagCompound();
-                    var18 = new NBTTagCompound();
-                    NBTTagList var25 = new NBTTagList();
+                    var16 = new NBTTagCompound();
+                    var19 = new NBTTagCompound();
+                    NBTTagList var23 = new NBTTagList();
 
-                    for (int var22 = 0; var22 < par1InventoryCrafting.getSizeInventory(); ++var22)
+                    for (int var24 = 0; var24 < p_77569_1_.getSizeInventory(); ++var24)
                     {
-                        ItemStack var26 = par1InventoryCrafting.getStackInSlot(var22);
+                        ItemStack var26 = p_77569_1_.getStackInSlot(var24);
 
                         if (var26 != null && var26.getItem() == Items.firework_charge && var26.hasTagCompound() && var26.getTagCompound().func_150297_b("Explosion", 10))
                         {
-                            var25.appendTag(var26.getTagCompound().getCompoundTag("Explosion"));
+                            var23.appendTag(var26.getTagCompound().getCompoundTag("Explosion"));
                         }
                     }
 
-                    var18.setTag("Explosions", var25);
-                    var18.setByte("Flight", (byte)var4);
-                    var15.setTag("Fireworks", var18);
-                    this.field_92102_a.setTagCompound(var15);
+                    var19.setTag("Explosions", var23);
+                    var19.setByte("Flight", (byte)var4);
+                    var16.setTag("Fireworks", var19);
+                    this.field_92102_a.setTagCompound(var16);
                 }
 
                 return true;
@@ -119,14 +119,14 @@ public class RecipeFireworks implements IRecipe
             else if (var4 == 1 && var3 == 0 && var6 == 0 && var5 > 0 && var8 <= 1)
             {
                 this.field_92102_a = new ItemStack(Items.firework_charge);
-                var15 = new NBTTagCompound();
-                var18 = new NBTTagCompound();
-                byte var21 = 0;
+                var16 = new NBTTagCompound();
+                var19 = new NBTTagCompound();
+                byte var22 = 0;
                 ArrayList var12 = new ArrayList();
 
-                for (int var13 = 0; var13 < par1InventoryCrafting.getSizeInventory(); ++var13)
+                for (int var13 = 0; var13 < p_77569_1_.getSizeInventory(); ++var13)
                 {
-                    ItemStack var14 = par1InventoryCrafting.getStackInSlot(var13);
+                    ItemStack var14 = p_77569_1_.getStackInSlot(var13);
 
                     if (var14 != null)
                     {
@@ -136,57 +136,57 @@ public class RecipeFireworks implements IRecipe
                         }
                         else if (var14.getItem() == Items.glowstone_dust)
                         {
-                            var18.setBoolean("Flicker", true);
+                            var19.setBoolean("Flicker", true);
                         }
                         else if (var14.getItem() == Items.diamond)
                         {
-                            var18.setBoolean("Trail", true);
+                            var19.setBoolean("Trail", true);
                         }
                         else if (var14.getItem() == Items.fire_charge)
                         {
-                            var21 = 1;
+                            var22 = 1;
                         }
                         else if (var14.getItem() == Items.feather)
                         {
-                            var21 = 4;
+                            var22 = 4;
                         }
                         else if (var14.getItem() == Items.gold_nugget)
                         {
-                            var21 = 2;
+                            var22 = 2;
                         }
                         else if (var14.getItem() == Items.skull)
                         {
-                            var21 = 3;
+                            var22 = 3;
                         }
                     }
                 }
 
-                int[] var24 = new int[var12.size()];
+                int[] var25 = new int[var12.size()];
 
-                for (int var27 = 0; var27 < var24.length; ++var27)
+                for (int var27 = 0; var27 < var25.length; ++var27)
                 {
-                    var24[var27] = ((Integer)var12.get(var27)).intValue();
+                    var25[var27] = ((Integer)var12.get(var27)).intValue();
                 }
 
-                var18.setIntArray("Colors", var24);
-                var18.setByte("Type", var21);
-                var15.setTag("Explosion", var18);
-                this.field_92102_a.setTagCompound(var15);
+                var19.setIntArray("Colors", var25);
+                var19.setByte("Type", var22);
+                var16.setTag("Explosion", var19);
+                this.field_92102_a.setTagCompound(var16);
                 return true;
             }
             else if (var4 == 0 && var3 == 0 && var6 == 1 && var5 > 0 && var5 == var7)
             {
-                ArrayList var16 = new ArrayList();
+                ArrayList var15 = new ArrayList();
 
-                for (int var20 = 0; var20 < par1InventoryCrafting.getSizeInventory(); ++var20)
+                for (int var17 = 0; var17 < p_77569_1_.getSizeInventory(); ++var17)
                 {
-                    ItemStack var11 = par1InventoryCrafting.getStackInSlot(var20);
+                    ItemStack var11 = p_77569_1_.getStackInSlot(var17);
 
                     if (var11 != null)
                     {
                         if (var11.getItem() == Items.dye)
                         {
-                            var16.add(Integer.valueOf(ItemDye.field_150922_c[var11.getItemDamage()]));
+                            var15.add(Integer.valueOf(ItemDye.field_150922_c[var11.getItemDamage()]));
                         }
                         else if (var11.getItem() == Items.firework_charge)
                         {
@@ -196,24 +196,24 @@ public class RecipeFireworks implements IRecipe
                     }
                 }
 
-                int[] var17 = new int[var16.size()];
+                int[] var18 = new int[var15.size()];
 
-                for (int var19 = 0; var19 < var17.length; ++var19)
+                for (int var20 = 0; var20 < var18.length; ++var20)
                 {
-                    var17[var19] = ((Integer)var16.get(var19)).intValue();
+                    var18[var20] = ((Integer)var15.get(var20)).intValue();
                 }
 
                 if (this.field_92102_a != null && this.field_92102_a.hasTagCompound())
                 {
-                    NBTTagCompound var23 = this.field_92102_a.getTagCompound().getCompoundTag("Explosion");
+                    NBTTagCompound var21 = this.field_92102_a.getTagCompound().getCompoundTag("Explosion");
 
-                    if (var23 == null)
+                    if (var21 == null)
                     {
                         return false;
                     }
                     else
                     {
-                        var23.setIntArray("FadeColors", var17);
+                        var21.setIntArray("FadeColors", var18);
                         return true;
                     }
                 }
@@ -236,7 +236,7 @@ public class RecipeFireworks implements IRecipe
     /**
      * Returns an Item that is the result of this recipe
      */
-    public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting)
+    public ItemStack getCraftingResult(InventoryCrafting p_77572_1_)
     {
         return this.field_92102_a.copy();
     }

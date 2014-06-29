@@ -32,12 +32,12 @@ public class EnchantmentProtection extends Enchantment
     public final int protectionType;
     private static final String __OBFID = "CL_00000121";
 
-    public EnchantmentProtection(int par1, int par2, int par3)
+    public EnchantmentProtection(int p_i1936_1_, int p_i1936_2_, int p_i1936_3_)
     {
-        super(par1, par2, EnumEnchantmentType.armor);
-        this.protectionType = par3;
+        super(p_i1936_1_, p_i1936_2_, EnumEnchantmentType.armor);
+        this.protectionType = p_i1936_3_;
 
-        if (par3 == 2)
+        if (p_i1936_3_ == 2)
         {
             this.type = EnumEnchantmentType.armor_feet;
         }
@@ -46,17 +46,17 @@ public class EnchantmentProtection extends Enchantment
     /**
      * Returns the minimal value of enchantability needed on the enchantment level passed.
      */
-    public int getMinEnchantability(int par1)
+    public int getMinEnchantability(int p_77321_1_)
     {
-        return baseEnchantability[this.protectionType] + (par1 - 1) * levelEnchantability[this.protectionType];
+        return baseEnchantability[this.protectionType] + (p_77321_1_ - 1) * levelEnchantability[this.protectionType];
     }
 
     /**
      * Returns the maximum value of enchantability nedded on the enchantment level passed.
      */
-    public int getMaxEnchantability(int par1)
+    public int getMaxEnchantability(int p_77317_1_)
     {
-        return this.getMinEnchantability(par1) + thresholdEnchantability[this.protectionType];
+        return this.getMinEnchantability(p_77317_1_) + thresholdEnchantability[this.protectionType];
     }
 
     /**
@@ -70,16 +70,16 @@ public class EnchantmentProtection extends Enchantment
     /**
      * Calculates de damage protection of the enchantment based on level and damage source passed.
      */
-    public int calcModifierDamage(int par1, DamageSource par2DamageSource)
+    public int calcModifierDamage(int p_77318_1_, DamageSource p_77318_2_)
     {
-        if (par2DamageSource.canHarmInCreative())
+        if (p_77318_2_.canHarmInCreative())
         {
             return 0;
         }
         else
         {
-            float var3 = (float)(6 + par1 * par1) / 3.0F;
-            return this.protectionType == 0 ? MathHelper.floor_float(var3 * 0.75F) : (this.protectionType == 1 && par2DamageSource.isFireDamage() ? MathHelper.floor_float(var3 * 1.25F) : (this.protectionType == 2 && par2DamageSource == DamageSource.fall ? MathHelper.floor_float(var3 * 2.5F) : (this.protectionType == 3 && par2DamageSource.isExplosion() ? MathHelper.floor_float(var3 * 1.5F) : (this.protectionType == 4 && par2DamageSource.isProjectile() ? MathHelper.floor_float(var3 * 1.5F) : 0))));
+            float var3 = (float)(6 + p_77318_1_ * p_77318_1_) / 3.0F;
+            return this.protectionType == 0 ? MathHelper.floor_float(var3 * 0.75F) : (this.protectionType == 1 && p_77318_2_.isFireDamage() ? MathHelper.floor_float(var3 * 1.25F) : (this.protectionType == 2 && p_77318_2_ == DamageSource.fall ? MathHelper.floor_float(var3 * 2.5F) : (this.protectionType == 3 && p_77318_2_.isExplosion() ? MathHelper.floor_float(var3 * 1.5F) : (this.protectionType == 4 && p_77318_2_.isProjectile() ? MathHelper.floor_float(var3 * 1.5F) : 0))));
         }
     }
 
@@ -94,43 +94,43 @@ public class EnchantmentProtection extends Enchantment
     /**
      * Determines if the enchantment passed can be applyied together with this enchantment.
      */
-    public boolean canApplyTogether(Enchantment par1Enchantment)
+    public boolean canApplyTogether(Enchantment p_77326_1_)
     {
-        if (par1Enchantment instanceof EnchantmentProtection)
+        if (p_77326_1_ instanceof EnchantmentProtection)
         {
-            EnchantmentProtection var2 = (EnchantmentProtection)par1Enchantment;
+            EnchantmentProtection var2 = (EnchantmentProtection)p_77326_1_;
             return var2.protectionType == this.protectionType ? false : this.protectionType == 2 || var2.protectionType == 2;
         }
         else
         {
-            return super.canApplyTogether(par1Enchantment);
+            return super.canApplyTogether(p_77326_1_);
         }
     }
 
     /**
      * Gets the amount of ticks an entity should be set fire, adjusted for fire protection.
      */
-    public static int getFireTimeForEntity(Entity par0Entity, int par1)
+    public static int getFireTimeForEntity(Entity p_92093_0_, int p_92093_1_)
     {
-        int var2 = EnchantmentHelper.getMaxEnchantmentLevel(Enchantment.fireProtection.effectId, par0Entity.getLastActiveItems());
+        int var2 = EnchantmentHelper.getMaxEnchantmentLevel(Enchantment.fireProtection.effectId, p_92093_0_.getLastActiveItems());
 
         if (var2 > 0)
         {
-            par1 -= MathHelper.floor_float((float)par1 * (float)var2 * 0.15F);
+            p_92093_1_ -= MathHelper.floor_float((float)p_92093_1_ * (float)var2 * 0.15F);
         }
 
-        return par1;
+        return p_92093_1_;
     }
 
-    public static double func_92092_a(Entity par0Entity, double par1)
+    public static double func_92092_a(Entity p_92092_0_, double p_92092_1_)
     {
-        int var3 = EnchantmentHelper.getMaxEnchantmentLevel(Enchantment.blastProtection.effectId, par0Entity.getLastActiveItems());
+        int var3 = EnchantmentHelper.getMaxEnchantmentLevel(Enchantment.blastProtection.effectId, p_92092_0_.getLastActiveItems());
 
         if (var3 > 0)
         {
-            par1 -= (double)MathHelper.floor_double(par1 * (double)((float)var3 * 0.15F));
+            p_92092_1_ -= (double)MathHelper.floor_double(p_92092_1_ * (double)((float)var3 * 0.15F));
         }
 
-        return par1;
+        return p_92092_1_;
     }
 }

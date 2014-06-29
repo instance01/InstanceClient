@@ -62,11 +62,11 @@ public class CryptManager
     /**
      * Compute a serverId hash for use by sendSessionRequest()
      */
-    public static byte[] getServerIdHash(String par0Str, PublicKey par1PublicKey, SecretKey par2SecretKey)
+    public static byte[] getServerIdHash(String p_75895_0_, PublicKey p_75895_1_, SecretKey p_75895_2_)
     {
         try
         {
-            return digestOperation("SHA-1", new byte[][] {par0Str.getBytes("ISO_8859_1"), par2SecretKey.getEncoded(), par1PublicKey.getEncoded()});
+            return digestOperation("SHA-1", new byte[][] {p_75895_0_.getBytes("ISO_8859_1"), p_75895_2_.getEncoded(), p_75895_1_.getEncoded()});
         }
         catch (UnsupportedEncodingException var4)
         {
@@ -78,13 +78,13 @@ public class CryptManager
     /**
      * Compute a message digest on arbitrary byte[] data
      */
-    private static byte[] digestOperation(String par0Str, byte[] ... par1ArrayOfByte)
+    private static byte[] digestOperation(String p_75893_0_, byte[] ... p_75893_1_)
     {
         try
         {
-            MessageDigest var2 = MessageDigest.getInstance(par0Str);
-            byte[][] var3 = par1ArrayOfByte;
-            int var4 = par1ArrayOfByte.length;
+            MessageDigest var2 = MessageDigest.getInstance(p_75893_0_);
+            byte[][] var3 = p_75893_1_;
+            int var4 = p_75893_1_.length;
 
             for (int var5 = 0; var5 < var4; ++var5)
             {
@@ -104,11 +104,11 @@ public class CryptManager
     /**
      * Create a new PublicKey from encoded X.509 data
      */
-    public static PublicKey decodePublicKey(byte[] par0ArrayOfByte)
+    public static PublicKey decodePublicKey(byte[] p_75896_0_)
     {
         try
         {
-            X509EncodedKeySpec var1 = new X509EncodedKeySpec(par0ArrayOfByte);
+            X509EncodedKeySpec var1 = new X509EncodedKeySpec(p_75896_0_);
             KeyFactory var2 = KeyFactory.getInstance("RSA");
             return var2.generatePublic(var1);
         }
@@ -128,35 +128,35 @@ public class CryptManager
     /**
      * Decrypt shared secret AES key using RSA private key
      */
-    public static SecretKey decryptSharedKey(PrivateKey par0PrivateKey, byte[] par1ArrayOfByte)
+    public static SecretKey decryptSharedKey(PrivateKey p_75887_0_, byte[] p_75887_1_)
     {
-        return new SecretKeySpec(decryptData(par0PrivateKey, par1ArrayOfByte), "AES");
+        return new SecretKeySpec(decryptData(p_75887_0_, p_75887_1_), "AES");
     }
 
     /**
      * Encrypt byte[] data with RSA public key
      */
-    public static byte[] encryptData(Key par0Key, byte[] par1ArrayOfByte)
+    public static byte[] encryptData(Key p_75894_0_, byte[] p_75894_1_)
     {
-        return cipherOperation(1, par0Key, par1ArrayOfByte);
+        return cipherOperation(1, p_75894_0_, p_75894_1_);
     }
 
     /**
      * Decrypt byte[] data with RSA private key
      */
-    public static byte[] decryptData(Key par0Key, byte[] par1ArrayOfByte)
+    public static byte[] decryptData(Key p_75889_0_, byte[] p_75889_1_)
     {
-        return cipherOperation(2, par0Key, par1ArrayOfByte);
+        return cipherOperation(2, p_75889_0_, p_75889_1_);
     }
 
     /**
      * Encrypt or decrypt byte[] data using the specified key
      */
-    private static byte[] cipherOperation(int par0, Key par1Key, byte[] par2ArrayOfByte)
+    private static byte[] cipherOperation(int p_75885_0_, Key p_75885_1_, byte[] p_75885_2_)
     {
         try
         {
-            return createTheCipherInstance(par0, par1Key.getAlgorithm(), par1Key).doFinal(par2ArrayOfByte);
+            return createTheCipherInstance(p_75885_0_, p_75885_1_.getAlgorithm(), p_75885_1_).doFinal(p_75885_2_);
         }
         catch (IllegalBlockSizeException var4)
         {
@@ -174,12 +174,12 @@ public class CryptManager
     /**
      * Creates the Cipher Instance.
      */
-    private static Cipher createTheCipherInstance(int par0, String par1Str, Key par2Key)
+    private static Cipher createTheCipherInstance(int p_75886_0_, String p_75886_1_, Key p_75886_2_)
     {
         try
         {
-            Cipher var3 = Cipher.getInstance(par1Str);
-            var3.init(par0, par2Key);
+            Cipher var3 = Cipher.getInstance(p_75886_1_);
+            var3.init(p_75886_0_, p_75886_2_);
             return var3;
         }
         catch (InvalidKeyException var4)

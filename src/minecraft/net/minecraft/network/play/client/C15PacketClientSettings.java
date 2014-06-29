@@ -56,9 +56,9 @@ public class C15PacketClientSettings extends Packet
         p_148840_1_.writeBoolean(this.field_149525_f);
     }
 
-    public void processPacket(INetHandlerPlayServer p_149522_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149522_1_.processClientSettings(this);
+        p_148833_1_.processClientSettings(this);
     }
 
     public String func_149524_c()

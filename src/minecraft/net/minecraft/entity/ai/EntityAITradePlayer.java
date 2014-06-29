@@ -9,9 +9,9 @@ public class EntityAITradePlayer extends EntityAIBase
     private EntityVillager villager;
     private static final String __OBFID = "CL_00001617";
 
-    public EntityAITradePlayer(EntityVillager par1EntityVillager)
+    public EntityAITradePlayer(EntityVillager p_i1658_1_)
     {
-        this.villager = par1EntityVillager;
+        this.villager = p_i1658_1_;
         this.setMutexBits(5);
     }
 

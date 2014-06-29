@@ -12,6 +12,7 @@ import net.minecraft.command.server.CommandListBans;
 import net.minecraft.command.server.CommandListPlayers;
 import net.minecraft.command.server.CommandMessage;
 import net.minecraft.command.server.CommandMessageRaw;
+import net.minecraft.command.server.CommandNetstat;
 import net.minecraft.command.server.CommandOp;
 import net.minecraft.command.server.CommandPardonIp;
 import net.minecraft.command.server.CommandPardonPlayer;
@@ -28,7 +29,8 @@ import net.minecraft.command.server.CommandTeleport;
 import net.minecraft.command.server.CommandTestFor;
 import net.minecraft.command.server.CommandTestForBlock;
 import net.minecraft.command.server.CommandWhitelist;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.rcon.RConConsoleSource;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
@@ -88,6 +90,7 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
             this.registerCommand(new CommandListPlayers());
             this.registerCommand(new CommandWhitelist());
             this.registerCommand(new CommandSetPlayerTimeout());
+            this.registerCommand(new CommandNetstat());
         }
         else
         {
@@ -97,46 +100,42 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
         CommandBase.setAdminCommander(this);
     }
 
-    /**
-     * Sends a message to the admins of the server from a given CommandSender with the given resource string and given
-     * extra srings. If the int par2 is even or zero, the original sender is also notified.
-     */
-    public void notifyAdmins(ICommandSender par1ICommandSender, int par2, String par3Str, Object ... par4ArrayOfObj)
+    public void func_152372_a(ICommandSender p_152372_1_, ICommand p_152372_2_, int p_152372_3_, String p_152372_4_, Object ... p_152372_5_)
     {
-        boolean var5 = true;
+        boolean var6 = true;
 
-        if (par1ICommandSender instanceof CommandBlockLogic && !MinecraftServer.getServer().worldServers[0].getGameRules().getGameRuleBooleanValue("commandBlockOutput"))
+        if (p_152372_1_ instanceof CommandBlockLogic && !MinecraftServer.getServer().worldServers[0].getGameRules().getGameRuleBooleanValue("commandBlockOutput"))
         {
-            var5 = false;
+            var6 = false;
         }
 
-        ChatComponentTranslation var6 = new ChatComponentTranslation("chat.type.admin", new Object[] {par1ICommandSender.getCommandSenderName(), new ChatComponentTranslation(par3Str, par4ArrayOfObj)});
-        var6.getChatStyle().setColor(EnumChatFormatting.GRAY);
-        var6.getChatStyle().setItalic(Boolean.valueOf(true));
+        ChatComponentTranslation var7 = new ChatComponentTranslation("chat.type.admin", new Object[] {p_152372_1_.getCommandSenderName(), new ChatComponentTranslation(p_152372_4_, p_152372_5_)});
+        var7.getChatStyle().setColor(EnumChatFormatting.GRAY);
+        var7.getChatStyle().setItalic(Boolean.valueOf(true));
 
-        if (var5)
+        if (var6)
         {
-            Iterator var7 = MinecraftServer.getServer().getConfigurationManager().playerEntityList.iterator();
+            Iterator var8 = MinecraftServer.getServer().getConfigurationManager().playerEntityList.iterator();
 
-            while (var7.hasNext())
+            while (var8.hasNext())
             {
-                EntityPlayerMP var8 = (EntityPlayerMP)var7.next();
+                EntityPlayer var9 = (EntityPlayer)var8.next();
 
-                if (var8 != par1ICommandSender && MinecraftServer.getServer().getConfigurationManager().isPlayerOpped(var8.getCommandSenderName()))
+                if (var9 != p_152372_1_ && MinecraftServer.getServer().getConfigurationManager().func_152596_g(var9.getGameProfile()) && p_152372_2_.canCommandSenderUseCommand(var9) && (!(p_152372_1_ instanceof RConConsoleSource) || MinecraftServer.getServer().func_152363_m()))
                 {
-                    var8.addChatMessage(var6);
+                    var9.addChatMessage(var7);
                 }
             }
         }
 
-        if (par1ICommandSender != MinecraftServer.getServer())
+        if (p_152372_1_ != MinecraftServer.getServer())
         {
-            MinecraftServer.getServer().addChatMessage(var6);
+            MinecraftServer.getServer().addChatMessage(var7);
         }
 
-        if ((par2 & 1) != 1)
+        if ((p_152372_3_ & 1) != 1)
         {
-            par1ICommandSender.addChatMessage(new ChatComponentTranslation(par3Str, par4ArrayOfObj));
+            p_152372_1_.addChatMessage(new ChatComponentTranslation(p_152372_4_, p_152372_5_));
         }
     }
 }

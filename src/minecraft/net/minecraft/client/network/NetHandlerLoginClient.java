@@ -48,25 +48,35 @@ public class NetHandlerLoginClient implements INetHandlerLoginClient
         String var3 = p_147389_1_.func_149609_c();
         PublicKey var4 = p_147389_1_.func_149608_d();
         String var5 = (new BigInteger(CryptManager.getServerIdHash(var3, var4, var2))).toString(16);
+        boolean var6 = this.field_147394_b.func_147104_D() == null || !this.field_147394_b.func_147104_D().func_152585_d();
 
         try
         {
             this.func_147391_c().joinServer(this.field_147394_b.getSession().func_148256_e(), this.field_147394_b.getSession().getToken(), var5);
         }
-        catch (AuthenticationUnavailableException var7)
+        catch (AuthenticationUnavailableException var8)
         {
-            this.field_147393_d.closeChannel(new ChatComponentTranslation("disconnect.loginFailedInfo", new Object[] {new ChatComponentTranslation("disconnect.loginFailedInfo.serversUnavailable", new Object[0])}));
-            return;
+            if (var6)
+            {
+                this.field_147393_d.closeChannel(new ChatComponentTranslation("disconnect.loginFailedInfo", new Object[] {new ChatComponentTranslation("disconnect.loginFailedInfo.serversUnavailable", new Object[0])}));
+                return;
+            }
         }
-        catch (InvalidCredentialsException var8)
+        catch (InvalidCredentialsException var9)
         {
-            this.field_147393_d.closeChannel(new ChatComponentTranslation("disconnect.loginFailedInfo", new Object[] {new ChatComponentTranslation("disconnect.loginFailedInfo.invalidSession", new Object[0])}));
-            return;
+            if (var6)
+            {
+                this.field_147393_d.closeChannel(new ChatComponentTranslation("disconnect.loginFailedInfo", new Object[] {new ChatComponentTranslation("disconnect.loginFailedInfo.invalidSession", new Object[0])}));
+                return;
+            }
         }
-        catch (AuthenticationException var9)
+        catch (AuthenticationException var10)
         {
-            this.field_147393_d.closeChannel(new ChatComponentTranslation("disconnect.loginFailedInfo", new Object[] {var9.getMessage()}));
-            return;
+            if (var6)
+            {
+                this.field_147393_d.closeChannel(new ChatComponentTranslation("disconnect.loginFailedInfo", new Object[] {var10.getMessage()}));
+                return;
+            }
         }
 
         this.field_147393_d.scheduleOutboundPacket(new C01PacketEncryptionResponse(var2, var4, p_147389_1_.func_149607_e()), new GenericFutureListener[] {new GenericFutureListener()

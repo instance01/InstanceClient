@@ -43,9 +43,9 @@ public class S1BPacketEntityAttach extends Packet
         p_148840_1_.writeByte(this.field_149408_a);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149405_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149405_1_.handleEntityAttach(this);
+        p_148833_1_.handleEntityAttach(this);
     }
 
     public int func_149404_c()

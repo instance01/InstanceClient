@@ -30,10 +30,10 @@ public class EntityAIControlledByPlayer extends EntityAIBase
     private int maxSpeedBoostTime;
     private static final String __OBFID = "CL_00001580";
 
-    public EntityAIControlledByPlayer(EntityLiving par1EntityLiving, float par2)
+    public EntityAIControlledByPlayer(EntityLiving p_i1620_1_, float p_i1620_2_)
     {
-        this.thisEntity = par1EntityLiving;
-        this.maxSpeed = par2;
+        this.thisEntity = p_i1620_1_;
+        this.maxSpeed = p_i1620_2_;
         this.setMutexBits(7);
     }
 

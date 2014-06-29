@@ -22,9 +22,9 @@ public class C0FPacketConfirmTransaction extends Packet
         this.field_149535_c = p_i45244_3_;
     }
 
-    public void processPacket(INetHandlerPlayServer p_149531_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149531_1_.processConfirmTransaction(this);
+        p_148833_1_.processConfirmTransaction(this);
     }
 
     /**

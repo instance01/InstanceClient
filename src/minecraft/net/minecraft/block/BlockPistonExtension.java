@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Facing;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -231,7 +232,7 @@ public class BlockPistonExtension extends Block
 
     public static int func_150085_b(int p_150085_0_)
     {
-        return p_150085_0_ & 7;
+        return MathHelper.clamp_int(p_150085_0_ & 7, 0, Facing.offsetsXForSide.length - 1);
     }
 
     /**

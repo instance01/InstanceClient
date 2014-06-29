@@ -7,8 +7,8 @@ public enum EnumSkyBlock
     public final int defaultLightValue;
     private static final String __OBFID = "CL_00000151";
 
-    private EnumSkyBlock(int par3)
+    private EnumSkyBlock(int p_i1961_3_)
     {
-        this.defaultLightValue = par3;
+        this.defaultLightValue = p_i1961_3_;
     }
 }

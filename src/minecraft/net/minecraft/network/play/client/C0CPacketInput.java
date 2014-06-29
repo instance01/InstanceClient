@@ -46,9 +46,9 @@ public class C0CPacketInput extends Packet
         p_148840_1_.writeBoolean(this.field_149621_d);
     }
 
-    public void processPacket(INetHandlerPlayServer p_149619_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149619_1_.processInput(this);
+        p_148833_1_.processInput(this);
     }
 
     public float func_149620_c()

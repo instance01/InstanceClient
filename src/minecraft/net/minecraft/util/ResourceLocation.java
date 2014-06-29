@@ -8,35 +8,35 @@ public class ResourceLocation
     private final String resourcePath;
     private static final String __OBFID = "CL_00001082";
 
-    public ResourceLocation(String par1Str, String par2Str)
+    public ResourceLocation(String p_i1292_1_, String p_i1292_2_)
     {
-        Validate.notNull(par2Str);
+        Validate.notNull(p_i1292_2_);
 
-        if (par1Str != null && par1Str.length() != 0)
+        if (p_i1292_1_ != null && p_i1292_1_.length() != 0)
         {
-            this.resourceDomain = par1Str;
+            this.resourceDomain = p_i1292_1_;
         }
         else
         {
             this.resourceDomain = "minecraft";
         }
 
-        this.resourcePath = par2Str;
+        this.resourcePath = p_i1292_2_;
     }
 
-    public ResourceLocation(String par1Str)
+    public ResourceLocation(String p_i1293_1_)
     {
         String var2 = "minecraft";
-        String var3 = par1Str;
-        int var4 = par1Str.indexOf(58);
+        String var3 = p_i1293_1_;
+        int var4 = p_i1293_1_.indexOf(58);
 
         if (var4 >= 0)
         {
-            var3 = par1Str.substring(var4 + 1, par1Str.length());
+            var3 = p_i1293_1_.substring(var4 + 1, p_i1293_1_.length());
 
             if (var4 > 1)
             {
-                var2 = par1Str.substring(0, var4);
+                var2 = p_i1293_1_.substring(0, var4);
             }
         }
 
@@ -59,19 +59,19 @@ public class ResourceLocation
         return this.resourceDomain + ":" + this.resourcePath;
     }
 
-    public boolean equals(Object par1Obj)
+    public boolean equals(Object p_equals_1_)
     {
-        if (this == par1Obj)
+        if (this == p_equals_1_)
         {
             return true;
         }
-        else if (!(par1Obj instanceof ResourceLocation))
+        else if (!(p_equals_1_ instanceof ResourceLocation))
         {
             return false;
         }
         else
         {
-            ResourceLocation var2 = (ResourceLocation)par1Obj;
+            ResourceLocation var2 = (ResourceLocation)p_equals_1_;
             return this.resourceDomain.equals(var2.resourceDomain) && this.resourcePath.equals(var2.resourcePath);
         }
     }

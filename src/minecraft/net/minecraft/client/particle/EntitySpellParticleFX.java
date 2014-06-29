@@ -9,12 +9,12 @@ public class EntitySpellParticleFX extends EntityFX
     private int baseSpellTextureIndex = 128;
     private static final String __OBFID = "CL_00000926";
 
-    public EntitySpellParticleFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12)
+    public EntitySpellParticleFX(World p_i1229_1_, double p_i1229_2_, double p_i1229_4_, double p_i1229_6_, double p_i1229_8_, double p_i1229_10_, double p_i1229_12_)
     {
-        super(par1World, par2, par4, par6, par8, par10, par12);
+        super(p_i1229_1_, p_i1229_2_, p_i1229_4_, p_i1229_6_, p_i1229_8_, p_i1229_10_, p_i1229_12_);
         this.motionY *= 0.20000000298023224D;
 
-        if (par8 == 0.0D && par12 == 0.0D)
+        if (p_i1229_8_ == 0.0D && p_i1229_12_ == 0.0D)
         {
             this.motionX *= 0.10000000149011612D;
             this.motionZ *= 0.10000000149011612D;
@@ -25,9 +25,9 @@ public class EntitySpellParticleFX extends EntityFX
         this.noClip = false;
     }
 
-    public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7)
+    public void renderParticle(Tessellator p_70539_1_, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_)
     {
-        float var8 = ((float)this.particleAge + par2) / (float)this.particleMaxAge * 32.0F;
+        float var8 = ((float)this.particleAge + p_70539_2_) / (float)this.particleMaxAge * 32.0F;
 
         if (var8 < 0.0F)
         {
@@ -39,7 +39,7 @@ public class EntitySpellParticleFX extends EntityFX
             var8 = 1.0F;
         }
 
-        super.renderParticle(par1Tessellator, par2, par3, par4, par5, par6, par7);
+        super.renderParticle(p_70539_1_, p_70539_2_, p_70539_3_, p_70539_4_, p_70539_5_, p_70539_6_, p_70539_7_);
     }
 
     /**
@@ -80,8 +80,8 @@ public class EntitySpellParticleFX extends EntityFX
     /**
      * Sets the base spell texture index
      */
-    public void setBaseSpellTextureIndex(int par1)
+    public void setBaseSpellTextureIndex(int p_70589_1_)
     {
-        this.baseSpellTextureIndex = par1;
+        this.baseSpellTextureIndex = p_70589_1_;
     }
 }

@@ -4,20 +4,20 @@ import net.minecraft.client.resources.I18n;
 
 public class GuiConfirmOpenLink extends GuiYesNo
 {
-    private String field_146363_r;
-    private String field_146362_s;
-    private String field_146361_t;
+    private final String field_146363_r;
+    private final String field_146362_s;
+    private final String field_146361_t;
     private boolean field_146360_u = true;
     private static final String __OBFID = "CL_00000683";
 
-    public GuiConfirmOpenLink(GuiScreen par1GuiScreen, String par2Str, int par3, boolean par4)
+    public GuiConfirmOpenLink(GuiYesNoCallback p_i1084_1_, String p_i1084_2_, int p_i1084_3_, boolean p_i1084_4_)
     {
-        super(par1GuiScreen, I18n.format(par4 ? "chat.link.confirmTrusted" : "chat.link.confirm", new Object[0]), par2Str, par3);
-        this.field_146352_g = I18n.format(par4 ? "chat.link.open" : "gui.yes", new Object[0]);
-        this.field_146356_h = I18n.format(par4 ? "gui.cancel" : "gui.no", new Object[0]);
+        super(p_i1084_1_, I18n.format(p_i1084_4_ ? "chat.link.confirmTrusted" : "chat.link.confirm", new Object[0]), p_i1084_2_, p_i1084_3_);
+        this.field_146352_g = I18n.format(p_i1084_4_ ? "chat.link.open" : "gui.yes", new Object[0]);
+        this.field_146356_h = I18n.format(p_i1084_4_ ? "gui.cancel" : "gui.no", new Object[0]);
         this.field_146362_s = I18n.format("chat.copy", new Object[0]);
         this.field_146363_r = I18n.format("chat.link.warning", new Object[0]);
-        this.field_146361_t = par2Str;
+        this.field_146361_t = p_i1084_2_;
     }
 
     /**
@@ -48,9 +48,9 @@ public class GuiConfirmOpenLink extends GuiYesNo
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
 
         if (this.field_146360_u)
         {

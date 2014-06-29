@@ -35,26 +35,26 @@ public class EnchantmentDamage extends Enchantment
     public final int damageType;
     private static final String __OBFID = "CL_00000102";
 
-    public EnchantmentDamage(int par1, int par2, int par3)
+    public EnchantmentDamage(int p_i1923_1_, int p_i1923_2_, int p_i1923_3_)
     {
-        super(par1, par2, EnumEnchantmentType.weapon);
-        this.damageType = par3;
+        super(p_i1923_1_, p_i1923_2_, EnumEnchantmentType.weapon);
+        this.damageType = p_i1923_3_;
     }
 
     /**
      * Returns the minimal value of enchantability needed on the enchantment level passed.
      */
-    public int getMinEnchantability(int par1)
+    public int getMinEnchantability(int p_77321_1_)
     {
-        return baseEnchantability[this.damageType] + (par1 - 1) * levelEnchantability[this.damageType];
+        return baseEnchantability[this.damageType] + (p_77321_1_ - 1) * levelEnchantability[this.damageType];
     }
 
     /**
      * Returns the maximum value of enchantability nedded on the enchantment level passed.
      */
-    public int getMaxEnchantability(int par1)
+    public int getMaxEnchantability(int p_77317_1_)
     {
-        return this.getMinEnchantability(par1) + thresholdEnchantability[this.damageType];
+        return this.getMinEnchantability(p_77317_1_) + thresholdEnchantability[this.damageType];
     }
 
     /**
@@ -65,12 +65,9 @@ public class EnchantmentDamage extends Enchantment
         return 5;
     }
 
-    /**
-     * Calculates de (magic) damage done by the enchantment on a living entity based on level and entity passed.
-     */
-    public float calcModifierLiving(int par1, EntityLivingBase par2EntityLivingBase)
+    public float func_152376_a(int p_152376_1_, EnumCreatureAttribute p_152376_2_)
     {
-        return this.damageType == 0 ? (float)par1 * 1.25F : (this.damageType == 1 && par2EntityLivingBase.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD ? (float)par1 * 2.5F : (this.damageType == 2 && par2EntityLivingBase.getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD ? (float)par1 * 2.5F : 0.0F));
+        return this.damageType == 0 ? (float)p_152376_1_ * 1.25F : (this.damageType == 1 && p_152376_2_ == EnumCreatureAttribute.UNDEAD ? (float)p_152376_1_ * 2.5F : (this.damageType == 2 && p_152376_2_ == EnumCreatureAttribute.ARTHROPOD ? (float)p_152376_1_ * 2.5F : 0.0F));
     }
 
     /**
@@ -84,14 +81,14 @@ public class EnchantmentDamage extends Enchantment
     /**
      * Determines if the enchantment passed can be applyied together with this enchantment.
      */
-    public boolean canApplyTogether(Enchantment par1Enchantment)
+    public boolean canApplyTogether(Enchantment p_77326_1_)
     {
-        return !(par1Enchantment instanceof EnchantmentDamage);
+        return !(p_77326_1_ instanceof EnchantmentDamage);
     }
 
-    public boolean canApply(ItemStack par1ItemStack)
+    public boolean canApply(ItemStack p_92089_1_)
     {
-        return par1ItemStack.getItem() instanceof ItemAxe ? true : super.canApply(par1ItemStack);
+        return p_92089_1_.getItem() instanceof ItemAxe ? true : super.canApply(p_92089_1_);
     }
 
     public void func_151368_a(EntityLivingBase p_151368_1_, Entity p_151368_2_, int p_151368_3_)

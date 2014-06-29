@@ -85,11 +85,11 @@ public abstract class MapGenStructure extends MapGenBase
     /**
      * Generates structures in specified chunk next to existing structures. Does *not* generate StructureStarts.
      */
-    public boolean generateStructuresInChunk(World par1World, Random par2Random, int par3, int par4)
+    public boolean generateStructuresInChunk(World p_75051_1_, Random p_75051_2_, int p_75051_3_, int p_75051_4_)
     {
-        this.func_143027_a(par1World);
-        int var5 = (par3 << 4) + 8;
-        int var6 = (par4 << 4) + 8;
+        this.func_143027_a(p_75051_1_);
+        int var5 = (p_75051_3_ << 4) + 8;
+        int var6 = (p_75051_4_ << 4) + 8;
         boolean var7 = false;
         Iterator var8 = this.structureMap.values().iterator();
 
@@ -99,7 +99,7 @@ public abstract class MapGenStructure extends MapGenBase
 
             if (var9.isSizeableStructure() && var9.getBoundingBox().intersectsWith(var5, var6, var5 + 15, var6 + 15))
             {
-                var9.generateStructure(par1World, par2Random, new StructureBoundingBox(var5, var6, var5 + 15, var6 + 15));
+                var9.generateStructure(p_75051_1_, p_75051_2_, new StructureBoundingBox(var5, var6, var5 + 15, var6 + 15));
                 var7 = true;
                 this.func_143026_a(var9.func_143019_e(), var9.func_143018_f(), var9);
             }
@@ -111,13 +111,13 @@ public abstract class MapGenStructure extends MapGenBase
     /**
      * Returns true if the structure generator has generated a structure located at the given position tuple.
      */
-    public boolean hasStructureAt(int par1, int par2, int par3)
+    public boolean hasStructureAt(int p_75048_1_, int p_75048_2_, int p_75048_3_)
     {
         this.func_143027_a(this.worldObj);
-        return this.func_143028_c(par1, par2, par3) != null;
+        return this.func_143028_c(p_75048_1_, p_75048_2_, p_75048_3_) != null;
     }
 
-    protected StructureStart func_143028_c(int par1, int par2, int par3)
+    protected StructureStart func_143028_c(int p_143028_1_, int p_143028_2_, int p_143028_3_)
     {
         Iterator var4 = this.structureMap.values().iterator();
 
@@ -125,7 +125,7 @@ public abstract class MapGenStructure extends MapGenBase
         {
             StructureStart var5 = (StructureStart)var4.next();
 
-            if (var5.isSizeableStructure() && var5.getBoundingBox().intersectsWith(par1, par3, par1, par3))
+            if (var5.isSizeableStructure() && var5.getBoundingBox().intersectsWith(p_143028_1_, p_143028_3_, p_143028_1_, p_143028_3_))
             {
                 Iterator var6 = var5.getComponents().iterator();
 
@@ -133,7 +133,7 @@ public abstract class MapGenStructure extends MapGenBase
                 {
                     StructureComponent var7 = (StructureComponent)var6.next();
 
-                    if (var7.getBoundingBox().isVecInside(par1, par2, par3))
+                    if (var7.getBoundingBox().isVecInside(p_143028_1_, p_143028_2_, p_143028_3_))
                     {
                         return var5;
                     }
@@ -144,7 +144,7 @@ public abstract class MapGenStructure extends MapGenBase
         return null;
     }
 
-    public boolean func_142038_b(int par1, int par2, int par3)
+    public boolean func_142038_b(int p_142038_1_, int p_142038_2_, int p_142038_3_)
     {
         this.func_143027_a(this.worldObj);
         Iterator var4 = this.structureMap.values().iterator();
@@ -161,7 +161,7 @@ public abstract class MapGenStructure extends MapGenBase
         }
         while (!var5.isSizeableStructure());
 
-        return var5.getBoundingBox().intersectsWith(par1, par3, par1, par3);
+        return var5.getBoundingBox().intersectsWith(p_142038_1_, p_142038_3_, p_142038_1_, p_142038_3_);
     }
 
     public ChunkPosition func_151545_a(World p_151545_1_, int p_151545_2_, int p_151545_3_, int p_151545_4_)
@@ -179,10 +179,10 @@ public abstract class MapGenStructure extends MapGenBase
         ChunkPosition var15 = null;
         Iterator var16 = this.structureMap.values().iterator();
         ChunkPosition var19;
-        int var21;
         int var20;
-        double var23;
+        int var21;
         int var22;
+        double var23;
 
         while (var16.hasNext())
         {
@@ -251,16 +251,16 @@ public abstract class MapGenStructure extends MapGenBase
         return null;
     }
 
-    private void func_143027_a(World par1World)
+    private void func_143027_a(World p_143027_1_)
     {
         if (this.field_143029_e == null)
         {
-            this.field_143029_e = (MapGenStructureData)par1World.loadItemData(MapGenStructureData.class, this.func_143025_a());
+            this.field_143029_e = (MapGenStructureData)p_143027_1_.loadItemData(MapGenStructureData.class, this.func_143025_a());
 
             if (this.field_143029_e == null)
             {
                 this.field_143029_e = new MapGenStructureData(this.func_143025_a());
-                par1World.setItemData(this.func_143025_a(), this.field_143029_e);
+                p_143027_1_.setItemData(this.func_143025_a(), this.field_143029_e);
             }
             else
             {
@@ -280,8 +280,12 @@ public abstract class MapGenStructure extends MapGenBase
                         {
                             int var7 = var6.getInteger("ChunkX");
                             int var8 = var6.getInteger("ChunkZ");
-                            StructureStart var9 = MapGenStructureIO.func_143035_a(var6, par1World);
-                            this.structureMap.put(Long.valueOf(ChunkCoordIntPair.chunkXZ2Int(var7, var8)), var9);
+                            StructureStart var9 = MapGenStructureIO.func_143035_a(var6, p_143027_1_);
+
+                            if (var9 != null)
+                            {
+                                this.structureMap.put(Long.valueOf(ChunkCoordIntPair.chunkXZ2Int(var7, var8)), var9);
+                            }
                         }
                     }
                 }
@@ -289,13 +293,13 @@ public abstract class MapGenStructure extends MapGenBase
         }
     }
 
-    private void func_143026_a(int par1, int par2, StructureStart par3StructureStart)
+    private void func_143026_a(int p_143026_1_, int p_143026_2_, StructureStart p_143026_3_)
     {
-        this.field_143029_e.func_143043_a(par3StructureStart.func_143021_a(par1, par2), par1, par2);
+        this.field_143029_e.func_143043_a(p_143026_3_.func_143021_a(p_143026_1_, p_143026_2_), p_143026_1_, p_143026_2_);
         this.field_143029_e.markDirty();
     }
 
-    protected abstract boolean canSpawnStructureAtCoords(int var1, int var2);
+    protected abstract boolean canSpawnStructureAtCoords(int p_75047_1_, int p_75047_2_);
 
-    protected abstract StructureStart getStructureStart(int var1, int var2);
+    protected abstract StructureStart getStructureStart(int p_75049_1_, int p_75049_2_);
 }

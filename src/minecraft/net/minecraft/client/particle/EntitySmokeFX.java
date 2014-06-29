@@ -8,32 +8,32 @@ public class EntitySmokeFX extends EntityFX
     float smokeParticleScale;
     private static final String __OBFID = "CL_00000924";
 
-    public EntitySmokeFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12)
+    public EntitySmokeFX(World p_i1225_1_, double p_i1225_2_, double p_i1225_4_, double p_i1225_6_, double p_i1225_8_, double p_i1225_10_, double p_i1225_12_)
     {
-        this(par1World, par2, par4, par6, par8, par10, par12, 1.0F);
+        this(p_i1225_1_, p_i1225_2_, p_i1225_4_, p_i1225_6_, p_i1225_8_, p_i1225_10_, p_i1225_12_, 1.0F);
     }
 
-    public EntitySmokeFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12, float par14)
+    public EntitySmokeFX(World p_i1226_1_, double p_i1226_2_, double p_i1226_4_, double p_i1226_6_, double p_i1226_8_, double p_i1226_10_, double p_i1226_12_, float p_i1226_14_)
     {
-        super(par1World, par2, par4, par6, 0.0D, 0.0D, 0.0D);
+        super(p_i1226_1_, p_i1226_2_, p_i1226_4_, p_i1226_6_, 0.0D, 0.0D, 0.0D);
         this.motionX *= 0.10000000149011612D;
         this.motionY *= 0.10000000149011612D;
         this.motionZ *= 0.10000000149011612D;
-        this.motionX += par8;
-        this.motionY += par10;
-        this.motionZ += par12;
+        this.motionX += p_i1226_8_;
+        this.motionY += p_i1226_10_;
+        this.motionZ += p_i1226_12_;
         this.particleRed = this.particleGreen = this.particleBlue = (float)(Math.random() * 0.30000001192092896D);
         this.particleScale *= 0.75F;
-        this.particleScale *= par14;
+        this.particleScale *= p_i1226_14_;
         this.smokeParticleScale = this.particleScale;
         this.particleMaxAge = (int)(8.0D / (Math.random() * 0.8D + 0.2D));
-        this.particleMaxAge = (int)((float)this.particleMaxAge * par14);
+        this.particleMaxAge = (int)((float)this.particleMaxAge * p_i1226_14_);
         this.noClip = false;
     }
 
-    public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7)
+    public void renderParticle(Tessellator p_70539_1_, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_)
     {
-        float var8 = ((float)this.particleAge + par2) / (float)this.particleMaxAge * 32.0F;
+        float var8 = ((float)this.particleAge + p_70539_2_) / (float)this.particleMaxAge * 32.0F;
 
         if (var8 < 0.0F)
         {
@@ -46,7 +46,7 @@ public class EntitySmokeFX extends EntityFX
         }
 
         this.particleScale = this.smokeParticleScale * var8;
-        super.renderParticle(par1Tessellator, par2, par3, par4, par5, par6, par7);
+        super.renderParticle(p_70539_1_, p_70539_2_, p_70539_3_, p_70539_4_, p_70539_5_, p_70539_6_, p_70539_7_);
     }
 
     /**

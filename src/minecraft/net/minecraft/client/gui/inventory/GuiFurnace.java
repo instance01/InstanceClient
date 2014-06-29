@@ -13,10 +13,10 @@ public class GuiFurnace extends GuiContainer
     private TileEntityFurnace field_147086_v;
     private static final String __OBFID = "CL_00000758";
 
-    public GuiFurnace(InventoryPlayer par1InventoryPlayer, TileEntityFurnace par2TileEntityFurnace)
+    public GuiFurnace(InventoryPlayer p_i1091_1_, TileEntityFurnace p_i1091_2_)
     {
-        super(new ContainerFurnace(par1InventoryPlayer, par2TileEntityFurnace));
-        this.field_147086_v = par2TileEntityFurnace;
+        super(new ContainerFurnace(p_i1091_1_, p_i1091_2_));
+        this.field_147086_v = p_i1091_2_;
     }
 
     protected void func_146979_b(int p_146979_1_, int p_146979_2_)
@@ -33,15 +33,13 @@ public class GuiFurnace extends GuiContainer
         int var4 = (this.width - this.field_146999_f) / 2;
         int var5 = (this.height - this.field_147000_g) / 2;
         this.drawTexturedModalRect(var4, var5, 0, 0, this.field_146999_f, this.field_147000_g);
-        int var6;
 
         if (this.field_147086_v.func_145950_i())
         {
-            var6 = this.field_147086_v.func_145955_e(12);
-            this.drawTexturedModalRect(var4 + 56, var5 + 36 + 12 - var6, 176, 12 - var6, 14, var6 + 2);
+            int var6 = this.field_147086_v.func_145955_e(13);
+            this.drawTexturedModalRect(var4 + 56, var5 + 36 + 12 - var6, 176, 12 - var6, 14, var6 + 1);
+            var6 = this.field_147086_v.func_145953_d(24);
+            this.drawTexturedModalRect(var4 + 79, var5 + 34, 176, 14, var6 + 1, 16);
         }
-
-        var6 = this.field_147086_v.func_145953_d(24);
-        this.drawTexturedModalRect(var4 + 79, var5 + 34, 176, 14, var6 + 1, 16);
     }
 }

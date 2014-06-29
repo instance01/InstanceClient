@@ -19,16 +19,16 @@ public class ItemMinecart extends Item
     {
         private final BehaviorDefaultDispenseItem behaviourDefaultDispenseItem = new BehaviorDefaultDispenseItem();
         private static final String __OBFID = "CL_00000050";
-        public ItemStack dispenseStack(IBlockSource par1IBlockSource, ItemStack par2ItemStack)
+        public ItemStack dispenseStack(IBlockSource p_82487_1_, ItemStack p_82487_2_)
         {
-            EnumFacing var3 = BlockDispenser.func_149937_b(par1IBlockSource.getBlockMetadata());
-            World var4 = par1IBlockSource.getWorld();
-            double var5 = par1IBlockSource.getX() + (double)((float)var3.getFrontOffsetX() * 1.125F);
-            double var7 = par1IBlockSource.getY() + (double)((float)var3.getFrontOffsetY() * 1.125F);
-            double var9 = par1IBlockSource.getZ() + (double)((float)var3.getFrontOffsetZ() * 1.125F);
-            int var11 = par1IBlockSource.getXInt() + var3.getFrontOffsetX();
-            int var12 = par1IBlockSource.getYInt() + var3.getFrontOffsetY();
-            int var13 = par1IBlockSource.getZInt() + var3.getFrontOffsetZ();
+            EnumFacing var3 = BlockDispenser.func_149937_b(p_82487_1_.getBlockMetadata());
+            World var4 = p_82487_1_.getWorld();
+            double var5 = p_82487_1_.getX() + (double)((float)var3.getFrontOffsetX() * 1.125F);
+            double var7 = p_82487_1_.getY() + (double)((float)var3.getFrontOffsetY() * 1.125F);
+            double var9 = p_82487_1_.getZ() + (double)((float)var3.getFrontOffsetZ() * 1.125F);
+            int var11 = p_82487_1_.getXInt() + var3.getFrontOffsetX();
+            int var12 = p_82487_1_.getYInt() + var3.getFrontOffsetY();
+            int var13 = p_82487_1_.getZInt() + var3.getFrontOffsetZ();
             Block var14 = var4.getBlock(var11, var12, var13);
             double var15;
 
@@ -40,26 +40,26 @@ public class ItemMinecart extends Item
             {
                 if (var14.getMaterial() != Material.air || !BlockRailBase.func_150051_a(var4.getBlock(var11, var12 - 1, var13)))
                 {
-                    return this.behaviourDefaultDispenseItem.dispense(par1IBlockSource, par2ItemStack);
+                    return this.behaviourDefaultDispenseItem.dispense(p_82487_1_, p_82487_2_);
                 }
 
                 var15 = -1.0D;
             }
 
-            EntityMinecart var17 = EntityMinecart.createMinecart(var4, var5, var7 + var15, var9, ((ItemMinecart)par2ItemStack.getItem()).minecartType);
+            EntityMinecart var17 = EntityMinecart.createMinecart(var4, var5, var7 + var15, var9, ((ItemMinecart)p_82487_2_.getItem()).minecartType);
 
-            if (par2ItemStack.hasDisplayName())
+            if (p_82487_2_.hasDisplayName())
             {
-                var17.setMinecartName(par2ItemStack.getDisplayName());
+                var17.setMinecartName(p_82487_2_.getDisplayName());
             }
 
             var4.spawnEntityInWorld(var17);
-            par2ItemStack.splitStack(1);
-            return par2ItemStack;
+            p_82487_2_.splitStack(1);
+            return p_82487_2_;
         }
-        protected void playDispenseSound(IBlockSource par1IBlockSource)
+        protected void playDispenseSound(IBlockSource p_82485_1_)
         {
-            par1IBlockSource.getWorld().playAuxSFX(1000, par1IBlockSource.getXInt(), par1IBlockSource.getYInt(), par1IBlockSource.getZInt(), 0);
+            p_82485_1_.getWorld().playAuxSFX(1000, p_82485_1_.getXInt(), p_82485_1_.getYInt(), p_82485_1_.getZInt(), 0);
         }
     };
     public int minecartType;
@@ -77,23 +77,23 @@ public class ItemMinecart extends Item
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
      * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
      */
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+    public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World p_77648_3_, int p_77648_4_, int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
     {
-        if (BlockRailBase.func_150051_a(par3World.getBlock(par4, par5, par6)))
+        if (BlockRailBase.func_150051_a(p_77648_3_.getBlock(p_77648_4_, p_77648_5_, p_77648_6_)))
         {
-            if (!par3World.isClient)
+            if (!p_77648_3_.isClient)
             {
-                EntityMinecart var11 = EntityMinecart.createMinecart(par3World, (double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), this.minecartType);
+                EntityMinecart var11 = EntityMinecart.createMinecart(p_77648_3_, (double)((float)p_77648_4_ + 0.5F), (double)((float)p_77648_5_ + 0.5F), (double)((float)p_77648_6_ + 0.5F), this.minecartType);
 
-                if (par1ItemStack.hasDisplayName())
+                if (p_77648_1_.hasDisplayName())
                 {
-                    var11.setMinecartName(par1ItemStack.getDisplayName());
+                    var11.setMinecartName(p_77648_1_.getDisplayName());
                 }
 
-                par3World.spawnEntityInWorld(var11);
+                p_77648_3_.spawnEntityInWorld(var11);
             }
 
-            --par1ItemStack.stackSize;
+            --p_77648_1_.stackSize;
             return true;
         }
         else

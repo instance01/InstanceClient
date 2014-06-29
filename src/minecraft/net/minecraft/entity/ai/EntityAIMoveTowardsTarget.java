@@ -19,11 +19,11 @@ public class EntityAIMoveTowardsTarget extends EntityAIBase
     private float maxTargetDistance;
     private static final String __OBFID = "CL_00001599";
 
-    public EntityAIMoveTowardsTarget(EntityCreature par1EntityCreature, double par2, float par4)
+    public EntityAIMoveTowardsTarget(EntityCreature p_i1640_1_, double p_i1640_2_, float p_i1640_4_)
     {
-        this.theEntity = par1EntityCreature;
-        this.speed = par2;
-        this.maxTargetDistance = par4;
+        this.theEntity = p_i1640_1_;
+        this.speed = p_i1640_2_;
+        this.maxTargetDistance = p_i1640_4_;
         this.setMutexBits(1);
     }
 
@@ -44,7 +44,7 @@ public class EntityAIMoveTowardsTarget extends EntityAIBase
         }
         else
         {
-            Vec3 var1 = RandomPositionGenerator.findRandomTargetBlockTowards(this.theEntity, 16, 7, this.theEntity.worldObj.getWorldVec3Pool().getVecFromPool(this.targetEntity.posX, this.targetEntity.posY, this.targetEntity.posZ));
+            Vec3 var1 = RandomPositionGenerator.findRandomTargetBlockTowards(this.theEntity, 16, 7, Vec3.createVectorHelper(this.targetEntity.posX, this.targetEntity.posY, this.targetEntity.posZ));
 
             if (var1 == null)
             {

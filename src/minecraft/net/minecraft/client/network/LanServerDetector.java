@@ -21,6 +21,89 @@ public class LanServerDetector
     private static final Logger logger = LogManager.getLogger();
     private static final String __OBFID = "CL_00001133";
 
+    public static class LanServer
+    {
+        private String lanServerMotd;
+        private String lanServerIpPort;
+        private long timeLastSeen;
+        private static final String __OBFID = "CL_00001134";
+
+        public LanServer(String p_i1319_1_, String p_i1319_2_)
+        {
+            this.lanServerMotd = p_i1319_1_;
+            this.lanServerIpPort = p_i1319_2_;
+            this.timeLastSeen = Minecraft.getSystemTime();
+        }
+
+        public String getServerMotd()
+        {
+            return this.lanServerMotd;
+        }
+
+        public String getServerIpPort()
+        {
+            return this.lanServerIpPort;
+        }
+
+        public void updateLastSeen()
+        {
+            this.timeLastSeen = Minecraft.getSystemTime();
+        }
+    }
+
+    public static class LanServerList
+    {
+        private ArrayList listOfLanServers = new ArrayList();
+        boolean wasUpdated;
+        private static final String __OBFID = "CL_00001136";
+
+        public synchronized boolean getWasUpdated()
+        {
+            return this.wasUpdated;
+        }
+
+        public synchronized void setWasNotUpdated()
+        {
+            this.wasUpdated = false;
+        }
+
+        public synchronized List getLanServers()
+        {
+            return Collections.unmodifiableList(this.listOfLanServers);
+        }
+
+        public synchronized void func_77551_a(String p_77551_1_, InetAddress p_77551_2_)
+        {
+            String var3 = ThreadLanServerPing.getMotdFromPingResponse(p_77551_1_);
+            String var4 = ThreadLanServerPing.getAdFromPingResponse(p_77551_1_);
+
+            if (var4 != null)
+            {
+                var4 = p_77551_2_.getHostAddress() + ":" + var4;
+                boolean var5 = false;
+                Iterator var6 = this.listOfLanServers.iterator();
+
+                while (var6.hasNext())
+                {
+                    LanServerDetector.LanServer var7 = (LanServerDetector.LanServer)var6.next();
+
+                    if (var7.getServerIpPort().equals(var4))
+                    {
+                        var7.updateLastSeen();
+                        var5 = true;
+                        break;
+                    }
+                }
+
+                if (!var5)
+                {
+                    this.listOfLanServers.add(new LanServerDetector.LanServer(var3, var4));
+                    this.wasUpdated = true;
+                }
+            }
+        }
+    }
+
     public static class ThreadLanServerFind extends Thread
     {
         private final LanServerDetector.LanServerList localServerList;
@@ -28,10 +111,10 @@ public class LanServerDetector
         private final MulticastSocket socket;
         private static final String __OBFID = "CL_00001135";
 
-        public ThreadLanServerFind(LanServerDetector.LanServerList par1LanServerList) throws IOException
+        public ThreadLanServerFind(LanServerDetector.LanServerList p_i1320_1_) throws IOException
         {
             super("LanServerDetector #" + LanServerDetector.field_148551_a.incrementAndGet());
-            this.localServerList = par1LanServerList;
+            this.localServerList = p_i1320_1_;
             this.setDaemon(true);
             this.socket = new MulticastSocket(4445);
             this.broadcastAddress = InetAddress.getByName("224.0.2.60");
@@ -76,89 +159,6 @@ public class LanServerDetector
             }
 
             this.socket.close();
-        }
-    }
-
-    public static class LanServer
-    {
-        private String lanServerMotd;
-        private String lanServerIpPort;
-        private long timeLastSeen;
-        private static final String __OBFID = "CL_00001134";
-
-        public LanServer(String par1Str, String par2Str)
-        {
-            this.lanServerMotd = par1Str;
-            this.lanServerIpPort = par2Str;
-            this.timeLastSeen = Minecraft.getSystemTime();
-        }
-
-        public String getServerMotd()
-        {
-            return this.lanServerMotd;
-        }
-
-        public String getServerIpPort()
-        {
-            return this.lanServerIpPort;
-        }
-
-        public void updateLastSeen()
-        {
-            this.timeLastSeen = Minecraft.getSystemTime();
-        }
-    }
-
-    public static class LanServerList
-    {
-        private ArrayList listOfLanServers = new ArrayList();
-        boolean wasUpdated;
-        private static final String __OBFID = "CL_00001136";
-
-        public synchronized boolean getWasUpdated()
-        {
-            return this.wasUpdated;
-        }
-
-        public synchronized void setWasNotUpdated()
-        {
-            this.wasUpdated = false;
-        }
-
-        public synchronized List getLanServers()
-        {
-            return Collections.unmodifiableList(this.listOfLanServers);
-        }
-
-        public synchronized void func_77551_a(String par1Str, InetAddress par2InetAddress)
-        {
-            String var3 = ThreadLanServerPing.getMotdFromPingResponse(par1Str);
-            String var4 = ThreadLanServerPing.getAdFromPingResponse(par1Str);
-
-            if (var4 != null)
-            {
-                var4 = par2InetAddress.getHostAddress() + ":" + var4;
-                boolean var5 = false;
-                Iterator var6 = this.listOfLanServers.iterator();
-
-                while (var6.hasNext())
-                {
-                    LanServerDetector.LanServer var7 = (LanServerDetector.LanServer)var6.next();
-
-                    if (var7.getServerIpPort().equals(var4))
-                    {
-                        var7.updateLastSeen();
-                        var5 = true;
-                        break;
-                    }
-                }
-
-                if (!var5)
-                {
-                    this.listOfLanServers.add(new LanServerDetector.LanServer(var3, var4));
-                    this.wasUpdated = true;
-                }
-            }
         }
     }
 }

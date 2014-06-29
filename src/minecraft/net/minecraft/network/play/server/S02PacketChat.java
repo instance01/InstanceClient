@@ -46,9 +46,9 @@ public class S02PacketChat extends Packet
         p_148840_1_.writeStringToBuffer(IChatComponent.Serializer.func_150696_a(this.field_148919_a));
     }
 
-    public void processPacket(INetHandlerPlayClient p_148917_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_148917_1_.handleChat(this);
+        p_148833_1_.handleChat(this);
     }
 
     /**

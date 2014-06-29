@@ -22,34 +22,34 @@ public class LowerStringMap implements Map
         return this.internalMap.isEmpty();
     }
 
-    public boolean containsKey(Object par1Obj)
+    public boolean containsKey(Object p_containsKey_1_)
     {
-        return this.internalMap.containsKey(par1Obj.toString().toLowerCase());
+        return this.internalMap.containsKey(p_containsKey_1_.toString().toLowerCase());
     }
 
-    public boolean containsValue(Object par1Obj)
+    public boolean containsValue(Object p_containsValue_1_)
     {
-        return this.internalMap.containsKey(par1Obj);
+        return this.internalMap.containsKey(p_containsValue_1_);
     }
 
-    public Object get(Object par1Obj)
+    public Object get(Object p_get_1_)
     {
-        return this.internalMap.get(par1Obj.toString().toLowerCase());
+        return this.internalMap.get(p_get_1_.toString().toLowerCase());
     }
 
-    public Object put(String par1Str, Object par2Obj)
+    public Object put(String p_put_1_, Object p_put_2_)
     {
-        return this.internalMap.put(par1Str.toLowerCase(), par2Obj);
+        return this.internalMap.put(p_put_1_.toLowerCase(), p_put_2_);
     }
 
-    public Object remove(Object par1Obj)
+    public Object remove(Object p_remove_1_)
     {
-        return this.internalMap.remove(par1Obj.toString().toLowerCase());
+        return this.internalMap.remove(p_remove_1_.toString().toLowerCase());
     }
 
-    public void putAll(Map par1Map)
+    public void putAll(Map p_putAll_1_)
     {
-        Iterator var2 = par1Map.entrySet().iterator();
+        Iterator var2 = p_putAll_1_.entrySet().iterator();
 
         while (var2.hasNext())
         {
@@ -78,8 +78,8 @@ public class LowerStringMap implements Map
         return this.internalMap.entrySet();
     }
 
-    public Object put(Object par1Obj, Object par2Obj)
+    public Object put(Object p_put_1_, Object p_put_2_)
     {
-        return this.put((String)par1Obj, par2Obj);
+        return this.put((String)p_put_1_, p_put_2_);
     }
 }

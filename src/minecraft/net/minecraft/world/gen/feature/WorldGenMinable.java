@@ -27,22 +27,22 @@ public class WorldGenMinable extends WorldGenerator
         this.field_150518_c = p_i45460_3_;
     }
 
-    public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
+    public boolean generate(World p_76484_1_, Random p_76484_2_, int p_76484_3_, int p_76484_4_, int p_76484_5_)
     {
-        float var6 = par2Random.nextFloat() * (float)Math.PI;
-        double var7 = (double)((float)(par3 + 8) + MathHelper.sin(var6) * (float)this.numberOfBlocks / 8.0F);
-        double var9 = (double)((float)(par3 + 8) - MathHelper.sin(var6) * (float)this.numberOfBlocks / 8.0F);
-        double var11 = (double)((float)(par5 + 8) + MathHelper.cos(var6) * (float)this.numberOfBlocks / 8.0F);
-        double var13 = (double)((float)(par5 + 8) - MathHelper.cos(var6) * (float)this.numberOfBlocks / 8.0F);
-        double var15 = (double)(par4 + par2Random.nextInt(3) - 2);
-        double var17 = (double)(par4 + par2Random.nextInt(3) - 2);
+        float var6 = p_76484_2_.nextFloat() * (float)Math.PI;
+        double var7 = (double)((float)(p_76484_3_ + 8) + MathHelper.sin(var6) * (float)this.numberOfBlocks / 8.0F);
+        double var9 = (double)((float)(p_76484_3_ + 8) - MathHelper.sin(var6) * (float)this.numberOfBlocks / 8.0F);
+        double var11 = (double)((float)(p_76484_5_ + 8) + MathHelper.cos(var6) * (float)this.numberOfBlocks / 8.0F);
+        double var13 = (double)((float)(p_76484_5_ + 8) - MathHelper.cos(var6) * (float)this.numberOfBlocks / 8.0F);
+        double var15 = (double)(p_76484_4_ + p_76484_2_.nextInt(3) - 2);
+        double var17 = (double)(p_76484_4_ + p_76484_2_.nextInt(3) - 2);
 
         for (int var19 = 0; var19 <= this.numberOfBlocks; ++var19)
         {
             double var20 = var7 + (var9 - var7) * (double)var19 / (double)this.numberOfBlocks;
             double var22 = var15 + (var17 - var15) * (double)var19 / (double)this.numberOfBlocks;
             double var24 = var11 + (var13 - var11) * (double)var19 / (double)this.numberOfBlocks;
-            double var26 = par2Random.nextDouble() * (double)this.numberOfBlocks / 16.0D;
+            double var26 = p_76484_2_.nextDouble() * (double)this.numberOfBlocks / 16.0D;
             double var28 = (double)(MathHelper.sin((float)var19 * (float)Math.PI / (float)this.numberOfBlocks) + 1.0F) * var26 + 1.0D;
             double var30 = (double)(MathHelper.sin((float)var19 * (float)Math.PI / (float)this.numberOfBlocks) + 1.0F) * var26 + 1.0D;
             int var32 = MathHelper.floor_double(var20 - var28 / 2.0D);
@@ -68,9 +68,9 @@ public class WorldGenMinable extends WorldGenerator
                             {
                                 double var45 = ((double)var44 + 0.5D - var24) / (var28 / 2.0D);
 
-                                if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D && par1World.getBlock(var38, var41, var44) == this.field_150518_c)
+                                if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D && p_76484_1_.getBlock(var38, var41, var44) == this.field_150518_c)
                                 {
-                                    par1World.setBlock(var38, var41, var44, this.field_150519_a, 0, 2);
+                                    p_76484_1_.setBlock(var38, var41, var44, this.field_150519_a, 0, 2);
                                 }
                             }
                         }

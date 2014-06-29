@@ -9,9 +9,9 @@ public class ContainerDispenser extends Container
     private TileEntityDispenser tileEntityDispenser;
     private static final String __OBFID = "CL_00001763";
 
-    public ContainerDispenser(IInventory par1IInventory, TileEntityDispenser par2TileEntityDispenser)
+    public ContainerDispenser(IInventory p_i1825_1_, TileEntityDispenser p_i1825_2_)
     {
-        this.tileEntityDispenser = par2TileEntityDispenser;
+        this.tileEntityDispenser = p_i1825_2_;
         int var3;
         int var4;
 
@@ -19,7 +19,7 @@ public class ContainerDispenser extends Container
         {
             for (var4 = 0; var4 < 3; ++var4)
             {
-                this.addSlotToContainer(new Slot(par2TileEntityDispenser, var4 + var3 * 3, 62 + var4 * 18, 17 + var3 * 18));
+                this.addSlotToContainer(new Slot(p_i1825_2_, var4 + var3 * 3, 62 + var4 * 18, 17 + var3 * 18));
             }
         }
 
@@ -27,35 +27,35 @@ public class ContainerDispenser extends Container
         {
             for (var4 = 0; var4 < 9; ++var4)
             {
-                this.addSlotToContainer(new Slot(par1IInventory, var4 + var3 * 9 + 9, 8 + var4 * 18, 84 + var3 * 18));
+                this.addSlotToContainer(new Slot(p_i1825_1_, var4 + var3 * 9 + 9, 8 + var4 * 18, 84 + var3 * 18));
             }
         }
 
         for (var3 = 0; var3 < 9; ++var3)
         {
-            this.addSlotToContainer(new Slot(par1IInventory, var3, 8 + var3 * 18, 142));
+            this.addSlotToContainer(new Slot(p_i1825_1_, var3, 8 + var3 * 18, 142));
         }
     }
 
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer)
+    public boolean canInteractWith(EntityPlayer p_75145_1_)
     {
-        return this.tileEntityDispenser.isUseableByPlayer(par1EntityPlayer);
+        return this.tileEntityDispenser.isUseableByPlayer(p_75145_1_);
     }
 
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+    public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int p_82846_2_)
     {
         ItemStack var3 = null;
-        Slot var4 = (Slot)this.inventorySlots.get(par2);
+        Slot var4 = (Slot)this.inventorySlots.get(p_82846_2_);
 
         if (var4 != null && var4.getHasStack())
         {
             ItemStack var5 = var4.getStack();
             var3 = var5.copy();
 
-            if (par2 < 9)
+            if (p_82846_2_ < 9)
             {
                 if (!this.mergeItemStack(var5, 9, 45, true))
                 {
@@ -81,7 +81,7 @@ public class ContainerDispenser extends Container
                 return null;
             }
 
-            var4.onPickupFromSlot(par1EntityPlayer, var5);
+            var4.onPickupFromSlot(p_82846_1_, var5);
         }
 
         return var3;

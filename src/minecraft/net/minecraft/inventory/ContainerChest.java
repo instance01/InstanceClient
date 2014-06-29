@@ -9,11 +9,11 @@ public class ContainerChest extends Container
     private int numRows;
     private static final String __OBFID = "CL_00001742";
 
-    public ContainerChest(IInventory par1IInventory, IInventory par2IInventory)
+    public ContainerChest(IInventory p_i1806_1_, IInventory p_i1806_2_)
     {
-        this.lowerChestInventory = par2IInventory;
-        this.numRows = par2IInventory.getSizeInventory() / 9;
-        par2IInventory.openInventory();
+        this.lowerChestInventory = p_i1806_2_;
+        this.numRows = p_i1806_2_.getSizeInventory() / 9;
+        p_i1806_2_.openInventory();
         int var3 = (this.numRows - 4) * 18;
         int var4;
         int var5;
@@ -22,7 +22,7 @@ public class ContainerChest extends Container
         {
             for (var5 = 0; var5 < 9; ++var5)
             {
-                this.addSlotToContainer(new Slot(par2IInventory, var5 + var4 * 9, 8 + var5 * 18, 18 + var4 * 18));
+                this.addSlotToContainer(new Slot(p_i1806_2_, var5 + var4 * 9, 8 + var5 * 18, 18 + var4 * 18));
             }
         }
 
@@ -30,35 +30,35 @@ public class ContainerChest extends Container
         {
             for (var5 = 0; var5 < 9; ++var5)
             {
-                this.addSlotToContainer(new Slot(par1IInventory, var5 + var4 * 9 + 9, 8 + var5 * 18, 103 + var4 * 18 + var3));
+                this.addSlotToContainer(new Slot(p_i1806_1_, var5 + var4 * 9 + 9, 8 + var5 * 18, 103 + var4 * 18 + var3));
             }
         }
 
         for (var4 = 0; var4 < 9; ++var4)
         {
-            this.addSlotToContainer(new Slot(par1IInventory, var4, 8 + var4 * 18, 161 + var3));
+            this.addSlotToContainer(new Slot(p_i1806_1_, var4, 8 + var4 * 18, 161 + var3));
         }
     }
 
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer)
+    public boolean canInteractWith(EntityPlayer p_75145_1_)
     {
-        return this.lowerChestInventory.isUseableByPlayer(par1EntityPlayer);
+        return this.lowerChestInventory.isUseableByPlayer(p_75145_1_);
     }
 
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+    public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int p_82846_2_)
     {
         ItemStack var3 = null;
-        Slot var4 = (Slot)this.inventorySlots.get(par2);
+        Slot var4 = (Slot)this.inventorySlots.get(p_82846_2_);
 
         if (var4 != null && var4.getHasStack())
         {
             ItemStack var5 = var4.getStack();
             var3 = var5.copy();
 
-            if (par2 < this.numRows * 9)
+            if (p_82846_2_ < this.numRows * 9)
             {
                 if (!this.mergeItemStack(var5, this.numRows * 9, this.inventorySlots.size(), true))
                 {
@@ -86,9 +86,9 @@ public class ContainerChest extends Container
     /**
      * Called when the container is closed.
      */
-    public void onContainerClosed(EntityPlayer par1EntityPlayer)
+    public void onContainerClosed(EntityPlayer p_75134_1_)
     {
-        super.onContainerClosed(par1EntityPlayer);
+        super.onContainerClosed(p_75134_1_);
         this.lowerChestInventory.closeInventory();
     }
 

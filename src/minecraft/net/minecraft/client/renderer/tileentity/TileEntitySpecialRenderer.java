@@ -11,7 +11,7 @@ public abstract class TileEntitySpecialRenderer
     protected TileEntityRendererDispatcher field_147501_a;
     private static final String __OBFID = "CL_00000964";
 
-    public abstract void renderTileEntityAt(TileEntity var1, double var2, double var4, double var6, float var8);
+    public abstract void renderTileEntityAt(TileEntity p_147500_1_, double p_147500_2_, double p_147500_4_, double p_147500_6_, float p_147500_8_);
 
     protected void bindTexture(ResourceLocation p_147499_1_)
     {

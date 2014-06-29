@@ -59,15 +59,15 @@ public class BlockFlowerPot extends BlockContainer
 
         if (var10 != null && var10.getItem() instanceof ItemBlock)
         {
-            if (p_149727_1_.getBlockMetadata(p_149727_2_, p_149727_3_, p_149727_4_) != 0)
-            {
-                return false;
-            }
-            else
-            {
-                TileEntityFlowerPot var11 = this.func_149929_e(p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_);
+            TileEntityFlowerPot var11 = this.func_149929_e(p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_);
 
-                if (var11 != null)
+            if (var11 != null)
+            {
+                if (var11.func_145965_a() != null)
+                {
+                    return false;
+                }
+                else
                 {
                     Block var12 = Block.getBlockFromItem(var10.getItem());
 
@@ -93,10 +93,10 @@ public class BlockFlowerPot extends BlockContainer
                         return true;
                     }
                 }
-                else
-                {
-                    return false;
-                }
+            }
+            else
+            {
+                return false;
             }
         }
         else
@@ -147,20 +147,6 @@ public class BlockFlowerPot extends BlockContainer
         {
             this.dropBlockAsItem(p_149695_1_, p_149695_2_, p_149695_3_, p_149695_4_, p_149695_1_.getBlockMetadata(p_149695_2_, p_149695_3_, p_149695_4_), 0);
             p_149695_1_.setBlockToAir(p_149695_2_, p_149695_3_, p_149695_4_);
-        }
-    }
-
-    /**
-     * Drops the block items with a specified chance of dropping the specified items
-     */
-    public void dropBlockAsItemWithChance(World p_149690_1_, int p_149690_2_, int p_149690_3_, int p_149690_4_, int p_149690_5_, float p_149690_6_, int p_149690_7_)
-    {
-        super.dropBlockAsItemWithChance(p_149690_1_, p_149690_2_, p_149690_3_, p_149690_4_, p_149690_5_, p_149690_6_, p_149690_7_);
-        TileEntityFlowerPot var8 = this.func_149929_e(p_149690_1_, p_149690_2_, p_149690_3_, p_149690_4_);
-
-        if (var8 != null && var8.func_145965_a() != null)
-        {
-            this.dropBlockAsItem_do(p_149690_1_, p_149690_2_, p_149690_3_, p_149690_4_, new ItemStack(var8.func_145965_a(), 1, var8.func_145966_b()));
         }
     }
 

@@ -22,9 +22,9 @@ public class ServerList
     private final List servers = new ArrayList();
     private static final String __OBFID = "CL_00000891";
 
-    public ServerList(Minecraft par1Minecraft)
+    public ServerList(Minecraft p_i1194_1_)
     {
-        this.mc = par1Minecraft;
+        this.mc = p_i1194_1_;
         this.loadServerList();
     }
 
@@ -87,25 +87,25 @@ public class ServerList
     /**
      * Gets the ServerData instance stored for the given index in the list.
      */
-    public ServerData getServerData(int par1)
+    public ServerData getServerData(int p_78850_1_)
     {
-        return (ServerData)this.servers.get(par1);
+        return (ServerData)this.servers.get(p_78850_1_);
     }
 
     /**
      * Removes the ServerData instance stored for the given index in the list.
      */
-    public void removeServerData(int par1)
+    public void removeServerData(int p_78851_1_)
     {
-        this.servers.remove(par1);
+        this.servers.remove(p_78851_1_);
     }
 
     /**
      * Adds the given ServerData instance to the list.
      */
-    public void addServerData(ServerData par1ServerData)
+    public void addServerData(ServerData p_78849_1_)
     {
-        this.servers.add(par1ServerData);
+        this.servers.add(p_78849_1_);
     }
 
     /**
@@ -119,11 +119,11 @@ public class ServerList
     /**
      * Takes two list indexes, and swaps their order around.
      */
-    public void swapServers(int par1, int par2)
+    public void swapServers(int p_78857_1_, int p_78857_2_)
     {
-        ServerData var3 = this.getServerData(par1);
-        this.servers.set(par1, this.getServerData(par2));
-        this.servers.set(par2, var3);
+        ServerData var3 = this.getServerData(p_78857_1_);
+        this.servers.set(p_78857_1_, this.getServerData(p_78857_2_));
+        this.servers.set(p_78857_2_, var3);
         this.saveServerList();
     }
 

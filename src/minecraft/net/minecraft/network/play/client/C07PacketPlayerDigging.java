@@ -50,9 +50,9 @@ public class C07PacketPlayerDigging extends Packet
         p_148840_1_.writeByte(this.field_149507_d);
     }
 
-    public void processPacket(INetHandlerPlayServer p_149504_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149504_1_.processPlayerDigging(this);
+        p_148833_1_.processPlayerDigging(this);
     }
 
     public int func_149505_c()

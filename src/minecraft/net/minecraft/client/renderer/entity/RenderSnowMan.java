@@ -27,9 +27,9 @@ public class RenderSnowMan extends RenderLiving
         this.setRenderPassModel(this.snowmanModel);
     }
 
-    protected void renderEquippedItems(EntitySnowman par1EntitySnowman, float par2)
+    protected void renderEquippedItems(EntitySnowman p_77029_1_, float p_77029_2_)
     {
-        super.renderEquippedItems(par1EntitySnowman, par2);
+        super.renderEquippedItems(p_77029_1_, p_77029_2_);
         ItemStack var3 = new ItemStack(Blocks.pumpkin, 1);
 
         if (var3.getItem() instanceof ItemBlock)
@@ -45,7 +45,7 @@ public class RenderSnowMan extends RenderLiving
                 GL11.glScalef(var4, -var4, var4);
             }
 
-            this.renderManager.itemRenderer.renderItem(par1EntitySnowman, var3, 0);
+            this.renderManager.itemRenderer.renderItem(p_77029_1_, var3, 0);
             GL11.glPopMatrix();
         }
     }
@@ -53,21 +53,21 @@ public class RenderSnowMan extends RenderLiving
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntitySnowman par1EntitySnowman)
+    protected ResourceLocation getEntityTexture(EntitySnowman p_110775_1_)
     {
         return snowManTextures;
     }
 
-    protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2)
+    protected void renderEquippedItems(EntityLivingBase p_77029_1_, float p_77029_2_)
     {
-        this.renderEquippedItems((EntitySnowman)par1EntityLivingBase, par2);
+        this.renderEquippedItems((EntitySnowman)p_77029_1_, p_77029_2_);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntitySnowman)par1Entity);
+        return this.getEntityTexture((EntitySnowman)p_110775_1_);
     }
 }

@@ -1,5 +1,6 @@
 package net.minecraft.client.resources;
 
+import com.google.gson.JsonParseException;
 import java.io.IOException;
 import net.minecraft.client.gui.GuiScreenResourcePacks;
 import net.minecraft.client.renderer.texture.DynamicTexture;
@@ -43,12 +44,16 @@ public class ResourcePackListEntryDefault extends ResourcePackListEntry
 
             if (var1 != null)
             {
-                return var1.getPackDescription();
+                return var1.func_152805_a().getFormattedText();
             }
         }
-        catch (IOException var2)
+        catch (JsonParseException var2)
         {
             logger.error("Couldn\'t load metadata info", var2);
+        }
+        catch (IOException var3)
+        {
+            logger.error("Couldn\'t load metadata info", var3);
         }
 
         return EnumChatFormatting.RED + "Missing " + "pack.mcmeta" + " :(";

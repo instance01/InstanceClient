@@ -19,9 +19,9 @@ public class RecipesMapExtending extends ShapedRecipes
     /**
      * Used to check if a recipe matches current crafting inventory
      */
-    public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World)
+    public boolean matches(InventoryCrafting p_77569_1_, World p_77569_2_)
     {
-        if (!super.matches(par1InventoryCrafting, par2World))
+        if (!super.matches(p_77569_1_, p_77569_2_))
         {
             return false;
         }
@@ -29,9 +29,9 @@ public class RecipesMapExtending extends ShapedRecipes
         {
             ItemStack var3 = null;
 
-            for (int var4 = 0; var4 < par1InventoryCrafting.getSizeInventory() && var3 == null; ++var4)
+            for (int var4 = 0; var4 < p_77569_1_.getSizeInventory() && var3 == null; ++var4)
             {
-                ItemStack var5 = par1InventoryCrafting.getStackInSlot(var4);
+                ItemStack var5 = p_77569_1_.getStackInSlot(var4);
 
                 if (var5 != null && var5.getItem() == Items.filled_map)
                 {
@@ -45,7 +45,7 @@ public class RecipesMapExtending extends ShapedRecipes
             }
             else
             {
-                MapData var6 = Items.filled_map.getMapData(var3, par2World);
+                MapData var6 = Items.filled_map.getMapData(var3, p_77569_2_);
                 return var6 == null ? false : var6.scale < 4;
             }
         }
@@ -54,13 +54,13 @@ public class RecipesMapExtending extends ShapedRecipes
     /**
      * Returns an Item that is the result of this recipe
      */
-    public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting)
+    public ItemStack getCraftingResult(InventoryCrafting p_77572_1_)
     {
         ItemStack var2 = null;
 
-        for (int var3 = 0; var3 < par1InventoryCrafting.getSizeInventory() && var2 == null; ++var3)
+        for (int var3 = 0; var3 < p_77572_1_.getSizeInventory() && var2 == null; ++var3)
         {
-            ItemStack var4 = par1InventoryCrafting.getStackInSlot(var3);
+            ItemStack var4 = p_77572_1_.getStackInSlot(var3);
 
             if (var4 != null && var4.getItem() == Items.filled_map)
             {

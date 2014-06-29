@@ -59,9 +59,9 @@ public class FlatLayerInfo
     /**
      * Set the minimum Y coordinate for this layer.
      */
-    public void setMinY(int par1)
+    public void setMinY(int p_82660_1_)
     {
-        this.layerMinimumY = par1;
+        this.layerMinimumY = p_82660_1_;
     }
 
     public String toString()

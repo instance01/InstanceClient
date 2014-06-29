@@ -227,6 +227,18 @@ public class JsonUtils
         }
     }
 
+    public static JsonObject func_152754_s(JsonObject p_152754_0_, String p_152754_1_)
+    {
+        if (p_152754_0_.has(p_152754_1_))
+        {
+            return getJsonElementAsJsonObject(p_152754_0_.get(p_152754_1_), p_152754_1_);
+        }
+        else
+        {
+            throw new JsonSyntaxException("Missing " + p_152754_1_ + ", expected to find a JsonObject");
+        }
+    }
+
     /**
      * Gets the JsonObject field on the JsonObject with the given name, or the given default value if the field is
      * missing.

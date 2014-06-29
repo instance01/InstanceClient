@@ -20,7 +20,7 @@ public class RenderSpider extends RenderLiving
         this.setRenderPassModel(new ModelSpider());
     }
 
-    protected float getDeathMaxRotation(EntitySpider par1EntitySpider)
+    protected float getDeathMaxRotation(EntitySpider p_77037_1_)
     {
         return 180.0F;
     }
@@ -28,9 +28,9 @@ public class RenderSpider extends RenderLiving
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntitySpider par1EntitySpider, int par2, float par3)
+    protected int shouldRenderPass(EntitySpider p_77032_1_, int p_77032_2_, float p_77032_3_)
     {
-        if (par2 != 0)
+        if (p_77032_2_ != 0)
         {
             return -1;
         }
@@ -41,7 +41,7 @@ public class RenderSpider extends RenderLiving
             GL11.glDisable(GL11.GL_ALPHA_TEST);
             GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
 
-            if (par1EntitySpider.isInvisible())
+            if (p_77032_1_.isInvisible())
             {
                 GL11.glDepthMask(false);
             }
@@ -62,29 +62,29 @@ public class RenderSpider extends RenderLiving
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntitySpider par1EntitySpider)
+    protected ResourceLocation getEntityTexture(EntitySpider p_110775_1_)
     {
         return spiderTextures;
     }
 
-    protected float getDeathMaxRotation(EntityLivingBase par1EntityLivingBase)
+    protected float getDeathMaxRotation(EntityLivingBase p_77037_1_)
     {
-        return this.getDeathMaxRotation((EntitySpider)par1EntityLivingBase);
+        return this.getDeathMaxRotation((EntitySpider)p_77037_1_);
     }
 
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3)
+    protected int shouldRenderPass(EntityLivingBase p_77032_1_, int p_77032_2_, float p_77032_3_)
     {
-        return this.shouldRenderPass((EntitySpider)par1EntityLivingBase, par2, par3);
+        return this.shouldRenderPass((EntitySpider)p_77032_1_, p_77032_2_, p_77032_3_);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntitySpider)par1Entity);
+        return this.getEntityTexture((EntitySpider)p_110775_1_);
     }
 }

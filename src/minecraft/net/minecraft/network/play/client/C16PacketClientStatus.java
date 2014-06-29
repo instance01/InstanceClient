@@ -34,9 +34,9 @@ public class C16PacketClientStatus extends Packet
         p_148840_1_.writeByte(this.field_149437_a.field_151403_d);
     }
 
-    public void processPacket(INetHandlerPlayServer p_149436_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149436_1_.processClientStatus(this);
+        p_148833_1_.processClientStatus(this);
     }
 
     public C16PacketClientStatus.EnumState func_149435_c()

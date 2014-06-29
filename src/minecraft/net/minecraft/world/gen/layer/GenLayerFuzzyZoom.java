@@ -4,9 +4,9 @@ public class GenLayerFuzzyZoom extends GenLayerZoom
 {
     private static final String __OBFID = "CL_00000556";
 
-    public GenLayerFuzzyZoom(long par1, GenLayer par3GenLayer)
+    public GenLayerFuzzyZoom(long p_i2123_1_, GenLayer p_i2123_3_)
     {
-        super(par1, par3GenLayer);
+        super(p_i2123_1_, p_i2123_3_);
     }
 
     protected int func_151617_b(int p_151617_1_, int p_151617_2_, int p_151617_3_, int p_151617_4_)

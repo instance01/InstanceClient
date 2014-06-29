@@ -8,9 +8,9 @@ public class BiomeGenOcean extends BiomeGenBase
 {
     private static final String __OBFID = "CL_00000179";
 
-    public BiomeGenOcean(int par1)
+    public BiomeGenOcean(int p_i1985_1_)
     {
-        super(par1);
+        super(p_i1985_1_);
         this.spawnableCreatureList.clear();
     }
 

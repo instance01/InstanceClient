@@ -31,10 +31,10 @@ public class ResourcePackRepository
     protected static final FileFilter resourcePackFilter = new FileFilter()
     {
         private static final String __OBFID = "CL_00001088";
-        public boolean accept(File par1File)
+        public boolean accept(File p_accept_1_)
         {
-            boolean var2 = par1File.isFile() && par1File.getName().endsWith(".zip");
-            boolean var3 = par1File.isDirectory() && (new File(par1File, "pack.mcmeta")).isFile();
+            boolean var2 = p_accept_1_.isFile() && p_accept_1_.getName().endsWith(".zip");
+            boolean var3 = p_accept_1_.isDirectory() && (new File(p_accept_1_, "pack.mcmeta")).isFile();
             return var2 || var3;
         }
     };
@@ -179,7 +179,7 @@ public class ResourcePackRepository
         GuiScreenWorking var4 = new GuiScreenWorking();
         var3.put("X-Minecraft-Username", Minecraft.getMinecraft().getSession().getUsername());
         var3.put("X-Minecraft-UUID", Minecraft.getMinecraft().getSession().getPlayerID());
-        var3.put("X-Minecraft-Version", "1.7.2");
+        var3.put("X-Minecraft-Version", "1.7.10");
         this.field_148533_g = true;
         Minecraft.getMinecraft().displayGuiScreen(var4);
         HttpUtil.func_151223_a(p_148528_2_, p_148528_1_, new HttpUtil.DownloadListener()
@@ -217,9 +217,9 @@ public class ResourcePackRepository
         private ResourceLocation locationTexturePackIcon;
         private static final String __OBFID = "CL_00001090";
 
-        private Entry(File par2File)
+        private Entry(File p_i1295_2_)
         {
-            this.resourcePackFile = par2File;
+            this.resourcePackFile = p_i1295_2_;
         }
 
         public void updateResourcePack() throws IOException
@@ -244,14 +244,14 @@ public class ResourcePackRepository
             this.closeResourcePack();
         }
 
-        public void bindTexturePackIcon(TextureManager par1TextureManager)
+        public void bindTexturePackIcon(TextureManager p_110518_1_)
         {
             if (this.locationTexturePackIcon == null)
             {
-                this.locationTexturePackIcon = par1TextureManager.getDynamicTextureLocation("texturepackicon", new DynamicTexture(this.texturePackIcon));
+                this.locationTexturePackIcon = p_110518_1_.getDynamicTextureLocation("texturepackicon", new DynamicTexture(this.texturePackIcon));
             }
 
-            par1TextureManager.bindTexture(this.locationTexturePackIcon);
+            p_110518_1_.bindTexture(this.locationTexturePackIcon);
         }
 
         public void closeResourcePack()
@@ -274,12 +274,12 @@ public class ResourcePackRepository
 
         public String getTexturePackDescription()
         {
-            return this.rePackMetadataSection == null ? EnumChatFormatting.RED + "Invalid pack.mcmeta (or missing \'pack\' section)" : this.rePackMetadataSection.getPackDescription();
+            return this.rePackMetadataSection == null ? EnumChatFormatting.RED + "Invalid pack.mcmeta (or missing \'pack\' section)" : this.rePackMetadataSection.func_152805_a().getFormattedText();
         }
 
-        public boolean equals(Object par1Obj)
+        public boolean equals(Object p_equals_1_)
         {
-            return this == par1Obj ? true : (par1Obj instanceof ResourcePackRepository.Entry ? this.toString().equals(par1Obj.toString()) : false);
+            return this == p_equals_1_ ? true : (p_equals_1_ instanceof ResourcePackRepository.Entry ? this.toString().equals(p_equals_1_.toString()) : false);
         }
 
         public int hashCode()
@@ -292,9 +292,9 @@ public class ResourcePackRepository
             return String.format("%s:%s:%d", new Object[] {this.resourcePackFile.getName(), this.resourcePackFile.isDirectory() ? "folder" : "zip", Long.valueOf(this.resourcePackFile.lastModified())});
         }
 
-        Entry(File par2File, Object par3ResourcePackRepositoryFilter)
+        Entry(File p_i1296_2_, Object p_i1296_3_)
         {
-            this(par2File);
+            this(p_i1296_2_);
         }
     }
 }

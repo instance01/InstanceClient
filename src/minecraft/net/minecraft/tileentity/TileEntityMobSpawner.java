@@ -11,9 +11,9 @@ public class TileEntityMobSpawner extends TileEntity
     private final MobSpawnerBaseLogic field_145882_a = new MobSpawnerBaseLogic()
     {
         private static final String __OBFID = "CL_00000361";
-        public void func_98267_a(int par1)
+        public void func_98267_a(int p_98267_1_)
         {
-            TileEntityMobSpawner.this.worldObj.func_147452_c(TileEntityMobSpawner.this.field_145851_c, TileEntityMobSpawner.this.field_145848_d, TileEntityMobSpawner.this.field_145849_e, Blocks.mob_spawner, par1, 0);
+            TileEntityMobSpawner.this.worldObj.func_147452_c(TileEntityMobSpawner.this.field_145851_c, TileEntityMobSpawner.this.field_145848_d, TileEntityMobSpawner.this.field_145849_e, Blocks.mob_spawner, p_98267_1_, 0);
         }
         public World getSpawnerWorld()
         {
@@ -31,9 +31,9 @@ public class TileEntityMobSpawner extends TileEntity
         {
             return TileEntityMobSpawner.this.field_145849_e;
         }
-        public void setRandomMinecart(MobSpawnerBaseLogic.WeightedRandomMinecart par1WeightedRandomMinecart)
+        public void setRandomMinecart(MobSpawnerBaseLogic.WeightedRandomMinecart p_98277_1_)
         {
-            super.setRandomMinecart(par1WeightedRandomMinecart);
+            super.setRandomMinecart(p_98277_1_);
 
             if (this.getSpawnerWorld() != null)
             {

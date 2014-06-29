@@ -20,9 +20,9 @@ public class C00PacketServerQuery extends Packet
      */
     public void writePacketData(PacketBuffer p_148840_1_) throws IOException {}
 
-    public void processPacket(INetHandlerStatusServer p_149287_1_)
+    public void processPacket(INetHandlerStatusServer p_148833_1_)
     {
-        p_149287_1_.processServerQuery(this);
+        p_148833_1_.processServerQuery(this);
     }
 
     /**

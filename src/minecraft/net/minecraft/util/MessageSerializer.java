@@ -6,6 +6,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 import java.io.IOException;
 import net.minecraft.network.NetworkManager;
+import net.minecraft.network.NetworkStatistics;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import org.apache.logging.log4j.LogManager;
@@ -17,15 +18,21 @@ public class MessageSerializer extends MessageToByteEncoder
 {
     private static final Logger logger = LogManager.getLogger();
     private static final Marker field_150797_b = MarkerManager.getMarker("PACKET_SENT", NetworkManager.logMarkerPackets);
+    private final NetworkStatistics field_152500_c;
     private static final String __OBFID = "CL_00001253";
 
-    protected void encode(ChannelHandlerContext p_150796_1_, Packet p_150796_2_, ByteBuf p_150796_3_) throws IOException
+    public MessageSerializer(NetworkStatistics p_i1182_1_)
     {
-        Integer var4 = (Integer)((BiMap)p_150796_1_.channel().attr(NetworkManager.attrKeySendable).get()).inverse().get(p_150796_2_.getClass());
+        this.field_152500_c = p_i1182_1_;
+    }
+
+    protected void encode(ChannelHandlerContext p_encode_1_, Packet p_encode_2_, ByteBuf p_encode_3_) throws IOException
+    {
+        Integer var4 = (Integer)((BiMap)p_encode_1_.channel().attr(NetworkManager.attrKeySendable).get()).inverse().get(p_encode_2_.getClass());
 
         if (logger.isDebugEnabled())
         {
-            logger.debug(field_150797_b, "OUT: [{}:{}] {}[{}]", new Object[] {p_150796_1_.channel().attr(NetworkManager.attrKeyConnectionState).get(), var4, p_150796_2_.getClass().getName(), p_150796_2_.serialize()});
+            logger.debug(field_150797_b, "OUT: [{}:{}] {}[{}]", new Object[] {p_encode_1_.channel().attr(NetworkManager.attrKeyConnectionState).get(), var4, p_encode_2_.getClass().getName(), p_encode_2_.serialize()});
         }
 
         if (var4 == null)
@@ -34,9 +41,10 @@ public class MessageSerializer extends MessageToByteEncoder
         }
         else
         {
-            PacketBuffer var5 = new PacketBuffer(p_150796_3_);
+            PacketBuffer var5 = new PacketBuffer(p_encode_3_);
             var5.writeVarIntToBuffer(var4.intValue());
-            p_150796_2_.writePacketData(var5);
+            p_encode_2_.writePacketData(var5);
+            this.field_152500_c.func_152464_b(var4.intValue(), (long)var5.readableBytes());
         }
     }
 

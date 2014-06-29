@@ -51,18 +51,18 @@ public class RenderHelper
     /**
      * Update and return colorBuffer with the RGBA values passed as arguments
      */
-    private static FloatBuffer setColorBuffer(double par0, double par2, double par4, double par6)
+    private static FloatBuffer setColorBuffer(double p_74517_0_, double p_74517_2_, double p_74517_4_, double p_74517_6_)
     {
-        return setColorBuffer((float)par0, (float)par2, (float)par4, (float)par6);
+        return setColorBuffer((float)p_74517_0_, (float)p_74517_2_, (float)p_74517_4_, (float)p_74517_6_);
     }
 
     /**
      * Update and return colorBuffer with the RGBA values passed as arguments
      */
-    private static FloatBuffer setColorBuffer(float par0, float par1, float par2, float par3)
+    private static FloatBuffer setColorBuffer(float p_74521_0_, float p_74521_1_, float p_74521_2_, float p_74521_3_)
     {
         colorBuffer.clear();
-        colorBuffer.put(par0).put(par1).put(par2).put(par3);
+        colorBuffer.put(p_74521_0_).put(p_74521_1_).put(p_74521_2_).put(p_74521_3_);
         colorBuffer.flip();
         return colorBuffer;
     }

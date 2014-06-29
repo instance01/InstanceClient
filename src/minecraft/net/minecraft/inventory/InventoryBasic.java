@@ -14,61 +14,61 @@ public class InventoryBasic implements IInventory
     private boolean field_94051_e;
     private static final String __OBFID = "CL_00001514";
 
-    public InventoryBasic(String par1Str, boolean par2, int par3)
+    public InventoryBasic(String p_i1561_1_, boolean p_i1561_2_, int p_i1561_3_)
     {
-        this.inventoryTitle = par1Str;
-        this.field_94051_e = par2;
-        this.slotsCount = par3;
-        this.inventoryContents = new ItemStack[par3];
+        this.inventoryTitle = p_i1561_1_;
+        this.field_94051_e = p_i1561_2_;
+        this.slotsCount = p_i1561_3_;
+        this.inventoryContents = new ItemStack[p_i1561_3_];
     }
 
-    public void func_110134_a(IInvBasic par1IInvBasic)
+    public void func_110134_a(IInvBasic p_110134_1_)
     {
         if (this.field_70480_d == null)
         {
             this.field_70480_d = new ArrayList();
         }
 
-        this.field_70480_d.add(par1IInvBasic);
+        this.field_70480_d.add(p_110134_1_);
     }
 
-    public void func_110132_b(IInvBasic par1IInvBasic)
+    public void func_110132_b(IInvBasic p_110132_1_)
     {
-        this.field_70480_d.remove(par1IInvBasic);
+        this.field_70480_d.remove(p_110132_1_);
     }
 
     /**
      * Returns the stack in slot i
      */
-    public ItemStack getStackInSlot(int par1)
+    public ItemStack getStackInSlot(int p_70301_1_)
     {
-        return this.inventoryContents[par1];
+        return p_70301_1_ >= 0 && p_70301_1_ < this.inventoryContents.length ? this.inventoryContents[p_70301_1_] : null;
     }
 
     /**
      * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
      * new stack.
      */
-    public ItemStack decrStackSize(int par1, int par2)
+    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_)
     {
-        if (this.inventoryContents[par1] != null)
+        if (this.inventoryContents[p_70298_1_] != null)
         {
             ItemStack var3;
 
-            if (this.inventoryContents[par1].stackSize <= par2)
+            if (this.inventoryContents[p_70298_1_].stackSize <= p_70298_2_)
             {
-                var3 = this.inventoryContents[par1];
-                this.inventoryContents[par1] = null;
+                var3 = this.inventoryContents[p_70298_1_];
+                this.inventoryContents[p_70298_1_] = null;
                 this.onInventoryChanged();
                 return var3;
             }
             else
             {
-                var3 = this.inventoryContents[par1].splitStack(par2);
+                var3 = this.inventoryContents[p_70298_1_].splitStack(p_70298_2_);
 
-                if (this.inventoryContents[par1].stackSize == 0)
+                if (this.inventoryContents[p_70298_1_].stackSize == 0)
                 {
-                    this.inventoryContents[par1] = null;
+                    this.inventoryContents[p_70298_1_] = null;
                 }
 
                 this.onInventoryChanged();
@@ -85,12 +85,12 @@ public class InventoryBasic implements IInventory
      * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
      * like when you close a workbench GUI.
      */
-    public ItemStack getStackInSlotOnClosing(int par1)
+    public ItemStack getStackInSlotOnClosing(int p_70304_1_)
     {
-        if (this.inventoryContents[par1] != null)
+        if (this.inventoryContents[p_70304_1_] != null)
         {
-            ItemStack var2 = this.inventoryContents[par1];
-            this.inventoryContents[par1] = null;
+            ItemStack var2 = this.inventoryContents[p_70304_1_];
+            this.inventoryContents[p_70304_1_] = null;
             return var2;
         }
         else
@@ -102,13 +102,13 @@ public class InventoryBasic implements IInventory
     /**
      * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      */
-    public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
+    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_)
     {
-        this.inventoryContents[par1] = par2ItemStack;
+        this.inventoryContents[p_70299_1_] = p_70299_2_;
 
-        if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
+        if (p_70299_2_ != null && p_70299_2_.stackSize > this.getInventoryStackLimit())
         {
-            par2ItemStack.stackSize = this.getInventoryStackLimit();
+            p_70299_2_.stackSize = this.getInventoryStackLimit();
         }
 
         this.onInventoryChanged();
@@ -138,10 +138,10 @@ public class InventoryBasic implements IInventory
         return this.field_94051_e;
     }
 
-    public void func_110133_a(String par1Str)
+    public void func_110133_a(String p_110133_1_)
     {
         this.field_94051_e = true;
-        this.inventoryTitle = par1Str;
+        this.inventoryTitle = p_110133_1_;
     }
 
     /**
@@ -169,7 +169,7 @@ public class InventoryBasic implements IInventory
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
      */
-    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+    public boolean isUseableByPlayer(EntityPlayer p_70300_1_)
     {
         return true;
     }
@@ -181,7 +181,7 @@ public class InventoryBasic implements IInventory
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      */
-    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
+    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_)
     {
         return true;
     }

@@ -10,19 +10,19 @@ public class EntityMinecartChest extends EntityMinecartContainer
 {
     private static final String __OBFID = "CL_00001671";
 
-    public EntityMinecartChest(World par1World)
+    public EntityMinecartChest(World p_i1714_1_)
     {
-        super(par1World);
+        super(p_i1714_1_);
     }
 
-    public EntityMinecartChest(World par1World, double par2, double par4, double par6)
+    public EntityMinecartChest(World p_i1715_1_, double p_i1715_2_, double p_i1715_4_, double p_i1715_6_)
     {
-        super(par1World, par2, par4, par6);
+        super(p_i1715_1_, p_i1715_2_, p_i1715_4_, p_i1715_6_);
     }
 
-    public void killMinecart(DamageSource par1DamageSource)
+    public void killMinecart(DamageSource p_94095_1_)
     {
-        super.killMinecart(par1DamageSource);
+        super.killMinecart(p_94095_1_);
         this.func_145778_a(Item.getItemFromBlock(Blocks.chest), 1, 0.0F);
     }
 

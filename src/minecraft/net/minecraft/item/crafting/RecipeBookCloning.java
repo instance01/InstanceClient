@@ -13,14 +13,14 @@ public class RecipeBookCloning implements IRecipe
     /**
      * Used to check if a recipe matches current crafting inventory
      */
-    public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World)
+    public boolean matches(InventoryCrafting p_77569_1_, World p_77569_2_)
     {
         int var3 = 0;
         ItemStack var4 = null;
 
-        for (int var5 = 0; var5 < par1InventoryCrafting.getSizeInventory(); ++var5)
+        for (int var5 = 0; var5 < p_77569_1_.getSizeInventory(); ++var5)
         {
-            ItemStack var6 = par1InventoryCrafting.getStackInSlot(var5);
+            ItemStack var6 = p_77569_1_.getStackInSlot(var5);
 
             if (var6 != null)
             {
@@ -51,14 +51,14 @@ public class RecipeBookCloning implements IRecipe
     /**
      * Returns an Item that is the result of this recipe
      */
-    public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting)
+    public ItemStack getCraftingResult(InventoryCrafting p_77572_1_)
     {
         int var2 = 0;
         ItemStack var3 = null;
 
-        for (int var4 = 0; var4 < par1InventoryCrafting.getSizeInventory(); ++var4)
+        for (int var4 = 0; var4 < p_77572_1_.getSizeInventory(); ++var4)
         {
-            ItemStack var5 = par1InventoryCrafting.getStackInSlot(var4);
+            ItemStack var5 = p_77572_1_.getStackInSlot(var4);
 
             if (var5 != null)
             {

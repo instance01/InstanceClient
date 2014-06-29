@@ -7,17 +7,21 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.vecmath.Matrix4f;
+import net.minecraft.client.renderer.texture.ITextureObject;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.util.JsonException;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
 import org.apache.commons.io.IOUtils;
+import org.lwjgl.opengl.GL11;
 
 public class ShaderGroup
 {
@@ -34,88 +38,88 @@ public class ShaderGroup
     private float field_148037_k;
     private static final String __OBFID = "CL_00001041";
 
-    public ShaderGroup(IResourceManager p_i45088_1_, Framebuffer p_i45088_2_, ResourceLocation p_i45088_3_) throws JsonException
+    public ShaderGroup(TextureManager p_i1050_1_, IResourceManager p_i1050_2_, Framebuffer p_i1050_3_, ResourceLocation p_i1050_4_) throws JsonException
     {
-        this.resourceManager = p_i45088_1_;
-        this.mainFramebuffer = p_i45088_2_;
+        this.resourceManager = p_i1050_2_;
+        this.mainFramebuffer = p_i1050_3_;
         this.field_148036_j = 0.0F;
         this.field_148037_k = 0.0F;
-        this.mainFramebufferWidth = p_i45088_2_.framebufferWidth;
-        this.mainFramebufferHeight = p_i45088_2_.framebufferHeight;
-        this.shaderGroupName = p_i45088_3_.toString();
+        this.mainFramebufferWidth = p_i1050_3_.framebufferWidth;
+        this.mainFramebufferHeight = p_i1050_3_.framebufferHeight;
+        this.shaderGroupName = p_i1050_4_.toString();
         this.resetProjectionMatrix();
-        this.initFromLocation(p_i45088_3_);
+        this.func_152765_a(p_i1050_1_, p_i1050_4_);
     }
 
-    public void initFromLocation(ResourceLocation p_148025_1_) throws JsonException
+    public void func_152765_a(TextureManager p_152765_1_, ResourceLocation p_152765_2_) throws JsonException
     {
-        JsonParser var2 = new JsonParser();
-        InputStream var3 = null;
+        JsonParser var3 = new JsonParser();
+        InputStream var4 = null;
 
         try
         {
-            IResource var4 = this.resourceManager.getResource(p_148025_1_);
-            var3 = var4.getInputStream();
-            JsonObject var21 = var2.parse(IOUtils.toString(var3, Charsets.UTF_8)).getAsJsonObject();
-            JsonArray var6;
-            int var7;
-            Iterator var8;
-            JsonElement var9;
-            JsonException var11;
+            IResource var5 = this.resourceManager.getResource(p_152765_2_);
+            var4 = var5.getInputStream();
+            JsonObject var22 = var3.parse(IOUtils.toString(var4, Charsets.UTF_8)).getAsJsonObject();
+            JsonArray var7;
+            int var8;
+            Iterator var9;
+            JsonElement var10;
+            JsonException var12;
 
-            if (JsonUtils.jsonObjectFieldTypeIsArray(var21, "targets"))
+            if (JsonUtils.jsonObjectFieldTypeIsArray(var22, "targets"))
             {
-                var6 = var21.getAsJsonArray("targets");
-                var7 = 0;
+                var7 = var22.getAsJsonArray("targets");
+                var8 = 0;
 
-                for (var8 = var6.iterator(); var8.hasNext(); ++var7)
+                for (var9 = var7.iterator(); var9.hasNext(); ++var8)
                 {
-                    var9 = (JsonElement)var8.next();
+                    var10 = (JsonElement)var9.next();
 
                     try
                     {
-                        this.initTarget(var9);
+                        this.initTarget(var10);
+                    }
+                    catch (Exception var19)
+                    {
+                        var12 = JsonException.func_151379_a(var19);
+                        var12.func_151380_a("targets[" + var8 + "]");
+                        throw var12;
+                    }
+                }
+            }
+
+            if (JsonUtils.jsonObjectFieldTypeIsArray(var22, "passes"))
+            {
+                var7 = var22.getAsJsonArray("passes");
+                var8 = 0;
+
+                for (var9 = var7.iterator(); var9.hasNext(); ++var8)
+                {
+                    var10 = (JsonElement)var9.next();
+
+                    try
+                    {
+                        this.func_152764_a(p_152765_1_, var10);
                     }
                     catch (Exception var18)
                     {
-                        var11 = JsonException.func_151379_a(var18);
-                        var11.func_151380_a("targets[" + var7 + "]");
-                        throw var11;
-                    }
-                }
-            }
-
-            if (JsonUtils.jsonObjectFieldTypeIsArray(var21, "passes"))
-            {
-                var6 = var21.getAsJsonArray("passes");
-                var7 = 0;
-
-                for (var8 = var6.iterator(); var8.hasNext(); ++var7)
-                {
-                    var9 = (JsonElement)var8.next();
-
-                    try
-                    {
-                        this.initPass(var9);
-                    }
-                    catch (Exception var17)
-                    {
-                        var11 = JsonException.func_151379_a(var17);
-                        var11.func_151380_a("passes[" + var7 + "]");
-                        throw var11;
+                        var12 = JsonException.func_151379_a(var18);
+                        var12.func_151380_a("passes[" + var8 + "]");
+                        throw var12;
                     }
                 }
             }
         }
-        catch (Exception var19)
+        catch (Exception var20)
         {
-            JsonException var5 = JsonException.func_151379_a(var19);
-            var5.func_151381_b(p_148025_1_.getResourcePath());
-            throw var5;
+            JsonException var6 = JsonException.func_151379_a(var20);
+            var6.func_151381_b(p_152765_2_.getResourcePath());
+            throw var6;
         }
         finally
         {
-            IOUtils.closeQuietly(var3);
+            IOUtils.closeQuietly(var4);
         }
     }
 
@@ -141,78 +145,108 @@ public class ShaderGroup
         }
     }
 
-    private void initPass(JsonElement p_148019_1_) throws JsonException
+    private void func_152764_a(TextureManager p_152764_1_, JsonElement p_152764_2_) throws JsonException
     {
-        JsonObject var2 = JsonUtils.getJsonElementAsJsonObject(p_148019_1_, "pass");
-        String var3 = JsonUtils.getJsonObjectStringFieldValue(var2, "name");
-        String var4 = JsonUtils.getJsonObjectStringFieldValue(var2, "intarget");
-        String var5 = JsonUtils.getJsonObjectStringFieldValue(var2, "outtarget");
-        Framebuffer var6 = this.getFramebuffer(var4);
+        JsonObject var3 = JsonUtils.getJsonElementAsJsonObject(p_152764_2_, "pass");
+        String var4 = JsonUtils.getJsonObjectStringFieldValue(var3, "name");
+        String var5 = JsonUtils.getJsonObjectStringFieldValue(var3, "intarget");
+        String var6 = JsonUtils.getJsonObjectStringFieldValue(var3, "outtarget");
         Framebuffer var7 = this.getFramebuffer(var5);
+        Framebuffer var8 = this.getFramebuffer(var6);
 
-        if (var6 == null)
+        if (var7 == null)
         {
-            throw new JsonException("Input target \'" + var4 + "\' does not exist");
+            throw new JsonException("Input target \'" + var5 + "\' does not exist");
         }
-        else if (var7 == null)
+        else if (var8 == null)
         {
-            throw new JsonException("Output target \'" + var5 + "\' does not exist");
+            throw new JsonException("Output target \'" + var6 + "\' does not exist");
         }
         else
         {
-            Shader var8 = this.addShader(var3, var6, var7);
-            JsonArray var9 = JsonUtils.getJsonObjectJsonArrayFieldOrDefault(var2, "auxtargets", (JsonArray)null);
+            Shader var9 = this.addShader(var4, var7, var8);
+            JsonArray var10 = JsonUtils.getJsonObjectJsonArrayFieldOrDefault(var3, "auxtargets", (JsonArray)null);
 
-            if (var9 != null)
+            if (var10 != null)
             {
-                int var10 = 0;
+                int var11 = 0;
 
-                for (Iterator var11 = var9.iterator(); var11.hasNext(); ++var10)
+                for (Iterator var12 = var10.iterator(); var12.hasNext(); ++var11)
                 {
-                    JsonElement var12 = (JsonElement)var11.next();
+                    JsonElement var13 = (JsonElement)var12.next();
 
                     try
                     {
-                        JsonObject var13 = JsonUtils.getJsonElementAsJsonObject(var12, "auxtarget");
-                        String var24 = JsonUtils.getJsonObjectStringFieldValue(var13, "name");
-                        String var15 = JsonUtils.getJsonObjectStringFieldValue(var13, "id");
-                        Framebuffer var16 = this.getFramebuffer(var15);
+                        JsonObject var14 = JsonUtils.getJsonElementAsJsonObject(var13, "auxtarget");
+                        String var30 = JsonUtils.getJsonObjectStringFieldValue(var14, "name");
+                        String var16 = JsonUtils.getJsonObjectStringFieldValue(var14, "id");
+                        Framebuffer var17 = this.getFramebuffer(var16);
 
-                        if (var16 == null)
+                        if (var17 == null)
                         {
-                            throw new JsonException("Render target \'" + var15 + "\' does not exist");
-                        }
+                            ResourceLocation var18 = new ResourceLocation("textures/effect/" + var16 + ".png");
 
-                        var8.addAuxFramebuffer(var24, var16, var16.framebufferTextureWidth, var16.framebufferTextureHeight);
+                            try
+                            {
+                                this.resourceManager.getResource(var18);
+                            }
+                            catch (FileNotFoundException var24)
+                            {
+                                throw new JsonException("Render target or texture \'" + var16 + "\' does not exist");
+                            }
+
+                            p_152764_1_.bindTexture(var18);
+                            ITextureObject var19 = p_152764_1_.getTexture(var18);
+                            int var20 = JsonUtils.getJsonObjectIntegerFieldValue(var14, "width");
+                            int var21 = JsonUtils.getJsonObjectIntegerFieldValue(var14, "height");
+                            boolean var22 = JsonUtils.getJsonObjectBooleanFieldValue(var14, "bilinear");
+
+                            if (var22)
+                            {
+                                GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
+                                GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
+                            }
+                            else
+                            {
+                                GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
+                                GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
+                            }
+
+                            var9.addAuxFramebuffer(var30, Integer.valueOf(var19.getGlTextureId()), var20, var21);
+                        }
+                        else
+                        {
+                            var9.addAuxFramebuffer(var30, var17, var17.framebufferTextureWidth, var17.framebufferTextureHeight);
+                        }
                     }
-                    catch (Exception var18)
+                    catch (Exception var25)
                     {
-                        JsonException var14 = JsonException.func_151379_a(var18);
-                        var14.func_151380_a("auxtargets[" + var10 + "]");
-                        throw var14;
+                        JsonException var15 = JsonException.func_151379_a(var25);
+                        var15.func_151380_a("auxtargets[" + var11 + "]");
+                        throw var15;
                     }
                 }
             }
 
-            JsonArray var20 = JsonUtils.getJsonObjectJsonArrayFieldOrDefault(var2, "uniforms", (JsonArray)null);
+            JsonArray var26 = JsonUtils.getJsonObjectJsonArrayFieldOrDefault(var3, "uniforms", (JsonArray)null);
 
-            if (var20 != null)
+            if (var26 != null)
             {
-                int var19 = 0;
+                int var27 = 0;
 
-                for (Iterator var21 = var20.iterator(); var21.hasNext(); ++var19)
+                for (Iterator var28 = var26.iterator(); var28.hasNext(); ++var27)
                 {
-                    JsonElement var22 = (JsonElement)var21.next();
+                    JsonElement var29 = (JsonElement)var28.next();
 
                     try
                     {
-                        this.initUniform(var22);
+                        this.initUniform(var29);
                     }
-                    catch (Exception var17)
+                    catch (Exception var23)
                     {
-                        JsonException var23 = JsonException.func_151379_a(var17);
-                        var23.func_151380_a("uniforms[" + var19 + "]");
-                        throw var23;
+                        JsonException var31 = JsonException.func_151379_a(var23);
+                        var31.func_151380_a("uniforms[" + var27 + "]");
+                        throw var31;
                     }
                 }
             }

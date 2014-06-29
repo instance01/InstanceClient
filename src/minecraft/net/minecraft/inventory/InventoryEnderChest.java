@@ -21,7 +21,7 @@ public class InventoryEnderChest extends InventoryBasic
         this.associatedChest = p_146031_1_;
     }
 
-    public void loadInventoryFromNBT(NBTTagList par1NBTTagList)
+    public void loadInventoryFromNBT(NBTTagList p_70486_1_)
     {
         int var2;
 
@@ -30,9 +30,9 @@ public class InventoryEnderChest extends InventoryBasic
             this.setInventorySlotContents(var2, (ItemStack)null);
         }
 
-        for (var2 = 0; var2 < par1NBTTagList.tagCount(); ++var2)
+        for (var2 = 0; var2 < p_70486_1_.tagCount(); ++var2)
         {
-            NBTTagCompound var3 = par1NBTTagList.getCompoundTagAt(var2);
+            NBTTagCompound var3 = p_70486_1_.getCompoundTagAt(var2);
             int var4 = var3.getByte("Slot") & 255;
 
             if (var4 >= 0 && var4 < this.getSizeInventory())
@@ -65,9 +65,9 @@ public class InventoryEnderChest extends InventoryBasic
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
      */
-    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+    public boolean isUseableByPlayer(EntityPlayer p_70300_1_)
     {
-        return this.associatedChest != null && !this.associatedChest.func_145971_a(par1EntityPlayer) ? false : super.isUseableByPlayer(par1EntityPlayer);
+        return this.associatedChest != null && !this.associatedChest.func_145971_a(p_70300_1_) ? false : super.isUseableByPlayer(p_70300_1_);
     }
 
     public void openInventory()

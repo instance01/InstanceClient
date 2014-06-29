@@ -4,13 +4,13 @@ public class AnimalChest extends InventoryBasic
 {
     private static final String __OBFID = "CL_00001731";
 
-    public AnimalChest(String par1Str, int par2)
+    public AnimalChest(String p_i1796_1_, int p_i1796_2_)
     {
-        super(par1Str, false, par2);
+        super(p_i1796_1_, false, p_i1796_2_);
     }
 
-    public AnimalChest(String par1Str, boolean par2, int par3)
+    public AnimalChest(String p_i1797_1_, boolean p_i1797_2_, int p_i1797_3_)
     {
-        super(par1Str, par2, par3);
+        super(p_i1797_1_, p_i1797_2_, p_i1797_3_);
     }
 }

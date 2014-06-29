@@ -34,15 +34,15 @@ public class NextTickListEntry implements Comparable
         this.field_151352_g = p_i45370_4_;
     }
 
-    public boolean equals(Object par1Obj)
+    public boolean equals(Object p_equals_1_)
     {
-        if (!(par1Obj instanceof NextTickListEntry))
+        if (!(p_equals_1_ instanceof NextTickListEntry))
         {
             return false;
         }
         else
         {
-            NextTickListEntry var2 = (NextTickListEntry)par1Obj;
+            NextTickListEntry var2 = (NextTickListEntry)p_equals_1_;
             return this.xCoord == var2.xCoord && this.yCoord == var2.yCoord && this.zCoord == var2.zCoord && Block.isEqualTo(this.field_151352_g, var2.field_151352_g);
         }
     }
@@ -55,20 +55,20 @@ public class NextTickListEntry implements Comparable
     /**
      * Sets the scheduled time for this tick entry
      */
-    public NextTickListEntry setScheduledTime(long par1)
+    public NextTickListEntry setScheduledTime(long p_77176_1_)
     {
-        this.scheduledTime = par1;
+        this.scheduledTime = p_77176_1_;
         return this;
     }
 
-    public void setPriority(int par1)
+    public void setPriority(int p_82753_1_)
     {
-        this.priority = par1;
+        this.priority = p_82753_1_;
     }
 
-    public int compareTo(NextTickListEntry par1NextTickListEntry)
+    public int compareTo(NextTickListEntry p_compareTo_1_)
     {
-        return this.scheduledTime < par1NextTickListEntry.scheduledTime ? -1 : (this.scheduledTime > par1NextTickListEntry.scheduledTime ? 1 : (this.priority != par1NextTickListEntry.priority ? this.priority - par1NextTickListEntry.priority : (this.tickEntryID < par1NextTickListEntry.tickEntryID ? -1 : (this.tickEntryID > par1NextTickListEntry.tickEntryID ? 1 : 0))));
+        return this.scheduledTime < p_compareTo_1_.scheduledTime ? -1 : (this.scheduledTime > p_compareTo_1_.scheduledTime ? 1 : (this.priority != p_compareTo_1_.priority ? this.priority - p_compareTo_1_.priority : (this.tickEntryID < p_compareTo_1_.tickEntryID ? -1 : (this.tickEntryID > p_compareTo_1_.tickEntryID ? 1 : 0))));
     }
 
     public String toString()
@@ -81,8 +81,8 @@ public class NextTickListEntry implements Comparable
         return this.field_151352_g;
     }
 
-    public int compareTo(Object par1Obj)
+    public int compareTo(Object p_compareTo_1_)
     {
-        return this.compareTo((NextTickListEntry)par1Obj);
+        return this.compareTo((NextTickListEntry)p_compareTo_1_);
     }
 }

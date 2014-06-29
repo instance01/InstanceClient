@@ -17,14 +17,14 @@ public class ItemDoublePlant extends ItemMultiTexture
     /**
      * Gets an icon index based on an item's damage value
      */
-    public IIcon getIconFromDamage(int par1)
+    public IIcon getIconFromDamage(int p_77617_1_)
     {
-        return BlockDoublePlant.func_149890_d(par1) == 0 ? ((BlockDoublePlant)this.field_150941_b).field_149891_b[0] : ((BlockDoublePlant)this.field_150941_b).func_149888_a(true, par1);
+        return BlockDoublePlant.func_149890_d(p_77617_1_) == 0 ? ((BlockDoublePlant)this.field_150941_b).field_149891_b[0] : ((BlockDoublePlant)this.field_150941_b).func_149888_a(true, p_77617_1_);
     }
 
-    public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
+    public int getColorFromItemStack(ItemStack p_82790_1_, int p_82790_2_)
     {
-        int var3 = BlockDoublePlant.func_149890_d(par1ItemStack.getItemDamage());
-        return var3 != 2 && var3 != 3 ? super.getColorFromItemStack(par1ItemStack, par2) : ColorizerGrass.getGrassColor(0.5D, 1.0D);
+        int var3 = BlockDoublePlant.func_149890_d(p_82790_1_.getItemDamage());
+        return var3 != 2 && var3 != 3 ? super.getColorFromItemStack(p_82790_1_, p_82790_2_) : ColorizerGrass.getGrassColor(0.5D, 1.0D);
     }
 }

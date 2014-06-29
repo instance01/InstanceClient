@@ -25,10 +25,10 @@ public class GuiRepair extends GuiContainer implements ICrafting
     private InventoryPlayer field_147094_x;
     private static final String __OBFID = "CL_00000738";
 
-    public GuiRepair(InventoryPlayer par1InventoryPlayer, World par2World, int par3, int par4, int par5)
+    public GuiRepair(InventoryPlayer p_i1073_1_, World p_i1073_2_, int p_i1073_3_, int p_i1073_4_, int p_i1073_5_)
     {
-        super(new ContainerRepair(par1InventoryPlayer, par2World, par3, par4, par5, Minecraft.getMinecraft().thePlayer));
-        this.field_147094_x = par1InventoryPlayer;
+        super(new ContainerRepair(p_i1073_1_, p_i1073_2_, p_i1073_3_, p_i1073_4_, p_i1073_5_, Minecraft.getMinecraft().thePlayer));
+        this.field_147094_x = p_i1073_1_;
         this.field_147092_v = (ContainerRepair)this.field_147002_h;
     }
 
@@ -114,15 +114,15 @@ public class GuiRepair extends GuiContainer implements ICrafting
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2)
+    protected void keyTyped(char p_73869_1_, int p_73869_2_)
     {
-        if (this.field_147091_w.textboxKeyTyped(par1, par2))
+        if (this.field_147091_w.textboxKeyTyped(p_73869_1_, p_73869_2_))
         {
             this.func_147090_g();
         }
         else
         {
-            super.keyTyped(par1, par2);
+            super.keyTyped(p_73869_1_, p_73869_2_);
         }
     }
 
@@ -143,18 +143,18 @@ public class GuiRepair extends GuiContainer implements ICrafting
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int par1, int par2, int par3)
+    protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_)
     {
-        super.mouseClicked(par1, par2, par3);
-        this.field_147091_w.mouseClicked(par1, par2, par3);
+        super.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
+        this.field_147091_w.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
     }
 
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_BLEND);
         this.field_147091_w.drawTextBox();
@@ -175,23 +175,23 @@ public class GuiRepair extends GuiContainer implements ICrafting
         }
     }
 
-    public void sendContainerAndContentsToPlayer(Container par1Container, List par2List)
+    public void sendContainerAndContentsToPlayer(Container p_71110_1_, List p_71110_2_)
     {
-        this.sendSlotContents(par1Container, 0, par1Container.getSlot(0).getStack());
+        this.sendSlotContents(p_71110_1_, 0, p_71110_1_.getSlot(0).getStack());
     }
 
     /**
      * Sends the contents of an inventory slot to the client-side Container. This doesn't have to match the actual
      * contents of that slot. Args: Container, slot number, slot contents
      */
-    public void sendSlotContents(Container par1Container, int par2, ItemStack par3ItemStack)
+    public void sendSlotContents(Container p_71111_1_, int p_71111_2_, ItemStack p_71111_3_)
     {
-        if (par2 == 0)
+        if (p_71111_2_ == 0)
         {
-            this.field_147091_w.setText(par3ItemStack == null ? "" : par3ItemStack.getDisplayName());
-            this.field_147091_w.func_146184_c(par3ItemStack != null);
+            this.field_147091_w.setText(p_71111_3_ == null ? "" : p_71111_3_.getDisplayName());
+            this.field_147091_w.func_146184_c(p_71111_3_ != null);
 
-            if (par3ItemStack != null)
+            if (p_71111_3_ != null)
             {
                 this.func_147090_g();
             }
@@ -203,5 +203,5 @@ public class GuiRepair extends GuiContainer implements ICrafting
      * and enchanting level. Normally the first int identifies which variable to update, and the second contains the new
      * value. Both are truncated to shorts in non-local SMP.
      */
-    public void sendProgressBarUpdate(Container par1Container, int par2, int par3) {}
+    public void sendProgressBarUpdate(Container p_71112_1_, int p_71112_2_, int p_71112_3_) {}
 }

@@ -4,16 +4,16 @@ public class EnchantmentArrowFire extends Enchantment
 {
     private static final String __OBFID = "CL_00000099";
 
-    public EnchantmentArrowFire(int par1, int par2)
+    public EnchantmentArrowFire(int p_i1920_1_, int p_i1920_2_)
     {
-        super(par1, par2, EnumEnchantmentType.bow);
+        super(p_i1920_1_, p_i1920_2_, EnumEnchantmentType.bow);
         this.setName("arrowFire");
     }
 
     /**
      * Returns the minimal value of enchantability needed on the enchantment level passed.
      */
-    public int getMinEnchantability(int par1)
+    public int getMinEnchantability(int p_77321_1_)
     {
         return 20;
     }
@@ -21,7 +21,7 @@ public class EnchantmentArrowFire extends Enchantment
     /**
      * Returns the maximum value of enchantability nedded on the enchantment level passed.
      */
-    public int getMaxEnchantability(int par1)
+    public int getMaxEnchantability(int p_77317_1_)
     {
         return 50;
     }

@@ -44,15 +44,15 @@ public class GuiScreenBook extends GuiScreen
     private GuiButton field_146469_F;
     private static final String __OBFID = "CL_00000744";
 
-    public GuiScreenBook(EntityPlayer par1EntityPlayer, ItemStack par2ItemStack, boolean par3)
+    public GuiScreenBook(EntityPlayer p_i1080_1_, ItemStack p_i1080_2_, boolean p_i1080_3_)
     {
-        this.field_146468_g = par1EntityPlayer;
-        this.field_146474_h = par2ItemStack;
-        this.field_146475_i = par3;
+        this.field_146468_g = p_i1080_1_;
+        this.field_146474_h = p_i1080_2_;
+        this.field_146475_i = p_i1080_3_;
 
-        if (par2ItemStack.hasTagCompound())
+        if (p_i1080_2_.hasTagCompound())
         {
-            NBTTagCompound var4 = par2ItemStack.getTagCompound();
+            NBTTagCompound var4 = p_i1080_2_.getTagCompound();
             this.field_146483_y = var4.getTagList("pages", 8);
 
             if (this.field_146483_y != null)
@@ -67,7 +67,7 @@ public class GuiScreenBook extends GuiScreen
             }
         }
 
-        if (this.field_146483_y == null && par3)
+        if (this.field_146483_y == null && p_i1080_3_)
         {
             this.field_146483_y = new NBTTagList();
             this.field_146483_y.appendTag(new NBTTagString(""));
@@ -256,19 +256,19 @@ public class GuiScreenBook extends GuiScreen
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2)
+    protected void keyTyped(char p_73869_1_, int p_73869_2_)
     {
-        super.keyTyped(par1, par2);
+        super.keyTyped(p_73869_1_, p_73869_2_);
 
         if (this.field_146475_i)
         {
             if (this.field_146480_s)
             {
-                this.func_146460_c(par1, par2);
+                this.func_146460_c(p_73869_1_, p_73869_2_);
             }
             else
             {
-                this.func_146463_b(par1, par2);
+                this.func_146463_b(p_73869_1_, p_73869_2_);
             }
         }
     }
@@ -370,7 +370,7 @@ public class GuiScreenBook extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(field_146466_f);
@@ -439,7 +439,7 @@ public class GuiScreenBook extends GuiScreen
             this.fontRendererObj.drawSplitString(var7, var4 + 36, var5 + 16 + 16, 116, 0);
         }
 
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 
     static class NextPageButton extends GuiButton
@@ -447,10 +447,10 @@ public class GuiScreenBook extends GuiScreen
         private final boolean field_146151_o;
         private static final String __OBFID = "CL_00000745";
 
-        public NextPageButton(int par1, int par2, int par3, boolean par4)
+        public NextPageButton(int p_i1079_1_, int p_i1079_2_, int p_i1079_3_, boolean p_i1079_4_)
         {
-            super(par1, par2, par3, 23, 13, "");
-            this.field_146151_o = par4;
+            super(p_i1079_1_, p_i1079_2_, p_i1079_3_, 23, 13, "");
+            this.field_146151_o = p_i1079_4_;
         }
 
         public void drawButton(Minecraft p_146112_1_, int p_146112_2_, int p_146112_3_)

@@ -25,9 +25,9 @@ public abstract class EntityAIDoorInteract extends EntityAIBase
     float entityPositionZ;
     private static final String __OBFID = "CL_00001581";
 
-    public EntityAIDoorInteract(EntityLiving par1EntityLiving)
+    public EntityAIDoorInteract(EntityLiving p_i1621_1_)
     {
-        this.theEntity = par1EntityLiving;
+        this.theEntity = p_i1621_1_;
     }
 
     /**

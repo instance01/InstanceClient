@@ -9,8 +9,8 @@ public class CommandNotFoundException extends CommandException
         this("commands.generic.notFound", new Object[0]);
     }
 
-    public CommandNotFoundException(String par1Str, Object ... par2ArrayOfObj)
+    public CommandNotFoundException(String p_i1363_1_, Object ... p_i1363_2_)
     {
-        super(par1Str, par2ArrayOfObj);
+        super(p_i1363_1_, p_i1363_2_);
     }
 }

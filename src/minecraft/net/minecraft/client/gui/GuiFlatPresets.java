@@ -33,9 +33,9 @@ public class GuiFlatPresets extends GuiScreen
     private GuiTextField field_146433_u;
     private static final String __OBFID = "CL_00000704";
 
-    public GuiFlatPresets(GuiCreateFlatWorld par1GuiCreateFlatWorld)
+    public GuiFlatPresets(GuiCreateFlatWorld p_i1049_1_)
     {
-        this.field_146432_g = par1GuiCreateFlatWorld;
+        this.field_146432_g = p_i1049_1_;
     }
 
     /**
@@ -68,20 +68,20 @@ public class GuiFlatPresets extends GuiScreen
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int par1, int par2, int par3)
+    protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_)
     {
-        this.field_146433_u.mouseClicked(par1, par2, par3);
-        super.mouseClicked(par1, par2, par3);
+        this.field_146433_u.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
+        super.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
     }
 
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2)
+    protected void keyTyped(char p_73869_1_, int p_73869_2_)
     {
-        if (!this.field_146433_u.textboxKeyTyped(par1, par2))
+        if (!this.field_146433_u.textboxKeyTyped(p_73869_1_, p_73869_2_))
         {
-            super.keyTyped(par1, par2);
+            super.keyTyped(p_73869_1_, p_73869_2_);
         }
     }
 
@@ -101,15 +101,15 @@ public class GuiFlatPresets extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         this.drawDefaultBackground();
-        this.field_146435_s.func_148128_a(par1, par2, par3);
+        this.field_146435_s.func_148128_a(p_73863_1_, p_73863_2_, p_73863_3_);
         this.drawCenteredString(this.fontRendererObj, this.field_146438_h, this.width / 2, 8, 16777215);
         this.drawString(this.fontRendererObj, this.field_146439_i, 50, 30, 10526880);
         this.drawString(this.fontRendererObj, this.field_146436_r, 50, 70, 10526880);
         this.field_146433_u.drawTextBox();
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 
     /**

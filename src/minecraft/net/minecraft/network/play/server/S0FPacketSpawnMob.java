@@ -119,9 +119,9 @@ public class S0FPacketSpawnMob extends Packet
         this.field_149043_l.func_151509_a(p_148840_1_);
     }
 
-    public void processPacket(INetHandlerPlayClient p_149035_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_149035_1_.handleSpawnMob(this);
+        p_148833_1_.handleSpawnMob(this);
     }
 
     public List func_149027_c()

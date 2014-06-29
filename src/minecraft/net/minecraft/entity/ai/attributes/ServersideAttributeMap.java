@@ -14,18 +14,18 @@ public class ServersideAttributeMap extends BaseAttributeMap
     protected final Map descriptionToAttributeInstanceMap = new LowerStringMap();
     private static final String __OBFID = "CL_00001569";
 
-    public ModifiableAttributeInstance getAttributeInstance(IAttribute par1Attribute)
+    public ModifiableAttributeInstance getAttributeInstance(IAttribute p_111151_1_)
     {
-        return (ModifiableAttributeInstance)super.getAttributeInstance(par1Attribute);
+        return (ModifiableAttributeInstance)super.getAttributeInstance(p_111151_1_);
     }
 
-    public ModifiableAttributeInstance getAttributeInstanceByName(String par1Str)
+    public ModifiableAttributeInstance getAttributeInstanceByName(String p_111152_1_)
     {
-        IAttributeInstance var2 = super.getAttributeInstanceByName(par1Str);
+        IAttributeInstance var2 = super.getAttributeInstanceByName(p_111152_1_);
 
         if (var2 == null)
         {
-            var2 = (IAttributeInstance)this.descriptionToAttributeInstanceMap.get(par1Str);
+            var2 = (IAttributeInstance)this.descriptionToAttributeInstanceMap.get(p_111152_1_);
         }
 
         return (ModifiableAttributeInstance)var2;
@@ -34,32 +34,32 @@ public class ServersideAttributeMap extends BaseAttributeMap
     /**
      * Registers an attribute with this AttributeMap, returns a modifiable AttributeInstance associated with this map
      */
-    public IAttributeInstance registerAttribute(IAttribute par1Attribute)
+    public IAttributeInstance registerAttribute(IAttribute p_111150_1_)
     {
-        if (this.attributesByName.containsKey(par1Attribute.getAttributeUnlocalizedName()))
+        if (this.attributesByName.containsKey(p_111150_1_.getAttributeUnlocalizedName()))
         {
             throw new IllegalArgumentException("Attribute is already registered!");
         }
         else
         {
-            ModifiableAttributeInstance var2 = new ModifiableAttributeInstance(this, par1Attribute);
-            this.attributesByName.put(par1Attribute.getAttributeUnlocalizedName(), var2);
+            ModifiableAttributeInstance var2 = new ModifiableAttributeInstance(this, p_111150_1_);
+            this.attributesByName.put(p_111150_1_.getAttributeUnlocalizedName(), var2);
 
-            if (par1Attribute instanceof RangedAttribute && ((RangedAttribute)par1Attribute).getDescription() != null)
+            if (p_111150_1_ instanceof RangedAttribute && ((RangedAttribute)p_111150_1_).getDescription() != null)
             {
-                this.descriptionToAttributeInstanceMap.put(((RangedAttribute)par1Attribute).getDescription(), var2);
+                this.descriptionToAttributeInstanceMap.put(((RangedAttribute)p_111150_1_).getDescription(), var2);
             }
 
-            this.attributes.put(par1Attribute, var2);
+            this.attributes.put(p_111150_1_, var2);
             return var2;
         }
     }
 
-    public void addAttributeInstance(ModifiableAttributeInstance par1ModifiableAttributeInstance)
+    public void addAttributeInstance(ModifiableAttributeInstance p_111149_1_)
     {
-        if (par1ModifiableAttributeInstance.getAttribute().getShouldWatch())
+        if (p_111149_1_.getAttribute().getShouldWatch())
         {
-            this.attributeInstanceSet.add(par1ModifiableAttributeInstance);
+            this.attributeInstanceSet.add(p_111149_1_);
         }
     }
 

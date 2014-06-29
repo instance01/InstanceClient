@@ -4,10 +4,13 @@ import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundCategory;
 import net.minecraft.client.audio.SoundEventAccessorComposite;
 import net.minecraft.client.audio.SoundHandler;
+import net.minecraft.client.gui.stream.GuiStreamOptions;
+import net.minecraft.client.gui.stream.GuiStreamUnavailable;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
+import net.minecraft.client.stream.IStream;
 
-public class GuiOptions extends GuiScreen
+public class GuiOptions extends GuiScreen implements GuiYesNoCallback
 {
     private static final GameSettings.Options[] field_146440_f = new GameSettings.Options[] {GameSettings.Options.FOV, GameSettings.Options.DIFFICULTY};
     private final GuiScreen field_146441_g;
@@ -15,10 +18,10 @@ public class GuiOptions extends GuiScreen
     protected String field_146442_a = "Options";
     private static final String __OBFID = "CL_00000700";
 
-    public GuiOptions(GuiScreen par1GuiScreen, GameSettings par2GameSettings)
+    public GuiOptions(GuiScreen p_i1046_1_, GameSettings p_i1046_2_)
     {
-        this.field_146441_g = par1GuiScreen;
-        this.field_146443_h = par2GameSettings;
+        this.field_146441_g = p_i1046_1_;
+        this.field_146443_h = p_i1046_2_;
     }
 
     /**
@@ -55,8 +58,7 @@ public class GuiOptions extends GuiScreen
             ++var1;
         }
 
-        this.buttonList.add(new GuiButton(106, this.width / 2 - 152, this.height / 6 + 72 - 6, 150, 20, I18n.format("options.sounds", new Object[0])));
-        this.buttonList.add(new GuiButton(8675309, this.width / 2 + 2, this.height / 6 + 72 - 6, 150, 20, "Super Secret Settings...")
+        this.buttonList.add(new GuiButton(8675309, this.width / 2 + 5, this.height / 6 + 48 - 6, 150, 20, "Super Secret Settings...")
         {
             private static final String __OBFID = "CL_00000701";
             public void func_146113_a(SoundHandler p_146113_1_)
@@ -69,12 +71,14 @@ public class GuiOptions extends GuiScreen
                 }
             }
         });
-        this.buttonList.add(new GuiButton(101, this.width / 2 - 152, this.height / 6 + 96 - 6, 150, 20, I18n.format("options.video", new Object[0])));
-        this.buttonList.add(new GuiButton(100, this.width / 2 + 2, this.height / 6 + 96 - 6, 150, 20, I18n.format("options.controls", new Object[0])));
-        this.buttonList.add(new GuiButton(102, this.width / 2 - 152, this.height / 6 + 120 - 6, 150, 20, I18n.format("options.language", new Object[0])));
-        this.buttonList.add(new GuiButton(103, this.width / 2 + 2, this.height / 6 + 120 - 6, 150, 20, I18n.format("options.multiplayer.title", new Object[0])));
-        this.buttonList.add(new GuiButton(105, this.width / 2 - 152, this.height / 6 + 144 - 6, 150, 20, I18n.format("options.resourcepack", new Object[0])));
-        this.buttonList.add(new GuiButton(104, this.width / 2 + 2, this.height / 6 + 144 - 6, 150, 20, I18n.format("options.snooper.view", new Object[0])));
+        this.buttonList.add(new GuiButton(106, this.width / 2 - 155, this.height / 6 + 72 - 6, 150, 20, I18n.format("options.sounds", new Object[0])));
+        this.buttonList.add(new GuiButton(107, this.width / 2 + 5, this.height / 6 + 72 - 6, 150, 20, I18n.format("options.stream", new Object[0])));
+        this.buttonList.add(new GuiButton(101, this.width / 2 - 155, this.height / 6 + 96 - 6, 150, 20, I18n.format("options.video", new Object[0])));
+        this.buttonList.add(new GuiButton(100, this.width / 2 + 5, this.height / 6 + 96 - 6, 150, 20, I18n.format("options.controls", new Object[0])));
+        this.buttonList.add(new GuiButton(102, this.width / 2 - 155, this.height / 6 + 120 - 6, 150, 20, I18n.format("options.language", new Object[0])));
+        this.buttonList.add(new GuiButton(103, this.width / 2 + 5, this.height / 6 + 120 - 6, 150, 20, I18n.format("options.multiplayer.title", new Object[0])));
+        this.buttonList.add(new GuiButton(105, this.width / 2 - 155, this.height / 6 + 144 - 6, 150, 20, I18n.format("options.resourcepack", new Object[0])));
+        this.buttonList.add(new GuiButton(104, this.width / 2 + 5, this.height / 6 + 144 - 6, 150, 20, I18n.format("options.snooper.view", new Object[0])));
         this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 
@@ -140,16 +144,31 @@ public class GuiOptions extends GuiScreen
                 this.mc.gameSettings.saveOptions();
                 this.mc.displayGuiScreen(new GuiScreenOptionsSounds(this, this.field_146443_h));
             }
+
+            if (p_146284_1_.id == 107)
+            {
+                this.mc.gameSettings.saveOptions();
+                IStream var2 = this.mc.func_152346_Z();
+
+                if (var2.func_152936_l() && var2.func_152928_D())
+                {
+                    this.mc.displayGuiScreen(new GuiStreamOptions(this, this.field_146443_h));
+                }
+                else
+                {
+                    GuiStreamUnavailable.func_152321_a(this);
+                }
+            }
         }
     }
 
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRendererObj, this.field_146442_a, this.width / 2, 15, 16777215);
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 }

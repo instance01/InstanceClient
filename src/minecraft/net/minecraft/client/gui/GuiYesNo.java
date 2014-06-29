@@ -5,7 +5,7 @@ import net.minecraft.client.resources.I18n;
 
 public class GuiYesNo extends GuiScreen
 {
-    protected GuiScreen field_146355_a;
+    protected GuiYesNoCallback field_146355_a;
     protected String field_146351_f;
     private String field_146354_r;
     protected String field_146352_g;
@@ -14,24 +14,24 @@ public class GuiYesNo extends GuiScreen
     private int field_146353_s;
     private static final String __OBFID = "CL_00000684";
 
-    public GuiYesNo(GuiScreen par1GuiScreen, String par2Str, String par3Str, int par4)
+    public GuiYesNo(GuiYesNoCallback p_i1082_1_, String p_i1082_2_, String p_i1082_3_, int p_i1082_4_)
     {
-        this.field_146355_a = par1GuiScreen;
-        this.field_146351_f = par2Str;
-        this.field_146354_r = par3Str;
-        this.field_146357_i = par4;
+        this.field_146355_a = p_i1082_1_;
+        this.field_146351_f = p_i1082_2_;
+        this.field_146354_r = p_i1082_3_;
+        this.field_146357_i = p_i1082_4_;
         this.field_146352_g = I18n.format("gui.yes", new Object[0]);
         this.field_146356_h = I18n.format("gui.no", new Object[0]);
     }
 
-    public GuiYesNo(GuiScreen par1GuiScreen, String par2Str, String par3Str, String par4Str, String par5Str, int par6)
+    public GuiYesNo(GuiYesNoCallback p_i1083_1_, String p_i1083_2_, String p_i1083_3_, String p_i1083_4_, String p_i1083_5_, int p_i1083_6_)
     {
-        this.field_146355_a = par1GuiScreen;
-        this.field_146351_f = par2Str;
-        this.field_146354_r = par3Str;
-        this.field_146352_g = par4Str;
-        this.field_146356_h = par5Str;
-        this.field_146357_i = par6;
+        this.field_146355_a = p_i1083_1_;
+        this.field_146351_f = p_i1083_2_;
+        this.field_146354_r = p_i1083_3_;
+        this.field_146352_g = p_i1083_4_;
+        this.field_146356_h = p_i1083_5_;
+        this.field_146357_i = p_i1083_6_;
     }
 
     /**
@@ -51,12 +51,12 @@ public class GuiYesNo extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRendererObj, this.field_146351_f, this.width / 2, 70, 16777215);
         this.drawCenteredString(this.fontRendererObj, this.field_146354_r, this.width / 2, 90, 16777215);
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 
     public void func_146350_a(int p_146350_1_)

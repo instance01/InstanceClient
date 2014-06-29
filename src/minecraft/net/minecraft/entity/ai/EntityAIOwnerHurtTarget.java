@@ -10,10 +10,10 @@ public class EntityAIOwnerHurtTarget extends EntityAITarget
     private int field_142050_e;
     private static final String __OBFID = "CL_00001625";
 
-    public EntityAIOwnerHurtTarget(EntityTameable par1EntityTameable)
+    public EntityAIOwnerHurtTarget(EntityTameable p_i1668_1_)
     {
-        super(par1EntityTameable, false);
-        this.theEntityTameable = par1EntityTameable;
+        super(p_i1668_1_, false);
+        this.theEntityTameable = p_i1668_1_;
         this.setMutexBits(1);
     }
 

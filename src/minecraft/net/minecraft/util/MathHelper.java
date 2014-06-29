@@ -22,105 +22,110 @@ public class MathHelper
     /**
      * sin looked up in a table
      */
-    public static final float sin(float par0)
+    public static final float sin(float p_76126_0_)
     {
-        return SIN_TABLE[(int)(par0 * 10430.378F) & 65535];
+        return SIN_TABLE[(int)(p_76126_0_ * 10430.378F) & 65535];
     }
 
     /**
      * cos looked up in the sin table with the appropriate offset
      */
-    public static final float cos(float par0)
+    public static final float cos(float p_76134_0_)
     {
-        return SIN_TABLE[(int)(par0 * 10430.378F + 16384.0F) & 65535];
+        return SIN_TABLE[(int)(p_76134_0_ * 10430.378F + 16384.0F) & 65535];
     }
 
-    public static final float sqrt_float(float par0)
+    public static final float sqrt_float(float p_76129_0_)
     {
-        return (float)Math.sqrt((double)par0);
+        return (float)Math.sqrt((double)p_76129_0_);
     }
 
-    public static final float sqrt_double(double par0)
+    public static final float sqrt_double(double p_76133_0_)
     {
-        return (float)Math.sqrt(par0);
+        return (float)Math.sqrt(p_76133_0_);
     }
 
     /**
      * Returns the greatest integer less than or equal to the float argument
      */
-    public static int floor_float(float par0)
+    public static int floor_float(float p_76141_0_)
     {
-        int var1 = (int)par0;
-        return par0 < (float)var1 ? var1 - 1 : var1;
+        int var1 = (int)p_76141_0_;
+        return p_76141_0_ < (float)var1 ? var1 - 1 : var1;
     }
 
     /**
      * returns par0 cast as an int, and no greater than Integer.MAX_VALUE-1024
      */
-    public static int truncateDoubleToInt(double par0)
+    public static int truncateDoubleToInt(double p_76140_0_)
     {
-        return (int)(par0 + 1024.0D) - 1024;
+        return (int)(p_76140_0_ + 1024.0D) - 1024;
     }
 
     /**
      * Returns the greatest integer less than or equal to the double argument
      */
-    public static int floor_double(double par0)
+    public static int floor_double(double p_76128_0_)
     {
-        int var2 = (int)par0;
-        return par0 < (double)var2 ? var2 - 1 : var2;
+        int var2 = (int)p_76128_0_;
+        return p_76128_0_ < (double)var2 ? var2 - 1 : var2;
     }
 
     /**
      * Long version of floor_double
      */
-    public static long floor_double_long(double par0)
+    public static long floor_double_long(double p_76124_0_)
     {
-        long var2 = (long)par0;
-        return par0 < (double)var2 ? var2 - 1L : var2;
+        long var2 = (long)p_76124_0_;
+        return p_76124_0_ < (double)var2 ? var2 - 1L : var2;
     }
 
-    public static float abs(float par0)
+    public static int func_154353_e(double p_154353_0_)
     {
-        return par0 >= 0.0F ? par0 : -par0;
+        return (int)(p_154353_0_ >= 0.0D ? p_154353_0_ : -p_154353_0_ + 1.0D);
+    }
+
+    public static float abs(float p_76135_0_)
+    {
+        return p_76135_0_ >= 0.0F ? p_76135_0_ : -p_76135_0_;
     }
 
     /**
      * Returns the unsigned value of an int.
      */
-    public static int abs_int(int par0)
+    public static int abs_int(int p_76130_0_)
     {
-        return par0 >= 0 ? par0 : -par0;
+        return p_76130_0_ >= 0 ? p_76130_0_ : -p_76130_0_;
     }
 
-    public static int ceiling_float_int(float par0)
+    public static int ceiling_float_int(float p_76123_0_)
     {
-        int var1 = (int)par0;
-        return par0 > (float)var1 ? var1 + 1 : var1;
+        int var1 = (int)p_76123_0_;
+        return p_76123_0_ > (float)var1 ? var1 + 1 : var1;
     }
 
-    public static int ceiling_double_int(double par0)
+    public static int ceiling_double_int(double p_76143_0_)
     {
-        int var2 = (int)par0;
-        return par0 > (double)var2 ? var2 + 1 : var2;
+        int var2 = (int)p_76143_0_;
+        return p_76143_0_ > (double)var2 ? var2 + 1 : var2;
     }
 
     /**
      * Returns the value of the first parameter, clamped to be within the lower and upper limits given by the second and
      * third parameters.
      */
-    public static int clamp_int(int par0, int par1, int par2)
+    public static int clamp_int(int p_76125_0_, int p_76125_1_, int p_76125_2_)
     {
-        return par0 < par1 ? par1 : (par0 > par2 ? par2 : par0);
+        return p_76125_0_ < p_76125_1_ ? p_76125_1_ : (p_76125_0_ > p_76125_2_ ? p_76125_2_ : p_76125_0_);
     }
 
     /**
      * Returns the value of the first parameter, clamped to be within the lower and upper limits given by the second and
      * third parameters
      */
-    public static float clamp_float(float par0, float par1, float par2)
+    public static float clamp_float(float p_76131_0_, float p_76131_1_, float p_76131_2_)
     {
-        return par0 < par1 ? par1 : (par0 > par2 ? par2 : par0);
+        return p_76131_0_ < p_76131_1_ ? p_76131_1_ : (p_76131_0_ > p_76131_2_ ? p_76131_2_ : p_76131_0_);
     }
 
     public static double clamp_double(double p_151237_0_, double p_151237_2_, double p_151237_4_)
@@ -136,40 +141,40 @@ public class MathHelper
     /**
      * Maximum of the absolute value of two numbers.
      */
-    public static double abs_max(double par0, double par2)
+    public static double abs_max(double p_76132_0_, double p_76132_2_)
     {
-        if (par0 < 0.0D)
+        if (p_76132_0_ < 0.0D)
         {
-            par0 = -par0;
+            p_76132_0_ = -p_76132_0_;
         }
 
-        if (par2 < 0.0D)
+        if (p_76132_2_ < 0.0D)
         {
-            par2 = -par2;
+            p_76132_2_ = -p_76132_2_;
         }
 
-        return par0 > par2 ? par0 : par2;
+        return p_76132_0_ > p_76132_2_ ? p_76132_0_ : p_76132_2_;
     }
 
     /**
      * Buckets an integer with specifed bucket sizes.  Args: i, bucketSize
      */
-    public static int bucketInt(int par0, int par1)
+    public static int bucketInt(int p_76137_0_, int p_76137_1_)
     {
-        return par0 < 0 ? -((-par0 - 1) / par1) - 1 : par0 / par1;
+        return p_76137_0_ < 0 ? -((-p_76137_0_ - 1) / p_76137_1_) - 1 : p_76137_0_ / p_76137_1_;
     }
 
     /**
      * Tests if a string is null or of length zero
      */
-    public static boolean stringNullOrLengthZero(String par0Str)
+    public static boolean stringNullOrLengthZero(String p_76139_0_)
     {
-        return par0Str == null || par0Str.length() == 0;
+        return p_76139_0_ == null || p_76139_0_.length() == 0;
     }
 
-    public static int getRandomIntegerInRange(Random par0Random, int par1, int par2)
+    public static int getRandomIntegerInRange(Random p_76136_0_, int p_76136_1_, int p_76136_2_)
     {
-        return par1 >= par2 ? par1 : par0Random.nextInt(par2 - par1 + 1) + par1;
+        return p_76136_1_ >= p_76136_2_ ? p_76136_1_ : p_76136_0_.nextInt(p_76136_2_ - p_76136_1_ + 1) + p_76136_1_;
     }
 
     public static float randomFloatClamp(Random p_151240_0_, float p_151240_1_, float p_151240_2_)
@@ -177,16 +182,16 @@ public class MathHelper
         return p_151240_1_ >= p_151240_2_ ? p_151240_1_ : p_151240_0_.nextFloat() * (p_151240_2_ - p_151240_1_) + p_151240_1_;
     }
 
-    public static double getRandomDoubleInRange(Random par0Random, double par1, double par3)
+    public static double getRandomDoubleInRange(Random p_82716_0_, double p_82716_1_, double p_82716_3_)
     {
-        return par1 >= par3 ? par1 : par0Random.nextDouble() * (par3 - par1) + par1;
+        return p_82716_1_ >= p_82716_3_ ? p_82716_1_ : p_82716_0_.nextDouble() * (p_82716_3_ - p_82716_1_) + p_82716_1_;
     }
 
-    public static double average(long[] par0ArrayOfLong)
+    public static double average(long[] p_76127_0_)
     {
         long var1 = 0L;
-        long[] var3 = par0ArrayOfLong;
-        int var4 = par0ArrayOfLong.length;
+        long[] var3 = p_76127_0_;
+        int var4 = p_76127_0_.length;
 
         for (int var5 = 0; var5 < var4; ++var5)
         {
@@ -194,59 +199,59 @@ public class MathHelper
             var1 += var6;
         }
 
-        return (double)var1 / (double)par0ArrayOfLong.length;
+        return (double)var1 / (double)p_76127_0_.length;
     }
 
     /**
      * the angle is reduced to an angle between -180 and +180 by mod, and a 360 check
      */
-    public static float wrapAngleTo180_float(float par0)
+    public static float wrapAngleTo180_float(float p_76142_0_)
     {
-        par0 %= 360.0F;
+        p_76142_0_ %= 360.0F;
 
-        if (par0 >= 180.0F)
+        if (p_76142_0_ >= 180.0F)
         {
-            par0 -= 360.0F;
+            p_76142_0_ -= 360.0F;
         }
 
-        if (par0 < -180.0F)
+        if (p_76142_0_ < -180.0F)
         {
-            par0 += 360.0F;
+            p_76142_0_ += 360.0F;
         }
 
-        return par0;
+        return p_76142_0_;
     }
 
     /**
      * the angle is reduced to an angle between -180 and +180 by mod, and a 360 check
      */
-    public static double wrapAngleTo180_double(double par0)
+    public static double wrapAngleTo180_double(double p_76138_0_)
     {
-        par0 %= 360.0D;
+        p_76138_0_ %= 360.0D;
 
-        if (par0 >= 180.0D)
+        if (p_76138_0_ >= 180.0D)
         {
-            par0 -= 360.0D;
+            p_76138_0_ -= 360.0D;
         }
 
-        if (par0 < -180.0D)
+        if (p_76138_0_ < -180.0D)
         {
-            par0 += 360.0D;
+            p_76138_0_ += 360.0D;
         }
 
-        return par0;
+        return p_76138_0_;
     }
 
     /**
      * parses the string as integer or returns the second parameter if it fails
      */
-    public static int parseIntWithDefault(String par0Str, int par1)
+    public static int parseIntWithDefault(String p_82715_0_, int p_82715_1_)
     {
-        int var2 = par1;
+        int var2 = p_82715_1_;
 
         try
         {
-            var2 = Integer.parseInt(par0Str);
+            var2 = Integer.parseInt(p_82715_0_);
         }
         catch (Throwable var4)
         {
@@ -259,22 +264,22 @@ public class MathHelper
     /**
      * parses the string as integer or returns the second parameter if it fails. this value is capped to par2
      */
-    public static int parseIntWithDefaultAndMax(String par0Str, int par1, int par2)
+    public static int parseIntWithDefaultAndMax(String p_82714_0_, int p_82714_1_, int p_82714_2_)
     {
-        int var3 = par1;
+        int var3 = p_82714_1_;
 
         try
         {
-            var3 = Integer.parseInt(par0Str);
+            var3 = Integer.parseInt(p_82714_0_);
         }
         catch (Throwable var5)
         {
             ;
         }
 
-        if (var3 < par2)
+        if (var3 < p_82714_2_)
         {
-            var3 = par2;
+            var3 = p_82714_2_;
         }
 
         return var3;
@@ -283,13 +288,13 @@ public class MathHelper
     /**
      * parses the string as double or returns the second parameter if it fails.
      */
-    public static double parseDoubleWithDefault(String par0Str, double par1)
+    public static double parseDoubleWithDefault(String p_82712_0_, double p_82712_1_)
     {
-        double var3 = par1;
+        double var3 = p_82712_1_;
 
         try
         {
-            var3 = Double.parseDouble(par0Str);
+            var3 = Double.parseDouble(p_82712_0_);
         }
         catch (Throwable var6)
         {
@@ -299,22 +304,22 @@ public class MathHelper
         return var3;
     }
 
-    public static double parseDoubleWithDefaultAndMax(String par0Str, double par1, double par3)
+    public static double parseDoubleWithDefaultAndMax(String p_82713_0_, double p_82713_1_, double p_82713_3_)
     {
-        double var5 = par1;
+        double var5 = p_82713_1_;
 
         try
         {
-            var5 = Double.parseDouble(par0Str);
+            var5 = Double.parseDouble(p_82713_0_);
         }
         catch (Throwable var8)
         {
             ;
         }
 
-        if (var5 < par3)
+        if (var5 < p_82713_3_)
         {
-            var5 = par3;
+            var5 = p_82713_3_;
         }
 
         return var5;
@@ -360,6 +365,24 @@ public class MathHelper
     public static int calculateLogBaseTwo(int p_151239_0_)
     {
         return calculateLogBaseTwoDeBruijn(p_151239_0_) - (isPowerOfTwo(p_151239_0_) ? 0 : 1);
+    }
+
+    public static int func_154354_b(int p_154354_0_, int p_154354_1_)
+    {
+        if (p_154354_1_ == 0)
+        {
+            return 0;
+        }
+        else
+        {
+            if (p_154354_0_ < 0)
+            {
+                p_154354_1_ *= -1;
+            }
+
+            int var2 = p_154354_0_ % p_154354_1_;
+            return var2 == 0 ? p_154354_0_ : p_154354_0_ + p_154354_1_ - var2;
+        }
     }
 
     static

@@ -50,9 +50,9 @@ public class S25PacketBlockBreakAnim extends Packet
         p_148840_1_.writeByte(this.field_148849_e);
     }
 
-    public void processPacket(INetHandlerPlayClient p_148847_1_)
+    public void processPacket(INetHandlerPlayClient p_148833_1_)
     {
-        p_148847_1_.handleBlockBreakAnim(this);
+        p_148833_1_.handleBlockBreakAnim(this);
     }
 
     public int func_148845_c()

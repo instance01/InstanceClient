@@ -222,22 +222,22 @@ public class StatList
     /**
      * Forces all dual blocks to count for each other on the stats list
      */
-    private static void replaceAllSimilarBlocks(StatBase[] par0ArrayOfStatBase)
+    private static void replaceAllSimilarBlocks(StatBase[] p_75924_0_)
     {
-        func_151180_a(par0ArrayOfStatBase, Blocks.water, Blocks.flowing_water);
-        func_151180_a(par0ArrayOfStatBase, Blocks.lava, Blocks.flowing_lava);
-        func_151180_a(par0ArrayOfStatBase, Blocks.lit_pumpkin, Blocks.pumpkin);
-        func_151180_a(par0ArrayOfStatBase, Blocks.lit_furnace, Blocks.furnace);
-        func_151180_a(par0ArrayOfStatBase, Blocks.lit_redstone_ore, Blocks.redstone_ore);
-        func_151180_a(par0ArrayOfStatBase, Blocks.powered_repeater, Blocks.unpowered_repeater);
-        func_151180_a(par0ArrayOfStatBase, Blocks.powered_comparator, Blocks.unpowered_comparator);
-        func_151180_a(par0ArrayOfStatBase, Blocks.redstone_torch, Blocks.unlit_redstone_torch);
-        func_151180_a(par0ArrayOfStatBase, Blocks.lit_redstone_lamp, Blocks.redstone_lamp);
-        func_151180_a(par0ArrayOfStatBase, Blocks.red_mushroom, Blocks.brown_mushroom);
-        func_151180_a(par0ArrayOfStatBase, Blocks.double_stone_slab, Blocks.stone_slab);
-        func_151180_a(par0ArrayOfStatBase, Blocks.double_wooden_slab, Blocks.wooden_slab);
-        func_151180_a(par0ArrayOfStatBase, Blocks.grass, Blocks.dirt);
-        func_151180_a(par0ArrayOfStatBase, Blocks.farmland, Blocks.dirt);
+        func_151180_a(p_75924_0_, Blocks.water, Blocks.flowing_water);
+        func_151180_a(p_75924_0_, Blocks.lava, Blocks.flowing_lava);
+        func_151180_a(p_75924_0_, Blocks.lit_pumpkin, Blocks.pumpkin);
+        func_151180_a(p_75924_0_, Blocks.lit_furnace, Blocks.furnace);
+        func_151180_a(p_75924_0_, Blocks.lit_redstone_ore, Blocks.redstone_ore);
+        func_151180_a(p_75924_0_, Blocks.powered_repeater, Blocks.unpowered_repeater);
+        func_151180_a(p_75924_0_, Blocks.powered_comparator, Blocks.unpowered_comparator);
+        func_151180_a(p_75924_0_, Blocks.redstone_torch, Blocks.unlit_redstone_torch);
+        func_151180_a(p_75924_0_, Blocks.lit_redstone_lamp, Blocks.redstone_lamp);
+        func_151180_a(p_75924_0_, Blocks.red_mushroom, Blocks.brown_mushroom);
+        func_151180_a(p_75924_0_, Blocks.double_stone_slab, Blocks.stone_slab);
+        func_151180_a(p_75924_0_, Blocks.double_wooden_slab, Blocks.wooden_slab);
+        func_151180_a(p_75924_0_, Blocks.grass, Blocks.dirt);
+        func_151180_a(p_75924_0_, Blocks.farmland, Blocks.dirt);
     }
 
     private static void func_151180_a(StatBase[] p_151180_0_, Block p_151180_1_, Block p_151180_2_)

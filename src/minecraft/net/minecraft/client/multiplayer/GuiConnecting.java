@@ -28,22 +28,22 @@ public class GuiConnecting extends GuiScreen
     private final GuiScreen field_146374_i;
     private static final String __OBFID = "CL_00000685";
 
-    public GuiConnecting(GuiScreen par1GuiScreen, Minecraft par2Minecraft, ServerData par3ServerData)
+    public GuiConnecting(GuiScreen p_i1181_1_, Minecraft p_i1181_2_, ServerData p_i1181_3_)
     {
-        this.mc = par2Minecraft;
-        this.field_146374_i = par1GuiScreen;
-        ServerAddress var4 = ServerAddress.func_78860_a(par3ServerData.serverIP);
-        par2Minecraft.loadWorld((WorldClient)null);
-        par2Minecraft.setServerData(par3ServerData);
+        this.mc = p_i1181_2_;
+        this.field_146374_i = p_i1181_1_;
+        ServerAddress var4 = ServerAddress.func_78860_a(p_i1181_3_.serverIP);
+        p_i1181_2_.loadWorld((WorldClient)null);
+        p_i1181_2_.setServerData(p_i1181_3_);
         this.func_146367_a(var4.getIP(), var4.getPort());
     }
 
-    public GuiConnecting(GuiScreen par1GuiScreen, Minecraft par2Minecraft, String par3Str, int par4)
+    public GuiConnecting(GuiScreen p_i1182_1_, Minecraft p_i1182_2_, String p_i1182_3_, int p_i1182_4_)
     {
-        this.mc = par2Minecraft;
-        this.field_146374_i = par1GuiScreen;
-        par2Minecraft.loadWorld((WorldClient)null);
-        this.func_146367_a(par3Str, par4);
+        this.mc = p_i1182_2_;
+        this.field_146374_i = p_i1182_1_;
+        p_i1182_2_.loadWorld((WorldClient)null);
+        this.func_146367_a(p_i1182_3_, p_i1182_4_);
     }
 
     private void func_146367_a(final String p_146367_1_, final int p_146367_2_)
@@ -54,6 +54,8 @@ public class GuiConnecting extends GuiScreen
             private static final String __OBFID = "CL_00000686";
             public void run()
             {
+                InetAddress var1 = null;
+
                 try
                 {
                     if (GuiConnecting.this.field_146373_h)
@@ -61,30 +63,39 @@ public class GuiConnecting extends GuiScreen
                         return;
                     }
 
-                    GuiConnecting.this.field_146371_g = NetworkManager.provideLanClient(InetAddress.getByName(p_146367_1_), p_146367_2_);
+                    var1 = InetAddress.getByName(p_146367_1_);
+                    GuiConnecting.this.field_146371_g = NetworkManager.provideLanClient(var1, p_146367_2_);
                     GuiConnecting.this.field_146371_g.setNetHandler(new NetHandlerLoginClient(GuiConnecting.this.field_146371_g, GuiConnecting.this.mc, GuiConnecting.this.field_146374_i));
-                    GuiConnecting.this.field_146371_g.scheduleOutboundPacket(new C00Handshake(4, p_146367_1_, p_146367_2_, EnumConnectionState.LOGIN), new GenericFutureListener[0]);
+                    GuiConnecting.this.field_146371_g.scheduleOutboundPacket(new C00Handshake(5, p_146367_1_, p_146367_2_, EnumConnectionState.LOGIN), new GenericFutureListener[0]);
                     GuiConnecting.this.field_146371_g.scheduleOutboundPacket(new C00PacketLoginStart(GuiConnecting.this.mc.getSession().func_148256_e()), new GenericFutureListener[0]);
                 }
-                catch (UnknownHostException var2)
+                catch (UnknownHostException var5)
                 {
                     if (GuiConnecting.this.field_146373_h)
                     {
                         return;
                     }
 
-                    GuiConnecting.logger.error("Couldn\'t connect to server", var2);
-                    GuiConnecting.this.mc.displayGuiScreen(new GuiDisconnected(GuiConnecting.this.field_146374_i, "connect.failed", new ChatComponentTranslation("disconnect.genericReason", new Object[] {"Unknown host \'" + p_146367_1_ + "\'"})));
+                    GuiConnecting.logger.error("Couldn\'t connect to server", var5);
+                    GuiConnecting.this.mc.displayGuiScreen(new GuiDisconnected(GuiConnecting.this.field_146374_i, "connect.failed", new ChatComponentTranslation("disconnect.genericReason", new Object[] {"Unknown host"})));
                 }
-                catch (Exception var3)
+                catch (Exception var6)
                 {
                     if (GuiConnecting.this.field_146373_h)
                     {
                         return;
                     }
 
-                    GuiConnecting.logger.error("Couldn\'t connect to server", var3);
-                    GuiConnecting.this.mc.displayGuiScreen(new GuiDisconnected(GuiConnecting.this.field_146374_i, "connect.failed", new ChatComponentTranslation("disconnect.genericReason", new Object[] {var3.toString()})));
+                    GuiConnecting.logger.error("Couldn\'t connect to server", var6);
+                    String var3 = var6.toString();
+
+                    if (var1 != null)
+                    {
+                        String var4 = var1.toString() + ":" + p_146367_2_;
+                        var3 = var3.replaceAll(var4, "");
+                    }
+
+                    GuiConnecting.this.mc.displayGuiScreen(new GuiDisconnected(GuiConnecting.this.field_146374_i, "connect.failed", new ChatComponentTranslation("disconnect.genericReason", new Object[] {var3})));
                 }
             }
         }).start();
@@ -111,7 +122,7 @@ public class GuiConnecting extends GuiScreen
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2) {}
+    protected void keyTyped(char p_73869_1_, int p_73869_2_) {}
 
     /**
      * Adds the buttons (and other controls) to the screen in question.
@@ -119,7 +130,7 @@ public class GuiConnecting extends GuiScreen
     public void initGui()
     {
         this.buttonList.clear();
-        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120 + 12, I18n.format("gui.cancel", new Object[0])));
+        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 2 + 50, I18n.format("gui.cancel", new Object[0])));
     }
 
     protected void actionPerformed(GuiButton p_146284_1_)
@@ -140,7 +151,7 @@ public class GuiConnecting extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         this.drawDefaultBackground();
 
@@ -153,6 +164,6 @@ public class GuiConnecting extends GuiScreen
             this.drawCenteredString(this.fontRendererObj, I18n.format("connect.authorizing", new Object[0]), this.width / 2, this.height / 2 - 50, 16777215);
         }
 
-        super.drawScreen(par1, par2, par3);
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 }

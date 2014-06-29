@@ -148,8 +148,8 @@ public class NoiseGeneratorSimplex
                 double var35 = (double)var30 - var31;
                 double var37 = var19 - var33;
                 double var39 = var16 - var35;
-                byte var42;
                 byte var41;
+                byte var42;
 
                 if (var37 > var39)
                 {

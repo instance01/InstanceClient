@@ -66,9 +66,9 @@ public class C17PacketCustomPayload extends Packet
         }
     }
 
-    public void processPacket(INetHandlerPlayServer p_149557_1_)
+    public void processPacket(INetHandlerPlayServer p_148833_1_)
     {
-        p_149557_1_.processVanilla250Packet(this);
+        p_148833_1_.processVanilla250Packet(this);
     }
 
     public String func_149559_c()

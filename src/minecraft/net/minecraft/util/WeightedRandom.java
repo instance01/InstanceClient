@@ -11,12 +11,12 @@ public class WeightedRandom
     /**
      * Returns the total weight of all items in a collection.
      */
-    public static int getTotalWeight(Collection par0Collection)
+    public static int getTotalWeight(Collection p_76272_0_)
     {
         int var1 = 0;
         WeightedRandom.Item var3;
 
-        for (Iterator var2 = par0Collection.iterator(); var2.hasNext(); var1 += var3.itemWeight)
+        for (Iterator var2 = p_76272_0_.iterator(); var2.hasNext(); var1 += var3.itemWeight)
         {
             var3 = (WeightedRandom.Item)var2.next();
         }
@@ -27,16 +27,16 @@ public class WeightedRandom
     /**
      * Returns a random choice from the input items, with a total weight value.
      */
-    public static WeightedRandom.Item getRandomItem(Random par0Random, Collection par1Collection, int par2)
+    public static WeightedRandom.Item getRandomItem(Random p_76273_0_, Collection p_76273_1_, int p_76273_2_)
     {
-        if (par2 <= 0)
+        if (p_76273_2_ <= 0)
         {
             throw new IllegalArgumentException();
         }
         else
         {
-            int var3 = par0Random.nextInt(par2);
-            Iterator var4 = par1Collection.iterator();
+            int var3 = p_76273_0_.nextInt(p_76273_2_);
+            Iterator var4 = p_76273_1_.iterator();
             WeightedRandom.Item var5;
 
             do
@@ -58,19 +58,19 @@ public class WeightedRandom
     /**
      * Returns a random choice from the input items.
      */
-    public static WeightedRandom.Item getRandomItem(Random par0Random, Collection par1Collection)
+    public static WeightedRandom.Item getRandomItem(Random p_76271_0_, Collection p_76271_1_)
     {
-        return getRandomItem(par0Random, par1Collection, getTotalWeight(par1Collection));
+        return getRandomItem(p_76271_0_, p_76271_1_, getTotalWeight(p_76271_1_));
     }
 
     /**
      * Returns the total weight of all items in a array.
      */
-    public static int getTotalWeight(WeightedRandom.Item[] par0ArrayOfWeightedRandomItem)
+    public static int getTotalWeight(WeightedRandom.Item[] p_76270_0_)
     {
         int var1 = 0;
-        WeightedRandom.Item[] var2 = par0ArrayOfWeightedRandomItem;
-        int var3 = par0ArrayOfWeightedRandomItem.length;
+        WeightedRandom.Item[] var2 = p_76270_0_;
+        int var3 = p_76270_0_.length;
 
         for (int var4 = 0; var4 < var3; ++var4)
         {
@@ -84,17 +84,17 @@ public class WeightedRandom
     /**
      * Returns a random choice from the input array of items, with a total weight value.
      */
-    public static WeightedRandom.Item getRandomItem(Random par0Random, WeightedRandom.Item[] par1ArrayOfWeightedRandomItem, int par2)
+    public static WeightedRandom.Item getRandomItem(Random p_76269_0_, WeightedRandom.Item[] p_76269_1_, int p_76269_2_)
     {
-        if (par2 <= 0)
+        if (p_76269_2_ <= 0)
         {
             throw new IllegalArgumentException();
         }
         else
         {
-            int var3 = par0Random.nextInt(par2);
-            WeightedRandom.Item[] var4 = par1ArrayOfWeightedRandomItem;
-            int var5 = par1ArrayOfWeightedRandomItem.length;
+            int var3 = p_76269_0_.nextInt(p_76269_2_);
+            WeightedRandom.Item[] var4 = p_76269_1_;
+            int var5 = p_76269_1_.length;
 
             for (int var6 = 0; var6 < var5; ++var6)
             {
@@ -114,9 +114,9 @@ public class WeightedRandom
     /**
      * Returns a random choice from the input items.
      */
-    public static WeightedRandom.Item getRandomItem(Random par0Random, WeightedRandom.Item[] par1ArrayOfWeightedRandomItem)
+    public static WeightedRandom.Item getRandomItem(Random p_76274_0_, WeightedRandom.Item[] p_76274_1_)
     {
-        return getRandomItem(par0Random, par1ArrayOfWeightedRandomItem, getTotalWeight(par1ArrayOfWeightedRandomItem));
+        return getRandomItem(p_76274_0_, p_76274_1_, getTotalWeight(p_76274_1_));
     }
 
     public static class Item
@@ -124,9 +124,9 @@ public class WeightedRandom
         protected int itemWeight;
         private static final String __OBFID = "CL_00001504";
 
-        public Item(int par1)
+        public Item(int p_i1556_1_)
         {
-            this.itemWeight = par1;
+            this.itemWeight = p_i1556_1_;
         }
     }
 }

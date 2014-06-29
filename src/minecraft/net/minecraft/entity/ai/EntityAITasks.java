@@ -23,20 +23,20 @@ public class EntityAITasks
     private int tickRate = 3;
     private static final String __OBFID = "CL_00001588";
 
-    public EntityAITasks(Profiler par1Profiler)
+    public EntityAITasks(Profiler p_i1628_1_)
     {
-        this.theProfiler = par1Profiler;
+        this.theProfiler = p_i1628_1_;
     }
 
-    public void addTask(int par1, EntityAIBase par2EntityAIBase)
+    public void addTask(int p_75776_1_, EntityAIBase p_75776_2_)
     {
-        this.taskEntries.add(new EntityAITasks.EntityAITaskEntry(par1, par2EntityAIBase));
+        this.taskEntries.add(new EntityAITasks.EntityAITaskEntry(p_75776_1_, p_75776_2_));
     }
 
     /**
      * removes the indicated task from the entity's AI tasks.
      */
-    public void removeTask(EntityAIBase par1EntityAIBase)
+    public void removeTask(EntityAIBase p_85156_1_)
     {
         Iterator var2 = this.taskEntries.iterator();
 
@@ -45,7 +45,7 @@ public class EntityAITasks
             EntityAITasks.EntityAITaskEntry var3 = (EntityAITasks.EntityAITaskEntry)var2.next();
             EntityAIBase var4 = var3.action;
 
-            if (var4 == par1EntityAIBase)
+            if (var4 == p_85156_1_)
             {
                 if (this.executingTaskEntries.contains(var3))
                 {
@@ -134,10 +134,10 @@ public class EntityAITasks
     /**
      * Determine if a specific AI Task should continue being executed.
      */
-    private boolean canContinue(EntityAITasks.EntityAITaskEntry par1EntityAITaskEntry)
+    private boolean canContinue(EntityAITasks.EntityAITaskEntry p_75773_1_)
     {
         this.theProfiler.startSection("canContinue");
-        boolean var2 = par1EntityAITaskEntry.action.continueExecuting();
+        boolean var2 = p_75773_1_.action.continueExecuting();
         this.theProfiler.endSection();
         return var2;
     }
@@ -146,7 +146,7 @@ public class EntityAITasks
      * Determine if a specific AI Task can be executed, which means that all running higher (= lower int value) priority
      * tasks are compatible with it or all lower priority tasks can be interrupted.
      */
-    private boolean canUse(EntityAITasks.EntityAITaskEntry par1EntityAITaskEntry)
+    private boolean canUse(EntityAITasks.EntityAITaskEntry p_75775_1_)
     {
         this.theProfiler.startSection("canUse");
         Iterator var2 = this.taskEntries.iterator();
@@ -155,11 +155,11 @@ public class EntityAITasks
         {
             EntityAITasks.EntityAITaskEntry var3 = (EntityAITasks.EntityAITaskEntry)var2.next();
 
-            if (var3 != par1EntityAITaskEntry)
+            if (var3 != p_75775_1_)
             {
-                if (par1EntityAITaskEntry.priority >= var3.priority)
+                if (p_75775_1_.priority >= var3.priority)
                 {
-                    if (this.executingTaskEntries.contains(var3) && !this.areTasksCompatible(par1EntityAITaskEntry, var3))
+                    if (this.executingTaskEntries.contains(var3) && !this.areTasksCompatible(p_75775_1_, var3))
                     {
                         this.theProfiler.endSection();
                         return false;
@@ -180,9 +180,9 @@ public class EntityAITasks
     /**
      * Returns whether two EntityAITaskEntries can be executed concurrently
      */
-    private boolean areTasksCompatible(EntityAITasks.EntityAITaskEntry par1EntityAITaskEntry, EntityAITasks.EntityAITaskEntry par2EntityAITaskEntry)
+    private boolean areTasksCompatible(EntityAITasks.EntityAITaskEntry p_75777_1_, EntityAITasks.EntityAITaskEntry p_75777_2_)
     {
-        return (par1EntityAITaskEntry.action.getMutexBits() & par2EntityAITaskEntry.action.getMutexBits()) == 0;
+        return (p_75777_1_.action.getMutexBits() & p_75777_2_.action.getMutexBits()) == 0;
     }
 
     class EntityAITaskEntry
@@ -191,10 +191,10 @@ public class EntityAITasks
         public int priority;
         private static final String __OBFID = "CL_00001589";
 
-        public EntityAITaskEntry(int par2, EntityAIBase par3EntityAIBase)
+        public EntityAITaskEntry(int p_i1627_2_, EntityAIBase p_i1627_3_)
         {
-            this.priority = par2;
-            this.action = par3EntityAIBase;
+            this.priority = p_i1627_2_;
+            this.action = p_i1627_3_;
         }
     }
 }

@@ -30,7 +30,7 @@ public class GuiOptionSlider extends GuiButton
         this.displayString = var7.gameSettings.getKeyBinding(p_i45017_4_);
     }
 
-    protected int getHoverState(boolean p_146114_1_)
+    public int getHoverState(boolean p_146114_1_)
     {
         return 0;
     }

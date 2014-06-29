@@ -35,9 +35,9 @@ public class S00PacketDisconnect extends Packet
         p_148840_1_.writeStringToBuffer(IChatComponent.Serializer.func_150696_a(this.field_149605_a));
     }
 
-    public void processPacket(INetHandlerLoginClient p_149604_1_)
+    public void processPacket(INetHandlerLoginClient p_148833_1_)
     {
-        p_149604_1_.handleDisconnect(this);
+        p_148833_1_.handleDisconnect(this);
     }
 
     /**

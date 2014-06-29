@@ -6,6 +6,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
@@ -57,16 +59,16 @@ public class PathNavigate
     private boolean canSwim;
     private static final String __OBFID = "CL_00001627";
 
-    public PathNavigate(EntityLiving par1EntityLiving, World par2World)
+    public PathNavigate(EntityLiving p_i1671_1_, World p_i1671_2_)
     {
-        this.theEntity = par1EntityLiving;
-        this.worldObj = par2World;
-        this.pathSearchRange = par1EntityLiving.getEntityAttribute(SharedMonsterAttributes.followRange);
+        this.theEntity = p_i1671_1_;
+        this.worldObj = p_i1671_2_;
+        this.pathSearchRange = p_i1671_1_.getEntityAttribute(SharedMonsterAttributes.followRange);
     }
 
-    public void setAvoidsWater(boolean par1)
+    public void setAvoidsWater(boolean p_75491_1_)
     {
-        this.avoidsWater = par1;
+        this.avoidsWater = p_75491_1_;
     }
 
     public boolean getAvoidsWater()
@@ -74,17 +76,17 @@ public class PathNavigate
         return this.avoidsWater;
     }
 
-    public void setBreakDoors(boolean par1)
+    public void setBreakDoors(boolean p_75498_1_)
     {
-        this.canPassClosedWoodenDoors = par1;
+        this.canPassClosedWoodenDoors = p_75498_1_;
     }
 
     /**
      * Sets if the entity can enter open doors
      */
-    public void setEnterDoors(boolean par1)
+    public void setEnterDoors(boolean p_75490_1_)
     {
-        this.canPassOpenWoodenDoors = par1;
+        this.canPassOpenWoodenDoors = p_75490_1_;
     }
 
     /**
@@ -98,25 +100,25 @@ public class PathNavigate
     /**
      * Sets if the path should avoid sunlight
      */
-    public void setAvoidSun(boolean par1)
+    public void setAvoidSun(boolean p_75504_1_)
     {
-        this.noSunPathfind = par1;
+        this.noSunPathfind = p_75504_1_;
     }
 
     /**
      * Sets the speed
      */
-    public void setSpeed(double par1)
+    public void setSpeed(double p_75489_1_)
     {
-        this.speed = par1;
+        this.speed = p_75489_1_;
     }
 
     /**
      * Sets if the entity can swim
      */
-    public void setCanSwim(boolean par1)
+    public void setCanSwim(boolean p_75495_1_)
     {
-        this.canSwim = par1;
+        this.canSwim = p_75495_1_;
     }
 
     public float func_111269_d()
@@ -127,53 +129,53 @@ public class PathNavigate
     /**
      * Returns the path to the given coordinates
      */
-    public PathEntity getPathToXYZ(double par1, double par3, double par5)
+    public PathEntity getPathToXYZ(double p_75488_1_, double p_75488_3_, double p_75488_5_)
     {
-        return !this.canNavigate() ? null : this.worldObj.getEntityPathToXYZ(this.theEntity, MathHelper.floor_double(par1), (int)par3, MathHelper.floor_double(par5), this.func_111269_d(), this.canPassOpenWoodenDoors, this.canPassClosedWoodenDoors, this.avoidsWater, this.canSwim);
+        return !this.canNavigate() ? null : this.worldObj.getEntityPathToXYZ(this.theEntity, MathHelper.floor_double(p_75488_1_), (int)p_75488_3_, MathHelper.floor_double(p_75488_5_), this.func_111269_d(), this.canPassOpenWoodenDoors, this.canPassClosedWoodenDoors, this.avoidsWater, this.canSwim);
     }
 
     /**
      * Try to find and set a path to XYZ. Returns true if successful.
      */
-    public boolean tryMoveToXYZ(double par1, double par3, double par5, double par7)
+    public boolean tryMoveToXYZ(double p_75492_1_, double p_75492_3_, double p_75492_5_, double p_75492_7_)
     {
-        PathEntity var9 = this.getPathToXYZ((double)MathHelper.floor_double(par1), (double)((int)par3), (double)MathHelper.floor_double(par5));
-        return this.setPath(var9, par7);
+        PathEntity var9 = this.getPathToXYZ((double)MathHelper.floor_double(p_75492_1_), (double)((int)p_75492_3_), (double)MathHelper.floor_double(p_75492_5_));
+        return this.setPath(var9, p_75492_7_);
     }
 
     /**
      * Returns the path to the given EntityLiving
      */
-    public PathEntity getPathToEntityLiving(Entity par1Entity)
+    public PathEntity getPathToEntityLiving(Entity p_75494_1_)
     {
-        return !this.canNavigate() ? null : this.worldObj.getPathEntityToEntity(this.theEntity, par1Entity, this.func_111269_d(), this.canPassOpenWoodenDoors, this.canPassClosedWoodenDoors, this.avoidsWater, this.canSwim);
+        return !this.canNavigate() ? null : this.worldObj.getPathEntityToEntity(this.theEntity, p_75494_1_, this.func_111269_d(), this.canPassOpenWoodenDoors, this.canPassClosedWoodenDoors, this.avoidsWater, this.canSwim);
     }
 
     /**
      * Try to find and set a path to EntityLiving. Returns true if successful.
      */
-    public boolean tryMoveToEntityLiving(Entity par1Entity, double par2)
+    public boolean tryMoveToEntityLiving(Entity p_75497_1_, double p_75497_2_)
     {
-        PathEntity var4 = this.getPathToEntityLiving(par1Entity);
-        return var4 != null ? this.setPath(var4, par2) : false;
+        PathEntity var4 = this.getPathToEntityLiving(p_75497_1_);
+        return var4 != null ? this.setPath(var4, p_75497_2_) : false;
     }
 
     /**
      * sets the active path data if path is 100% unique compared to old path, checks to adjust path for sun avoiding
      * ents and stores end coords
      */
-    public boolean setPath(PathEntity par1PathEntity, double par2)
+    public boolean setPath(PathEntity p_75484_1_, double p_75484_2_)
     {
-        if (par1PathEntity == null)
+        if (p_75484_1_ == null)
         {
             this.currentPath = null;
             return false;
         }
         else
         {
-            if (!par1PathEntity.isSamePath(this.currentPath))
+            if (!p_75484_1_.isSamePath(this.currentPath))
             {
-                this.currentPath = par1PathEntity;
+                this.currentPath = p_75484_1_;
             }
 
             if (this.noSunPathfind)
@@ -187,7 +189,7 @@ public class PathNavigate
             }
             else
             {
-                this.speed = par2;
+                this.speed = p_75484_2_;
                 Vec3 var4 = this.getEntityPosition();
                 this.ticksAtLastPos = this.totalTicks;
                 this.lastPosCheck.xCoord = var4.xCoord;
@@ -299,7 +301,7 @@ public class PathNavigate
 
     private Vec3 getEntityPosition()
     {
-        return this.worldObj.getWorldVec3Pool().getVecFromPool(this.theEntity.posX, (double)this.getPathableYPos(), this.theEntity.posZ);
+        return Vec3.createVectorHelper(this.theEntity.posX, (double)this.getPathableYPos(), this.theEntity.posZ);
     }
 
     /**
@@ -339,7 +341,7 @@ public class PathNavigate
      */
     private boolean canNavigate()
     {
-        return this.theEntity.onGround || this.canSwim && this.isInFluid();
+        return this.theEntity.onGround || this.canSwim && this.isInFluid() || this.theEntity.isRiding() && this.theEntity instanceof EntityZombie && this.theEntity.ridingEntity instanceof EntityChicken;
     }
 
     /**
@@ -374,12 +376,12 @@ public class PathNavigate
      * Returns true when an entity of specified size could safely walk in a straight line between the two points. Args:
      * pos1, pos2, entityXSize, entityYSize, entityZSize
      */
-    private boolean isDirectPathBetweenPoints(Vec3 par1Vec3, Vec3 par2Vec3, int par3, int par4, int par5)
+    private boolean isDirectPathBetweenPoints(Vec3 p_75493_1_, Vec3 p_75493_2_, int p_75493_3_, int p_75493_4_, int p_75493_5_)
     {
-        int var6 = MathHelper.floor_double(par1Vec3.xCoord);
-        int var7 = MathHelper.floor_double(par1Vec3.zCoord);
-        double var8 = par2Vec3.xCoord - par1Vec3.xCoord;
-        double var10 = par2Vec3.zCoord - par1Vec3.zCoord;
+        int var6 = MathHelper.floor_double(p_75493_1_.xCoord);
+        int var7 = MathHelper.floor_double(p_75493_1_.zCoord);
+        double var8 = p_75493_2_.xCoord - p_75493_1_.xCoord;
+        double var10 = p_75493_2_.zCoord - p_75493_1_.zCoord;
         double var12 = var8 * var8 + var10 * var10;
 
         if (var12 < 1.0E-8D)
@@ -391,21 +393,21 @@ public class PathNavigate
             double var14 = 1.0D / Math.sqrt(var12);
             var8 *= var14;
             var10 *= var14;
-            par3 += 2;
-            par5 += 2;
+            p_75493_3_ += 2;
+            p_75493_5_ += 2;
 
-            if (!this.isSafeToStandAt(var6, (int)par1Vec3.yCoord, var7, par3, par4, par5, par1Vec3, var8, var10))
+            if (!this.isSafeToStandAt(var6, (int)p_75493_1_.yCoord, var7, p_75493_3_, p_75493_4_, p_75493_5_, p_75493_1_, var8, var10))
             {
                 return false;
             }
             else
             {
-                par3 -= 2;
-                par5 -= 2;
+                p_75493_3_ -= 2;
+                p_75493_5_ -= 2;
                 double var16 = 1.0D / Math.abs(var8);
                 double var18 = 1.0D / Math.abs(var10);
-                double var20 = (double)(var6 * 1) - par1Vec3.xCoord;
-                double var22 = (double)(var7 * 1) - par1Vec3.zCoord;
+                double var20 = (double)(var6 * 1) - p_75493_1_.xCoord;
+                double var22 = (double)(var7 * 1) - p_75493_1_.zCoord;
 
                 if (var8 >= 0.0D)
                 {
@@ -421,8 +423,8 @@ public class PathNavigate
                 var22 /= var10;
                 int var24 = var8 < 0.0D ? -1 : 1;
                 int var25 = var10 < 0.0D ? -1 : 1;
-                int var26 = MathHelper.floor_double(par2Vec3.xCoord);
-                int var27 = MathHelper.floor_double(par2Vec3.zCoord);
+                int var26 = MathHelper.floor_double(p_75493_2_.xCoord);
+                int var27 = MathHelper.floor_double(p_75493_2_.zCoord);
                 int var28 = var26 - var6;
                 int var29 = var27 - var7;
 
@@ -446,7 +448,7 @@ public class PathNavigate
                         var29 = var27 - var7;
                     }
                 }
-                while (this.isSafeToStandAt(var6, (int)par1Vec3.yCoord, var7, par3, par4, par5, par1Vec3, var8, var10));
+                while (this.isSafeToStandAt(var6, (int)p_75493_1_.yCoord, var7, p_75493_3_, p_75493_4_, p_75493_5_, p_75493_1_, var8, var10));
 
                 return false;
             }
@@ -457,27 +459,27 @@ public class PathNavigate
      * Returns true when an entity could stand at a position, including solid blocks under the entire entity. Args:
      * xOffset, yOffset, zOffset, entityXSize, entityYSize, entityZSize, originPosition, vecX, vecZ
      */
-    private boolean isSafeToStandAt(int par1, int par2, int par3, int par4, int par5, int par6, Vec3 par7Vec3, double par8, double par10)
+    private boolean isSafeToStandAt(int p_75483_1_, int p_75483_2_, int p_75483_3_, int p_75483_4_, int p_75483_5_, int p_75483_6_, Vec3 p_75483_7_, double p_75483_8_, double p_75483_10_)
     {
-        int var12 = par1 - par4 / 2;
-        int var13 = par3 - par6 / 2;
+        int var12 = p_75483_1_ - p_75483_4_ / 2;
+        int var13 = p_75483_3_ - p_75483_6_ / 2;
 
-        if (!this.isPositionClear(var12, par2, var13, par4, par5, par6, par7Vec3, par8, par10))
+        if (!this.isPositionClear(var12, p_75483_2_, var13, p_75483_4_, p_75483_5_, p_75483_6_, p_75483_7_, p_75483_8_, p_75483_10_))
         {
             return false;
         }
         else
         {
-            for (int var14 = var12; var14 < var12 + par4; ++var14)
+            for (int var14 = var12; var14 < var12 + p_75483_4_; ++var14)
             {
-                for (int var15 = var13; var15 < var13 + par6; ++var15)
+                for (int var15 = var13; var15 < var13 + p_75483_6_; ++var15)
                 {
-                    double var16 = (double)var14 + 0.5D - par7Vec3.xCoord;
-                    double var18 = (double)var15 + 0.5D - par7Vec3.zCoord;
+                    double var16 = (double)var14 + 0.5D - p_75483_7_.xCoord;
+                    double var18 = (double)var15 + 0.5D - p_75483_7_.zCoord;
 
-                    if (var16 * par8 + var18 * par10 >= 0.0D)
+                    if (var16 * p_75483_8_ + var18 * p_75483_10_ >= 0.0D)
                     {
-                        Block var20 = this.worldObj.getBlock(var14, par2 - 1, var15);
+                        Block var20 = this.worldObj.getBlock(var14, p_75483_2_ - 1, var15);
                         Material var21 = var20.getMaterial();
 
                         if (var21 == Material.air)
@@ -506,18 +508,18 @@ public class PathNavigate
      * Returns true if an entity does not collide with any solid blocks at the position. Args: xOffset, yOffset,
      * zOffset, entityXSize, entityYSize, entityZSize, originPosition, vecX, vecZ
      */
-    private boolean isPositionClear(int par1, int par2, int par3, int par4, int par5, int par6, Vec3 par7Vec3, double par8, double par10)
+    private boolean isPositionClear(int p_75496_1_, int p_75496_2_, int p_75496_3_, int p_75496_4_, int p_75496_5_, int p_75496_6_, Vec3 p_75496_7_, double p_75496_8_, double p_75496_10_)
     {
-        for (int var12 = par1; var12 < par1 + par4; ++var12)
+        for (int var12 = p_75496_1_; var12 < p_75496_1_ + p_75496_4_; ++var12)
         {
-            for (int var13 = par2; var13 < par2 + par5; ++var13)
+            for (int var13 = p_75496_2_; var13 < p_75496_2_ + p_75496_5_; ++var13)
             {
-                for (int var14 = par3; var14 < par3 + par6; ++var14)
+                for (int var14 = p_75496_3_; var14 < p_75496_3_ + p_75496_6_; ++var14)
                 {
-                    double var15 = (double)var12 + 0.5D - par7Vec3.xCoord;
-                    double var17 = (double)var14 + 0.5D - par7Vec3.zCoord;
+                    double var15 = (double)var12 + 0.5D - p_75496_7_.xCoord;
+                    double var17 = (double)var14 + 0.5D - p_75496_7_.zCoord;
 
-                    if (var15 * par8 + var17 * par10 >= 0.0D)
+                    if (var15 * p_75496_8_ + var17 * p_75496_10_ >= 0.0D)
                     {
                         Block var19 = this.worldObj.getBlock(var12, var13, var14);
 

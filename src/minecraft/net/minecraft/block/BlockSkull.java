@@ -13,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemSkull;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntitySkull;
@@ -159,10 +160,12 @@ public class BlockSkull extends BlockContainer
                 ItemStack var7 = new ItemStack(Items.skull, 1, this.getDamageValue(p_149749_1_, p_149749_2_, p_149749_3_, p_149749_4_));
                 TileEntitySkull var8 = (TileEntitySkull)p_149749_1_.getTileEntity(p_149749_2_, p_149749_3_, p_149749_4_);
 
-                if (var8.func_145904_a() == 3 && var8.func_145907_c() != null && var8.func_145907_c().length() > 0)
+                if (var8.func_145904_a() == 3 && var8.func_152108_a() != null)
                 {
                     var7.setTagCompound(new NBTTagCompound());
-                    var7.getTagCompound().setString("SkullOwner", var8.func_145907_c());
+                    NBTTagCompound var9 = new NBTTagCompound();
+                    NBTUtil.func_152460_a(var9, var8.func_152108_a());
+                    var7.getTagCompound().setTag("SkullOwner", var9);
                 }
 
                 this.dropBlockAsItem_do(p_149749_1_, p_149749_2_, p_149749_3_, p_149749_4_, var7);

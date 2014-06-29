@@ -10,29 +10,29 @@ public class EntityEgg extends EntityThrowable
 {
     private static final String __OBFID = "CL_00001724";
 
-    public EntityEgg(World par1World)
+    public EntityEgg(World p_i1779_1_)
     {
-        super(par1World);
+        super(p_i1779_1_);
     }
 
-    public EntityEgg(World par1World, EntityLivingBase par2EntityLivingBase)
+    public EntityEgg(World p_i1780_1_, EntityLivingBase p_i1780_2_)
     {
-        super(par1World, par2EntityLivingBase);
+        super(p_i1780_1_, p_i1780_2_);
     }
 
-    public EntityEgg(World par1World, double par2, double par4, double par6)
+    public EntityEgg(World p_i1781_1_, double p_i1781_2_, double p_i1781_4_, double p_i1781_6_)
     {
-        super(par1World, par2, par4, par6);
+        super(p_i1781_1_, p_i1781_2_, p_i1781_4_, p_i1781_6_);
     }
 
     /**
      * Called when this EntityThrowable hits a block or entity.
      */
-    protected void onImpact(MovingObjectPosition par1MovingObjectPosition)
+    protected void onImpact(MovingObjectPosition p_70184_1_)
     {
-        if (par1MovingObjectPosition.entityHit != null)
+        if (p_70184_1_.entityHit != null)
         {
-            par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 0.0F);
+            p_70184_1_.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 0.0F);
         }
 
         if (!this.worldObj.isClient && this.rand.nextInt(8) == 0)

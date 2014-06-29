@@ -61,14 +61,14 @@ public abstract class Packet
     /**
      * Reads the raw packet data from the data stream.
      */
-    public abstract void readPacketData(PacketBuffer var1) throws IOException;
+    public abstract void readPacketData(PacketBuffer p_148837_1_) throws IOException;
 
     /**
      * Writes the raw packet data to the data stream.
      */
-    public abstract void writePacketData(PacketBuffer var1) throws IOException;
+    public abstract void writePacketData(PacketBuffer p_148840_1_) throws IOException;
 
-    public abstract void processPacket(INetHandler var1);
+    public abstract void processPacket(INetHandler p_148833_1_);
 
     /**
      * If true, the network manager will process the packet immediately when received, otherwise it will queue it for

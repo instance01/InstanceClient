@@ -3,6 +3,7 @@ package net.minecraft.enchantment;
 import java.util.ArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
@@ -103,19 +104,19 @@ public abstract class Enchantment
     protected String name;
     private static final String __OBFID = "CL_00000105";
 
-    protected Enchantment(int par1, int par2, EnumEnchantmentType par3EnumEnchantmentType)
+    protected Enchantment(int p_i1926_1_, int p_i1926_2_, EnumEnchantmentType p_i1926_3_)
     {
-        this.effectId = par1;
-        this.weight = par2;
-        this.type = par3EnumEnchantmentType;
+        this.effectId = p_i1926_1_;
+        this.weight = p_i1926_2_;
+        this.type = p_i1926_3_;
 
-        if (enchantmentsList[par1] != null)
+        if (enchantmentsList[p_i1926_1_] != null)
         {
             throw new IllegalArgumentException("Duplicate enchantment id!");
         }
         else
         {
-            enchantmentsList[par1] = this;
+            enchantmentsList[p_i1926_1_] = this;
         }
     }
 
@@ -143,31 +144,28 @@ public abstract class Enchantment
     /**
      * Returns the minimal value of enchantability needed on the enchantment level passed.
      */
-    public int getMinEnchantability(int par1)
+    public int getMinEnchantability(int p_77321_1_)
     {
-        return 1 + par1 * 10;
+        return 1 + p_77321_1_ * 10;
     }
 
     /**
      * Returns the maximum value of enchantability nedded on the enchantment level passed.
      */
-    public int getMaxEnchantability(int par1)
+    public int getMaxEnchantability(int p_77317_1_)
     {
-        return this.getMinEnchantability(par1) + 5;
+        return this.getMinEnchantability(p_77317_1_) + 5;
     }
 
     /**
      * Calculates de damage protection of the enchantment based on level and damage source passed.
      */
-    public int calcModifierDamage(int par1, DamageSource par2DamageSource)
+    public int calcModifierDamage(int p_77318_1_, DamageSource p_77318_2_)
     {
         return 0;
     }
 
-    /**
-     * Calculates de (magic) damage done by the enchantment on a living entity based on level and entity passed.
-     */
-    public float calcModifierLiving(int par1, EntityLivingBase par2EntityLivingBase)
+    public float func_152376_a(int p_152376_1_, EnumCreatureAttribute p_152376_2_)
     {
         return 0.0F;
     }
@@ -175,17 +173,17 @@ public abstract class Enchantment
     /**
      * Determines if the enchantment passed can be applyied together with this enchantment.
      */
-    public boolean canApplyTogether(Enchantment par1Enchantment)
+    public boolean canApplyTogether(Enchantment p_77326_1_)
     {
-        return this != par1Enchantment;
+        return this != p_77326_1_;
     }
 
     /**
      * Sets the enchantment name
      */
-    public Enchantment setName(String par1Str)
+    public Enchantment setName(String p_77322_1_)
     {
-        this.name = par1Str;
+        this.name = p_77322_1_;
         return this;
     }
 
@@ -200,15 +198,15 @@ public abstract class Enchantment
     /**
      * Returns the correct traslated name of the enchantment and the level in roman numbers.
      */
-    public String getTranslatedName(int par1)
+    public String getTranslatedName(int p_77316_1_)
     {
         String var2 = StatCollector.translateToLocal(this.getName());
-        return var2 + " " + StatCollector.translateToLocal("enchantment.level." + par1);
+        return var2 + " " + StatCollector.translateToLocal("enchantment.level." + p_77316_1_);
     }
 
-    public boolean canApply(ItemStack par1ItemStack)
+    public boolean canApply(ItemStack p_92089_1_)
     {
-        return this.type.canEnchantItem(par1ItemStack.getItem());
+        return this.type.canEnchantItem(p_92089_1_.getItem());
     }
 
     public void func_151368_a(EntityLivingBase p_151368_1_, Entity p_151368_2_, int p_151368_3_) {}

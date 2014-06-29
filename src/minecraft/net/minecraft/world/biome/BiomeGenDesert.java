@@ -9,9 +9,9 @@ public class BiomeGenDesert extends BiomeGenBase
 {
     private static final String __OBFID = "CL_00000167";
 
-    public BiomeGenDesert(int par1)
+    public BiomeGenDesert(int p_i1977_1_)
     {
-        super(par1);
+        super(p_i1977_1_);
         this.spawnableCreatureList.clear();
         this.topBlock = Blocks.sand;
         this.fillerBlock = Blocks.sand;
@@ -22,16 +22,16 @@ public class BiomeGenDesert extends BiomeGenBase
         this.spawnableCreatureList.clear();
     }
 
-    public void decorate(World par1World, Random par2Random, int par3, int par4)
+    public void decorate(World p_76728_1_, Random p_76728_2_, int p_76728_3_, int p_76728_4_)
     {
-        super.decorate(par1World, par2Random, par3, par4);
+        super.decorate(p_76728_1_, p_76728_2_, p_76728_3_, p_76728_4_);
 
-        if (par2Random.nextInt(1000) == 0)
+        if (p_76728_2_.nextInt(1000) == 0)
         {
-            int var5 = par3 + par2Random.nextInt(16) + 8;
-            int var6 = par4 + par2Random.nextInt(16) + 8;
+            int var5 = p_76728_3_ + p_76728_2_.nextInt(16) + 8;
+            int var6 = p_76728_4_ + p_76728_2_.nextInt(16) + 8;
             WorldGenDesertWells var7 = new WorldGenDesertWells();
-            var7.generate(par1World, par2Random, var5, par1World.getHeightValue(var5, var6) + 1, var6);
+            var7.generate(p_76728_1_, p_76728_2_, var5, p_76728_1_.getHeightValue(var5, var6) + 1, var6);
         }
     }
 }

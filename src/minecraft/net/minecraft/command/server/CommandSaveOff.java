@@ -15,12 +15,12 @@ public class CommandSaveOff extends CommandBase
         return "save-off";
     }
 
-    public String getCommandUsage(ICommandSender par1ICommandSender)
+    public String getCommandUsage(ICommandSender p_71518_1_)
     {
         return "commands.save-off.usage";
     }
 
-    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
+    public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_)
     {
         MinecraftServer var3 = MinecraftServer.getServer();
         boolean var4 = false;
@@ -41,7 +41,7 @@ public class CommandSaveOff extends CommandBase
 
         if (var4)
         {
-            notifyAdmins(par1ICommandSender, "commands.save.disabled", new Object[0]);
+            func_152373_a(p_71515_1_, this, "commands.save.disabled", new Object[0]);
         }
         else
         {

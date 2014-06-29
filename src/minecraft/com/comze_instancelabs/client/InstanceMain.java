@@ -29,6 +29,8 @@ public class InstanceMain
     public static boolean xray = false;
     public static boolean freecam = false;
     public static boolean autofish = false;
+    public static boolean mobesp = false;
+    public static boolean coloredmobs = false;
 
     public static List<Module> modList = new ArrayList<Module>();
 

@@ -8,15 +8,15 @@ public abstract class EntityGolem extends EntityCreature implements IAnimals
 {
     private static final String __OBFID = "CL_00001644";
 
-    public EntityGolem(World par1World)
+    public EntityGolem(World p_i1686_1_)
     {
-        super(par1World);
+        super(p_i1686_1_);
     }
 
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
-    protected void fall(float par1) {}
+    protected void fall(float p_70069_1_) {}
 
     /**
      * Returns the sound this mob makes while it's alive.

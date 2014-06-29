@@ -18,9 +18,9 @@ public class EntitySpider extends EntityMob
 {
     private static final String __OBFID = "CL_00001699";
 
-    public EntitySpider(World par1World)
+    public EntitySpider(World p_i1743_1_)
     {
-        super(par1World);
+        super(p_i1743_1_);
         this.setSize(1.4F, 0.9F);
     }
 
@@ -101,7 +101,7 @@ public class EntitySpider extends EntityMob
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */
-    protected void attackEntity(Entity par1Entity, float par2)
+    protected void attackEntity(Entity p_70785_1_, float p_70785_2_)
     {
         float var3 = this.getBrightness(1.0F);
 
@@ -111,12 +111,12 @@ public class EntitySpider extends EntityMob
         }
         else
         {
-            if (par2 > 2.0F && par2 < 6.0F && this.rand.nextInt(10) == 0)
+            if (p_70785_2_ > 2.0F && p_70785_2_ < 6.0F && this.rand.nextInt(10) == 0)
             {
                 if (this.onGround)
                 {
-                    double var4 = par1Entity.posX - this.posX;
-                    double var6 = par1Entity.posZ - this.posZ;
+                    double var4 = p_70785_1_.posX - this.posX;
+                    double var6 = p_70785_1_.posZ - this.posZ;
                     float var8 = MathHelper.sqrt_double(var4 * var4 + var6 * var6);
                     this.motionX = var4 / (double)var8 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
                     this.motionZ = var6 / (double)var8 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
@@ -125,7 +125,7 @@ public class EntitySpider extends EntityMob
             }
             else
             {
-                super.attackEntity(par1Entity, par2);
+                super.attackEntity(p_70785_1_, p_70785_2_);
             }
         }
     }
@@ -138,11 +138,11 @@ public class EntitySpider extends EntityMob
     /**
      * Drop 0-2 items of this living's type
      */
-    protected void dropFewItems(boolean par1, int par2)
+    protected void dropFewItems(boolean p_70628_1_, int p_70628_2_)
     {
-        super.dropFewItems(par1, par2);
+        super.dropFewItems(p_70628_1_, p_70628_2_);
 
-        if (par1 && (this.rand.nextInt(3) == 0 || this.rand.nextInt(1 + par2) > 0))
+        if (p_70628_1_ && (this.rand.nextInt(3) == 0 || this.rand.nextInt(1 + p_70628_2_) > 0))
         {
             this.func_145779_a(Items.spider_eye, 1);
         }
@@ -169,9 +169,9 @@ public class EntitySpider extends EntityMob
         return EnumCreatureAttribute.ARTHROPOD;
     }
 
-    public boolean isPotionApplicable(PotionEffect par1PotionEffect)
+    public boolean isPotionApplicable(PotionEffect p_70687_1_)
     {
-        return par1PotionEffect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(par1PotionEffect);
+        return p_70687_1_.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(p_70687_1_);
     }
 
     /**
@@ -187,11 +187,11 @@ public class EntitySpider extends EntityMob
      * Updates the WatchableObject (Byte) created in entityInit(), setting it to 0x01 if par1 is true or 0x00 if it is
      * false.
      */
-    public void setBesideClimbableBlock(boolean par1)
+    public void setBesideClimbableBlock(boolean p_70839_1_)
     {
         byte var2 = this.dataWatcher.getWatchableObjectByte(16);
 
-        if (par1)
+        if (p_70839_1_)
         {
             var2 = (byte)(var2 | 1);
         }
@@ -203,9 +203,9 @@ public class EntitySpider extends EntityMob
         this.dataWatcher.updateObject(16, Byte.valueOf(var2));
     }
 
-    public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+    public IEntityLivingData onSpawnWithEgg(IEntityLivingData p_110161_1_)
     {
-        Object par1EntityLivingData1 = super.onSpawnWithEgg(par1EntityLivingData);
+        Object p_110161_1_1 = super.onSpawnWithEgg(p_110161_1_);
 
         if (this.worldObj.rand.nextInt(100) == 0)
         {
@@ -216,19 +216,19 @@ public class EntitySpider extends EntityMob
             var2.mountEntity(this);
         }
 
-        if (par1EntityLivingData1 == null)
+        if (p_110161_1_1 == null)
         {
-            par1EntityLivingData1 = new EntitySpider.GroupData();
+            p_110161_1_1 = new EntitySpider.GroupData();
 
             if (this.worldObj.difficultySetting == EnumDifficulty.HARD && this.worldObj.rand.nextFloat() < 0.1F * this.worldObj.func_147462_b(this.posX, this.posY, this.posZ))
             {
-                ((EntitySpider.GroupData)par1EntityLivingData1).func_111104_a(this.worldObj.rand);
+                ((EntitySpider.GroupData)p_110161_1_1).func_111104_a(this.worldObj.rand);
             }
         }
 
-        if (par1EntityLivingData1 instanceof EntitySpider.GroupData)
+        if (p_110161_1_1 instanceof EntitySpider.GroupData)
         {
-            int var4 = ((EntitySpider.GroupData)par1EntityLivingData1).field_111105_a;
+            int var4 = ((EntitySpider.GroupData)p_110161_1_1).field_111105_a;
 
             if (var4 > 0 && Potion.potionTypes[var4] != null)
             {
@@ -236,7 +236,7 @@ public class EntitySpider extends EntityMob
             }
         }
 
-        return (IEntityLivingData)par1EntityLivingData1;
+        return (IEntityLivingData)p_110161_1_1;
     }
 
     public static class GroupData implements IEntityLivingData
@@ -244,9 +244,9 @@ public class EntitySpider extends EntityMob
         public int field_111105_a;
         private static final String __OBFID = "CL_00001700";
 
-        public void func_111104_a(Random par1Random)
+        public void func_111104_a(Random p_111104_1_)
         {
-            int var2 = par1Random.nextInt(5);
+            int var2 = p_111104_1_.nextInt(5);
 
             if (var2 <= 1)
             {

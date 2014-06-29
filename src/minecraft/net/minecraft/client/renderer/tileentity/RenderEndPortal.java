@@ -19,7 +19,7 @@ public class RenderEndPortal extends TileEntitySpecialRenderer
     FloatBuffer field_147528_b = GLAllocation.createDirectFloatBuffer(16);
     private static final String __OBFID = "CL_00000972";
 
-    public void renderTileEntityAt(TileEntityEndPortal p_147524_1_, double p_147524_2_, double p_147524_4_, double p_147524_6_, float p_147524_8_)
+    public void renderTileEntityAt(TileEntityEndPortal p_147500_1_, double p_147500_2_, double p_147500_4_, double p_147500_6_, float p_147500_8_)
     {
         float var9 = (float)this.field_147501_a.field_147560_j;
         float var10 = (float)this.field_147501_a.field_147561_k;
@@ -53,11 +53,11 @@ public class RenderEndPortal extends TileEntitySpecialRenderer
                 var15 = 0.5F;
             }
 
-            float var17 = (float)(-(p_147524_4_ + (double)var12));
+            float var17 = (float)(-(p_147500_4_ + (double)var12));
             float var18 = var17 + ActiveRenderInfo.objectY;
             float var19 = var17 + var14 + ActiveRenderInfo.objectY;
             float var20 = var18 / var19;
-            var20 += (float)(p_147524_4_ + (double)var12);
+            var20 += (float)(p_147500_4_ + (double)var12);
             GL11.glTranslatef(var9, var20, var11);
             GL11.glTexGeni(GL11.GL_S, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR);
             GL11.glTexGeni(GL11.GL_T, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR);
@@ -97,10 +97,10 @@ public class RenderEndPortal extends TileEntitySpecialRenderer
             }
 
             var23.setColorRGBA_F(var20 * var16, var21 * var16, var22 * var16, 1.0F);
-            var23.addVertex(p_147524_2_, p_147524_4_ + (double)var12, p_147524_6_);
-            var23.addVertex(p_147524_2_, p_147524_4_ + (double)var12, p_147524_6_ + 1.0D);
-            var23.addVertex(p_147524_2_ + 1.0D, p_147524_4_ + (double)var12, p_147524_6_ + 1.0D);
-            var23.addVertex(p_147524_2_ + 1.0D, p_147524_4_ + (double)var12, p_147524_6_);
+            var23.addVertex(p_147500_2_, p_147500_4_ + (double)var12, p_147500_6_);
+            var23.addVertex(p_147500_2_, p_147500_4_ + (double)var12, p_147500_6_ + 1.0D);
+            var23.addVertex(p_147500_2_ + 1.0D, p_147500_4_ + (double)var12, p_147500_6_ + 1.0D);
+            var23.addVertex(p_147500_2_ + 1.0D, p_147500_4_ + (double)var12, p_147500_6_);
             var23.draw();
             GL11.glPopMatrix();
             GL11.glMatrixMode(GL11.GL_MODELVIEW);
