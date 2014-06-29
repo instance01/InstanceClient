@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import net.minecraft.block.Block;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.model.ModelChicken;
 import net.minecraft.client.model.ModelCow;
@@ -381,8 +382,10 @@ public class RenderManager
         }
         else if (par1Entity instanceof EntityPlayer)
         {
-         var11 = AxisAlignedBB.getBoundingBox(par2 - (double)var10, par4 - (double)par1Entity.height, par6 - (double)var10, par2 + (double)var10, par4, par6 + (double)var10);
-         InstanceMain.getRender().drawESP(var11, 105, 0, 154); // yellowish
+        	if(!(par1Entity instanceof EntityPlayerSP)){
+        		//var11 = AxisAlignedBB.getBoundingBox(par2 - (double)var10, par4 - (double)par1Entity.height, par6 - (double)var10, par2 + (double)var10, par4, par6 + (double)var10);
+        		InstanceMain.getRender().drawESP(var11, 105, 0, 154); // yellowish
+        	}
         }
         else
         {
