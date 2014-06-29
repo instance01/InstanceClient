@@ -29,6 +29,8 @@ Download [here](https://github.com/instance01/InstanceClient/releases).
 - ColoredMobs
 - AutoFish
 - Timer <sub>(20 is default; 0 breaks the game)</sub>
+- FOV <sub>(kinda secret and dumb feature)</sub>
+- Nuker/AutoMiner for Prisonserver-mines (WIP)
 
 
 #### Planned stuff:
