@@ -1,14 +1,7 @@
 package com.comze_instancelabs.client.modules;
 
-import java.io.File;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
-
-import com.comze_instancelabs.client.InstanceMain;
 import com.comze_instancelabs.client.Module;
-import com.comze_instancelabs.client.util.JavaYoutubeDownloader;
+import com.comze_instancelabs.client.util.IYoutubeDownloader;
 
 public class YoutubeTestModule extends Module
 {
@@ -28,7 +21,7 @@ public class YoutubeTestModule extends Module
     		System.out.println(args[1]);
     		String id = args[1];
     		
-    		JavaYoutubeDownloader j = new JavaYoutubeDownloader();
+    		/*JavaYoutubeDownloader j = new JavaYoutubeDownloader();
     		j.init();
     		
     		String outdir = ".";
@@ -41,8 +34,10 @@ public class YoutubeTestModule extends Module
 				j.play(id, format, encoding, userAgent, new File(outdir), extension);
 			} catch (Throwable e) {
 				e.printStackTrace();
-			}
-
+			}*/
+    		
+    		IYoutubeDownloader yd = new IYoutubeDownloader(id);
+    		
     	}
     }
     

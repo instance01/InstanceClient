@@ -50,7 +50,7 @@ import org.apache.http.protocol.HttpContext;
 /**
  * Locally download a YouTube.com video.
  */
-public class JavaYoutubeDownloader extends Formatter {
+public class JavaYoutubeDownloaderOLD extends Formatter {
 
 	private static final String scheme = "http";
 	private static final String host = "www.youtube.com";
@@ -59,7 +59,7 @@ public class JavaYoutubeDownloader extends Formatter {
 	private static final String DEFAULT_USER_AGENT = "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13";
 	private static final String DEFAULT_ENCODING = "UTF-8";
 	private static final String newline = System.getProperty("line.separator");
-	private static final Logger log = Logger.getLogger(JavaYoutubeDownloader.class.getCanonicalName());
+	private static final Logger log = Logger.getLogger(JavaYoutubeDownloaderOLD.class.getCanonicalName());
 	private static final Logger rootlog = Logger.getLogger("");
 	private static final Pattern commaPattern = Pattern.compile(",");
 	private static final Pattern semicolonPattern = Pattern.compile(";");
@@ -88,7 +88,7 @@ public class JavaYoutubeDownloader extends Formatter {
 
 	public static void main(String[] args) {
 		try {
-			new JavaYoutubeDownloader().run(args);
+			new JavaYoutubeDownloaderOLD().run(args);
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
