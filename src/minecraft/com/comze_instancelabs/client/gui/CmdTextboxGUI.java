@@ -1,5 +1,6 @@
 package com.comze_instancelabs.client.gui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -48,18 +49,11 @@ public class CmdTextboxGUI extends GuiScreen
     public void initGui()
     {
         Keyboard.enableRepeatEvents(true);
-        this.field_146416_h = this.mc.ingameGUI.getChatGUI().func_146238_c().size();
-        this.textbox = new GuiTextField(this.fontRendererObj, 4, 4, this.width - 4, 12);
-        this.textbox.func_146203_f(100);
-        this.textbox.func_146185_a(false);
+        this.textbox = new GuiTextField(100, this.fontRendererObj, 4, 4, this.width - 4, 12);
         this.textbox.setFocused(true);
         this.textbox.setText(this.field_146409_v);
-        this.textbox.func_146205_d(false);
-        this.textbox2 = new GuiTextField(this.fontRendererObj, 4, 22, this.width - 4, 30);
-        this.textbox2.func_146203_f(100);
-        this.textbox2.func_146185_a(false);
+        this.textbox2 = new GuiTextField(101, this.fontRendererObj, 4, 22, this.width - 4, 30);
         this.textbox2.setText(this.field_146409_v);
-        this.textbox2.func_146205_d(false);
     }
 
     /**
@@ -125,19 +119,19 @@ public class CmdTextboxGUI extends GuiScreen
         {
             if (par2 == 200)   // UP KEY
             {
-                this.getHistory(-1);
+                //this.getHistory(-1);
             }
             else if (par2 == 208)     // DOWN KEY
             {
-                this.getHistory(1);
+                //this.getHistory(1);
             }
             else if (par2 == 201)
             {
-                this.mc.ingameGUI.getChatGUI().func_146229_b(this.mc.ingameGUI.getChatGUI().func_146232_i() - 1);
+                //this.mc.ingameGUI.getChatGUI().func_146229_b(this.mc.ingameGUI.getChatGUI().func_146232_i() - 1);
             }
             else if (par2 == 209)
             {
-                this.mc.ingameGUI.getChatGUI().func_146229_b(-this.mc.ingameGUI.getChatGUI().func_146232_i() + 1);
+                //this.mc.ingameGUI.getChatGUI().func_146229_b(-this.mc.ingameGUI.getChatGUI().func_146232_i() + 1);
             }
             else
             {
@@ -188,7 +182,11 @@ public class CmdTextboxGUI extends GuiScreen
      */
     public void handleMouseInput()
     {
-        super.handleMouseInput();
+        try {
+			super.handleMouseInput();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         int var1 = Mouse.getEventDWheel();
 
         if (var1 != 0)
@@ -208,7 +206,7 @@ public class CmdTextboxGUI extends GuiScreen
                 var1 *= 7;
             }
 
-            this.mc.ingameGUI.getChatGUI().func_146229_b(var1);
+            //this.mc.ingameGUI.getChatGUI().func_146229_b(var1);
         }
     }
 
@@ -220,44 +218,6 @@ public class CmdTextboxGUI extends GuiScreen
         this.textbox.setText(t);
         this.textbox2.setText(t);
         currentcmd = t;
-        /*if (this.field_146417_i) {
-        	this.textbox.func_146175_b(this.textbox.func_146197_a(-1, this.textbox.func_146198_h(), false) - this.textbox.func_146198_h());
-
-        	if (this.field_146413_s >= this.field_146412_t.size()) {
-        		this.field_146413_s = 0;
-        	}
-        } else {
-        	int var1 = this.textbox.func_146197_a(-1, this.textbox.func_146198_h(), false);
-        	this.field_146412_t.clear();
-        	this.field_146413_s = 0;
-        	String var2 = this.textbox.getText().substring(var1).toLowerCase();
-        	var3 = this.textbox.getText().substring(0, this.textbox.func_146198_h());
-        	this.func_146405_a(var3, var2);
-
-        	if (this.field_146412_t.isEmpty()) {
-        		return;
-        	}
-
-        	this.field_146417_i = true;
-        	this.textbox.func_146175_b(var1 - this.textbox.func_146198_h());
-        }
-
-        if (this.field_146412_t.size() > 1) {
-        	StringBuilder var4 = new StringBuilder();
-
-        	for (Iterator var5 = this.field_146412_t.iterator(); var5.hasNext(); var4.append(var3)) {
-        		var3 = (String) var5.next();
-
-        		if (var4.length() > 0) {
-        			var4.append(", ");
-        		}
-        	}
-
-        	this.mc.ingameGUI.getChatGUI().func_146234_a(new ChatComponentText(var4.toString()), 1);
-        }
-
-        this.textbox.func_146191_b((String) this.field_146412_t.get(this.field_146413_s++));
-        */
     }
 
     private void func_146405_a(String p_146405_1_, String p_146405_2_)
@@ -266,41 +226,6 @@ public class CmdTextboxGUI extends GuiScreen
         {
             this.mc.thePlayer.sendQueue.addToSendQueue(new C14PacketTabComplete(p_146405_1_));
             this.field_146414_r = true;
-        }
-    }
-
-    public void getHistory(int p_146402_1_)
-    {
-        int var2 = this.field_146416_h + p_146402_1_;
-        int var3 = this.mc.ingameGUI.getChatGUI().func_146238_c().size();
-
-        if (var2 < 0)
-        {
-            var2 = 0;
-        }
-
-        if (var2 > var3)
-        {
-            var2 = var3;
-        }
-
-        if (var2 != this.field_146416_h)
-        {
-            if (var2 == var3)
-            {
-                this.field_146416_h = var3;
-                this.textbox.setText(this.field_146410_g);
-            }
-            else
-            {
-                if (this.field_146416_h == var3)
-                {
-                    this.field_146410_g = this.textbox.getText();
-                }
-
-                this.textbox.setText((String) this.mc.ingameGUI.getChatGUI().func_146238_c().get(var2));
-                this.field_146416_h = var2;
-            }
         }
     }
 
@@ -314,12 +239,11 @@ public class CmdTextboxGUI extends GuiScreen
         if (currentcmd.length() > 0)
         {
             drawRect(2, 20, this.width - 2, 32, 0x55111111);
-            //this.mc.fontRenderer.drawStringWithShadow(currentcmd, 4, 34, 0x00C940);
         }
 
         this.textbox.drawTextBox();
         this.textbox2.drawTextBox();
-        IChatComponent var4 = this.mc.ingameGUI.getChatGUI().func_146236_a(Mouse.getX(), Mouse.getY());
+        //IChatComponent var4 = this.mc.ingameGUI.getChatGUI().func_146236_a(Mouse.getX(), Mouse.getY());
         super.drawScreen(par1, par2, par3);
     }
 

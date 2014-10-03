@@ -8,24 +8,20 @@ import com.comze_instancelabs.client.InstanceMain;
 import com.comze_instancelabs.client.Module;
 import com.comze_instancelabs.client.InstanceRender;
 
-public class ColoredMobsModule extends Module
-{
-    public ColoredMobsModule()
-    {
-        super("coloredmobs", "Renders Yellow Mobs (failed ESP).");
-    }
-    
-    @Override
-    public void enable()
-    {
-        super.enable();
-        InstanceMain.coloredmobs = true;
-    }
+public class ColoredMobsModule extends Module {
+	public ColoredMobsModule() {
+		super("coloredmobs", "Renders Yellow Mobs (failed ESP).");
+	}
 
-    @Override
-    public void disable()
-    {
-    	InstanceMain.coloredmobs = false;
-        super.disable();
-    }
+	@Override
+	public void enable() {
+		super.enable();
+		InstanceMain.getInstance().coloredmobs = true;
+	}
+
+	@Override
+	public void disable() {
+		super.disable();
+		InstanceMain.getInstance().coloredmobs = false;
+	}
 }

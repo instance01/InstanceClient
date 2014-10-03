@@ -63,13 +63,13 @@ public class AutoFishModule extends Module
     public void enable()
     {
         super.enable();
-        InstanceMain.autofish = true;
+        InstanceMain.getInstance().autofish = true;
     }
 
     @Override
     public void disable()
     {
-    	InstanceMain.autofish = false;
+    	InstanceMain.getInstance().autofish = false;
         super.disable();
     }
     

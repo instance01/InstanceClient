@@ -9,10 +9,10 @@ public class UserListOpsEntry extends UserListEntry
     private final int field_152645_a;
     private static final String __OBFID = "CL_00001878";
 
-    public UserListOpsEntry(GameProfile p_i1149_1_, int p_i1149_2_)
+    public UserListOpsEntry(GameProfile p_i46328_1_, int p_i46328_2_)
     {
-        super(p_i1149_1_);
-        this.field_152645_a = p_i1149_2_;
+        super(p_i46328_1_);
+        this.field_152645_a = p_i46328_2_;
     }
 
     public UserListOpsEntry(JsonObject p_i1150_1_)
@@ -26,14 +26,14 @@ public class UserListOpsEntry extends UserListEntry
         return this.field_152645_a;
     }
 
-    protected void func_152641_a(JsonObject p_152641_1_)
+    protected void onSerialization(JsonObject data)
     {
-        if (this.func_152640_f() != null)
+        if (this.getValue() != null)
         {
-            p_152641_1_.addProperty("uuid", ((GameProfile)this.func_152640_f()).getId() == null ? "" : ((GameProfile)this.func_152640_f()).getId().toString());
-            p_152641_1_.addProperty("name", ((GameProfile)this.func_152640_f()).getName());
-            super.func_152641_a(p_152641_1_);
-            p_152641_1_.addProperty("level", Integer.valueOf(this.field_152645_a));
+            data.addProperty("uuid", ((GameProfile)this.getValue()).getId() == null ? "" : ((GameProfile)this.getValue()).getId().toString());
+            data.addProperty("name", ((GameProfile)this.getValue()).getName());
+            super.onSerialization(data);
+            data.addProperty("level", Integer.valueOf(this.field_152645_a));
         }
     }
 

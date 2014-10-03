@@ -2,7 +2,7 @@ package com.comze_instancelabs.client.modules;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
+//import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
@@ -37,7 +37,7 @@ public class AutoPrisonMine extends Module
 
     @Override
     public void update(){
-    	c++;
+    	/*c++;
     	if(c > cnext){
     		c = 0;
     		if(mining){
@@ -60,7 +60,7 @@ public class AutoPrisonMine extends Module
     			}
     		}
     	}
-    	return;
+    	return;*/
     }
     
     // example; just for me to figure that stuff out
@@ -72,7 +72,7 @@ public class AutoPrisonMine extends Module
     public void execute(String[] args)
     {
     	System.out.println(args[0]);
-    	if(args.length > 1){
+    	/*if(args.length > 1){
     		System.out.println(args[1]);
     		if(args[1].equalsIgnoreCase("set1")){
     			EntityClientPlayerMP p = Minecraft.getMinecraft().thePlayer;
@@ -119,7 +119,7 @@ public class AutoPrisonMine extends Module
     		cz = startloc[2];
     		mining = !mining;
 	        Minecraft.getMinecraft().ingameGUI.getChatGUI().func_146234_a(new ChatComponentText(EnumChatFormatting.RED + "Mining state: " + Boolean.toString(mining)), 1);
-    	}
+    	}*/
     }
 
 }

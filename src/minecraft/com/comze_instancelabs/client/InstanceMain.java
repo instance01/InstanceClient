@@ -21,135 +21,124 @@ import com.comze_instancelabs.client.modules.TimerModule;
 import com.comze_instancelabs.client.modules.XrayModule;
 import com.comze_instancelabs.client.modules.YoutubeTestModule;
 
-public class InstanceMain
-{
-    static InstanceRender r;
-    static InstanceGuiManager guimanager;
+public class InstanceMain {
+	static InstanceRender r;
+	static InstanceGuiManager guimanager;
 
-    public static boolean xray = false;
-    public static boolean freecam = false;
-    public static boolean autofish = false;
-    public static boolean mobesp = false;
-    public static boolean coloredmobs = false;
+	static InstanceMain instance;
 
-    public static List<Module> modList = new ArrayList<Module>();
+	public boolean xray = false;
+	public boolean freecam = false;
+	public boolean autofish = false;
+	public boolean mobesp = false;
+	public boolean coloredmobs = false;
+	public boolean allchestesp = false;
+	public boolean chestesp = false;
 
-    public InstanceMain()
-    {
-        init();
-    }
+	public static List<Module> modList = new ArrayList<Module>();
 
-    public static void init()
-    {
-        r = new InstanceRender();
-        modList.add(new HelpModule());
-        modList.add(new FullbrightModule());
-        modList.add(new ColoredMobsModule());
-        modList.add(new MobESPModule());
-        modList.add(new ChestESPModule());
-        modList.add(new AllChestESPModule());
-        modList.add(new XrayModule());
-        modList.add(new FreecamModule());
-        modList.add(new AutoFishModule());
-        modList.add(new KeybindModule());
-        modList.add(new TimerModule());
-        modList.add(new AutoPrisonMine());
-        modList.add(new FOVModule());
-        modList.add(new YoutubeTestModule());
-        Settings.loadAll();
-    }
+	public InstanceMain() {
+		instance = this;
+		init();
+	}
 
-    public static void initGUI()
-    {
-        guimanager = new InstanceGuiManager();
-        guimanager.setTheme(new SimpleTheme());
-        guimanager.setup();
-        Settings.loadEnabledMods();
-    }
+	public static void init() {
+		r = new InstanceRender();
+		modList.add(new HelpModule());
+		modList.add(new FullbrightModule());
+		modList.add(new ColoredMobsModule());
+		modList.add(new MobESPModule());
+		modList.add(new ChestESPModule());
+		modList.add(new AllChestESPModule());
+		modList.add(new XrayModule());
+		modList.add(new FreecamModule());
+		modList.add(new AutoFishModule());
+		modList.add(new KeybindModule());
+		modList.add(new TimerModule());
+		modList.add(new AutoPrisonMine());
+		modList.add(new FOVModule());
+		modList.add(new YoutubeTestModule());
+		Settings.loadAll();
+	}
 
-    public static InstanceRender getRender()
-    {
-        return r;
-    }
+	public static void initGUI() {
+		guimanager = new InstanceGuiManager();
+		guimanager.setTheme(new SimpleTheme());
+		guimanager.setup();
+		Settings.loadEnabledMods();
+	}
 
-    public static InstanceGuiManager getGuiManager()
-    {
-        return guimanager;
-    }
+	public static InstanceRender getRender() {
+		return r;
+	}
 
-    public void executeCMD(String cmd)
-    {
-    	String cmd_ = cmd;
-    	if(cmd.contains(" ")){
-    		cmd_ = cmd.split(" ")[0];
-    	}
-    	
-        // search in modules and try to enable
-        if (containsMod(cmd_))
-        {
-            Module m = getMod(cmd_);
+	public static InstanceGuiManager getGuiManager() {
+		return guimanager;
+	}
 
-            if (m != null)
-            {
-            	if(m.getNeedArgs()){
-            		m.execute(cmd.split(" "));
-            		return;
-            	}else if(m.getNeedUpdate()){
-            		m.execute(true);
-            	}
-                m.execute();
-            }
-        }
-    }
+	public void executeCMD(String cmd) {
+		String cmd_ = cmd;
+		if (cmd.contains(" ")) {
+			cmd_ = cmd.split(" ")[0];
+		}
 
-    public static boolean containsMod(String modname)
-    {
-        for (Module m : modList)
-        {
-            if (m.name.toLowerCase().startsWith(modname.toLowerCase()))
-            {
-                return true;
-            }
-        }
+		// search in modules and try to enable
+		if (containsMod(cmd_)) {
+			Module m = getMod(cmd_);
 
-        return false;
-    }
+			if (m != null) {
+				if (m.getNeedArgs()) {
+					m.execute(cmd.split(" "));
+					return;
+				} else if (m.getNeedUpdate()) {
+					m.execute(true);
+				}
+				m.execute();
+			}
+		}
+	}
 
-    public static String getModName(String modname)
-    {
-        for (Module m : modList)
-        {
-            if (m.name.toLowerCase().startsWith(modname.toLowerCase()))
-            {
-                return m.name;
-            }
-        }
+	public static boolean containsMod(String modname) {
+		for (Module m : modList) {
+			if (m.name.toLowerCase().startsWith(modname.toLowerCase())) {
+				return true;
+			}
+		}
 
-        return "";
-    }
+		return false;
+	}
 
-    public static Module getMod(String modname)
-    {
-        for (Module m : modList)
-        {
-            if (m.name.toLowerCase().startsWith(modname.toLowerCase()))
-            {
-                return m;
-            }
-        }
+	public static String getModName(String modname) {
+		for (Module m : modList) {
+			if (m.name.toLowerCase().startsWith(modname.toLowerCase())) {
+				return m.name;
+			}
+		}
 
-        return null;
-    }
-    
+		return "";
+	}
+
+	public static Module getMod(String modname) {
+		for (Module m : modList) {
+			if (m.name.toLowerCase().startsWith(modname.toLowerCase())) {
+				return m;
+			}
+		}
+
+		return null;
+	}
+
 	public static boolean isNumeric(String s) {
 		return s.matches("[-+]?\\d*\\.?\\d+");
 	}
-	
-	public static void update(){
-		for(Module m : modList){
-			//if(m.isEnabled()){
-				m.update();
-			//}
+
+	public static void update() {
+		for (Module m : modList) {
+			m.update();
 		}
+	}
+
+	public static InstanceMain getInstance() {
+		return instance;
 	}
 }

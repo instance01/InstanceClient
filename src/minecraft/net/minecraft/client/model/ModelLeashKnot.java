@@ -12,11 +12,11 @@ public class ModelLeashKnot extends ModelBase
         this(0, 0, 32, 32);
     }
 
-    public ModelLeashKnot(int p_i1150_1_, int p_i1150_2_, int p_i1150_3_, int p_i1150_4_)
+    public ModelLeashKnot(int p_i46365_1_, int p_i46365_2_, int p_i46365_3_, int p_i46365_4_)
     {
-        this.textureWidth = p_i1150_3_;
-        this.textureHeight = p_i1150_4_;
-        this.field_110723_a = new ModelRenderer(this, p_i1150_1_, p_i1150_2_);
+        this.textureWidth = p_i46365_3_;
+        this.textureHeight = p_i46365_4_;
+        this.field_110723_a = new ModelRenderer(this, p_i46365_1_, p_i46365_2_);
         this.field_110723_a.addBox(-3.0F, -6.0F, -3.0F, 6, 8, 6, 0.0F);
         this.field_110723_a.setRotationPoint(0.0F, 0.0F, 0.0F);
     }

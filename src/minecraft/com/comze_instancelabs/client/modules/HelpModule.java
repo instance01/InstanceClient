@@ -22,7 +22,7 @@ public class HelpModule extends Module
         link.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/instance01/InstanceClient"));
         link.getChatStyle().setUnderlined(Boolean.valueOf(true));
         link.getChatStyle().setColor(EnumChatFormatting.GOLD);
-        Minecraft.getMinecraft().ingameGUI.getChatGUI().func_146234_a(new ChatComponentText(EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + "You can get more help by visiting "), 1);
-        Minecraft.getMinecraft().ingameGUI.getChatGUI().func_146234_a(link, 2);
+        Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessageWithOptionalDeletion(new ChatComponentText(EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + "Get info/help by visiting "), 1);
+        Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessageWithOptionalDeletion(link, 2);
     }
 }

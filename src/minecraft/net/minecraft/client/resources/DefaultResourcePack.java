@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Set;
-import javax.imageio.ImageIO;
+import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.data.IMetadataSection;
 import net.minecraft.client.resources.data.IMetadataSerializer;
 import net.minecraft.util.ResourceLocation;
@@ -20,9 +20,9 @@ public class DefaultResourcePack implements IResourcePack
     private final Map field_152781_b;
     private static final String __OBFID = "CL_00001073";
 
-    public DefaultResourcePack(Map p_i1046_1_)
+    public DefaultResourcePack(Map p_i46346_1_)
     {
-        this.field_152781_b = p_i1046_1_;
+        this.field_152781_b = p_i46346_1_;
     }
 
     public InputStream getInputStream(ResourceLocation p_110590_1_) throws IOException
@@ -88,7 +88,7 @@ public class DefaultResourcePack implements IResourcePack
 
     public BufferedImage getPackImage() throws IOException
     {
-        return ImageIO.read(DefaultResourcePack.class.getResourceAsStream("/" + (new ResourceLocation("pack.png")).getResourcePath()));
+        return TextureUtil.func_177053_a(DefaultResourcePack.class.getResourceAsStream("/" + (new ResourceLocation("pack.png")).getResourcePath()));
     }
 
     public String getPackName()

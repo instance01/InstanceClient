@@ -16,16 +16,14 @@ public class MobESPModule extends Module
     }
     
     @Override
-    public void enable()
-    {
-        super.enable();
-        InstanceMain.mobesp = true;
-    }
+	public void enable() {
+		super.enable();
+		InstanceMain.getInstance().mobesp = true;
+	}
 
-    @Override
-    public void disable()
-    {
-    	InstanceMain.mobesp = false;
-        super.disable();
-    }
+	@Override
+	public void disable() {
+		super.disable();
+		InstanceMain.getInstance().mobesp = false;
+	}
 }

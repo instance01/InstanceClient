@@ -1,5 +1,5 @@
 ***************
-*** 95,101 ****
+*** 127,133 ****
         return true;
      }
   
@@ -7,7 +7,7 @@
         boolean var1 = this.field_71348_o;
         this.field_71348_o = Minecraft.func_71410_x().func_147114_u() != null && Minecraft.func_71410_x().func_147113_T();
         if(!var1 && this.field_71348_o) {
---- 95,101 ----
+--- 127,133 ----
         return true;
      }
   

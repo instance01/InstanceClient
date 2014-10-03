@@ -26,13 +26,13 @@ public class XrayModule extends Module
     public void enable()
     {
         super.enable();
-        InstanceMain.xray = true;
+        InstanceMain.getInstance().xray = true;
     }
 
     @Override
     public void disable()
     {
         super.disable();
-        InstanceMain.xray = false;
+        InstanceMain.getInstance().xray = false;
     }
 }

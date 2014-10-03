@@ -19,3 +19,12 @@ temp
 *.bat
 CHANGELOG
 Thumbs.db
+
+src/minecraft/net/minecraft/*/*
+!Block.java
+!EntityPlayerSP.java
+!GuiIngame.java
+!RenderManager.java
+!TileEntityRendererDispatcher.java
+!TileEntity.java
+!Minecraft.java

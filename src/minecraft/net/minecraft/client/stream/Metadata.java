@@ -13,10 +13,10 @@ public class Metadata
     private Map field_152814_d;
     private static final String __OBFID = "CL_00001823";
 
-    public Metadata(String p_i1029_1_, String p_i1029_2_)
+    public Metadata(String p_i46345_1_, String p_i46345_2_)
     {
-        this.field_152812_b = p_i1029_1_;
-        this.field_152813_c = p_i1029_2_;
+        this.field_152812_b = p_i46345_1_;
+        this.field_152813_c = p_i46345_2_;
     }
 
     public Metadata(String p_i1030_1_)

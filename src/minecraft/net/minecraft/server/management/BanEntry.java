@@ -14,13 +14,13 @@ public abstract class BanEntry extends UserListEntry
     protected final String reason;
     private static final String __OBFID = "CL_00001395";
 
-    public BanEntry(Object p_i1173_1_, Date p_i1173_2_, String p_i1173_3_, Date p_i1173_4_, String p_i1173_5_)
+    public BanEntry(Object p_i46334_1_, Date p_i46334_2_, String p_i46334_3_, Date p_i46334_4_, String p_i46334_5_)
     {
-        super(p_i1173_1_);
-        this.banStartDate = p_i1173_2_ == null ? new Date() : p_i1173_2_;
-        this.bannedBy = p_i1173_3_ == null ? "(Unknown)" : p_i1173_3_;
-        this.banEndDate = p_i1173_4_;
-        this.reason = p_i1173_5_ == null ? "Banned by an operator." : p_i1173_5_;
+        super(p_i46334_1_);
+        this.banStartDate = p_i46334_2_ == null ? new Date() : p_i46334_2_;
+        this.bannedBy = p_i46334_3_ == null ? "(Unknown)" : p_i46334_3_;
+        this.banEndDate = p_i46334_4_;
+        this.reason = p_i46334_5_ == null ? "Banned by an operator." : p_i46334_5_;
     }
 
     protected BanEntry(Object p_i1174_1_, JsonObject p_i1174_2_)
@@ -69,11 +69,11 @@ public abstract class BanEntry extends UserListEntry
         return this.banEndDate == null ? false : this.banEndDate.before(new Date());
     }
 
-    protected void func_152641_a(JsonObject p_152641_1_)
+    protected void onSerialization(JsonObject data)
     {
-        p_152641_1_.addProperty("created", dateFormat.format(this.banStartDate));
-        p_152641_1_.addProperty("source", this.bannedBy);
-        p_152641_1_.addProperty("expires", this.banEndDate == null ? "forever" : dateFormat.format(this.banEndDate));
-        p_152641_1_.addProperty("reason", this.reason);
+        data.addProperty("created", dateFormat.format(this.banStartDate));
+        data.addProperty("source", this.bannedBy);
+        data.addProperty("expires", this.banEndDate == null ? "forever" : dateFormat.format(this.banEndDate));
+        data.addProperty("reason", this.reason);
     }
 }

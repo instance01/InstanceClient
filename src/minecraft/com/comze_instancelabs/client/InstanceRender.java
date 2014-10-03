@@ -12,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.util.AxisAlignedBB;
 
 import com.comze_instancelabs.client.gui.CmdTextboxGUI;
@@ -80,7 +81,7 @@ public class InstanceRender
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glDepthMask(false);
         GL11.glColor4d(r, g, b, 0.1001F);
-        drawBoundingBox(axis);
+        //drawBoundingBox(axis);
         GL11.glColor4d(r, g, b, 1.0F);
         drawOutlinedBoundingBox(axis);
         GL11.glLineWidth(1F);
@@ -95,7 +96,7 @@ public class InstanceRender
 
     public static void drawOutlinedBoundingBox(AxisAlignedBB par1AxisAlignedBB)
     {
-        Tessellator var2 = Tessellator.instance;
+        WorldRenderer var2 = Tessellator.getInstance().getWorldRenderer();
         var2.startDrawing(3);
         var2.addVertex(par1AxisAlignedBB.minX, par1AxisAlignedBB.minY, par1AxisAlignedBB.minZ);
         var2.addVertex(par1AxisAlignedBB.maxX, par1AxisAlignedBB.minY, par1AxisAlignedBB.minZ);
@@ -138,7 +139,7 @@ public class InstanceRender
 
     public static void drawBoundingBox(AxisAlignedBB axisalignedbb)
     {
-        Tessellator tessellator = Tessellator.instance;
+    	WorldRenderer tessellator = Tessellator.getInstance().getWorldRenderer();
         tessellator.startDrawingQuads();
         tessellator.addVertex(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ);
         tessellator.addVertex(axisalignedbb.minX, axisalignedbb.maxY, axisalignedbb.minZ);
@@ -273,17 +274,17 @@ public class InstanceRender
         float f1 = ((i1 >> 16) & 0xff) / 255F;
         float f2 = ((i1 >> 8) & 0xff) / 255F;
         float f3 = (i1 & 0xff) / 255F;
-        Tessellator tessellator = Tessellator.instance;
+        WorldRenderer worldRenderer = Tessellator.getInstance().getWorldRenderer();
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glColor4f(f1, f2, f3, f);
-        tessellator.startDrawingQuads();
-        tessellator.addVertex(i, l, 0.0D);
-        tessellator.addVertex(k, l, 0.0D);
-        tessellator.addVertex(k, j, 0.0D);
-        tessellator.addVertex(i, j, 0.0D);
-        tessellator.draw();
+        worldRenderer.startDrawingQuads();
+        worldRenderer.addVertex(i, l, 0.0D);
+        worldRenderer.addVertex(k, l, 0.0D);
+        worldRenderer.addVertex(k, j, 0.0D);
+        worldRenderer.addVertex(i, j, 0.0D);
+        worldRenderer.draw();
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_BLEND);
     }

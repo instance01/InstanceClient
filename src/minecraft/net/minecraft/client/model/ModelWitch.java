@@ -10,9 +10,9 @@ public class ModelWitch extends ModelVillager
     private ModelRenderer witchHat;
     private static final String __OBFID = "CL_00000866";
 
-    public ModelWitch(float p_i1166_1_)
+    public ModelWitch(float p_i46361_1_)
     {
-        super(p_i1166_1_, 0.0F, 64, 128);
+        super(p_i46361_1_, 0.0F, 64, 128);
         this.field_82901_h.setRotationPoint(0.0F, -2.0F, 0.0F);
         this.field_82901_h.setTextureOffset(0, 0).addBox(0.0F, 3.0F, -6.75F, 1, 1, 1, -0.25F);
         this.villagerNose.addChild(this.field_82901_h);

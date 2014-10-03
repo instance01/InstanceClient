@@ -35,14 +35,14 @@ public class FreecamModule extends Module
     public void enable()
     {
         super.enable();
-        InstanceMain.freecam = true;
+        InstanceMain.getInstance().freecam = true;
     }
 
     @Override
     public void disable()
     {
         super.disable();
-        InstanceMain.freecam = false;
+        InstanceMain.getInstance().freecam = false;
 
         if (c != null)
         {
@@ -52,7 +52,6 @@ public class FreecamModule extends Module
             Minecraft.getMinecraft().theWorld.removeEntity(c);
         }
     }
-    
     
     public static void fly(EntityPlayerSP s){
     	s.onGround = false;
