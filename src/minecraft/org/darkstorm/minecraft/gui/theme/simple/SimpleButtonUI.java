@@ -21,7 +21,7 @@ public class SimpleButtonUI extends AbstractComponentUI<Button>
         this.theme = theme;
         foreground = Color.WHITE;
         //background = new Color(128, 128, 128, 128 + 128 / 2);
-        background = new Color(0, 152, 235, 100); // blue
+        background = new Color(0, 152, 235, 10); // blue
     }
 
     @Override
@@ -66,7 +66,7 @@ public class SimpleButtonUI extends AbstractComponentUI<Button>
 
         glEnable(GL_TEXTURE_2D);
         String text = button.getText();
-        theme.getFontRenderer().drawString(
+        theme.getFontRenderer().func_175063_a(
             text,
             area.width / 2 - theme.getFontRenderer().getStringWidth(text)
             / 2,
