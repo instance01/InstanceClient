@@ -11,6 +11,8 @@ import org.darkstorm.minecraft.gui.util.GuiManagerDisplayScreen;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.util.AxisAlignedBB;
@@ -46,7 +48,7 @@ public class InstanceRender
 
     public static void drawESP(double d, double d1, double d2, double r, double b, double g)
     {
-        GL11.glPushMatrix();
+        /*GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glLineWidth(1F);
@@ -55,18 +57,36 @@ public class InstanceRender
         GL11.glEnable(GL11.GL_LINE_SMOOTH);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glDepthMask(false);
-        GL11.glColor4d(r, g, b, 0.1001F);
-        drawBoundingBox(new AxisAlignedBB(d, d1, d2, d + 1.0, d1 + 1.0, d2 + 1.0));
-        GL11.glColor4d(r, g, b, 1.0F);
-        drawOutlinedBoundingBox(new AxisAlignedBB(d, d1, d2, d + 1.0, d1 + 1.0, d2 + 1.0));
-        GL11.glLineWidth(1F);
+        GL11.glColor4d(r, g, b, 0.1001F);*/
+    	GlStateManager.pushMatrix();
+		GL11.glNormal3f(0.0F, 1.0F, 0.0F);
+		GlStateManager.disableLighting();
+		GlStateManager.depthMask(false);
+		GlStateManager.disableDepth();
+		GlStateManager.enableBlend();
+		GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+		GlStateManager.func_179090_x();
+        //drawBoundingBox(new AxisAlignedBB(d, d1, d2, d + 1.0, d1 + 1.0, d2 + 1.0));
+		RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(d, d1, d2, d + 1.0, d1 + 1.0, d2 + 1.0), 16711680);
+        //GL11.glColor4d(r, g, b, 1.0F);
+        //drawOutlinedBoundingBox(new AxisAlignedBB(d, d1, d2, d + 1.0, d1 + 1.0, d2 + 1.0));
+        GlStateManager.func_179098_w();
+
+		GlStateManager.enableDepth();
+		GlStateManager.depthMask(true);
+
+		GlStateManager.enableLighting();
+		GlStateManager.disableBlend();
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.popMatrix();
+        /*GL11.glLineWidth(1F);
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glDepthMask(true);
         GL11.glDisable(GL11.GL_BLEND);
-        GL11.glPopMatrix();
+        GL11.glPopMatrix();*/
     }
 
     public static void drawESP(AxisAlignedBB axis, double r, double b, double g)
