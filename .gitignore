@@ -20,11 +20,13 @@ temp
 CHANGELOG
 Thumbs.db
 
-src/minecraft/net/minecraft/*/*
-!Block.java
-!EntityPlayerSP.java
-!GuiIngame.java
-!RenderManager.java
-!TileEntityRendererDispatcher.java
-!TileEntity.java
-!Minecraft.java
+# Temporary fix #
+*
+!*/
+!src/minecraft/net/minecraft/block/Block.java
+!src/minecraft/net/minecraft/client/entity/EntityPlayerSP.java
+!src/minecraft/net/minecraft/client/gui/GuiIngame.java
+!src/minecraft/net/minecraft/client/renderer/entity/RenderManager.java
+!src/minecraft/net/minecraft/client/renderer/tileentity/TileEntityRendererDispatcher.java
+!src/minecraft/net/minecraft/tileentity/TileEntity.java
+!src/minecraft/net/minecraft/client/Minecraft.java
