@@ -7,7 +7,7 @@ Modded Minecraft Client with a few Utilities.
 
 Thanks to [Sinuce](http://denmarkinminecraft.com/profile/4517920) for creating the design for the GuiButtons above.
 
-The purpose of [INDEX1.7.10.md](https://github.com/instance01/InstanceClient/blob/master/INDEX1.7.10.md) is to keep track of the mod locations (in this case only for 1.7.10 though), but it doesn't contain any mods that don't require changing vanilla Minecraft code (obviously). I'll add a INDEX1.8.md when I find the time.
+The purpose of [INDEX1.7.10.md](https://github.com/instance01/InstanceClient/blob/master/INDEX1.7.10.md) is to keep track of the mod locations (in this case only for 1.7.10 though), but it doesn't contain any mods that don't require changing vanilla Minecraft code (obviously). The index for Minecraft 1.8 can be found at [INDEX1.8.md](https://github.com/instance01/InstanceClient/blob/master/INDEX1.8.md).
 
 
 Uses DarkStorm's GUI API (included) and has a Console included.
