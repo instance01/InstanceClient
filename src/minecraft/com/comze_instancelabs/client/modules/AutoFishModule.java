@@ -23,6 +23,7 @@ public class AutoFishModule extends Module
     {
         super("autofish", "Automatically catches fish.");
         this.setNeedUpdate(true);
+        this.setCanBeSaved(false);
     }
 
     //int ccc = 0;

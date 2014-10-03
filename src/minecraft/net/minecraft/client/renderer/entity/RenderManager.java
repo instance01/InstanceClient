@@ -346,15 +346,7 @@ public class RenderManager {
 
 			if (var11 != null && this.renderEngine != null) {
 				try {
-					// TODO t
-					if (InstanceMain.getInstance().mobesp) {
-						try {
-							this.renderDebugBoundingBox(p_147939_1_, p_147939_2_, p_147939_4_, p_147939_6_, p_147939_8_, p_147939_9_);
-						} catch (Throwable var16) {
-							throw new ReportedException(CrashReport.makeCrashReport(var16, "Rendering entity hitbox in world"));
-						}
-					}
-					//
+					
 					if (var11 instanceof RendererLivingEntity) {
 						((RendererLivingEntity) var11).func_177086_a(this.field_178639_r);
 					}
@@ -452,31 +444,6 @@ public class RenderManager {
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.popMatrix();
 
-		/*
-		 * GlStateManager.depthMask(false); GlStateManager.func_179090_x();
-		 * GlStateManager.disableLighting(); GlStateManager.disableCull();
-		 * GlStateManager.disableBlend(); float var10 = par1Entity.width / 2.0F; AxisAlignedBB var11
-		 * = par1Entity.getEntityBoundingBox(); AxisAlignedBB var12 = new AxisAlignedBB(var11.minX -
-		 * par1Entity.posX + par2, var11.minY - par1Entity.posY + par4, var11.minZ - par1Entity.posZ
-		 * + par6, var11.maxX - par1Entity.posX + par2, var11.maxY - par1Entity.posY + par4,
-		 * var11.maxZ - par1Entity.posZ + par6); RenderGlobal.drawOutlinedBoundingBox(var12,
-		 * 16777215);
-		 * 
-		 * if (par1Entity instanceof EntityLivingBase) { float var13 = 0.01F;
-		 * RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(par2 - (double) var10, par4 +
-		 * (double) par1Entity.getEyeHeight() - 0.009999999776482582D, par6 - (double) var10, par2 +
-		 * (double) var10, par4 + (double) par1Entity.getEyeHeight() + 0.009999999776482582D, par6 +
-		 * (double) var10), 16711680); }
-		 * 
-		 * Tessellator var16 = Tessellator.getInstance(); WorldRenderer var14 =
-		 * var16.getWorldRenderer(); Vec3 var15 = par1Entity.getLook(par9); var14.startDrawing(3);
-		 * var14.func_178991_c(255); var14.addVertex(par2, par4 + (double)
-		 * par1Entity.getEyeHeight(), par6); var14.addVertex(par2 + var15.xCoord * 2.0D, par4 +
-		 * (double) par1Entity.getEyeHeight() + var15.yCoord * 2.0D, par6 + var15.zCoord * 2.0D);
-		 * var16.draw(); GlStateManager.func_179098_w(); GlStateManager.enableLighting();
-		 * GlStateManager.enableCull(); GlStateManager.disableBlend();
-		 * GlStateManager.depthMask(true);
-		 */
 	}
 
 	/**
